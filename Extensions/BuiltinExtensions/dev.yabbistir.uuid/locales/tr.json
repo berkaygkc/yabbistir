@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "UUID üretir: rastgele (v4) ya da zamana göre sıralı (v7).",
+  "v4.title": "UUID oluştur",
+  "v4.subtitle": "v4 · rastgele",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "UUID oluştur (v7)",
+  "v7.subtitle": "zamana göre sıralı",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "Büyük harf"
+}

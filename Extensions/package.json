@@ -1,0 +1,14 @@
+{
+  "name": "yabbistir-builtin-extensions",
+  "private": true,
+  "description": "The extensions that ship inside yabbistir, built from TypeScript.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}

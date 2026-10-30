@@ -1,0 +1,52 @@
+name: Bug report
+description: Something doesn't work, pastes the wrong thing or looks broken.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected instead. Screenshots help a lot, but check they don't show private clipboard content.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can we reproduce it?
+      placeholder: |
+        1. Copy …
+        2. Press ⇧⌘V in …
+        3. …
+  - type: input
+    id: version
+    attributes:
+      label: yabbistir version
+      description: In Finder, select yabbistir in Applications and choose File → Get Info.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "26.1"
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App you were pasting into
+      description: Some apps (certain Electron apps, for example) don't report the caret position, so the panel opens under the mouse instead.
+      placeholder: "a text editor, a browser…"
+  - type: dropdown
+    id: language
+    attributes:
+      label: App language
+      options:
+        - English
+        - Turkish
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Accessibility permission granted or not, extensions involved, or anything that seems related.

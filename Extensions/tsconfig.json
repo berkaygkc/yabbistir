@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "types": [],
+    "paths": { "@yabbistir/api": ["./api/index.d.ts"] }
+  },
+  "include": ["api/**/*.d.ts", "builtin/*/src/**/*.ts", "reference/*/src/**/*.ts"]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Base64",
+  "description": "Base64 kodlar ve çözer, kopyaladığında tanır.",
+  "decode.title": "Base64 çöz",
+  "decode.keywords": ["base64", "b64", "çöz"],
+  "encode.title": "Base64 kodla",
+  "encode.keywords": ["base64", "b64", "kodla"],
+  "tag": "base64",
+  "preview": "Çözülmüş hali",
+  "notBase64": "Bu bir Base64 metni değil."
+}

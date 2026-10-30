@@ -1,0 +1,19 @@
+{
+  "id": "dev.yabbistir.uuid",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "defaultLocale": "en",
+  "name": "name",
+  "description": "description",
+  "icon": "sf:number",
+  "author": "berkaygkc",
+  "license": "MIT",
+  "categories": ["developer"],
+  "preferences": [{ "id": "uppercase", "type": "toggle", "title": "uppercase", "default": false }],
+  "contributes": {
+    "actions": [
+      { "id": "v4", "title": "v4.title", "subtitle": "v4.subtitle", "keywords": "v4.keywords", "input": "none", "output": "text", "hint": true },
+      { "id": "v7", "title": "v7.title", "subtitle": "v7.subtitle", "keywords": "v7.keywords", "input": "none", "output": "text", "hint": true }
+    ]
+  }
+}

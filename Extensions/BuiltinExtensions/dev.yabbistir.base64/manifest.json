@@ -1,0 +1,24 @@
+{
+  "id": "dev.yabbistir.base64",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "defaultLocale": "en",
+  "name": "name",
+  "description": "description",
+  "icon": "sf:arrow.left.arrow.right",
+  "author": "berkaygkc",
+  "license": "MIT",
+  "categories": ["text", "developer"],
+  "contributes": {
+    "actions": [
+      { "id": "decode", "title": "decode.title", "keywords": "decode.keywords", "input": "item",
+        "accepts": { "kinds": ["text", "code"], "tags": ["base64"] }, "output": "text", "hint": true, "priority": 2 },
+      { "id": "encode", "title": "encode.title", "keywords": "encode.keywords", "input": "item",
+        "accepts": { "kinds": ["text", "code", "link"] }, "output": "text", "hint": true, "priority": 1 }
+    ],
+    "detectors": [
+      { "id": "base64", "tag": "tag", "accepts": { "kinds": ["text", "code"], "pattern": "^[A-Za-z0-9+/_-]{8,}={0,2}$" },
+        "validate": true, "preview": true, "suggests": ["decode"] }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+// Shared build settings. Ad-hoc signing by default; macOS privacy permissions
+// (Accessibility) reset on every rebuild unless a stable identity is configured
+// in Signing.local.xcconfig (see Signing.local.xcconfig.example).
+CODE_SIGN_IDENTITY = -
+CODE_SIGN_STYLE = Manual
+DEVELOPMENT_TEAM =
+// One executable instead of Xcode's debug dylib: hardened-runtime library validation
+// rejects the split dylib when signed with a local (team-less) identity.
+ENABLE_DEBUG_DYLIB = NO
+
+#include? "Signing.local.xcconfig"

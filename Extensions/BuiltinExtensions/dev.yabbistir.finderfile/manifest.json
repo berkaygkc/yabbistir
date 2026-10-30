@@ -1,0 +1,19 @@
+{
+  "id": "dev.yabbistir.finderfile",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "defaultLocale": "en",
+  "name": "name",
+  "description": "description",
+  "icon": "sf:arrow.down.doc",
+  "author": "berkaygkc",
+  "license": "MIT",
+  "categories": ["files"],
+  "contributes": {
+    "actions": [
+      { "id": "file", "title": "file.title", "keywords": "file.keywords", "input": "item",
+        "accepts": { "kinds": ["text", "code", "link", "image"] }, "output": "file", "targets": ["finder"], "targetsOnly": true,
+        "priority": -1 }
+    ]
+  }
+}

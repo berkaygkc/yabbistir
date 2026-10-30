@@ -1,0 +1,9 @@
+{
+  "name": "Paste to Finder as a File",
+  "description": "Drops text, code, links and images into the open Finder folder as files.",
+  "file.title": "Paste to Finder as a File",
+  "file.keywords": ["finder", "file", "save", "webloc"],
+  "text": "Text",
+  "link": "Link",
+  "image": "Image"
+}

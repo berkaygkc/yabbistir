@@ -1,0 +1,9 @@
+.build/
+DerivedData/
+*.xcodeproj/
+Config/Signing.local.xcconfig
+.swiftpm/
+xcuserdata/
+.DS_Store
+Extensions/node_modules/
+build/

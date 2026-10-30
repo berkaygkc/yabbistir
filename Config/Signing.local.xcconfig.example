@@ -1,0 +1,7 @@
+// Copy to Signing.local.xcconfig (git-ignored) to sign with a stable identity so
+// macOS keeps the Accessibility / Input Monitoring grants across rebuilds.
+//
+// One-time setup: Keychain Access → Certificate Assistant → Create a Certificate…
+//   Name: yabbistir Dev   Identity Type: Self Signed Root   Certificate Type: Code Signing
+CODE_SIGN_IDENTITY = yabbistir Dev
+CODE_SIGN_STYLE = Manual

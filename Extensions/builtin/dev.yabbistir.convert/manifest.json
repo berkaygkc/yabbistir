@@ -1,0 +1,33 @@
+{
+  "id": "dev.yabbistir.convert",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "defaultLocale": "en",
+  "name": "name",
+  "description": "description",
+  "icon": "sf:arrow.triangle.2.circlepath",
+  "author": "berkaygkc",
+  "license": "MIT",
+  "categories": ["images", "developer"],
+  "contributes": {
+    "actions": [
+      { "id": "color", "title": "color.title", "keywords": "color.keywords", "input": "item", "accepts": { "kinds": ["color"] },
+        "output": "text", "hint": true, "priority": 1,
+        "variants": [
+          { "id": "rgb", "title": "color.rgb" }, { "id": "hsl", "title": "color.hsl" }, { "id": "oklch", "title": "color.oklch" },
+          { "id": "swiftui", "title": "color.swiftui" }, { "id": "nscolor", "title": "color.nscolor" }
+        ] },
+      { "id": "image", "title": "image.title", "keywords": "image.keywords", "input": "item", "accepts": { "kinds": ["image"] },
+        "output": "image", "priority": 1,
+        "variants": [
+          { "id": "jpeg", "title": "image.jpeg", "subtitle": "image.jpeg.subtitle" },
+          { "id": "png", "title": "image.png", "subtitle": "image.png.subtitle" },
+          { "id": "half", "title": "image.half", "subtitle": "image.half.subtitle" }
+        ] },
+      { "id": "bgremove", "title": "bgremove.title", "subtitle": "bgremove.subtitle", "keywords": "bgremove.keywords", "input": "item",
+        "accepts": { "kinds": ["image"] }, "output": "image" },
+      { "id": "ocr", "title": "ocr.title", "subtitle": "ocr.subtitle", "keywords": "ocr.keywords", "input": "item",
+        "accepts": { "kinds": ["image"] }, "output": "text" }
+    ]
+  }
+}

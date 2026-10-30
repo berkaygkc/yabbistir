@@ -1,0 +1,16 @@
+name: Feature request
+description: Something yabbistir should capture, show or do.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like yabbistir to do?
+      description: Start with the situation. For example, "I copy a lot of SQL while debugging and can't tell the queries apart in the panel".
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How do you picture it?
+      description: Where it would appear (panel, Stack, ⇧ transforms, ⌘K, settings) and how you would use it.

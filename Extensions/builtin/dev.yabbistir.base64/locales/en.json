@@ -1,0 +1,11 @@
+{
+  "name": "Base64",
+  "description": "Encodes and decodes Base64, and recognizes it when you copy it.",
+  "decode.title": "Decode Base64",
+  "decode.keywords": ["base64", "b64", "decode"],
+  "encode.title": "Encode Base64",
+  "encode.keywords": ["base64", "b64", "encode"],
+  "tag": "base64",
+  "preview": "Decoded",
+  "notBase64": "This is not Base64."
+}

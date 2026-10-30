@@ -1,0 +1,9 @@
+{
+  "name": "Finder’a dosya olarak yapıştır",
+  "description": "Metni, kodu, linkleri ve görselleri açık Finder klasörüne dosya olarak bırakır.",
+  "file.title": "Finder’a dosya olarak yapıştır",
+  "file.keywords": ["finder", "dosya", "kaydet", "webloc"],
+  "text": "Metin",
+  "link": "Link",
+  "image": "Görsel"
+}

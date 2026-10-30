@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://berkaygkc.github.io/yabbistir-extensions/v1/manifest.schema.json",
+  "title": "yabbistir extension manifest (API version 1)",
+  "description": "manifest.json at the root of an extension folder. Human text fields hold keys from locales/<language>.json.",
+  "type": "object",
+  "required": ["id", "version", "apiVersion", "defaultLocale", "name", "description", "icon", "author", "license"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$", "description": "Reverse-domain id; equals the folder name." },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$" },
+    "apiVersion": { "const": 1 },
+    "minAppVersion": { "type": "string" },
+    "defaultLocale": { "type": "string", "description": "A language with a locales/<language>.json file, usually \"en\"." },
+    "name": { "$ref": "#/$defs/localeKey" },
+    "description": { "$ref": "#/$defs/localeKey" },
+    "icon": { "type": "string", "description": "\"sf:<SF Symbol name>\" or a file name in the extension folder." },
+    "author": { "type": "string", "description": "GitHub user name." },
+    "license": { "type": "string" },
+    "categories": {
+      "type": "array",
+      "items": { "enum": ["text", "links", "images", "files", "developer", "media", "ai", "productivity"] }
+    },
+    "permissions": { "type": "array", "items": { "enum": ["network", "exec", "capture", "history"] }, "description": "\"capture\" is required by captureRules." },
+    "network": {
+      "type": "object", "required": ["domains"], "additionalProperties": false,
+      "properties": { "domains": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$" }, "description": "Lowercase host names: no scheme, no path, no *." } }
+    },
+    "requires": {
+      "type": "object", "required": ["tools"], "additionalProperties": false,
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "Required with the \"exec\" permission, and only allowed with it.",
+          "items": {
+            "type": "object", "required": ["name", "install"], "additionalProperties": false,
+            "properties": { "name": { "type": "string", "pattern": "^[A-Za-z0-9._+-]+$" }, "install": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    },
+    "preferences": { "type": "array", "items": { "$ref": "#/$defs/preference" } },
+    "contributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actions": { "type": "array", "items": { "$ref": "#/$defs/action" } },
+        "detectors": { "type": "array", "items": { "$ref": "#/$defs/detector" } },
+        "captureRules": { "type": "array", "items": { "$ref": "#/$defs/captureRule" }, "description": "Needs the \"capture\" permission." }
+      }
+    }
+  },
+  "$defs": {
+    "localeKey": { "type": "string", "minLength": 1, "description": "A key in locales/<defaultLocale>.json." },
+    "accepts": {
+      "type": "object",
+      "required": ["kinds"],
+      "additionalProperties": false,
+      "properties": {
+        "kinds": { "type": "array", "minItems": 1, "items": { "enum": ["text", "code", "link", "color", "image", "file"] } },
+        "pattern": { "type": "string", "description": "ICU regular expression matched against the item's text or URL." },
+        "tags": { "type": "array", "items": { "type": "string" }, "description": "\"tag\" (own detector) or \"extension.id:tag\"." }
+      }
+    },
+    "action": {
+      "type": "object",
+      "required": ["id", "title", "keywords", "input", "output"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "title": { "$ref": "#/$defs/localeKey" },
+        "subtitle": { "$ref": "#/$defs/localeKey" },
+        "keywords": { "$ref": "#/$defs/localeKey", "description": "Its locale value is an array of keywords." },
+        "input": { "enum": ["item", "none"] },
+        "accepts": { "$ref": "#/$defs/accepts" },
+        "output": { "enum": ["text", "html", "image", "link", "file", "files", "none"] },
+        "targets": { "type": "array", "items": { "enum": ["finder", "terminal", "browser", "editor", "other"] } },
+        "targetsOnly": { "type": "boolean", "description": "Only offered when the paste target is one of \"targets\"; needs a non-empty \"targets\"." },
+        "job": { "type": "boolean", "description": "Runs as a long-running job." },
+        "verb": { "$ref": "#/$defs/localeKey", "description": "A job's ↵ label in the ⇧ panel (\"İndir\"): \"↵ <verb> · ⌘C <verb> ve kopyala\". Without it a job says \"Başlat\"." },
+        "failTitle": { "$ref": "#/$defs/localeKey", "description": "A failed job's title (\"Video indirilemedi\"); a variant's own wins." },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["id", "title"], "additionalProperties": false,
+            "properties": { "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" }, "title": { "$ref": "#/$defs/localeKey" }, "subtitle": { "$ref": "#/$defs/localeKey" },
+                            "failTitle": { "$ref": "#/$defs/localeKey" } }
+          }
+        },
+        "hint": { "type": "boolean", "description": "Run early (500 ms limit) and show the output as the row's hint." },
+        "priority": { "type": "integer" }
+      },
+      "if": { "properties": { "input": { "const": "item" } } },
+      "then": { "required": ["accepts"] }
+    },
+    "detector": {
+      "type": "object",
+      "required": ["id", "tag", "accepts"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "tag": { "$ref": "#/$defs/localeKey" },
+        "accepts": { "$ref": "#/$defs/accepts" },
+        "validate": { "type": "boolean" },
+        "preview": { "type": "boolean" },
+        "suggests": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "captureRule": {
+      "type": "object",
+      "required": ["id", "title", "accepts"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "title": { "$ref": "#/$defs/localeKey" },
+        "description": { "$ref": "#/$defs/localeKey" },
+        "accepts": { "$ref": "#/$defs/accepts" }
+      }
+    },
+    "preference": {
+      "type": "object",
+      "required": ["id", "type", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "type": { "enum": ["text", "toggle", "choice", "secret", "folder"] },
+        "title": { "$ref": "#/$defs/localeKey" },
+        "default": { "description": "Not allowed for \"secret\"; for \"folder\" a path starting with ~, such as ~/Downloads." },
+        "confirm": { "$ref": "#/$defs/localeKey", "description": "Question asked before the preference is turned on." },
+        "options": {
+          "type": "array",
+          "items": { "type": "object", "required": ["id", "title"], "properties": { "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" }, "title": { "$ref": "#/$defs/localeKey" } } }
+        }
+      }
+    }
+  }
+}
