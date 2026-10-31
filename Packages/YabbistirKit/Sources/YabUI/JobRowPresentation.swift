@@ -106,7 +106,9 @@ public struct JobRowPresentation {
 
     /// Why a job failed. Failures the app or its host made carry English text, so the card words
     /// them itself; a script's own error is already in the person's language. A result that is not
-    /// one (`badResult`) is the app's finding: generic here, its reason in the Development log.
+    /// one (`badResult`) is the app's finding: generic here, its reason in the Development log. An
+    /// `unavailable` the app said in the person's language (Apple Intelligence is off, a language
+    /// pack is missing) shows as it is.
     static func failure(code: ExtensionError.Code?, message: String?, _ language: AppLanguage) -> String {
         let message = message.flatMap(nonEmpty)
         let generic = L10n.string("jobs.failed.generic", language)
@@ -115,7 +117,8 @@ public struct JobRowPresentation {
             if let tool = message.flatMap(missingTool) { return L10n.string("jobs.failed.toolMissing", language, tool) }
             return message ?? generic
         case .interrupted: return L10n.string("jobs.failed.interrupted", language)
-        case .unavailable: return L10n.string("jobs.failed.unavailable", language)
+        case .unavailable:
+            return message.flatMap { AppUnavailableMessage.localized($0, in: language) } ?? L10n.string("jobs.failed.unavailable", language)
         case .networkError: return L10n.string("jobs.failed.network", language)
         case .permissionDenied: return L10n.string("jobs.failed.permission", language)
         case .script, nil: return message ?? generic

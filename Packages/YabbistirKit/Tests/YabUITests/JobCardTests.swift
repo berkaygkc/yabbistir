@@ -184,6 +184,32 @@ import YabLocalization
         #expect(row.percent == nil)
     }
 
+    /// When the app itself said why (Apple Intelligence is off, a language pack is missing, it took too long), the card
+    /// shows that, in the app's language, instead of the generic line.
+    @Test func theAppsOwnUnavailableMessageShows() {
+        let off = job(.failed, errorMessage: AIUnavailable.message(.disabled, language: .english), errorCode: .unavailable)
+        #expect(JobRowPresentation.make(off, language: .english).status.subject == "\(Self.short): Turn on Apple Intelligence in System Settings")
+        #expect(JobRowPresentation.make(off, language: .turkish).status.subject == "\(Self.short): Apple Intelligence’ı Sistem Ayarları’ndan aç")
+        let pack = TranslationUnavailable.message(.notInstalled(from: "en", to: "tr"), language: .turkish)
+        #expect(JobRowPresentation.make(job(.failed, errorMessage: pack, errorCode: .unavailable), language: .turkish).status.subject
+            == "\(Self.short): \(pack)")
+        let slow = job(.failed, errorMessage: L10n.string("host.tooSlow", .turkish), errorCode: .unavailable)
+        #expect(JobRowPresentation.make(slow, language: .english).status.subject == "\(Self.short): This took too long")
+        // Every reason the on-device services give is known, in both languages.
+        let reasons = AIUnavailable.allCases.map { reason in { AIUnavailable.message(reason, language: $0) } }
+            + [TranslationUnavailable.notInstalled(from: "en", to: "tr"), .unsupported(from: "en", to: "ja"), .unknownSource].map { reason in
+                { TranslationUnavailable.message(reason, language: $0) }
+            }
+        for language in AppLanguage.allCases {
+            for reason in reasons {
+                #expect(AppUnavailableMessage.localized(reason(language), in: language) == reason(language))
+            }
+        }
+        // The app's English for the developer still reads as the generic line.
+        let english = job(.failed, errorMessage: "the extension host could not start: boom", errorCode: .unavailable)
+        #expect(JobRowPresentation.make(english, language: .turkish).status.subject == "\(Self.short): Uzantı şu an kullanılamıyor")
+    }
+
     /// ExecAPI words a missing tool as "<name> is not installed[. Install it with: …]"; the card
     /// takes the name from there.
     @Test func aMissingToolIsNamedFromExecsMessage() throws {
