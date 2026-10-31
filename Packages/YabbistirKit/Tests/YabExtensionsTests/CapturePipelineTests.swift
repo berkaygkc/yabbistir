@@ -300,7 +300,9 @@ import YabPasteboard
         try await Task.sleep(for: .milliseconds(400))
         #expect(fixture.ingested.count == 2)
         #expect(fixture.board.writes.isEmpty && fixture.categories.added.isEmpty)
-        // And copies go on as before.
+        // And copies go on as before. With the app's backstop again: the answer needs a turn on the main actor, which
+        // other suites can hold for longer than the short one above.
+        fixture.pipeline.backstop = .seconds(3)
         rules.decide = { _ in CaptureRuleDecision(replacement: .text("clean")) }
         fixture.copy(Self.text("after"))
         try await eventually { fixture.ingested.count == 3 }

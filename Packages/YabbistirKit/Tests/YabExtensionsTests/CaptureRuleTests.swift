@@ -103,6 +103,12 @@ import YabLocalization
 
     func run(_ item: ExtensionItem) async -> CaptureRuleDecision { await runner.run(on: item) }
 
+    /// How long a copy that a rule must not hold may take, as these tests check it: well short of the copy path's 3 s
+    /// backstop, which would cut it otherwise. A rule's own limit is 200 ms, but the copy comes back through the main
+    /// actor, which every suite shares: even once the start-up rush is over it can be most of a second behind. (That
+    /// a rule was cut at its own limit shows in how its call ended, not in this.)
+    static let promptly: Duration = .seconds(2)
+
     /// Returns once the main actor keeps up (a turn on it takes under 10 ms, three times running), or after
     /// 3 s. Every suite starts at once and queues its setup there; a copy timed in that rush would measure
     /// the rush, not the rule.
@@ -212,13 +218,14 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
 
     @Test func aSlowRuleIsSkipped() async throws {
         let harness = try await RuleHarness([Spec(id: "dev.example.slow", name: "Slow", rules: [Self.rule("slow")], js: #"""
-        exports.captureRules = { slow: { run: () => new Promise((resolve) => setTimeout(() => resolve({ replace: { text: "late" } }), 1000)) } };
+        exports.captureRules = { slow: { run: () => new Promise((resolve) => setTimeout(() => resolve({ replace: { text: "late" } }), 5000)) } };
         """#)], timeout: nil)
         await RuleHarness.mainActorKeepsUp()
         let start = ContinuousClock.now
         #expect(await harness.run(.text("a")) == CaptureRuleDecision())
-        #expect(ContinuousClock.now - start < .milliseconds(400))
-        // The Development log names the rule and the code, nothing it saw.
+        // Back long before its answer was due.
+        #expect(ContinuousClock.now - start < RuleHarness.promptly)
+        // Cut at its time: the Development log names the rule and the code, nothing it saw.
         try await eventually { harness.logs.lines.contains("dev.example.slow: rule slow failed (timeout)") }
     }
 
@@ -232,7 +239,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         while harness.settings.isEnabled("dev.example.hang"), copies < 10 {
             let start = ContinuousClock.now
             #expect(await harness.run(.text("a")) == CaptureRuleDecision())
-            #expect(ContinuousClock.now - start < .milliseconds(400))
+            #expect(ContinuousClock.now - start < RuleHarness.promptly)
             copies += 1
             // The host restarted: its extensions load again, and the next copy finds this one in.
             await harness.service.preloadCaptureRules().value
@@ -246,8 +253,9 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
     }
 
     @Test func aSlowFirstLoadSkipsTheRuleButNotTheCopy() async throws {
+        // Longer than a copy may take (`promptly`), so the copy below is timed against a load still running.
         let harness = try await RuleHarness([Spec(id: "dev.example.heavy", name: "Heavy", rules: [Self.rule("clean")], js: #"""
-        const end = Date.now() + 1000;
+        const end = Date.now() + 3000;
         while (Date.now() < end) {}
         exports.captureRules = { clean: { run: () => ({ replace: { text: "clean" } }) } };
         """#)], timeout: nil, preload: false)
@@ -257,10 +265,10 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         // A registry change (an install, a switch, an edit) starts loading its rules at once.
         harness.registry.reload()
         try await eventually { harness.transport.requests.contains { $0.load?.extensionID == "dev.example.heavy" } }
-        // A copy does not wait for that load.
+        // A copy does not wait for that load: it is back well before the load's 3 s are up.
         let start = ContinuousClock.now
         #expect(await harness.run(.text("a")) == CaptureRuleDecision())
-        #expect(ContinuousClock.now - start < .milliseconds(400))
+        #expect(ContinuousClock.now - start < RuleHarness.promptly)
         // The load went on: once it is in, the rule applies. (A late folder event for the new, empty extensions
         // folder can change the registry once more, which starts the load over.)
         var decision = CaptureRuleDecision()
@@ -334,10 +342,11 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
 
     /// A copy too big for speculative work (`ExtensionService.speculativeLimit`) goes past every rule
     /// untouched. No call is made, so nothing runs out of time on it and nothing counts against its extension.
+    /// (Rules get the harness's 2 s: the ordinary copy at the end must not race a busy main actor for its answer.)
     @Test func aCopyTooBigForSpeculativeWorkSkipsEveryRule() async throws {
         let harness = try await RuleHarness([Spec(id: "dev.example.big", name: "Big", rules: [Self.rule("clean")], js: #"""
         exports.captureRules = { clean: { run: (item) => (item.text ?? "").length > 1000 ? new Promise(() => {}) : { replace: { text: "clean" } } } };
-        """#)], timeout: nil)
+        """#)])
         let big = String(repeating: "a", count: ExtensionService.speculativeLimit + 1)
         for _ in 0..<ExtensionHostClient.failureLimit {
             #expect(await harness.run(.text(big)) == CaptureRuleDecision())
@@ -420,12 +429,14 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
 
     /// Review fix 3: a load of the old code that fails after the extension changed does not hide the new code.
     @Test func aFailureFromBeforeAChangeDoesNotHideTheFix() async throws {
+        // The old code runs 3 s: the change below lands while it does, however far behind the main actor is.
         let harness = try await RuleHarness([Spec(id: "dev.example.fixed", name: "Fixed", rules: [Self.rule("clean")], js: #"""
         console.log("old code running");
-        const end = Date.now() + 500;
+        const end = Date.now() + 3000;
         while (Date.now() < end) {}
         throw new Error("broken");
         """#)], preload: false)
+        await RuleHarness.mainActorKeepsUp()
         // A change starts loading the broken code…
         harness.registry.reload()
         try await eventually { harness.logs.lines.contains("old code running") }
@@ -442,12 +453,15 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
     /// Review round 2, A: the caller's retry after a stale failure does not load code the current revision already
     /// found broken; a third failure would turn the extension off, when it should only be hidden.
     @Test func aBrokenExtensionIsHiddenNotTurnedOff() async throws {
+        // The old code runs 3 s, so the change below lands while it does, however far behind the main actor is; the
+        // copy's rule gets 5 s, so the copy is still waiting when that load fails.
         let harness = try await RuleHarness([Spec(id: "dev.example.broken", name: "Broken", rules: [Self.rule("clean")], js: #"""
         console.log("old code running");
-        const end = Date.now() + 500;
+        const end = Date.now() + 3000;
         while (Date.now() < end) {}
         throw new Error("broken");
-        """#)], preload: false)
+        """#)], timeout: .seconds(5), preload: false)
+        await RuleHarness.mainActorKeepsUp()
         // A change loads the old code, and a copy waits for that load.
         harness.registry.reload()
         try await eventually { harness.logs.lines.contains("old code running") }

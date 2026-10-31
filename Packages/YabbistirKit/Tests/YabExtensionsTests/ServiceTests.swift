@@ -565,7 +565,10 @@ import YabPasteboard
         try await eventually { transport.requests.compactMap(\.invoke).count == 2 }
         try await eventually { service.cachedOutput(of: command, subjectID: nil) != nil }
         try await Task.sleep(for: .milliseconds(200))
-        #expect(transport.requests.compactMap(\.invoke).map(\.context.target) == [Self.finder, Self.editor])
+        // One call each, each with its own target. Both wait for the same load and go on together: which reaches the
+        // host first is the main actor's choice, not the order they were asked in.
+        let targets = transport.requests.compactMap(\.invoke).map(\.context.target)
+        #expect(targets.count == 2 && targets.contains(Self.finder) && targets.contains(Self.editor))
         #expect(service.cachedOutput(of: command, subjectID: nil) == .text("Zed"))
     }
 

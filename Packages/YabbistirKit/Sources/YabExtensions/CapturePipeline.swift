@@ -61,7 +61,9 @@ public final class CapturePipeline {
     private let stack: () -> Bool
     private let categories: CategoryResolving
     private let log: (String) -> Void
-    private let backstop: Duration
+    /// The longest a copy waits for the rules, whatever their budget. Read for each copy, so a test can make it short
+    /// for the copies about it and give the next ones the app's.
+    var backstop: Duration
     /// Copies waiting for the rules, oldest first, with the change count each was read at.
     private var waiting: [(clip: CapturedClip, changeCount: Int)] = []
     /// Works through `waiting`; nil when nothing is with the rules.

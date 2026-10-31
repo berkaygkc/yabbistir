@@ -104,13 +104,23 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
     @Test func aHungCallTimesOutAndTheHostRestarts() async throws {
         let transport = FakeTransport(reply: nil)
         let client = ExtensionHostClient(transport: transport) { _, _ in }
-        let start = ContinuousClock.now
+        // A call with twenty times as long, already waiting in a host of its own. The hung call is timed against it, not
+        // against the wall clock, which would measure the main actor too: other suites can hold that for seconds.
+        let patientHost = FakeTransport(reply: nil)
+        let patientClient = ExtensionHostClient(transport: patientHost) { _, _ in }
+        let context = context
+        let patient = Task {
+            try await patientClient.invoke("dev.example.fixture", .run, name: "a", item: nil, context: context, timeout: .seconds(10))
+        }
+        try await eventually { patientHost.invokes == 1 }
         await #expect {
             _ = try await client.invoke("dev.example.fixture", .run, name: "a", item: nil, context: context, timeout: .milliseconds(500))
         } throws: { ($0 as? ExtensionError)?.code == .timeout }
-        // Well short of the 5 s a hung call would cost; parallel suites delay the main-actor timer.
-        #expect(ContinuousClock.now - start < .seconds(3))
+        // Cut at its own 500 ms: the other call, sent before it with 10 s, still waits.
+        #expect(patientHost.restarts == 0)
         #expect(transport.restarts == 1)
+        patient.cancel()
+        await #expect { _ = try await patient.value } throws: { ($0 as? ExtensionError)?.code == .cancelled }
     }
 
     nonisolated static func failing(_ id: Int) -> HostMessage { HostMessage(id: id, error: ExtensionError(.script, "boom")) }
