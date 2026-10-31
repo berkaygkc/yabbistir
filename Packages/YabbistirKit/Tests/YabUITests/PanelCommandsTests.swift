@@ -111,7 +111,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(content.info[2].chips == ["b64", "çöz"])
     }
 
-    /// Review I5: selecting a row never runs a command that has no hint; it runs when used.
+    /// Selecting a row never runs a command that has no hint; it runs when used.
     @Test func aTransformerWithoutAHintIsNotRunByItsPreview() async throws {
         let command = FakeCommands.command("dev.yabbistir.convert/ocr", title: "Metni oku", keywords: ["ocr"], hint: false)
         let content = await PreviewLoader.load(command: command, rowID: RowModel.commandIDBase, subjectID: plainID, library: library,

@@ -465,7 +465,7 @@ private final class StackWriter: PasteboardWriting {
         #expect(model.handle(.confirm(plain: false)) == .addToStack(itemID: item))
     }
 
-    /// Review: deleting a queued item from History drops its stack entry too ("UPDATE…" is in no
+    /// Deleting a queued item from History drops its stack entry too ("UPDATE…" is in no
     /// category, so ⌘⌫ deletes it).
     @Test func deletingAQueuedItemFromHistoryDropsItsEntry() {
         _ = model.handle(.move(1))

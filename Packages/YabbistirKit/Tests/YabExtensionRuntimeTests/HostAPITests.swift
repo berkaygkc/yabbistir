@@ -33,7 +33,7 @@ import YabExtensionKit
         #expect(text(output) == "Merhaba Ada|Only English|tr")
     }
 
-    /// Review I3: huge numbers and array lengths from JavaScript never trap the host.
+    /// Huge numbers and array lengths from JavaScript never trap the host.
     @Test func hugeNumbersNeverTrap() async throws {
         let js = #"exports.actions = { a: { run: () => ({ text: yab.t("count", { n: 1e300 }) + "|" + yab.t("count", { n: -Infinity }) }) } };"#
         let output = try await RuntimeFixture.load(js: js, locales: ["en": ["name": "F", "keywords": ["f"], "count": "{n} items"]])

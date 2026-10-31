@@ -394,7 +394,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         #expect(!harness.logs.lines.contains { $0.contains("gizli") })
     }
 
-    /// Review fix 1: a host restart drops what the service had loaded there, and the reload goes the shared way,
+    /// A host restart drops what the service had loaded there, and the reload goes the shared way,
     /// so the next copies' deadlines cannot cut it short again and again.
     @Test func aRestartDoesNotSilenceASlowLoadingRule() async throws {
         let harness = try await RuleHarness([Spec(id: "dev.example.restart", name: "Restart", rules: [Self.rule("clean")], js: #"""
@@ -416,7 +416,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         #expect(decision == CaptureRuleDecision(replacement: .text("clean")))
     }
 
-    /// Review fix 2: what a rule returns never reaches the Development log, whatever its shape.
+    /// What a rule returns never reaches the Development log, whatever its shape.
     @Test func aRuleAnswerNeverReachesTheLog() async throws {
         let harness = try await RuleHarness([Spec(id: "dev.example.echo", name: "Echo", rules: [Self.rule("number"), Self.rule("flag")], js: #"""
         exports.captureRules = { number: { run: (item) => Number(item.text) }, flag: { run: (item) => item.text.length > 3 } };
@@ -427,7 +427,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         #expect(!harness.logs.lines.contains { $0.contains("123456") || $0.contains("returned true") })
     }
 
-    /// Review fix 3: a load of the old code that fails after the extension changed does not hide the new code.
+    /// A load of the old code that fails after the extension changed does not hide the new code.
     @Test func aFailureFromBeforeAChangeDoesNotHideTheFix() async throws {
         // The old code runs 3 s: the change below lands while it does, however far behind the main actor is.
         let harness = try await RuleHarness([Spec(id: "dev.example.fixed", name: "Fixed", rules: [Self.rule("clean")], js: #"""
@@ -450,7 +450,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         #expect(await harness.run(.text("a")) == CaptureRuleDecision(replacement: .text("clean")))
     }
 
-    /// Review round 2, A: the caller's retry after a stale failure does not load code the current revision already
+    /// The caller's retry after a stale failure does not load code the current revision already
     /// found broken; a third failure would turn the extension off, when it should only be hidden.
     @Test func aBrokenExtensionIsHiddenNotTurnedOff() async throws {
         // The old code runs 3 s, so the change below lands while it does, however far behind the main actor is; the
@@ -483,7 +483,7 @@ final class DyingTransport: HostTransport, @unchecked Sendable {
         #expect(harness.transport.requests.filter { $0.load != nil }.count == 2)
     }
 
-    /// Review round 2, B: a host that stops on every load is not started again and again by the loads a restart
+    /// A host that stops on every load is not started again and again by the loads a restart
     /// brings on by itself.
     @Test func aHostThatDiesOnEveryLoadIsNotRespawnedEndlessly() async throws {
         let host = DyingTransport()

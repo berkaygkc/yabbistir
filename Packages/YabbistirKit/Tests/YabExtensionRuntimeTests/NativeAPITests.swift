@@ -63,7 +63,7 @@ enum TestImages {
         try await RuntimeFixture.load(js: js).invoke(.run, name: "a", item: item, context: context)
     }
 
-    /// Review I3: numbers from JavaScript never trap the host.
+    /// Numbers from JavaScript never trap the host.
     @Test func outOfRangeNumbersAreErrors() async throws {
         let item = TestImages.item(TestImages.photo(width: 20, height: 10))
         for call in ["yab.image.resize(item.image, { width: Infinity, height: 5 })", "yab.image.resize(item.image, { scale: 1e300 })",

@@ -63,7 +63,7 @@ final class FakeWriter: PasteboardWriting {
                                timing: StackTiming(rail: .milliseconds(80), settle: .milliseconds(10), closeDelay: .milliseconds(20)))
     }
 
-    /// Review: a ⌘V of something the stack did not put on the clipboard (a password manager's copy,
+    /// A ⌘V of something the stack did not put on the clipboard (a password manager's copy,
     /// a snippet) pastes that, not the head: the head stays and goes back on the clipboard.
     @Test func aPasteOfSomethingElseKeepsTheHead() async throws {
         session.append(ids[0])
@@ -75,7 +75,7 @@ final class FakeWriter: PasteboardWriting {
         #expect(writer.lastText == "bir")
     }
 
-    /// Review: once the rail's copy is next, the rail and ⌥1/⌥2 are gone (they type characters again).
+    /// Once the rail's copy is next, the rail and ⌥1/⌥2 are gone (they type characters again).
     @Test func theRailLeavesOnceItsCopyIsNext() async throws {
         session.append(ids[0])
         session.append(ids[1])
@@ -96,7 +96,7 @@ final class FakeWriter: PasteboardWriting {
         #expect(session.offersSecondPlace)
     }
 
-    /// Review: an item deleted from the library leaves the stack instead of staying as an empty row.
+    /// An item deleted from the library leaves the stack instead of staying as an empty row.
     @Test func aDeletedItemLeavesTheStack() {
         session.append(ids[0])
         session.append(ids[1])

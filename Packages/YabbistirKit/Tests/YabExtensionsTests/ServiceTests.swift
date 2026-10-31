@@ -163,7 +163,7 @@ import YabPasteboard
         #expect((width, height) == (64, 40))
     }
 
-    /// Review C3: a huge subject gets no speculative calls (hints, validation, preview sections).
+    /// A huge subject gets no speculative calls (hints, validation, preview sections).
     @Test func bigItemsGetNoSpeculativeCalls() async throws {
         let big = try ingest(String(repeating: "QUJD", count: 80_000))
         let encode = try #require(service.transforms(forItemID: big).first { $0.actionID == "encode" })
@@ -189,7 +189,7 @@ import YabPasteboard
         _ = small
     }
 
-    /// Review I4: the launch scan gives the main actor room between items.
+    /// The launch scan gives the main actor room between items.
     @Test func backfillLetsTheMainActorBreathe() async throws {
         for index in 0..<300 { _ = try ingest("satır \(index) merhaba dünya") }
         let state = BackfillState()
@@ -204,7 +204,7 @@ import YabPasteboard
         #expect(ranDuringScan)
     }
 
-    /// Review I2: "turned off after repeated errors" is off everywhere, and turning it back on works.
+    /// "Turned off after repeated errors" is off everywhere, and turning it back on works.
     @Test func anExtensionTurnedOffByErrorsIsOffEverywhere() async throws {
         let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-off-\(UUID().uuidString)")!)
         let registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
@@ -254,7 +254,7 @@ import YabPasteboard
         _ = uuid
     }
 
-    /// Review I6: an extension whose index.js throws leaves the panel until its files change, and says why in the log.
+    /// An extension whose index.js throws leaves the panel until its files change, and says why in the log.
     @Test func aFailingLoadHidesItsCommandsUntilItsFilesChange() async throws {
         let folder = try RegistryFixture.write(in: RegistryFixture.temporary("src"), id: "dev.example.throws")
         try "throw new Error('boom');".write(to: folder.appendingPathComponent("index.js"), atomically: true, encoding: .utf8)

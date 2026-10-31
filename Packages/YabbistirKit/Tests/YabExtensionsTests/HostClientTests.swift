@@ -66,7 +66,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         #expect(output == .result(.text("ok")))
     }
 
-    /// Review round 2, C: what a run or a preview returns never reaches the Development log, whatever its shape
+    /// What a run or a preview returns never reaches the Development log, whatever its shape
     /// (hints run actions on clipboard text by themselves).
     @Test func aBadResultNeverLogsWhatWasReturned() async throws {
         var lines: [String] = []
@@ -206,7 +206,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         #expect(disabled.isEmpty)
     }
 
-    /// Review C3: a host that stops reading never blocks the app; the call's clock is already running.
+    /// A host that stops reading never blocks the app; the call's clock is already running.
     @Test func sendingNeverBlocks() async throws {
         let transport = ProcessTransport(executableURL: URL(fileURLWithPath: "/bin/sleep"), arguments: ["4"])
         let client = ExtensionHostClient(transport: transport) { _, _ in }
@@ -229,7 +229,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         transport.stop()
     }
 
-    /// Review C3: the transport queues the write; a host that is not reading never holds up the caller.
+    /// The transport queues the write; a host that is not reading never holds up the caller.
     @Test func aTransportSendReturnsAtOnce() throws {
         let transport = ProcessTransport(executableURL: URL(fileURLWithPath: "/bin/sleep"), arguments: ["3"])
         try transport.start { _ in }
@@ -239,7 +239,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         transport.stop()
     }
 
-    /// Review I1: a call cut short by another call's timeout is not its extension's fault.
+    /// A call cut short by another call's timeout is not its extension's fault.
     @Test func restartCasualtiesAreNotCounted() async throws {
         let client = ExtensionHostClient(transport: FakeTransport(reply: nil)) { _, _ in }
         for _ in 0..<3 {
@@ -254,7 +254,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         #expect(!client.isDisabled("dev.example.innocent"))
     }
 
-    /// Review I1: an extension whose load hangs or fails is the one that gets turned off.
+    /// An extension whose load hangs or fails is the one that gets turned off.
     @Test func aLoadThatHangsIsCountedAgainstItsExtension() async throws {
         let client = ExtensionHostClient(transport: FakeTransport(reply: nil), loadTimeout: .milliseconds(200)) { _, _ in }
         for _ in 0..<3 {
@@ -285,7 +285,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         try await eventually { Set(PipeEnd.all(in: getpid())).isDisjoint(with: ours) }
     }
 
-    /// Review I3: a host that dies fails its calls at once, without blaming them.
+    /// A host that dies fails its calls at once, without blaming them.
     @Test func aHostThatExitsFailsItsCallsAtOnce() async throws {
         let transport = ProcessTransport(executableURL: URL(fileURLWithPath: "/bin/sh"), arguments: ["-c", "sleep 0.3; exit 3"])
         let client = ExtensionHostClient(transport: transport) { _, _ in }
@@ -298,7 +298,7 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         transport.stop()
     }
 
-    /// Review C3: a slow load (a top-level loop) never stops the host from answering others.
+    /// A slow load (a top-level loop) never stops the host from answering others.
     @Test func aSlowLoadDoesNotHoldUpOtherExtensions() async throws {
         let client = ExtensionHostClient(transport: PipeTransport()) { _, _ in }
         let quick = try ExtensionFixture.folder(id: "dev.example.quick", js: #"exports.actions = { a: { run: () => ({ text: "ok" }) } };"#)

@@ -62,7 +62,7 @@ enum BuiltinFolder {
         #expect(!catalog().transforms(for: two).contains { $0.extensionID == "dev.yabbistir.convert" })
     }
 
-    /// Review C2: whatever slips past validation, building the catalog and reading preferences never trap.
+    /// Whatever slips past validation, building the catalog and reading preferences never trap.
     @Test func duplicateIDsNeverTrap() throws {
         let json = """
         {"id":"dev.example.dup","version":"1.0.0","apiVersion":1,"defaultLocale":"en","name":"n","description":"n","icon":"sf:number",

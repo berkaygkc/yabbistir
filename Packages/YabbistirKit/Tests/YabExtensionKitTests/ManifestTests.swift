@@ -111,7 +111,7 @@ import Testing
             ("contributes.actions[0].targets[0]", base.setting("contributes.actions.0.targets", ["desktop"]), nil, "x", false),
             ("contributes.actions[0].targetsOnly", base.setting("contributes.actions.0.targetsOnly", true), nil, "x", false),
             ("index.js", base, nil, nil, false),
-            // Review C2: what used to pass and then trap.
+            // What used to pass and then trap.
             ("apiVersion", base.setting("apiVersion", 1e20), nil, "x", false),
             ("preferences[1].id", base.setting("preferences", [["id": "upper", "type": "toggle", "title": "upper", "default": false],
                                                                 ["id": "upper", "type": "toggle", "title": "upper", "default": true]]), nil, "x", false),

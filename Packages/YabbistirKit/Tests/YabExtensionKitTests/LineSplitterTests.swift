@@ -10,7 +10,7 @@ import YabExtensionKit
         #expect(splitter.append(Data("\n".utf8)) == [Data("f".utf8)])
     }
 
-    /// Review C3: a big line in pipe-sized chunks costs one pass, not one pass per chunk.
+    /// A big line in pipe-sized chunks costs one pass, not one pass per chunk.
     @Test func aLongLineSplitsInLinearTime() {
         let splitter = LineSplitter()
         let chunk = Data(repeating: 0x41, count: 64 * 1024)

@@ -167,7 +167,7 @@ extension ExtensionRegistry {
         #expect(FileManager.default.fileExists(atPath: linked.appendingPathComponent("manifest.json").path))
     }
 
-    /// Review C1: an id is a path component; ".." must never reach the file system.
+    /// An id is a path component; ".." must never reach the file system.
     @Test func aLinkWhoseIDLeavesTheFolderTouchesNothing() throws {
         let appSupport = user.deletingLastPathComponent()
         let marker = appSupport.appendingPathComponent("db.sqlite")
@@ -183,7 +183,7 @@ extension ExtensionRegistry {
         #expect(registry.installed.contains { $0.id == "dev.example.kept" })
     }
 
-    /// Review I6: index.js that does not parse is a problem in Settings, found without running it.
+    /// index.js that does not parse is a problem in Settings, found without running it.
     @Test func aSyntaxErrorIsAProblem() throws {
         let folder = try RegistryFixture.write(in: user, id: "dev.example.broken")
         try "exports.actions = {\n  a: { run() { return { text: 'x' } }\n".write(to: folder.appendingPathComponent("index.js"), atomically: true, encoding: .utf8)

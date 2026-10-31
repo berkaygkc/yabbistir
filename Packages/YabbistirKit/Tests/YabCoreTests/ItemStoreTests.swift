@@ -180,7 +180,7 @@ private func vsCodeClip(_ s: String, token: Data, at date: Date) -> CapturedClip
         #expect(try store.referencedFileURLs() == [url])
     }
 
-    /// Review I4: reading an item's text never pulls its other payloads.
+    /// Reading an item's text never pulls its other payloads.
     @Test func representationsCanBeReadByType() throws {
         let store = try ItemStore.temporary()
         let big = Data(repeating: 7, count: 200_000)
