@@ -277,16 +277,15 @@ public final class StoreClient {
 
         let work = FileManager.default.temporaryDirectory.appendingPathComponent("yabbistir-store-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: work) }
-        let archive = work.appendingPathComponent("package.yabext")
-        do {
-            try FileManager.default.createDirectory(at: work, withIntermediateDirectories: true)
-            try bytes.write(to: archive)
-        } catch {
-            return .registry("could not save the download: \(error.localizedDescription)")
+        // Saving, unpacking and checking wait on the disk and on ditto: off the main actor. Only the registry runs on it.
+        let unpacked = await Task.detached(priority: .userInitiated) { Self.unpack(bytes, in: work, entry: entry) }.value
+        let folder: URL
+        switch unpacked {
+        case .success(let checked): folder = checked
+        case .failure(let failure): return failure
         }
-        // The folder that was checked is the folder that gets installed.
-        guard let folder = checkedFolder(of: archive, in: work, entry: entry) else { return .badPackage(id: entry.id) }
         do {
+            // The folder that was checked is the folder that gets installed.
             try registry.install(folder: folder)
             return nil
         } catch {
@@ -294,10 +293,23 @@ public final class StoreClient {
         }
     }
 
+    /// Saves the download in `work`, unpacks it there and returns the checked package folder.
+    nonisolated private static func unpack(_ bytes: Data, in work: URL, entry: StoreEntry) -> Result<URL, StoreFailure> {
+        let archive = work.appendingPathComponent("package.yabext")
+        do {
+            try FileManager.default.createDirectory(at: work, withIntermediateDirectories: true)
+            try bytes.write(to: archive)
+        } catch {
+            return .failure(.registry("could not save the download: \(error.localizedDescription)"))
+        }
+        guard let folder = checkedFolder(of: archive, in: work, entry: entry) else { return .failure(.badPackage(id: entry.id)) }
+        return .success(folder)
+    }
+
     /// Unpacks into a scratch folder and returns the package's folder only when it is the single entry at the root
     /// (hidden files and resource-fork folders count), is named after the entry's id, and its manifest says what the
     /// entry says: the same id and version, and the same permissions, sites and programs in any order.
-    private func checkedFolder(of archive: URL, in work: URL, entry: StoreEntry) -> URL? {
+    nonisolated private static func checkedFolder(of archive: URL, in work: URL, entry: StoreEntry) -> URL? {
         let id = entry.id
         let scratch = work.appendingPathComponent("unpacked", isDirectory: true)
         let ditto = Process()
@@ -319,7 +331,7 @@ public final class StoreClient {
 
     /// The permissions, sites and programs a manifest asks for (sorted, without duplicates), or nil when one of those
     /// lists is not a list of strings.
-    private static func request(of manifest: JSONValue) -> PermissionGrant? {
+    nonisolated private static func request(of manifest: JSONValue) -> PermissionGrant? {
         /// A list's strings: empty when the list is absent, nil when it holds anything else.
         func strings(_ value: JSONValue?) -> [String]? {
             guard let value else { return [] }
