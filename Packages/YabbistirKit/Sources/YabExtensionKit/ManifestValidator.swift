@@ -3,12 +3,20 @@ import Foundation
 /// One problem with an extension, written so a person or an agent can fix it: where, what,
 /// what was expected and how to fix it.
 public struct ManifestIssue: Equatable, Sendable, CustomStringConvertible {
+    /// An error keeps an extension from loading; a warning is shown but the extension still loads.
+    public enum Severity: Sendable { case error, warning }
+
     public let path: String
     public let message: String
     public let expected: String?
     public let fix: String?
+    public let severity: Severity
+    /// A stable name for issues a tool may match on (warnings have one); nil for the rest.
+    public let code: String?
 
-    public init(_ path: String, _ message: String, expected: String? = nil, fix: String) {
+    public init(_ path: String, _ message: String, expected: String? = nil, fix: String, severity: Severity = .error, code: String? = nil) {
+        self.severity = severity
+        self.code = code
         self.path = path
         self.message = message
         self.expected = expected
@@ -37,6 +45,17 @@ public enum ManifestValidator {
 
     public static let supportedAPIVersions = 1...1
 
+    /// Warnings about a manifest that loads: things that work but not as written. Empty when the manifest is not valid
+    /// (its errors come first).
+    public static func warnings(folder: URL) -> [ManifestIssue] {
+        guard let data = try? Data(contentsOf: folder.appendingPathComponent("manifest.json")),
+              let tree = try? JSONDecoder().decode(JSONValue.self, from: data), let root = tree.objectValue else { return [] }
+        var checker = Checker(root: root, folder: folder, localization: (try? ExtensionLocalization(folder: folder, defaultLocale: root["defaultLocale"]?.stringValue ?? "en"))
+            ?? ExtensionLocalization(tables: [:], defaultLocale: "en"))
+        checker.run()
+        return checker.issues.contains { $0.severity == .error } ? [] : checker.issues
+    }
+
     public static func validate(folder: URL) -> ManifestValidation {
         let manifestURL = folder.appendingPathComponent("manifest.json")
         guard let data = try? Data(contentsOf: manifestURL) else {
@@ -50,7 +69,7 @@ public enum ManifestValidator {
             ?? ExtensionLocalization(tables: [:], defaultLocale: defaultLocale)
         var checker = Checker(root: root, folder: folder, localization: localization)
         checker.run()
-        guard checker.issues.isEmpty else { return .invalid(checker.issues) }
+        guard !checker.issues.contains(where: { $0.severity == .error }) else { return .invalid(checker.issues) }
         do {
             return .valid(try JSONDecoder().decode(ExtensionManifest.self, from: data), localization)
         } catch {
@@ -236,7 +255,15 @@ public enum ManifestValidator {
                 memberID(in: object, path: "\(path).id", what: "capture rule", seen: &ruleIDs)
                 localeKey("title", in: object, path: "\(path).title")
                 if object["description"] != nil { localeKey("description", in: object, path: "\(path).description") }
-                if let accepts = object["accepts"] { acceptSpec(accepts, path: "\(path).accepts") }
+                if let accepts = object["accepts"] {
+                    acceptSpec(accepts, path: "\(path).accepts")
+                    // Rules run before tags exist, so a tag filter would never match.
+                    if !(accepts["tags"]?.arrayValue ?? []).isEmpty {
+                        issues.append(ManifestIssue("\(path).accepts.tags", "capture rules never see tags; this rule would never run",
+                                                    fix: "Remove \"tags\" from \"accepts\"; filter on \"kinds\" or \"pattern\" instead.",
+                                                    severity: .warning, code: "captureRuleTags"))
+                    }
+                }
                 else { issue("\(path).accepts", "a capture rule needs \"accepts\"", fix: "Add \"accepts\": {\"kinds\": [\"link\"]}.") }
             }
             var detectorIDs = Set<String>()

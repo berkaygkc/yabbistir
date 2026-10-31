@@ -159,7 +159,8 @@ final class RecordingTransport: HostTransport, @unchecked Sendable {
 
         harness.clock.advance(by: .milliseconds(3100))
         _ = try await harness.run()
-        try await eventually { harness.handled == 6 }
+        // The helper lets five through in ten seconds, so the sixth never reaches the router.
+        try await eventually { harness.handled == 5 }
         #expect(harness.services.notifications.filter { $0.name == "Test" }.map(\.message) == ["bir", "bir"])
     }
 

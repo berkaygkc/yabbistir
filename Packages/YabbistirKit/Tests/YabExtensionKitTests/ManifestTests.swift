@@ -16,6 +16,27 @@ import Testing
         #expect(found.isEmpty, "\(found)")
     }
 
+    @Test func captureRulesWithTagsWarn() throws {
+        let rule = Self.rule.setting("accepts.tags", ["dev.example.sample:base64"])
+        let manifest = Fixture.manifest(id: "dev.example.sample")
+            .setting("permissions", ["capture"]).setting("contributes.captureRules", [rule])
+        let fixture = try Fixture(manifest: manifest)
+        // A warning is not an error: the manifest still loads.
+        guard case .valid = ManifestValidator.validate(folder: fixture.root) else {
+            Issue.record("expected a valid manifest: \(ManifestValidator.validate(folder: fixture.root).issues)"); return
+        }
+        let warnings = ManifestValidator.warnings(folder: fixture.root)
+        #expect(warnings.count == 1)
+        #expect(warnings.first?.code == "captureRuleTags")
+        #expect(warnings.first?.severity == .warning)
+        #expect(warnings.first?.path == "contributes.captureRules[0].accepts.tags")
+        #expect(warnings.first?.message == "capture rules never see tags; this rule would never run")
+        // The same rule without tags is clean, and an action with tags is fine.
+        let clean = try Fixture(manifest: Fixture.manifest(id: "dev.example.sample")
+            .setting("permissions", ["capture"]).setting("contributes.captureRules", [Self.rule]))
+        #expect(ManifestValidator.warnings(folder: clean.root).isEmpty)
+    }
+
     @Test func aRuleManifestParses() throws {
         let manifest = Fixture.manifest(id: "dev.example.sample")
             .setting("permissions", ["capture"]).setting("contributes.captureRules", [Self.rule])

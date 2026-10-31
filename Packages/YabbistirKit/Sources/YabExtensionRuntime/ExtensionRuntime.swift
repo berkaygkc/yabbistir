@@ -30,6 +30,10 @@ public final class ExtensionRuntime: @unchecked Sendable {
     let http: HTTPClient
     /// Where requests to the app go (`hostCall`); nil outside a host, where the app cannot be asked.
     let hostCalls: HostCallChannel?
+    /// How many `yab.notify` requests may leave for the app (queue-confined).
+    var notifyLimiter = NotifyLimiter()
+    /// Seconds on a steady clock; the notify cap counts against it.
+    let clock: @Sendable () -> TimeInterval
     /// The language of the call in progress (queue-confined).
     var currentLanguage: String
     /// The call whose code is running (queue-confined); see CallScope.
@@ -59,7 +63,9 @@ public final class ExtensionRuntime: @unchecked Sendable {
     init(folder: URL, manifest: ExtensionManifest, localization: ExtensionLocalization, dataFolder: URL,
          grant: PermissionGrant = .empty, toolSearchPath: [String] = [], secrets: [String: String] = [:],
          urlSessionConfiguration: URLSessionConfiguration = .ephemeral, hostCalls: HostCallChannel?,
+         clock: @escaping @Sendable () -> TimeInterval = { ProcessInfo.processInfo.systemUptime },
          log: @escaping @Sendable (String) -> Void) throws(ExtensionError) {
+        self.clock = clock
         extensionID = manifest.id
         queue = DispatchQueue(label: "dev.yabbistir.extension.\(manifest.id)")
         self.log = log
