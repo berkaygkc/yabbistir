@@ -16,8 +16,8 @@ APP="build/yabbistir.app"
 
 fail() { echo "error: $*" >&2; exit 1; }
 
-# Preflight, cheapest and most local first: certificate, clean tree, untracked files, then the notary profile
-# (a network call), then green tests.
+# Preflight, cheapest and most local first: certificate, clean tree, untracked files, the store's keys, then the
+# notary profile (a network call), then green tests.
 IDENTITY="$(security find-identity -v -p codesigning 2>/dev/null | grep -m1 'Developer ID Application' | sed -E 's/.*"(.*)"/\1/' || true)"
 [ -n "$IDENTITY" ] || fail "no Developer ID Application certificate in the keychain"
 [ -z "$(git status --porcelain --untracked-files=no)" ] || fail "uncommitted changes; commit or stash them first"
@@ -31,6 +31,8 @@ $UNTRACKED"
 IGNORED="$(git ls-files --others --ignored --exclude-standard -- Extensions/BuiltinExtensions)"
 [ -z "$IGNORED" ] || fail "ignored files would be bundled into the app:
 $IGNORED"
+# Without the store's public keys no catalog verifies, and this release's Store tab would never open.
+scripts/check-store-keys.sh || fail "the store has no public keys yet; see above"
 
 # An explicit NOTARY_PROFILE is used as is; otherwise yabbistir-notary, then mystat-notary.
 if [ -n "${NOTARY_PROFILE:-}" ]; then

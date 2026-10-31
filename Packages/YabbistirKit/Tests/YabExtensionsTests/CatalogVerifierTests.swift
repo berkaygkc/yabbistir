@@ -80,3 +80,33 @@ extension CatalogVerifierTests {
         }
     }
 }
+
+extension CatalogVerifierTests {
+    /// With no key no catalog verifies, so a release shipped that way would have a Store tab that never opens:
+    /// scripts/release.sh stops first, through scripts/check-store-keys.sh.
+    @Test func aReleaseRefusesAnEmptyKeyList() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let release = try String(contentsOf: root.appendingPathComponent("scripts/release.sh"), encoding: .utf8)
+        #expect(release.contains("scripts/check-store-keys.sh"))
+        /// The gate's exit status for a StoreConfiguration.swift that declares `keys`.
+        func gate(_ keys: String) throws -> Int32 {
+            let file = FileManager.default.temporaryDirectory.appendingPathComponent("StoreConfiguration-\(UUID().uuidString).swift")
+            defer { try? FileManager.default.removeItem(at: file) }
+            try "import CryptoKit\n\npublic enum StoreConfiguration {\n    /// The keys.\n    \(keys)\n}\n".write(to: file, atomically: true, encoding: .utf8)
+            let process = Process()
+            process.executableURL = URL(fileURLWithPath: "/bin/bash")
+            process.arguments = [root.appendingPathComponent("scripts/check-store-keys.sh").path, file.path]
+            process.standardError = FileHandle.nullDevice
+            try process.run()
+            process.waitUntilExit()
+            return process.terminationStatus
+        }
+        #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = []") != 0)
+        #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [ ] // none yet") != 0)
+        #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [\n    ]") != 0)
+        #expect(try gate("public static let otherKeys: [Curve25519.Signing.PublicKey] = [key(\"a\")]") != 0)
+        #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [\n        key(\"q0aJ\"),\n        key(\"Zm9v\"),\n    ]") == 0)
+        #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [key(\"q0aJ\")]") == 0)
+    }
+}
