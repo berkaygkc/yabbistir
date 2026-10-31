@@ -5,6 +5,8 @@ import YabUI
 /// app the user is typing in stays active, so the paste lands back there.
 final class PanelWindow: NSPanel {
     var onCommand: ((PanelCommand) -> Void)?
+    /// Whether the bar shows the ⇧↵ hint: a ⇧ let go while it shows was held, not tapped.
+    var showsShiftHint: () -> Bool = { false }
     private var shiftTap = ShiftTapDetector()
 
     init() {
@@ -38,9 +40,13 @@ final class PanelWindow: NSPanel {
     /// Routes keys before SwiftUI sees them, so typing always goes to search.
     override func sendEvent(_ event: NSEvent) {
         if event.type == .flagsChanged {
+            // A bare ⇧ tap opens (or closes) the transforms of the selected item; a hold long enough
+            // to show the ⇧↵ hint is no tap. Both are read before the hint goes.
+            let tapped = shiftTap.flagsChanged(event.modifierFlags, at: event.timestamp) && !showsShiftHint()
             onCommand?(.commandHeld(PanelKeyRouter.commandHeld(event.modifierFlags)))
-            // A bare ⇧ tap opens (or closes) the transforms of the selected item.
-            if shiftTap.flagsChanged(event.modifierFlags, at: event.timestamp) { onCommand?(.toggleTransforms) }
+            if tapped { onCommand?(.toggleTransforms) }
+            // ⇧ alone starts the hint's delay; let go, or joined by another modifier, it ends the hint.
+            onCommand?(.shiftHeld(PanelKeyRouter.shiftHeld(event.modifierFlags)))
         }
         if event.type == .keyDown { shiftTap.keyDown() }
         if event.type == .keyDown,

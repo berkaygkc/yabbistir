@@ -27,7 +27,7 @@ public struct PanelView: View {
             searchRow
             Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5)
             strip
-            ActionBarView(model: model, onPaste: paste)
+            ActionBarView(model: model, onPaste: paste, onAction: onAction)
         }
         .overlay(alignment: .topTrailing) {
             if model.layer == .categoryMenu {

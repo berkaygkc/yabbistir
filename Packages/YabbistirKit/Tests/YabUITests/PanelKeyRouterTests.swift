@@ -46,4 +46,10 @@ import Testing
         #expect(PanelKeyRouter.commandHeld(.command))
         #expect(!PanelKeyRouter.commandHeld([.command, .shift]))
     }
+    @Test func shiftAloneIsHeld() {
+        #expect(PanelKeyRouter.shiftHeld(.shift))
+        #expect(PanelKeyRouter.shiftHeld([.shift, .capsLock]))
+        #expect(!PanelKeyRouter.shiftHeld([.shift, .command]))
+        #expect(!PanelKeyRouter.shiftHeld([]))
+    }
 }

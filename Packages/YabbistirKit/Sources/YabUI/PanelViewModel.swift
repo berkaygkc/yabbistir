@@ -82,6 +82,12 @@ public struct TransformSection: Identifiable, Equatable, Sendable {
     public let rows: Range<Int>
 }
 
+/// The ⇧ panel's ⌘K, for its highlighted row: make it what ⇧↵ runs for this kind of item (or stop
+/// that), then the row's ↵ and ⌘C.
+public enum TransformMenuItem: Hashable, Sendable {
+    case setDefault, clearDefault, run, copy
+}
+
 /// What sits on top of the list and takes the keyboard: the Kategoriler menu, ⌘K, ⌘P or the ⇧ panel.
 public enum PanelLayer: Equatable, Sendable {
     case none, categoryMenu, actions, pin, transforms
@@ -104,7 +110,10 @@ public final class PanelViewModel {
     public private(set) var isQuerySelected = false
     /// "On select" categories opened from the Kategoriler menu; kept while the app runs.
     public private(set) var shownCategoryIDs: Set<Int64> = []
-    public private(set) var layer: PanelLayer = .none
+    public private(set) var layer: PanelLayer = .none {
+        // The ⇧ panel's ⌘K leaves with the panel.
+        didSet { if layer != .transforms, transformMenuOpen { transformMenuOpen = false } }
+    }
     /// Why the preview is open: a hover (closes when the pointer leaves) or the keyboard (stays
     /// for the session and follows the selection). Nil: closed.
     public private(set) var previewSource: PreviewSource?
@@ -196,6 +205,15 @@ public final class PanelViewModel {
         return shiftReturn(itemID: row.itemID, kind: row.kind)
     }
 
+    /// ⇧ held for `shiftHintDelay` with no layer open, on a row whose ⇧↵ does something ↵ does not:
+    /// the bar becomes one button saying what (`shiftHintLabel`). A ⇧ released while it shows is no tap.
+    public private(set) var showsShiftHint = false
+    /// What the bar says while ⇧ is held: "Paste as plain text" or the default transform's title.
+    /// Kept once the hint hides, so the button fades out with its words.
+    public private(set) var shiftHintLabel: String?
+    /// How long ⇧ is held before the hint shows: 200 ms, as ⌘ before its keycaps; tests pass zero.
+    @ObservationIgnored public let shiftHintDelay: Duration
+
     /// ⇧ panel search text.
     public private(set) var transformQuery = ""
     /// The item the ⇧ panel transforms.
@@ -204,6 +222,15 @@ public final class PanelViewModel {
     public private(set) var transformSubjectApp: String?
     /// Its text, for the "Paste as plain text" row's preview.
     public private(set) var transformPlainText: String?
+    /// ⌘K over the ⇧ panel's lower right; the panel stays its layer.
+    public private(set) var transformMenuOpen = false
+    /// That menu's search text.
+    public private(set) var transformMenuQuery = ""
+    /// Its highlighted item; the ⇧ panel's highlighted row (`menuSelection`), which it acts on, stays.
+    public private(set) var transformMenuSelection = 0
+    /// Bumped when a ⇧↵ default changes: the defaults live in UserDefaults, which nothing observes,
+    /// and the ⇧ panel, ⌘K and the bar read them through this.
+    private var defaultsRevision = 0
 
     /// The transformed item's row, for the ⇧ panel's header.
     public var transformSubjectRow: RowModel? {
@@ -280,6 +307,26 @@ public final class PanelViewModel {
         }
         let verb = command.verb ?? L10n.string("transforms.start", language)
         return (verb, L10n.string("transforms.copyAfter", language, verb))
+    }
+
+    /// The ⇧ panel's ⌘K for the highlighted row: "Make default for ⇧↵" ("Remove default" on the
+    /// default), then ↵ and ⌘C in the footer's words; a search keeps the items whose words contain it.
+    public var transformMenuItems: [TransformMenuItem] {
+        let rows = transformRows
+        guard rows.indices.contains(menuSelection) else { return [] }
+        let items: [TransformMenuItem] = [rows[menuSelection].id == layerDefault ? .clearDefault : .setDefault, .run, .copy]
+        let needle = SearchNormalizer.normalize(transformMenuQuery.trimmingCharacters(in: .whitespaces))
+        guard !needle.isEmpty else { return items }
+        return items.filter { SearchNormalizer.normalize(transformMenuLabel($0)).contains(needle) }
+    }
+
+    public func transformMenuLabel(_ item: TransformMenuItem) -> String {
+        switch item {
+        case .setDefault: L10n.string("transforms.menu.setDefault", language)
+        case .clearDefault: L10n.string("transforms.menu.clearDefault", language)
+        case .run: transformKeyLabels.confirm
+        case .copy: transformKeyLabels.copy
+        }
     }
 
     /// Where a file result goes, for the ⇧ panel's file strip: into the open Finder folder, or pasted
@@ -380,12 +427,17 @@ public final class PanelViewModel {
     @ObservationIgnored private let shiftDefaults: ShiftReturnDefaults
     @ObservationIgnored private var transformCountCache: (itemID: Int64, count: Int)?
     @ObservationIgnored private var commandHold: Task<Void, Never>?
+    /// ⇧ is down on its own and the hint's delay is running.
+    @ObservationIgnored private var shiftHold: Task<Void, Never>?
+    /// ⇧ has been held past the delay: the hint shows on any row that has one.
+    @ObservationIgnored private var shiftHeldLong = false
     @ObservationIgnored private var pointerTask: Task<Void, Never>?
     @ObservationIgnored private var pointerInPanel = false
     @ObservationIgnored private var pointerInPreview = false
 
     public init(library: Library, language: LanguageStore, stack: StackSession? = nil, extensions: ExtensionCommandsProviding? = nil,
-                now: @escaping () -> Date = Date.init, shiftDefaults: ShiftReturnDefaults = .init()) {
+                now: @escaping () -> Date = Date.init, shiftDefaults: ShiftReturnDefaults = .init(),
+                shiftHintDelay: Duration = .milliseconds(200)) {
         self.library = library
         self.stack = stack
         self.thumbnails = RowThumbnails(library: library)
@@ -393,6 +445,7 @@ public final class PanelViewModel {
         self.extensions = extensions
         self.now = now
         self.shiftDefaults = shiftDefaults
+        self.shiftHintDelay = shiftHintDelay
         extensions?.onHintsChanged = { [weak self] in
             self?.hintRevision += 1
             self?.refresh()
@@ -440,6 +493,7 @@ public final class PanelViewModel {
         pointerTask?.cancel()
         commandHold?.cancel()
         showsIndexKeys = false
+        endShiftHold()
         rebuild()
         focusedColumn = columns.firstIndex { $0.id == .history } ?? 0
         revealSelection()
@@ -456,6 +510,8 @@ public final class PanelViewModel {
     public func handle(_ command: PanelCommand) -> PanelAction? {
         // A ⌘ shortcut while ⌘ is down means the user is not holding ⌘ to read the keycaps.
         if command.isCommandShortcut { commandHold?.cancel() }
+        // Any key puts the bar back from the ⇧↵ hint; only ⇧ itself, held or let go, decides it.
+        if !command.isModifierChange { endShiftHold() }
         if layer == .categoryMenu, let consumed = handleCategoryMenu(command) { return consumed.action }
         if layer == .actions, let consumed = handleActions(command) { return consumed.action }
         if layer == .pin, let consumed = handlePin(command) { return consumed.action }
@@ -530,6 +586,8 @@ public final class PanelViewModel {
             } else {
                 showsIndexKeys = false
             }
+        case .shiftHeld(let held):
+            if held { holdShift() } else { endShiftHold() }
         case .swallow:
             break
         }
@@ -559,8 +617,55 @@ public final class PanelViewModel {
     /// What ⇧↵ does with an item: its kind's pinned default while the item takes it, else plain
     /// text for rich text, else a paste as it is.
     private func shiftReturn(itemID: Int64, kind: ItemKind) -> ShiftReturnAction {
-        ShiftReturn.resolve(isRich: library.isRichText(itemID), transforms: transforms(of: itemID).map(\.id),
-                            pinned: shiftDefaults.pinned(for: ShiftKind(kind)))
+        _ = defaultsRevision
+        return ShiftReturn.resolve(isRich: library.isRichText(itemID), transforms: transforms(of: itemID).map(\.id),
+                                   pinned: shiftDefaults.pinned(for: ShiftKind(kind)))
+    }
+
+    // MARK: Holding ⇧
+
+    /// ⇧ went down on its own: once it has been held for `shiftHintDelay`, the bar says what ⇧↵ does.
+    /// The other ⇧, or the same one reported again, leaves a running hold as it is.
+    private func holdShift() {
+        guard shiftHold == nil, !shiftHeldLong else { return }
+        guard shiftHintDelay > .zero else { return shiftHeldPastDelay() }
+        let delay = shiftHintDelay
+        shiftHold = Task { [weak self] in
+            try? await Task.sleep(for: delay)
+            guard !Task.isCancelled else { return }
+            self?.shiftHeldPastDelay()
+        }
+    }
+
+    private func shiftHeldPastDelay() {
+        shiftHold = nil
+        shiftHeldLong = true
+        updateShiftHint()
+    }
+
+    /// ⇧ let go, another modifier joined it, or a key went down: no hint, and none coming.
+    private func endShiftHold() {
+        shiftHold?.cancel()
+        shiftHold = nil
+        shiftHeldLong = false
+        if showsShiftHint { showsShiftHint = false }
+    }
+
+    /// Shown while ⇧ is held long, nothing is open over the list, and ⇧↵ on the selected row does
+    /// something ↵ does not; it follows the pointer from row to row.
+    private func updateShiftHint() {
+        let label = shiftHeldLong && layer == .none ? currentShiftHintLabel : nil
+        if let label, label != shiftHintLabel { shiftHintLabel = label }
+        if showsShiftHint != (label != nil) { showsShiftHint = label != nil }
+    }
+
+    /// What ⇧↵ does on the selected row, in the bar's words; nil when it pastes like ↵.
+    private var currentShiftHintLabel: String? {
+        switch shiftReturnAction {
+        case .plainText?: L10n.string("actions.pastePlain", language)
+        case .command(let id)?: selectedRow.flatMap { row in transforms(of: row.itemID).first { $0.id == id }?.title }
+        case .paste?, nil: nil
+        }
     }
 
     /// The pointer rested ~380 ms on a row: open the hover preview (never downgrades a keyboard one).
@@ -616,7 +721,7 @@ public final class PanelViewModel {
                 layer = .none
                 return Consumed(action: .openEditor)
             }
-        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld:
+        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld, .shiftHeld:
             return nil
         default:
             break
@@ -647,7 +752,7 @@ public final class PanelViewModel {
             // ⌘⌫ in a search field clears it; it never deletes the item under the menu.
             actionQuery = ""
             menuSelection = 0
-        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld:
+        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld, .shiftHeld:
             return nil
         default:
             break
@@ -676,6 +781,7 @@ public final class PanelViewModel {
 
     /// What ⇧↵ does with the layer's item.
     private var layerShiftReturn: ShiftReturnAction? {
+        _ = defaultsRevision
         guard let layerItem else { return nil }
         return ShiftReturn.resolve(isRich: layerItem.isRich, transforms: layerTransforms.map(\.id), pinned: shiftDefaults.pinned(for: layerItem.kind))
     }
@@ -733,8 +839,9 @@ public final class PanelViewModel {
     }
 
     /// Keys while the ⇧ panel is open: typing searches, ↑/↓ move, ↵ (⇧↵ too) pastes and ⌘C copies
-    /// the highlighted result, ← / Esc / ⇧ close it.
+    /// the highlighted result, ⌘K opens the panel's own menu, ← / Esc / ⇧ close it.
     private func handleTransforms(_ command: PanelCommand) -> Consumed? {
+        if transformMenuOpen, let consumed = handleTransformMenu(command) { return consumed }
         switch command {
         case .type(let text):
             transformQuery += text
@@ -752,26 +859,104 @@ public final class PanelViewModel {
         case .move(let delta):
             menuSelection = max(0, min(transformRows.count - 1, menuSelection + delta))
         case .confirm, .copy:
-            let rows = transformRows
-            guard rows.indices.contains(menuSelection), let subject = transformSubjectID else { return Consumed() }
-            layer = .none
-            switch rows[menuSelection] {
-            case .plainText:
-                return Consumed(action: command == .copy ? .copyPlain(itemID: subject) : .paste(itemID: subject, plain: true))
-            case .command(let transform):
-                return Consumed(action: .runCommand(commandID: transform.id, subjectID: subject, copy: command == .copy))
-            }
+            return Consumed(action: runTransformRow(copy: command == .copy))
+        case .toggleActions:
+            transformMenuOpen = true
+            transformMenuQuery = ""
+            transformMenuSelection = 0
         case .moveColumn(let delta) where delta < 0:
             layer = .none
         case .escape, .toggleTransforms:
             layer = .none
-        case .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld:
+        case .toggleCategoryMenu, .togglePin, .openEditor, .commandHeld, .shiftHeld:
             return nil
         default:
             // → and ⌘1–9 would act on the list under the panel.
             break
         }
         return Consumed()
+    }
+
+    /// ↵ (or, with `copy`, ⌘C) on the ⇧ panel's highlighted row; the panel closes.
+    private func runTransformRow(copy: Bool) -> PanelAction? {
+        let rows = transformRows
+        guard rows.indices.contains(menuSelection), let subject = transformSubjectID else { return nil }
+        layer = .none
+        switch rows[menuSelection] {
+        case .plainText:
+            return copy ? .copyPlain(itemID: subject) : .paste(itemID: subject, plain: true)
+        case .command(let transform):
+            return .runCommand(commandID: transform.id, subjectID: subject, copy: copy)
+        }
+    }
+
+    /// Keys while the ⇧ panel's ⌘K is open: typing searches it, ↑/↓ move, ↵ runs the highlighted
+    /// item; Esc and ⌘K close the menu alone. Nil: the panel's (a ⇧ tap closes both).
+    private func handleTransformMenu(_ command: PanelCommand) -> Consumed? {
+        switch command {
+        case .type(let text):
+            transformMenuQuery += text
+            transformMenuSelection = 0
+        case .togglePreview:
+            transformMenuQuery += " "
+            transformMenuSelection = 0
+        case .deleteBackward:
+            if !transformMenuQuery.isEmpty { transformMenuQuery.removeLast() }
+            transformMenuSelection = 0
+        case .delete:
+            transformMenuQuery = ""
+            transformMenuSelection = 0
+        case .move(let delta):
+            transformMenuSelection = max(0, min(transformMenuItems.count - 1, transformMenuSelection + delta))
+        case .confirm:
+            let items = transformMenuItems
+            guard items.indices.contains(transformMenuSelection) else { return Consumed() }
+            transformMenuOpen = false
+            return Consumed(action: runTransformMenu(items[transformMenuSelection]))
+        case .escape, .toggleActions:
+            transformMenuOpen = false
+        case .toggleTransforms, .commandHeld, .shiftHeld:
+            return nil
+        default:
+            // ←, ⌘C and the rest would act on the panel under the menu.
+            break
+        }
+        return Consumed()
+    }
+
+    private func runTransformMenu(_ item: TransformMenuItem) -> PanelAction? {
+        switch item {
+        case .setDefault: setShiftDefault(true)
+        case .clearDefault: setShiftDefault(false)
+        case .run: return runTransformRow(copy: false)
+        case .copy: return runTransformRow(copy: true)
+        }
+        return nil
+    }
+
+    /// Makes the highlighted row ⇧↵'s default for this kind of item (`on`), or takes that back. The
+    /// rows re-sort (the default leads them), the search clears so the whole list shows, and the
+    /// highlight stays on the row wherever it went.
+    private func setShiftDefault(_ on: Bool) {
+        let rows = transformRows
+        guard rows.indices.contains(menuSelection), let kind = layerItem?.kind else { return }
+        let id = rows[menuSelection].id
+        shiftDefaults.pin(on ? id : nil, for: kind)
+        defaultsRevision += 1
+        if !transformQuery.isEmpty { transformQuery = "" }
+        menuSelection = transformRows.firstIndex { $0.id == id } ?? 0
+    }
+
+    /// Pointer over an item of the ⇧ panel's ⌘K.
+    public func highlightTransformMenuItem(_ index: Int) {
+        transformMenuSelection = index
+    }
+
+    /// Click on an item of the ⇧ panel's ⌘K: the same as ↵ on it.
+    public func activateTransformMenuItem(_ index: Int) -> PanelAction? {
+        guard transformMenuOpen else { return nil }
+        transformMenuSelection = index
+        return handle(.confirm(plain: false))
     }
 
     private func openPin() {
@@ -817,7 +1002,7 @@ public final class PanelViewModel {
             // ⌘⌫ in a search field clears it; it never deletes the item being categorized.
             pinQuery = ""
             menuSelection = 0
-        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld:
+        case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld, .shiftHeld:
             return nil
         default:
             // Column moves, ⌘1–9 and ⌘C would change or act on the item under the popover.
@@ -853,6 +1038,7 @@ public final class PanelViewModel {
     /// Hover or click in the focused column.
     public func select(_ id: Int64) {
         if focusedRows.contains(where: { $0.id == id }) { selections[focusedSource] = id }
+        if shiftHeldLong { updateShiftHint() }
     }
 
     /// Hover or click in any column: focuses that column (like a mouse move) without scrolling.
@@ -860,6 +1046,7 @@ public final class PanelViewModel {
         guard let index = columns.firstIndex(where: { $0.id == source }), columns[index].rows.contains(where: { $0.id == id }) else { return }
         focusedColumn = index
         selections[source] = id
+        if shiftHeldLong { updateShiftHint() }
     }
 
     /// Whole columns that fit on screen; columns never shrink.
@@ -1011,6 +1198,14 @@ private enum TransformSectionKey: Equatable {
 }
 
 private extension PanelCommand {
+    /// ⌘ or ⇧ pressed or let go on its own: not a key.
+    var isModifierChange: Bool {
+        switch self {
+        case .commandHeld, .shiftHeld: true
+        default: false
+        }
+    }
+
     var isCommandShortcut: Bool {
         switch self {
         case .pasteIndex, .copy, .delete, .toggleActions, .togglePin, .openEditor, .selectAll, .swallow: true

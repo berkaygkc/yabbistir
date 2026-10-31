@@ -8,7 +8,7 @@ import YabLocalization
 /// The ⇧ panel (344 pt): the item on top, its ⇧↵ default first ("Varsayılan"), "Paste as plain
 /// text" for rich text ("yabbistir"), the paste target's own actions ("Finder’a"), then its
 /// transforms grouped by extension with each one's output on the right, the highlighted one's
-/// result below, then the keys.
+/// result below, then the keys; ⌘K opens its own menu over the lower right.
 public struct TransformPanelView: View {
     @Bindable var model: PanelViewModel
     let onAction: (PanelAction) -> Void
@@ -39,8 +39,11 @@ public struct TransformPanelView: View {
                             .padding(.leading, 4)
                     }
                 }
-                .onHover { if $0 { model.highlightMenuRow(index) } }
+                // While ⌘K is open the highlighted row is the one it acts on, so the pointer leaves it be.
+                .onHover { if $0, !model.transformMenuOpen { model.highlightMenuRow(index) } }
                 .onTapGesture {
+                    // A click beside the open menu closes it, as a click outside any menu does.
+                    guard !model.transformMenuOpen else { _ = model.handle(.toggleActions); return }
                     model.highlightMenuRow(index)
                     if let action = model.handle(.confirm(plain: false)) { onAction(action) }
                 }
@@ -207,11 +210,19 @@ public struct TransformPanelView: View {
     }
 
     /// "↵ Yapıştır · ⌘C Kopyala", or a job's verb ("↵ İndir · ⌘C İndir ve kopyala"); "← Geri" on the
-    /// right. A verb too long for all three ("Download and copy") leaves "← Back" out (← and Esc
-    /// still close the panel), and the panel keeps its width.
+    /// right, "⌘K Eylemler" while ⌘ is held. With a verb too long for "⌘K Eylemler" ("İndir ve
+    /// kopyala"), "← Geri" stays put; too long for "← Geri" too ("Download and copy"), the right one
+    /// is left out (← and Esc still close the panel, ⌘K still opens its menu), and the panel keeps
+    /// its width. ⌘K's menu stands on the footer's hairline.
     private var footer: some View {
         let labels = model.transformKeyLabels
         return ViewThatFits(in: .horizontal) {
+            HStack(spacing: 14) {
+                hint(["↵"], labels.confirm)
+                hint(["⌘", "C"], labels.copy)
+                Spacer(minLength: 0)
+                backOrActions
+            }
             HStack(spacing: 14) {
                 hint(["↵"], labels.confirm)
                 hint(["⌘", "C"], labels.copy)
@@ -228,7 +239,59 @@ public struct TransformPanelView: View {
         .foregroundStyle(Tokens.Colors.textSecondary)
         .padding(EdgeInsets(top: 8, leading: 10, bottom: 3, trailing: 10))
         .overlay(alignment: .top) { Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5) }
+        .overlay(alignment: .topTrailing) {
+            // Its foot 4 pt above the hairline, as ⌘K stands 4 pt above the main bar. The guide sits on
+            // a container: one inside the `if` is dropped.
+            ZStack {
+                if model.transformMenuOpen {
+                    menu.transition(.opacity.combined(with: .offset(y: 4)))
+                }
+            }
+            .alignmentGuide(.top) { $0[.bottom] + 4 }
+        }
+        .animation(Tokens.Motion.resolved(Tokens.Motion.ease(0.14)), value: model.transformMenuOpen)
         .padding(.top, 4)
+    }
+
+    /// "← Geri", or "⌘K Eylemler" while ⌘ is held: the main bar's cross-fade and 5 pt slide.
+    private var backOrActions: some View {
+        let held = model.showsIndexKeys
+        return ZStack(alignment: .trailing) {
+            hint(["←"], L10n.string("transforms.back", model.language))
+                .opacity(held ? 0 : 1)
+                .offset(y: held ? -5 : 0)
+            hint(["⌘", "K"], L10n.string("panel.footer.actions", model.language))
+                .opacity(held ? 1 : 0)
+                .offset(y: held ? 0 : 5)
+        }
+        .animation(Tokens.Motion.resolved(Tokens.Motion.ease(0.18)), value: held)
+    }
+
+    /// ⌘K (300 pt, ⌘K's rows): make the highlighted row what ⇧↵ runs for this kind of item, or stop
+    /// that; then the row's ↵ and ⌘C in the footer's words; the search line at the foot.
+    private var menu: some View {
+        let items = model.transformMenuItems
+        let isJob = highlightedIsJob
+        return MenuSurface(width: 300) {
+            if items.isEmpty {
+                MenuRow(title: L10n.string("actions.none", model.language)) { EmptyView() } trailing: { EmptyView() }
+                    .foregroundStyle(Tokens.Colors.textSecondary)
+            }
+            ForEach(Array(items.enumerated()), id: \.element) { index, item in
+                if index > 0, Self.isDefaultItem(items[index - 1]) != Self.isDefaultItem(item) { MenuSeparator() }
+                MenuRow(title: model.transformMenuLabel(item), isHighlighted: index == model.transformMenuSelection) {
+                    Image(systemName: Self.symbol(item, isJob: isJob)).font(.system(size: 13)).frame(width: 16)
+                        .foregroundStyle(Tokens.Colors.textSecondary)
+                } trailing: {
+                    HStack(spacing: 3) { ForEach(Self.keys(item), id: \.self) { Keycap($0) } }
+                }
+                .onHover { if $0 { model.highlightTransformMenuItem(index) } }
+                .onTapGesture { if let action = model.activateTransformMenuItem(index) { onAction(action) } }
+            }
+            ActionSearchLine(query: model.transformMenuQuery, language: model.language)
+        }
+        // Its own height, not the footer's it is laid over.
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     /// `fixed: false`: the label may shorten rather than widen the panel (the last resort).
@@ -240,6 +303,36 @@ public struct TransformPanelView: View {
     }
 
     // MARK: Values
+
+    /// Whether the highlighted row is a job: ↵ starts it (a download) rather than pasting.
+    private var highlightedIsJob: Bool {
+        let rows = model.transformRows
+        guard rows.indices.contains(model.menuSelection), case .command(let command) = rows[model.menuSelection] else { return false }
+        return command.isJob
+    }
+
+    /// The default's item is a group of its own, above ↵ and ⌘C.
+    static func isDefaultItem(_ item: TransformMenuItem) -> Bool {
+        item == .setDefault || item == .clearDefault
+    }
+
+    /// To the top for the default, a cross to take it back, then paste (a job's download arrow) and copy.
+    static func symbol(_ item: TransformMenuItem, isJob: Bool) -> String {
+        switch item {
+        case .setDefault: "arrow.up.to.line"
+        case .clearDefault: "xmark"
+        case .run: isJob ? "arrow.down.to.line" : "doc.on.clipboard"
+        case .copy: "doc.on.doc"
+        }
+    }
+
+    static func keys(_ item: TransformMenuItem) -> [String] {
+        switch item {
+        case .setDefault, .clearDefault: []
+        case .run: ["↵"]
+        case .copy: ["⌘", "C"]
+        }
+    }
 
     private func title(of row: TransformRow) -> String {
         switch row {

@@ -2,23 +2,42 @@ import SwiftUI
 import YabLocalization
 
 /// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right. While ⌘ is held it cross-fades
-/// (5 pt vertical slide) to the ⌘ shortcuts. Nothing in it ever wraps.
+/// (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one button saying what ⇧↵ does. One
+/// layer shows at a time. Nothing in it ever wraps.
 struct ActionBarView: View {
     @Bindable var model: PanelViewModel
     let onPaste: (Int64) -> Void
+    /// The ⇧↵ button's action.
+    let onAction: (PanelAction) -> Void
+
+    private enum Layer {
+        case actions, shiftReturn, commands
+    }
+
+    /// Held ⌘ belongs to what has the keyboard: the ⇧ panel turns its own footer instead.
+    private var layer: Layer {
+        if model.showsIndexKeys, model.layer != .transforms { return .commands }
+        return model.showsShiftHint ? .shiftReturn : .actions
+    }
 
     var body: some View {
+        let layer = layer
         HStack(spacing: 10) {
             Spacer(minLength: 0)
             ZStack(alignment: .trailing) {
                 actions
-                    .opacity(model.showsIndexKeys ? 0 : 1)
-                    .offset(y: model.showsIndexKeys ? -5 : 0)
+                    .opacity(layer == .actions ? 1 : 0)
+                    .offset(y: layer == .actions ? 0 : -5)
+                    .allowsHitTesting(layer == .actions)
+                shiftReturn
+                    .opacity(layer == .shiftReturn ? 1 : 0)
+                    .offset(y: layer == .shiftReturn ? 0 : 5)
+                    .allowsHitTesting(layer == .shiftReturn)
                 commandHints
-                    .opacity(model.showsIndexKeys ? 1 : 0)
-                    .offset(y: model.showsIndexKeys ? 0 : 5)
+                    .opacity(layer == .commands ? 1 : 0)
+                    .offset(y: layer == .commands ? 0 : 5)
             }
-            .animation(Tokens.Motion.resolved(Tokens.Motion.ease(0.18)), value: model.showsIndexKeys)
+            .animation(Tokens.Motion.resolved(Tokens.Motion.ease(0.18)), value: layer)
         }
         .padding(.leading, 14)
         .padding(.trailing, 7)
@@ -80,6 +99,25 @@ struct ActionBarView: View {
             }
             .buttonStyle(ActionButtonStyle())
         }
+    }
+
+    /// What ⇧↵ does, as the primary button in place of the actions ("Düz metin olarak yapıştır ⇧↵").
+    private var shiftReturn: some View {
+        Button {
+            if let action = model.handle(.confirm(plain: true)) { onAction(action) }
+        } label: {
+            HStack(spacing: 9) {
+                Text(model.shiftHintLabel ?? "").font(Tokens.Fonts.labelStrong)
+                    .lineLimit(1)
+                HStack(spacing: 3) { Keycap("⇧"); Keycap("↵") }
+            }
+            .foregroundStyle(Tokens.Colors.text)
+            .padding(.leading, 10)
+            .padding(.trailing, 6)
+            .frame(height: 30)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(ActionButtonStyle())
     }
 
     /// All three ⌘ hints when they fit; otherwise the "Add to category" hint steps aside.

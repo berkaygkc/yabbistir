@@ -62,9 +62,10 @@ struct ColumnView: View {
 
     private var selectedID: Int64? { model.selectedID(in: column.id) }
 
-    /// ⌘ held: the focused column's first nine rows show 1–9 keycaps in the icon slot.
+    /// ⌘ held: the focused column's first nine rows show 1–9 keycaps in the icon slot (not while the
+    /// ⇧ panel has the keyboard: ⌘1–9 do nothing there, and held ⌘ turns its footer instead).
     private func indexKey(for row: RowModel) -> Int? {
-        guard isFocused, model.showsIndexKeys, let position = column.rows.firstIndex(where: { $0.id == row.id }), position < 9 else { return nil }
+        guard isFocused, model.showsIndexKeys, model.layer != .transforms, let position = column.rows.firstIndex(where: { $0.id == row.id }), position < 9 else { return nil }
         return position + 1
     }
 

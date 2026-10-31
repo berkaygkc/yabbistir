@@ -4319,6 +4319,40 @@
         }
       }
     },
+    "transforms.menu.clearDefault": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove default"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılanı kaldır"
+          }
+        }
+      }
+    },
+    "transforms.menu.setDefault": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make default for ⇧↵"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⇧↵ için varsayılan yap"
+          }
+        }
+      }
+    },
     "transforms.paste": {
       "extractionState": "manual",
       "localizations": {

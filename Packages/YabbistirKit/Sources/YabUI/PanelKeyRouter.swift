@@ -8,6 +8,8 @@ public enum PanelCommand: Equatable, Sendable {
     case toggleActions, togglePin, toggleCategoryMenu, openEditor, togglePreview
     /// ⌘ pressed or released on its own (flagsChanged).
     case commandHeld(Bool)
+    /// ⇧ pressed or released on its own (flagsChanged): held, the bar says what ⇧↵ does.
+    case shiftHeld(Bool)
     /// A bare ⇧ tap (`ShiftTapDetector`) or the footer's Transform: the ⇧ panel.
     case toggleTransforms
     /// A ⌘ shortcut the panel does not use; consumed so it never reaches the main menu.
@@ -58,5 +60,10 @@ public enum PanelKeyRouter {
     /// True while ⌘ is down on its own (no ⇧, ⌥ or ⌃), from a flagsChanged event.
     public static func commandHeld(_ modifiers: NSEvent.ModifierFlags) -> Bool {
         modifiers.intersection([.command, .control, .option, .shift]) == .command
+    }
+
+    /// True while ⇧ is down on its own (no ⌘, ⌥ or ⌃), from a flagsChanged event.
+    public static func shiftHeld(_ modifiers: NSEvent.ModifierFlags) -> Bool {
+        modifiers.intersection([.command, .control, .option, .shift]) == .shift
     }
 }

@@ -128,6 +128,32 @@ struct CategoryMenuView: View {
     }
 }
 
+/// The search line at the foot of a ⌘K menu: the query and a caret, or "Search actions…".
+struct ActionSearchLine: View {
+    let query: String
+    let language: AppLanguage
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5).padding(.top, 6)
+            HStack(spacing: 8) {
+                Image(systemName: "magnifyingglass").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textSecondary)
+                HStack(spacing: 0) {
+                    Text(query).font(Tokens.Fonts.body).foregroundStyle(Tokens.Colors.text)
+                    BlinkingCaret().scaleEffect(0.75, anchor: .leading)
+                    if query.isEmpty {
+                        Text(L10n.string("actions.search", language)).font(Tokens.Fonts.body)
+                            .foregroundStyle(Tokens.Colors.textSecondary).padding(.leading, 2)
+                    }
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, 10)
+            .frame(height: 36)
+        }
+    }
+}
+
 /// ⌘K (300 pt): every action on the selected item, grouped by hairlines, with its shortcut; a
 /// search line sits at the bottom.
 struct ActionMenuView: View {
@@ -157,21 +183,7 @@ struct ActionMenuView: View {
                 .onHover { if $0 { model.highlightMenuRow(index) } }
                 .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
             }
-            Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5).padding(.top, 6)
-            HStack(spacing: 8) {
-                Image(systemName: "magnifyingglass").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textSecondary)
-                HStack(spacing: 0) {
-                    Text(model.actionQuery).font(Tokens.Fonts.body).foregroundStyle(Tokens.Colors.text)
-                    BlinkingCaret().scaleEffect(0.75, anchor: .leading)
-                    if model.actionQuery.isEmpty {
-                        Text(L10n.string("actions.search", model.language)).font(Tokens.Fonts.body)
-                            .foregroundStyle(Tokens.Colors.textSecondary).padding(.leading, 2)
-                    }
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(.horizontal, 10)
-            .frame(height: 36)
+            ActionSearchLine(query: model.actionQuery, language: model.language)
         }
     }
 

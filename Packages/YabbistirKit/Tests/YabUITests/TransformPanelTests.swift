@@ -1,4 +1,6 @@
 import Foundation
+import Observation
+import os
 import Testing
 @testable import YabCore
 import YabExtensionKit
@@ -18,6 +20,10 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
     let richID: Int64
     let linkID: Int64
     let defaults: ShiftReturnDefaults
+    let library: Library
+    let language: LanguageStore
+    /// Holds the language and the ⇧↵ defaults, so a second model can read what the first one saved.
+    let suite: UserDefaults
 
     init() throws {
         let store = try ItemStore.temporary()
@@ -32,9 +38,9 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         colorID = try ingest("#6E56CF", minutesAgo: 2)
         richID = try ingest("Perşembe toplantısı\niade akışı demosu", minutesAgo: 3, rtf: true)
         linkID = try ingest("https://ornek.dev/rapor", minutesAgo: 4)
-        let library = try Library(store: store)
-        let suite = try #require(UserDefaults(suiteName: "yab-xform-\(UUID().uuidString)"))
-        let language = LanguageStore(defaults: suite)
+        library = try Library(store: store)
+        suite = try #require(UserDefaults(suiteName: "yab-xform-\(UUID().uuidString)"))
+        language = LanguageStore(defaults: suite)
         language.language = .turkish
         defaults = ShiftReturnDefaults(defaults: suite)
         fake.transformsByItem[base64ID] = [FakeCommands.command("dev.yabbistir.base64/decode", title: "Base64 çöz", keywords: ["b64", "çöz"]),
@@ -43,7 +49,8 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
             FakeCommands.command("dev.yabbistir.convert/color#\($0)", title: "\($0.uppercased()) olarak", keywords: ["renk", $0],
                                  extensionName: "Dönüştür")
         }
-        model = PanelViewModel(library: library, language: language, extensions: fake, now: { now }, shiftDefaults: defaults)
+        model = PanelViewModel(library: library, language: language, extensions: fake, now: { now }, shiftDefaults: defaults,
+                               shiftHintDelay: .zero)
         model.reset()
     }
 
@@ -390,5 +397,222 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(model.transformKeyLabels.confirm == "Yapıştır")
         for character in "düz" { _ = model.handle(.type(String(character))) }
         #expect(model.transformRows == [.plainText])
+    }
+
+    // MARK: Holding ⇧
+
+    @Test func holdingShiftShowsWhatShiftReturnDoes() {
+        select(richID)
+        _ = model.handle(.shiftHeld(true))
+        #expect(model.showsShiftHint)
+        #expect(model.shiftHintLabel == "Düz metin olarak yapıştır")
+    }
+
+    @Test func theHintNamesTheDefaultTransform() {
+        fake.transformsByItem[plainID] = [Self.b64]
+        defaults.pin("fake.ext/b64", for: .text)
+        select(plainID)
+        _ = model.handle(.shiftHeld(true))
+        #expect(model.showsShiftHint)
+        #expect(model.shiftHintLabel == "Base64 kodla")
+    }
+
+    /// The hint waits for the hold; ⇧ let go sooner (a tap) never shows it.
+    @Test func theHintWaitsForTheHold() async throws {
+        let held = PanelViewModel(library: library, language: language, extensions: fake, now: { now }, shiftDefaults: defaults,
+                                  shiftHintDelay: .milliseconds(20))
+        held.reset()
+        held.select(richID, in: .history)
+        _ = held.handle(.shiftHeld(true))
+        _ = held.handle(.shiftHeld(false))
+        try await Task.sleep(for: .milliseconds(80))
+        #expect(!held.showsShiftHint)
+        _ = held.handle(.shiftHeld(true))
+        #expect(!held.showsShiftHint)
+        // Polled, not slept: parallel suites can keep the main actor busy.
+        let start = ContinuousClock.now
+        while !held.showsShiftHint, ContinuousClock.now - start < .seconds(5) { try await Task.sleep(for: .milliseconds(10)) }
+        #expect(held.showsShiftHint)
+    }
+
+    /// ⇧↵ pastes the link like ↵, so holding ⇧ has nothing to say.
+    @Test func noHintWhenShiftReturnJustPastes() {
+        fake.transformsByItem[linkID] = [Self.b64]
+        select(linkID)
+        _ = model.handle(.shiftHeld(true))
+        #expect(!model.showsShiftHint)
+    }
+
+    @Test func releasingShiftHidesTheHint() {
+        select(richID)
+        _ = model.handle(.shiftHeld(true))
+        #expect(model.showsShiftHint)
+        _ = model.handle(.shiftHeld(false))
+        #expect(!model.showsShiftHint)
+        // Any key puts the bar back too.
+        _ = model.handle(.shiftHeld(true))
+        #expect(model.showsShiftHint)
+        _ = model.handle(.type("A"))
+        #expect(!model.showsShiftHint)
+    }
+
+    /// The bar's hint is the panel's own: an open layer (⌘K, the ⇧ panel) has the keyboard.
+    @Test func noHintOverALayer() {
+        select(richID)
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.shiftHeld(true))
+        #expect(!model.showsShiftHint)
+    }
+
+    /// Pointing at another row while ⇧ is held: the hint follows it, and leaves on a row with none.
+    @Test func theHintFollowsThePointer() {
+        fake.transformsByItem[plainID] = [Self.b64]
+        defaults.pin("fake.ext/b64", for: .text)
+        select(richID)
+        _ = model.handle(.shiftHeld(true))
+        select(plainID)
+        #expect(model.showsShiftHint)
+        #expect(model.shiftHintLabel == "Base64 kodla")
+        select(linkID)
+        #expect(!model.showsShiftHint)
+        select(richID)
+        #expect(model.showsShiftHint)
+        #expect(model.shiftHintLabel == "Düz metin olarak yapıştır")
+    }
+
+    // MARK: ⌘K in the ⇧ panel
+
+    static let colorRows = ["rgb", "hsl", "oklch", "swiftui", "nscolor"].map { "dev.yabbistir.convert/color#\($0)" }
+
+    @Test func commandKInTheShiftPanelOpensItsMenu() {
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        #expect(model.layer == .transforms)
+        #expect(model.transformMenuOpen)
+        #expect(model.transformMenuItems == [.setDefault, .run, .copy])
+        #expect(model.transformMenuItems.map(model.transformMenuLabel) == ["⇧↵ için varsayılan yap", "Yapıştır", "Kopyala"])
+        // ⌘K and Esc close the menu alone.
+        _ = model.handle(.toggleActions)
+        #expect(!model.transformMenuOpen)
+        #expect(model.layer == .transforms)
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.escape)
+        #expect(!model.transformMenuOpen)
+        #expect(model.layer == .transforms)
+    }
+
+    @Test func theShiftPanelMenuPastesAndCopiesTheRow() {
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.move(1))
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.move(1))
+        #expect(model.handle(.confirm(plain: false)) == .runCommand(commandID: "dev.yabbistir.base64/encode", subjectID: base64ID, copy: false))
+        #expect(model.layer == .none)
+        #expect(!model.transformMenuOpen)
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        #expect(model.activateTransformMenuItem(2) == .runCommand(commandID: "dev.yabbistir.base64/decode", subjectID: base64ID, copy: true))
+    }
+
+    /// A job's menu says what it does, as the footer does.
+    @Test func theShiftPanelMenuNamesTheVerb() {
+        fake.target = Self.finder
+        offerTheDownload()
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        #expect(model.transformMenuLabel(.run) == "İndir")
+        #expect(model.transformMenuLabel(.copy) == "İndir ve kopyala")
+    }
+
+    @Test func makingADefaultMovesItToTheTopAndPersists() {
+        select(colorID)
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.move(2))
+        _ = model.handle(.toggleActions)
+        #expect(model.transformMenuItems.first == .setDefault)
+        #expect(model.handle(.confirm(plain: false)) == nil)
+        #expect(!model.transformMenuOpen)
+        #expect(model.layer == .transforms)
+        let pinned = Self.colorRows[2]
+        #expect(model.transformRows.map(\.id) == [pinned] + Self.colorRows.filter { $0 != pinned })
+        #expect(model.menuSelection == 0)
+        #expect(model.transformSections.map(\.title) == ["Varsayılan", "Dönüştür"])
+        #expect(defaults.pinned(for: .color) == pinned)
+        // Another panel (the next launch) reads it.
+        let next = PanelViewModel(library: library, language: language, extensions: fake, now: { now },
+                                  shiftDefaults: ShiftReturnDefaults(defaults: suite))
+        next.reset()
+        next.select(colorID, in: .history)
+        _ = next.handle(.toggleTransforms)
+        #expect(next.transformRows.map(\.id) == [pinned] + Self.colorRows.filter { $0 != pinned })
+        #expect(next.handle(.escape) == nil)
+        #expect(next.handle(.confirm(plain: true)) == .runCommand(commandID: pinned, subjectID: colorID, copy: false))
+    }
+
+    @Test func removingTheDefaultRestoresTheOrder() {
+        defaults.pin(Self.colorRows[2], for: .color)
+        select(colorID)
+        _ = model.handle(.toggleTransforms)
+        #expect(model.transformRows.first?.id == Self.colorRows[2])
+        _ = model.handle(.toggleActions)
+        #expect(model.transformMenuItems == [.clearDefault, .run, .copy])
+        #expect(model.transformMenuLabel(.clearDefault) == "Varsayılanı kaldır")
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.transformRows.map(\.id) == Self.colorRows)
+        // The highlight stays on the row, back in its place.
+        #expect(model.menuSelection == 2)
+        #expect(model.transformSections.map(\.title) == ["Dönüştür"])
+        #expect(defaults.pinned(for: .color) == nil)
+    }
+
+    /// A default made while searching: the search clears and the row leads the whole list.
+    @Test func aDefaultMadeWhileSearchingLeadsTheList() {
+        select(colorID)
+        _ = model.handle(.toggleTransforms)
+        for character in "swift" { _ = model.handle(.type(String(character))) }
+        #expect(model.transformRows.map(\.id) == [Self.colorRows[3]])
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.transformQuery.isEmpty)
+        #expect(model.transformRows.first?.id == Self.colorRows[3])
+        #expect(model.transformRows.count == 5)
+        #expect(model.menuSelection == 0)
+    }
+
+    /// A new default reaches what is on screen: the ⇧ panel's rows and what ⇧↵ does on the row.
+    @Test func aNewDefaultIsObserved() {
+        select(colorID)
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.move(2))
+        _ = model.handle(.toggleActions)
+        let rowsChanged = OSAllocatedUnfairLock(initialState: false), shiftReturnChanged = OSAllocatedUnfairLock(initialState: false)
+        withObservationTracking { _ = model.transformRows } onChange: { rowsChanged.withLock { $0 = true } }
+        withObservationTracking { _ = model.shiftReturnAction } onChange: { shiftReturnChanged.withLock { $0 = true } }
+        _ = model.handle(.confirm(plain: false))
+        #expect(rowsChanged.withLock { $0 })
+        #expect(shiftReturnChanged.withLock { $0 })
+        #expect(model.shiftReturnAction == .command(Self.colorRows[2]))
+    }
+
+    /// Typing searches the menu; ↵ runs what is left.
+    @Test func typingSearchesTheShiftPanelMenu() {
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        for character in "kop" { _ = model.handle(.type(String(character))) }
+        #expect(model.transformMenuQuery == "kop")
+        #expect(model.transformMenuItems == [.copy])
+        #expect(model.transformQuery.isEmpty)
+        #expect(model.handle(.confirm(plain: false)) == .runCommand(commandID: "dev.yabbistir.base64/decode", subjectID: base64ID, copy: true))
+    }
+
+    /// Leaving the ⇧ panel takes its menu along; it opens closed next time.
+    @Test func theMenuClosesWithTheShiftPanel() {
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.toggleTransforms)
+        #expect(model.layer == .none)
+        #expect(!model.transformMenuOpen)
+        _ = model.handle(.toggleTransforms)
+        #expect(!model.transformMenuOpen)
     }
 }

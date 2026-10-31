@@ -62,6 +62,7 @@ final class PanelController: NSObject, NSWindowDelegate {
         }
         window.delegate = self
         window.onCommand = { [weak self] in self?.handle($0) }
+        window.showsShiftHint = { [weak self] in self?.model.showsShiftHint ?? false }
         window.contentView = PanelPresentation.host(PanelView(model: model, material: PanelMaterial.current) { [weak self] action in
             self?.perform(action)
         })
@@ -317,7 +318,8 @@ final class PanelController: NSObject, NSWindowDelegate {
         notice.show(near: frame, language: env.language.language, kind: .extensionDisabled(name: name))
     }
 
-    /// The ⇧ panel follows the selected row, the filter and arriving outputs while it is open.
+    /// The ⇧ panel follows the selected row, the filter, arriving outputs and a new ⇧↵ default (the
+    /// rows read it; they re-sort under "Varsayılan", so the panel's height can change) while it is open.
     private func observeTransforms() {
         withObservationTracking {
             _ = model.layer
