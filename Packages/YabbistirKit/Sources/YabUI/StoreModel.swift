@@ -48,9 +48,13 @@ public final class StoreModel {
             public let fromVersion: String?
             /// For an install, everything it asks for; for an update, only what it asks for beyond the approved grant.
             public let sentences: [String]
-            /// What approving records. For an install it is exactly what the sentences describe. For an update it is
-            /// what the new version asks for: the part approved before plus the new part the sentences describe.
+            /// What approving records: the version's full request, as the sheet shows it. For an install the sentences
+            /// describe all of it; for an update they describe the part not approved before, and the rest was approved
+            /// earlier.
             public let grant: PermissionGrant
+            /// The catalog entry as it was when the sheet was made. Only this exact offer is installed: if the catalog
+            /// offers something else under the same id by the time it is confirmed, the item is not installed.
+            public let entry: StoreEntry
         }
 
         public let id: UUID
@@ -59,6 +63,12 @@ public final class StoreModel {
         public let items: [Item]
         /// Updates that ask for nothing new. They are installed with the others and nothing is approved for them.
         public let quietUpdates: [Item]
+    }
+
+    public enum InstallFailure: Equatable, Sendable {
+        case store(StoreFailure)
+        /// A refresh changed the offer (version, permissions, sites, programs or package) after the sheet was shown.
+        case changedSinceShown
     }
 
     /// A line under a list that is still shown: why the latest catalog is not the one on screen.
@@ -80,7 +90,8 @@ public final class StoreModel {
     public var selection: Set<String> = []
     /// Set by Install or Update All; the sheet reads it.
     public var pendingConsent: Consent?
-    public private(set) var failures: [String: StoreFailure] = [:]
+    /// Why an install did not happen, by extension id.
+    public private(set) var failures: [String: InstallFailure] = [:]
     public private(set) var installing: Set<String> = []
     /// The refresh under way, if any.
     public private(set) var refreshTask: Task<Void, Never>?
@@ -117,6 +128,7 @@ public final class StoreModel {
             cacheLoaded = true
             if client.catalog == nil { client.loadCache() }
         }
+        pruneSelection()
         guard !refreshedThisSession else { return }
         refreshedThisSession = true
         refresh()
@@ -138,6 +150,7 @@ public final class StoreModel {
         let client = client
         refreshTask = Task {
             await client.refresh()
+            pruneSelection()
             refreshTask = nil
         }
     }
@@ -239,13 +252,14 @@ public final class StoreModel {
         return parts.joined(separator: " · ")
     }
 
-    private func message(_ failure: StoreFailure) -> String {
+    private func message(_ failure: InstallFailure) -> String {
         switch failure {
-        case .offline: string("extensions.store.failed.offline")
-        case .badSignature: string("extensions.store.badSignature")
-        case .badPackage: string("extensions.store.failed.package")
-        case .incompatible, .needsNewerApp: string("extensions.store.failed.incompatible")
-        case .registry(let reason): string("extensions.store.failed.registry", reason)
+        case .changedSinceShown: string("extensions.store.failed.changed")
+        case .store(.offline): string("extensions.store.failed.offline")
+        case .store(.badSignature): string("extensions.store.badSignature")
+        case .store(.badPackage): string("extensions.store.failed.package")
+        case .store(.incompatible), .store(.needsNewerApp): string("extensions.store.failed.incompatible")
+        case .store(.registry(let reason)): string("extensions.store.failed.registry", reason)
         }
     }
 
@@ -282,6 +296,14 @@ public final class StoreModel {
     public func setSelected(_ id: String, _ on: Bool) {
         guard row(id)?.isSelectable == true else { return }
         if on { selection.insert(id) } else { selection.remove(id) }
+    }
+
+    /// Drops picks that can no longer be installed (gone from the catalog, installed, or now needing a newer
+    /// yabbistir), so they never come back ticked on their own.
+    private func pruneSelection() {
+        let selectable = (client.catalog?.extensions ?? []).filter { client.status(of: $0) == .notInstalled }.map(\.id)
+        let kept = selection.intersection(selectable)
+        if kept != selection { selection = kept }
     }
 
     private var selectedEntries: [StoreEntry] {
@@ -358,32 +380,47 @@ public final class StoreModel {
 
     private func item(_ entry: StoreEntry, fromVersion: String?, sentences: [String]) -> Consent.Item {
         Consent.Item(id: entry.id, name: entry.localizedName(language), icon: Self.icon(entry), version: entry.version, fromVersion: fromVersion,
-                     sentences: sentences, grant: PermissionGrant(permissions: entry.permissions, domains: entry.networkHosts, tools: entry.tools))
+                     sentences: sentences, grant: PermissionGrant(permissions: entry.permissions, domains: entry.networkHosts, tools: entry.tools),
+                     entry: entry)
     }
 
     /// Installs one extension at a time; right after each one succeeds, the grant its sheet showed is approved.
     private func install(_ consent: Consent) {
         guard installTask == nil else { return }
+        // Items under "New permissions" (or every item of an install) are approved; quiet updates keep their grant.
+        let work = consent.items.map { ($0, true) } + consent.quietUpdates.map { ($0, false) }
+        guard !work.isEmpty else { return }
+        for (item, _) in work { failures[item.id] = nil }
+        installing = Set(work.map { item, _ in item.id })
         let client = client, registry = registry
-        let catalog = client.catalog?.extensions ?? []
-        let entries = (consent.items + consent.quietUpdates).compactMap { item in catalog.first { $0.id == item.id } }
-        guard !entries.isEmpty else { return }
-        for entry in entries { failures[entry.id] = nil }
-        installing = Set(entries.map(\.id))
         installTask = Task {
-            for entry in entries {
-                let outcome: StoreFailure? = await client.install([entry])[entry.id] ?? .badPackage(id: entry.id)
-                if let outcome {
-                    failures[entry.id] = outcome
-                } else {
-                    // Only what was shown is recorded; an update that asks for nothing new keeps its grant as it is.
-                    if let shown = consent.items.first(where: { $0.id == entry.id }) { registry.approve(entry.id, grant: shown.grant) }
-                    selection.remove(entry.id)
+            for (item, approves) in work {
+                // Checked right before each download, since a refresh may land while the sheet is open or during the
+                // install before this one. The client looks the entry up by id before its first suspension, so what it
+                // downloads is the offer compared here.
+                guard let current = client.catalog?.extensions.first(where: { $0.id == item.id }), Self.offersTheSame(current, item.entry) else {
+                    failures[item.id] = .changedSinceShown
+                    installing.remove(item.id)
+                    continue
                 }
-                installing.remove(entry.id)
+                let outcome: StoreFailure? = await client.install([item.entry])[item.id] ?? .badPackage(id: item.id)
+                if let outcome {
+                    failures[item.id] = .store(outcome)
+                } else {
+                    if approves { registry.approve(item.id, grant: item.grant) }
+                    selection.remove(item.id)
+                }
+                installing.remove(item.id)
             }
+            pruneSelection()
             installTask = nil
         }
+    }
+
+    /// The same download with the same request: version, permissions, sites, programs and package hash.
+    private static func offersTheSame(_ current: StoreEntry, _ shown: StoreEntry) -> Bool {
+        current.version == shown.version && current.permissions == shown.permissions && current.networkHosts == shown.networkHosts
+            && current.tools == shown.tools && current.sha256 == shown.sha256
     }
 
     /// What `entry` asks for beyond `granted`, one sentence per new kind of access: a site list holds only the new

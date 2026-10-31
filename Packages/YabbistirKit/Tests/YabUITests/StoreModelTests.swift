@@ -189,6 +189,11 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
     func serve(_ entries: [Entry], packaged: [Entry] = []) throws {
         var packages: [String: Data] = [:]
         for entry in packaged { packages[entry.id] = try package(entry) }
+        try serve(entries, packages: packages)
+    }
+
+    /// Serves a signed catalog of `entries` with packages already built (the same bytes keep the same hash).
+    func serve(_ entries: [Entry], packages: [String: Data]) throws {
         let catalog = try catalog(entries, packages: packages)
         var paths: [String: Result<Data, URLError>] = ["/v1/catalog.json": .success(catalog),
                                                        "/v1/catalog.json.sig": .success(try signature(catalog))]
@@ -408,6 +413,86 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.row(F.video.id)?.failure == "İndirilen paket katalogla uyuşmadı; kurulmadı.")
         #expect(fixture.registry.installed.first { $0.id == F.video.id } == nil)
         #expect(model.selection == [F.video.id])
+    }
+
+    @Test func aRefreshDuringConsentNeverInstallsWhatWasNotShown() async throws {
+        let fixture = StoreFixture()
+        let jwtPackage = try fixture.package(F.jwt)
+        try fixture.serve([F.video, F.jwt], packages: [F.video.id: try fixture.package(F.video), F.jwt.id: jwtPackage])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        model.setSelected(F.video.id, true)
+        model.setSelected(F.jwt.id, true)
+        model.installSelected()
+        let shown = try #require(model.pendingConsent)
+        #expect(shown.items.first { $0.id == F.video.id }?.version == "1.0.0")
+
+        // While the sheet is open, the store starts offering a newer video download that reaches one more site.
+        var newer = F.video
+        newer.version = "1.1.0"
+        newer.hosts.append("more.example")
+        try fixture.serve([newer, F.jwt], packages: [newer.id: try fixture.package(newer), F.jwt.id: jwtPackage])
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(model.row(F.video.id)?.version == "1.1.0")
+
+        model.confirmConsent()
+        await model.installTask?.value
+        // What was not shown is not downloaded, not installed and not approved; the unchanged one installs.
+        #expect(!fixture.requests.contains("/v1/packages/\(F.video.id).yabext"))
+        #expect(fixture.registry.installed.first { $0.id == F.video.id } == nil)
+        #expect(model.failures[F.video.id] == .changedSinceShown)
+        #expect(model.row(F.video.id)?.failure == "The store list changed; review and try again")
+        fixture.languageStore.language = .turkish
+        #expect(model.row(F.video.id)?.failure == "Mağaza listesi değişti; gözden geçirip yeniden deneyin")
+        let jwt = try #require(fixture.registry.installed.first { $0.id == F.jwt.id })
+        #expect(jwt.grant == shown.items.first { $0.id == F.jwt.id }?.grant)
+        // The pick stays, so the person can look again and install what is offered now.
+        #expect(model.selection == [F.video.id])
+        model.installSelected()
+        let again = try #require(model.pendingConsent)
+        #expect(again.items.map(\.version) == ["1.1.0"])
+        #expect(again.items.first?.sentences.first?.contains("more.example") == true)
+        model.confirmConsent()
+        await model.installTask?.value
+        #expect(fixture.registry.installed.first { $0.id == F.video.id }?.manifest?.version == "1.1.0")
+        #expect(fixture.registry.installed.first { $0.id == F.video.id }?.needsConsent == false)
+        #expect(model.failures.isEmpty)
+    }
+
+    @Test func aSelectionThatCanNoLongerBeInstalledIsDropped() async throws {
+        let fixture = StoreFixture()
+        try fixture.serve([F.video, F.translate, F.jwt, F.linkClean], packaged: [F.jwt])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        for id in [F.video.id, F.translate.id, F.jwt.id, F.linkClean.id] { model.setSelected(id, true) }
+
+        // A refresh: one now needs a newer yabbistir, one is gone from the store.
+        var newer = F.translate
+        newer.minApp = "9.0.0"
+        try fixture.serve([F.video, newer, F.jwt], packaged: [F.jwt])
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(model.selection == [F.video.id, F.jwt.id])
+
+        // Installed elsewhere (from a folder) while picked here, then another install from the store.
+        try fixture.installLocally(F.video)
+        model.selection = [F.video.id, F.jwt.id]
+        model.installSelected()
+        #expect(model.pendingConsent?.items.map(\.id) == [F.jwt.id])
+        model.confirmConsent()
+        await model.installTask?.value
+        #expect(model.selection.isEmpty)
+
+        // Even if the store stops asking for a newer app later, the old pick does not come back ticked.
+        try fixture.serve([F.video, F.translate, F.jwt])
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(model.row(F.translate.id)?.isSelectable == true)
+        #expect(model.row(F.translate.id)?.isSelected == false)
+        #expect(model.selectedCount == 0)
     }
 
     // MARK: Updates

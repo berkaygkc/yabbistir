@@ -1548,6 +1548,23 @@
         }
       }
     },
+    "extensions.store.failed.changed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The store list changed; review and try again"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mağaza listesi değişti; gözden geçirip yeniden deneyin"
+          }
+        }
+      }
+    },
     "extensions.store.failed.incompatible": {
       "extractionState": "manual",
       "localizations": {
