@@ -22,13 +22,18 @@ test:
 run: build
 	open DerivedData/Build/Products/Debug/yabbistir.app
 
-# Copies the last build to ~/Applications so it opens from Spotlight/Launchpad. Only the copy there is stopped:
-# a release installed in /Applications keeps running.
+# Copies the last build to ~/Applications as "yabbistir Dev.app", so it opens from Spotlight and reads apart from a
+# release in macOS privacy settings. Opening it quits a running release (one copy at a time).
+DEV_APP := $(HOME)/Applications/yabbistir Dev.app
 install:
-	pkill -f "$(HOME)/Applications/yabbistir.app/Contents/MacOS/yabbistir" || true
+	pkill -f "$(DEV_APP)/Contents/MacOS/yabbistir" || true
+	@old="$(HOME)/Applications/yabbistir.app"; \
+	if [ "$$(defaults read "$$old/Contents/Info" CFBundleIdentifier 2>/dev/null)" = "dev.yabbistir.app.debug" ]; then \
+		pkill -f "$$old/Contents/MacOS/yabbistir" || true; rm -rf "$$old"; echo "removed the old dev copy at $$old"; \
+	fi
 	mkdir -p $(HOME)/Applications
-	ditto DerivedData/Build/Products/Debug/yabbistir.app $(HOME)/Applications/yabbistir.app
-	open $(HOME)/Applications/yabbistir.app
+	ditto DerivedData/Build/Products/Debug/yabbistir.app "$(DEV_APP)"
+	open "$(DEV_APP)"
 
 # Builds the built-in extensions: TypeScript in Extensions/builtin → Extensions/BuiltinExtensions,
 # which the app bundles. If Extensions/reference exists (a local-only folder, absent in a public clone) it is built
