@@ -81,13 +81,16 @@ public final class StoreClient {
     }
 
     /// Fetches the catalog and its signature. Only a verified pair at least as new as the saved one replaces the cache
-    /// and `catalog`; any failure leaves both as they were (an older pair shows the saved one).
+    /// and `catalog`; any failure leaves both as they were (an older pair shows the saved one). A pair that does not
+    /// match is fetched once more first: right after a publish, the two files can come from either side of it.
     public func refresh() async {
         guard lastRefresh != .refreshing else { return }
         lastRefresh = .refreshing
         do {
-            let bytes = try await fetch(catalogURL, limit: Limits.catalog, deadline: Limits.catalogDeadline)
-            let signature = try await fetch(signatureURL, limit: Limits.signature, deadline: Limits.catalogDeadline)
+            var (bytes, signature) = try await fetchPair()
+            if !CatalogVerifier.verify(catalog: bytes, signatureBase64: signature, keys: keys) {
+                (bytes, signature) = try await fetchPair()
+            }
             let fresh: StoreCatalog
             do {
                 fresh = try CatalogVerifier.verifyAndDecode(catalog: bytes, signatureBase64: signature, keys: keys)
@@ -110,6 +113,12 @@ public final class StoreClient {
         } catch {
             lastRefresh = .failed((error as? StoreFailure) ?? .offline)
         }
+    }
+
+    private func fetchPair() async throws(StoreFailure) -> (catalog: Data, signature: Data) {
+        let bytes = try await fetch(catalogURL, limit: Limits.catalog, deadline: Limits.catalogDeadline)
+        let signature = try await fetch(signatureURL, limit: Limits.signature, deadline: Limits.catalogDeadline)
+        return (bytes, signature)
     }
 
     /// Writes both files to temporary names first, then moves them into place, so a failure while writing never

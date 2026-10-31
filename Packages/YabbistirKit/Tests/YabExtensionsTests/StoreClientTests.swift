@@ -10,9 +10,12 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
     struct Seen: Sendable { let path: String; let cookies: Bool; let cachePolicy: URLRequest.CachePolicy; let headers: [String: String] }
     private static let lock = NSLock()
     nonisolated(unsafe) private static var answers: [String: [String: Result<Data, URLError>]] = [:]
+    nonisolated(unsafe) private static var turns: [String: [String: [Result<Data, URLError>]]] = [:]
     nonisolated(unsafe) private static var seen: [String: [Seen]] = [:]
 
-    static func serve(host: String, _ paths: [String: Result<Data, URLError>]) { lock.withLock { answers[host] = paths } }
+    static func serve(host: String, _ paths: [String: Result<Data, URLError>]) { lock.withLock { answers[host] = paths; turns[host] = nil } }
+    /// Answers each path with its answers in turn, one per request; the last one repeats.
+    static func serve(host: String, inTurn paths: [String: [Result<Data, URLError>]]) { lock.withLock { turns[host] = paths; answers[host] = nil } }
     static func requests(host: String) -> [Seen] { lock.withLock { seen[host] ?? [] } }
 
     static func session() -> URLSession {
@@ -31,6 +34,10 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         let answer: Result<Data, URLError>? = Self.lock.withLock {
             Self.seen[host, default: []].append(Seen(path: path, cookies: request.httpShouldHandleCookies, cachePolicy: request.cachePolicy,
                                                 headers: request.allHTTPHeaderFields ?? [:]))
+            if let queue = Self.turns[host]?[path], let next = queue.first {
+                if queue.count > 1 { Self.turns[host]?[path] = Array(queue.dropFirst()) }
+                return next
+            }
             return Self.answers[host]?[path]
         }
         switch answer {
@@ -239,6 +246,29 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         await client.refresh()
         guard case .ok = client.lastRefresh else { Issue.record("expected ok, got \(client.lastRefresh)"); return }
         #expect(client.catalog?.extensions.first?.version == "1.2.0")
+    }
+
+    /// Right after a publish the catalog and its signature can come from either side of it: a pair that does not match
+    /// is fetched once more before it is reported.
+    @Test func aMismatchRightAfterAPublishIsFetchedOnceMore() async throws {
+        let before = catalogData([entryJSON(id: "dev.example.a")])
+        let after = catalogData([entryJSON(id: "dev.example.a"), entryJSON(id: "dev.example.b")])
+        MockStoreProtocol.serve(host: host, inTurn: ["/v1/catalog.json": [.success(before), .success(after)],
+                                                     "/v1/catalog.json.sig": [.success(try sign(after))]])
+        let client = client(registry())
+        await client.refresh()
+        guard case .ok = client.lastRefresh else { Issue.record("expected ok, got \(client.lastRefresh)"); return }
+        #expect(client.catalog?.extensions.map(\.id) == ["dev.example.a", "dev.example.b"])
+        #expect(MockStoreProtocol.requests(host: host).filter { $0.path == "/v1/catalog.json" }.count == 2)
+
+        // A pair that still does not match is reported after that one more try.
+        let forged = catalogData([entryJSON(id: "dev.example.evil")])
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(forged),
+                                             "/v1/catalog.json.sig": .success(try sign(forged, with: Curve25519.Signing.PrivateKey()))])
+        await client.refresh()
+        #expect(client.lastRefresh == .failed(.badSignature))
+        #expect(MockStoreProtocol.requests(host: host).filter { $0.path == "/v1/catalog.json" }.count == 4)
+        #expect(client.catalog?.extensions.count == 2)
     }
 
     @Test func offlineIsReportedCalmly() async throws {
