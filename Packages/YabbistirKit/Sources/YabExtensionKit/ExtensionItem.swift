@@ -43,6 +43,8 @@ public struct ExtensionItem: Codable, Equatable, Sendable {
     public var tags: [String]
     public var source: SourcePayload?
     public var copiedAt: Date
+    /// Set when `yab.history` cut the item's text or HTML to its byte limit; left out otherwise.
+    public var truncated: Bool?
 
     public init(id: Int64, kind: String, text: String? = nil, url: String? = nil, color: ColorPayload? = nil, files: [FilePayload]? = nil,
                 richText: RichTextPayload? = nil, image: ImagePayload? = nil, tags: [String] = [], source: SourcePayload? = nil,

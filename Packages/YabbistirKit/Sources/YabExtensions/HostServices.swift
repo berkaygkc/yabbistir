@@ -8,8 +8,8 @@ import YabExtensionKit
     func notify(extensionName: String, message: String)
     /// An http or https link, in the default browser.
     func open(_ url: URL)
-    func recentItems(limit: Int) -> [ExtensionItem]
-    func searchItems(_ query: String, limit: Int) -> [ExtensionItem]
+    func recentItems(limit: Int) async -> [ExtensionItem]
+    func searchItems(_ query: String, limit: Int) async -> [ExtensionItem]
     /// The on-device model's answer (`OnDeviceHostServices.generate`).
     func generate(_ prompt: String, options: AIOptions) async throws(ExtensionError) -> String
     /// `text` in `to`, from `from` or the language it is recognized as (`OnDeviceHostServices.translate`).

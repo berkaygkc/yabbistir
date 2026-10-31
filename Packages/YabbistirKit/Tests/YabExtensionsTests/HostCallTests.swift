@@ -26,12 +26,12 @@ import YabLocalization
         let limit: Int
     }
 
-    func recentItems(limit: Int) -> [ExtensionItem] {
+    func recentItems(limit: Int) async -> [ExtensionItem] {
         recentLimits.append(limit)
         return items
     }
 
-    func searchItems(_ query: String, limit: Int) -> [ExtensionItem] {
+    func searchItems(_ query: String, limit: Int) async -> [ExtensionItem] {
         searches.append(Search(query: query, limit: limit))
         return items
     }

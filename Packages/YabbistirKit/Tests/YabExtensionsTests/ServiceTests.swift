@@ -325,7 +325,7 @@ import YabPasteboard
 
     /// `yab.history` hands out items built as any extension item, newest first, but never with an image's pixels: not a
     /// copied image's, not a picture copied as a file's. Texts and files keep what they say.
-    @Test func historyItemsCarryNoPixels() throws {
+    @Test func historyItemsCarryNoPixels() async throws {
         let text = try ingest("merhaba dünya")
         let image = try ingest(PasteboardRepresentation(type: TypeIdentifiers.png, data: Self.png()))
         let folder = RegistryFixture.temporary("history")
@@ -336,36 +336,36 @@ import YabPasteboard
         #expect(service.item(for: image, includeImage: true)?.image?.width == 64)
         #expect(service.item(for: file, includeImage: true)?.image?.width == 64)
 
-        let recent = service.historyItems(recent: 20)
+        let recent = await service.historyItems(recent: 20)
         #expect(recent.map(\.id) == [file, image, text])
         #expect(recent.allSatisfy { $0.image == nil })
         #expect(recent.map(\.kind) == ["file", "image", "text"])
         #expect(recent[0].files?.map(\.name) == ["Ekran Resmi.png"])
         #expect(recent[2].text == "merhaba dünya")
-        let found = service.historyItems(matching: "dünya", limit: 20)
+        let found = await service.historyItems(matching: "dünya", limit: 20)
         #expect(found.map(\.id) == [text])
         #expect(found.first?.text == "merhaba dünya")
-        #expect(service.historyItems(matching: "Ekran", limit: 20).map(\.image) == [nil])
+        #expect(await service.historyItems(matching: "Ekran", limit: 20).map(\.image) == [nil])
     }
 
     /// At most `limit` items, the newest, and never more than the router's 50 however many are asked for. Search finds what
     /// the panel's history search finds; an item taken out of history (kept in a category) is no longer history.
-    @Test func historyGivesAtMostItsLimitNewestFirst() throws {
+    @Test func historyGivesAtMostItsLimitNewestFirst() async throws {
         let ids = try (0..<60).map { try ingest("not \($0)") }
-        #expect(service.historyItems(recent: 5).map(\.id) == Array(ids.reversed().prefix(5)))
-        #expect(service.historyItems(recent: 5).map(\.text) == ["not 59", "not 58", "not 57", "not 56", "not 55"])
-        #expect(service.historyItems(recent: 500).count == 50)
-        #expect(service.historyItems(recent: 0).isEmpty)
+        #expect(await service.historyItems(recent: 5).map(\.id) == Array(ids.reversed().prefix(5)))
+        #expect(await service.historyItems(recent: 5).map(\.text) == ["not 59", "not 58", "not 57", "not 56", "not 55"])
+        #expect(await service.historyItems(recent: 500).count == 50)
+        #expect(await service.historyItems(recent: 0).isEmpty)
         // "not 1", "not 10" … "not 19": eleven matches, the newest first.
-        #expect(service.historyItems(matching: "not 1", limit: 3).map(\.text) == ["not 19", "not 18", "not 17"])
-        #expect(service.historyItems(matching: "not 1", limit: 50).count == 11)
-        #expect(service.historyItems(matching: "nothing like it", limit: 50).isEmpty)
+        #expect(await service.historyItems(matching: "not 1", limit: 3).map(\.text) == ["not 19", "not 18", "not 17"])
+        #expect(await service.historyItems(matching: "not 1", limit: 50).count == 11)
+        #expect(await service.historyItems(matching: "nothing like it", limit: 50).isEmpty)
 
         let category = try library.createCategory(name: "Saklı")
         try library.add(ids[59], toCategory: category.id!)
         try library.deleteFromHistory(ids[59])
-        #expect(service.historyItems(recent: 1).map(\.text) == ["not 58"])
-        #expect(service.historyItems(matching: "not 59", limit: 50).isEmpty)
+        #expect(await service.historyItems(recent: 1).map(\.text) == ["not 58"])
+        #expect(await service.historyItems(matching: "not 59", limit: 50).isEmpty)
     }
 
     /// A command that makes files never runs ahead (it would litter work folders and Outputs); when it is used, the

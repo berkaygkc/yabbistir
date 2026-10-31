@@ -81,7 +81,11 @@ export interface Context {
 }
 
 /** An item as `yab.history` returns it: images have their size only. */
-export type HistoryItem = Omit<Item, "image"> & { image?: { width: number; height: number } };
+export type HistoryItem = Omit<Item, "image"> & {
+  image?: { width: number; height: number };
+  /** True when the text or HTML was cut to 64 KB; absent otherwise. */
+  readonly truncated?: boolean;
+};
 
 /** `yab.ai.generate`'s options. Left out, each is the model's own default. */
 export interface AIOptions {

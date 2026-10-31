@@ -85,11 +85,11 @@ public struct HostCall: Equatable, Sendable {
             try open(call)
         case "history.recent":
             try requireHistory(call)
-            return history(call) { limit in services.recentItems(limit: limit) }
+            return await history(call) { limit in await services.recentItems(limit: limit) }
         case "history.search":
             try requireHistory(call)
             guard let query = call.params["query"]?.stringValue else { throw ExtensionError(.badResult, "yab.history.search takes a query") }
-            return history(call) { limit in services.searchItems(query, limit: limit) }
+            return await history(call) { limit in await services.searchItems(query, limit: limit) }
         case "ai.generate":
             return try await generate(call)
         case "translate":
@@ -106,7 +106,7 @@ public struct HostCall: Equatable, Sendable {
     public static let historyLimit = 50
     public static let historyDefaultLimit = 20
     /// A text (and an item's HTML) is cut to this many bytes of UTF-8, at a character boundary.
-    public static let historyTextBytes = 65_536
+    nonisolated public static let historyTextBytes = 65_536
 
     /// History needs the `history` permission, and a run the person started or a job: never a rule, detector or
     /// preview. Checked before anything else about the request. The refusal is the person's to read (a card or
@@ -124,19 +124,17 @@ public struct HostCall: Equatable, Sendable {
     }
 
     /// The newest items, or those `read` finds, at most the call's limit (1 to 50, 20 when it does not say).
-    private func history(_ call: HostCall, _ read: (Int) -> [ExtensionItem]) -> JSONValue {
+    private func history(_ call: HostCall, _ read: (Int) async -> [ExtensionItem]) async -> JSONValue {
         var limit = Self.historyDefaultLimit
         if let number = call.params["limit"]?.numberValue, number.isFinite {
             limit = Int(min(max(number, 1), Double(Self.historyLimit)))
         }
-        return .array(read(limit).prefix(limit).map(Self.trimmed))
+        return .array(await read(limit).prefix(limit).map { Self.trimmed($0) })
     }
 
     /// An item as an extension sees it from history: no pixels (width and height stay), a bounded text.
     private static func trimmed(_ item: ExtensionItem) -> JSONValue {
-        var item = item
-        item.text = item.text.map(cut)
-        if let html = item.richText?.html { item.richText?.html = cut(html) }
+        var item = item.cappedForHistory()
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let image = item.image
@@ -146,10 +144,6 @@ public struct HostCall: Equatable, Sendable {
         if let image { object["image"] = .object(["width": .number(Double(image.width)), "height": .number(Double(image.height))]) }
         value = .object(object)
         return value
-    }
-
-    private static func cut(_ text: String) -> String {
-        text.cut(toUTF8Bytes: historyTextBytes)
     }
 
     // MARK: On-device model and translation
@@ -299,5 +293,25 @@ extension String {
             end = next
         }
         return String(self[..<end])
+    }
+}
+
+extension ExtensionItem {
+    /// The item as history hands it out: its text and HTML cut to `HostCallRouter.historyTextBytes` at a character
+    /// boundary, `truncated` set when either was cut.
+    func cappedForHistory() -> ExtensionItem {
+        var item = self
+        let limit = HostCallRouter.historyTextBytes
+        var cutAny = false
+        if let text = item.text, text.utf8.count > limit {
+            item.text = text.cut(toUTF8Bytes: limit)
+            cutAny = true
+        }
+        if let html = item.richText?.html, html.utf8.count > limit {
+            item.richText?.html = html.cut(toUTF8Bytes: limit)
+            cutAny = true
+        }
+        if cutAny { item.truncated = true }
+        return item
     }
 }

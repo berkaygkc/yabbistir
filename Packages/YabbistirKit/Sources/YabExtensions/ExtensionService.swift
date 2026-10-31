@@ -292,18 +292,28 @@ public final class ExtensionService: ExtensionCommandsProviding {
     }
 
     /// `yab.history.recent`: history's newest items, at most `limit` (never more than `HostCallRouter.historyLimit`).
-    public func historyItems(recent limit: Int) -> [ExtensionItem] {
-        historyItems(matching: "", limit: limit)
+    public func historyItems(recent limit: Int) async -> [ExtensionItem] {
+        await historyItems(matching: "", limit: limit)
     }
+
+    /// Called once per history item, on the thread that builds it. Lets a test see that the build is not on the main actor.
+    @ObservationIgnored var historyBuildObserver: (@Sendable () -> Void)?
 
     /// `yab.history.search`: what the panel's history search finds for `query`, newest first, at most `limit`.
     /// Built as any item, but never with an image's pixels (not even read), and outside the panel session's cache.
-    public func historyItems(matching query: String, limit: Int) -> [ExtensionItem] {
+    /// The index answers on the main actor; reading and building the items (the database, the full texts) does not.
+    public func historyItems(matching query: String, limit: Int) async -> [ExtensionItem] {
         let limit = min(max(limit, 0), HostCallRouter.historyLimit)
         guard limit > 0 else { return [] }
-        return library.index.search(query, limit: limit).ids.compactMap { id in
-            Self.buildItem(id, store: library.store, includeImage: false)
-        }
+        let ids = library.index.search(query, limit: limit).ids
+        let store = library.store
+        let observer = historyBuildObserver
+        return await Task.detached(priority: .userInitiated) {
+            ids.compactMap { id -> ExtensionItem? in
+                observer?()
+                return Self.buildItem(id, store: store, includeImage: false)?.cappedForHistory()
+            }
+        }.value
     }
 
     nonisolated private static let imageTypes = [TypeIdentifiers.png, TypeIdentifiers.tiff, TypeIdentifiers.jpeg, TypeIdentifiers.heic]

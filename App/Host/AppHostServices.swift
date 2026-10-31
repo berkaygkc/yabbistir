@@ -40,12 +40,12 @@ final class AppHostServices: HostServices {
         NSWorkspace.shared.open(url)
     }
 
-    func recentItems(limit: Int) -> [ExtensionItem] {
-        extensions.historyItems(recent: limit)
+    func recentItems(limit: Int) async -> [ExtensionItem] {
+        await extensions.historyItems(recent: limit)
     }
 
-    func searchItems(_ query: String, limit: Int) -> [ExtensionItem] {
-        extensions.historyItems(matching: query, limit: limit)
+    func searchItems(_ query: String, limit: Int) async -> [ExtensionItem] {
+        await extensions.historyItems(matching: query, limit: limit)
     }
 
     /// The call's cancellation (its run ended, timed out or was cancelled) reaches the model through this await.
