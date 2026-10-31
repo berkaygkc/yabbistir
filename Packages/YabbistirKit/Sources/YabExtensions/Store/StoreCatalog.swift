@@ -43,6 +43,8 @@ public enum StoreCatalogError: Error, Equatable, Sendable {
     case needsNewerApp
     /// Not JSON, or not the shape the catalog schema describes.
     case malformed
+    /// The bytes were not signed by any known key.
+    case badSignature
 }
 
 public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
@@ -87,8 +89,9 @@ public enum StoreCompatibility: Equatable, Sendable {
 extension StoreEntry {
     public func compatibility(appVersion: SemanticVersion) -> StoreCompatibility {
         if !ManifestValidator.supportedAPIVersions.contains(apiVersion) { return .unsupportedAPI(apiVersion) }
-        if let minAppVersion, let minimum = SemanticVersion(minAppVersion), minimum > appVersion {
-            return .needsNewerApp(minimum: minAppVersion)
+        if let minAppVersion {
+            // A minimum this app cannot read counts as unmet: when in doubt, do not install.
+            guard let minimum = SemanticVersion(minAppVersion), minimum <= appVersion else { return .needsNewerApp(minimum: minAppVersion) }
         }
         return .compatible
     }

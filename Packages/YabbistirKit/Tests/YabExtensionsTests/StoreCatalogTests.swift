@@ -44,6 +44,12 @@ struct StoreCatalogTests {
         #expect(noEnglish.localizedName(.turkish) == "Nur")
     }
 
+    @Test func anUnparsableMinAppVersionIsIncompatible() throws {
+        let app = try #require(SemanticVersion("99.0.0"))
+        #expect(try entry(minAppVersion: "soon").compatibility(appVersion: app) == .needsNewerApp(minimum: "soon"))
+        #expect(try entry(minAppVersion: "1.2").compatibility(appVersion: app) == .needsNewerApp(minimum: "1.2"))
+    }
+
     @Test func minAppVersionAboveTheAppIsNeedsNewerApp() throws {
         let app = try #require(SemanticVersion("0.2.0"))
         #expect(try entry(minAppVersion: "0.3.0").compatibility(appVersion: app) == .needsNewerApp(minimum: "0.3.0"))

@@ -60,3 +60,23 @@ struct CatalogVerifierTests {
         #expect(!CatalogVerifier.packageMatches(package, sha256: ""))
     }
 }
+
+extension CatalogVerifierTests {
+    @Test func verifyAndDecodeReadsOnlyAVerifiedCatalog() throws {
+        let key = Curve25519.Signing.PrivateKey()
+        let signature = try sign(catalog, with: key)
+        #expect(try CatalogVerifier.verifyAndDecode(catalog: catalog, signatureBase64: signature, keys: [key.publicKey]).extensions.isEmpty)
+        // Unsigned or wrongly signed bytes are refused before anyone parses them, even when they are well formed.
+        #expect(throws: StoreCatalogError.badSignature) {
+            try CatalogVerifier.verifyAndDecode(catalog: catalog, signatureBase64: signature, keys: [Curve25519.Signing.PrivateKey().publicKey])
+        }
+        let junk = Data("nope".utf8)
+        #expect(throws: StoreCatalogError.badSignature) {
+            try CatalogVerifier.verifyAndDecode(catalog: junk, signatureBase64: signature, keys: [key.publicKey])
+        }
+        // Signed but malformed.
+        #expect(throws: StoreCatalogError.malformed) {
+            try CatalogVerifier.verifyAndDecode(catalog: junk, signatureBase64: try sign(junk, with: key), keys: [key.publicKey])
+        }
+    }
+}
