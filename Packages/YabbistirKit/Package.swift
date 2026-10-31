@@ -30,7 +30,7 @@ let package = Package(
         .target(name: "YabUI", dependencies: ["YabCore", "YabPasteboard", "YabPlatform", "YabLocalization", "YabStack", "YabExtensions", "YabExtensionKit"]),
         .target(name: "YabExtensionKit"),
         .target(name: "YabExtensionRuntime", dependencies: ["YabExtensionKit"]),
-        .target(name: "YabExtensions", dependencies: ["YabExtensionKit", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization"]),
+        .target(name: "YabExtensions", dependencies: ["YabExtensionKit", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization", "YabPlatform"]),
         .target(name: "YabImport", dependencies: ["YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
         .testTarget(name: "YabCoreTests", dependencies: ["YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
         .testTarget(name: "YabPasteboardTests", dependencies: ["YabPasteboard"]),
@@ -42,7 +42,7 @@ let package = Package(
         .testTarget(name: "YabStackTests", dependencies: ["YabStack"]),
         .testTarget(name: "YabExtensionKitTests", dependencies: ["YabExtensionKit"]),
         .testTarget(name: "YabExtensionRuntimeTests", dependencies: ["YabExtensionRuntime"]),
-        .testTarget(name: "YabExtensionsTests", dependencies: ["YabExtensions", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization",
+        .testTarget(name: "YabExtensionsTests", dependencies: ["YabExtensions", "YabPlatform", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization",
                                                         .product(name: "GRDB", package: "GRDB.swift")]),
     ]
 )
