@@ -1,0 +1,71 @@
+{
+  "about": "A job that runs a tool and reaches two hosts: network, exec, requires.tools, confirm, targets and verb.",
+  "folder": "dev.example.sample",
+  "manifest": {
+    "id": "dev.example.sample",
+    "version": "1.0.0",
+    "apiVersion": 1,
+    "defaultLocale": "en",
+    "name": "name",
+    "description": "description",
+    "icon": "sf:number",
+    "author": "example",
+    "license": "MIT",
+    "categories": ["text"],
+    "permissions": ["network", "exec"],
+    "network": {"domains": ["video.example", "cdn.example.org"]},
+    "requires": {"tools": [{"name": "yt-dlp", "install": "brew install yt-dlp"}]},
+    "preferences": [{"id": "upper", "type": "toggle", "title": "upper", "default": false, "confirm": "hello"}],
+    "contributes": {
+      "actions": [
+        {
+          "id": "decode",
+          "title": "decode.title",
+          "keywords": "decode.keywords",
+          "input": "item",
+          "accepts": {"kinds": ["text"], "tags": ["base64"]},
+          "output": "file",
+          "hint": true,
+          "priority": 2,
+          "targets": ["finder"],
+          "targetsOnly": true,
+          "job": true,
+          "verb": "hello"
+        },
+        {
+          "id": "encode",
+          "title": "encode.title",
+          "keywords": "encode.keywords",
+          "input": "item",
+          "accepts": {"kinds": ["text", "code"]},
+          "output": "text"
+        }
+      ],
+      "detectors": [
+        {
+          "id": "base64",
+          "tag": "tag",
+          "accepts": {"kinds": ["text"], "pattern": "^[A-Za-z0-9+/]{8,}={0,2}$"},
+          "validate": true,
+          "preview": true,
+          "suggests": ["decode"]
+        }
+      ]
+    }
+  },
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "decode.title": "Decode",
+      "decode.keywords": ["decode", "b64"],
+      "encode.title": "Encode",
+      "encode.keywords": ["encode"],
+      "tag": "base64",
+      "upper": "Uppercase",
+      "hello": "Hello {name}"
+    },
+    "tr": {"decode.title": "Çöz", "decode.keywords": ["çöz"], "hello": "Merhaba {name}"}
+  },
+  "files": ["index.js"]
+}

@@ -1,0 +1,30 @@
+{
+  "about": "Only the required fields; no contributions.",
+  "folder": "dev.example.sample",
+  "manifest": {
+    "id": "dev.example.sample",
+    "version": "1.0.0",
+    "apiVersion": 1,
+    "defaultLocale": "en",
+    "name": "name",
+    "description": "description",
+    "icon": "sf:number",
+    "author": "example",
+    "license": "MIT"
+  },
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "decode.title": "Decode",
+      "decode.keywords": ["decode", "b64"],
+      "encode.title": "Encode",
+      "encode.keywords": ["encode"],
+      "tag": "base64",
+      "upper": "Uppercase",
+      "hello": "Hello {name}"
+    },
+    "tr": {"decode.title": "Çöz", "decode.keywords": ["çöz"], "hello": "Merhaba {name}"}
+  },
+  "files": ["index.js"]
+}

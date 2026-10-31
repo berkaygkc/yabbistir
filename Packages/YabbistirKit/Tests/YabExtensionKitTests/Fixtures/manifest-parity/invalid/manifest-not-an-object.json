@@ -1,0 +1,20 @@
+{
+  "about": "manifest.json is JSON but not an object.",
+  "folder": "dev.example.sample",
+  "manifest": ["dev.example.sample"],
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "decode.title": "Decode",
+      "decode.keywords": ["decode", "b64"],
+      "encode.title": "Encode",
+      "encode.keywords": ["encode"],
+      "tag": "base64",
+      "upper": "Uppercase",
+      "hello": "Hello {name}"
+    },
+    "tr": {"decode.title": "Çöz", "decode.keywords": ["çöz"], "hello": "Merhaba {name}"}
+  },
+  "files": ["index.js"]
+}
