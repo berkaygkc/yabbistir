@@ -591,7 +591,8 @@ public final class ExtensionService: ExtensionCommandsProviding {
             self?.noteLoadFailure(key.id, result, revision: revision)
             if case .success = result { self?.noteLoadWorked(in: host) }
             pending.finish(result)
-            // Those who were waiting go on first, in the order they came; whoever asks after them finds it loaded.
+            // Those who were waiting are woken with the result (the main actor picks the order they go on in,
+            // which need not be the order they came); whoever asks after this finds it loaded.
             await Task.yield()
             self?.settle(key, pending, result, revision: revision)
         }
@@ -721,8 +722,9 @@ private struct LoadKey: Hashable {
     let id: String
 }
 
-/// A load on its way, which whoever needs the extension waits for: they go on in the order they came,
-/// and one that is cancelled stops waiting at once (with `cancelled`) while the load goes on.
+/// A load on its way, which whoever needs the extension waits for: all are woken with its result (they go on in
+/// whatever order the main actor runs them, not necessarily the order they came), and one that is cancelled stops
+/// waiting at once (with `cancelled`) while the load goes on.
 @MainActor
 private final class PendingLoad {
     /// The registry's revision when it started.

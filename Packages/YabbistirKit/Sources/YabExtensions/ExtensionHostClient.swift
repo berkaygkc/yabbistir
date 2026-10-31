@@ -167,10 +167,12 @@ public final class ExtensionHostClient {
         do {
             if !started {
                 try transport.start(onLine: { [weak self] line in
-                    // Timed as it comes in, and decoded on the reading thread: a big answer never costs the main actor.
-                    let arrived = ContinuousClock.now
-                    guard let message = try? JSONDecoder().decode(HostMessage.self, from: line) else { return }
-                    self?.post(.line(message, arrived: arrived))
+                    // Takes its place in the inbox as it comes in, then is decoded on the reading thread: a big answer
+                    // never costs the main actor, and nothing that happens while it decodes goes ahead of it.
+                    guard let self else { return }
+                    let (place, arrived) = inbox.reserve()
+                    let message = try? JSONDecoder().decode(HostMessage.self, from: line)
+                    deliver(place, message.map { .line($0, arrived: arrived) })
                 }, onExit: { [weak self] in
                     self?.post(.exited)
                 })
@@ -201,21 +203,33 @@ public final class ExtensionHostClient {
                 }
                 encoder.async { [weak self] in
                     guard let data = try? JSONEncoder().encode(request) else {
-                        Task { @MainActor in self?.answer(id, ExtensionError(.badResult, "the request could not be encoded")) }
+                        // In line with the rest, so the call's clock cannot turn this into a timeout and a restart.
+                        self?.post(.failed(id: id, ExtensionError(.badResult, "the request could not be encoded")))
                         return
                     }
                     transport.send(data)
                 }
             }
         } onCancel: { [weak self] in
-            self?.post(.cancelled(id: id, at: .now))
+            self?.post { .cancelled(id: id, at: $0) }
         }
         return message
     }
 
-    /// Puts `event` in the inbox, from any thread; the main actor then takes everything there, in order.
+    /// Puts the event made for this moment in the inbox, from any thread; the main actor then takes what is there,
+    /// in order.
+    nonisolated private func post(_ event: (ContinuousClock.Instant) -> Inbox.Event) {
+        let (place, now) = inbox.reserve()
+        deliver(place, event(now))
+    }
+
     nonisolated private func post(_ event: Inbox.Event) {
-        inbox.post(event)
+        post { _ in event }
+    }
+
+    /// Fills a place taken earlier (nil gives it up), and has the main actor take what is ready, in order.
+    nonisolated private func deliver(_ place: Int, _ event: Inbox.Event?) {
+        inbox.fill(place, with: event)
         Task { @MainActor [weak self] in self?.drain() }
     }
 
@@ -227,6 +241,7 @@ public final class ExtensionHostClient {
             case .exited: hostExited()
             case .cancelled(let id, let at): cancel(id, at: at)
             case .clock(let id, let turn): clockWentOff(id, turn: turn)
+            case .failed(let id, let error): answer(id, error)
             }
         }
     }
@@ -463,26 +478,50 @@ private struct InvokeInFlight {
 }
 
 /// What other threads hand the client, kept in the order it happened: the host's lines (with when each came in),
-/// the host stopping, a caller giving up, a clock running out. The main actor takes them in that order, whatever
-/// order it runs the hops that bring it here.
+/// the host stopping, a caller giving up, a clock running out, a request that could not be encoded. Each takes its
+/// place the moment it happens, even when it is filled in a little later (a line is decoded after); the main actor
+/// takes them in that order, whatever order it runs the hops that bring it here.
 private final class Inbox: Sendable {
     enum Event: Sendable {
         case line(HostMessage, arrived: ContinuousClock.Instant)
         case exited
         case cancelled(id: Int, at: ContinuousClock.Instant)
         case clock(id: Int, turn: Int)
+        case failed(id: Int, ExtensionError)
     }
 
-    private let events = Mutex<[Event]>([])
-
-    func post(_ event: Event) {
-        events.withLock { $0.append(event) }
+    private struct Places {
+        var order: [Int] = []
+        var ready: [Int: Event] = [:]
+        var next = 0
     }
 
-    /// Everything posted so far, oldest first; the inbox is empty after.
+    private let places = Mutex(Places())
+
+    /// The next place in line, and the moment it was taken.
+    func reserve() -> (place: Int, at: ContinuousClock.Instant) {
+        places.withLock { places in
+            defer { places.next += 1 }
+            places.order.append(places.next)
+            return (places.next, .now)
+        }
+    }
+
+    /// Puts `event` in its place; nil gives the place up (a line that did not decode).
+    func fill(_ place: Int, with event: Event?) {
+        places.withLock { places in
+            if let event { places.ready[place] = event } else { places.order.removeAll { $0 == place } }
+        }
+    }
+
+    /// The events ready, oldest first, up to the first place still being filled in.
     func take() -> [Event] {
-        events.withLock { events in
-            defer { events = [] }
+        places.withLock { places in
+            var events: [Event] = []
+            while let first = places.order.first, let event = places.ready.removeValue(forKey: first) {
+                events.append(event)
+                places.order.removeFirst()
+            }
             return events
         }
     }
