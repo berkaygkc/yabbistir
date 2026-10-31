@@ -14,4 +14,10 @@ public enum CounterpartApp {
         default: nil
         }
     }
+
+    /// Whether a running copy with `ownID` should quit because the other build appears among `added`.
+    public static func shouldQuit(ownID: String, added: [String]) -> Bool {
+        guard let other = counterpart(of: ownID) else { return false }
+        return added.contains(other)
+    }
 }
