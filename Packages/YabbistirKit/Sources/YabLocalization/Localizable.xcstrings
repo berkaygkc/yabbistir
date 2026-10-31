@@ -1401,13 +1401,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Also updating, with nothing new to allow: %@"
+            "value": "Also updating (no new permissions): %@"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yeni izin istemeden güncellenecek: %@"
+            "value": "Ayrıca güncellenecek (yeni izin yok): %@"
           }
         }
       }

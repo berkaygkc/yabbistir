@@ -427,10 +427,11 @@ public final class StoreModel {
         }
     }
 
-    /// The same download with the same request: version, permissions, sites, programs and package hash.
+    /// The same download with the same request: version, package hash, and the same permissions, sites and programs in
+    /// any order.
     private static func offersTheSame(_ current: StoreEntry, _ shown: StoreEntry) -> Bool {
-        current.version == shown.version && current.permissions == shown.permissions && current.networkHosts == shown.networkHosts
-            && current.tools == shown.tools && current.sha256 == shown.sha256
+        current.version == shown.version && current.sha256 == shown.sha256 && Set(current.permissions) == Set(shown.permissions)
+            && Set(current.networkHosts) == Set(shown.networkHosts) && Set(current.tools) == Set(shown.tools)
     }
 
     /// What `entry` asks for beyond `granted`, one sentence per new kind of access: a site list holds only the new

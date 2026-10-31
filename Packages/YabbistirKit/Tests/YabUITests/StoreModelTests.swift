@@ -556,6 +556,29 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.failures.isEmpty)
     }
 
+    /// The same permissions, sites and programs listed in another order are the same offer.
+    @Test func aReorderedOfferIsStillTheSameOffer() async throws {
+        let fixture = StoreFixture()
+        let package = try fixture.package(F.video)
+        try fixture.serve([F.video], packages: [F.video.id: package])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        model.setSelected(F.video.id, true)
+        model.installSelected()
+        var reordered = F.video
+        reordered.permissions.reverse()
+        reordered.hosts.reverse()
+        reordered.tools.reverse()
+        try fixture.serve([reordered], packages: [F.video.id: package])
+        model.refresh()
+        await model.refreshTask?.value
+        model.confirmConsent()
+        await model.installTask?.value
+        #expect(model.failures.isEmpty)
+        #expect(fixture.registry.installed.first { $0.id == F.video.id }?.needsConsent == false)
+    }
+
     @Test func aSelectionThatCanNoLongerBeInstalledIsDropped() async throws {
         let fixture = StoreFixture()
         try fixture.serve([F.video, F.translate, F.jwt, F.linkClean], packaged: [F.jwt])
@@ -636,6 +659,12 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(fixture.registry.installed.first { $0.id == tooNew.id }?.manifest?.version == "1.0.0")
         #expect(!fixture.requests.contains("/v1/packages/\(tooNew.id).yabext"))
         #expect(model.updateCount == 0)
+    }
+
+    /// The sheet's line for updates that ask for nothing new.
+    @Test func theQuietUpdatesLineSaysNothingNewIsAsked() {
+        #expect(L10n.string("extensions.store.consent.alsoUpdating", .english, "JWT, UUID") == "Also updating (no new permissions): JWT, UUID")
+        #expect(L10n.string("extensions.store.consent.alsoUpdating", .turkish, "JWT, UUID") == "Ayrıca güncellenecek (yeni izin yok): JWT, UUID")
     }
 
     @Test func updatesThatAskForNothingNewInstallWithoutAsking() async throws {
