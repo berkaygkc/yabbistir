@@ -109,4 +109,19 @@ extension CatalogVerifierTests {
         #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [\n        key(\"q0aJ\"),\n        key(\"Zm9v\"),\n    ]") == 0)
         #expect(try gate("public static let publicKeys: [Curve25519.Signing.PublicKey] = [key(\"q0aJ\")]") == 0)
     }
+
+    /// Fixtures/store-live holds the first catalog the store published, byte for byte, with its signature.
+    static let live = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("Fixtures/store-live")
+
+    @Test func thePublishedCatalogVerifiesWithTheEmbeddedKeys() throws {
+        let catalog = try Data(contentsOf: Self.live.appendingPathComponent("catalog.json"))
+        let signature = try Data(contentsOf: Self.live.appendingPathComponent("catalog.json.sig"))
+        #expect(StoreConfiguration.publicKeys.count == 2)
+        let decoded = try CatalogVerifier.verifyAndDecode(catalog: catalog, signatureBase64: signature, keys: StoreConfiguration.publicKeys)
+        #expect(decoded.extensions.map(\.id).sorted()
+            == ["dev.yabbistir.jwt", "dev.yabbistir.link-clean", "dev.yabbistir.translate", "dev.yabbistir.video-download"])
+        var flipped = catalog
+        flipped[flipped.count / 2] ^= 0x01
+        #expect(!CatalogVerifier.verify(catalog: flipped, signatureBase64: signature, keys: StoreConfiguration.publicKeys))
+    }
 }

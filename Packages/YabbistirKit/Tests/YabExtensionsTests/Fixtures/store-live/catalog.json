@@ -1,0 +1,130 @@
+{
+  "formatVersion": 1,
+  "generatedAt": "2026-10-31T10:31:50Z",
+  "extensions": [
+    {
+      "id": "dev.yabbistir.jwt",
+      "version": "1.0.0",
+      "apiVersion": 1,
+      "minAppVersion": null,
+      "name": {
+        "en": "JWT",
+        "tr": "JWT"
+      },
+      "description": {
+        "en": "Recognizes copied JSON Web Tokens and shows what is inside.",
+        "tr": "Kopyalanan JSON Web Token'ları tanır ve içini gösterir."
+      },
+      "author": "Berkay Gökçe",
+      "categories": [
+        "developer"
+      ],
+      "icon": "sf:key.horizontal",
+      "permissions": [],
+      "networkHosts": [],
+      "tools": [],
+      "sha256": "c4088c02e503aa43e39bfc626f213e28ed354bd0ca896c97aa110044b84344b2",
+      "size": 3284,
+      "updatedAt": "2026-10-31T05:48:27Z",
+      "readme": "https://github.com/berkaygkc/yabbistir-extensions/tree/main/extensions/dev.yabbistir.jwt",
+      "package": "https://berkaygkc.github.io/yabbistir-extensions/v1/packages/dev.yabbistir.jwt-1.0.0.yabext"
+    },
+    {
+      "id": "dev.yabbistir.link-clean",
+      "version": "1.0.0",
+      "apiVersion": 1,
+      "minAppVersion": null,
+      "name": {
+        "en": "Link Cleaner",
+        "tr": "Link Temizle"
+      },
+      "description": {
+        "en": "Strips tracking parameters from the links you copy.",
+        "tr": "Kopyaladığın linklerden izleme parametrelerini siler."
+      },
+      "author": "Berkay Gökçe",
+      "categories": [
+        "links"
+      ],
+      "icon": "sf:link.badge.plus",
+      "permissions": [
+        "capture"
+      ],
+      "networkHosts": [],
+      "tools": [],
+      "sha256": "8d210f7cb0f14e1eb8fb911356c3bb9a43136c411c21b36a8ba65572187b5f79",
+      "size": 3349,
+      "updatedAt": "2026-10-31T05:48:27Z",
+      "readme": "https://github.com/berkaygkc/yabbistir-extensions/tree/main/extensions/dev.yabbistir.link-clean",
+      "package": "https://berkaygkc.github.io/yabbistir-extensions/v1/packages/dev.yabbistir.link-clean-1.0.0.yabext"
+    },
+    {
+      "id": "dev.yabbistir.translate",
+      "version": "1.0.0",
+      "apiVersion": 1,
+      "minAppVersion": null,
+      "name": {
+        "en": "Translate",
+        "tr": "Çevir"
+      },
+      "description": {
+        "en": "Translates text on this Mac and summarizes it with Apple Intelligence.",
+        "tr": "Metni bu Mac’te çevirir, Apple Intelligence ile özetler."
+      },
+      "author": "Berkay Gökçe",
+      "categories": [
+        "text",
+        "ai"
+      ],
+      "icon": "sf:character.bubble",
+      "permissions": [],
+      "networkHosts": [],
+      "tools": [],
+      "sha256": "01cd5cbd6d45714077f4abf2606c1813522c06aa193b765744db992c68dc230f",
+      "size": 3435,
+      "updatedAt": "2026-10-31T05:48:27Z",
+      "readme": "https://github.com/berkaygkc/yabbistir-extensions/tree/main/extensions/dev.yabbistir.translate",
+      "package": "https://berkaygkc.github.io/yabbistir-extensions/v1/packages/dev.yabbistir.translate-1.0.0.yabext"
+    },
+    {
+      "id": "dev.yabbistir.video-download",
+      "version": "1.0.0",
+      "apiVersion": 1,
+      "minAppVersion": null,
+      "name": {
+        "en": "Download Video",
+        "tr": "Video İndir"
+      },
+      "description": {
+        "en": "Downloads YouTube, Instagram and X links as an MP4 video or M4A audio with yt-dlp.",
+        "tr": "YouTube, Instagram ve X linklerini yt-dlp ile MP4 video ya da M4A ses olarak indirir."
+      },
+      "author": "Berkay Gökçe",
+      "categories": [
+        "files"
+      ],
+      "icon": "sf:arrow.down.circle",
+      "permissions": [
+        "network",
+        "exec"
+      ],
+      "networkHosts": [
+        "youtube.com",
+        "youtu.be",
+        "instagram.com",
+        "x.com",
+        "twitter.com"
+      ],
+      "tools": [
+        "yt-dlp",
+        "ffmpeg",
+        "deno"
+      ],
+      "sha256": "af09b6c2ada0696cb1240b854550ff913d80295b0c31821439ce0103a2f2783f",
+      "size": 7216,
+      "updatedAt": "2026-10-31T10:31:50Z",
+      "readme": "https://github.com/berkaygkc/yabbistir-extensions/tree/main/extensions/dev.yabbistir.video-download",
+      "package": "https://berkaygkc.github.io/yabbistir-extensions/v1/packages/dev.yabbistir.video-download-1.0.0.yabext"
+    }
+  ]
+}
