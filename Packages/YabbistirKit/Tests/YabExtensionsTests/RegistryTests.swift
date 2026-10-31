@@ -61,6 +61,25 @@ extension ExtensionRegistry {
         #expect(lines.all == ["\(id): contributes.captureRules[0].accepts.tags: capture rules never see tags; this rule would never run"])
         // A warning does not keep the extension off.
         #expect(try #require(registry.installed.first { $0.id == id }).issues.isEmpty)
+    }
+
+    /// A reload (every save in a linked folder is one) does not repeat a warning; a new version may say it again.
+    @Test func aWarningIsLoggedOncePerVersion() throws {
+        let id = "dev.example.tags"
+        func write(version: String) throws {
+            var manifest = RegistryFixture.manifest(id: id, version: version, permissions: ["capture"])
+            manifest["contributes"] = ["captureRules": [["id": "r", "title": "name", "accepts": ["kinds": ["text"], "tags": ["x"]]]]]
+            try RegistryFixture.write(in: user, id: id, manifest: manifest)
+        }
+        try write(version: "1.0.0")
+        final class Lines: @unchecked Sendable { var all: [String] = [] }
+        let lines = Lines()
+        let registry = ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings) { _, line in lines.all.append(line) }
+        registry.reload()
+        registry.reload()
+        #expect(lines.all.count == 1)
+        try write(version: "1.1.0")
+        registry.reload()
         registry.reload()
         #expect(lines.all.count == 2)
     }
