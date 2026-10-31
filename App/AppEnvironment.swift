@@ -69,7 +69,7 @@ final class AppEnvironment {
                                               userRoot: directory.appendingPathComponent("Extensions", isDirectory: true),
                                               dataRoot: directory.appendingPathComponent("ExtensionData", isDirectory: true),
                                               settings: extensionSettings,
-                                              onWarning: { id, line in MainActor.assumeIsolated { warningLogs.append(id, line) } })
+                                              onWarning: { id, line in warningLogs.append(id, line) })
         resultFiles = ResultFiles(root: directory.appendingPathComponent("Outputs", isDirectory: true))
         // A version that cannot be read meets no extension's minimum: when in doubt, nothing new is installed.
         let appVersion = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String).flatMap { SemanticVersion($0) }

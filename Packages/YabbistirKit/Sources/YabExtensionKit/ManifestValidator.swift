@@ -11,7 +11,9 @@ public struct ManifestIssue: Equatable, Sendable, CustomStringConvertible {
     public let expected: String?
     public let fix: String?
     public let severity: Severity
-    /// A stable name for issues a tool may match on (warnings have one); nil for the rest.
+    /// A stable name a tool may match on, the same one the store's checker reports ("invalidVersion",
+    /// "captureRuleTags"). Every issue the validator finds has one; nil only for problems found elsewhere (the
+    /// registry's id check before validating, a syntax error in index.js).
     public let code: String?
 
     public init(_ path: String, _ message: String, expected: String? = nil, fix: String, severity: Severity = .error, code: String? = nil) {

@@ -87,13 +87,13 @@ public final class ExtensionRegistry {
     /// Hears each warning of a loadable manifest as (extension id, line), once for each version of the extension;
     /// the app writes it to the Development log. Warnings never enter `InstalledExtension.issues`: those keep an
     /// extension off.
-    @ObservationIgnored private let onWarning: ((String, String) -> Void)?
+    @ObservationIgnored private let onWarning: (@MainActor (String, String) -> Void)?
     /// The warnings already heard, by extension id, version and line: a reload (every save in a linked folder is
     /// one) does not repeat them.
     @ObservationIgnored private var loggedWarnings: Set<[String]> = []
 
     public init(builtInRoot: URL, userRoot: URL, dataRoot: URL, settings: ExtensionSettings,
-                onWarning: ((String, String) -> Void)? = nil) {
+                onWarning: (@MainActor (String, String) -> Void)? = nil) {
         self.onWarning = onWarning
         self.builtInRoot = builtInRoot
         self.userRoot = userRoot
