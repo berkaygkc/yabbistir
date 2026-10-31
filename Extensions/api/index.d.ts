@@ -158,8 +158,7 @@ export type CaptureResult =
  * link is over 256 KB meets no rule and is stored as it is. No network, programs, history, AI,
  * translation, notifications or opening links; `ctx.trigger` is "capture".
  *
- * The manifest's `accepts` for a rule: capture rules see text and URLs only: no tags, no pixels.
- * A rule that lists `tags` in `accepts` never runs.
+ * Capture rules see text and URLs only: no tags, no pixels.
  */
 export interface CaptureRule {
   run(item: Item, ctx: Context): CaptureResult | undefined | Promise<CaptureResult | undefined>;

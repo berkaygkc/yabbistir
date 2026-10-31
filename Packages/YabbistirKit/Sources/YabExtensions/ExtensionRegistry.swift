@@ -84,8 +84,13 @@ public final class ExtensionRegistry {
     @ObservationIgnored public let dataRoot: URL
     @ObservationIgnored public let settings: ExtensionSettings
     @ObservationIgnored private var watcher: FolderWatcher?
+    /// Hears each warning of a loadable manifest as (extension id, line) on every load and reload; the app writes
+    /// it to the Development log. Warnings never enter `InstalledExtension.issues`: those keep an extension off.
+    @ObservationIgnored private let onWarning: ((String, String) -> Void)?
 
-    public init(builtInRoot: URL, userRoot: URL, dataRoot: URL, settings: ExtensionSettings) {
+    public init(builtInRoot: URL, userRoot: URL, dataRoot: URL, settings: ExtensionSettings,
+                onWarning: ((String, String) -> Void)? = nil) {
+        self.onWarning = onWarning
         self.builtInRoot = builtInRoot
         self.userRoot = userRoot
         self.dataRoot = dataRoot
@@ -208,6 +213,9 @@ public final class ExtensionRegistry {
             case .valid(let manifest, let localization):
                 // A syntax error is found by parsing, never by running: listed with its line.
                 let issues = SyntaxCheck.problem(in: folder).map { [$0] } ?? []
+                for warning in ManifestValidator.warnings(folder: folder) {
+                    onWarning?(manifest.id, "\(manifest.id): \(warning.path): \(warning.message)")
+                }
                 return InstalledExtension(id: manifest.id, folder: folder, source: entrySource, manifest: manifest, localization: localization,
                                           issues: issues, isEnabled: settings.isEnabled(manifest.id),
                                           grant: settings.grant(manifest.id), thirdPartyDisabled: settings.thirdPartyDisabled)

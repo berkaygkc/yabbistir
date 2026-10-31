@@ -61,10 +61,12 @@ final class AppEnvironment {
         let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("yabbistir", isDirectory: true)
         library = try Library(store: ItemStore(directory: directory))
+        let warningLogs = extensionLogs
         extensionRegistry = ExtensionRegistry(builtInRoot: Bundle.main.resourceURL!.appendingPathComponent("BuiltinExtensions"),
                                               userRoot: directory.appendingPathComponent("Extensions", isDirectory: true),
                                               dataRoot: directory.appendingPathComponent("ExtensionData", isDirectory: true),
-                                              settings: extensionSettings)
+                                              settings: extensionSettings,
+                                              onWarning: { id, line in MainActor.assumeIsolated { warningLogs.append(id, line) } })
         resultFiles = ResultFiles(root: directory.appendingPathComponent("Outputs", isDirectory: true))
         let logs = extensionLogs
         let helper = Bundle.main.url(forAuxiliaryExecutable: "yabbistir-extension-host")!

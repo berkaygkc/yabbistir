@@ -50,6 +50,21 @@ extension ExtensionRegistry {
         ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings)
     }
 
+    @Test func aCaptureRuleTagsWarningReachesTheDevelopmentLog() throws {
+        let id = "dev.example.tags"
+        var manifest = RegistryFixture.manifest(id: id, permissions: ["capture"])
+        manifest["contributes"] = ["captureRules": [["id": "r", "title": "name", "accepts": ["kinds": ["text"], "tags": ["x"]]]]]
+        try RegistryFixture.write(in: user, id: id, manifest: manifest)
+        final class Lines: @unchecked Sendable { var all: [String] = [] }
+        let lines = Lines()
+        let registry = ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings) { _, line in lines.all.append(line) }
+        #expect(lines.all == ["\(id): contributes.captureRules[0].accepts.tags: capture rules never see tags; this rule would never run"])
+        // A warning does not keep the extension off.
+        #expect(try #require(registry.installed.first { $0.id == id }).issues.isEmpty)
+        registry.reload()
+        #expect(lines.all.count == 2)
+    }
+
     @Test func builtInsAndLocalsAreListedWithTheirSource() throws {
         try RegistryFixture.write(in: user, id: "dev.example.b")
         try RegistryFixture.write(in: builtIn, id: "dev.yabbistir.a")
