@@ -139,11 +139,11 @@ Built in:
 - **Convert**: colors to RGB, HSL, OKLCH, SwiftUI `Color` or `NSColor`; images to JPEG, PNG or half size; text from an image; an image's background removed.
 - **Paste to Finder as a File**: with Finder in front, text, code, links and images land in the open folder as files.
 
-An open extension store is coming soon, with everything you need to write and share your own. Until then, Settings → Extensions installs an extension from a folder or a `.yabext` file. Before an extension is installed, it shows what it wants to do: reach websites, run command-line programs, read your history or see what you copy. Nothing happens until you allow it.
+More extensions are in the open store, [yabbistir-extensions](https://github.com/berkaygkc/yabbistir-extensions): open Settings → Extensions → Store, pick the ones you want and install them together. The store's catalog is signed, and yabbistir checks every package before installing it. Before an extension is installed, it shows what it wants to do: reach websites, run command-line programs, read your history or see what you copy. Nothing happens until you allow it. To write your own, start with the store's README; Settings → Extensions also installs one from a folder or a `.yabext` file.
 
 ## Privacy
 
-- **Nothing leaves your Mac unless you ask.** No telemetry, no analytics, no background network. yabbistir itself goes online only when you choose **Check for Updates…**: it asks GitHub for the latest version and, if there's a newer one, offers to open its release page. The built-in extensions never go online.
+- **Nothing leaves your Mac unless you ask.** No telemetry, no analytics, no background network. yabbistir itself goes online only when you ask: **Check for Updates…** asks GitHub for the latest version and, if there's a newer one, offers to open its release page; the **Store** tab reads the store's signed list when you open it or press Refresh, and downloads only what you install. The built-in extensions never go online.
 - **Passwords stay out.** Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords.
 - **Local history.** Your history stays on your Mac, in `~/Library/Application Support/yabbistir`. Copies from your iPhone arrive through Universal Clipboard and are kept there too.
 
