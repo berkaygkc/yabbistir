@@ -257,7 +257,7 @@ public final class StoreModel {
         switch failure {
         case .changedSinceShown: string("extensions.store.failed.changed")
         case .store(.offline): string("extensions.store.failed.offline")
-        case .store(.badSignature), .store(.malformedCatalog): string("extensions.store.failed.unverified")
+        case .store(.badSignature), .store(.malformedCatalog), .store(.olderCatalog): string("extensions.store.failed.unverified")
         case .store(.badPackage): string("extensions.store.failed.package")
         case .store(.incompatible), .store(.needsNewerApp): string("extensions.store.failed.incompatible")
         case .store(.registry(let reason)): string("extensions.store.failed.registry", reason)
@@ -266,13 +266,14 @@ public final class StoreModel {
 
     // MARK: States
 
-    /// The catalog on screen is not the latest: the store could not be reached or could not be trusted.
+    /// The catalog on screen is not the latest: the store could not be reached, read or trusted, or sent an older list.
     public var notice: Notice? {
         guard client.catalog != nil, case .failed(let failure) = client.lastRefresh else { return nil }
         return switch failure {
         case .offline: Notice(symbol: "wifi.slash", text: string("extensions.store.offline.cached"))
         case .needsNewerApp: Notice(symbol: "arrow.up.circle", text: string("extensions.store.newerApp.cached"))
         case .malformedCatalog: Notice(symbol: "doc.questionmark", text: string("extensions.store.malformed.cached"))
+        case .olderCatalog: Notice(symbol: "clock.arrow.circlepath", text: string("extensions.store.older.cached"))
         default: Notice(symbol: "exclamationmark.shield", text: string("extensions.store.badSignature.cached"))
         }
     }

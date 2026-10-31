@@ -13,6 +13,8 @@ public enum StoreFailure: Error, Equatable, Sendable {
     case malformedCatalog
     /// The catalog is genuine but in a format only a newer yabbistir reads.
     case needsNewerApp
+    /// The catalog is genuine but older than the saved one, so the saved one stays.
+    case olderCatalog
     /// The download does not match the catalog: its hash, folder name, or its manifest's id, version, permissions,
     /// sites or programs.
     case badPackage(id: String)
@@ -69,13 +71,17 @@ public final class StoreClient {
 
     /// Reads the cached pair, checking it again against the current keys. No network.
     public func loadCache() {
-        guard let bytes = try? Data(contentsOf: cachedCatalogFile), let signature = try? Data(contentsOf: cachedSignatureFile),
-              let cached = try? CatalogVerifier.verifyAndDecode(catalog: bytes, signatureBase64: signature, keys: keys) else { return }
-        catalog = cached
+        if let cached = savedCatalog() { catalog = cached }
     }
 
-    /// Fetches the catalog and its signature. Only a verified pair replaces the cache and `catalog`; any failure
-    /// leaves both as they were.
+    /// The cached pair, checked again against the current keys; nil when there is none or it does not verify.
+    private func savedCatalog() -> StoreCatalog? {
+        guard let bytes = try? Data(contentsOf: cachedCatalogFile), let signature = try? Data(contentsOf: cachedSignatureFile) else { return nil }
+        return try? CatalogVerifier.verifyAndDecode(catalog: bytes, signatureBase64: signature, keys: keys)
+    }
+
+    /// Fetches the catalog and its signature. Only a verified pair at least as new as the saved one replaces the cache
+    /// and `catalog`; any failure leaves both as they were (an older pair shows the saved one).
     public func refresh() async {
         guard lastRefresh != .refreshing else { return }
         lastRefresh = .refreshing
@@ -92,6 +98,11 @@ public final class StoreClient {
                 throw StoreFailure.malformedCatalog
             } catch {
                 throw StoreFailure.badSignature
+            }
+            // An old copy served again (a stale cache in front of the store, or a replay) never replaces a newer list.
+            if let saved = catalog ?? savedCatalog(), fresh.generatedAt < saved.generatedAt {
+                catalog = saved
+                throw StoreFailure.olderCatalog
             }
             writeCache(catalog: bytes, signature: signature)
             catalog = fresh

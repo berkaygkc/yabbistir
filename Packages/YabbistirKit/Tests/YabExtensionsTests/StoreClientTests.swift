@@ -213,6 +213,34 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         #expect(try Data(contentsOf: cache.appendingPathComponent("catalog.json.sig")) == cachedSignature)
     }
 
+    /// A genuine catalog older than the saved one (an old copy served again) never replaces it, even in a session that
+    /// has not read the saved one yet.
+    @Test func anOlderCatalogNeverReplacesANewerCache() async throws {
+        let newer = StoreCatalogTests.catalogJSON(generatedAt: "2026-10-31T09:30:00Z", entries: [entryJSON(id: "dev.example.a", version: "1.1.0")])
+        let older = StoreCatalogTests.catalogJSON(generatedAt: "2026-10-30T09:30:00Z", entries: [entryJSON(id: "dev.example.a", version: "1.0.0")])
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(newer), "/v1/catalog.json.sig": .success(try sign(newer))])
+        let client = client(registry())
+        await client.refresh()
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(older), "/v1/catalog.json.sig": .success(try sign(older))])
+        await client.refresh()
+        #expect(client.lastRefresh == .failed(.olderCatalog))
+        #expect(client.catalog?.extensions.first?.version == "1.1.0")
+        #expect(try Data(contentsOf: cache.appendingPathComponent("catalog.json")) == newer)
+
+        let restarted = self.client(registry())
+        await restarted.refresh()
+        #expect(restarted.lastRefresh == .failed(.olderCatalog))
+        #expect(restarted.catalog?.extensions.first?.version == "1.1.0")
+        #expect(try Data(contentsOf: cache.appendingPathComponent("catalog.json")) == newer)
+
+        // The same age, or newer, is taken.
+        let same = StoreCatalogTests.catalogJSON(generatedAt: "2026-10-31T09:30:00Z", entries: [entryJSON(id: "dev.example.a", version: "1.2.0")])
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(same), "/v1/catalog.json.sig": .success(try sign(same))])
+        await client.refresh()
+        guard case .ok = client.lastRefresh else { Issue.record("expected ok, got \(client.lastRefresh)"); return }
+        #expect(client.catalog?.extensions.first?.version == "1.2.0")
+    }
+
     @Test func offlineIsReportedCalmly() async throws {
         try serve([entryJSON(id: "dev.example.a")])
         let client = client(registry())

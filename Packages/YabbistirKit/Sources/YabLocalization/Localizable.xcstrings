@@ -1888,6 +1888,23 @@
         }
       }
     },
+    "extensions.store.older.cached": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The store sent an older list. Showing the saved list."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mağaza daha eski bir liste gönderdi. Önbellekteki liste gösteriliyor."
+          }
+        }
+      }
+    },
     "extensions.store.refresh": {
       "extractionState": "manual",
       "localizations": {

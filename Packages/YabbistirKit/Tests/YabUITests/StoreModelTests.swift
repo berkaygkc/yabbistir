@@ -163,7 +163,7 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
 
     // MARK: Catalog
 
-    func catalog(_ entries: [Entry], packages: [String: Data] = [:]) throws -> Data {
+    func catalog(_ entries: [Entry], packages: [String: Data] = [:], generatedAt: String = "2026-10-31T09:30:00Z") throws -> Data {
         let list: [[String: Any]] = entries.map { entry in
             let bytes = packages[entry.id]
             var json: [String: Any] = [
@@ -177,7 +177,7 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
             json["minAppVersion"] = entry.minApp ?? NSNull()
             return json
         }
-        let catalog: [String: Any] = ["formatVersion": 1, "generatedAt": "2026-10-31T09:30:00Z", "extensions": list]
+        let catalog: [String: Any] = ["formatVersion": 1, "generatedAt": generatedAt, "extensions": list]
         return try JSONSerialization.data(withJSONObject: catalog)
     }
 
@@ -362,6 +362,23 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.notice?.text == "Mağaza listesi okunamadı. Önbellekteki liste gösteriliyor.")
         fixture.languageStore.language = .english
         #expect(model.notice?.text == "Couldn’t read the store’s list. Showing the saved list.")
+    }
+
+    /// An old copy of the store's list keeps the saved one on screen, with a calm line.
+    @Test func anOlderCatalogKeepsTheSavedListCalmly() async throws {
+        let fixture = StoreFixture(language: .turkish)
+        try fixture.serve([F.video, F.jwt])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        let older = try fixture.catalog([F.jwt], generatedAt: "2026-10-01T09:30:00Z")
+        StoreTabMockProtocol.serve(host: fixture.host, ["/v1/catalog.json": .success(older), "/v1/catalog.json.sig": .success(try fixture.signature(older))])
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(Set(model.rows.map(\.id)) == [F.video.id, F.jwt.id])
+        #expect(model.notice?.text == "Mağaza daha eski bir liste gönderdi. Önbellekteki liste gösteriliyor.")
+        fixture.languageStore.language = .english
+        #expect(model.notice?.text == "The store sent an older list. Showing the saved list.")
     }
 
     // MARK: Selecting
