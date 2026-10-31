@@ -28,7 +28,7 @@ targets:
     info:
       path: App/Info.plist
       properties:
-        CFBundleDisplayName: yabbistir
+        CFBundleDisplayName: $(APP_DISPLAY_NAME)
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations: [en, tr]
         CFBundleShortVersionString: "0.1.0"
@@ -70,7 +70,12 @@ targets:
         ENABLE_HARDENED_RUNTIME: YES
         MACOSX_DEPLOYMENT_TARGET: "26.0"
       configs:
+        # The Debug build has its own identity, so macOS keeps separate privacy entries for it and an installed release.
+        Debug:
+          PRODUCT_BUNDLE_IDENTIFIER: dev.yabbistir.app.debug
+          APP_DISPLAY_NAME: yabbistir Dev
         Release:
+          APP_DISPLAY_NAME: yabbistir
           # Xcode otherwise injects get-task-allow (and for the helper an application-identifier), which notarization rejects.
           CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
   ExtensionHost:

@@ -14,7 +14,7 @@ make install   # copy the build to ~/Applications and open it
 
 The Xcode project is generated from `project.yml`; don't edit `Yabbistir.xcodeproj` by hand. The built-in extensions are TypeScript: after changing anything under `Extensions/`, run `make extensions` (needs Node).
 
-A dev build shares the bundle ID, the data folder and the Accessibility and Input Monitoring entries with an installed release. Quit the release before you run a dev build, and expect macOS to ask for both permissions again each time you switch.
+A dev build is named "yabbistir Dev" and has its own bundle ID (`dev.yabbistir.app.debug`), so macOS keeps separate Accessibility and Input Monitoring entries for it and for an installed release. It uses the same history. Launching one quits the other, so only one copy is running at a time.
 
 Tests that open a window on screen only run with `TEST_RUNNER_YAB_ONSCREEN=1`.
 

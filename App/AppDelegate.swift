@@ -17,6 +17,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
+        // Before the store opens or the clipboard is watched: the other build may be using both.
+        SingleInstance.replaceCounterpart()
         do {
             let env = try AppEnvironment()
             env.start()

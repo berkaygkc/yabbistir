@@ -161,7 +161,7 @@ The Xcode project is generated from `project.yml`; don't edit `Yabbistir.xcodepr
 
 macOS ties the Accessibility grant to the app's signature. Debug builds are signed ad hoc, so the grant resets on every rebuild. To keep it, create a self-signed **Code Signing** certificate named `yabbistir Dev` in Keychain Access, then copy `Config/Signing.local.xcconfig.example` to `Config/Signing.local.xcconfig`.
 
-A dev build shares the bundle ID, the data folder and the Accessibility and Input Monitoring entries with an installed release. Quit the release before you run a dev build, and expect macOS to ask for both permissions again each time you switch.
+A dev build is named "yabbistir Dev" and has its own bundle ID (`dev.yabbistir.app.debug`), so macOS keeps separate Accessibility and Input Monitoring entries for it and for an installed release. It uses the same history. Launching one quits the other, so only one copy is running at a time.
 
 The README images are drawn from synthetic data by `tools/readme-images.sh`.
 
