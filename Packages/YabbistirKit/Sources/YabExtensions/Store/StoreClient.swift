@@ -9,6 +9,8 @@ public enum StoreFailure: Error, Equatable, Sendable {
     case offline
     /// The catalog is not signed by a known key, or is not a catalog this app can read.
     case badSignature
+    /// The catalog is genuine but in a format only a newer yabbistir reads.
+    case needsNewerApp
     /// The download does not match the catalog (hash, folder name or manifest id).
     case badPackage(id: String)
     case incompatible(id: String)
@@ -47,7 +49,7 @@ public final class StoreClient {
     @ObservationIgnored private let session: URLSession
 
     public init(catalogURL: URL = StoreConfiguration.catalogURL, keys: [Curve25519.Signing.PublicKey] = StoreConfiguration.publicKeys,
-                cacheFolder: URL, registry: ExtensionRegistry, appVersion: SemanticVersion, session: URLSession = .shared) {
+                cacheFolder: URL, registry: ExtensionRegistry, appVersion: SemanticVersion, session: URLSession = URLSession(configuration: .ephemeral)) {
         self.catalogURL = catalogURL
         self.keys = keys
         self.cacheFolder = cacheFolder
@@ -75,11 +77,13 @@ public final class StoreClient {
         guard lastRefresh != .refreshing else { return }
         lastRefresh = .refreshing
         do {
-            let bytes = try await fetch(catalogURL)
-            let signature = try await fetch(signatureURL)
+            let bytes = try await fetch(catalogURL, limit: Limits.catalog, deadline: Limits.catalogDeadline)
+            let signature = try await fetch(signatureURL, limit: Limits.signature, deadline: Limits.catalogDeadline)
             let fresh: StoreCatalog
             do {
                 fresh = try CatalogVerifier.verifyAndDecode(catalog: bytes, signatureBase64: signature, keys: keys)
+            } catch .needsNewerApp {
+                throw StoreFailure.needsNewerApp
             } catch {
                 // A catalog that is signed but unreadable is reported like a bad one.
                 throw StoreFailure.badSignature
@@ -111,16 +115,63 @@ public final class StoreClient {
         }
     }
 
-    private func fetch(_ url: URL) async throws(StoreFailure) -> Data {
-        var request = URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpShouldHandleCookies = false
+    /// Size and time limits for what the store sends.
+    private enum Limits {
+        static let catalog = 2_000_000
+        static let signature = 1_000
+        static let package = 5_000_000
+        /// Seconds without any data before a request gives up.
+        static let idleTimeout: TimeInterval = 30
+        static let catalogDeadline: TimeInterval = 30
+        /// A package gets 30 s plus time for its size at 50 KB/s: 130 s at the 5 MB cap.
+        static func packageDeadline(size: Int) -> TimeInterval { 30 + Double(size) / 50_000 }
+    }
+
+    private enum FetchError: Error { case network, status, size }
+
+    /// Reads at most `limit` bytes (exactly `exactly`, when given) before `deadline` seconds have passed.
+    /// A response that announces more than the limit is dropped before its body is read.
+    private func fetch(_ url: URL, limit: Int, exactly: Int? = nil, deadline: TimeInterval,
+                       badResponse: StoreFailure = .offline) async throws(StoreFailure) -> Data {
         do {
-            let (data, response) = try await session.data(for: request)
-            guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else { throw StoreFailure.offline }
-            return data
-        } catch {
+            return try await Self.download(session: session, url: url, limit: limit, exactly: exactly, deadline: deadline)
+        } catch FetchError.network {
             throw .offline
+        } catch FetchError.status {
+            throw badResponse
+        } catch {
+            throw .badSignature
+        }
+    }
+
+    nonisolated private static func download(session: URLSession, url: URL, limit: Int, exactly: Int?, deadline: TimeInterval) async throws -> Data {
+        let request: URLRequest = {
+            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: Limits.idleTimeout)
+            request.httpShouldHandleCookies = false
+            return request
+        }()
+        return try await withThrowingTaskGroup(of: Data.self) { group in
+            group.addTask {
+                let bytes: URLSession.AsyncBytes, response: URLResponse
+                do { (bytes, response) = try await session.bytes(for: request) } catch { throw FetchError.network }
+                guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else { throw FetchError.status }
+                if response.expectedContentLength > Int64(limit) { throw FetchError.size }
+                var data = Data()
+                do {
+                    for try await byte in bytes {
+                        data.append(byte)
+                        if data.count > limit { throw FetchError.size }
+                    }
+                } catch let error as FetchError { throw error } catch { throw FetchError.network }
+                if let exactly, data.count != exactly { throw FetchError.size }
+                return data
+            }
+            group.addTask {
+                try await Task.sleep(for: .seconds(deadline))
+                throw FetchError.network
+            }
+            defer { group.cancelAll() }
+            return try await group.next()!
         }
     }
 
@@ -132,6 +183,8 @@ public final class StoreClient {
             return compatibility == .compatible ? .notInstalled : .incompatible(compatibility)
         }
         if installed.source == .builtIn { return .builtIn }
+        // A linked development folder is the developer's own; the store never offers to replace it.
+        if installed.source == .development { return .installed }
         guard let have = installed.manifest?.version, have != entry.version,
               let haveVersion = SemanticVersion(have), let offered = SemanticVersion(entry.version), haveVersion < offered else { return .installed }
         let compatibility = entry.compatibility(appVersion: appVersion)
@@ -169,53 +222,68 @@ public final class StoreClient {
     /// Downloads, checks and installs each entry. The value is nil on success. Nothing is approved here.
     public func install(_ entries: [StoreEntry]) async -> [String: StoreFailure?] {
         var results: [String: StoreFailure?] = [:]
-        for entry in entries {
+        for requested in entries {
+            // Only what the verified catalog lists is installed, whatever the caller passes.
+            guard let entry = catalog?.extensions.first(where: { $0.id == requested.id }) else {
+                results.updateValue(.badPackage(id: requested.id), forKey: requested.id)
+                continue
+            }
             results.updateValue(await install(entry), forKey: entry.id)
         }
         return results
     }
 
     private func install(_ entry: StoreEntry) async -> StoreFailure? {
+        if let existing = registry.installed.first(where: { $0.id == entry.id }), existing.source != .local {
+            return .incompatible(id: entry.id)
+        }
         guard entry.compatibility(appVersion: appVersion) == .compatible else { return .incompatible(id: entry.id) }
+        guard entry.size > 0, entry.size <= Limits.package else { return .badPackage(id: entry.id) }
         let bytes: Data
-        do { bytes = try await fetch(entry.package) } catch { return .offline }
+        do {
+            bytes = try await fetch(entry.package, limit: entry.size, exactly: entry.size, deadline: Limits.packageDeadline(size: entry.size),
+                              badResponse: .badPackage(id: entry.id))
+        } catch .offline {
+            return .offline
+        } catch {
+            return .badPackage(id: entry.id)
+        }
         guard CatalogVerifier.packageMatches(bytes, sha256: entry.sha256) else { return .badPackage(id: entry.id) }
 
         let work = FileManager.default.temporaryDirectory.appendingPathComponent("yabbistir-store-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: work) }
-        let archive = work.appendingPathComponent("\(UUID().uuidString).yabext")
+        let archive = work.appendingPathComponent("package.yabext")
         do {
             try FileManager.default.createDirectory(at: work, withIntermediateDirectories: true)
             try bytes.write(to: archive)
         } catch {
             return .registry("could not save the download: \(error.localizedDescription)")
         }
-        guard packageIdentity(of: archive, in: work) == entry.id else { return .badPackage(id: entry.id) }
+        // The folder that was checked is the folder that gets installed.
+        guard let folder = checkedFolder(of: archive, in: work, id: entry.id) else { return .badPackage(id: entry.id) }
         do {
-            try registry.install(archive: archive)
+            try registry.install(folder: folder)
             return nil
         } catch {
             return .registry(error.message)
         }
     }
 
-    /// Unpacks into a scratch folder and returns the id only when the package's single root folder and the `id` in its
-    /// manifest agree. Nothing reaches the registry before this.
-    private func packageIdentity(of archive: URL, in work: URL) -> String? {
-        let scratch = work.appendingPathComponent("peek", isDirectory: true)
+    /// Unpacks into a scratch folder and returns the package's folder only when it is the single entry at the root
+    /// (hidden files and resource-fork folders count), is named `id`, and its manifest says the same `id`.
+    private func checkedFolder(of archive: URL, in work: URL, id: String) -> URL? {
+        let scratch = work.appendingPathComponent("unpacked", isDirectory: true)
         let ditto = Process()
         ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
         ditto.arguments = ["-x", "-k", archive.path, scratch.path]
         guard (try? ditto.run()) != nil else { return nil }
         ditto.waitUntilExit()
         guard ditto.terminationStatus == 0,
-              let roots = try? FileManager.default.contentsOfDirectory(at: scratch, includingPropertiesForKeys: [.isDirectoryKey],
-                                                                       options: [.skipsHiddenFiles]).filter({ $0.lastPathComponent != "__MACOSX" }),
-              roots.count == 1, let root = roots.first,
+              let roots = try? FileManager.default.contentsOfDirectory(at: scratch, includingPropertiesForKeys: [.isDirectoryKey]),
+              roots.count == 1, let root = roots.first, root.lastPathComponent == id,
               (try? root.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true,
               let manifest = try? Data(contentsOf: root.appendingPathComponent("manifest.json")),
-              let id = (try? JSONDecoder().decode(JSONValue.self, from: manifest))?["id"]?.stringValue,
-              id == root.lastPathComponent else { return nil }
-        return id
+              (try? JSONDecoder().decode(JSONValue.self, from: manifest))?["id"]?.stringValue == id else { return nil }
+        return root
     }
 }

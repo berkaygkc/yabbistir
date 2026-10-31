@@ -87,13 +87,25 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         return Package(data: bytes, sha: SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined())
     }
 
-    func entryJSON(id: String, version: String = "1.0.0", sha: String = String(repeating: "a", count: 64), apiVersion: Int = 1,
+    /// A zip of `root`'s contents (no wrapping folder).
+    func zip(contentsOf root: URL) throws -> Package {
+        let archive = RegistryFixture.temporary("zip").appendingPathComponent("out.yabext")
+        let ditto = Process()
+        ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
+        ditto.arguments = ["-c", "-k", root.path, archive.path]
+        try ditto.run()
+        ditto.waitUntilExit()
+        let bytes = try Data(contentsOf: archive)
+        return Package(data: bytes, sha: SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined())
+    }
+
+    func entryJSON(id: String, version: String = "1.0.0", sha: String = String(repeating: "a", count: 64), size: Int = 1, apiVersion: Int = 1,
                    minApp: String? = nil, permissions: [String] = [], hosts: [String] = []) -> String {
         func list(_ items: [String]) -> String { "[" + items.map { "\"\($0)\"" }.joined(separator: ",") + "]" }
         return """
         {"id":"\(id)","version":"\(version)","apiVersion":\(apiVersion),"minAppVersion":\(minApp.map { "\"\($0)\"" } ?? "null"),
          "name":{"en":"\(id)"},"description":{"en":"d"},"author":"a","categories":["text"],"icon":"sf:number",
-         "permissions":\(list(permissions)),"networkHosts":\(list(hosts)),"tools":[],"sha256":"\(sha)","size":1,
+         "permissions":\(list(permissions)),"networkHosts":\(list(hosts)),"tools":[],"sha256":"\(sha)","size":\(size),
          "updatedAt":"2026-10-30T12:00:00Z","readme":"https://\(host)/r","package":"https://\(host)/v1/packages/\(id).yabext"}
         """
     }
@@ -229,7 +241,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
 
     @Test func installVerifiesTheHashBeforeTheRegistry() async throws {
         let pkg = try package(id: "dev.example.a")
-        try serve([entryJSON(id: "dev.example.a", sha: String(repeating: "0", count: 64))], packages: ["dev.example.a": pkg.data])
+        try serve([entryJSON(id: "dev.example.a", sha: String(repeating: "0", count: 64), size: pkg.data.count)], packages: ["dev.example.a": pkg.data])
         let registry = registry()
         let client = client(registry)
         await client.refresh()
@@ -241,7 +253,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
 
     @Test func aGoodPackageInstallsAndReportsNil() async throws {
         let pkg = try package(id: "dev.example.a")
-        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha)], packages: ["dev.example.a": pkg.data])
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count)], packages: ["dev.example.a": pkg.data])
         let registry = registry()
         let client = client(registry)
         await client.refresh()
@@ -256,7 +268,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         let mismatchedManifest = try package(id: "dev.example.a", folder: "dev.example.a", manifestID: "dev.example.b")
         // The manifest carries the catalog id, the folder another.
         let mismatchedFolder = try package(id: "dev.example.c", folder: "dev.example.other")
-        try serve([entryJSON(id: "dev.example.a", sha: mismatchedManifest.sha), entryJSON(id: "dev.example.c", sha: mismatchedFolder.sha)],
+        try serve([entryJSON(id: "dev.example.a", sha: mismatchedManifest.sha, size: mismatchedManifest.data.count), entryJSON(id: "dev.example.c", sha: mismatchedFolder.sha, size: mismatchedFolder.data.count)],
                   packages: ["dev.example.a": mismatchedManifest.data, "dev.example.c": mismatchedFolder.data])
         let registry = registry()
         let client = client(registry)
@@ -270,7 +282,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
 
     @Test func installNeverApprovesPermissions() async throws {
         let pkg = try package(id: "dev.example.a", permissions: ["history"])
-        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, permissions: ["history"])], packages: ["dev.example.a": pkg.data])
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count, permissions: ["history"])], packages: ["dev.example.a": pkg.data])
         let registry = registry()
         let client = client(registry)
         await client.refresh()
@@ -284,7 +296,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
 
     @Test func incompatibleEntriesAreNeverInstalled() async throws {
         let pkg = try package(id: "dev.example.a")
-        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, minApp: "9.0.0")], packages: ["dev.example.a": pkg.data])
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count, minApp: "9.0.0")], packages: ["dev.example.a": pkg.data])
         let registry = registry()
         let client = client(registry)
         await client.refresh()
@@ -342,5 +354,108 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         #expect(client.status(of: try entry(client, "dev.example.b")) == .incompatible(.needsNewerApp(minimum: "9.0.0")))
         #expect(client.status(of: try entry(client, "dev.example.c")) == .installed)
         #expect(client.status(of: try entry(client, "dev.example.d")) == .notInstalled)
+    }
+
+    // MARK: Hardening
+
+    @Test func anArchiveWithAHiddenOrMacosxRootIsRejected() async throws {
+        for (index, extra) in ["__MACOSX", ".payload"].enumerated() {
+            let id = "dev.example.h\(index)"
+            let root = RegistryFixture.temporary("hidden")
+            try RegistryFixture.write(in: root, id: id)
+            try RegistryFixture.write(in: root.appendingPathComponent(extra), id: "dev.trusted.tool", folderName: ".")
+            let pkg = try zip(contentsOf: root)
+            try serve([entryJSON(id: id, sha: pkg.sha, size: pkg.data.count)], packages: [id: pkg.data])
+            let registry = registry()
+            let client = client(registry)
+            await client.refresh()
+            let result = await client.install([try entry(client, id)])
+            #expect(result[id] == .some(.badPackage(id: id)))
+            #expect(registry.installed.isEmpty)
+        }
+    }
+
+    @Test func theInstalledFolderIsTheOneThatWasChecked() async throws {
+        let pkg = try package(id: "dev.example.a")
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count)], packages: ["dev.example.a": pkg.data])
+        let registry = registry()
+        let client = client(registry)
+        await client.refresh()
+        _ = await client.install([try entry(client, "dev.example.a")])
+        #expect(try FileManager.default.contentsOfDirectory(atPath: user.path) == ["dev.example.a"])
+        let manifest = try Data(contentsOf: user.appendingPathComponent("dev.example.a/manifest.json"))
+        #expect((try JSONSerialization.jsonObject(with: manifest) as? [String: Any])?["id"] as? String == "dev.example.a")
+        #expect(registry.installed.map(\.id) == ["dev.example.a"])
+    }
+
+    @Test func anOversizedCatalogIsRefusedWithoutReadingItAll() async throws {
+        try serve([entryJSON(id: "dev.example.a")])
+        let client = client(registry())
+        await client.refresh()
+        let huge = Data(repeating: 0x20, count: 3_000_000)
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(huge), "/v1/catalog.json.sig": .success(try sign(huge))])
+        await client.refresh()
+        #expect(client.lastRefresh == .failed(.badSignature))
+        #expect(client.catalog?.extensions.count == 1)
+    }
+
+    @Test func aPackageLargerThanItsCatalogSizeIsRejected() async throws {
+        let pkg = try package(id: "dev.example.a")
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count - 1)], packages: ["dev.example.a": pkg.data])
+        let registry = registry()
+        let client = client(registry)
+        await client.refresh()
+        let result = await client.install([try entry(client, "dev.example.a")])
+        #expect(result["dev.example.a"] == .some(.badPackage(id: "dev.example.a")))
+        #expect(registry.installed.isEmpty)
+    }
+
+    @Test func aPackageShorterThanItsCatalogSizeIsRejected() async throws {
+        let pkg = try package(id: "dev.example.a")
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count + 1)], packages: ["dev.example.a": pkg.data])
+        let registry = registry()
+        let client = client(registry)
+        await client.refresh()
+        let result = await client.install([try entry(client, "dev.example.a")])
+        #expect(result["dev.example.a"] == .some(.badPackage(id: "dev.example.a")))
+        #expect(registry.installed.isEmpty)
+    }
+
+    @Test func aVerifiedCatalogInANewerFormatAsksForANewerApp() async throws {
+        let future = Data(#"{"formatVersion":2,"items":[]}"#.utf8)
+        MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(future), "/v1/catalog.json.sig": .success(try sign(future))])
+        let client = client(registry())
+        await client.refresh()
+        #expect(client.lastRefresh == .failed(.needsNewerApp))
+    }
+
+    @Test func aMissingPackageIsABadPackageNotOffline() async throws {
+        try serve([entryJSON(id: "dev.example.a", size: 10)])
+        let client = client(registry())
+        await client.refresh()
+        let result = await client.install([try entry(client, "dev.example.a")])
+        #expect(result["dev.example.a"] == .some(.badPackage(id: "dev.example.a")))
+    }
+
+    @Test func onlyIdsInTheVerifiedCatalogAreInstalled() async throws {
+        let pkg = try package(id: "dev.example.a")
+        try serve([entryJSON(id: "dev.example.a", sha: pkg.sha, size: pkg.data.count)], packages: ["dev.example.a": pkg.data])
+        let registry = registry()
+        let client = client(registry)
+        await client.refresh()
+        let foreign = try StoreCatalog.decode(catalogData([entryJSON(id: "dev.example.z", sha: pkg.sha, size: pkg.data.count)])).extensions[0]
+        let result = await client.install([foreign])
+        #expect(result["dev.example.z"] == .some(.badPackage(id: "dev.example.z")))
+        #expect(registry.installed.isEmpty)
+    }
+
+    @Test func aDevelopmentLinkIsNeverOfferedAnUpdate() async throws {
+        let registry = registry()
+        _ = try registry.linkDevelopmentFolder(try RegistryFixture.write(in: RegistryFixture.temporary("dev"), id: "dev.example.a"))
+        try serve([entryJSON(id: "dev.example.a", version: "2.0.0")])
+        let client = client(registry)
+        await client.refresh()
+        #expect(client.status(of: try entry(client, "dev.example.a")) == .installed)
+        #expect(client.updates.isEmpty)
     }
 }
