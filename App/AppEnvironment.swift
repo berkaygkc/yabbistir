@@ -130,10 +130,11 @@ final class AppEnvironment {
         }
     }
 
-    /// ⌘C in the panel: puts the item on the clipboard with every representation (not re-captured).
-    func copyToClipboard(_ itemID: Int64) {
+    /// ⌘C in the panel: puts the item on the clipboard with every representation, or its plain text
+    /// alone (`plainTextOnly`); not re-captured.
+    func copyToClipboard(_ itemID: Int64, plainTextOnly: Bool = false) {
         guard let representations = try? library.store.representations(of: itemID) else { return }
-        monitor.ignore(changeCount: SystemPasteboardWriter().write(representations, plainTextOnly: false))
+        monitor.ignore(changeCount: SystemPasteboardWriter().write(representations, plainTextOnly: plainTextOnly))
         markUsed(itemID)
     }
 

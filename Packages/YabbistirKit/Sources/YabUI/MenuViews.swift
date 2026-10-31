@@ -8,6 +8,8 @@ struct MenuRow<Leading: View, Trailing: View>: View {
     let title: String
     var isHighlighted = false
     var isDestructive = false
+    /// The title keeps its width and the trailing view shortens (the ⇧ panel's outputs).
+    var keepsTitle = false
     @ViewBuilder var leading: Leading
     @ViewBuilder var trailing: Trailing
 
@@ -18,6 +20,7 @@ struct MenuRow<Leading: View, Trailing: View>: View {
                 .font(Tokens.Fonts.body)
                 .lineLimit(1)
                 .truncationMode(.tail)
+                .layoutPriority(keepsTitle ? 1 : 0)
             Spacer(minLength: 8)
             trailing
         }
@@ -134,6 +137,7 @@ struct ActionMenuView: View {
     var body: some View {
         MenuSurface(width: 300) {
             let items = model.actionItems
+            let shiftReturn = model.shiftReturnItem
             if items.isEmpty {
                 MenuRow(title: L10n.string("actions.none", model.language)) { EmptyView() } trailing: { EmptyView() }
                     .foregroundStyle(Tokens.Colors.textSecondary)
@@ -148,7 +152,7 @@ struct ActionMenuView: View {
                             .foregroundStyle(item == .delete ? Tokens.Colors.danger : Tokens.Colors.textSecondary)
                     }
                 } trailing: {
-                    HStack(spacing: 3) { ForEach(Self.keys(item), id: \.self) { Keycap($0) } }
+                    HStack(spacing: 3) { ForEach(Self.keys(item, shiftReturn: shiftReturn), id: \.self) { Keycap($0) } }
                 }
                 .onHover { if $0 { model.highlightMenuRow(index) } }
                 .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
@@ -200,12 +204,13 @@ struct ActionMenuView: View {
         }
     }
 
-    static func keys(_ item: PanelActionItem) -> [String] {
-        switch item {
+    /// ⇧↵ sits on the row it runs (`shiftReturn`), wherever that row is.
+    static func keys(_ item: PanelActionItem, shiftReturn: PanelActionItem?) -> [String] {
+        if item == shiftReturn { return ["⇧", "↵"] }
+        return switch item {
         case .paste: ["↵"]
-        case .pastePlain: ["⇧", "↵"]
         case .copy: ["⌘", "C"]
-        case .addToStack, .transform: []
+        case .pastePlain, .addToStack, .transform: []
         case .allTransforms: ["⇧"]
         case .addToCategory: ["⌘", "P"]
         case .preview: ["␣"]

@@ -4387,6 +4387,23 @@
         }
       }
     },
+    "transforms.section.default": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılan"
+          }
+        }
+      }
+    },
     "transforms.section.finder": {
       "extractionState": "manual",
       "localizations": {
@@ -4400,6 +4417,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Finder’a"
+          }
+        }
+      }
+    },
+    "transforms.section.yabbistir": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
           }
         }
       }

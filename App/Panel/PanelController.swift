@@ -215,6 +215,10 @@ final class PanelController: NSObject, NSWindowDelegate {
         // The panel stays open: several items can be queued in a row.
         case .addToStack(let itemID): stack.append(itemID)
         case .runCommand(let commandID, let subjectID, let copy): run(commandID, subjectID: subjectID, copy: copy)
+        case .copyPlain(let id):
+            hide()
+            // The plain text goes to the clipboard alone, the Sıra open or not.
+            env.copyToClipboard(id, plainTextOnly: true)
         }
     }
 
@@ -318,7 +322,7 @@ final class PanelController: NSObject, NSWindowDelegate {
         withObservationTracking {
             _ = model.layer
             _ = model.selectedRowFrame
-            _ = model.transformCommands.count
+            _ = model.transformRows.count
             _ = model.transformQuery
             _ = model.menuSelection
             _ = model.hintRevision

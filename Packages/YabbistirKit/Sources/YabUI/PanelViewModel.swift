@@ -21,6 +21,8 @@ public enum PanelAction: Equatable, Sendable {
     case addToStack(itemID: Int64)
     /// ↵, ⌘1–9 (copy: false) or ⌘C (copy: true) on a command row.
     case runCommand(commandID: String, subjectID: Int64?, copy: Bool)
+    /// ⌘C on the ⇧ panel's "Paste as plain text": the item's plain text alone to the clipboard.
+    case copyPlain(itemID: Int64)
 }
 
 public enum PanelActionItem: Hashable, Sendable {
@@ -44,21 +46,39 @@ public enum CategoryMenuOption: Equatable, Sendable {
     case category(ClipCategory, isShown: Bool), editCategories
 }
 
-/// A run of the ⇧ panel's rows under one header: the paste target's own actions ("Finder’a",
-/// "Zed için"), or one extension's commands.
+/// A row of the ⇧ panel: the app's own "Paste as plain text" (rich text only), or a transform.
+public enum TransformRow: Equatable, Identifiable, Sendable {
+    case plainText, command(ExtensionCommand)
+
+    /// What a ⇧↵ default stores for the row.
+    public var id: String {
+        switch self {
+        case .plainText: ShiftReturn.plainTextID
+        case .command(let command): command.id
+        }
+    }
+}
+
+/// A run of the ⇧ panel's rows under one header: the item kind's ⇧↵ default ("Varsayılan"), the
+/// app's own plain-text paste ("yabbistir"), the paste target's own actions ("Finder’a", "Zed için"),
+/// or one extension's commands.
 public struct TransformSection: Identifiable, Equatable, Sendable {
     public enum Mark: Equatable, Sendable {
         /// The kind of app the target is (Finder: a folder), as a grey glyph.
         case target(TargetClass)
         /// The extension's icon.
         case icon(String)
+        /// The app's own glyph, grey like the others.
+        case app
+        /// No glyph: the default's header is its word alone.
+        case pinned
     }
 
-    /// "target", or the extension's id.
+    /// "default", "yabbistir", "target", or the extension's id.
     public let id: String
     public let title: String
     public let mark: Mark
-    /// The section's rows in `transformCommands`.
+    /// The section's rows in `transformRows`.
     public let rows: Range<Int>
 }
 
@@ -125,17 +145,20 @@ public final class PanelViewModel {
     /// The ⌘K menu's search text.
     public private(set) var actionQuery = ""
 
-    /// ⌘K: the paste target's own actions first, when it has any; paste, plain, copy, add to
-    /// Sıra; the item's first three other transforms (and "All transforms" past three); then the
-    /// rest. A query matches labels (Turkish-folded) and reaches every transform, by title or
-    /// keyword prefix.
+    /// ⌘K: the paste target's own actions first, when it has any; paste, plain (rich text only),
+    /// copy, add to Sıra; the item's first three other transforms, led by its ⇧↵ default (and "All
+    /// transforms" past three); then the rest. A query matches labels (Turkish-folded) and reaches
+    /// every transform, by title or keyword prefix.
     public var actionItems: [PanelActionItem] {
         let needle = SearchNormalizer.normalize(actionQuery.trimmingCharacters(in: .whitespaces))
         let target = extensions?.target
         let lead = layerTransforms.filter { $0.isFor(target) }.map { PanelActionItem.transform($0.id) }
-        let transforms = layerTransforms.filter { !$0.isFor(target) }.map { PanelActionItem.transform($0.id) }
+        var transforms = layerTransforms.filter { !$0.isFor(target) }.map { PanelActionItem.transform($0.id) }
+        if case .command(let id)? = layerShiftReturn, let index = transforms.firstIndex(of: .transform(id)) {
+            transforms.insert(transforms.remove(at: index), at: 0)
+        }
         let more: [PanelActionItem] = transforms.count > 3 ? [.allTransforms] : []
-        let head: [PanelActionItem] = [.paste, .pastePlain, .copy, .addToStack]
+        let head: [PanelActionItem] = [.paste] + (layerItem?.isRich == true ? [.pastePlain] : []) + [.copy, .addToStack]
         let tail: [PanelActionItem] = [.addToCategory, .preview, .editCategories, .delete]
         guard !needle.isEmpty else { return lead + head + Array(transforms.prefix(3)) + more + tail }
         return (lead + head + transforms + more + tail).filter { item in
@@ -156,12 +179,31 @@ public final class PanelViewModel {
         return transformCommand(id)?.isFor(extensions?.target) == true
     }
 
+    /// The ⌘K row ⇧↵ runs, which wears its keycaps: "Paste as plain text" or the default transform.
+    /// Nil when ⇧↵ pastes like ↵.
+    public var shiftReturnItem: PanelActionItem? {
+        switch layerShiftReturn {
+        case .plainText?: .pastePlain
+        case .command(let id)?: .transform(id)
+        case .paste?, nil: nil
+        }
+    }
+
+    /// What ⇧↵ does on the selected item (`ShiftReturn.resolve`). Nil without one: no row, or a
+    /// command row, where ⇧↵ runs it like ↵.
+    public var shiftReturnAction: ShiftReturnAction? {
+        guard let row = selectedRow, row.command == nil else { return nil }
+        return shiftReturn(itemID: row.itemID, kind: row.kind)
+    }
+
     /// ⇧ panel search text.
     public private(set) var transformQuery = ""
     /// The item the ⇧ panel transforms.
     public private(set) var transformSubjectID: Int64?
     /// The app it was copied from, for the ⇧ panel's header.
     public private(set) var transformSubjectApp: String?
+    /// Its text, for the "Paste as plain text" row's preview.
+    public private(set) var transformPlainText: String?
 
     /// The transformed item's row, for the ⇧ panel's header.
     public var transformSubjectRow: RowModel? {
@@ -171,38 +213,58 @@ public final class PanelViewModel {
     /// Bumped as hints arrive, so command rows and the ⇧ panel redraw.
     public private(set) var hintRevision = 0
 
-    /// The ⇧ panel's transforms, grouped by extension, filtered by title or extension name
-    /// (contains) or keyword (prefix), Turkish-folded.
-    public var transformCommands: [ExtensionCommand] {
+    /// The ⇧ panel's rows, filtered by title or extension name (contains) or keyword (prefix),
+    /// Turkish-folded; "Paste as plain text" by its title or "yabbistir".
+    public var transformRows: [TransformRow] {
+        let rows = layerRows
         let needle = SearchNormalizer.normalize(transformQuery.trimmingCharacters(in: .whitespaces))
-        guard !needle.isEmpty else { return layerTransforms }
-        return layerTransforms.filter { command in
-            SearchNormalizer.normalize(command.title).contains(needle) || SearchNormalizer.normalize(command.extensionName).contains(needle)
-                || command.keywords.contains { SearchNormalizer.normalize($0).hasPrefix(needle) }
+        guard !needle.isEmpty else { return rows }
+        return rows.filter { row in
+            switch row {
+            case .plainText:
+                return [L10n.string("actions.pastePlain", language), L10n.string("transforms.section.yabbistir", language)]
+                    .contains { SearchNormalizer.normalize($0).contains(needle) }
+            case .command(let command):
+                return SearchNormalizer.normalize(command.title).contains(needle) || SearchNormalizer.normalize(command.extensionName).contains(needle)
+                    || command.keywords.contains { SearchNormalizer.normalize($0).hasPrefix(needle) }
+            }
         }
     }
 
-    /// The ⇧ panel's rows under their headers: the paste target's own actions first ("Finder’a"
+    /// The ⇧ panel's rows under their headers: the kind's ⇧↵ default under "Varsayılan", "Paste as
+    /// plain text" under "yabbistir" with the app's glyph, the paste target's own actions ("Finder’a"
     /// with a folder, "<app> için" with its kind's glyph), then each extension's.
     public var transformSections: [TransformSection] {
-        let commands = transformCommands
+        let rows = transformRows
         let target = extensions?.target
-        // The target's actions share one section (nil); any other command is in its extension's.
-        let section = { (command: ExtensionCommand) in command.isFor(target) ? nil : command.extensionID }
+        let pinned = layerDefault
+        func section(_ row: TransformRow) -> TransformSectionKey {
+            if row.id == pinned { return .pinned }
+            switch row {
+            case .plainText: return .app
+            case .command(let command): return command.isFor(target) ? .target : .extension(command.extensionID)
+            }
+        }
         var sections: [TransformSection] = []
         var start = 0
-        while start < commands.count {
-            let first = commands[start]
+        while start < rows.count {
+            let key = section(rows[start])
             var end = start + 1
-            while end < commands.count, section(commands[end]) == section(first) { end += 1 }
-            let rows = start..<end
-            switch (section(first), target) {
-            case (nil, let target?):
+            while end < rows.count, section(rows[end]) == key { end += 1 }
+            let range = start..<end
+            switch key {
+            case .pinned:
+                sections.append(TransformSection(id: "default", title: L10n.string("transforms.section.default", language), mark: .pinned, rows: range))
+            case .app:
+                sections.append(TransformSection(id: "yabbistir", title: L10n.string("transforms.section.yabbistir", language), mark: .app, rows: range))
+            case .target:
+                guard let target else { break }
                 let title = target.kind == .finder ? L10n.string("transforms.section.finder", language)
                     : L10n.string("transforms.section.app", language, target.name)
-                sections.append(TransformSection(id: "target", title: title, mark: .target(target.kind), rows: rows))
-            default:
-                sections.append(TransformSection(id: first.extensionID, title: first.extensionName, mark: .icon(first.icon), rows: rows))
+                sections.append(TransformSection(id: "target", title: title, mark: .target(target.kind), rows: range))
+            case .extension:
+                guard case .command(let first) = rows[start] else { break }
+                sections.append(TransformSection(id: first.extensionID, title: first.extensionName, mark: .icon(first.icon), rows: range))
             }
             start = end
         }
@@ -212,11 +274,11 @@ public final class PanelViewModel {
     /// The ⇧ panel's words for ↵ and ⌘C on the highlighted row: a job says what it does ("İndir",
     /// "İndir ve kopyala"; "Başlat" without a verb), anything else pastes and copies.
     public var transformKeyLabels: (confirm: String, copy: String) {
-        let commands = transformCommands
-        guard commands.indices.contains(menuSelection), commands[menuSelection].isJob else {
+        let rows = transformRows
+        guard rows.indices.contains(menuSelection), case .command(let command) = rows[menuSelection], command.isJob else {
             return (L10n.string("transforms.paste", language), L10n.string("transforms.copy", language))
         }
-        let verb = commands[menuSelection].verb ?? L10n.string("transforms.start", language)
+        let verb = command.verb ?? L10n.string("transforms.start", language)
         return (verb, L10n.string("transforms.copyAfter", language, verb))
     }
 
@@ -244,11 +306,12 @@ public final class PanelViewModel {
         return extensions?.cachedOutput(of: command, subjectID: transformSubjectID)
     }
 
-    /// How many transforms the focused item has; the footer shows "Transform ⇧" when any.
+    /// How many rows the ⇧ panel has for the focused item (its transforms, and "Paste as plain text"
+    /// for rich text); the footer shows "Transform ⇧" when any.
     public var selectedTransformCount: Int {
-        guard let id = selectedItemID, let extensions else { return 0 }
+        guard let id = selectedItemID else { return 0 }
         if let cached = transformCountCache, cached.itemID == id { return cached.count }
-        let count = extensions.transforms(forItemID: id).count
+        let count = (extensions?.transforms(forItemID: id).count ?? 0) + (library.isRichText(id) ? 1 : 0)
         transformCountCache = (id, count)
         return count
     }
@@ -257,7 +320,7 @@ public final class PanelViewModel {
         switch item {
         case .transform(let id): return transformCommand(id)?.title ?? id
         case .allTransforms:
-            return L10n.string("actions.allTransforms", language, NumberFormatting.count(layerTransforms.count, language: language))
+            return L10n.string("actions.allTransforms", language, NumberFormatting.count(layerRows.count, language: language))
         default: break
         }
         let key = switch item {
@@ -311,6 +374,10 @@ public final class PanelViewModel {
     @ObservationIgnored var visibleCommands: [ExtensionCommand] = []
     /// The selected item's transforms while ⌘K or the ⇧ panel is open, grouped by extension.
     @ObservationIgnored private var layerTransforms: [ExtensionCommand] = []
+    /// That item's kind (whose ⇧↵ default applies) and whether it is rich text; nil without an item.
+    @ObservationIgnored private var layerItem: (kind: ShiftKind, isRich: Bool)?
+    /// The user's ⇧↵ default per item kind.
+    @ObservationIgnored private let shiftDefaults: ShiftReturnDefaults
     @ObservationIgnored private var transformCountCache: (itemID: Int64, count: Int)?
     @ObservationIgnored private var commandHold: Task<Void, Never>?
     @ObservationIgnored private var pointerTask: Task<Void, Never>?
@@ -318,13 +385,14 @@ public final class PanelViewModel {
     @ObservationIgnored private var pointerInPreview = false
 
     public init(library: Library, language: LanguageStore, stack: StackSession? = nil, extensions: ExtensionCommandsProviding? = nil,
-                now: @escaping () -> Date = Date.init) {
+                now: @escaping () -> Date = Date.init, shiftDefaults: ShiftReturnDefaults = .init()) {
         self.library = library
         self.stack = stack
         self.thumbnails = RowThumbnails(library: library)
         self.languageStore = language
         self.extensions = extensions
         self.now = now
+        self.shiftDefaults = shiftDefaults
         extensions?.onHintsChanged = { [weak self] in
             self?.hintRevision += 1
             self?.refresh()
@@ -416,8 +484,9 @@ public final class PanelViewModel {
             guard (1...9).contains(number), number <= rows.count else { return nil }
             selections[focusedSource] = rows[number - 1].id
             return pasteAction(rowID: rows[number - 1].id, plain: false)
-        case .confirm(let plain):
-            return selectedID.flatMap { pasteAction(rowID: $0, plain: plain) }
+        case .confirm(let shift):
+            guard let id = selectedID else { return nil }
+            return shift ? shiftReturnAction(rowID: id) : pasteAction(rowID: id, plain: false)
         case .copy:
             if let command = selectedCommand { return .runCommand(commandID: command.id, subjectID: subjectID, copy: true) }
             return selectedItemID.map { .copy(itemID: $0) }
@@ -429,7 +498,7 @@ public final class PanelViewModel {
             layer = layer == .actions ? .none : .actions
             actionQuery = ""
             menuSelection = 0
-            if layer == .actions { layerTransforms = selectedTransforms() }
+            if layer == .actions { loadLayer() }
         case .toggleTransforms:
             openTransforms()
         case .togglePin:
@@ -467,13 +536,31 @@ public final class PanelViewModel {
         return nil
     }
 
-    /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column: a Sıra row
-    /// pastes its entry out of order; a command row runs (⇧↵ too: its output is already plain).
+    /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column (`plain`: ⌘K's
+    /// "Paste as plain text"): a Sıra row pastes its entry out of order; a command row runs.
     public func pasteAction(rowID: Int64, plain: Bool) -> PanelAction? {
         guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
         if let command = row.command { return .runCommand(commandID: command.commandID, subjectID: subjectID, copy: false) }
         guard focusedSource == .stack else { return .paste(itemID: row.itemID, plain: plain) }
         return .pasteFromStack(entryID: Int(-row.id), itemID: row.itemID, plain: plain)
+    }
+
+    /// ⇧↵ on a row of the focused column: the item's default transform runs on it, rich text pastes
+    /// as plain text, anything else pastes as it is (a Sıra row its entry, out of order). A command
+    /// row runs, as with ↵: its output is already plain.
+    private func shiftReturnAction(rowID: Int64) -> PanelAction? {
+        guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
+        guard row.command == nil else { return pasteAction(rowID: rowID, plain: false) }
+        let action = shiftReturn(itemID: row.itemID, kind: row.kind)
+        if case .command(let id) = action { return .runCommand(commandID: id, subjectID: row.itemID, copy: false) }
+        return pasteAction(rowID: rowID, plain: action == .plainText)
+    }
+
+    /// What ⇧↵ does with an item: its kind's pinned default while the item takes it, else plain
+    /// text for rich text, else a paste as it is.
+    private func shiftReturn(itemID: Int64, kind: ItemKind) -> ShiftReturnAction {
+        ShiftReturn.resolve(isRich: library.isRichText(itemID), transforms: transforms(of: itemID).map(\.id),
+                            pinned: shiftDefaults.pinned(for: ShiftKind(kind)))
     }
 
     /// The pointer rested ~380 ms on a row: open the hover preview (never downgrades a keyboard one).
@@ -571,10 +658,47 @@ public final class PanelViewModel {
     // MARK: ⇧ panel
 
     /// The paste target's own transforms first, as they came; the rest grouped by extension.
-    private func selectedTransforms() -> [ExtensionCommand] {
-        guard let id = selectedItemID, let extensions else { return [] }
-        let transforms = extensions.transforms(forItemID: id), target = extensions.target
+    private func transforms(of itemID: Int64) -> [ExtensionCommand] {
+        guard let extensions else { return [] }
+        let transforms = extensions.transforms(forItemID: itemID), target = extensions.target
         return transforms.filter { $0.isFor(target) } + Self.groupedByExtension(transforms.filter { !$0.isFor(target) })
+    }
+
+    /// Reads the selected item for ⌘K or the ⇧ panel: its transforms, kind and whether it is rich text.
+    private func loadLayer() {
+        guard let row = selectedRow, row.command == nil else {
+            (layerTransforms, layerItem) = ([], nil)
+            return
+        }
+        layerTransforms = transforms(of: row.itemID)
+        layerItem = (ShiftKind(row.kind), library.isRichText(row.itemID))
+    }
+
+    /// What ⇧↵ does with the layer's item.
+    private var layerShiftReturn: ShiftReturnAction? {
+        guard let layerItem else { return nil }
+        return ShiftReturn.resolve(isRich: layerItem.isRich, transforms: layerTransforms.map(\.id), pinned: shiftDefaults.pinned(for: layerItem.kind))
+    }
+
+    /// The row of the kind's pinned ⇧↵ default, while the layer's item takes it.
+    private var layerDefault: String? {
+        guard let layerItem else { return nil }
+        switch layerShiftReturn {
+        case .command(let id)?: return id
+        case .plainText? where shiftDefaults.pinned(for: layerItem.kind) == ShiftReturn.plainTextID: return ShiftReturn.plainTextID
+        default: return nil
+        }
+    }
+
+    /// The ⇧ panel's rows in their fixed order: the pinned default, while it applies; "Paste as plain
+    /// text" for rich text; then the transforms (the paste target's own first, the rest grouped by
+    /// extension).
+    private var layerRows: [TransformRow] {
+        var rows = (layerItem?.isRich == true ? [TransformRow.plainText] : []) + layerTransforms.map(TransformRow.command)
+        if let pinned = layerDefault, let index = rows.firstIndex(where: { $0.id == pinned }) {
+            rows.insert(rows.remove(at: index), at: 0)
+        }
+        return rows
     }
 
     /// Each extension's commands together, extensions in order of their first command.
@@ -588,26 +712,28 @@ public final class PanelViewModel {
         return order.flatMap { groups[$0] ?? [] }
     }
 
-    /// Opens on an item with transforms; an item without any gets the edge nudge instead.
+    /// Opens on an item with rows (transforms, or rich text's plain paste); an item without any
+    /// gets the edge nudge instead.
     private func openTransforms() {
-        guard let id = selectedItemID, extensions != nil else { return }
-        let commands = selectedTransforms()
-        guard !commands.isEmpty else {
+        guard let id = selectedItemID else { return }
+        loadLayer()
+        guard !layerRows.isEmpty else {
             edgeNudgeDirection = 1
             edgeNudge += 1
             return
         }
-        layerTransforms = commands
+        let summary = library.summaries(ids: [id]).first
         transformSubjectID = id
-        transformSubjectApp = library.summaries(ids: [id]).first?.sourceName
+        transformSubjectApp = summary?.sourceName
+        transformPlainText = summary?.previewText
         transformQuery = ""
         menuSelection = 0
         layer = .transforms
-        extensions?.requestHints(for: commands, subjectID: id)
+        if !layerTransforms.isEmpty { extensions?.requestHints(for: layerTransforms, subjectID: id) }
     }
 
-    /// Keys while the ⇧ panel is open: typing searches, ↑/↓ move, ↵ pastes and ⌘C copies the
-    /// highlighted result, ← / Esc / ⇧ close it.
+    /// Keys while the ⇧ panel is open: typing searches, ↑/↓ move, ↵ (⇧↵ too) pastes and ⌘C copies
+    /// the highlighted result, ← / Esc / ⇧ close it.
     private func handleTransforms(_ command: PanelCommand) -> Consumed? {
         switch command {
         case .type(let text):
@@ -624,12 +750,17 @@ public final class PanelViewModel {
             transformQuery = ""
             menuSelection = 0
         case .move(let delta):
-            menuSelection = max(0, min(transformCommands.count - 1, menuSelection + delta))
+            menuSelection = max(0, min(transformRows.count - 1, menuSelection + delta))
         case .confirm, .copy:
-            let commands = transformCommands
-            guard commands.indices.contains(menuSelection) else { return Consumed() }
+            let rows = transformRows
+            guard rows.indices.contains(menuSelection), let subject = transformSubjectID else { return Consumed() }
             layer = .none
-            return Consumed(action: .runCommand(commandID: commands[menuSelection].id, subjectID: transformSubjectID, copy: command == .copy))
+            switch rows[menuSelection] {
+            case .plainText:
+                return Consumed(action: command == .copy ? .copyPlain(itemID: subject) : .paste(itemID: subject, plain: true))
+            case .command(let transform):
+                return Consumed(action: .runCommand(commandID: transform.id, subjectID: subject, copy: command == .copy))
+            }
         case .moveColumn(let delta) where delta < 0:
             layer = .none
         case .escape, .toggleTransforms:
@@ -753,6 +884,9 @@ public final class PanelViewModel {
 
     private var focusedRows: [RowModel] { columns.indices.contains(focusedColumn) ? columns[focusedColumn].rows : [] }
 
+    /// The focused column's selected row.
+    private var selectedRow: RowModel? { selectedID.flatMap { id in focusedRows.first { $0.id == id } } }
+
     /// The subject is caught as the query begins, before the selection jumps to the first match.
     private func setQuery(_ text: String) {
         if query.isEmpty, !text.isEmpty { subjectID = currentSubject() }
@@ -869,6 +1003,11 @@ public final class PanelViewModel {
 /// A command a layer took; its action, if any, goes to the window controller.
 private struct Consumed {
     var action: PanelAction?
+}
+
+/// What groups the ⇧ panel's rows under one header.
+private enum TransformSectionKey: Equatable {
+    case pinned, app, target, `extension`(String)
 }
 
 private extension PanelCommand {

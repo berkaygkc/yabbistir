@@ -64,9 +64,10 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         #expect(model.handle(.confirm(plain: false)) == .paste(itemID: first, plain: false))
     }
 
-    @Test func shiftConfirmIsPlain() {
+    /// ⇧↵ pastes plain text as it is: there is no formatting to drop and no default to run.
+    @Test func shiftConfirmOnPlainTextPastesAsIs() {
         let first = allRows.first!.id
-        #expect(model.handle(.confirm(plain: true)) == .paste(itemID: first, plain: true))
+        #expect(model.handle(.confirm(plain: true)) == .paste(itemID: first, plain: false))
     }
 
     @Test func escapeClearsQueryThenCloses() {
@@ -455,6 +456,23 @@ private final class StackWriter: PasteboardWriting {
         _ = model.handle(.move(1))
         let entry = stack.entries[1]
         #expect(model.handle(.confirm(plain: false)) == .pasteFromStack(entryID: entry.id, itemID: entry.itemID, plain: false))
+    }
+
+    /// ⇧↵ on a Sıra row pastes its entry by the ⇧↵ rule: plain text as it is, rich text as plain text.
+    @Test func shiftReturnOnAStackRowFollowsTheRule() throws {
+        _ = model.handle(.moveColumn(-1))
+        let first = stack.entries[0]
+        #expect(model.handle(.confirm(plain: true)) == .pasteFromStack(entryID: first.id, itemID: first.itemID, plain: false))
+        let reps = [PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("Perşembe toplantısı".utf8)),
+                    PasteboardRepresentation(type: TypeIdentifiers.rtf, data: Data("{\\rtf1 Perşembe toplantısı}".utf8))]
+        let rich = try #require(try library.store.ingest(CapturedClip(items: [reps], source: nil, device: .local, capturedAt: now))).item
+        library.didIngest(rich)
+        stack.append(try #require(rich.id))
+        model.refresh()
+        _ = model.handle(.move(2))
+        let entry = stack.entries[2]
+        #expect(model.selectedItemID == entry.itemID)
+        #expect(model.handle(.confirm(plain: true)) == .pasteFromStack(entryID: entry.id, itemID: entry.itemID, plain: true))
     }
 
     @Test func addToStackFromActions() {

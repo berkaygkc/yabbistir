@@ -5,9 +5,10 @@ import YabExtensionKit
 import YabExtensions
 import YabLocalization
 
-/// The ⇧ panel (344 pt): the item on top, the paste target's own actions
-/// first ("Finder’a"), then its transforms grouped by extension with each one's output on the
-/// right, the highlighted one's result below, then the keys.
+/// The ⇧ panel (344 pt): the item on top, its ⇧↵ default first ("Varsayılan"), "Paste as plain
+/// text" for rich text ("yabbistir"), the paste target's own actions ("Finder’a"), then its
+/// transforms grouped by extension with each one's output on the right, the highlighted one's
+/// result below, then the keys.
 public struct TransformPanelView: View {
     @Bindable var model: PanelViewModel
     let onAction: (PanelAction) -> Void
@@ -18,19 +19,19 @@ public struct TransformPanelView: View {
     }
 
     public var body: some View {
-        let commands = model.transformCommands
+        let rows = model.transformRows
         let sections = model.transformSections
         VStack(alignment: .leading, spacing: 0) {
-            header(count: commands.count)
+            header(count: rows.count)
             if !model.transformQuery.isEmpty { queryLine }
-            ForEach(Array(commands.enumerated()), id: \.element.id) { index, command in
+            ForEach(Array(rows.enumerated()), id: \.element.id) { index, row in
                 if let section = sections.first(where: { $0.rows.lowerBound == index }) { sectionHeader(section) }
-                MenuRow(title: command.title, isHighlighted: index == model.menuSelection) {
+                MenuRow(title: title(of: row), isHighlighted: index == model.menuSelection, keepsTitle: true) {
                     EmptyView()
                 } trailing: {
-                    if let hint = hint(for: command), !hint.isEmpty {
+                    if let hint = hint(for: row), !hint.isEmpty {
                         Text(hint)
-                            .font(Self.isPlain(command) ? .system(size: 11.5) : .system(size: 11.3, design: .monospaced))
+                            .font(Self.isPlain(row) ? .system(size: 11.5) : .system(size: 11.3, design: .monospaced))
                             .foregroundStyle(Tokens.Colors.textSecondary)
                             .lineLimit(1)
                             .truncationMode(.tail)
@@ -44,7 +45,7 @@ public struct TransformPanelView: View {
                     if let action = model.handle(.confirm(plain: false)) { onAction(action) }
                 }
             }
-            if commands.isEmpty {
+            if rows.isEmpty {
                 Text(L10n.string("transforms.empty", model.language, model.transformQuery))
                     .font(.system(size: 12.5))
                     .foregroundStyle(Tokens.Colors.textSecondary)
@@ -52,8 +53,8 @@ public struct TransformPanelView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .padding(.horizontal, 10)
-            } else if commands.indices.contains(model.menuSelection) {
-                result(commands[model.menuSelection])
+            } else if rows.indices.contains(model.menuSelection) {
+                result(rows[model.menuSelection])
             }
             footer
         }
@@ -109,9 +110,11 @@ public struct TransformPanelView: View {
 
     private func sectionHeader(_ section: TransformSection) -> some View {
         HStack(spacing: 7) {
-            CommandIcon(icon: Self.icon(section.mark))
-                .scaleEffect(0.85)
-                .frame(width: 14, height: 14)
+            if let icon = Self.icon(section.mark) {
+                CommandIcon(icon: icon)
+                    .scaleEffect(0.85)
+                    .frame(width: 14, height: 14)
+            }
             Text(section.title)
         }
         .font(.system(size: 11.5, weight: .semibold))
@@ -119,13 +122,22 @@ public struct TransformPanelView: View {
         .padding(EdgeInsets(top: 9, leading: 10, bottom: 4, trailing: 10))
     }
 
-    /// The highlighted transform's output: a swatch beside a color's value, a thumbnail beside an
-    /// image's format, a file's tile beside where it goes, otherwise up to three lines of text.
-    @ViewBuilder private func result(_ command: ExtensionCommand) -> some View {
+    /// The highlighted row's output: a swatch beside a color's value, a thumbnail beside an
+    /// image's format, a file's tile beside where it goes, otherwise up to three lines of text
+    /// (for "Paste as plain text", the item's own).
+    @ViewBuilder private func result(_ row: TransformRow) -> some View {
         HStack(spacing: 11) {
-            if Self.makesFiles(command) {
+            switch row {
+            case .plainText:
+                Text(model.transformPlainText ?? "")
+                    .font(.system(size: 12.5))
+                    .lineSpacing(3)
+                    .foregroundStyle(Tokens.Colors.text)
+                    .lineLimit(3)
+                    .truncationMode(.tail)
+            case .command(let command) where Self.makesFiles(command):
                 fileResult(command)
-            } else {
+            case .command(let command):
                 output(command)
             }
             Spacer(minLength: 0)
@@ -229,12 +241,31 @@ public struct TransformPanelView: View {
 
     // MARK: Values
 
-    /// The row's right side: an image's format and size, otherwise the one-line hint.
-    private func hint(for command: ExtensionCommand) -> String? {
+    private func title(of row: TransformRow) -> String {
+        switch row {
+        case .plainText: L10n.string("actions.pastePlain", model.language)
+        case .command(let command): command.title
+        }
+    }
+
+    /// The row's right side: the item's text on one line for "Paste as plain text"; an image's
+    /// format and size, otherwise the one-line hint.
+    private func hint(for row: TransformRow) -> String? {
+        guard case .command(let command) = row else {
+            return model.transformPlainText.map { $0.split(whereSeparator: \.isWhitespace).joined(separator: " ") }
+        }
         if case .image(_, let uti, let width, let height)? = model.transformOutput(command) {
             return "\(Self.format(uti)) · \(width)×\(height)"
         }
         return model.transformHint(command)
+    }
+
+    /// The plain-text row reads as prose.
+    static func isPlain(_ row: TransformRow) -> Bool {
+        switch row {
+        case .plainText: true
+        case .command(let command): isPlain(command)
+        }
     }
 
     /// Image outputs, readings of an image (OCR), files and jobs are prose (a format, a description);
@@ -243,8 +274,9 @@ public struct TransformPanelView: View {
         command.output == .image || makesFiles(command) || command.isJob || command.accepts?.kinds.contains("image") == true
     }
 
-    /// A target section's glyph names the kind of app (no app icons: headers stay grey).
-    static func icon(_ mark: TransformSection.Mark) -> String {
+    /// A target section's glyph names the kind of app (no app icons: headers stay grey); "yabbistir"
+    /// wears the app's own glyph, "Varsayılan" none.
+    static func icon(_ mark: TransformSection.Mark) -> String? {
         switch mark {
         case .icon(let icon): icon
         case .target(.finder): "sf:folder"
@@ -252,6 +284,8 @@ public struct TransformPanelView: View {
         case .target(.browser): "sf:globe"
         case .target(.editor): "sf:doc.text"
         case .target(.other): "sf:macwindow"
+        case .app: "sf:\(StatusRingImage.glyphName)"
+        case .pinned: nil
         }
     }
 
