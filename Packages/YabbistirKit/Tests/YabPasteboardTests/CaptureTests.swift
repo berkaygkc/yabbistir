@@ -37,6 +37,11 @@ final class FakeApps: FrontmostAppProviding {
         #expect(filter.evaluate(types: [TypeIdentifiers.plainText], source: passwords) == .skip(.ignoredApp("com.apple.Passwords")))
     }
 
+    @Test func passwordsMenuBarItemSkips() {
+        let menuBar = SourceApp(bundleID: "com.apple.Passwords.MenuBarExtra", name: "Passwords")
+        #expect(filter.evaluate(types: [TypeIdentifiers.plainText], source: menuBar) == .skip(.ignoredApp("com.apple.Passwords.MenuBarExtra")))
+    }
+
     @Test func remoteTypeCapturesAsRemote() {
         #expect(filter.evaluate(types: [TypeIdentifiers.plainText, CaptureFilter.remoteClipboardType], source: textEdit) == .capture(.remote))
     }

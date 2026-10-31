@@ -17,7 +17,9 @@ public struct CaptureFilter: Sendable {
     /// Marks content that arrived via Universal Clipboard from another device.
     public static let remoteClipboardType = "com.apple.is-remote-clipboard"
 
-    public var ignoredBundleIDs: Set<String> = ["com.apple.keychainaccess", "com.apple.Passwords"]
+    public var ignoredBundleIDs: Set<String> = [
+        "com.apple.keychainaccess", "com.apple.Passwords", "com.apple.Passwords.MenuBarExtra",
+    ]
     public var ignoreConcealed = true
     public var captureRemote = true
 
