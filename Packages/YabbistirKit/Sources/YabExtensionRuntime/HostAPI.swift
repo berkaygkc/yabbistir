@@ -243,6 +243,98 @@ enum HostAPI {
         return sections
     }
 
+    // MARK: Sources
+
+    /// The most rows a listing keeps; the longest a row's id, title and subtitle may be; the longest a locked
+    /// listing's message and command may be (characters).
+    static let sourceRowLimit = 10_000
+    static let sourceTextLimit = 256
+    static let lockedTextLimit = 200
+
+    /// A source's `list` answer: `{ rows: [{ id, title, subtitle? }] }`, or `{ locked: true, message, command? }`
+    /// (which wins over rows). Titles, subtitles, the message and the command become one line (`oneLine`), and a blank
+    /// subtitle or command is none; the id goes back to `run` exactly as listed, so one that could not is refused. Rows
+    /// past `sourceRowLimit` are dropped with one line to `log`. As for every bad result, the reason names shapes and
+    /// places only: a source's rows may be secrets.
+    static func sourceListing(from value: JSONValue, log: (String) -> Void) throws(ExtensionError) -> SourceListing {
+        let shapes = "expected {rows} or {locked}"
+        guard let object = value.objectValue else { throw ExtensionError(.badResult, "list returned \(shape(of: value)); \(shapes)") }
+        if object["locked"]?.boolValue == true {
+            let message = try requiredLine(object["message"], limit: lockedTextLimit, else: "a locked listing needs a non-empty message")
+            let command = try optionalLine(object["command"], limit: lockedTextLimit, else: "command must be a string")
+            return .locked(message: message, command: command)
+        }
+        guard let rows = object["rows"] else { throw ExtensionError(.badResult, "list returned an object of another shape; \(shapes)") }
+        guard var entries = rows.arrayValue else { throw ExtensionError(.badResult, "rows must be an array of {id, title, subtitle?}") }
+        if entries.count > sourceRowLimit {
+            log("list returned more than \(sourceRowLimit) rows; kept the first \(sourceRowLimit)")
+            entries.removeSubrange(sourceRowLimit...)
+        }
+        var listed: [SourceRow] = []
+        listed.reserveCapacity(entries.count)
+        for (index, entry) in entries.enumerated() { listed.append(try sourceRow(entry, at: "rows[\(index)]")) }
+        return .rows(listed)
+    }
+
+    private static func sourceRow(_ entry: JSONValue, at place: String) throws(ExtensionError) -> SourceRow {
+        guard let row = entry.objectValue else {
+            throw ExtensionError(.badResult, "\(place) is \(shape(of: entry)); expected {id, title, subtitle?}")
+        }
+        guard let id = row["id"]?.stringValue, !id.isEmpty else { throw ExtensionError(.badResult, "\(place).id must be a non-empty string") }
+        guard id.count <= sourceTextLimit else {
+            throw ExtensionError(.badResult, "\(place).id is longer than \(sourceTextLimit) characters")
+        }
+        let title = try requiredLine(row["title"], limit: sourceTextLimit, else: "\(place).title must be a non-empty string")
+        let subtitle = try optionalLine(row["subtitle"], limit: sourceTextLimit, else: "\(place).subtitle must be a string")
+        return SourceRow(id: id, title: title, subtitle: subtitle)
+    }
+
+    /// An optional field as one line: nil when it is left out, null or blank; `reason` when it is not a string.
+    private static func optionalLine(_ value: JSONValue?, limit: Int, else reason: String) throws(ExtensionError) -> String? {
+        switch value {
+        case nil, .null?: return nil
+        case .string(let text)?:
+            let line = oneLine(text, limit: limit)
+            return line.isEmpty ? nil : line
+        default: throw ExtensionError(.badResult, reason)
+        }
+    }
+
+    /// A field that must hold text, as one line; `reason` when it does not, or is blank.
+    private static func requiredLine(_ value: JSONValue?, limit: Int, else reason: String) throws(ExtensionError) -> String {
+        guard let line = try optionalLine(value, limit: limit, else: reason) else { throw ExtensionError(.badResult, reason) }
+        return line
+    }
+
+    private static let lineBreaks: Set<Unicode.Scalar> = ["\t", "\n", "\u{0B}", "\u{0C}", "\r", "\u{85}", "\u{2028}", "\u{2029}"]
+
+    /// Short plain text for a row: every tab and line end (each scalar, so "\r\n" is two) becomes a space, the ends are
+    /// trimmed, and what lies past `limit` characters is cut.
+    static func oneLine(_ text: String, limit: Int) -> String {
+        var scalars = String.UnicodeScalarView()
+        scalars.append(contentsOf: text.unicodeScalars.lazy.map { lineBreaks.contains($0) ? " " : $0 })
+        return String(String(scalars).trimmingCharacters(in: .whitespacesAndNewlines).prefix(limit))
+    }
+
+    /// A source action's answer: `{ secret: string }` for a secret action, `{ text: string }` for a text one, and not
+    /// blank. Kept exactly as given (a password may end in a space). The reason for anything else names shapes only,
+    /// never the value.
+    static func sourceValue(from value: JSONValue, expected kind: SourceActionSpec.Kind) throws(ExtensionError) -> SourceValue {
+        let expects = "this action expects {\(kind.rawValue)}"
+        guard let object = value.objectValue else { throw ExtensionError(.badResult, "run returned \(shape(of: value)); \(expects)") }
+        guard let field = object[kind.rawValue] else {
+            let other = SourceActionSpec.Kind.allCases.first { $0 != kind && object[$0.rawValue] != nil }
+            throw ExtensionError(.badResult, "run returned \(other.map { "{\($0.rawValue)}" } ?? "an object of another shape"); \(expects)")
+        }
+        guard let text = field.stringValue else { throw ExtensionError(.badResult, "\(kind.rawValue) must be a string") }
+        let result: SourceValue = switch kind {
+        case .secret: .secret(text)
+        case .text: .text(text)
+        }
+        guard !result.isBlank else { throw ExtensionError(.badResult, "run returned an empty value") }
+        return result
+    }
+
     /// What kind of value it is, never the value itself, nor an object's keys: a bad result's reason goes to the
     /// Development log, and what a run, preview or capture rule returns may come from the clipboard.
     private static func shape(of value: JSONValue) -> String {
@@ -260,11 +352,16 @@ enum HostAPI {
 
 extension ExtensionRuntime {
     /// Runs one call with its item and context, and types what came back. `effects`: the network and
-    /// programs are allowed (a run the person started); `callID` is what `cancel(callID:)` takes;
-    /// `onProgress` hears `yab.job.progress`, on the extension's queue.
+    /// programs are allowed (a run the person started, a source's list or run); `source`: a `sourceRun`'s row
+    /// and action; `callID` is what `cancel(callID:)` takes; `onProgress` hears `yab.job.progress`, on the
+    /// extension's queue.
     public func invoke(_ kind: InvokeKind, name: String, item: ExtensionItem?, context: ExtensionContext, effects: Bool = false,
-                       callID: Int = 0, onProgress: (@Sendable (_ fraction: Double?, _ message: String?) -> Void)? = nil)
+                       source: SourceInvocation? = nil, callID: Int = 0,
+                       onProgress: (@Sendable (_ fraction: Double?, _ message: String?) -> Void)? = nil)
         async throws(ExtensionError) -> InvokeOutput {
+        if kind == .sourceRun, source == nil { throw ExtensionError(.badResult, "a source run needs its row and action") }
+        // A source's calls see no item, nor its files.
+        let item = kind == .sourceList || kind == .sourceRun ? nil : item
         let scope = CallScope(callID: callID, extensionID: extensionID, kind: kind, grant: grant, effects: effects, onProgress: onProgress)
         scope.readablePaths = Set((item?.files ?? []).compactMap { WorkFolders.realPath($0.path) })
         // Folders the person chose (the app sends stored values only, never a manifest default): read-only access to what
@@ -278,7 +375,14 @@ extension ExtensionRuntime {
             fields["image"] = images.add(decoded, data: payload.data, uti: "public.png")
             itemJSON = .object(fields)
         }
-        let arguments: [JSONValue] = kind == .validate ? [itemJSON] : [itemJSON, HostAPI.json(context)]
+        // A source's calls take no item: the row and action (for `run`), then the context.
+        let arguments: [JSONValue] = switch kind {
+        case .validate: [itemJSON]
+        case .sourceList: [HostAPI.json(context)]
+        // Never nil here (checked above).
+        case .sourceRun: [.string(source?.rowID ?? ""), .string(source?.actionID ?? ""), HostAPI.json(context)]
+        case .run, .preview, .captureRule: [itemJSON, HostAPI.json(context)]
+        }
         // The work folder stays only for a file result, which the app adopts; any other end removes it.
         do throws(ExtensionError) {
             let value = try await call(kind, name: name, arguments: arguments, in: scope)
@@ -300,6 +404,12 @@ extension ExtensionRuntime {
             case .captureRule:
                 await removeWorkFolder(of: scope)
                 return .capture(try HostAPI.captureOutcome(from: value))
+            case .sourceList:
+                await removeWorkFolder(of: scope)
+                return .listing(try HostAPI.sourceListing(from: value, log: log))
+            case .sourceRun:
+                await removeWorkFolder(of: scope)
+                return .value(try HostAPI.sourceValue(from: value, expected: source?.kind ?? .secret))
             }
         } catch {
             await removeWorkFolder(of: scope)

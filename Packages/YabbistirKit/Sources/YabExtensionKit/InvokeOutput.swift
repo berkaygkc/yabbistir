@@ -8,4 +8,8 @@ public enum InvokeOutput: Codable, Equatable, Sendable {
     case sections([PreviewSection])
     /// `captureRule`: what the rule decided about a new copy.
     case capture(CaptureOutcome)
+    /// `sourceList`: a source's rows, or that it is locked.
+    case listing(SourceListing)
+    /// `sourceRun`: what a row action gave; never logged.
+    case value(SourceValue)
 }

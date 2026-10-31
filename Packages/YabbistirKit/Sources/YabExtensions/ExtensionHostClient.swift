@@ -106,16 +106,17 @@ public final class ExtensionHostClient {
         Task { _ = try? await send(HostRequest(unload: UnloadRequest(extensionID: id)), timeout: loadTimeout) }
     }
 
-    /// `effects`: the network and programs are allowed (only a run the person started).
-    /// `timeout`: nil for none (a job). `onProgress` hears `yab.job.progress` until the call ends.
+    /// `effects`: the network and programs are allowed (only a run the person started, or a source's list or run).
+    /// `source`: a `sourceRun`'s row and action. `timeout`: nil for none (a job). `onProgress` hears `yab.job.progress`
+    /// until the call ends.
     public func invoke(_ id: String, _ kind: InvokeKind, name: String, item: ExtensionItem?, context: ExtensionContext,
-                       effects: Bool = false, timeout: Duration?,
+                       effects: Bool = false, source: SourceInvocation? = nil, timeout: Duration?,
                        onProgress: ((_ fraction: Double?, _ message: String?) -> Void)? = nil) async throws(ExtensionError) -> InvokeOutput {
         guard !disabled.contains(id) else { throw ExtensionError(.unavailable, "\(id) was turned off after repeated errors") }
         // A failed load counts once, in load().
         if !loadedInHost.contains(id), let request = loads[id] { try await load(request) }
         do throws(ExtensionError) {
-            let request = InvokeRequest(extensionID: id, kind: kind, name: name, item: item, context: context, effects: effects)
+            let request = InvokeRequest(extensionID: id, kind: kind, name: name, item: item, context: context, effects: effects, source: source)
             let message = try await send(HostRequest(invoke: request), timeout: timeout, onProgress: onProgress)
             if let error = message.error { throw error }
             guard let output = message.ok else { throw ExtensionError(.badResult, "the host answered without a result") }
@@ -123,7 +124,9 @@ public final class ExtensionHostClient {
             return output
         } catch {
             // What it returned is not a result: the app's reason, in English, is for the developer (never
-            // user content: it names shapes, not values). The card and notices word it themselves.
+            // user content, nor a source's rows or values: it names shapes, not values). The card and notices
+            // word it themselves. Nothing else from the host reaches the log but its own log events: an answer,
+            // even one that does not decode, never does.
             if error.code == .badResult { onLog(id, "\(name) returned no result: \(error.message)") }
             // A job (no time limit) reports its failures with a message: only a broken extension counts.
             if timeout == nil ? Self.isBroken(error) : !Self.isNobodysFault(error) { recordFailure(id) }

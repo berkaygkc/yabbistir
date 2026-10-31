@@ -63,7 +63,7 @@ public struct ExtensionItem: Codable, Equatable, Sendable {
 
 /// What a call knows besides the item.
 public struct ExtensionContext: Codable, Equatable, Sendable {
-    public enum Trigger: String, Codable, Sendable { case search, shiftPanel, commandK, detect, preview, capture }
+    public enum Trigger: String, Codable, Sendable { case search, shiftPanel, commandK, detect, preview, capture, source }
 
     public var language: String
     public var preferences: [String: JSONValue]

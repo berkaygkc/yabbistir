@@ -8,4 +8,8 @@ public enum InvokeKind: String, Codable, Sendable {
     case preview
     /// `captureRules[name].run(item, ctx)`
     case captureRule
+    /// `sources[name].list(ctx)`
+    case sourceList
+    /// `sources[name].run(rowId, actionId, ctx)`
+    case sourceRun
 }

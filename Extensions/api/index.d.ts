@@ -171,40 +171,71 @@ export interface CaptureRule {
 export type CaptureRules = Record<string, CaptureRule>;
 
 /**
- * One row of a source, drawn by the app in its own category column. At most 10,000 rows; `id` and
- * `title` are at most 256 characters. Rows live in memory only and are never written to history or disk.
+ * One row of a source, drawn by the app in its own category column. A listing keeps at most 10,000 rows: the
+ * rest are dropped, with one line in the Development log. Rows live in the app's memory only: never in history,
+ * the search index or on disk. A row that breaks a rule below fails the whole listing with "badResult".
  */
 export interface SourceRow {
-  /** Stable within the listing; passed back to `run`. */
+  /**
+   * A non-empty string of at most 256 characters. `run` gets it back exactly as listed: it is never cleaned
+   * or cut, so a longer one fails the listing. Give each row its own, the same each time it is listed.
+   */
   readonly id: string;
+  /**
+   * The row's first line. Tabs and line ends become spaces, the ends are trimmed and it is cut to 256
+   * characters; one that is empty after that fails the listing.
+   */
   readonly title: string;
+  /**
+   * The second line, in the secondary color (a user name). Cleaned and cut like `title`; left out, null or
+   * blank, the row has none. Anything but a string fails the listing.
+   */
   readonly subtitle?: string;
 }
 
 /**
- * What `list` returns: the rows, or `locked` when the source needs the person to unlock it first
- * (the app then drops its rows). `message` and `command` are at most 200 characters; `command` is a
- * line the person can run to unlock it.
+ * What `list` returns: the rows, or `locked` when the source needs the person to unlock it first (the app then
+ * drops the rows it held at once, and shows one calm row instead). `locked: true` wins over `rows` sent with
+ * it. `message` is required; `message` and `command` are cleaned like a row's title and cut to 200
+ * characters, and a blank `command` is none. `command` is a line the person runs to unlock the source
+ * (⌘C copies it); a line end in it becomes a space, so pasting it never runs it. Any other shape is a
+ * "badResult", whose reason in the Development log names shapes only.
  */
 export type SourceListing =
   | { rows: SourceRow[] }
   | { locked: true; message: string; command?: string };
 
 /**
- * What `run` returns. `secret` only from a `kind: "secret"` action of a `sensitive` source; never log
- * rows or values. An empty value is never pasted or copied.
+ * What `run` returns: `{ secret }` for an action whose manifest `kind` is "secret" (of a `sensitive` source
+ * only), `{ text }` for a "text" one; the other shape, or any other value, is a "badResult". The string is
+ * kept exactly as given, so trim a tool's trailing newline yourself; an empty or whitespace-only one is a
+ * "badResult" too, and nothing is pasted or copied. Never log rows or values, and never put one in an error
+ * message: the app's own reasons name shapes only.
  */
 export type SourceValue = { secret: string } | { text: string };
 
 /**
  * A list the app shows as a column, with one or two row actions declared in the manifest under
- * `contributes.sources`; `ctx.trigger` is "source".
+ * `contributes.sources`. Both functions get no item, and run as the person's own action, like an action's
+ * `run`: `yab.exec` works (with the `exec` permission), as do `yab.http` (a `sensitive` source has no
+ * network), `yab.notify`, `yab.open`, `yab.ai` and `yab.translate`; `yab.history` rejects with
+ * "permissionDenied". `ctx.trigger` is "source".
  */
 export interface Source {
+  /**
+   * The source's rows, or that it is locked. Called when the panel opens; the app shows the rows it already
+   * holds until the new ones come, then swaps them in quietly. `ctx.signal` aborts when the call is cancelled:
+   * pass it to `yab.exec` (`{ signal: ctx.signal }`) so the tool stops with it.
+   */
   list(ctx: Context): SourceListing | Promise<SourceListing>;
+  /**
+   * A row's value for one action: `rowId` is a row's `id` exactly as listed, `actionId` the `id` of one of the
+   * source's actions in the manifest. `ctx` is as for `list`, with its own `signal`.
+   */
   run(rowId: string, actionId: string, ctx: Context): SourceValue | Promise<SourceValue>;
 }
 
+/** `exports.sources`, by each source's `id` in the manifest's `contributes.sources`. */
 export type Sources = Record<string, Source>;
 
 export interface HttpInit {
@@ -310,7 +341,8 @@ export interface Yab {
      * Fetches a URL; needs the `network` permission and only reaches the manifest's `network.domains`
      * (a host equals a domain or ends with ".domain"; redirects are held to the same list). Rejects with
      * "permissionDenied" (host not allowed), "networkError" (failed, redirected outside the domains, or a text
-     * body over 10 MB without `toFile`) or "cancelled". Works only in a run the person started.
+     * body over 10 MB without `toFile`) or "cancelled". Works only in a run the person started or a source's
+     * `list` and `run`.
      * Header names in the response are lowercased. With `toFile` the body streams into the work folder and
      * `file` is its path (`true` names it after the URL's last path part, or "download"); a non-2xx answer is
      * returned as `text` instead.
@@ -319,10 +351,10 @@ export interface Yab {
   };
   /**
    * Runs a tool from the manifest's `requires.tools`; needs the `exec` permission and works only in a run
-   * the person started. No shell is involved: each argument reaches the tool as it is, so quoting,
-   * `;`, `$(…)` and `*` mean nothing special. The tool runs in `yab.files.workDir` with only PATH
-   * (the folders tools are looked for in, then /usr/bin:/bin:/usr/sbin:/sbin), HOME, TMPDIR, USER and LANG
-   * set. Resolves once it has exited and closed its output. Rejects with "permissionDenied" (no `exec`
+   * the person started or a source's `list` and `run`. No shell is involved: each argument reaches the tool
+   * as it is, so quoting, `;`, `$(…)` and `*` mean nothing special. The tool runs in `yab.files.workDir`
+   * with only PATH (the folders tools are looked for in, then /usr/bin:/bin:/usr/sbin:/sbin), HOME, TMPDIR,
+   * USER and LANG set. Resolves once it has exited and closed its output. Rejects with "permissionDenied" (no `exec`
    * permission, or the tool is not in `requires.tools`), "toolMissing" (not installed; the message says how
    * to install it), "badResult" (`args` is not an array of strings) or "cancelled". Cancelling the call or
    * aborting `signal` sends SIGTERM to the tool and everything it started, and SIGKILL two seconds later.

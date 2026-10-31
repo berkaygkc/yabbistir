@@ -92,7 +92,7 @@ final class HostServer: @unchecked Sendable {
                 defer { self.lock.withLock { self.calls[id] = nil } }
                 do throws(ExtensionError) {
                     let output = try await runtime.invoke(invoke.kind, name: invoke.name, item: invoke.item, context: invoke.context,
-                                                          effects: invoke.effects, callID: id) { [weak self] fraction, message in
+                                                          effects: invoke.effects, source: invoke.source, callID: id) { [weak self] fraction, message in
                         self?.send(.progress(id, fraction: fraction, message: message))
                     }
                     self.send(HostMessage(id: id, ok: output))

@@ -59,11 +59,15 @@ public struct InvokeRequest: Codable, Sendable {
     public var name: String
     public var item: ExtensionItem?
     public var context: ExtensionContext
-    /// The network and programs are allowed: only in a `run` the person started.
+    /// The network and programs are allowed: only in a `run` the person started, or a source's `list` and `run`.
     public var effects: Bool
+    /// A `sourceRun`'s row and action; nil for every other kind.
+    public var source: SourceInvocation?
 
-    public init(extensionID: String, kind: InvokeKind, name: String, item: ExtensionItem?, context: ExtensionContext, effects: Bool = false) {
+    public init(extensionID: String, kind: InvokeKind, name: String, item: ExtensionItem?, context: ExtensionContext, effects: Bool = false,
+                source: SourceInvocation? = nil) {
         (self.extensionID, self.kind, self.name, self.item, self.context, self.effects) = (extensionID, kind, name, item, context, effects)
+        self.source = source
     }
 }
 

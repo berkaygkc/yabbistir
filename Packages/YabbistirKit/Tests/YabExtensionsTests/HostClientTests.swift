@@ -49,6 +49,29 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
     func stop() {}
 }
 
+/// A transport that answers each request with raw lines, in order: ones that do not decode, then a real answer.
+final class LineTransport: HostTransport, @unchecked Sendable {
+    private let lock = NSLock()
+    private var onLine: (@Sendable (Data) -> Void)?
+    let lines: @Sendable (HostRequest) -> [Data]
+
+    init(lines: @escaping @Sendable (HostRequest) -> [Data]) { self.lines = lines }
+
+    func start(onLine: @escaping @Sendable (Data) -> Void, onExit: @escaping @Sendable () -> Void) throws { lock.withLock { self.onLine = onLine } }
+
+    func send(_ line: Data) {
+        guard let request = try? JSONDecoder().decode(HostRequest.self, from: line), request.invoke != nil else { return }
+        let handler = lock.withLock { onLine }
+        let answer = lines(request)
+        DispatchQueue.global().async { answer.forEach { handler?($0) } }
+    }
+
+    func restart() throws {}
+    func stop() {}
+
+    static func encoded(_ message: HostMessage) -> Data { (try? JSONEncoder().encode(message)) ?? Data() }
+}
+
 @MainActor func eventually(_ condition: () -> Bool) async throws {
     let start = ContinuousClock.now
     while !condition(), ContinuousClock.now - start < .seconds(5) { try await Task.sleep(for: .milliseconds(10)) }
@@ -89,6 +112,57 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         }
         #expect(lines.count == 4)
         #expect(!lines.contains { $0.contains("123456") || $0.contains("returned true") })
+    }
+
+    /// A source's calls cross the real loop: the row and action reach `run`, and the answers come back typed.
+    @Test func aSourceRoundTripsThroughTheLoop() async throws {
+        let client = ExtensionHostClient(transport: PipeTransport()) { _, _ in }
+        let folder = try ExtensionFixture.folder(js: #"""
+        exports.sources = { vault: {
+          list: (ctx) => ({ rows: [{ id: "42", title: "ornek.dev", subtitle: ctx.trigger }] }),
+          run: (row, action) => action === "password" ? { secret: "s3cr3t-örnek:" + row } : { text: "deniz.k" },
+        } };
+        """#)
+        try await client.load("dev.example.fixture", folder: folder, dataFolder: ExtensionFixture.dataFolder, language: "tr")
+        let context = ExtensionContext(language: "tr", trigger: .source)
+        let listing = try await client.invoke("dev.example.fixture", .sourceList, name: "vault", item: nil, context: context, effects: true,
+                                              timeout: .seconds(5))
+        #expect(listing == .listing(.rows([SourceRow(id: "42", title: "ornek.dev", subtitle: "source")])))
+        let secretAction = SourceInvocation(rowID: "42", actionID: "password", kind: .secret)
+        let secret = try await client.invoke("dev.example.fixture", .sourceRun, name: "vault", item: nil, context: context, effects: true,
+                                             source: secretAction, timeout: .seconds(5))
+        #expect(secret == .value(.secret("s3cr3t-örnek:42")))
+        let username = SourceInvocation(rowID: "42", actionID: "username", kind: .text)
+        let text = try await client.invoke("dev.example.fixture", .sourceRun, name: "vault", item: nil, context: context, effects: true,
+                                           source: username, timeout: .seconds(5))
+        #expect(text == .value(.text("deniz.k")))
+    }
+
+    /// A source's value reaches its caller and nothing else: no line in the Development log carries it, whether it
+    /// came in an answer, in a line that does not decode, or a bad result followed.
+    @Test func noLogLineCarriesASourceValue() async throws {
+        var lines: [String] = []
+        let counter = Counter()
+        let transport = LineTransport { request in
+            if counter.next() == 0 { return [LineTransport.encoded(HostMessage(id: request.id, ok: .value(.secret("s3cr3t-örnek"))))] }
+            // The value in shapes the app cannot read (the wrong coding, a line cut short), then the host's reason.
+            let wrong = #"{"id":\#(request.id),"ok":{"value":{"secret":"s3cr3t-örnek"}}}"#
+            let cut = #"{"id":\#(request.id),"ok":{"value":{"_0":{"secret":{"_0":"s3cr3t-ör"#
+            let reason = ExtensionError(.badResult, "run returned {text}; this action expects {secret}")
+            return [Data(wrong.utf8), Data(cut.utf8), LineTransport.encoded(HostMessage(id: request.id, error: reason))]
+        }
+        let client = ExtensionHostClient(transport: transport) { id, line in lines.append("\(id) \(line)") }
+        let context = ExtensionContext(language: "tr", trigger: .source)
+        let source = SourceInvocation(rowID: "42", actionID: "password", kind: .secret)
+        let value = try await client.invoke("dev.example.fixture", .sourceRun, name: "vault", item: nil, context: context, effects: true,
+                                            source: source, timeout: .seconds(5))
+        #expect(value == .value(.secret("s3cr3t-örnek")))
+        await #expect {
+            _ = try await client.invoke("dev.example.fixture", .sourceRun, name: "vault", item: nil, context: context, effects: true,
+                                        source: source, timeout: .seconds(5))
+        } throws: { ($0 as? ExtensionError)?.code == .badResult }
+        #expect(lines == ["dev.example.fixture vault returned no result: run returned {text}; this action expects {secret}"])
+        #expect(!lines.contains { $0.contains("s3cr3t") })
     }
 
     @Test func logsArrive() async throws {

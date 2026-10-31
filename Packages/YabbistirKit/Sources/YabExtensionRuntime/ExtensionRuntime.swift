@@ -6,8 +6,8 @@ import YabExtensionKit
 /// own serial queue (timers and native promise resolutions come back to the same queue).
 ///
 /// index.js is a CommonJS module (esbuild `format: cjs`) exporting
-/// `actions: { [id]: { run(item, ctx) } }`, `detectors: { [id]: { validate?(item), preview?(item, ctx) } }`
-/// and `captureRules: { [id]: { run(item, ctx) } }`.
+/// `actions: { [id]: { run(item, ctx) } }`, `detectors: { [id]: { validate?(item), preview?(item, ctx) } }`,
+/// `captureRules: { [id]: { run(item, ctx) } }` and `sources: { [id]: { list(ctx), run(rowId, actionId, ctx) } }`.
 public final class ExtensionRuntime: @unchecked Sendable {
     public let extensionID: String
     let queue: DispatchQueue
@@ -101,14 +101,14 @@ public final class ExtensionRuntime: @unchecked Sendable {
         queue.async { timers.values.forEach { $0.cancel() } }
     }
 
-    /// Runs `actions[name].run`, `detectors[name].validate`, `detectors[name].preview` or
-    /// `captureRules[name].run` with the arguments, awaiting a returned promise. The raw JSON result;
-    /// typed results are built on top.
+    /// Runs `actions[name].run`, `detectors[name].validate`, `detectors[name].preview`,
+    /// `captureRules[name].run`, `sources[name].list` or `sources[name].run` with the arguments, awaiting a
+    /// returned promise. The raw JSON result; typed results are built on top.
     public func call(_ kind: InvokeKind, name: String, arguments: [JSONValue]) async throws(ExtensionError) -> JSONValue {
         try await call(kind, name: name, arguments: arguments, in: CallScope(callID: 0, extensionID: extensionID, kind: kind, grant: grant, effects: false))
     }
 
-    /// The same, as `scope`'s call: a context argument (the second) gets the call's signal.
+    /// The same, as `scope`'s call: the context argument (the last; `validate` has none) gets the call's signal.
     func call(_ kind: InvokeKind, name: String, arguments: [JSONValue], in scope: CallScope) async throws(ExtensionError) -> JSONValue {
         let outcome: Result<JSONValue, ExtensionError> = await withCheckedContinuation { continuation in
             queue.async {
@@ -225,6 +225,8 @@ public final class ExtensionRuntime: @unchecked Sendable {
         case .run: ("actions", "run")
         case .captureRule: ("captureRules", "run")
         case .validate, .preview: ("detectors", kind.rawValue)
+        case .sourceList: ("sources", "list")
+        case .sourceRun: ("sources", "run")
         }
         guard let entry = exportsValue.forProperty(group)?.forProperty(name), entry.isObject,
               isFunction(entry.forProperty(method)) else {
@@ -235,8 +237,9 @@ public final class ExtensionRuntime: @unchecked Sendable {
         within(scope) {
             pendingException = nil
             let values = arguments.map(jsValue)
-            if values.count > 1, values[1].isObject, let signal = scope.controller?.forProperty("signal") {
-                values[1].setValue(signal, forProperty: "signal")
+            // The context comes last; `validate` takes none.
+            if kind != .validate, let context = values.last, context.isObject, let signal = scope.controller?.forProperty("signal") {
+                context.setValue(signal, forProperty: "signal")
             }
             let value = entry.invokeMethod(method, withArguments: values)
             if let exception = takeException() {
