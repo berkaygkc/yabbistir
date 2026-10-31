@@ -75,7 +75,7 @@ public final class ProcessTransport: HostTransport, @unchecked Sendable {
         let (onLine, onExit) = lock.withLock { (self.onLine, self.onExit) }
         output.fileHandleForReading.readabilityHandler = { handle in
             let data = handle.availableData
-            guard !data.isEmpty else { handle.readabilityHandler = nil; return }
+            guard !data.isEmpty else { handle.finishReading(); return }
             for line in splitter.append(data) { onLine?(line) }
         }
         // Only the current host's own exit counts; one we terminated is no longer current.
@@ -114,6 +114,11 @@ public final class PipeTransport: HostTransport, @unchecked Sendable {
 
     public init() {}
 
+    /// A transport let go without `stop()` ends its loop too: the loop's thread, its runtimes and its pipes go with it.
+    deinit {
+        closeCurrent()
+    }
+
     public func start(onLine: @escaping @Sendable (Data) -> Void, onExit: @escaping @Sendable () -> Void) throws {
         lock.withLock { self.onLine = onLine }
         launch()
@@ -148,7 +153,7 @@ public final class PipeTransport: HostTransport, @unchecked Sendable {
         let onLine = lock.withLock { self.onLine }
         responses.fileHandleForReading.readabilityHandler = { handle in
             let data = handle.availableData
-            guard !data.isEmpty else { handle.readabilityHandler = nil; return }
+            guard !data.isEmpty else { handle.finishReading(); return }
             for line in splitter.append(data) { onLine?(line) }
         }
         lock.withLock { self.requests = requests }
@@ -158,5 +163,14 @@ public final class PipeTransport: HostTransport, @unchecked Sendable {
     private func closeCurrent() {
         let requests = lock.withLock { () -> Pipe? in defer { self.requests = nil }; return self.requests }
         if let requests { writer.async { try? requests.fileHandleForWriting.close() } }
+    }
+}
+
+private extension FileHandle {
+    /// The host's output ended (it exited, or its loop was let go): stop reading and close this end, or every host
+    /// started over would leave a descriptor behind for as long as the app runs.
+    func finishReading() {
+        readabilityHandler = nil
+        try? close()
     }
 }

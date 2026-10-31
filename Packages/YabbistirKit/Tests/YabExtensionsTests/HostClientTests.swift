@@ -259,6 +259,25 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         #expect(client.isDisabled("dev.example.stuck"))
     }
 
+    /// A host started over closes the pipes it was spoken to over: an app that restarts its host now and then, for as
+    /// long as it runs, never runs out of descriptors. Our ends are found through the helper's own (its standard input
+    /// and output), so the pipes other suites open and close meanwhile do not count.
+    @Test func aHelperRestartDoesNotLeakDescriptors() async throws {
+        let transport = ProcessTransport(executableURL: URL(fileURLWithPath: "/bin/sleep"), arguments: ["30"])
+        try transport.start { _ in }
+        var ours: [PipeEnd] = []
+        for _ in 0..<5 {
+            let helper = PipeEnd.all(in: try #require(transport.processIdentifier)).filter { $0.fd == 0 || $0.fd == 1 }
+            let ends = PipeEnd.all(in: getpid()).filter { end in helper.contains { $0.handle == end.peer } }
+            // Its input and its output (reading may hold a second descriptor for the same end).
+            #expect(Set(ends.map(\.handle)).count == 2)
+            ours += ends
+            try transport.restart()
+        }
+        transport.stop()
+        try await eventually { Set(PipeEnd.all(in: getpid())).isDisjoint(with: ours) }
+    }
+
     /// Review I3: a host that dies fails its calls at once, without blaming them.
     @Test func aHostThatExitsFailsItsCallsAtOnce() async throws {
         let transport = ProcessTransport(executableURL: URL(fileURLWithPath: "/bin/sh"), arguments: ["-c", "sleep 0.3; exit 3"])
@@ -397,4 +416,29 @@ final class Counter: @unchecked Sendable {
     private let lock = NSLock()
     private var value = -1
     func next() -> Int { lock.withLock { value += 1; return value } }
+}
+
+/// One end of a pipe open in a process: its descriptor there, and the kernel's handles for it and its other end.
+/// The same end is the same descriptor and handle, whatever became of the other end (its handle reads 0 once closed).
+struct PipeEnd: Hashable {
+    let fd: Int32
+    let handle: UInt64
+    let peer: UInt64
+
+    static func == (lhs: PipeEnd, rhs: PipeEnd) -> Bool { (lhs.fd, lhs.handle) == (rhs.fd, rhs.handle) }
+    func hash(into hasher: inout Hasher) { hasher.combine(fd); hasher.combine(handle) }
+
+    static func all(in pid: pid_t) -> [PipeEnd] {
+        let size = proc_pidinfo(pid, PROC_PIDLISTFDS, 0, nil, 0)
+        guard size > 0 else { return [] }
+        var fds = [proc_fdinfo](repeating: proc_fdinfo(), count: Int(size) / MemoryLayout<proc_fdinfo>.stride)
+        let filled = proc_pidinfo(pid, PROC_PIDLISTFDS, 0, &fds, size)
+        return fds.prefix(max(0, Int(filled)) / MemoryLayout<proc_fdinfo>.stride).compactMap { entry in
+            guard entry.proc_fdtype == UInt32(PROX_FDTYPE_PIPE) else { return nil }
+            var info = pipe_fdinfo()
+            let length = Int32(MemoryLayout<pipe_fdinfo>.size)
+            guard proc_pidfdinfo(pid, entry.proc_fd, PROC_PIDFDPIPEINFO, &info, length) == length else { return nil }
+            return PipeEnd(fd: entry.proc_fd, handle: info.pipeinfo.pipe_handle, peer: info.pipeinfo.pipe_peerhandle)
+        }
+    }
 }
