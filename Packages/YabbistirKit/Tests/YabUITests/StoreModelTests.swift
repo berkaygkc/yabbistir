@@ -443,9 +443,9 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(!fixture.requests.contains("/v1/packages/\(F.video.id).yabext"))
         #expect(fixture.registry.installed.first { $0.id == F.video.id } == nil)
         #expect(model.failures[F.video.id] == .changedSinceShown)
-        #expect(model.row(F.video.id)?.failure == "The store list changed; review and try again")
+        #expect(model.row(F.video.id)?.failure == "The store list changed; review it and try again.")
         fixture.languageStore.language = .turkish
-        #expect(model.row(F.video.id)?.failure == "Mağaza listesi değişti; gözden geçirip yeniden deneyin")
+        #expect(model.row(F.video.id)?.failure == "Mağaza listesi değişti; gözden geçirip yeniden dene.")
         let jwt = try #require(fixture.registry.installed.first { $0.id == F.jwt.id })
         #expect(jwt.grant == shown.items.first { $0.id == F.jwt.id }?.grant)
         // The pick stays, so the person can look again and install what is offered now.

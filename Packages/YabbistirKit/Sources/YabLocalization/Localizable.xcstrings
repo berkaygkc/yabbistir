@@ -1554,13 +1554,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The store list changed; review and try again"
+            "value": "The store list changed; review it and try again."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mağaza listesi değişti; gözden geçirip yeniden deneyin"
+            "value": "Mağaza listesi değişti; gözden geçirip yeniden dene."
           }
         }
       }
