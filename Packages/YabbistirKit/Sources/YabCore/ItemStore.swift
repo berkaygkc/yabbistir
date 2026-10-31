@@ -149,6 +149,14 @@ public final class ItemStore: Sendable {
         return items
     }
 
+    /// True when the item has a representation of any of these types; reads type names only, never payloads.
+    public func hasRepresentation(itemID: Int64, ofTypes types: Set<String>) throws -> Bool {
+        guard !types.isEmpty else { return false }
+        return try dbPool.read { db in
+            try StoredRepresentation.filter(Column("itemID") == itemID && types.contains(Column("type"))).fetchCount(db) > 0
+        }
+    }
+
     /// Every file URL a stored item points at (result files live as long as one does).
     public func referencedFileURLs() throws -> Set<String> {
         let rows = try dbPool.read { db in

@@ -122,3 +122,12 @@ public final class Library {
         changed()
     }
 }
+
+extension Library {
+    /// Text or code that also carries RTF or HTML, so plain-text paste differs from the original.
+    public func isRichText(_ itemID: Int64) -> Bool {
+        guard let kind = try? store.item(id: itemID)?.kind, kind == .text || kind == .code else { return false }
+        let richTypes: Set<String> = [TypeIdentifiers.rtf, "public.rtfd", "com.apple.flat-rtfd", "public.html"]
+        return (try? store.hasRepresentation(itemID: itemID, ofTypes: richTypes)) ?? false
+    }
+}

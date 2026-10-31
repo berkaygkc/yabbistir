@@ -24,4 +24,22 @@ import Testing
         try library.toggle(item.id!, inCategory: cat.id!)
         #expect(try library.store.itemIDs(inCategory: cat.id!).isEmpty)
     }
+
+    @Test func richTextIsTextWithRTFOrHTML() throws {
+        let library = try Library(store: ItemStore.temporary())
+        func add(_ reps: [PasteboardRepresentation]) throws -> Int64 {
+            let clip = CapturedClip(items: [reps], source: nil, device: .local, capturedAt: t0)
+            let item = try #require(try library.store.ingest(clip)).item
+            library.didIngest(item)
+            return item.id!
+        }
+        let plain = PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("merhaba".utf8))
+        let rich = try add([plain, PasteboardRepresentation(type: "public.rtf", data: Data("{\\rtf1 merhaba}".utf8))])
+        let onlyPlain = try add([PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("düz".utf8))])
+        let image = try add([PasteboardRepresentation(type: TypeIdentifiers.png, data: randomData(32)),
+                             PasteboardRepresentation(type: "public.html", data: Data("<img>".utf8))])
+        #expect(library.isRichText(rich))
+        #expect(!library.isRichText(onlyPlain))
+        #expect(!library.isRichText(image))
+    }
 }
