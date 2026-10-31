@@ -1157,19 +1157,19 @@
         }
       }
     },
-    "extensions.store.badSignature": {
+    "extensions.store.badSignature.cached": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The catalog couldn’t be verified; nothing was installed."
+            "value": "Couldn’t verify the store’s list. Showing the saved list."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Katalog doğrulanamadı; hiçbir şey kurulmadı."
+            "value": "Mağaza listesi doğrulanamadı. Önbellekteki liste gösteriliyor."
           }
         }
       }
@@ -1187,6 +1187,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağazanın imzası tutmadı. Daha sonra yeniden dene."
+          }
+        }
+      }
+    },
+    "extensions.store.badSignature.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t verify the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mağaza doğrulanamadı."
           }
         }
       }
@@ -1629,6 +1646,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kurulamadı: %@"
+          }
+        }
+      }
+    },
+    "extensions.store.failed.unverified": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t verify; nothing was installed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doğrulanamadı; hiçbir şey kurulmadı."
           }
         }
       }

@@ -308,7 +308,33 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         model.appeared()
         await model.refreshTask?.value
         #expect(model.rows.isEmpty)
-        #expect(model.unavailable?.title == "Katalog doğrulanamadı; hiçbir şey kurulmadı.")
+        #expect(model.unavailable?.title == "Mağaza doğrulanamadı.")
+        #expect(model.unavailable?.message == "Mağazanın imzası tutmadı. Daha sonra yeniden dene.")
+        fixture.languageStore.language = .english
+        #expect(model.unavailable?.title == "Couldn’t verify the store.")
+    }
+
+    /// Over a saved list the line says the list is still shown; it never claims nothing was installed.
+    @Test func anUnverifiedRefreshKeepsTheSavedListAndSaysSo() async throws {
+        let fixture = StoreFixture(language: .turkish)
+        try fixture.serve([F.video])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        let catalog = try fixture.catalog([F.jwt])
+        let stranger = Curve25519.Signing.PrivateKey()
+        StoreTabMockProtocol.serve(host: fixture.host, ["/v1/catalog.json": .success(catalog),
+                                                        "/v1/catalog.json.sig": .success(Data(try stranger.signature(for: catalog).base64EncodedString().utf8))])
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(model.rows.map(\.id) == [F.video.id])
+        #expect(model.notice?.text == "Mağaza listesi doğrulanamadı. Önbellekteki liste gösteriliyor.")
+        fixture.languageStore.language = .english
+        #expect(model.notice?.text == "Couldn’t verify the store’s list. Showing the saved list.")
+        // A row keeps its own wording.
+        #expect(model.message(.store(.badSignature)) == "Couldn’t verify; nothing was installed.")
+        fixture.languageStore.language = .turkish
+        #expect(model.message(.store(.badSignature)) == "Doğrulanamadı; hiçbir şey kurulmadı.")
     }
 
     /// Signed by the store's key but not a catalog this app reads: a calm line of its own, never "couldn't verify".
