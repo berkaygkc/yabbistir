@@ -13,7 +13,8 @@ public enum StoreFailure: Error, Equatable, Sendable {
     case malformedCatalog
     /// The catalog is genuine but in a format only a newer yabbistir reads.
     case needsNewerApp
-    /// The download does not match the catalog (hash, folder name or manifest id).
+    /// The download does not match the catalog: its hash, folder name, or its manifest's id, version, permissions,
+    /// sites or programs.
     case badPackage(id: String)
     case incompatible(id: String)
     /// The registry refused the package.
@@ -264,7 +265,7 @@ public final class StoreClient {
             return .registry("could not save the download: \(error.localizedDescription)")
         }
         // The folder that was checked is the folder that gets installed.
-        guard let folder = checkedFolder(of: archive, in: work, id: entry.id) else { return .badPackage(id: entry.id) }
+        guard let folder = checkedFolder(of: archive, in: work, entry: entry) else { return .badPackage(id: entry.id) }
         do {
             try registry.install(folder: folder)
             return nil
@@ -274,8 +275,10 @@ public final class StoreClient {
     }
 
     /// Unpacks into a scratch folder and returns the package's folder only when it is the single entry at the root
-    /// (hidden files and resource-fork folders count), is named `id`, and its manifest says the same `id`.
-    private func checkedFolder(of archive: URL, in work: URL, id: String) -> URL? {
+    /// (hidden files and resource-fork folders count), is named after the entry's id, and its manifest says what the
+    /// entry says: the same id and version, and the same permissions, sites and programs in any order.
+    private func checkedFolder(of archive: URL, in work: URL, entry: StoreEntry) -> URL? {
+        let id = entry.id
         let scratch = work.appendingPathComponent("unpacked", isDirectory: true)
         let ditto = Process()
         ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
@@ -286,8 +289,30 @@ public final class StoreClient {
               let roots = try? FileManager.default.contentsOfDirectory(at: scratch, includingPropertiesForKeys: [.isDirectoryKey]),
               roots.count == 1, let root = roots.first, root.lastPathComponent == id,
               (try? root.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true,
-              let manifest = try? Data(contentsOf: root.appendingPathComponent("manifest.json")),
-              (try? JSONDecoder().decode(JSONValue.self, from: manifest))?["id"]?.stringValue == id else { return nil }
+              let data = try? Data(contentsOf: root.appendingPathComponent("manifest.json")),
+              let manifest = try? JSONDecoder().decode(JSONValue.self, from: data),
+              manifest["id"]?.stringValue == id, manifest["version"]?.stringValue == entry.version,
+              let asked = Self.request(of: manifest),
+              asked == PermissionGrant(permissions: entry.permissions, domains: entry.networkHosts, tools: entry.tools) else { return nil }
         return root
+    }
+
+    /// The permissions, sites and programs a manifest asks for (sorted, without duplicates), or nil when one of those
+    /// lists is not a list of strings.
+    private static func request(of manifest: JSONValue) -> PermissionGrant? {
+        /// A list's strings: empty when the list is absent, nil when it holds anything else.
+        func strings(_ value: JSONValue?) -> [String]? {
+            guard let value else { return [] }
+            guard let items = value.arrayValue else { return nil }
+            let texts = items.compactMap(\.stringValue)
+            return texts.count == items.count ? texts : nil
+        }
+        var tools: [String] = []
+        if let listed = manifest["requires"]?["tools"] {
+            guard let items = listed.arrayValue, let names = strings(.array(items.map { $0["name"] ?? .null })) else { return nil }
+            tools = names
+        }
+        guard let permissions = strings(manifest["permissions"]), let domains = strings(manifest["network"]?["domains"]) else { return nil }
+        return PermissionGrant(permissions: permissions, domains: domains, tools: tools)
     }
 }

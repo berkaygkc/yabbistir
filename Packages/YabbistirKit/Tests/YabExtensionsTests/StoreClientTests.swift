@@ -72,10 +72,11 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
 
     struct Package { let data: Data; let sha: String }
 
-    /// A .yabext whose folder is `folder` and whose manifest says `manifestID`.
-    func package(id: String, version: String = "1.0.0", folder: String? = nil, manifestID: String? = nil, permissions: [String] = []) throws -> Package {
+    /// A .yabext whose folder is `folder` and whose manifest says `manifestID` (or is `manifest`, when given).
+    func package(id: String, version: String = "1.0.0", folder: String? = nil, manifestID: String? = nil, permissions: [String] = [],
+                 manifest custom: [String: Any]? = nil) throws -> Package {
         let source = RegistryFixture.temporary("pkg")
-        let manifest = RegistryFixture.manifest(id: manifestID ?? id, version: version, permissions: permissions)
+        let manifest = custom ?? RegistryFixture.manifest(id: manifestID ?? id, version: version, permissions: permissions)
         let folderURL = try RegistryFixture.write(in: source, id: manifestID ?? id, folderName: folder ?? id, manifest: manifest)
         let archive = source.appendingPathComponent("out.yabext")
         let ditto = Process()
@@ -100,12 +101,12 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
     }
 
     func entryJSON(id: String, version: String = "1.0.0", sha: String = String(repeating: "a", count: 64), size: Int = 1, apiVersion: Int = 1,
-                   minApp: String? = nil, permissions: [String] = [], hosts: [String] = []) -> String {
+                   minApp: String? = nil, permissions: [String] = [], hosts: [String] = [], tools: [String] = []) -> String {
         func list(_ items: [String]) -> String { "[" + items.map { "\"\($0)\"" }.joined(separator: ",") + "]" }
         return """
         {"id":"\(id)","version":"\(version)","apiVersion":\(apiVersion),"minAppVersion":\(minApp.map { "\"\($0)\"" } ?? "null"),
          "name":{"en":"\(id)"},"description":{"en":"d"},"author":"a","categories":["text"],"icon":"sf:number",
-         "permissions":\(list(permissions)),"networkHosts":\(list(hosts)),"tools":[],"sha256":"\(sha)","size":\(size),
+         "permissions":\(list(permissions)),"networkHosts":\(list(hosts)),"tools":\(list(tools)),"sha256":"\(sha)","size":\(size),
          "updatedAt":"2026-10-30T12:00:00Z","readme":"https://\(host)/r","package":"https://\(host)/v1/packages/\(id).yabext"}
         """
     }
@@ -278,6 +279,46 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         #expect(result["dev.example.c"] == .some(.badPackage(id: "dev.example.c")))
         #expect(registry.installed.isEmpty)
         #expect((try? FileManager.default.contentsOfDirectory(atPath: user.path))?.isEmpty ?? true)
+    }
+
+    /// The package must be what its entry describes: the same version, permissions, sites and programs (in any order).
+    @Test func aPackageWhoseManifestDiffersFromItsEntryIsRejected() async throws {
+        func manifest(_ id: String, version: String = "1.0.0", permissions: [String] = [], hosts: [String] = [],
+                      tools: [String] = []) -> [String: Any] {
+            var manifest = RegistryFixture.manifest(id: id, version: version, permissions: permissions)
+            if !hosts.isEmpty { manifest["network"] = ["domains": hosts] }
+            if !tools.isEmpty { manifest["requires"] = ["tools": tools.map { ["name": $0, "install": "brew install \($0)"] }] }
+            return manifest
+        }
+        let offers: [(id: String, manifest: [String: Any], entry: (Package) -> String)] = [
+            ("dev.example.version", manifest("dev.example.version", version: "1.0.1"),
+             { self.entryJSON(id: "dev.example.version", sha: $0.sha, size: $0.data.count) }),
+            ("dev.example.permissions", manifest("dev.example.permissions", permissions: ["history"]),
+             { self.entryJSON(id: "dev.example.permissions", sha: $0.sha, size: $0.data.count) }),
+            ("dev.example.hosts", manifest("dev.example.hosts", permissions: ["network"], hosts: ["example.com"]),
+             { self.entryJSON(id: "dev.example.hosts", sha: $0.sha, size: $0.data.count, permissions: ["network"], hosts: ["other.example"]) }),
+            ("dev.example.tools", manifest("dev.example.tools", permissions: ["exec"], tools: ["yt-dlp"]),
+             { self.entryJSON(id: "dev.example.tools", sha: $0.sha, size: $0.data.count, permissions: ["exec"], tools: ["ffmpeg"]) }),
+            ("dev.example.same", manifest("dev.example.same", permissions: ["network", "history"], hosts: ["b.example", "a.example"]),
+             { self.entryJSON(id: "dev.example.same", sha: $0.sha, size: $0.data.count, permissions: ["history", "network"],
+                              hosts: ["a.example", "b.example"]) }),
+        ]
+        var entries: [String] = [], packages: [String: Data] = [:]
+        for offer in offers {
+            let pkg = try package(id: offer.id, manifest: offer.manifest)
+            entries.append(offer.entry(pkg))
+            packages[offer.id] = pkg.data
+        }
+        try serve(entries, packages: packages)
+        let registry = registry()
+        let client = client(registry)
+        await client.refresh()
+        let result = await client.install(try offers.map { try entry(client, $0.id) })
+        for id in ["dev.example.version", "dev.example.permissions", "dev.example.hosts", "dev.example.tools"] {
+            #expect(result[id] == .some(.badPackage(id: id)), "\(id)")
+        }
+        #expect(result["dev.example.same"] == .some(nil))
+        #expect(registry.installed.map(\.id) == ["dev.example.same"])
     }
 
     @Test func installNeverApprovesPermissions() async throws {
