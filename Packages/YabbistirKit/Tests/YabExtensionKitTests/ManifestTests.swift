@@ -11,6 +11,115 @@ import Testing
 
     static var rule: [String: Any] { ["id": "clean", "title": "decode.title", "description": "encode.title", "accepts": ["kinds": ["link", "text"]]] }
 
+    // MARK: Sources
+
+    static var sourceLocales: [String: [String: Any]] {
+        var en = Fixture.locales["en"] ?? [:]
+        for (key, value) in ["source.title": "Vault", "password.title": "Paste password", "password.label": "Password",
+                             "username.title": "Paste username", "username.label": "Username",
+                             "username.copy": "Copy username", "username.copied": "Username copied."] { en[key] = value }
+        return ["en": en]
+    }
+    static var secretAction: [String: Any] { ["id": "password", "kind": "secret", "title": "password.title", "label": "password.label"] }
+    static var textAction: [String: Any] {
+        ["id": "username", "kind": "text", "title": "username.title", "label": "username.label", "copyTitle": "username.copy", "copied": "username.copied"]
+    }
+    static func sourceManifest(_ source: [String: Any]) -> [String: Any] {
+        Fixture.manifest(id: "dev.example.sample").setting("contributes.sources", [source])
+    }
+    static func vault(sensitive: Bool = true, actions: [[String: Any]]) -> [String: Any] {
+        ["id": "vault", "title": "source.title", "sensitive": sensitive, "actions": actions]
+    }
+    func sourceCodes(_ manifest: [String: Any]) throws -> [String] {
+        try issues(manifest, locales: Self.sourceLocales).compactMap(\.code)
+    }
+
+    @Test func aSourceDecodesWithItsActions() throws {
+        let manifest = Self.sourceManifest(Self.vault(actions: [Self.secretAction, Self.textAction]))
+        let fixture = try Fixture(manifest: manifest, locales: Self.sourceLocales)
+        guard case .valid(let parsed, _) = ManifestValidator.validate(folder: fixture.root) else {
+            Issue.record("expected a valid manifest: \(ManifestValidator.validate(folder: fixture.root).issues)"); return
+        }
+        let source = try #require(parsed.contributes.sources.first)
+        #expect(source.id == "vault" && source.title == "source.title" && source.sensitive)
+        #expect(source.actions.map(\.id) == ["password", "username"])
+        #expect(source.actions.map(\.kind) == [.secret, .text])
+        #expect(source.actions[0].label == "password.label" && source.actions[0].copyTitle == nil)
+        #expect(source.actions[1].copyTitle == "username.copy" && source.actions[1].copied == "username.copied")
+    }
+
+    @Test func aSourceIsNotSensitiveUnlessItSaysSo() throws {
+        let source: [String: Any] = ["id": "vault", "title": "source.title", "actions": [Self.textAction]]
+        let fixture = try Fixture(manifest: Self.sourceManifest(source), locales: Self.sourceLocales)
+        guard case .valid(let parsed, _) = ManifestValidator.validate(folder: fixture.root) else {
+            Issue.record("expected a valid manifest: \(ManifestValidator.validate(folder: fixture.root).issues)"); return
+        }
+        #expect(parsed.contributes.sources.first?.sensitive == false)
+    }
+
+    @Test func contributionsWithoutSourcesStillDecode() throws {
+        let fixture = try Fixture()
+        guard case .valid(let parsed, _) = ManifestValidator.validate(folder: fixture.root) else {
+            Issue.record("expected a valid manifest"); return
+        }
+        #expect(parsed.contributes.sources.isEmpty)
+    }
+
+    @Test func aSourceNeedsOneOrTwoActions() throws {
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(sensitive: false, actions: []))) == ["sourceActionCount"])
+        let extra = ["a", "b", "c"].map { ["id": $0, "kind": "text", "title": "username.title", "label": "username.label"] as [String: Any] }
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(sensitive: false, actions: extra))) == ["sourceActionCount"])
+    }
+
+    @Test func aSourceActionKindIsSecretOrText() throws {
+        let action = Self.secretAction.setting("kind", "bogus")
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(actions: [action]))) == ["unknownSourceActionKind"])
+    }
+
+    @Test func aSecretActionNeedsASensitiveSource() throws {
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(sensitive: false, actions: [Self.secretAction]))) == ["sourceSecretNeedsSensitive"])
+        let omitted: [String: Any] = ["id": "vault", "title": "source.title", "actions": [Self.secretAction]]
+        #expect(try sourceCodes(Self.sourceManifest(omitted)) == ["sourceSecretNeedsSensitive"])
+    }
+
+    @Test func aSecretActionRulesOutTheNetworkPermission() throws {
+        let manifest = Self.sourceManifest(Self.vault(actions: [Self.secretAction]))
+            .setting("permissions", ["network"]).setting("network", ["domains": ["ornek.dev"]])
+        #expect(try sourceCodes(manifest) == ["sourceSecretWithNetwork"])
+        // Text-only sources may reach the network.
+        let text = Self.sourceManifest(Self.vault(sensitive: false, actions: [Self.textAction]))
+            .setting("permissions", ["network"]).setting("network", ["domains": ["ornek.dev"]])
+        #expect(try sourceCodes(text).isEmpty)
+    }
+
+    @Test func copyFieldsBelongToTextActions() throws {
+        for key in ["copyTitle", "copied"] {
+            let action = Self.secretAction.setting(key, key == "copyTitle" ? "username.copy" : "username.copied")
+            #expect(try sourceCodes(Self.sourceManifest(Self.vault(actions: [action]))) == ["sourceCopyNeedsText"])
+        }
+    }
+
+    @Test func sourceAndActionIDsAreUnique() throws {
+        let twice = Self.sourceManifest(Self.vault(sensitive: false, actions: [Self.textAction, Self.textAction]))
+        #expect(try sourceCodes(twice) == ["duplicateID"])
+        let source = Self.vault(sensitive: false, actions: [Self.textAction])
+        #expect(try sourceCodes(Fixture.manifest(id: "dev.example.sample").setting("contributes.sources", [source, source])) == ["duplicateID"])
+        #expect(try sourceCodes(Self.sourceManifest(source.setting("id", "va ult"))) == ["invalidMemberID"])
+    }
+
+    @Test func sourceLocaleKeysMustExist() throws {
+        let source = Self.vault(sensitive: false, actions: [Self.textAction])
+        #expect(try sourceCodes(Self.sourceManifest(source.setting("title", "missing.key"))) == ["unknownLocaleKey"])
+        let action = Self.textAction.setting("copied", "missing.key")
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(sensitive: false, actions: [action]))) == ["unknownLocaleKey"])
+        #expect(try sourceCodes(Self.sourceManifest(Self.vault(sensitive: false, actions: [Self.textAction.setting("label", nil)]))) == ["missingField"])
+    }
+
+    @Test func aWronglyTypedSensitiveFlagIsUnreadable() throws {
+        let source = Self.vault(sensitive: false, actions: [Self.textAction]).setting("sensitive", "yes")
+        #expect(try sourceCodes(Self.sourceManifest(source)) == ["manifestUnreadable"])
+    }
+
     @Test func captureAndHistoryAreAccepted() throws {
         let found = try issues(Fixture.manifest(id: "dev.example.sample").setting("permissions", ["capture", "history"]))
         #expect(found.isEmpty, "\(found)")

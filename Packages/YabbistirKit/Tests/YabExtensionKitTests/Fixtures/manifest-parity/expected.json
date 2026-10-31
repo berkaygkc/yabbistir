@@ -56,6 +56,14 @@
   "invalid/requires-without-tools-list.json": ["manifestUnreadable"],
   "invalid/secret-with-default.json": ["secretDefault"],
   "invalid/several-problems.json": ["invalidVersion","unknownCategory","unknownPermission"],
+  "invalid/source-action-id-duplicate.json": ["duplicateID"],
+  "invalid/source-copy-on-secret.json": ["sourceCopyNeedsText"],
+  "invalid/source-kind-unknown.json": ["unknownSourceActionKind"],
+  "invalid/source-no-actions.json": ["sourceActionCount"],
+  "invalid/source-secret-not-sensitive.json": ["sourceSecretNeedsSensitive"],
+  "invalid/source-secret-with-network.json": ["sourceSecretWithNetwork"],
+  "invalid/source-three-actions.json": ["sourceActionCount"],
+  "invalid/source-title-key-missing.json": ["unknownLocaleKey"],
   "invalid/target-unknown.json": ["unknownTarget"],
   "invalid/targets-only-without-targets.json": ["targetsOnlyNeedsTargets"],
   "invalid/tool-name-is-a-path.json": ["invalidToolName"],
@@ -76,5 +84,6 @@
   "valid/minimal.json": [],
   "valid/nulls-in-optional-fields.json": [],
   "valid/sample.json": [],
-  "valid/secret-and-folder-preferences.json": []
+  "valid/secret-and-folder-preferences.json": [],
+  "valid/source-sensitive.json": []
 }

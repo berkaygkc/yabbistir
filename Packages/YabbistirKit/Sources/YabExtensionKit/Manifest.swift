@@ -73,11 +73,14 @@ public struct Contributions: Codable, Equatable, Sendable {
     public var detectors: [DetectorSpec]
     /// Rules that run on every new copy before it reaches history; need the "capture" permission.
     public var captureRules: [CaptureRuleSpec]
+    /// Lists the app draws in its own category column, each with one or two row actions.
+    public var sources: [SourceSpec]
 
-    public init(actions: [ActionSpec] = [], detectors: [DetectorSpec] = [], captureRules: [CaptureRuleSpec] = []) {
+    public init(actions: [ActionSpec] = [], detectors: [DetectorSpec] = [], captureRules: [CaptureRuleSpec] = [], sources: [SourceSpec] = []) {
         self.actions = actions
         self.detectors = detectors
         self.captureRules = captureRules
+        self.sources = sources
     }
 
     public init(from decoder: Decoder) throws {
@@ -85,6 +88,48 @@ public struct Contributions: Codable, Equatable, Sendable {
         actions = try c.decodeIfPresent([ActionSpec].self, forKey: .actions) ?? []
         detectors = try c.decodeIfPresent([DetectorSpec].self, forKey: .detectors) ?? []
         captureRules = try c.decodeIfPresent([CaptureRuleSpec].self, forKey: .captureRules) ?? []
+        sources = try c.decodeIfPresent([SourceSpec].self, forKey: .sources) ?? []
+    }
+}
+
+public struct SourceSpec: Codable, Equatable, Sendable {
+    public var id: String
+    /// Locale key of the column's name.
+    public var title: String
+    /// Its rows and values are secrets: never logged, kept or shown beyond the moment of use.
+    public var sensitive: Bool
+    /// One or two, in order: the first is ↵, the second ⇧↵.
+    public var actions: [SourceActionSpec]
+
+    public init(id: String, title: String, sensitive: Bool = false, actions: [SourceActionSpec]) {
+        (self.id, self.title, self.sensitive, self.actions) = (id, title, sensitive, actions)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        title = try c.decode(String.self, forKey: .title)
+        sensitive = try c.decodeIfPresent(Bool.self, forKey: .sensitive) ?? false
+        actions = try c.decode([SourceActionSpec].self, forKey: .actions)
+    }
+}
+
+public struct SourceActionSpec: Codable, Equatable, Sendable {
+    public enum Kind: String, Codable, Sendable, CaseIterable { case secret, text }
+
+    public var id: String
+    public var kind: Kind
+    /// Locale key of the paste label ("Şifreyi yapıştır"): the ↵/⇧↵ rows, ⌘K and the bar's primary.
+    public var title: String
+    /// Locale key of the value's short name ("Şifre"): the bar's secondary and the preview line.
+    public var label: String
+    /// Locale key of the copy row's title ("Kullanıcı adını kopyala"); text actions only.
+    public var copyTitle: String?
+    /// Locale key of the notice after copying ("Kullanıcı adı kopyalandı."); text actions only.
+    public var copied: String?
+
+    public init(id: String, kind: Kind, title: String, label: String, copyTitle: String? = nil, copied: String? = nil) {
+        (self.id, self.kind, self.title, self.label, self.copyTitle, self.copied) = (id, kind, title, label, copyTitle, copied)
     }
 }
 

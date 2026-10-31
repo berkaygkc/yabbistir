@@ -268,6 +268,7 @@ public enum ManifestValidator {
                 }
                 else { issue("\(path).accepts", "a capture rule needs \"accepts\"", fix: "Add \"accepts\": {\"kinds\": [\"link\"]}.", code: "acceptsMissing") }
             }
+            sources(contributes["sources"]?.arrayValue ?? [])
             var detectorIDs = Set<String>()
             for (index, detector) in (contributes["detectors"]?.arrayValue ?? []).enumerated() {
                 let path = "contributes.detectors[\(index)]"
@@ -276,6 +277,52 @@ public enum ManifestValidator {
                 localeKey("tag", in: object, path: "\(path).tag")
                 if let accepts = object["accepts"] { acceptSpec(accepts, path: "\(path).accepts") }
                 else { issue("\(path).accepts", "a detector needs \"accepts\"", fix: "Add \"accepts\": {\"kinds\": [\"text\"]}.", code: "acceptsMissing") }
+            }
+        }
+
+        private mutating func sources(_ list: [JSONValue]) {
+            var sourceIDs = Set<String>()
+            var hasSecret = false
+            for (index, source) in list.enumerated() {
+                let path = "contributes.sources[\(index)]"
+                guard let object = source.objectValue else { issue(path, "a source must be an object", fix: "Write it as {\"id\", \"title\", \"actions\"}.", code: "notAnObject"); continue }
+                memberID(in: object, path: "\(path).id", what: "source", seen: &sourceIDs)
+                localeKey("title", in: object, path: "\(path).title")
+                let actions = object["actions"]?.arrayValue ?? []
+                if !(1...2).contains(actions.count) {
+                    issue("\(path).actions", "a source needs one or two actions, not \(actions.count)", expected: "1 or 2",
+                          fix: "List one action, or two: ↵ runs the first and ⇧↵ the second.", code: "sourceActionCount")
+                }
+                var actionIDs = Set<String>()
+                var sourceHasSecret = false
+                for (actionIndex, action) in actions.enumerated() {
+                    let actionPath = "\(path).actions[\(actionIndex)]"
+                    guard let actionObject = action.objectValue else { issue(actionPath, "a source action must be an object", fix: "Write it as {\"id\", \"kind\", \"title\", \"label\"}.", code: "notAnObject"); continue }
+                    memberID(in: actionObject, path: "\(actionPath).id", what: "source action", seen: &actionIDs)
+                    let kind = string("kind", in: actionObject, path: "\(actionPath).kind", fix: "Add \"kind\": \"secret\" or \"text\".")
+                    if let kind, SourceActionSpec.Kind(rawValue: kind) == nil {
+                        issue("\(actionPath).kind", "\"\(kind)\" is not a source action kind", expected: "secret, text", fix: "Use \"secret\" or \"text\".", code: "unknownSourceActionKind")
+                    }
+                    localeKey("title", in: actionObject, path: "\(actionPath).title")
+                    localeKey("label", in: actionObject, path: "\(actionPath).label")
+                    for key in ["copyTitle", "copied"] where actionObject[key] != nil {
+                        localeKey(key, in: actionObject, path: "\(actionPath).\(key)")
+                        if kind == "secret" {
+                            issue("\(actionPath).\(key)", "a secret action has no \"\(key)\"; secrets are never copied to be kept", fix: "Remove \"\(key)\" or make the action \"kind\": \"text\".", code: "sourceCopyNeedsText")
+                        }
+                    }
+                    if kind == "secret" { sourceHasSecret = true }
+                }
+                if sourceHasSecret {
+                    hasSecret = true
+                    if object["sensitive"]?.boolValue != true {
+                        issue("\(path).sensitive", "a source with a secret action must be sensitive", fix: "Add \"sensitive\": true to the source.", code: "sourceSecretNeedsSensitive")
+                    }
+                }
+            }
+            let granted = (root["permissions"]?.arrayValue ?? []).compactMap(\.stringValue)
+            if hasSecret, granted.contains("network") {
+                issue("permissions", "an extension with a secret source action cannot ask for \"network\"", fix: "Remove \"network\" from \"permissions\", or make the actions \"kind\": \"text\".", code: "sourceSecretWithNetwork")
             }
         }
 

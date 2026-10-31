@@ -1,0 +1,61 @@
+{
+  "about": "Two actions of a source share an id.",
+  "folder": "dev.example.sample",
+  "manifest": {
+    "id": "dev.example.sample",
+    "version": "1.0.0",
+    "apiVersion": 1,
+    "defaultLocale": "en",
+    "name": "name",
+    "description": "description",
+    "icon": "sf:number",
+    "author": "example",
+    "license": "MIT",
+    "categories": [
+      "productivity"
+    ],
+    "contributes": {
+      "sources": [
+        {
+          "id": "vault",
+          "title": "source.title",
+          "sensitive": false,
+          "actions": [
+            {
+              "id": "username",
+              "kind": "text",
+              "title": "username.title",
+              "label": "username.label",
+              "copyTitle": "username.copy",
+              "copied": "username.copied"
+            },
+            {
+              "id": "username",
+              "kind": "text",
+              "title": "username.title",
+              "label": "username.label",
+              "copyTitle": "username.copy",
+              "copied": "username.copied"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "source.title": "Vault",
+      "password.title": "Paste password",
+      "password.label": "Password",
+      "username.title": "Paste username",
+      "username.label": "Username",
+      "username.copy": "Copy username",
+      "username.copied": "Username copied."
+    }
+  },
+  "files": [
+    "index.js"
+  ]
+}

@@ -1,7 +1,7 @@
 /**
  * @yabbistir/api — the extension API, version 1.
  *
- * An extension's index.ts exports `actions`, `detectors` and/or `captureRules`. yabbistir draws every piece of UI;
+ * An extension's index.ts exports `actions`, `detectors`, `captureRules` and/or `sources`. yabbistir draws every piece of UI;
  * an extension only computes. The functions below run in JavaScriptCore (ES2022), not Node: there
  * is no `require`, `process`, `fs` or `Buffer`. The web standards declared at the bottom are there.
  */
@@ -67,7 +67,7 @@ export interface Context {
   /** This extension's preferences (manifest defaults until the user changes them). */
   preferences: Record<string, unknown>;
   /** Where the call came from. */
-  trigger: "search" | "shiftPanel" | "commandK" | "detect" | "preview" | "capture";
+  trigger: "search" | "shiftPanel" | "commandK" | "detect" | "preview" | "capture" | "source";
   /** The variant the user chose, for actions with `variants`. */
   variant: string | null;
   /** The app the result is headed for, when known. */
@@ -169,6 +169,43 @@ export interface CaptureRule {
 }
 
 export type CaptureRules = Record<string, CaptureRule>;
+
+/**
+ * One row of a source, drawn by the app in its own category column. At most 10,000 rows; `id` and
+ * `title` are at most 256 characters. Rows live in memory only and are never written to history or disk.
+ */
+export interface SourceRow {
+  /** Stable within the listing; passed back to `run`. */
+  readonly id: string;
+  readonly title: string;
+  readonly subtitle?: string;
+}
+
+/**
+ * What `list` returns: the rows, or `locked` when the source needs the person to unlock it first
+ * (the app then drops its rows). `message` and `command` are at most 200 characters; `command` is a
+ * line the person can run to unlock it.
+ */
+export type SourceListing =
+  | { rows: SourceRow[] }
+  | { locked: true; message: string; command?: string };
+
+/**
+ * What `run` returns. `secret` only from a `kind: "secret"` action of a `sensitive` source; never log
+ * rows or values. An empty value is never pasted or copied.
+ */
+export type SourceValue = { secret: string } | { text: string };
+
+/**
+ * A list the app shows as a column, with one or two row actions declared in the manifest under
+ * `contributes.sources`; `ctx.trigger` is "source".
+ */
+export interface Source {
+  list(ctx: Context): SourceListing | Promise<SourceListing>;
+  run(rowId: string, actionId: string, ctx: Context): SourceValue | Promise<SourceValue>;
+}
+
+export type Sources = Record<string, Source>;
 
 export interface HttpInit {
   method?: string;

@@ -46,7 +46,8 @@
       "properties": {
         "actions": { "type": "array", "items": { "$ref": "#/$defs/action" } },
         "detectors": { "type": "array", "items": { "$ref": "#/$defs/detector" } },
-        "captureRules": { "type": "array", "items": { "$ref": "#/$defs/captureRule" }, "description": "Needs the \"capture\" permission." }
+        "captureRules": { "type": "array", "items": { "$ref": "#/$defs/captureRule" }, "description": "Needs the \"capture\" permission." },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/source" }, "description": "Lists the app draws in its own column. A secret action rules out the \"network\" permission." }
       }
     }
   },
@@ -115,6 +116,34 @@
         "title": { "$ref": "#/$defs/localeKey" },
         "description": { "$ref": "#/$defs/localeKey" },
         "accepts": { "$ref": "#/$defs/accepts" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["id", "title", "actions"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "title": { "$ref": "#/$defs/localeKey" },
+        "sensitive": { "type": "boolean", "default": false, "description": "Required for a source with a \"secret\" action." },
+        "actions": {
+          "type": "array", "minItems": 1, "maxItems": 2,
+          "description": "One or two: ↵ runs the first, ⇧↵ the second.",
+          "items": { "$ref": "#/$defs/sourceAction" }
+        }
+      }
+    },
+    "sourceAction": {
+      "type": "object",
+      "required": ["id", "kind", "title", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "kind": { "enum": ["secret", "text"] },
+        "title": { "$ref": "#/$defs/localeKey", "description": "The paste label (\"Paste password\")." },
+        "label": { "$ref": "#/$defs/localeKey", "description": "The value's short name (\"Password\")." },
+        "copyTitle": { "$ref": "#/$defs/localeKey", "description": "Text actions only." },
+        "copied": { "$ref": "#/$defs/localeKey", "description": "Text actions only." }
       }
     },
     "preference": {
