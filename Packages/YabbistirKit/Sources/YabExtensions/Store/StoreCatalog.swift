@@ -10,7 +10,24 @@ public struct StoreCatalog: Decodable, Equatable, Sendable {
 
     public let formatVersion: Int
     public let generatedAt: Date
+    /// The entries this app can read. One it cannot (a field missing or of another type) is left out, so a single
+    /// broken entry never takes the whole store down.
     public let extensions: [StoreEntry]
+
+    private enum CodingKeys: String, CodingKey { case formatVersion, generatedAt, extensions }
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        formatVersion = try container.decode(Int.self, forKey: .formatVersion)
+        generatedAt = try container.decode(Date.self, forKey: .generatedAt)
+        extensions = try container.decode([Skippable].self, forKey: .extensions).compactMap(\.entry)
+    }
+
+    /// One entry of the list, or nil when it cannot be read.
+    private struct Skippable: Decodable {
+        let entry: StoreEntry?
+        init(from decoder: any Decoder) throws { entry = try? StoreEntry(from: decoder) }
+    }
 
     /// Reads a catalog that has already been verified. A newer format is not read at all, because its shape is unknown.
     public static func decode(_ data: Data) throws(StoreCatalogError) -> StoreCatalog {
@@ -55,6 +72,7 @@ public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
     public let name: [String: String]
     public let description: [String: String]
     public let author: String
+    /// The categories this app knows; one added to the store later is left out.
     public let categories: [ExtensionCategory]
     /// `sf:<SF Symbol name>`, or the address of an icon file.
     public let icon: String
@@ -67,6 +85,32 @@ public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
     public let updatedAt: Date
     public let readme: URL
     public let package: URL
+
+    private enum CodingKeys: String, CodingKey {
+        case id, version, apiVersion, minAppVersion, name, description, author, categories, icon, permissions, networkHosts, tools, sha256, size
+        case updatedAt, readme, package
+    }
+
+    public init(from decoder: any Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        version = try c.decode(String.self, forKey: .version)
+        apiVersion = try c.decode(Int.self, forKey: .apiVersion)
+        minAppVersion = try c.decodeIfPresent(String.self, forKey: .minAppVersion)
+        name = try c.decode([String: String].self, forKey: .name)
+        description = try c.decode([String: String].self, forKey: .description)
+        author = try c.decode(String.self, forKey: .author)
+        categories = try c.decode([String].self, forKey: .categories).compactMap(ExtensionCategory.init(rawValue:))
+        icon = try c.decode(String.self, forKey: .icon)
+        permissions = try c.decode([String].self, forKey: .permissions)
+        networkHosts = try c.decode([String].self, forKey: .networkHosts)
+        tools = try c.decode([String].self, forKey: .tools)
+        sha256 = try c.decode(String.self, forKey: .sha256)
+        size = try c.decode(Int.self, forKey: .size)
+        updatedAt = try c.decode(Date.self, forKey: .updatedAt)
+        readme = try c.decode(URL.self, forKey: .readme)
+        package = try c.decode(URL.self, forKey: .package)
+    }
 
     /// The name in the app's language, else English, else whichever comes first.
     public func localizedName(_ language: AppLanguage) -> String {

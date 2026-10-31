@@ -5,18 +5,19 @@ import YabPlatform
 @testable import YabExtensions
 
 struct StoreCatalogTests {
-    static func entryJSON(apiVersion: Int = 1, minAppVersion: String? = nil, name: String = #"{"en":"Base64","tr":"Base64 Çevirici"}"#) -> String {
+    static func entryJSON(id: String = "dev.example.base64", apiVersion: Int = 1, minAppVersion: String? = nil,
+                          name: String = #"{"en":"Base64","tr":"Base64 Çevirici"}"#, categories: String = #"["text","developer"]"#) -> String {
         """
-        {"id":"dev.example.base64","version":"1.2.0","apiVersion":\(apiVersion),"minAppVersion":\(minAppVersion.map { "\"\($0)\"" } ?? "null"),
-         "name":\(name),"description":{"en":"Encode"},"author":"example","categories":["text","developer"],
+        {"id":"\(id)","version":"1.2.0","apiVersion":\(apiVersion),"minAppVersion":\(minAppVersion.map { "\"\($0)\"" } ?? "null"),
+         "name":\(name),"description":{"en":"Encode"},"author":"example","categories":\(categories),
          "icon":"sf:number","permissions":["network"],"networkHosts":["example.com"],"tools":[],
          "sha256":"\(String(repeating: "a", count: 64))","size":1234,"updatedAt":"2026-10-30T12:00:00+03:00",
          "readme":"https://example.com/readme","package":"https://example.com/p.yabext"}
         """
     }
 
-    static func catalogJSON(format: Int = 1, entries: [String]) -> Data {
-        Data(#"{"formatVersion":\#(format),"generatedAt":"2026-10-31T09:30:00Z","extensions":[\#(entries.joined(separator: ","))]}"#.utf8)
+    static func catalogJSON(format: Int = 1, generatedAt: String = "2026-10-31T09:30:00Z", entries: [String]) -> Data {
+        Data(#"{"formatVersion":\#(format),"generatedAt":"\#(generatedAt)","extensions":[\#(entries.joined(separator: ","))]}"#.utf8)
     }
 
     func entry(apiVersion: Int = 1, minAppVersion: String? = nil) throws -> StoreEntry {
@@ -61,6 +62,27 @@ struct StoreCatalogTests {
         let app = try #require(SemanticVersion("0.2.0"))
         #expect(try entry(apiVersion: 2).compatibility(appVersion: app) == .unsupportedAPI(2))
         #expect(try entry(apiVersion: 1).compatibility(appVersion: app) == .compatible)
+    }
+
+    /// A category added to the store later is one this app does not know: the entry stays, without it.
+    @Test func anUnknownCategoryDoesNotBreakTheCatalog() throws {
+        let catalog = try StoreCatalog.decode(Self.catalogJSON(entries: [Self.entryJSON(categories: #"["text","holograms","developer"]"#)]))
+        #expect(catalog.extensions.map(\.id) == ["dev.example.base64"])
+        #expect(catalog.extensions.first?.categories == [.text, .developer])
+        let onlyUnknown = try StoreCatalog.decode(Self.catalogJSON(entries: [Self.entryJSON(categories: #"["holograms"]"#)]))
+        #expect(onlyUnknown.extensions.first?.categories == [])
+    }
+
+    /// An entry this app cannot read is left out; the rest of the catalog is still listed.
+    @Test func oneBrokenEntryIsSkippedNotTheWholeCatalog() throws {
+        let wrongType = Self.entryJSON(id: "dev.example.broken").replacingOccurrences(of: #""size":1234"#, with: #""size":"big""#)
+        let half = #"{"id":"dev.example.half","version":"1.0.0"}"#
+        let catalog = try StoreCatalog.decode(Self.catalogJSON(entries: [wrongType, Self.entryJSON(), half, "42"]))
+        #expect(catalog.extensions.map(\.id) == ["dev.example.base64"])
+        // The catalog itself must still have its shape.
+        #expect(throws: StoreCatalogError.malformed) {
+            try StoreCatalog.decode(Data(#"{"formatVersion":1,"generatedAt":"2026-10-31T09:30:00Z","extensions":{}}"#.utf8))
+        }
     }
 
     @Test func anUnknownFormatVersionIsNotUsed() throws {

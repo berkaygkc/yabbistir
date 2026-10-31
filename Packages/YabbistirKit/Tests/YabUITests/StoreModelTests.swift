@@ -311,6 +311,33 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.unavailable?.title == "Katalog doğrulanamadı; hiçbir şey kurulmadı.")
     }
 
+    /// Signed by the store's key but not a catalog this app reads: a calm line of its own, never "couldn't verify".
+    @Test func aMalformedCatalogIsNotCalledABadSignature() async throws {
+        let fixture = StoreFixture(language: .turkish)
+        let client = fixture.client()
+        let model = StoreModel(client: client, registry: fixture.registry, language: fixture.languageStore)
+        let junk = Data(#"{"formatVersion":1,"extensions":"none"}"#.utf8)
+        let signedJunk: [String: Result<Data, URLError>] = ["/v1/catalog.json": .success(junk),
+                                                             "/v1/catalog.json.sig": .success(try fixture.signature(junk))]
+        StoreTabMockProtocol.serve(host: fixture.host, signedJunk)
+        model.appeared()
+        await model.refreshTask?.value
+        #expect(client.lastRefresh == .failed(.malformedCatalog))
+        #expect(model.unavailable?.title == "Mağaza listesi okunamadı.")
+        #expect(model.unavailable?.message == "Daha sonra yeniden dene ya da yabbistir’i güncelle.")
+        // Over a saved list it is a line of its own too.
+        try fixture.serve([F.video])
+        model.refresh()
+        await model.refreshTask?.value
+        StoreTabMockProtocol.serve(host: fixture.host, signedJunk)
+        model.refresh()
+        await model.refreshTask?.value
+        #expect(model.rows.map(\.id) == [F.video.id])
+        #expect(model.notice?.text == "Mağaza listesi okunamadı. Önbellekteki liste gösteriliyor.")
+        fixture.languageStore.language = .english
+        #expect(model.notice?.text == "Couldn’t read the store’s list. Showing the saved list.")
+    }
+
     // MARK: Selecting
 
     @Test func incompatibleRowsCannotBeSelected() async throws {

@@ -201,11 +201,11 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
         MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(tampered), "/v1/catalog.json.sig": .success(try sign(honest))])
         await client.refresh()
         #expect(client.lastRefresh == .failed(.badSignature))
-        // Signed but not a catalog.
+        // Signed but not a catalog: genuine, so not called a bad signature.
         let junk = Data("not json".utf8)
         MockStoreProtocol.serve(host: host, ["/v1/catalog.json": .success(junk), "/v1/catalog.json.sig": .success(try sign(junk))])
         await client.refresh()
-        #expect(client.lastRefresh == .failed(.badSignature))
+        #expect(client.lastRefresh == .failed(.malformedCatalog))
 
         #expect(client.catalog?.extensions.map(\.id) == ["dev.example.a"])
         #expect(try Data(contentsOf: cache.appendingPathComponent("catalog.json")) == cachedCatalog)

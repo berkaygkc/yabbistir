@@ -1701,6 +1701,57 @@
         }
       }
     },
+    "extensions.store.malformed.cached": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read the store’s list. Showing the saved list."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mağaza listesi okunamadı. Önbellekteki liste gösteriliyor."
+          }
+        }
+      }
+    },
+    "extensions.store.malformed.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again later, or update yabbistir."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha sonra yeniden dene ya da yabbistir’i güncelle."
+          }
+        }
+      }
+    },
+    "extensions.store.malformed.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read the store’s list."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mağaza listesi okunamadı."
+          }
+        }
+      }
+    },
     "extensions.store.newerApp.cached": {
       "extractionState": "manual",
       "localizations": {

@@ -7,8 +7,10 @@ import YabPlatform
 public enum StoreFailure: Error, Equatable, Sendable {
     /// The store could not be reached.
     case offline
-    /// The catalog is not signed by a known key, or is not a catalog this app can read.
+    /// The catalog is not signed by a known key, or does not match its signature.
     case badSignature
+    /// The catalog is signed by a known key but is not one this app can read.
+    case malformedCatalog
     /// The catalog is genuine but in a format only a newer yabbistir reads.
     case needsNewerApp
     /// The download does not match the catalog (hash, folder name or manifest id).
@@ -84,8 +86,10 @@ public final class StoreClient {
                 fresh = try CatalogVerifier.verifyAndDecode(catalog: bytes, signatureBase64: signature, keys: keys)
             } catch .needsNewerApp {
                 throw StoreFailure.needsNewerApp
+            } catch .malformed {
+                // Genuine, but not a catalog this app can read: not a bad signature.
+                throw StoreFailure.malformedCatalog
             } catch {
-                // A catalog that is signed but unreadable is reported like a bad one.
                 throw StoreFailure.badSignature
             }
             writeCache(catalog: bytes, signature: signature)

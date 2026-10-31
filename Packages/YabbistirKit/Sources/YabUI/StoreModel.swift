@@ -256,7 +256,7 @@ public final class StoreModel {
         switch failure {
         case .changedSinceShown: string("extensions.store.failed.changed")
         case .store(.offline): string("extensions.store.failed.offline")
-        case .store(.badSignature): string("extensions.store.badSignature")
+        case .store(.badSignature), .store(.malformedCatalog): string("extensions.store.badSignature")
         case .store(.badPackage): string("extensions.store.failed.package")
         case .store(.incompatible), .store(.needsNewerApp): string("extensions.store.failed.incompatible")
         case .store(.registry(let reason)): string("extensions.store.failed.registry", reason)
@@ -271,6 +271,7 @@ public final class StoreModel {
         return switch failure {
         case .offline: Notice(symbol: "wifi.slash", text: string("extensions.store.offline.cached"))
         case .needsNewerApp: Notice(symbol: "arrow.up.circle", text: string("extensions.store.newerApp.cached"))
+        case .malformedCatalog: Notice(symbol: "doc.questionmark", text: string("extensions.store.malformed.cached"))
         default: Notice(symbol: "exclamationmark.shield", text: string("extensions.store.badSignature"))
         }
     }
@@ -283,6 +284,8 @@ public final class StoreModel {
                                    message: string("extensions.store.offline.message"))
         case .needsNewerApp: Unavailable(symbol: "arrow.up.circle", title: string("extensions.store.newerApp.title"),
                                          message: string("extensions.store.newerApp.message"))
+        case .malformedCatalog: Unavailable(symbol: "doc.questionmark", title: string("extensions.store.malformed.title"),
+                                            message: string("extensions.store.malformed.message"))
         default: Unavailable(symbol: "exclamationmark.shield", title: string("extensions.store.badSignature"),
                              message: string("extensions.store.badSignature.message"))
         }
