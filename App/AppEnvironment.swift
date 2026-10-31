@@ -17,6 +17,9 @@ final class AppEnvironment {
     let extensionRegistry: ExtensionRegistry
     let extensionSettings = ExtensionSettings()
     let extensionLogs = ExtensionLogBuffer()
+    /// The signed extension catalog, saved in Application Support/yabbistir/Store. It reaches the network only from
+    /// Settings → Extensions → Store, never at launch.
+    let storeClient: StoreClient
     /// Talks to the helper program that runs extensions (Contents/MacOS/yabbistir-extension-host).
     let extensionClient: ExtensionHostClient
     /// A second copy of that helper, for jobs alone: a hint that runs out of time restarts its
@@ -68,6 +71,10 @@ final class AppEnvironment {
                                               settings: extensionSettings,
                                               onWarning: { id, line in MainActor.assumeIsolated { warningLogs.append(id, line) } })
         resultFiles = ResultFiles(root: directory.appendingPathComponent("Outputs", isDirectory: true))
+        // A version that cannot be read meets no extension's minimum: when in doubt, nothing new is installed.
+        let appVersion = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String).flatMap { SemanticVersion($0) }
+        storeClient = StoreClient(cacheFolder: directory.appendingPathComponent("Store", isDirectory: true), registry: extensionRegistry,
+                                  appVersion: appVersion ?? SemanticVersion("0.0.0")!)
         let logs = extensionLogs
         let helper = Bundle.main.url(forAuxiliaryExecutable: "yabbistir-extension-host")!
         hostTransport = ProcessTransport(executableURL: helper)

@@ -36,7 +36,7 @@ let package = Package(
         .testTarget(name: "YabPasteboardTests", dependencies: ["YabPasteboard"]),
         .testTarget(name: "YabPlatformTests", dependencies: ["YabPlatform"]),
         .testTarget(name: "YabLocalizationTests", dependencies: ["YabLocalization"]),
-        .testTarget(name: "YabUITests", dependencies: ["YabUI", "YabStack", "YabPasteboard", "YabExtensions", "YabExtensionKit",
+        .testTarget(name: "YabUITests", dependencies: ["YabUI", "YabStack", "YabPasteboard", "YabExtensions", "YabExtensionKit", "YabPlatform",
                                                 .product(name: "GRDB", package: "GRDB.swift")]),
         .testTarget(name: "YabImportTests", dependencies: ["YabImport"]),
         .testTarget(name: "YabStackTests", dependencies: ["YabStack"]),

@@ -6,6 +6,7 @@ import YabExtensionKit
 import YabExtensions
 import YabLocalization
 import YabPasteboard
+import YabPlatform
 import YabStack
 @testable import YabUI
 
@@ -165,7 +166,7 @@ import YabStack
                 languageStore.language = language
                 let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: logs)
                 model.selectedID = "dev.yabbistir.uuid"
-                let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, tab: tab)
+                let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, store: .offline(model), tab: tab)
                     .frame(width: 680, height: 560)
                     .background(Color(nsColor: .windowBackgroundColor)))
                 let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 680, height: 560), styleMask: [.titled], backing: .buffered, defer: false)
@@ -212,7 +213,7 @@ import YabStack
                 try secrets.write(saved ? "sk-synthetic-1" : nil, "dev.example.keys", "token")
                 model.setSecret("dev.example.keys", "token", saved ? "sk-synthetic-1" : nil)
                 for scheme in [NSAppearance.Name.darkAqua, .aqua] {
-                    let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, tab: .installed)
+                    let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, store: .offline(model), tab: .installed)
                         .frame(width: 760, height: 620).background(Color(nsColor: .windowBackgroundColor)))
                     host.frame = NSRect(x: 0, y: 0, width: 760, height: 620)
                     let window = NSWindow(contentRect: host.frame, styleMask: [.titled], backing: .buffered, defer: false)
@@ -279,7 +280,7 @@ import YabStack
             model.selectedID = "dev.example.link-clean"
             model.setRuleEnabled("dev.example.link-clean", "amp", false)
             for scheme in [NSAppearance.Name.darkAqua, .aqua] {
-                let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, tab: .installed)
+                let host = NSHostingView(rootView: ExtensionsSettingsView(model: model, store: .offline(model), tab: .installed)
                     .frame(width: 760, height: 620).background(Color(nsColor: .windowBackgroundColor)))
                 host.frame = NSRect(x: 0, y: 0, width: 760, height: 620)
                 let window = NSWindow(contentRect: host.frame, styleMask: [.titled], backing: .buffered, defer: false)
@@ -357,10 +358,10 @@ import YabStack
                        size: nil, name: "consent-\(isNew ? "new" : "existing")-\(language.rawValue).png")
             }
             model.selectedID = "dev.example.video"
-            render(ExtensionsSettingsView(model: model, tab: .installed).frame(width: 760, height: 620),
+            render(ExtensionsSettingsView(model: model, store: .offline(model), tab: .installed).frame(width: 760, height: 620),
                    size: NSSize(width: 760, height: 620), name: "detail-waiting-\(language.rawValue).png")
             model.thirdPartyDisabled = true
-            render(ExtensionsSettingsView(model: model, tab: .installed).frame(width: 760, height: 620),
+            render(ExtensionsSettingsView(model: model, store: .offline(model), tab: .installed).frame(width: 760, height: 620),
                    size: NSSize(width: 760, height: 620), name: "detail-master-off-\(language.rawValue).png")
             model.thirdPartyDisabled = false
         }
@@ -400,4 +401,15 @@ import YabStack
 
 private final class SnapshotWriter: PasteboardWriting {
     func write(_ items: [[PasteboardRepresentation]], plainTextOnly: Bool) -> Int { 0 }
+}
+
+extension StoreModel {
+    /// A store for snapshots of the other tabs: never shown, so it never reaches the network.
+    static func offline(_ settings: ExtensionsSettingsModel) -> StoreModel {
+        let cache = FileManager.default.temporaryDirectory.appendingPathComponent("snap-store-\(UUID())")
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "snap-store-lang-\(UUID())")!)
+        language.language = settings.language
+        return StoreModel(client: StoreClient(cacheFolder: cache, registry: settings.registry, appVersion: SemanticVersion("1.0.0")!),
+                          registry: settings.registry, language: language)
+    }
 }

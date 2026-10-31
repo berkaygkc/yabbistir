@@ -8,14 +8,16 @@ import YabLocalization
 /// The Settings window: a sidebar of sections beside the chosen one.
 public struct SettingsView: View {
     @Bindable var model: ExtensionsSettingsModel
+    let store: StoreModel
     @State private var section: Section? = .extensions
 
     enum Section: Hashable {
         case extensions
     }
 
-    public init(model: ExtensionsSettingsModel) {
+    public init(model: ExtensionsSettingsModel, store: StoreModel) {
         self.model = model
+        self.store = store
     }
 
     public var body: some View {
@@ -26,25 +28,27 @@ public struct SettingsView: View {
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
         } detail: {
-            ExtensionsSettingsView(model: model)
+            ExtensionsSettingsView(model: model, store: store)
         }
         .environment(\.locale, model.language.locale)
     }
 }
 
-/// Settings → Extensions: Installed (the list, with each one's details and preferences) and
-/// Development (install, link, reload, and the log).
+/// Settings → Extensions: Installed (the list, with each one's details and preferences), Store (the signed
+/// catalog) and Development (install, link, reload, and the log).
 public struct ExtensionsSettingsView: View {
     @Bindable var model: ExtensionsSettingsModel
+    let store: StoreModel
     @State private var tab: Tab
     @State private var removing: ExtensionsSettingsModel.Row?
 
     public enum Tab: Hashable, Sendable {
-        case installed, development
+        case installed, store, development
     }
 
-    public init(model: ExtensionsSettingsModel, tab: Tab = .installed) {
+    public init(model: ExtensionsSettingsModel, store: StoreModel, tab: Tab = .installed) {
         self.model = model
+        self.store = store
         _tab = State(initialValue: tab)
     }
 
@@ -52,6 +56,7 @@ public struct ExtensionsSettingsView: View {
         VStack(spacing: 0) {
             Picker("", selection: $tab) {
                 Text(string("extensions.tab.installed")).tag(Tab.installed)
+                Text(string("extensions.tab.store")).tag(Tab.store)
                 Text(string("extensions.tab.development")).tag(Tab.development)
             }
             .pickerStyle(.segmented)
@@ -61,6 +66,8 @@ public struct ExtensionsSettingsView: View {
             Divider()
             switch tab {
             case .installed: installed
+            // Only this tab reaches the network, and only once it is shown.
+            case .store: StoreView(model: store)
             case .development: development
             }
         }
