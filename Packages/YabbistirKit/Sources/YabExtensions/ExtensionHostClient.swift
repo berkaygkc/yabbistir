@@ -1,4 +1,5 @@
 import Foundation
+import Synchronization
 import YabExtensionKit
 
 /// The app's side of the extension host: numbered requests, answers matched by id, a time limit
@@ -14,6 +15,11 @@ import YabExtensionKit
 /// clock stop while the app works on its requests (a translation, the on-device model): that time is the
 /// app's, not the extension's. It stops for `pauseLimit` at most in all; past that it runs whatever is
 /// still asked. Hints, detectors, previews and rules never stop theirs.
+///
+/// A call's clock goes by when things happened, never by when the main actor gets to them: it starts as the
+/// request is sent, runs on a plain timer, pauses from the moment a request to the app comes in, and an answer
+/// or a cancel is judged by when it came. Everything from other threads (the host's lines, its exit, a caller
+/// giving up, a clock running out) reaches the main actor through one inbox, in the order it happened.
 @MainActor
 public final class ExtensionHostClient {
     public static let failureLimit = 3
@@ -37,6 +43,8 @@ public final class ExtensionHostClient {
     private var needsRestart = false
     /// Encodes and hands requests to the transport in order (a load before its invoke).
     private let encoder = DispatchQueue(label: "dev.yabbistir.extension-host.encoder")
+    /// What other threads hand the main actor, in the order it happened.
+    private let inbox = Inbox()
     private var nextID = 1
     private var pending: [Int: CheckedContinuation<HostMessage, Never>] = [:]
     /// Where each call's progress events go, beside its continuation in `pending`.
@@ -159,11 +167,12 @@ public final class ExtensionHostClient {
         do {
             if !started {
                 try transport.start(onLine: { [weak self] line in
-                    // Decoded on the reading thread: a big answer never costs the main actor.
+                    // Timed as it comes in, and decoded on the reading thread: a big answer never costs the main actor.
+                    let arrived = ContinuousClock.now
                     guard let message = try? JSONDecoder().decode(HostMessage.self, from: line) else { return }
-                    Task { @MainActor in self?.receive(message) }
+                    self?.post(.line(message, arrived: arrived))
                 }, onExit: { [weak self] in
-                    Task { @MainActor in self?.hostExited() }
+                    self?.post(.exited)
                 })
                 started = true
             } else if needsRestart {
@@ -198,10 +207,28 @@ public final class ExtensionHostClient {
                     transport.send(data)
                 }
             }
-        } onCancel: {
-            Task { @MainActor [weak self] in self?.cancel(id) }
+        } onCancel: { [weak self] in
+            self?.post(.cancelled(id: id, at: .now))
         }
         return message
+    }
+
+    /// Puts `event` in the inbox, from any thread; the main actor then takes everything there, in order.
+    nonisolated private func post(_ event: Inbox.Event) {
+        inbox.post(event)
+        Task { @MainActor [weak self] in self?.drain() }
+    }
+
+    /// Takes what came from other threads, in the order it happened, whichever hop brought the main actor here.
+    private func drain() {
+        for event in inbox.take() {
+            switch event {
+            case .line(let message, let arrived): receive(message, arrived: arrived)
+            case .exited: hostExited()
+            case .cancelled(let id, let at): cancel(id, at: at)
+            case .clock(let id, let turn): clockWentOff(id, turn: turn)
+            }
+        }
     }
 
     /// The call is over for the caller: its continuation, if it was still waiting, no more progress, its
@@ -223,51 +250,74 @@ public final class ExtensionHostClient {
 
     // MARK: Clocks
 
-    /// Runs a call's clock down from what it has left; out of time, the call times out. A pause it was in ends,
-    /// and what it took comes off the call's pause budget (all of it when `pauseSpent`).
+    /// Runs a call's clock down from what it has left, from now; out of time, the call times out. A pause it was in
+    /// ends, and what it took comes off the call's pause budget (all of it when `pauseSpent`).
     private func runClock(_ id: Int, pauseSpent: Bool = false) {
         guard var clock = clocks[id], clock.since == nil else { return }
         clock.timer?.cancel()
+        let now = ContinuousClock.now
         if let paused = clock.pausedSince {
-            clock.pauseLeft = pauseSpent ? .zero : max(.zero, clock.pauseLeft - (ContinuousClock.now - paused))
+            clock.pauseLeft = pauseSpent ? .zero : max(.zero, clock.pauseLeft - (now - paused))
             clock.pausedSince = nil
         }
-        let remaining = clock.remaining
-        clock.since = .now
-        clock.timer = Task { [weak self] in
-            try? await Task.sleep(for: remaining)
-            // Paused or stopped meanwhile (on this actor, before this turn): its time is not up.
-            guard !Task.isCancelled else { return }
-            self?.timedOut(id)
-        }
+        clock.since = now
+        startTimer(id, &clock, after: clock.remaining)
         clocks[id] = clock
     }
 
-    /// Pauses a call's clock, keeping what it has left, for at most what is left of its pause budget: then it runs
+    /// Pauses a call's clock from `arrived`, when its request to the app came in (the main actor's wait to take it up
+    /// is the app's time too), keeping what it has left, for at most what is left of its pause budget: then it runs
     /// again whatever the app is still doing for it. With the budget spent it does not pause.
-    private func pauseClock(_ id: Int) {
+    private func pauseClock(_ id: Int, from arrived: ContinuousClock.Instant) {
         guard var clock = clocks[id], let since = clock.since, clock.pauseLeft > .zero else { return }
         clock.timer?.cancel()
-        clock.remaining -= ContinuousClock.now - since
+        // Never from before the clock last started: a request that came in while it was paused, taken up after.
+        let paused = max(arrived, since)
+        clock.remaining -= paused - since
         clock.since = nil
-        clock.pausedSince = .now
-        let pauseLeft = clock.pauseLeft
-        clock.timer = Task { [weak self] in
-            try? await Task.sleep(for: pauseLeft)
-            // Ran again meanwhile: the pause is over already.
-            guard !Task.isCancelled else { return }
-            self?.runClock(id, pauseSpent: true)
-        }
+        clock.pausedSince = paused
+        startTimer(id, &clock, after: clock.pauseLeft - (ContinuousClock.now - paused))
         clocks[id] = clock
+    }
+
+    /// A plain timer for the clock's next turn, off the main actor and the task pool: it goes off on time however busy
+    /// they are, and its event joins the inbox behind whatever came in before it.
+    private func startTimer(_ id: Int, _ clock: inout CallClock, after delay: Duration) {
+        clock.turn += 1
+        clock.timer = arm(.clock(id: id, turn: clock.turn), after: delay)
+    }
+
+    /// Posts `event` after `delay`. Nonisolated: the timer's block runs on a global queue.
+    nonisolated private func arm(_ event: Inbox.Event, after delay: Duration) -> DispatchWorkItem {
+        let timer = DispatchWorkItem { [weak self] in self?.post(event) }
+        let (seconds, attoseconds) = max(.zero, delay).components
+        let interval = DispatchTimeInterval.nanoseconds(Int(seconds) * 1_000_000_000 + Int(attoseconds / 1_000_000_000))
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + interval, execute: timer)
+        return timer
+    }
+
+    /// A clock's timer went off: running, the call is out of time; paused, its pause budget is spent and it runs
+    /// again. One from an earlier turn (the clock paused or ran again since) or for a call that ended is let go.
+    private func clockWentOff(_ id: Int, turn: Int) {
+        guard let clock = clocks[id], clock.turn == turn else { return }
+        if clock.since != nil { timedOut(id) } else { runClock(id, pauseSpent: true) }
+    }
+
+    /// Whether a call's clock was running at `instant` and its time was up by then.
+    private func isOutOfTime(_ id: Int, at instant: ContinuousClock.Instant) -> Bool {
+        guard let clock = clocks[id], let since = clock.since else { return false }
+        return instant - since >= clock.remaining
     }
 
     private func answer(_ id: Int, _ error: ExtensionError) {
         take(id)?.resume(returning: HostMessage(id: id, error: error))
     }
 
-    /// The caller's Task was cancelled: the call fails with `cancelled` now and the host is told to
-    /// abort it; whatever it answers later finds nobody waiting. No restart, no blame.
-    private func cancel(_ id: Int) {
+    /// The caller's Task was cancelled (`at`): the call fails with `cancelled` now and the host is told to
+    /// abort it; whatever it answers later finds nobody waiting. No restart, no blame, unless the call's own time
+    /// was up by then: that is a timeout, whether its timer or the cancel reached the main actor first.
+    private func cancel(_ id: Int, at: ContinuousClock.Instant) {
+        if isOutOfTime(id, at: at) { timedOut(id); return }
         guard let continuation = take(id) else { return }
         let transport = transport
         encoder.async {
@@ -292,7 +342,8 @@ public final class ExtensionHostClient {
         onHostRestarted?(true)
     }
 
-    private func receive(_ message: HostMessage) {
+    /// A line from the host, which came in at `arrived`.
+    private func receive(_ message: HostMessage, arrived: ContinuousClock.Instant) {
         switch message.event {
         case "log":
             if let extensionID = message.extensionID { onLog(extensionID, message.message ?? "") }
@@ -302,14 +353,17 @@ public final class ExtensionHostClient {
             if let id = message.id { progressHandlers[id]?(message.fraction, message.message) }
             return
         case "call":
-            ask(message)
+            ask(message, arrived: arrived)
             return
         case nil:
             break
         default:
             return
         }
-        guard let id = message.id, let continuation = take(id) else { return }
+        guard let id = message.id else { return }
+        // An answer that came after the call's time was up is no answer, even when its timer is late.
+        if isOutOfTime(id, at: arrived) { timedOut(id); return }
+        guard let continuation = take(id) else { return }
         continuation.resume(returning: message)
     }
 
@@ -334,15 +388,17 @@ public final class ExtensionHostClient {
 
     /// A running call asks the app for something: answered by `onHostCall` in a Task of its own, which
     /// stops when the call ends. A request from a call that is no longer in flight is not taken up.
-    private func ask(_ message: HostMessage) {
+    private func ask(_ message: HostMessage, arrived: ContinuousClock.Instant) {
         guard let invokeID = message.id, let invoke = invokes[invokeID], let requestID = message.requestID,
               let method = message.method else { return }
+        // Asked after the call's time was up: it is out of time, not waiting for the app.
+        if isOutOfTime(invokeID, at: arrived) { timedOut(invokeID); return }
         let call = HostCall(extensionID: invoke.extensionID, invokeID: invokeID, requestID: requestID, kind: invoke.kind,
                             method: method, params: message.params ?? .null, effects: invoke.effects)
         let handler = onHostCall
         // The app is at work for a run the person started: its clock waits (within its pause budget), and goes on
         // once the app has answered everything it asked. Hints, detectors, previews and rules keep their clock running.
-        if invoke.effects, invoke.requests.isEmpty { pauseClock(invokeID) }
+        if invoke.effects, invoke.requests.isEmpty { pauseClock(invokeID, from: arrived) }
         invokes[invokeID]?.requests[requestID] = Task { [weak self] in
             let outcome: Result<JSONValue, ExtensionError>
             if let handler {
@@ -389,7 +445,9 @@ private struct CallClock {
     var since: ContinuousClock.Instant?
     /// When the pause in progress began.
     var pausedSince: ContinuousClock.Instant?
-    var timer: Task<Void, Never>?
+    var timer: DispatchWorkItem?
+    /// Counts the timer's starts: one that goes off for an earlier turn is let go.
+    var turn = 0
 
     init(remaining: Duration, pauseLeft: Duration) {
         (self.remaining, self.pauseLeft) = (remaining, pauseLeft)
@@ -402,4 +460,30 @@ private struct InvokeInFlight {
     let kind: InvokeKind
     let effects: Bool
     var requests: [Int: Task<Void, Never>] = [:]
+}
+
+/// What other threads hand the client, kept in the order it happened: the host's lines (with when each came in),
+/// the host stopping, a caller giving up, a clock running out. The main actor takes them in that order, whatever
+/// order it runs the hops that bring it here.
+private final class Inbox: Sendable {
+    enum Event: Sendable {
+        case line(HostMessage, arrived: ContinuousClock.Instant)
+        case exited
+        case cancelled(id: Int, at: ContinuousClock.Instant)
+        case clock(id: Int, turn: Int)
+    }
+
+    private let events = Mutex<[Event]>([])
+
+    func post(_ event: Event) {
+        events.withLock { $0.append(event) }
+    }
+
+    /// Everything posted so far, oldest first; the inbox is empty after.
+    func take() -> [Event] {
+        events.withLock { events in
+            defer { events = [] }
+            return events
+        }
+    }
 }

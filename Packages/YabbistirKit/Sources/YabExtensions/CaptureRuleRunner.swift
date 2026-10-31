@@ -127,7 +127,10 @@ public final class CaptureRuleRunner: CaptureRuling {
         let timeout = timeout
         let deadline = timeout + Self.margin
         let first = FirstEnding()
-        let call = Task {
+        // Started at once, in this turn: a loaded rule's call is in the host, its own clock running, before the
+        // deadline starts below. A busy main actor would otherwise hold the call back while the deadline ran, and cut
+        // a rule that hangs before its own time was up, so it would never be counted.
+        let call = Task.immediate {
             first.finish(.answered(await CaptureRuleRunner.call(rule, in: extensionID, on: item, service: service, timeout: timeout)))
         }
         let clock = Self.startClock(first, deadline)
