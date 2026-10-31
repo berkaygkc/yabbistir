@@ -6,7 +6,8 @@ import YabExtensionKit
 /// on every call but a job's. A call that runs out of time restarts the host; an extension that
 /// fails three times in a row (its own calls and loads, never the ones another call's restart cut
 /// short, the person cancelled, or that only report the world: a missing tool, the network, a
-/// refused permission; and for a job only when the extension is broken) is turned off. Cancelling the calling
+/// refused permission, something the app or this Mac can't do now; and for a job only when the
+/// extension is broken) is turned off. Cancelling the calling
 /// Task ends the call at once and tells the host to abort it. JSON is encoded and decoded off the
 /// main actor, and writes never wait for the host, so a big item costs the app nothing while it travels.
 ///
@@ -132,9 +133,11 @@ public final class ExtensionHostClient {
 
     /// Not the extension's failure: cut short by another call's restart or the host stopping, cancelled
     /// by the person, or a failure it reports about the world (a missing tool, the network, a
-    /// permission it was refused). The host turns off an extension that crashes, not one that says why.
+    /// permission it was refused). `unavailable` always comes from the app or this Mac: a language pack
+    /// not downloaded, Apple Intelligence turned off, the app too slow to answer, a host that won't start.
+    /// The host turns off an extension that crashes, not one that says why.
     private static func isNobodysFault(_ error: ExtensionError) -> Bool {
-        [.interrupted, .cancelled, .toolMissing, .networkError, .permissionDenied].contains(error.code)
+        [.interrupted, .cancelled, .toolMissing, .networkError, .permissionDenied, .unavailable].contains(error.code)
     }
 
     /// A job's failure that means the extension is broken: what it returned is not a result, or what

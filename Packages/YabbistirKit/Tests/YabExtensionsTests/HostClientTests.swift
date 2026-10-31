@@ -161,6 +161,13 @@ final class FakeTransport: HostTransport, @unchecked Sendable {
         #expect(await !turnedOff(after: code, timeout: .seconds(2)))
     }
 
+    /// `unavailable` always comes from the app or this Mac (a missing language pack, Apple Intelligence turned off,
+    /// the app too slow to answer): never the extension's fault, as a job or not.
+    @Test func unavailableNeverTurnsAnExtensionOff() async {
+        #expect(await !turnedOff(after: .unavailable, timeout: nil))
+        #expect(await !turnedOff(after: .unavailable, timeout: .seconds(2)))
+    }
+
     /// A job that throws its own error with a message reported a failure, it did not crash.
     @Test func aJobsOwnErrorsAreNotCounted() async {
         #expect(await !turnedOff(after: .script, timeout: nil))
