@@ -122,8 +122,8 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
 
     // MARK: Folders and packages
 
-    /// A valid extension folder for `entry`, in a scratch folder.
-    func folder(_ entry: Entry) throws -> URL {
+    /// A valid extension folder for `entry`, in a scratch folder; `manifest` changes its manifest's fields.
+    func folder(_ entry: Entry, manifest changes: [String: Any] = [:]) throws -> URL {
         let folder = root.appendingPathComponent("source-\(UUID().uuidString)/\(entry.id)")
         try FileManager.default.createDirectory(at: folder.appendingPathComponent("locales"), withIntermediateDirectories: true)
         var manifest: [String: Any] = [
@@ -133,6 +133,7 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         ]
         if !entry.hosts.isEmpty { manifest["network"] = ["domains": entry.hosts] }
         if !entry.tools.isEmpty { manifest["requires"] = ["tools": entry.tools.map { ["name": $0, "install": "brew install \($0)"] }] }
+        manifest.merge(changes) { _, new in new }
         try JSONSerialization.data(withJSONObject: manifest).write(to: folder.appendingPathComponent("manifest.json"))
         for language in ["en", "tr"] {
             let table: [String: Any] = ["name": entry.name[language] ?? entry.id, "description": entry.description[language] ?? "", "keywords": ["k"]]
@@ -150,8 +151,8 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         registry.approve(id, grant: PermissionGrant.requested(by: manifest))
     }
 
-    func package(_ entry: Entry) throws -> Data {
-        let folder = try folder(entry)
+    func package(_ entry: Entry, manifest changes: [String: Any] = [:]) throws -> Data {
+        let folder = try folder(entry, manifest: changes)
         let archive = folder.deletingLastPathComponent().appendingPathComponent("out.yabext")
         let ditto = Process()
         ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
@@ -483,6 +484,30 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.row(F.video.id)?.failure == "İndirilen paket katalogla uyuşmadı; kurulmadı.")
         #expect(fixture.registry.installed.first { $0.id == F.video.id } == nil)
         #expect(model.selection == [F.video.id])
+    }
+
+    /// The registry's reason is English for the developer: the row says it in the app's language, and the reason goes
+    /// to the Development log.
+    @Test func aRegistryFailureReadsInTheAppsLanguage() async throws {
+        let fixture = StoreFixture(language: .turkish)
+        let logs = ExtensionLogBuffer()
+        let model = StoreModel(client: fixture.client(), registry: fixture.registry, language: fixture.languageStore, logs: logs)
+        // Matches its entry, but the registry refuses its manifest.
+        try fixture.serve([F.jwt], packages: [F.jwt.id: try fixture.package(F.jwt, manifest: ["apiVersion": 99])])
+        model.appeared()
+        await model.refreshTask?.value
+        model.setSelected(F.jwt.id, true)
+        model.installSelected()
+        model.confirmConsent()
+        await model.installTask?.value
+        guard case .store(.registry(let reason)) = model.failures[F.jwt.id] else {
+            Issue.record("expected a registry failure, got \(String(describing: model.failures[F.jwt.id]))")
+            return
+        }
+        #expect(model.row(F.jwt.id)?.failure == "Kurulamadı. Ayrıntılar Geliştirme sekmesinde.")
+        #expect(logs.lines(for: F.jwt.id).contains { $0.contains(reason) })
+        fixture.languageStore.language = .english
+        #expect(model.row(F.jwt.id)?.failure == "Couldn’t install it. The details are in the Development tab.")
     }
 
     @Test func aRefreshDuringConsentNeverInstallsWhatWasNotShown() async throws {

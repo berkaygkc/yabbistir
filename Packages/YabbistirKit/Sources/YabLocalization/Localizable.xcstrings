@@ -1639,13 +1639,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Couldn’t install it: %@"
+            "value": "Couldn’t install it. The details are in the Development tab."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kurulamadı: %@"
+            "value": "Kurulamadı. Ayrıntılar Geliştirme sekmesinde."
           }
         }
       }

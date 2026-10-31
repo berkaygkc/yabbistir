@@ -105,11 +105,14 @@ public final class StoreModel {
     @ObservationIgnored private let client: StoreClient
     @ObservationIgnored private let registry: ExtensionRegistry
     @ObservationIgnored private let languageStore: LanguageStore
+    /// The Development log: why the registry refused a package, in the developer's English.
+    @ObservationIgnored private let logs: ExtensionLogBuffer?
 
-    public init(client: StoreClient, registry: ExtensionRegistry, language: LanguageStore) {
+    public init(client: StoreClient, registry: ExtensionRegistry, language: LanguageStore, logs: ExtensionLogBuffer? = nil) {
         self.client = client
         self.registry = registry
         self.languageStore = language
+        self.logs = logs
     }
 
     public var language: AppLanguage { languageStore.language }
@@ -260,7 +263,8 @@ public final class StoreModel {
         case .store(.badSignature), .store(.malformedCatalog), .store(.olderCatalog): string("extensions.store.failed.unverified")
         case .store(.badPackage): string("extensions.store.failed.package")
         case .store(.incompatible), .store(.needsNewerApp): string("extensions.store.failed.incompatible")
-        case .store(.registry(let reason)): string("extensions.store.failed.registry", reason)
+        // The registry's reason is the developer's English: it is in the Development log, not here.
+        case .store(.registry): string("extensions.store.failed.registry")
         }
     }
 
@@ -411,6 +415,7 @@ public final class StoreModel {
                 let outcome: StoreFailure? = await client.install([item.entry])[item.id] ?? .badPackage(id: item.id)
                 if let outcome {
                     failures[item.id] = .store(outcome)
+                    if case .registry(let reason) = outcome { logs?.append(item.id, "could not install from the store: \(reason)") }
                 } else {
                     if approves { registry.approve(item.id, grant: item.grant) }
                     selection.remove(item.id)

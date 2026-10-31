@@ -47,7 +47,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 registry: env.extensionRegistry, settings: env.extensionSettings, language: env.language, logs: env.extensionLogs)
             // The settings window's own copies (an install command) are not clipboard history.
             settingsModel.onPasteboardWrite = { [weak env] changeCount in env?.monitor.ignore(changeCount: changeCount) }
-            let storeModel = StoreModel(client: env.storeClient, registry: env.extensionRegistry, language: env.language)
+            let storeModel = StoreModel(
+                client: env.storeClient, registry: env.extensionRegistry, language: env.language, logs: env.extensionLogs)
             let settings = SettingsWindowController(model: settingsModel, store: storeModel)
             self.settings = settings
             #if DEBUG
