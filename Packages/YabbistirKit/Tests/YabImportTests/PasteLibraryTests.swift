@@ -14,16 +14,17 @@ private func tempFolder() throws -> URL {
 private func text(_ s: String) -> [[(String, String)]] { [[("public.utf8-plain-text", s)]] }
 
 /// 3 history items (out of order in the table), a 2-item board, and an empty board.
-private func makeSample(in folder: URL) throws {
+@discardableResult
+private func makeSample(in folder: URL, wal: Bool = false) throws -> DatabaseQueue {
     typealias L = SyntheticPasteLibrary
-    try L.make(in: folder, items: [
+    return try L.make(in: folder, items: [
         L.Item(externalID: "h-new", createdAt: 300, timestamp: 400, app: 1, payload: .compressed(text("new"))),
         L.Item(externalID: "h-old", createdAt: 100, timestamp: 150, payload: .plain(text("old"))),
         L.Item(externalID: "h-ext", title: "ext", createdAt: 200, timestamp: 250, payload: .external(text("ext"))),
         L.Item(externalID: "b-2", createdAt: 10, timestamp: 20, board: 7, order: 2, payload: .plain(text("b2"))),
         L.Item(externalID: "b-1", createdAt: 30, timestamp: 40, board: 7, order: 1, payload: .plain(text("b1"))),
     ], boards: [.init(pk: 7, name: "ornek.dev links"), .init(pk: 8, name: "empty")],
-       apps: [.init(pk: 1, bundleID: "dev.ornek.app", name: "Ornek")])
+       apps: [.init(pk: 1, bundleID: "dev.ornek.app", name: "Ornek")], wal: wal)
 }
 
 private func collect(_ library: PasteLibrary, history: Bool, boards: Set<Int64>) throws -> [PasteItem] {
@@ -111,7 +112,8 @@ private func collect(_ library: PasteLibrary, history: Bool, boards: Set<Int64>)
 
     @Test func theOriginalIsNeverWritten() throws {
         let folder = try tempFolder()
-        try makeSample(in: folder)
+        let writer = try makeSample(in: folder, wal: true)
+        defer { _ = writer }
         let names = ["db.sqlite", "db.sqlite-wal", "db.sqlite-shm"]
         func snapshot() -> [String: [Double]] {
             Dictionary(uniqueKeysWithValues: names.compactMap { name in
@@ -120,14 +122,52 @@ private func collect(_ library: PasteLibrary, history: Bool, boards: Set<Int64>)
             })
         }
         let before = snapshot()
+        #expect(before.count == 3)
         let library = try PasteLibrary.open(PasteLibraryLocation(folder: folder, vendor: nil))
         _ = try library.summary()
         _ = try collect(library, history: true, boards: [7])
-        #expect(library.temporaryFolder != nil)
         let copy = try #require(library.temporaryFolder)
         #expect(FileManager.default.fileExists(atPath: copy.path))
         library.close()
         #expect(!FileManager.default.fileExists(atPath: copy.path))
         #expect(snapshot() == before)
+    }
+
+    @Test func rowsThatExistOnlyInTheLogAreRead() throws {
+        let folder = try tempFolder()
+        let writer = try makeSample(in: folder, wal: true)
+        defer { _ = writer }
+        let main = try FileManager.default.attributesOfItem(atPath: folder.appendingPathComponent("db.sqlite").path)[.size] as? Int
+        #expect((main ?? 0) < 8192)  // the schema alone is not in the main file: everything is in the log
+        let library = try PasteLibrary.open(PasteLibraryLocation(folder: folder, vendor: nil))
+        defer { library.close() }
+        #expect(try library.summary().historyCount == 3)
+        #expect(try collect(library, history: true, boards: [7]).count == 5)
+    }
+
+    @Test func aChangingOriginalIsRetriedThenGivenUp() throws {
+        let folder = try tempFolder()
+        let writer = try makeSample(in: folder, wal: true)
+        defer { _ = writer }
+        let wal = folder.appendingPathComponent("db.sqlite-wal")
+        func touch(_ attempt: Int) {
+            try? FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: Double(attempt) * 10)], ofItemAtPath: wal.path)
+        }
+        let location = PasteLibraryLocation(folder: folder, vendor: nil)
+
+        var attempts = 0
+        let library = try PasteLibrary.open(location) { attempt in
+            attempts = attempt
+            if attempt == 1 { touch(attempt) }
+        }
+        #expect(attempts == 2)
+        #expect(try library.summary().historyCount == 3)
+        library.close()
+
+        var tries = 0
+        #expect(throws: PasteImportError.unavailable) {
+            _ = try PasteLibrary.open(location) { attempt in tries = attempt; touch(attempt + 10) }
+        }
+        #expect(tries == 3)
     }
 }

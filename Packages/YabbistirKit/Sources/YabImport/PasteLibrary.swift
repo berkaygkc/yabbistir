@@ -49,7 +49,7 @@ public struct PasteItem: Sendable {
     public let title: String?
 }
 
-/// Reads another clipboard manager's library strictly read-only: the database files are copied to a
+/// Reads another clipboard manager's library strictly read-only: the database and its log are copied to a
 /// temporary folder and only the copy is opened. External data files are read in place.
 public final class PasteLibrary: Sendable {
     private static let tables = ["ZITEMENTITY", "ZITEMDATAENTITY", "ZLISTENTITY", "ZAPPLICATIONENTITY"]
@@ -87,25 +87,49 @@ public final class PasteLibrary: Sendable {
     }
 
     public static func open(_ location: PasteLibraryLocation) throws(PasteImportError) -> PasteLibrary {
+        try open(location, afterCopy: { _ in })
+    }
+
+    /// `afterCopy` runs after each copy attempt (with the attempt number) and exists so tests can change the original mid-copy.
+    static func open(_ location: PasteLibraryLocation, afterCopy: (Int) -> Void) throws(PasteImportError) -> PasteLibrary {
         let fm = FileManager.default
         let copy = fm.temporaryDirectory.appendingPathComponent("yab-library-\(UUID().uuidString)", isDirectory: true)
-        do {
-            try fm.createDirectory(at: copy, withIntermediateDirectories: true)
-            for name in ["db.sqlite", "db.sqlite-wal", "db.sqlite-shm"] {
-                let source = location.folder.appendingPathComponent(name)
-                if name == "db.sqlite" || fm.fileExists(atPath: source.path) {
-                    try fm.copyItem(at: source, to: copy.appendingPathComponent(name))
-                }
+        let names = ["db.sqlite", "db.sqlite-wal"]
+        func stamp() -> [String: [Double]] {
+            var result: [String: [Double]] = [:]
+            for name in names {
+                guard let attrs = try? fm.attributesOfItem(atPath: location.folder.appendingPathComponent(name).path) else { continue }
+                result[name] = [Double((attrs[.size] as? Int) ?? 0), ((attrs[.modificationDate] as? Date)?.timeIntervalSince1970 ?? 0)]
             }
-        } catch {
+            return result
+        }
+        // Recent rows may live only in the write-ahead log, so the database and log are copied as a pair and the
+        // copy is kept only if the original did not change meanwhile. The shared-memory index is not copied:
+        // SQLite rebuilds it from the copied log.
+        var consistent = false
+        for attempt in 1...3 {
+            do {
+                try? fm.removeItem(at: copy)
+                try fm.createDirectory(at: copy, withIntermediateDirectories: true)
+                let before = stamp()
+                for name in names where before[name] != nil {
+                    try fm.copyItem(at: location.folder.appendingPathComponent(name), to: copy.appendingPathComponent(name))
+                }
+                afterCopy(attempt)
+                if before["db.sqlite"] != nil, stamp() == before { consistent = true; break }
+            } catch {
+                try? fm.removeItem(at: copy)
+                throw .unavailable
+            }
+        }
+        guard consistent else {
             try? fm.removeItem(at: copy)
             throw .unavailable
         }
         let queue: DatabaseQueue
         do {
-            var configuration = Configuration()
-            configuration.readonly = true
-            queue = try DatabaseQueue(path: copy.appendingPathComponent("db.sqlite").path, configuration: configuration)
+            // The copy is ours, so it is opened normally (replaying the log needs write access); the original is never opened.
+            queue = try DatabaseQueue(path: copy.appendingPathComponent("db.sqlite").path)
         } catch {
             try? fm.removeItem(at: copy)
             throw .unavailable

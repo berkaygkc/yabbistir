@@ -51,11 +51,21 @@ public enum SyntheticPasteLibrary {
     }
 
     /// Creates `db.sqlite` and `.db_SUPPORT/_EXTERNAL_DATA` inside `folder`.
-    public static func make(in folder: URL, items: [Item], boards: [Board] = [], apps: [App] = []) throws {
+    /// With `wal`, the database is in write-ahead-log mode with automatic checkpointing off, and the returned
+    /// connection must be kept alive: while it is, every row exists only in `db.sqlite-wal`.
+    @discardableResult
+    public static func make(in folder: URL, items: [Item], boards: [Board] = [], apps: [App] = [], wal: Bool = false) throws -> DatabaseQueue {
         let fm = FileManager.default
         let external = folder.appendingPathComponent(".db_SUPPORT/_EXTERNAL_DATA", isDirectory: true)
         try fm.createDirectory(at: external, withIntermediateDirectories: true)
-        let queue = try DatabaseQueue(path: folder.appendingPathComponent("db.sqlite").path)
+        var configuration = Configuration()
+        if wal {
+            configuration.prepareDatabase { db in
+                _ = try String.fetchOne(db, sql: "PRAGMA journal_mode=WAL")
+                try db.execute(sql: "PRAGMA wal_autocheckpoint=0")
+            }
+        }
+        let queue = try DatabaseQueue(path: folder.appendingPathComponent("db.sqlite").path, configuration: configuration)
         try queue.write { db in
             try db.execute(sql: """
                 CREATE TABLE ZITEMENTITY (Z_PK INTEGER PRIMARY KEY, ZIDENTIFIER TEXT, ZCREATEDAT TIMESTAMP, ZTIMESTAMP TIMESTAMP,
@@ -84,6 +94,7 @@ public enum SyntheticPasteLibrary {
                     """, arguments: [index + 1, item.externalID, item.createdAt, item.timestamp, item.title, dataPK, item.board, item.order, item.app])
             }
         }
+        return queue
     }
 
     /// A SQLite file that lacks the expected tables.
