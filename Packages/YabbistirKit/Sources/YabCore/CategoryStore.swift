@@ -187,8 +187,10 @@ extension ItemStore {
             let deleted = try Int64.fetchAll(db, sql: """
                 SELECT id FROM item WHERE NOT EXISTS (SELECT 1 FROM categoryMembership WHERE itemID = item.id)
                 """)
-            let kept = try Int64.fetchAll(db, sql: "SELECT id FROM item WHERE inHistory = 1 AND id NOT IN (\(deleted.isEmpty ? "NULL" : deleted.map { _ in "?" }.joined(separator: ",")))",
-                                          arguments: StatementArguments(deleted))
+            let kept = try Int64.fetchAll(db, sql: """
+                SELECT id FROM item WHERE inHistory = 1
+                AND EXISTS (SELECT 1 FROM categoryMembership WHERE itemID = item.id)
+                """)
             try deleteItems(deleted, db)
             try db.execute(sql: "UPDATE item SET inHistory = 0 WHERE inHistory = 1")
             return (deleted, kept)

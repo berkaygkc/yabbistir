@@ -68,4 +68,14 @@ private let day: TimeInterval = 86_400
         #expect(!model.ignoredApps.contains("com.apple.Passwords"))
         #expect(!preferences.ignoredApps.contains("com.apple.Passwords"))
     }
+
+    @Test func clearingHistoryReportsTheDeletedIDsAndClosesTheDialog() {
+        var reported: [Int64]?
+        model.onCleared = { reported = $0 }
+        model.confirmingClear = true
+        model.clearHistory()
+        #expect(reported == [itemID])
+        #expect(!model.confirmingClear)
+        #expect(itemCount == 0)
+    }
 }

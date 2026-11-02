@@ -26,4 +26,22 @@ import Testing
         #expect(library.itemIDs(inCategory: cat.id!) == [ids[2]])
         #expect(library.index.search("", limit: 10).ids.isEmpty)
     }
+
+    @Test func clearingWhenEveryItemIsCategorizedHidesThemAll() throws {
+        let library = try Library(store: ItemStore.temporary())
+        let cat = try library.createCategory(name: "Kod")
+        var ids: [Int64] = []
+        for text in ["bir", "iki"] {
+            let item = try #require(try library.store.ingest(textClip(text, at: t0))).item
+            library.didIngest(item)
+            try library.add(item.id!, toCategory: cat.id!)
+            ids.append(item.id!)
+        }
+
+        let deleted = try library.clearHistory()
+
+        #expect(deleted.isEmpty)
+        #expect(library.index.search("", limit: 10).ids.isEmpty)
+        #expect(Set(library.itemIDs(inCategory: cat.id!)) == Set(ids))
+    }
 }
