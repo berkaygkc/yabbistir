@@ -19,6 +19,8 @@ final class StackController {
     private let presence = StackWindowState()
     private let notice = NoticeHUD()
     private lazy var pasteTap = PasteKeyTap { [weak self] isRepeat in self?.userPasted(isRepeat: isRepeat) ?? true }
+    /// Under secure input the tap hears no ⌘V; this claims it instead while the stack is open.
+    private let securePaste: SecureInputPaste
     private var tapRunning = false
     private var copying = false
     private var hideTask: Task<Void, Never>?
@@ -31,13 +33,16 @@ final class StackController {
 
     init(env: AppEnvironment) {
         self.env = env
+        // Marked, so the tap lets it pass.
+        let securePaste = SecureInputPaste(claim: GlobalShortcuts.setStackPaste(claimed:), type: {
+            CGEventKeystrokePoster().post(.commandV, keyCode: KeyCodeResolver.currentASCIICapable().keyCode(for: "v") ?? 9)
+        })
+        self.securePaste = securePaste
         session = StackSession(library: env.library, writer: SystemPasteboardWriter(),
                                didWrite: { [weak env] changeCount in env?.monitor.ignore(changeCount: changeCount) },
                                changeCount: { NSPasteboard.general.changeCount },
-                               replayPaste: {
-                                   // A held ⌘V, now that its item is on the clipboard; marked, so the tap lets it pass.
-                                   CGEventKeystrokePoster().post(.commandV, keyCode: KeyCodeResolver.currentASCIICapable().keyCode(for: "v") ?? 9)
-                               })
+                               // A held ⌘V, now that its item is on the clipboard.
+                               replayPaste: { securePaste.typePaste() })
         session.onChange = { [weak self] in self?.sessionChanged() }
         followRailShortcuts()
     }
@@ -72,8 +77,14 @@ final class StackController {
         return session.userPasted(isRepeat: isRepeat, canHold: pasteTap.holdsKeystrokes)
     }
 
+    /// ⌘V while secure input is on: the tap could not hear it, so the stack counts it here and it is typed again.
+    func claimedPastePressed() {
+        securePaste.pressed(ownWindowKey: NSApp.keyWindow != nil) { session.userPasted(canHold: true) }
+    }
+
     private func sessionChanged() {
         defer { onChange?() }
+        if session.isOpen { securePaste.start() } else { securePaste.stop() }
         if session.isOpen {
             if window.isVisible, hideTask == nil {
                 // Input Monitoring may have been granted since the stack opened.

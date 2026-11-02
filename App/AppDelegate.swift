@@ -69,6 +69,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             env.onIngested = { [weak stack] item in stack?.captured(item) }
             env.isStackOpen = { [weak stack] in stack?.session.isOpen ?? false }
             GlobalShortcuts.onStackCopy { stack.copyIntoStack() }
+            GlobalShortcuts.onStackPaste { stack.claimedPastePressed() }
             GlobalShortcuts.onRail(first: { stack.session.moveRecent(to: 0) }, second: { stack.session.moveRecent(to: 1) })
             // Ask once at launch.
             if !AccessibilityPermission.isTrusted() { AccessibilityPermission.prompt() }

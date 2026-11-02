@@ -8,6 +8,8 @@ extension KeyboardShortcuts.Name {
     /// While the new-copy rail shows: move that copy to the top, or to second place.
     public static let stackToFirst = Self("stackToFirst", default: .init(.one, modifiers: [.option]))
     public static let stackToSecond = Self("stackToSecond", default: .init(.two, modifiers: [.option]))
+    /// While the Sıra is open and secure input hides keystrokes from its tap: ⌘V, so the Sıra still hears it.
+    public static let stackPaste = Self("stackPaste", default: .init(.v, modifiers: [.command]))
 }
 
 /// Registers global shortcut handlers so the app target need not import KeyboardShortcuts.
@@ -27,6 +29,17 @@ public enum GlobalShortcuts {
         KeyboardShortcuts.onKeyUp(for: .stackToFirst, action: first)
         KeyboardShortcuts.onKeyUp(for: .stackToSecond, action: second)
         setRailShortcuts(first: false, second: false)
+    }
+
+    /// ⌘V is every app's paste, so it starts off and is claimed only while secure input hides it from the Sıra's
+    /// tap (`setStackPaste`).
+    public static func onStackPaste(_ action: @escaping () -> Void) {
+        KeyboardShortcuts.onKeyDown(for: .stackPaste, action: action)
+        setStackPaste(claimed: false)
+    }
+
+    public static func setStackPaste(claimed: Bool) {
+        if claimed { KeyboardShortcuts.enable(.stackPaste) } else { KeyboardShortcuts.disable(.stackPaste) }
     }
 
     public static func setRailShortcuts(first: Bool, second: Bool) {
