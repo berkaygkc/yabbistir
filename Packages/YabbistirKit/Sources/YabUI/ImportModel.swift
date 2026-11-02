@@ -71,7 +71,7 @@ public final class ImportModel {
 
     // MARK: Importing
 
-    /// Runs the import in the background, then reloads the history index once.
+    /// Runs the import in the background, then reloads the history index once, also after a failed run.
     public func start() {
         guard case .ready(let summary, let location) = state else { return }
         let selection = selection
@@ -87,12 +87,9 @@ public final class ImportModel {
                     Task { @MainActor in self?.advance(to: progress) }
                 }
             }.value
-            if let outcome {
-                state = .done(outcome)
-                reload()
-            } else {
-                state = .failed
-            }
+            state = outcome.map { .done($0) } ?? .failed
+            // A run that stopped partway has still written what it brought (each item filed with it).
+            reload()
         }
     }
 

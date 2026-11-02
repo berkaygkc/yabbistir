@@ -146,13 +146,17 @@ extension ItemStore {
     }
 
     public func add(itemID: Int64, toCategory categoryID: Int64) throws {
-        try dbPool.write { db in
-            if try ClipCategory.fetchOne(db, key: categoryID)?.isSource == true { throw CategoryError.managedByExtension }
-            let position = try Int.fetchOne(db, sql: "SELECT COALESCE(MAX(position), -1) + 1 FROM categoryMembership WHERE categoryID = ?",
-                                            arguments: [categoryID]) ?? 0
-            try db.execute(sql: "INSERT OR IGNORE INTO categoryMembership (categoryID, itemID, position) VALUES (?, ?, ?)",
-                           arguments: [categoryID, itemID, position])
-        }
+        try dbPool.write { db in try addMembership(itemID: itemID, categoryID: categoryID, db) }
+    }
+
+    /// Puts the item on top of the category (already there: it keeps its place). A missing category fails the
+    /// transaction (foreign key).
+    func addMembership(itemID: Int64, categoryID: Int64, _ db: Database) throws {
+        if try ClipCategory.fetchOne(db, key: categoryID)?.isSource == true { throw CategoryError.managedByExtension }
+        let position = try Int.fetchOne(db, sql: "SELECT COALESCE(MAX(position), -1) + 1 FROM categoryMembership WHERE categoryID = ?",
+                                        arguments: [categoryID]) ?? 0
+        try db.execute(sql: "INSERT OR IGNORE INTO categoryMembership (categoryID, itemID, position) VALUES (?, ?, ?)",
+                       arguments: [categoryID, itemID, position])
     }
 
     /// Takes an item out of a category; returns true when that deleted it (it was in nothing else).

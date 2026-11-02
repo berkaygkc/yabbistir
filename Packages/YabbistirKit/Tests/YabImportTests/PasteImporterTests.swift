@@ -153,7 +153,9 @@ private func sample() throws -> PasteLibrary {
         #expect(try store.categories().map(\.name) == ["Pinboard 7"])
     }
 
-    @Test func aBoardThatFailsToFileLeavesItsItemsVisibleAndTheRestCompletes() throws {
+    /// A pinboard item that cannot be filed (its category went away mid-run) is not imported at all: it counts as
+    /// failed, leaves nothing in History, the other boards complete, and the next run brings it.
+    @Test func aBoardItemThatCannotBeFiledComesInNextTime() throws {
         let store = try ItemStore.temporary()
         let library = try open([
             L.Item(externalID: "h", createdAt: 1, timestamp: 1, payload: .plain(text("history"))),
@@ -161,18 +163,22 @@ private func sample() throws -> PasteLibrary {
             L.Item(externalID: "b", createdAt: 1, timestamp: 3, board: 8, order: 1, payload: .plain(text("board eight"))),
         ], boards: [.init(pk: 7, name: "Seven"), .init(pk: 8, name: "Eight")])
         defer { library.close() }
-        struct Boom: Error {}
-        let doomed = Doomed()
-        let flaky = PasteImporter(store: store, ignoredApps: [], now: now, throttle: .init()) { id in
-            if try doomed.isDoomed(id, store: store) { throw Boom() }
-        }
-        let report = try flaky.run(library, selection: PasteSelection(history: true, boards: [7, 8])) { _ in }
-        #expect(report.failed == 1 && report.added == 2)
-        #expect(try store.categories().map(\.name).sorted() == ["Eight", "Seven"])
+        let selection = PasteSelection(history: true, boards: [7, 8])
+        let flaky = PasteImporter(store: store, ignoredApps: [], now: now, throttle: .init(), beforeItem: { item in
+            guard item.boardID == 7, let seven = try store.categories().first(where: { $0.name == "Seven" }) else { return }
+            _ = try store.deleteCategory(id: seven.id!)
+        })
+        let report = try flaky.run(library, selection: selection) { _ in }
+        #expect(report.failed == 1 && report.added == 2 && report.categoriesCreated == 1)
+        #expect(try store.categories().map(\.name) == ["Eight"])
+        #expect(try store.history(limit: 10).map(\.previewText).sorted() == ["board eight", "history"])
+        #expect(try store.history(limit: 10).filter(\.inHistory).map(\.previewText) == ["history"])
+
+        let again = try importer(store).run(library, selection: selection) { _ in }
+        #expect(again.added == 1 && again.skipped == 2 && again.categoriesCreated == 1)
         let seven = try #require(try store.categories().first { $0.name == "Seven" })
-        #expect(try store.itemIDs(inCategory: seven.id!).isEmpty)
-        let visible = try store.history(limit: 10).filter(\.inHistory).map(\.previewText)
-        #expect(Set(visible) == ["history", "board seven"])
+        #expect(try store.itemIDs(inCategory: seven.id!).compactMap { try store.item(id: $0)?.previewText } == ["board seven"])
+        #expect(try store.history(limit: 10).filter(\.inHistory).map(\.previewText) == ["history"])
     }
 
     @Test func aMergedBoardItemStaysInHistoryAndJoinsTheCategory() throws {
@@ -229,6 +235,60 @@ private func sample() throws -> PasteLibrary {
         #expect(try store.history(limit: 10).isEmpty)
     }
 
+    /// A run that stops partway through the pinboards (a quit, a crash, an unreadable page) loses none of them: the
+    /// next run files every item, in order, and keeps the pinned-only ones out of History.
+    @Test func anInterruptedRunStillFilesEveryPinboardItemNextTime() throws {
+        let store = try ItemStore.temporary()
+        let library = try open([
+            L.Item(externalID: "h", createdAt: 1, timestamp: 1, payload: .plain(text("history"))),
+            L.Item(externalID: "a1", createdAt: 1, timestamp: 2, board: 7, order: 1, payload: .plain(text("first"))),
+            L.Item(externalID: "a2", createdAt: 1, timestamp: 3, board: 7, order: 2, payload: .plain(text("second"))),
+            L.Item(externalID: "a3", createdAt: 1, timestamp: 4, board: 7, order: 3, payload: .plain(text("third"))),
+            L.Item(externalID: "b1", createdAt: 1, timestamp: 5, board: 8, order: 1, payload: .plain(text("other board"))),
+        ], boards: [.init(pk: 7, name: "Links"), .init(pk: 8, name: "Notes")])
+        defer { library.close() }
+        let selection = PasteSelection(history: true, boards: [7, 8])
+        struct Quit: Error {}
+        let countdown = Countdown(passes: 2)
+        let interrupted = PasteImporter(store: store, ignoredApps: [], now: now, throttle: .init(), beforeItem: { item in
+            if item.boardID != nil, countdown.expired() { throw Quit() }
+        })
+        #expect(throws: Quit.self) { _ = try interrupted.run(library, selection: selection) { _ in } }
+
+        _ = try importer(store).run(library, selection: selection) { _ in }
+        func previews(_ name: String) throws -> [String] {
+            let category = try #require(try store.categories().first { $0.name == name })
+            return try store.itemIDs(inCategory: category.id!).compactMap { try store.item(id: $0)?.previewText }
+        }
+        #expect(try store.categories().count == 2)
+        #expect(try previews("Links") == ["first", "second", "third"])
+        #expect(try previews("Notes") == ["other board"])
+        #expect(try store.history(limit: 10).filter(\.inHistory).map(\.previewText) == ["history"])
+    }
+
+    /// A pinboard whose items all stay out (an ignored app, or imported before and deleted since) leaves no empty
+    /// category behind.
+    @Test func aPinboardWithNothingNewLeavesNoEmptyCategory() throws {
+        let store = try ItemStore.temporary()
+        let library = try open([
+            L.Item(externalID: "a", createdAt: 1, timestamp: 1, board: 7, order: 1, app: 1, payload: .plain(text("from a vault"))),
+            L.Item(externalID: "b", createdAt: 1, timestamp: 2, board: 8, order: 1, payload: .plain(text("kept"))),
+        ], boards: [.init(pk: 7, name: "Vault"), .init(pk: 8, name: "Notes")],
+           apps: [.init(pk: 1, bundleID: "dev.ornek.vault", name: "Vault")])
+        defer { library.close() }
+        let selection = PasteSelection(history: false, boards: [7, 8])
+        let report = try importer(store, ignored: ["dev.ornek.vault"]).run(library, selection: selection) { _ in }
+        #expect(report.categoriesCreated == 1 && report.skipped == 1)
+        #expect(try store.categories().map(\.name) == ["Notes"])
+
+        // Deleted after the import: running it again brings nothing back, not even an empty column.
+        let notes = try #require(try store.categories().first)
+        _ = try store.deleteCategory(id: notes.id!)
+        let again = try importer(store, ignored: ["dev.ornek.vault"]).run(library, selection: selection) { _ in }
+        #expect(again.categoriesCreated == 0)
+        #expect(try store.categories().isEmpty)
+    }
+
     @Test func kindsAreCounted() throws {
         let store = try ItemStore.temporary()
         let library = try open([
@@ -243,15 +303,15 @@ private func sample() throws -> PasteLibrary {
     }
 }
 
-/// Dooms the first board item that reaches filing (the one on the lower-numbered board is filed first).
-private final class Doomed: @unchecked Sendable {
+/// Lets `passes` calls through, then reports expiry on every later one.
+private final class Countdown: @unchecked Sendable {
     private let lock = NSLock()
-    private var fired = false
-    func isDoomed(_ id: Int64, store: ItemStore) throws -> Bool {
+    private var left: Int
+    init(passes: Int) { left = passes }
+    func expired() -> Bool {
         lock.lock(); defer { lock.unlock() }
-        if fired { return false }
-        fired = true
-        return true
+        left -= 1
+        return left < 0
     }
 }
 

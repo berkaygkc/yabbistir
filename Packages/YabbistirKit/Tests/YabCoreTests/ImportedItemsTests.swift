@@ -38,6 +38,19 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
         #expect(item.sourceName == "TextEdit")
     }
 
+    /// The merge keeps the existing representations, so a large one that came with the import is not kept on disk.
+    @Test func aMergedImportLeavesNoStrayBlob() throws {
+        let store = try ItemStore.temporary()
+        _ = try #require(try store.ingest(textClip("aynı içerik", at: now)))
+        let large = Data(repeating: 0x3C, count: ItemStore.inlineLimit + 1)
+        let clip = ImportedClip(
+            items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("aynı içerik".utf8)),
+                     PasteboardRepresentation(type: "public.html", data: large)]],
+            source: nil, device: .local, firstCopiedAt: now, lastCopiedAt: now, externalID: "ext-large")
+        guard case .merged = try store.importClip(clip, from: "other", usedAt: now) else { Issue.record("expected merged"); return }
+        #expect(try store.blobs.allHashes().isEmpty)
+    }
+
     @Test func theSameExternalIDIsImportedOnce() throws {
         let store = try ItemStore.temporary()
         let clip = importedClip("bir kez", first: now, last: now)
@@ -60,15 +73,6 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
         let clip = ImportedClip(items: [], source: nil, device: .local, firstCopiedAt: now, lastCopiedAt: now, externalID: "empty")
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .nothingToKeep)
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .alreadyImported)
-    }
-
-    @Test func hideFromHistoryKeepsACategorizedItem() throws {
-        let store = try ItemStore.temporary()
-        let result = try #require(try store.ingest(textClip("kategorili", at: now)))
-        let category = try store.createCategory(name: "Not", color: .slate)
-        try store.add(itemID: result.item.id!, toCategory: category.id!)
-        try store.hideFromHistory(result.item.id!)
-        #expect(try store.item(id: result.item.id!)?.inHistory == false)
     }
 
     @MainActor @Test func reloadIndexNotifiesOnce() throws {

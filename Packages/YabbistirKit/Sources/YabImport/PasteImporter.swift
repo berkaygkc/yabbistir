@@ -53,17 +53,17 @@ public struct PasteImporter: Sendable {
     private let filter: CaptureFilter
     private let now: Date
     private let throttle: Throttle
-    /// Test seam: runs before a pinboard item is added to its category and may throw.
-    private let beforeFiling: (@Sendable (Int64) throws -> Void)?
+    /// Test seam: runs before each item is brought; what it throws stops the run, as a quit or an unreadable page would.
+    private let beforeItem: (@Sendable (PasteItem) throws -> Void)?
 
     public init(store: ItemStore, ignoredApps: Set<String>, now: Date) {
-        self.init(store: store, ignoredApps: ignoredApps, now: now, throttle: Throttle(), beforeFiling: nil)
+        self.init(store: store, ignoredApps: ignoredApps, now: now, throttle: Throttle(), beforeItem: nil)
     }
 
     init(store: ItemStore, ignoredApps: Set<String>, now: Date, throttle: Throttle,
-         beforeFiling: (@Sendable (Int64) throws -> Void)? = nil) {
+         beforeItem: (@Sendable (PasteItem) throws -> Void)? = nil) {
         self.throttle = throttle
-        self.beforeFiling = beforeFiling
+        self.beforeItem = beforeItem
         self.store = store
         var filter = CaptureFilter()
         filter.ignoredBundleIDs = ignoredApps
@@ -74,18 +74,17 @@ public struct PasteImporter: Sendable {
     public func run(_ library: PasteLibrary, selection: PasteSelection,
                     progress: @Sendable (ImportProgress) -> Void) throws -> ImportReport {
         let summary = try library.summary()
-        let names = Dictionary(uniqueKeysWithValues: summary.boards.map { ($0.id, $0.name) })
-        let total = (selection.history ? summary.historyCount : 0)
-            + summary.boards.filter { selection.boards.contains($0.id) }.reduce(0) { $0 + $1.count }
+        let chosen = summary.boards.filter { selection.boards.contains($0.id) }
+        let total = (selection.history ? summary.historyCount : 0) + chosen.reduce(0) { $0 + $1.count }
 
         var report = ImportReport()
         var done = 0
         var reported = -1
         let clock = ContinuousClock()
         var lastReport = clock.now
-        // Items per pinboard, in the pinboard's display order. New board-only items are hidden from history
-        // only once they are in their category.
-        var members: [Int64: [Member]] = [:]
+        // Every chosen pinboard has its category before the first item comes in, so an item is filed in the same
+        // transaction that imports it: a run that stops partway leaves nothing for a later run to file.
+        let (filings, created) = try categories(for: chosen)
 
         func notify() {
             reported = done
@@ -95,16 +94,19 @@ public struct PasteImporter: Sendable {
 
         try library.items(history: selection.history, boards: selection.boards) { batch in
             for item in batch {
+                try beforeItem?(item)
                 let outcome: Brought
-                do { outcome = try bring(item) } catch { outcome = .failed }
+                if let board = item.boardID, filings[board] == nil {
+                    // Its category could not be made: it stays out, and a later run brings it.
+                    outcome = .failed
+                } else {
+                    do { outcome = try bring(item, filing: item.boardID.flatMap { filings[$0] }) } catch { outcome = .failed }
+                }
                 switch outcome {
-                case .added(let id, let kind):
+                case .added(let kind):
                     report.added += 1
                     report.kinds[kind, default: 0] += 1
-                    if let board = item.boardID { members[board, default: []].append(Member(id: id, isNew: true, kind: kind)) }
-                case .merged(let id):
-                    report.merged += 1
-                    if let board = item.boardID { members[board, default: []].append(Member(id: id, isNew: false, kind: nil)) }
+                case .merged: report.merged += 1
                 case .skipped: report.skipped += 1
                 case .failed: report.failed += 1
                 }
@@ -113,16 +115,16 @@ public struct PasteImporter: Sendable {
             }
         }
 
-        try file(members, names: names, into: &report)
+        report.categoriesCreated = keepFilled(created)
         if reported != done { notify() }
         return report
     }
 
     private enum Brought {
-        case added(Int64, ItemKind), merged(Int64), skipped, failed
+        case added(ItemKind), merged, skipped, failed
     }
 
-    private func bring(_ item: PasteItem) throws -> Brought {
+    private func bring(_ item: PasteItem, filing: ImportFiling?) throws -> Brought {
         var items: [[PasteboardRepresentation]]
         switch item.payload {
         case .success(let decoded):
@@ -137,60 +139,49 @@ public struct PasteImporter: Sendable {
 
         let clip = ImportedClip(items: items, source: item.source, device: .local, firstCopiedAt: item.firstCopiedAt,
                                 lastCopiedAt: item.lastCopiedAt, externalID: item.externalID)
-        switch try store.importClip(clip, from: Self.source, usedAt: now) {
-        case .added(let id):
-            guard let kind = ItemClassifier.classify(items)?.kind else { return .added(id, .text) }
-            return .added(id, kind)
-        case .merged(let id): return .merged(id)
+        switch try store.importClip(clip, from: Self.source, usedAt: now, filing: filing) {
+        case .added: return .added(ItemClassifier.classify(items)?.kind ?? .text)
+        case .merged: return .merged
         case .alreadyImported: return .skipped
         case .nothingToKeep: return .failed
         }
     }
 
-    private struct Member {
-        let id: Int64
-        let isNew: Bool
-        let kind: ItemKind?
+    /// Each chosen pinboard joins the same-named category of the person's own (never an extension's source
+    /// category), or gets a new one. Pinned-only items stay out of History. A board whose category cannot be made
+    /// has no filing; the other boards carry on. Returns the filings by board and the categories made.
+    private func categories(for boards: [PasteBoard]) throws -> (filings: [Int64: ImportFiling], created: [Int64]) {
+        var categories = try store.categories()
+        var filings: [Int64: ImportFiling] = [:]
+        var created: [Int64] = []
+        for board in boards.sorted(by: { $0.id < $1.id }) {
+            let trimmed = board.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            let name = trimmed.isEmpty ? "Pinboard \(board.id)" : trimmed
+            let folded = SearchNormalizer.normalize(name)
+            if let found = categories.first(where: { !$0.isSource && SearchNormalizer.normalize($0.name) == folded }), let id = found.id {
+                filings[board.id] = ImportFiling(categoryID: id, hidesNewItem: true)
+                continue
+            }
+            guard let category = try? store.createCategory(name: name, color: store.nextCategoryColor(), visibility: .onSelect),
+                  let id = category.id else { continue }
+            categories.append(category)
+            created.append(id)
+            filings[board.id] = ImportFiling(categoryID: id, hidesNewItem: true)
+        }
+        return (filings, created)
     }
 
-    /// Each pinboard becomes (or joins) a category. A category lists its last-added item first, so items go in
-    /// reverse: the pinboard's top item ends on top. A board that cannot be filed leaves its items in history
-    /// and counts them as failed; the other boards carry on.
-    private func file(_ members: [Int64: [Member]], names: [Int64: String], into report: inout ImportReport) throws {
-        var categories = try store.categories()
-        for board in members.keys.sorted() {
-            guard let items = members[board], !items.isEmpty else { continue }
-            let trimmed = (names[board] ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-            let name = trimmed.isEmpty ? "Pinboard \(board)" : trimmed
-            let folded = SearchNormalizer.normalize(name)
-            var filed = 0
-            do {
-                let category: ClipCategory
-                if let found = categories.first(where: { !$0.isSource && SearchNormalizer.normalize($0.name) == folded }) {
-                    category = found
-                } else {
-                    category = try store.createCategory(name: name, color: try store.nextCategoryColor(), visibility: .onSelect)
-                    categories.append(category)
-                    report.categoriesCreated += 1
-                }
-                for member in items.reversed() {
-                    try beforeFiling?(member.id)
-                    try store.add(itemID: member.id, toCategory: category.id!)
-                    if member.isNew { try store.hideFromHistory(member.id) }
-                    filed += 1
-                }
-            } catch {
-                for member in items.reversed().dropFirst(filed) {
-                    if member.isNew, let kind = member.kind {
-                        report.added -= 1
-                        report.kinds[kind, default: 1] -= 1
-                        if report.kinds[kind] == 0 { report.kinds[kind] = nil }
-                    } else if !member.isNew {
-                        report.merged -= 1
-                    }
-                    report.failed += 1
-                }
+    /// A category made for a pinboard whose items all stayed out (imported before, ignored, failed) is removed again,
+    /// so a run never leaves an empty column. Returns how many made ones stay.
+    private func keepFilled(_ created: [Int64]) -> Int {
+        var kept = 0
+        for id in created {
+            if (try? store.itemIDs(inCategory: id))?.isEmpty == true {
+                _ = try? store.deleteCategory(id: id)
+            } else {
+                kept += 1
             }
         }
+        return kept
     }
 }

@@ -167,14 +167,15 @@ public final class PasteLibrary: Sendable {
         }
     }
 
-    /// History first (oldest to newest), then each requested pinboard in its display order.
+    /// History first (oldest to newest), then each requested pinboard from its last item up to its top one: a
+    /// category lists its last-added item first, so filing them in this order keeps the pinboard's top item on top.
     public func items(history: Bool, boards: Set<Int64>, batch: Int = 200, _ body: ([PasteItem]) throws -> Void) throws {
         let size = max(batch, 1)
         if history {
             try page(where: "i.ZLIST IS NULL", arguments: [], order: "i.ZTIMESTAMP, i.Z_PK", size: size, body)
         }
         for board in boards.sorted() {
-            try page(where: "i.ZLIST = ?", arguments: [board], order: "i.ZDISPLAYORDERINPINBOARD, i.Z_PK", size: size, body)
+            try page(where: "i.ZLIST = ?", arguments: [board], order: "i.ZDISPLAYORDERINPINBOARD DESC, i.Z_PK DESC", size: size, body)
         }
     }
 
