@@ -17,7 +17,7 @@ final class FloatingSurface: NSPanel {
     /// ⌘ shortcuts the surface handles itself (true: consumed), e.g. ⌘N in the editor.
     var onKeyEquivalent: ((NSEvent) -> Bool)?
 
-    init(canBecomeKey: Bool, sizedByOwner: Bool = false) {
+    init(canBecomeKey: Bool, sizedByOwner: Bool = false, sharingType: NSWindow.SharingType) {
         keyable = canBecomeKey
         self.sizedByOwner = sizedByOwner
         super.init(contentRect: .zero, styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
@@ -30,7 +30,7 @@ final class FloatingSurface: NSPanel {
         hidesOnDeactivate = false
         animationBehavior = .none
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient, .ignoresCycle]
-        sharingType = .none // hidden during screen sharing, like the panel
+        self.sharingType = sharingType
     }
 
     override var canBecomeKey: Bool { keyable }

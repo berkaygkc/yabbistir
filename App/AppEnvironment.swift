@@ -98,7 +98,8 @@ final class AppEnvironment {
                                       resultFiles: resultFiles)
         // Wired before anything loads: the main helper and the jobs' one both ask through `hostCalls`, which
         // `installHostCalls` also gives the app's language.
-        let hostServices = AppHostServices(extensions: extensions, language: language)
+        let hostServices = AppHostServices(extensions: extensions, language: language,
+                                          sharingType: PreferenceEffects.sharingType(hidden: preferences.hidesFromScreenSharing))
         self.hostServices = hostServices
         hostCalls = HostCallRouter(services: hostServices, registry: extensionRegistry)
         hostCalls.onTranslationNeeded = { [weak hostServices] from, to in hostServices?.offerTranslation(from: from, to: to) }

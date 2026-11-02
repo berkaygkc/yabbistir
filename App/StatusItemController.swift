@@ -53,6 +53,12 @@ final class StatusItemController: NSObject, NSMenuDelegate, NSMenuItemValidation
         followJobs()
     }
 
+    /// Whether the icon is in the menu bar.
+    var isVisible: Bool {
+        get { item.isVisible }
+        set { item.isVisible = newValue }
+    }
+
     /// The button on screen and its screen's visible frame (the job card hangs from it).
     private var anchor: (icon: CGRect, visibleFrame: CGRect)? {
         guard let button = item.button, let window = button.window, let screen = window.screen else { return nil }

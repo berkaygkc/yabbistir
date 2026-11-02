@@ -12,14 +12,15 @@ final class AppHostServices: HostServices {
     private let language: LanguageStore
     /// Made on first use: an app whose extensions never ask for the model or a translation never touches either.
     private lazy var onDevice = OnDeviceHostServices()
-    private let notice = NoticeHUD()
+    private let notice: NoticeHUD
     /// The open panel's frame; nil while it is closed. Set at launch, once the panel exists.
     var panelFrame: () -> CGRect? = { nil }
     /// Where a notice of the notice's size hangs while the panel is closed: from the menu bar status item, under the
     /// job card while that shows (`JobsSurfaceController.noticeOrigin`). Set at launch.
     var underStatusItem: ((CGSize) -> CGPoint)?
 
-    init(extensions: ExtensionService, language: LanguageStore) {
+    init(extensions: ExtensionService, language: LanguageStore, sharingType: NSWindow.SharingType) {
+        notice = NoticeHUD(sharingType: sharingType)
         self.extensions = extensions
         self.language = language
     }

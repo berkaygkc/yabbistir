@@ -14,15 +14,15 @@ import YabUI
 final class PanelController: NSObject, NSWindowDelegate {
     private let env: AppEnvironment
     private let stack: StackSession
-    private let window = PanelWindow()
+    private let window: PanelWindow
     private let model: PanelViewModel
     /// A source row's actions: the value pasted or copied without ever joining history.
     private let sourceRunner: SourceRunner
-    private let notice = NoticeHUD()
-    private let pinSurface = FloatingSurface(canBecomeKey: false)
+    private let notice: NoticeHUD
+    private let pinSurface: FloatingSurface
     /// The ⇧ panel: beside the selected row like a submenu; the keyboard stays with the panel.
-    private let transformSurface = FloatingSurface(canBecomeKey: false)
-    private let previewSurface = FloatingSurface(canBecomeKey: false)
+    private let transformSurface: FloatingSurface
+    private let previewSurface: FloatingSurface
     private var previewContent: PreviewContent?
     /// What the loaded preview shows: "item:<id>", a command on its subject (with the hint
     /// revision, so a value that arrives later replaces the spinner), or a source's row as it is listed now.
@@ -30,7 +30,7 @@ final class PanelController: NSObject, NSWindowDelegate {
     private var previewSide: PreviewSide?
     private var previewLoad: Task<Void, Never>?
     /// The category editor takes keyboard focus while a name is edited.
-    private let editorSurface = FloatingSurface(canBecomeKey: true)
+    private let editorSurface: FloatingSurface
     private lazy var editor = CategoryEditorModel(library: env.library, language: env.language, sources: env.sources)
     private var targetApp: NSRunningApplication?
     /// The app the panel opened for, as extensions see it; jobs started from this panel keep it.
@@ -45,6 +45,13 @@ final class PanelController: NSObject, NSWindowDelegate {
     init(env: AppEnvironment, stack: StackController) {
         self.env = env
         self.stack = stack.session
+        let sharing = PreferenceEffects.sharingType(hidden: env.preferences.hidesFromScreenSharing)
+        window = PanelWindow(sharingType: sharing)
+        notice = NoticeHUD(sharingType: sharing)
+        pinSurface = FloatingSurface(canBecomeKey: false, sharingType: sharing)
+        transformSurface = FloatingSurface(canBecomeKey: false, sharingType: sharing)
+        previewSurface = FloatingSurface(canBecomeKey: false, sharingType: sharing)
+        editorSurface = FloatingSurface(canBecomeKey: true, sharingType: sharing)
         model = PanelViewModel(library: env.library, language: env.language, stack: stack.session, extensions: env.extensions,
                                sources: env.sources)
         sourceRunner = SourceRunner(sources: env.sources, paste: env.sensitivePaste)

@@ -15,9 +15,9 @@ import YabUI
 final class StackController {
     let session: StackSession
     private let env: AppEnvironment
-    private let window = FloatingSurface(canBecomeKey: false, sizedByOwner: true)
+    private let window: FloatingSurface
     private let presence = StackWindowState()
-    private let notice = NoticeHUD()
+    private let notice: NoticeHUD
     private lazy var pasteTap = PasteKeyTap { [weak self] isRepeat in self?.userPasted(isRepeat: isRepeat) ?? true }
     /// Under secure input the tap hears no ⌘V; this claims it instead while the stack is open.
     private let securePaste: SecureInputPaste
@@ -35,6 +35,9 @@ final class StackController {
 
     init(env: AppEnvironment) {
         self.env = env
+        let sharing = PreferenceEffects.sharingType(hidden: env.preferences.hidesFromScreenSharing)
+        window = FloatingSurface(canBecomeKey: false, sizedByOwner: true, sharingType: sharing)
+        notice = NoticeHUD(sharingType: sharing)
         // Marked, so the tap lets it pass.
         let securePaste = SecureInputPaste(claim: GlobalShortcuts.setStackPaste(claimed:), type: {
             CGEventKeystrokePoster().post(.commandV, keyCode: KeyCodeResolver.currentASCIICapable().keyCode(for: "v") ?? 9)

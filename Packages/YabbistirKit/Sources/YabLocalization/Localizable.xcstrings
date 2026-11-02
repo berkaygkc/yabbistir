@@ -4947,6 +4947,227 @@
           }
         }
       }
+    },
+    "settings.general.language": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dil"
+          }
+        }
+      }
+    },
+    "settings.general.appearance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görünüm"
+          }
+        }
+      }
+    },
+    "settings.general.appearance.system": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem"
+          }
+        }
+      }
+    },
+    "settings.general.appearance.light": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık"
+          }
+        }
+      }
+    },
+    "settings.general.appearance.dark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koyu"
+          }
+        }
+      }
+    },
+    "settings.general.launchAtLogin": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at login"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girişte başlat"
+          }
+        }
+      }
+    },
+    "settings.general.launchAtLogin.approval": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs your approval in System Settings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Ayarları’nda onay gerekiyor."
+          }
+        }
+      }
+    },
+    "settings.general.launchAtLogin.failed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t turn it on. Try in System Settings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açılamadı. Sistem Ayarları’ndan dene."
+          }
+        }
+      }
+    },
+    "settings.openSystemSettings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Ayarları’nı aç"
+          }
+        }
+      }
+    },
+    "settings.general.menuBarIcon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu bar icon"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menü çubuğu simgesi"
+          }
+        }
+      }
+    },
+    "settings.general.menuBarIcon.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While it’s hidden, open yabbistir again to reach Settings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizliyken Ayarlar’a yabbistir’i yeniden açarak ulaşırsın."
+          }
+        }
+      }
+    },
+    "settings.general.hideFromSharing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide from screen sharing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran paylaşımında gizle"
+          }
+        }
+      }
+    },
+    "settings.general.hideFromSharing.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel, the Stack and notices don’t show up in recordings or shared screens."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel, Sıra ve bildirimler kayıtlarda ve paylaşılan ekranda görünmez."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

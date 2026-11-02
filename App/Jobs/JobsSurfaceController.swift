@@ -22,7 +22,7 @@ final class JobsSurfaceController {
 
     private let center: JobCenter
     private let language: LanguageStore
-    private let window = FloatingSurface(canBecomeKey: false, sizedByOwner: true)
+    private let window: FloatingSurface
     private let state = JobCardWindowState()
     /// The status item's button on screen and its screen's visible frame; nil while it has none
     /// (hidden behind the notch), then the card hangs at the top right of the main screen.
@@ -41,7 +41,8 @@ final class JobsSurfaceController {
     private var leaveTask: Task<Void, Never>?
     private var shadowTask: Task<Void, Never>?
 
-    init(center: JobCenter, language: LanguageStore) {
+    init(center: JobCenter, language: LanguageStore, sharingType: NSWindow.SharingType) {
+        window = FloatingSurface(canBecomeKey: false, sizedByOwner: true, sharingType: sharingType)
         self.center = center
         self.language = language
         followJobs()

@@ -25,12 +25,15 @@ public enum SettingsSection: String, CaseIterable, Hashable {
 public struct SettingsModels {
     public let preferences: Preferences
     public let language: LanguageStore
+    public let general: GeneralSettingsModel
     public let extensions: ExtensionsSettingsModel
     public let store: StoreModel
 
-    public init(preferences: Preferences, language: LanguageStore, extensions: ExtensionsSettingsModel, store: StoreModel) {
+    public init(preferences: Preferences, language: LanguageStore, general: GeneralSettingsModel,
+                extensions: ExtensionsSettingsModel, store: StoreModel) {
         self.preferences = preferences
         self.language = language
+        self.general = general
         self.extensions = extensions
         self.store = store
     }
@@ -53,6 +56,8 @@ public struct SettingsView: View {
             .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
         } detail: {
             switch section ?? .general {
+            case .general:
+                GeneralSettingsView(model: models.general)
             case .extensions:
                 ExtensionsSettingsView(model: models.extensions, store: models.store)
             case let other:

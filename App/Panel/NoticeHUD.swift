@@ -12,7 +12,7 @@ final class NoticeHUD {
     private let window: NSPanel
     private var hideTask: Task<Void, Never>?
 
-    init() {
+    init(sharingType: NSWindow.SharingType) {
         window = NSPanel(contentRect: .zero, styleMask: [.nonactivatingPanel, .borderless], backing: .buffered, defer: true)
         window.isFloatingPanel = true
         window.level = .floating
@@ -20,7 +20,7 @@ final class NoticeHUD {
         window.backgroundColor = .clear
         window.hasShadow = true
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
-        window.sharingType = .none
+        window.sharingType = sharingType
     }
 
     func show(near frame: CGRect, language: AppLanguage, kind: NoticeKind) {

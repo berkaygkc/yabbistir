@@ -9,7 +9,7 @@ final class PanelWindow: NSPanel {
     var showsShiftHint: () -> Bool = { false }
     private var shiftTap = ShiftTapDetector()
 
-    init() {
+    init(sharingType: NSWindow.SharingType) {
         super.init(contentRect: .zero, styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
                    backing: .buffered, defer: true)
         isFloatingPanel = true
@@ -22,7 +22,7 @@ final class PanelWindow: NSPanel {
         isMovable = false
         animationBehavior = .none
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient, .ignoresCycle]
-        sharingType = .none // hidden during screen sharing (spec default)
+        self.sharingType = sharingType
     }
 
     override var canBecomeKey: Bool { true }

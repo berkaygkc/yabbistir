@@ -11,6 +11,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: StatusItemController?
     private var jobsCard: JobsSurfaceController?
     private var settings: SettingsWindowController?
+    private var effects: PreferenceEffects?
     #if DEBUG
     private let materialComparison = MaterialSpikeWindow()
     #endif
@@ -38,7 +39,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             // Every registry change (a switch, a removal, the master switch, new permissions, too many
             // errors) stops the jobs of extensions that can no longer run.
             env.extensions.jobs = env.jobs
-            let jobsCard = JobsSurfaceController(center: env.jobs, language: env.language)
+            let jobsCard = JobsSurfaceController(
+                center: env.jobs, language: env.language,
+                sharingType: PreferenceEffects.sharingType(hidden: env.preferences.hidesFromScreenSharing))
             self.jobsCard = jobsCard
             self.env = env
             self.panel = panel
@@ -50,7 +53,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             let storeModel = StoreModel(
                 client: env.storeClient, registry: env.extensionRegistry, language: env.language, logs: env.extensionLogs)
             let settings = SettingsWindowController(
-                models: SettingsModels(preferences: env.preferences, language: env.language, extensions: settingsModel, store: storeModel))
+                models: SettingsModels(
+                    preferences: env.preferences, language: env.language,
+                    general: GeneralSettingsModel(preferences: env.preferences, language: env.language, loginItem: SystemLoginItem()),
+                    extensions: settingsModel, store: storeModel))
             self.settings = settings
             #if DEBUG
             let comparison = materialComparison
@@ -63,6 +69,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem = StatusItemController(env: env, jobsCard: jobsCard, isPanelVisible: isPanelVisible,
                                               openPanel: { panel.toggle(anchor: $0) }, openSettings: { settings.show() })
             #endif
+            if let statusItem {
+                let effects = PreferenceEffects(preferences: env.preferences, env: env, statusItem: statusItem)
+                effects.start()
+                self.effects = effects
+            }
             // Extensions' notices go over the open panel, else under the status item (and its job card).
             env.hostServices.panelFrame = { [weak panel] in panel?.frameOnScreen }
             env.hostServices.underStatusItem = { [weak jobsCard] size in jobsCard?.noticeOrigin(for: size) ?? .zero }
@@ -78,6 +89,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             NSAlert(error: error).runModal()
             NSApp.terminate(nil)
         }
+    }
+
+    /// Opening yabbistir again (Spotlight, Finder) opens Settings: the way in while the menu bar icon is hidden.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        settings?.show()
+        return true
     }
 
     /// A secret still on the clipboard gives it back before anything else. Jobs end with the app: every
