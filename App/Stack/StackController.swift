@@ -23,6 +23,8 @@ final class StackController {
     private let securePaste: SecureInputPaste
     private var tapRunning = false
     private var copying = false
+    /// The latest copy kept in history, for ⌘⇧C after an app that copies on its own (`RecentCopy`).
+    private var lastCopy: ClipItem?
     private var hideTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
     private var shadowTask: Task<Void, Never>?
@@ -48,24 +50,34 @@ final class StackController {
     }
 
     /// ⌘⇧C: opens the stack at once, then copies the frontmost app's selection into it with a
-    /// marked ⌘C. With nothing selected the stack stays open and empty, ready for copies made with
-    /// a page's copy button; a beep only when it was already open.
+    /// marked ⌘C. When that copies nothing, a copy the app made on its own a moment before joins
+    /// instead (`RecentCopy`); otherwise the stack stays open and empty, ready for copies made with
+    /// a page's copy button. A beep only when it was already open.
     func copyIntoStack() {
         guard !copying else { return }
         copying = true
         let wasOpen = session.isOpen
+        let frontApp = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
+        let pressedAt = Date()
         session.open()
         Task {
             let trigger = CopyTrigger(reader: SystemPasteboardReader(), resolver: .currentASCIICapable(), poster: CGEventKeystrokePoster())
             let copied = await trigger.copy()
             copying = false
-            if !copied, wasOpen { NSSound.beep() }
+            guard !copied else { return }
+            if wasOpen {
+                NSSound.beep()
+            } else if let id = RecentCopy.meant(lastCopy, frontApp: frontApp, pressedAt: pressedAt),
+                      !session.entries.contains(where: { $0.itemID == id }) {
+                session.append(id)
+            }
         }
     }
 
     /// Every captured copy joins the open stack. Copying the head again (a snippet tool putting
     /// the clipboard back) adds nothing.
     func captured(_ item: ClipItem) {
+        lastCopy = item
         guard let id = item.id, session.isOpen, session.entries.first?.itemID != id else { return }
         session.append(id)
     }
