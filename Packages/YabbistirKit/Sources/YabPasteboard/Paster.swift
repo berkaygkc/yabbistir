@@ -60,12 +60,20 @@ public final class Paster {
     public func paste(_ items: [[PasteboardRepresentation]], kind: ItemKind, targetBundleID: String?, plainText: Bool,
                       onlyIf stillTarget: (() -> Bool)? = nil) async -> PasteOutcome {
         didWrite(writer.write(items, plainTextOnly: plainText))
+        return await send(kind: kind, targetBundleID: targetBundleID, onlyIf: stillTarget)
+    }
+
+    /// Steps after the write: trust, key, the 30 ms beat, secure input (when honored), target check, ⌘V.
+    /// A caller that wrote the clipboard its own way (a secret from a source) types the shortcut with this.
+    /// `honorsSecureInput: false` sends ⌘V under Secure Event Input too: password fields turn it on.
+    public func send(kind: ItemKind, targetBundleID: String?, honorsSecureInput: Bool = true,
+                     onlyIf stillTarget: (() -> Bool)? = nil) async -> PasteOutcome {
         guard isTrusted() else { return .copiedOnly(.accessibilityDenied) }
         guard let keyCode = resolver.keyCode(for: "v") else { return .copiedOnly(.keyNotResolvable) }
         // Give the target app a beat to become key again after the panel hides.
         try? await Task.sleep(for: .milliseconds(30))
         // Secure Keyboard Entry (Terminal, iTerm, password fields) can swallow synthetic keystrokes.
-        guard !isSecureInput() else { return .copiedOnly(.secureInput) }
+        guard !honorsSecureInput || !isSecureInput() else { return .copiedOnly(.secureInput) }
         // Nothing awaits between this check and the keystroke.
         guard stillTarget?() ?? true else { return .copiedOnly(.targetLeft) }
         poster.post(PasteRules.keystroke(targetBundleID: targetBundleID, kind: kind), keyCode: keyCode)

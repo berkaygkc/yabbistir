@@ -71,6 +71,16 @@ let usLayout = KeyCodeResolver { $0 == 9 ? "v" : nil }
         #expect(writer.writes.count == 1)
     }
 
+    /// A secret from a source is pasted into password fields, which turn Secure Event Input on; its paste sends
+    /// ⌘V there anyway, over a clipboard it wrote itself.
+    @Test func sendCanIgnoreSecureInput() async {
+        let outcome = await paster(trusted: true, secureInput: true)
+            .send(kind: .text, targetBundleID: "com.apple.Safari", honorsSecureInput: false)
+        #expect(outcome == .pasted)
+        #expect(poster.posts.count == 1)
+        #expect(writer.writes.isEmpty)
+    }
+
     @Test func trustedPostsCommandV() async {
         let outcome = await paster(trusted: true).paste(items, kind: .text, targetBundleID: "com.apple.TextEdit", plainText: false)
         #expect(outcome == .pasted)
