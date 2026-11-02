@@ -5,35 +5,6 @@ import YabExtensionKit
 import YabExtensions
 import YabLocalization
 
-/// The Settings window: a sidebar of sections beside the chosen one.
-public struct SettingsView: View {
-    @Bindable var model: ExtensionsSettingsModel
-    let store: StoreModel
-    @State private var section: Section? = .extensions
-
-    enum Section: Hashable {
-        case extensions
-    }
-
-    public init(model: ExtensionsSettingsModel, store: StoreModel) {
-        self.model = model
-        self.store = store
-    }
-
-    public var body: some View {
-        NavigationSplitView {
-            List(selection: $section) {
-                Label(L10n.string("settings.section.extensions", model.language), systemImage: "puzzlepiece.extension")
-                    .tag(Section.extensions)
-            }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
-        } detail: {
-            ExtensionsSettingsView(model: model, store: store)
-        }
-        .environment(\.locale, model.language.locale)
-    }
-}
-
 /// Settings → Extensions: Installed (the list, with each one's details and preferences), Store (the signed
 /// catalog) and Development (install, link, reload, and the log).
 public struct ExtensionsSettingsView: View {

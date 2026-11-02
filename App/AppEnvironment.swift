@@ -12,6 +12,7 @@ import YabUI
 final class AppEnvironment {
     let library: Library
     let language = LanguageStore()
+    let preferences = Preferences()
     /// Built-ins from the app bundle; the person's copies and development links in
     /// Application Support/yabbistir/Extensions, their data in …/ExtensionData.
     let extensionRegistry: ExtensionRegistry
