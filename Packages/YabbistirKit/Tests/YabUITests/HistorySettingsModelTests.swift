@@ -120,4 +120,34 @@ private let day: TimeInterval = 86_400
             #expect(HistorySettingsModel.retentionTitle(count: count, language: .turkish) == tr)
         }
     }
+
+    @Test func confirmingWithoutACountedRequestDoesNothing() {
+        model.confirmRetention(.oneMonth)
+        #expect(preferences.retention == .oneYear)
+        #expect(itemCount == 1)
+    }
+
+    @Test func confirmingAnotherPolicyThanTheCountedOneDoesNothing() {
+        model.requestRetention(.oneMonth)
+        model.confirmRetention(.oneWeek)
+        #expect(preferences.retention == .oneYear)
+        #expect(itemCount == 1)
+    }
+
+    @Test func aFailedLaterCountDropsTheEarlierPendingRequest() throws {
+        model.requestRetention(.oneMonth)
+        #expect(model.pendingRetention == .oneMonth)
+        try library.store.dbPool.write { db in try db.drop(table: "item") }
+        model.requestRetention(.oneWeek)
+        #expect(model.pendingRetention == nil)
+        model.confirmRetention(.oneMonth)
+        #expect(preferences.retention == .oneYear)
+    }
+
+    @Test func appNamesLoseOnlyATrailingDotApp() {
+        #expect(AppNames.display("Notes.app") == "Notes")
+        #expect(AppNames.display("x.us") == "x.us")
+        #expect(AppNames.display("Notes") == "Notes")
+        #expect(AppNames.display("a.app.app") == "a.app")
+    }
 }

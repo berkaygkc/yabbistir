@@ -17,6 +17,9 @@ public final class HistorySettingsModel {
     public private(set) var pendingCount = 0
     /// When the waiting period was counted: confirming removes exactly what was counted.
     @ObservationIgnored private var pendingDate = Date.distantPast
+    /// The period that was counted. It outlives the dialog's dismissal (which clears `pendingRetention` before the
+    /// button's action runs), so confirming still works in either order, and nothing else can be confirmed.
+    @ObservationIgnored private var countedRetention: RetentionPolicy?
     /// How much disk space History uses; nil until measured.
     public private(set) var storageBytes: Int64?
     public var confirmingClear = false
@@ -67,21 +70,29 @@ public final class HistorySettingsModel {
         guard policy != preferences.retention else { return }
         let date = now()
         if Self.isShorter(policy, than: preferences.retention, now: date) {
-            guard let count = try? library.countExpired(policy: policy, now: date) else { return }
+            guard let count = try? library.countExpired(policy: policy, now: date) else {
+                pendingRetention = nil
+                countedRetention = nil
+                return
+            }
             if count > 0 {
                 pendingRetention = policy
+                countedRetention = policy
                 pendingCount = count
                 pendingDate = date
                 return
             }
         }
         pendingRetention = nil
+        countedRetention = nil
         preferences.retention = policy
     }
 
     /// Saves the period and removes what it expired when it was counted. Takes the policy the dialog showed, so
     /// it does not matter whether the dialog cleared the waiting one first.
     public func confirmRetention(_ policy: RetentionPolicy) {
+        guard countedRetention == policy else { return }
+        countedRetention = nil
         pendingRetention = nil
         preferences.retention = policy
         if (try? library.purgeExpired(policy: policy, now: pendingDate)) != nil { onRetentionApplied?() }
@@ -224,6 +235,13 @@ public struct HistorySettingsView: View {
     }
 }
 
+enum AppNames {
+    /// Finder's display name for an app, without its ".app" suffix (and only that suffix).
+    static func display(_ name: String) -> String {
+        name.hasSuffix(".app") ? String(name.dropLast(4)) : name
+    }
+}
+
 /// An ignored app: its icon and name, or the bundle identifier when the app is not installed.
 private struct AppRow: View {
     let bundleID: String
@@ -233,7 +251,7 @@ private struct AppRow: View {
         HStack(spacing: 8) {
             if let url {
                 Image(nsImage: NSWorkspace.shared.icon(forFile: url.path)).resizable().frame(width: 20, height: 20)
-                Text((FileManager.default.displayName(atPath: url.path) as NSString).deletingPathExtension)
+                Text(AppNames.display(FileManager.default.displayName(atPath: url.path)))
             } else {
                 Image(systemName: "app.dashed").frame(width: 20, height: 20).foregroundStyle(.secondary)
                 Text(bundleID)
