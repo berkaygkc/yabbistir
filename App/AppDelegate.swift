@@ -111,17 +111,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     /// Opening yabbistir again (Spotlight, Finder) opens Settings: the way in while the menu bar icon is hidden.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        settings?.show()
+        return true
+    }
+
     /// A text file shipped in the app bundle ("Name.ext"), or nil when it is missing or unreadable.
     nonisolated private static func bundledText(named fileName: String) -> String? {
         let baseName = (fileName as NSString).deletingPathExtension
         let fileExtension = (fileName as NSString).pathExtension
         return Bundle.main.url(forResource: baseName, withExtension: fileExtension.isEmpty ? nil : fileExtension)
             .flatMap { try? String(contentsOf: $0, encoding: .utf8) }
-    }
-
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        settings?.show()
-        return true
     }
 
     /// A secret still on the clipboard gives it back before anything else. Jobs end with the app: every
