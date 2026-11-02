@@ -51,56 +51,84 @@ public struct AboutSettingsView: View {
     }
 
     public var body: some View {
+        // The links sit in the section's footer: below the card, on the page itself, with no box around them.
         Form {
             Section {
-                VStack(spacing: 6) {
-                    Image(nsImage: NSApp.applicationIconImage)
-                        .resizable()
-                        .frame(width: 96, height: 96)
-                        .accessibilityHidden(true)
-                    Text("yabbistir").font(.title2.weight(.semibold))
-                    Text(model.versionText).foregroundStyle(.secondary).monospacedDigit()
-                    Text(string("settings.about.tagline")).font(.callout).foregroundStyle(.secondary)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 8)
-            }
-            Section {
-                Button(string("settings.about.checkForUpdates")) { model.checkForUpdates() }
-                Button(string("settings.about.github")) { model.open(AboutModel.repository) }
-                Button(string("settings.about.releaseNotes")) { model.open(AboutModel.releases) }
-                Button(string("settings.about.licenses")) { showsLicenses = true }
-            }
-            Section {
-                Button { model.open(AboutModel.sponsors) } label: {
-                    Label(string("settings.about.support"), systemImage: "heart")
-                }
-                .buttonStyle(.link)
-                .frame(maxWidth: .infinity)
+                aboutCard
+            } footer: {
+                links
             }
         }
         .formStyle(.grouped)
         .navigationTitle(string("settings.section.about"))
-        .sheet(isPresented: $showsLicenses) {
-            VStack(spacing: 0) {
-                ScrollView {
-                    Text(model.licensesText)
-                        .font(.callout.monospaced())
-                        .textSelection(.enabled)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                }
-                Divider()
-                HStack {
-                    Spacer()
-                    Button(string("settings.done")) { showsLicenses = false }
-                        .keyboardShortcut(.defaultAction)
-                }
-                .padding()
-            }
-            .frame(width: 520, height: 420)
-            .environment(\.locale, model.language.locale)
+        .sheet(isPresented: $showsLicenses) { licensesSheet }
+    }
+
+    private var aboutCard: some View {
+        VStack(spacing: 6) {
+            Image(nsImage: NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath))
+                .resizable()
+                .frame(width: 96, height: 96)
+                .accessibilityHidden(true)
+            Text("yabbistir").font(.title2.weight(.semibold))
+            Text(model.versionText).foregroundStyle(.secondary).monospacedDigit()
+            Text(string("settings.about.tagline")).font(.callout).foregroundStyle(.secondary)
+            Button(string("settings.about.checkForUpdates")) { model.checkForUpdates() }
+                .buttonStyle(.bordered)
+                .controlSize(.regular)
+                .padding(.top, 6)
         }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+    }
+
+    private var links: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 8) {
+                linkButton("settings.about.github") { model.open(AboutModel.repository) }
+                dot
+                linkButton("settings.about.releaseNotes") { model.open(AboutModel.releases) }
+                dot
+                linkButton("settings.about.licenses") { showsLicenses = true }
+            }
+            Button { model.open(AboutModel.sponsors) } label: {
+                Label(string("settings.about.support"), systemImage: "heart")
+            }
+            .buttonStyle(.link)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 4)
+    }
+
+    private var licensesSheet: some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                Text(model.licensesText)
+                    .font(.callout.monospaced())
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+            }
+            Divider()
+            HStack {
+                Spacer()
+                Button(string("settings.done")) { showsLicenses = false }
+                    .keyboardShortcut(.defaultAction)
+            }
+            .padding()
+        }
+        .frame(width: 520, height: 420)
+        .environment(\.locale, model.language.locale)
+    }
+
+    private var dot: some View {
+        Text("·").foregroundStyle(.tertiary).accessibilityHidden(true)
+    }
+
+    private func linkButton(_ key: String, action: @escaping () -> Void) -> some View {
+        Button(string(key), action: action)
+            .buttonStyle(.link)
+            .foregroundStyle(.secondary)
     }
 
     private func string(_ key: String) -> String { L10n.string(key, model.language) }
