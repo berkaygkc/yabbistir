@@ -14,6 +14,7 @@ public final class OnboardingModel {
     public private(set) var step: OnboardingStep = .welcome
     public private(set) var accessibilityGranted: Bool
     public var launchAtLogin = true
+    @ObservationIgnored private var finished = false
 
     public let importer: ImportModel
     public let language: LanguageStore
@@ -78,9 +79,13 @@ public final class OnboardingModel {
     }
 
     public var primaryEnabled: Bool {
-        guard step == .importing else { return true }
-        if case .done = importer.state { return true }
-        return false
+        switch step {
+        case .importChoice:
+            if case .ready = importer.state { true } else { false }
+        case .importing:
+            if case .done = importer.state { true } else { false }
+        default: true
+        }
     }
 
     public func next() {
@@ -88,6 +93,7 @@ public final class OnboardingModel {
         case .welcome:
             step = libraryMissing ? .setup : .importChoice
         case .importChoice:
+            guard primaryEnabled else { return }
             step = .importing
             importer.start()
         case .importing:
@@ -110,6 +116,8 @@ public final class OnboardingModel {
     }
 
     public func finish() {
+        guard !finished else { return }
+        finished = true
         preferences.onboarded = true
         if launchAtLogin {
             // A refusal stays visible in Settings; it must not hold the person in this window.

@@ -82,6 +82,25 @@ private func rig(withLibrary: Bool) async throws -> Rig {
         #expect(r.model.step == .importChoice)
     }
 
+    @Test func finishingHappensOnce() async throws {
+        let r = try await rig(withLibrary: false)
+        r.model.escape()
+        r.model.finish()
+        #expect(r.probe.finishes == 1 && r.login.setEnabledCalls == [true])
+    }
+
+    @Test func importingStartsOnlyFromAReadyLibrary() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.next()
+        #expect(r.model.step == .importChoice && r.model.primaryEnabled)
+        for state in [ImportModel.State.scanning, .failed] {
+            r.importer.state = state
+            #expect(!r.model.primaryEnabled)
+            r.model.next()
+            #expect(r.model.step == .importChoice)
+        }
+    }
+
     @Test func skipGoesStraightToSetup() async throws {
         let r = try await rig(withLibrary: true)
         r.model.next()
