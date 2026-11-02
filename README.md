@@ -41,7 +41,7 @@ It stays out of the way the rest of the time. Rows are one line each, details sh
 <td width="50%" valign="top">
 
 #### A panel under your caret
-Opens 8 points below the caret (under the pointer in apps that don't report one). Type to search, ↑ ↓ to move, ↵ to paste, ⇧↵ to paste as plain text, ⌘1–⌘9 for the first nine. ⌘P adds an item to a category, and a category can open as its own column next to History.
+Opens 8 points below the caret (under the pointer in apps that don't report one). Type to search, ↑ ↓ to move, ↵ to paste, ⇧↵ for the item's second choice (plain text for rich text, or a transform you made its default), ⌘1–⌘9 for the first nine. ⌘P adds an item to a category, and a category can open as its own column next to History.
 
 </td>
 <td width="50%" valign="top">
@@ -61,7 +61,7 @@ Tap ⇧ on an item to see what can be done with it: encode Base64, turn a color 
 <td valign="top">
 
 #### Extensions
-UUID, Base64, Convert and Paste to Finder as a File are built in. Extensions are small JavaScript packages that add commands, transforms and tags, while yabbistir draws the panel, so they all look and work the same. Each one asks before it reaches the network or runs a program.
+UUID, Base64, Convert and Paste to Finder as a File are built in. Extensions are small JavaScript packages that add commands, transforms, tags and columns of their own, while yabbistir draws the panel, so they all look and work the same. Each one asks before it reaches the network or runs a program.
 
 </td>
 </tr>
@@ -139,12 +139,14 @@ Built in:
 - **Convert**: colors to RGB, HSL, OKLCH, SwiftUI `Color` or `NSColor`; images to JPEG, PNG or half size; text from an image; an image's background removed.
 - **Paste to Finder as a File**: with Finder in front, text, code, links and images land in the open folder as files.
 
+An extension can also fill a column of its own. **LastPass**, in the store, lists your vault's entries by name and username through the `lpass` command-line tool: ↵ pastes the password into the field you're in, ⇧↵ the username.
+
 More extensions are in the open store, [yabbistir-extensions](https://github.com/berkaygkc/yabbistir-extensions): open Settings → Extensions → Store, pick the ones you want and install them together. The store's catalog is signed, and yabbistir checks every package before installing it. Before an extension is installed, it shows what it wants to do: reach websites, run command-line programs, read your history or see what you copy. Nothing happens until you allow it. To write your own, start with the store's README; Settings → Extensions also installs one from a folder or a `.yabext` file.
 
 ## Privacy
 
 - **Nothing leaves your Mac unless you ask.** No telemetry, no analytics, no background network. yabbistir itself goes online only when you ask: **Check for Updates…** asks GitHub for the latest version and, if there's a newer one, offers to open its release page; the **Store** tab reads the store's signed list when you open it or press Refresh, and downloads only what you install. The built-in extensions never go online.
-- **Passwords stay out.** Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords.
+- **Passwords stay out.** Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords. A password an extension pastes, such as one from LastPass, goes on the clipboard as a concealed item for this Mac only, and your clipboard comes back a moment later; it's never shown, saved or logged.
 - **Local history.** Your history stays on your Mac, in `~/Library/Application Support/yabbistir`. Copies from your iPhone arrive through Universal Clipboard and are kept there too.
 
 ## Build from source

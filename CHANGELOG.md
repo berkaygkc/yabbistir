@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — 2026-11-02
+
+- **New icon:** a "y" made of stacked glass cards, like the copies waiting in the Stack.
+- **Extension columns:** an extension can now bring a category of its own, filled with rows it lists, such as the entries of a password vault. It works like your other categories: search finds its rows, and it can open always or when you pick it. A row shows a name and a short second line, never a secret.
+  - The first one is **LastPass**, in the store. It reads your vault through the `lpass` command-line tool: ↵ pastes the password into the field you're in, ⇧↵ the username, and ⌘C copies the username. While LastPass is locked, the column shows one row with the command that signs you in.
+  - A password is pasted as a concealed item for this Mac only, which clipboard managers (yabbistir's own history included) skip, and your clipboard comes back a moment later. It's never shown, saved or logged. The rows stay in memory only and go when your Mac locks or sleeps, or when yabbistir quits.
+  - Before you install an extension that pastes secrets, yabbistir tells you: "Can read and paste secrets such as passwords. They're never written to history or disk."
+- **⇧↵:** pastes an item's second choice. On rich text that's plain text, as before; for any kind of item, it can be a transform you pick with "Make default for ⇧↵" in the ⇧ panel's ⌘K menu. Otherwise ⇧↵ pastes like ↵. Hold ⇧ to see what it will do.
+- **Password fields:** yabbistir pastes into them directly, and into Terminal with Secure Keyboard Entry on, instead of copying the item and asking you to press ⌘V. The Stack moves on when you paste into a password field too.
+- **Fixes:** ⇧⌘C copies the selection in Terminal. In a full-screen command-line program that copies a selection on its own, ⇧⌘C takes that copy.
+
 ## 0.2.0 — 2026-10-31
 
 - **Extension store:** Settings → Extensions → Store lists the extensions published in the open [yabbistir-extensions](https://github.com/berkaygkc/yabbistir-extensions) repository. Pick several, read every permission they ask for on one screen, and install them together. Updates show up as "N updates" with an "Update all" button; an update that asks for new permissions asks you first.
