@@ -171,6 +171,10 @@ The README images are drawn from synthetic data by `tools/readme-images.sh`.
 
 Bug reports and pull requests are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to build and test, and what to keep in mind.
 
+## Support
+
+yabbistir is free and open source, and it will stay that way. If it saves you time, you can [sponsor its development](https://github.com/sponsors/berkaygkc) on GitHub Sponsors.
+
 ## License
 
 yabbistir is released under the [MIT License](LICENSE). © 2026 Berkay Gökçe.
