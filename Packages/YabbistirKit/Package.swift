@@ -31,7 +31,7 @@ let package = Package(
         .target(name: "YabExtensionKit"),
         .target(name: "YabExtensionRuntime", dependencies: ["YabExtensionKit"]),
         .target(name: "YabExtensions", dependencies: ["YabExtensionKit", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization", "YabPlatform"]),
-        .target(name: "YabImport", dependencies: ["YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
+        .target(name: "YabImport", dependencies: ["YabCore", "YabPasteboard", .product(name: "GRDB", package: "GRDB.swift")]),
         // Test-only helpers (synthetic libraries, payload builders); deliberately not part of any product.
         .target(name: "YabImportTestSupport", dependencies: ["YabImport", "YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
         .testTarget(name: "YabCoreTests", dependencies: ["YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
