@@ -139,10 +139,9 @@ final class AppEnvironment {
         }
         sensitivePaste = SensitivePaste(
             board: SystemSensitivePasteboard(pasteboard: .general, sourceID: Bundle.main.bundleIdentifier ?? "dev.yabbistir.app"),
-            // ⌘V even under Secure Event Input: the field a password goes into turns it on.
             send: { [weak self] target, onlyIf in
                 guard let self else { return .copiedOnly(.targetLeft) }
-                return await makePaster().send(kind: .text, targetBundleID: target, honorsSecureInput: false, onlyIf: onlyIf)
+                return await makePaster().send(kind: .text, targetBundleID: target, onlyIf: onlyIf)
             },
             // Its writes and give-backs are never captured.
             didWrite: { [weak self] changeCount in self?.monitor.ignore(changeCount: changeCount) })

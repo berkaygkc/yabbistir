@@ -623,7 +623,6 @@ final class PanelController: NSObject, NSWindowDelegate {
             // The item stays on the clipboard for the user's own ⌘V.
             let kind: NoticeKind
             switch reason {
-            case .secureInput: kind = .secureInput
             case .accessibilityDenied, .keyNotResolvable: kind = .accessibility
             case .targetLeft: kind = .copiedOnly
             }

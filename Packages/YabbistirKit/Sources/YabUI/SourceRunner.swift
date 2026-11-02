@@ -54,7 +54,6 @@ public final class SourceRunner {
             switch await paste.paste(text, concealed: false, targetBundleID: target, onlyIf: onlyIf, restoreInstead: restoreInstead) {
             case .pasted: return nil
             case .copiedOnly(.accessibilityDenied), .copiedOnly(.keyNotResolvable): return .accessibility
-            case .copiedOnly(.secureInput): return .secureInput
             case .copiedOnly(.targetLeft): return .copiedOnly
             }
         }

@@ -29,10 +29,10 @@ import YabLocalization
     @Test func permissionNoticesStillOfferSettings() {
         #expect(NoticeKind.accessibility.offersSettings)
         #expect(NoticeKind.inputMonitoring.offersSettings)
-        #expect(!NoticeKind.secureInput.offersSettings)
+        #expect(!NoticeKind.copiedOnly.offersSettings)
         #expect(NoticeKind.accessibility.actionText(.english) == "Open Settings")
         #expect(NoticeKind.inputMonitoring.actionText(.turkish) == "Ayarları aç")
-        #expect(NoticeKind.secureInput.actionText(.english) == nil)
+        #expect(NoticeKind.copiedOnly.actionText(.english) == nil)
         #expect(NoticeKind.extensionFailed(name: "Base64", message: "boom").actionText(.english) == nil)
     }
 
@@ -58,7 +58,7 @@ import YabLocalization
     }
 
     static let every: [NoticeKind] = [
-        .accessibility, .secureInput, .inputMonitoring, .copiedOnly, .extensionFailed(name: "Base64", message: "boom"),
+        .accessibility, .inputMonitoring, .copiedOnly, .extensionFailed(name: "Base64", message: "boom"),
         .extensionDisabled(name: "Base64"), .extensionMessage(name: "Base64", message: "bitti"), .translationNeeded(from: "en", to: "tr"),
         .upToDate(version: "0.1.0"), .updateAvailable(version: "0.2.0", page: URL(string: "https://example.test/releases/tag/v0.2.0")!), .updateCheckFailed,
     ]

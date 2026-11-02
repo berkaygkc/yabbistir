@@ -16,11 +16,6 @@ import Testing
         #expect(L10n.string("panel.empty.noResults", .english, "uuid") == "No results for “uuid”")
     }
 
-    @Test func secureInputNoticeIsTranslated() {
-        #expect(L10n.string("notice.secureInput.body", .turkish) == "Güvenli Klavye Girişi açık, yapıştırmak için ⌘V'ye bas.")
-        #expect(L10n.string("notice.secureInput.body", .english) == "Secure Keyboard Entry is on. Press ⌘V to paste.")
-    }
-
     /// Every key the app's sources use exists in both languages (a missing key would show as its name).
     @Test func everyKeyUsedInSourcesIsTranslated() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()

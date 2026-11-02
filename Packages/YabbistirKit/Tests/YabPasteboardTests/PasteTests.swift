@@ -58,24 +58,14 @@ let usLayout = KeyCodeResolver { $0 == 9 ? "v" : nil }
     let poster = FakePoster()
     let items = [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("merhaba".utf8))]]
 
-    func paster(trusted: Bool, secureInput: Bool = false, resolver: KeyCodeResolver = usLayout,
+    func paster(trusted: Bool, resolver: KeyCodeResolver = usLayout,
                 didWrite: @escaping (Int) -> Void = { _ in }) -> Paster {
-        Paster(writer: writer, resolver: resolver, poster: poster, isTrusted: { trusted }, isSecureInput: { secureInput }, didWrite: didWrite)
+        Paster(writer: writer, resolver: resolver, poster: poster, isTrusted: { trusted }, didWrite: didWrite)
     }
 
-    @Test func secureKeyboardEntryCopiesOnly() async {
-        let outcome = await paster(trusted: true, secureInput: true)
-            .paste(items, kind: .text, targetBundleID: "com.apple.Terminal", plainText: false)
-        #expect(outcome == .copiedOnly(.secureInput))
-        #expect(poster.posts.isEmpty)
-        #expect(writer.writes.count == 1)
-    }
-
-    /// A secret from a source is pasted into password fields, which turn Secure Event Input on; its paste sends
-    /// ⌘V there anyway, over a clipboard it wrote itself.
-    @Test func sendCanIgnoreSecureInput() async {
-        let outcome = await paster(trusted: true, secureInput: true)
-            .send(kind: .text, targetBundleID: "com.apple.Safari", honorsSecureInput: false)
+    /// A secret from a source types ⌘V over a clipboard it wrote itself.
+    @Test func sendTypesTheShortcutOverAClipboardWrittenElsewhere() async {
+        let outcome = await paster(trusted: true).send(kind: .text, targetBundleID: "com.apple.Safari")
         #expect(outcome == .pasted)
         #expect(poster.posts.count == 1)
         #expect(writer.writes.isEmpty)

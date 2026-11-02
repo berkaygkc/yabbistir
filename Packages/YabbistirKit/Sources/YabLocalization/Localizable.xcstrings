@@ -3095,23 +3095,6 @@
         }
       }
     },
-    "notice.secureInput.body": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Secure Keyboard Entry is on. Press ⌘V to paste."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Güvenli Klavye Girişi açık, yapıştırmak için ⌘V'ye bas."
-          }
-        }
-      }
-    },
     "notice.sourceCommandCopied.body": {
       "extractionState": "manual",
       "localizations": {

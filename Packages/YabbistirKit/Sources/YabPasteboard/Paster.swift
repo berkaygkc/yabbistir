@@ -1,4 +1,3 @@
-import Carbon.HIToolbox
 import CoreGraphics
 import Foundation
 import YabCore
@@ -24,7 +23,7 @@ public final class CGEventKeystrokePoster: KeystrokePosting {
 }
 
 public enum CopiedOnlyReason: Equatable, Sendable {
-    case accessibilityDenied, keyNotResolvable, secureInput
+    case accessibilityDenied, keyNotResolvable
     /// The app it was meant for is no longer the one ⌘V would reach (`onlyIf`).
     case targetLeft
 }
@@ -41,16 +40,14 @@ public final class Paster {
     private let resolver: KeyCodeResolver
     private let poster: KeystrokePosting
     private let isTrusted: () -> Bool
-    private let isSecureInput: () -> Bool
     private let didWrite: (Int) -> Void
 
     public init(writer: PasteboardWriting, resolver: KeyCodeResolver, poster: KeystrokePosting,
-                isTrusted: @escaping () -> Bool, isSecureInput: @escaping () -> Bool = { IsSecureEventInputEnabled() }, didWrite: @escaping (Int) -> Void) {
+                isTrusted: @escaping () -> Bool, didWrite: @escaping (Int) -> Void) {
         self.writer = writer
         self.resolver = resolver
         self.poster = poster
         self.isTrusted = isTrusted
-        self.isSecureInput = isSecureInput
         self.didWrite = didWrite
     }
 
@@ -63,17 +60,14 @@ public final class Paster {
         return await send(kind: kind, targetBundleID: targetBundleID, onlyIf: stillTarget)
     }
 
-    /// Steps after the write: trust, key, the 30 ms beat, secure input (when honored), target check, ⌘V.
+    /// Steps after the write: trust, key, the 30 ms beat, target check, ⌘V. Secure Event Input (a password field,
+    /// Terminal's Secure Keyboard Entry) lets the app's ⌘V through, so it is not asked.
     /// A caller that wrote the clipboard its own way (a secret from a source) types the shortcut with this.
-    /// `honorsSecureInput: false` sends ⌘V under Secure Event Input too: password fields turn it on.
-    public func send(kind: ItemKind, targetBundleID: String?, honorsSecureInput: Bool = true,
-                     onlyIf stillTarget: (() -> Bool)? = nil) async -> PasteOutcome {
+    public func send(kind: ItemKind, targetBundleID: String?, onlyIf stillTarget: (() -> Bool)? = nil) async -> PasteOutcome {
         guard isTrusted() else { return .copiedOnly(.accessibilityDenied) }
         guard let keyCode = resolver.keyCode(for: "v") else { return .copiedOnly(.keyNotResolvable) }
         // Give the target app a beat to become key again after the panel hides.
         try? await Task.sleep(for: .milliseconds(30))
-        // Secure Keyboard Entry (Terminal, iTerm, password fields) can swallow synthetic keystrokes.
-        guard !honorsSecureInput || !isSecureInput() else { return .copiedOnly(.secureInput) }
         // Nothing awaits between this check and the keystroke.
         guard stillTarget?() ?? true else { return .copiedOnly(.targetLeft) }
         poster.post(PasteRules.keystroke(targetBundleID: targetBundleID, kind: kind), keyCode: keyCode)

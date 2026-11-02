@@ -5,8 +5,6 @@ import YabLocalization
 public enum NoticeKind: Equatable, Sendable {
     /// No Accessibility permission: offer the settings pane.
     case accessibility
-    /// Secure Keyboard Entry is on in the target app: the user pastes with ⌘V.
-    case secureInput
     /// The Sıra cannot hear ⌘V without Input Monitoring: offer the settings pane.
     case inputMonitoring
     /// The target app left (or the panel came back) before ⌘V: the item waits on the clipboard.
@@ -28,7 +26,7 @@ public enum NoticeKind: Equatable, Sendable {
     case updateCheckFailed
     /// A source's secret (a password) was pasted.
     case sourcePasted
-    /// A secret could only be copied (no Accessibility, Secure Keyboard Entry): it waits for ⌘V, then leaves.
+    /// A secret could only be copied (no Accessibility): it waits for ⌘V, then leaves.
     case secretCopiedOnly
     /// The app a secret was for left before ⌘V: nothing was typed, and the clipboard is already back.
     case sourceNotPasted
@@ -42,7 +40,7 @@ public enum NoticeKind: Equatable, Sendable {
     func titleText(_ language: AppLanguage) -> String {
         switch self {
         case .inputMonitoring: L10n.string("notice.inputMonitoring.title", language)
-        case .accessibility, .secureInput: L10n.string("notice.copiedOnly.title", language)
+        case .accessibility: L10n.string("notice.copiedOnly.title", language)
         case .copiedOnly: L10n.string("notice.copiedOnly", language)
         case .extensionFailed, .extensionDisabled: L10n.string("notice.extensionFailed.title", language)
         case .extensionMessage(let name, _): name
@@ -62,7 +60,6 @@ public enum NoticeKind: Equatable, Sendable {
     func bodyText(_ language: AppLanguage) -> String {
         switch self {
         case .accessibility: L10n.string("notice.copiedOnly.body", language)
-        case .secureInput: L10n.string("notice.secureInput.body", language)
         case .copiedOnly: ""
         case .inputMonitoring: L10n.string("notice.inputMonitoring.body", language)
         case .extensionFailed(let name, let message): L10n.string("notice.extensionFailed.body", language, name, message)
@@ -84,7 +81,7 @@ public enum NoticeKind: Equatable, Sendable {
         case .inputMonitoring: .inputMonitoringSettings
         case .translationNeeded(let from, let to): .downloadLanguagePack(from: from, to: to)
         case .updateAvailable(_, let page): .openURL(page)
-        case .secureInput, .copiedOnly, .extensionFailed, .extensionDisabled, .extensionMessage, .upToDate, .updateCheckFailed,
+        case .copiedOnly, .extensionFailed, .extensionDisabled, .extensionMessage, .upToDate, .updateCheckFailed,
              .sourcePasted, .secretCopiedOnly, .sourceNotPasted, .sourceEmpty, .sourceCopied, .sourceCommandCopied: nil
         }
     }

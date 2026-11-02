@@ -4,9 +4,8 @@ import YabLocalization
 import YabPlatform
 import YabUI
 
-/// A small floating notice where the panel was, e.g. "Copied — allow Accessibility"
-/// or "Copied — Secure Keyboard Entry is on, press ⌘V"; or under the Sıra window; or, from an
-/// extension, under the menu bar status item: its own message, or a translation's missing
+/// A small floating notice where the panel was, e.g. "Copied — allow Accessibility"; or under the
+/// Sıra window; or, from an extension, under the menu bar status item: its own message, or a translation's missing
 /// language pack with its download.
 @MainActor
 final class NoticeHUD {

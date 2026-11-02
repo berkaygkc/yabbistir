@@ -133,7 +133,7 @@ final class FakeSensitiveBoard: SensitivePasteboard {
     }
 
     /// Left on the clipboard for the person to press ⌘V, it stays its lifetime and then goes.
-    @Test(arguments: [CopiedOnlyReason.accessibilityDenied, .keyNotResolvable, .secureInput])
+    @Test(arguments: [CopiedOnlyReason.accessibilityDenied, .keyNotResolvable])
     func aCopyOnlySecretLeavesAfterItsLifetime(reason: CopiedOnlyReason) async {
         let board = FakeSensitiveBoard(previous)
         let paste = sensitivePaste(board, outcome: .copiedOnly(reason), restoreDelay: Self.never, copiedOnlyLifetime: Self.soon)

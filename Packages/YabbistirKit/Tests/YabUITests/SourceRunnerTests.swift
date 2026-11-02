@@ -140,14 +140,13 @@ final class FakeSensitivePasting: SensitivePasting {
         #expect(await run(secret) == .sourceNotPasted)
         let (text, _, _) = make(.text("deniz.k"), left)
         #expect(await run(text, action: "username") == .copiedOnly)
-        for reason in [CopiedOnlyReason.accessibilityDenied, .keyNotResolvable, .secureInput] {
+        for reason in [CopiedOnlyReason.accessibilityDenied, .keyNotResolvable] {
             let paste = FakeSensitivePasting()
             paste.outcome = .copiedOnly(reason)
             let (secret, _, _) = make(.secret(Self.secret), paste)
             #expect(await run(secret) == .secretCopiedOnly)
         }
-        for (reason, notice) in [(CopiedOnlyReason.accessibilityDenied, NoticeKind.accessibility), (.keyNotResolvable, .accessibility),
-                                 (.secureInput, .secureInput)] {
+        for (reason, notice) in [(CopiedOnlyReason.accessibilityDenied, NoticeKind.accessibility), (.keyNotResolvable, .accessibility)] {
             let paste = FakeSensitivePasting()
             paste.outcome = .copiedOnly(reason)
             let (text, _, _) = make(.text("deniz.k"), paste)
@@ -158,8 +157,7 @@ final class FakeSensitivePasting: SensitivePasting {
     /// Whatever happened, no notice's words (Turkish or English, title or line) hold the value.
     @Test func noNoticeCarriesTheValue() async {
         var notices: [NoticeKind] = []
-        let outcomes: [PasteOutcome] = [.pasted, .copiedOnly(.targetLeft), .copiedOnly(.accessibilityDenied), .copiedOnly(.keyNotResolvable),
-                                        .copiedOnly(.secureInput)]
+        let outcomes: [PasteOutcome] = [.pasted, .copiedOnly(.targetLeft), .copiedOnly(.accessibilityDenied), .copiedOnly(.keyNotResolvable)]
         for value in [SourceValue.secret(Self.secret), .text(Self.secret)] {
             for outcome in outcomes {
                 let paste = FakeSensitivePasting()
