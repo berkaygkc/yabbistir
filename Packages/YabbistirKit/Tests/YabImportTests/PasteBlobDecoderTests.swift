@@ -2,20 +2,8 @@ import Foundation
 import Testing
 import YabCore
 @testable import YabImport
+import YabImportTestSupport
 
-/// Builds a synthetic Paste payload: [{types, dataByType}] as a binary plist.
-func pastePlist(_ items: [[(String, String)]]) throws -> Data {
-    let array: [[String: Any]] = items.map { reps in
-        ["types": reps.map(\.0), "dataByType": Dictionary(uniqueKeysWithValues: reps.map { ($0.0, Data($0.1.utf8)) })]
-    }
-    return try PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0)
-}
-
-func lzfse(_ data: Data) throws -> Data {
-    try (data as NSData).compressed(using: .lzfse) as Data
-}
-
-let sampleItems = [[("public.utf8-plain-text", "hello"), ("public.html", "<b>hello</b>")]]
 let expected = [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data("hello".utf8)),
                  PasteboardRepresentation(type: "public.html", data: Data("<b>hello</b>".utf8))]]
 

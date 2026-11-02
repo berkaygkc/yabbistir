@@ -5,6 +5,10 @@ import YabCore
 public enum PasteImportError: Error, Equatable {
     case unknownFormat
     case missingExternalData(String)
+    /// The library could not be copied or opened.
+    case unavailable
+    /// The library opened but lacks the expected tables.
+    case unreadable
 }
 
 /// Decodes Paste's `ZITEMDATAENTITY.ZRAWPASTEBOARDITEMS`:
