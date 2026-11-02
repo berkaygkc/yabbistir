@@ -46,6 +46,8 @@ public final class Preferences {
     public var showsExtensionOutputs: Bool {
         didSet { defaults.set(showsExtensionOutputs, forKey: "pref.showExtensionOutputs") }
     }
+    /// Whether the first-run window has been finished or dismissed.
+    public var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "pref.onboarded") } }
 
     @ObservationIgnored private let defaults: UserDefaults
 
@@ -66,5 +68,6 @@ public final class Preferences {
         ignoredApps = defaults.stringArray(forKey: "pref.ignoredApps") ?? CaptureFilter.defaultIgnoredBundleIDs
         keepsRemoteCopies = flag("pref.keepRemoteCopies", true)
         showsExtensionOutputs = flag("pref.showExtensionOutputs", true)
+        onboarded = flag("pref.onboarded", false)
     }
 }
