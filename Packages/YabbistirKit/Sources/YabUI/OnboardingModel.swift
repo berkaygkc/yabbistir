@@ -12,10 +12,14 @@ public enum OnboardingStep: Equatable, Sendable {
 /// and what finishing does. Another clipboard manager's library, when found, adds the two import steps.
 @MainActor @Observable
 public final class OnboardingModel {
-    public private(set) var step: OnboardingStep = .welcome
+    public private(set) var step: OnboardingStep = .welcome {
+        didSet { if step == .setup { sawSetup = true } }
+    }
     public private(set) var accessibilityGranted: Bool
     public var launchAtLogin = true
     @ObservationIgnored private var finished = false
+    /// The setup step has shown in this showing, so the person has seen the login switch.
+    @ObservationIgnored private var sawSetup = false
 
     public let importer: ImportModel
     public let language: LanguageStore
@@ -41,13 +45,17 @@ public final class OnboardingModel {
         accessibilityGranted = isTrusted()
     }
 
-    /// Called by the window when it appears: looks for a library to bring along.
+    /// Called by the window when it appears: remembers that a first run has begun, then looks for a library to bring
+    /// along.
     public func appear() async {
+        if !preferences.firstRunStarted { preferences.firstRunStarted = true }
         await importer.scan()
     }
 
-    public static func shouldShowAtLaunch(onboarded: Bool, historyIsEmpty: Bool) -> Bool {
-        !onboarded && historyIsEmpty
+    /// A new install (nothing copied yet) gets the first run, and so does one whose first run was quit midway, whatever
+    /// was copied since. Someone upgrading, with a history and no first run begun, does not.
+    public static func shouldShowAtLaunch(onboarded: Bool, historyIsEmpty: Bool, firstRunStarted: Bool) -> Bool {
+        !onboarded && (historyIsEmpty || firstRunStarted)
     }
 
     private var libraryMissing: Bool { importer.state == .unavailable }
@@ -137,19 +145,27 @@ public final class OnboardingModel {
         accessibilityGranted = isTrusted()
     }
 
+    /// Marks the first run done and closes. The login item follows the switch only if the person saw it (the setup
+    /// step showed), and only where the two differ: on registers, off unregisters.
     public func finish() {
         guard !finished else { return }
         finished = true
         preferences.onboarded = true
-        if launchAtLogin {
+        if sawSetup, launchAtLogin != opensAtLogin {
             // A refusal stays visible in Settings; it must not hold the person in this window.
-            try? loginItem.setEnabled(true)
+            try? loginItem.setEnabled(launchAtLogin)
         }
         onFinish()
     }
 
+    /// Esc and the close button finish too; before the setup step they leave the login item alone.
     public func escape() {
         finish()
+    }
+
+    /// How the app opens now: registered counts as on, also while it waits for the person's approval.
+    private var opensAtLogin: Bool {
+        [.enabled, .requiresApproval].contains(loginItem.status)
     }
 }
 

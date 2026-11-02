@@ -21,6 +21,7 @@ import YabPlatform
         #expect(prefs.ignoredApps == CaptureFilter.defaultIgnoredBundleIDs)
         #expect(prefs.keepsRemoteCopies)
         #expect(prefs.showsExtensionOutputs)
+        #expect(!prefs.onboarded && !prefs.firstRunStarted)
     }
 
     @Test func valuesPersistUnderTheirKeys() {
@@ -36,6 +37,7 @@ import YabPlatform
         prefs.ignoredApps = ["dev.example.app"]
         prefs.keepsRemoteCopies = false
         prefs.showsExtensionOutputs = false
+        prefs.firstRunStarted = true
 
         let again = Preferences(defaults: defaults)
         #expect(again.appearance == .dark)
@@ -49,6 +51,8 @@ import YabPlatform
         #expect(again.ignoredApps == ["dev.example.app"])
         #expect(!again.keepsRemoteCopies)
         #expect(!again.showsExtensionOutputs)
+        #expect(again.firstRunStarted)
+        #expect(defaults.object(forKey: "pref.firstRunStarted") as? Bool == true)
         #expect(defaults.string(forKey: "pref.retention") == "oneMonth")
         #expect(defaults.stringArray(forKey: "pref.ignoredApps") == ["dev.example.app"])
         #expect(defaults.string(forKey: "pref.appearance") == "dark")

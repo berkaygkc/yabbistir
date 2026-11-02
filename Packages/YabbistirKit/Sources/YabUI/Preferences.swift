@@ -48,6 +48,8 @@ public final class Preferences {
     }
     /// Whether the first-run window has been finished or dismissed.
     public var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "pref.onboarded") } }
+    /// Whether the first-run window has shown at all, finished or not: quitting midway brings it back next launch.
+    public var firstRunStarted: Bool { didSet { defaults.set(firstRunStarted, forKey: "pref.firstRunStarted") } }
 
     @ObservationIgnored private let defaults: UserDefaults
 
@@ -69,5 +71,6 @@ public final class Preferences {
         keepsRemoteCopies = flag("pref.keepRemoteCopies", true)
         showsExtensionOutputs = flag("pref.showExtensionOutputs", true)
         onboarded = flag("pref.onboarded", false)
+        firstRunStarted = flag("pref.firstRunStarted", false)
     }
 }

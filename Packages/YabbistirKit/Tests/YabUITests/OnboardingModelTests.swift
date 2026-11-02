@@ -33,14 +33,14 @@ private func library() throws -> PasteLibraryLocation {
 }
 
 @MainActor
-private func rig(withLibrary: Bool) async throws -> Rig {
+private func rig(withLibrary: Bool, loginStatus: LoginItemStatus = .disabled) async throws -> Rig {
     let location = withLibrary ? try library() : nil
     let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-onb-\(UUID().uuidString)")!)
     let importer = ImportModel(
         store: try ItemStore.temporary(), reload: {}, ignoredApps: { [] }, locate: { location },
         otherAppRunning: { false }, quitOtherApp: {}, language: languages)
     let preferences = Preferences(defaults: UserDefaults(suiteName: "yab-onb-p-\(UUID().uuidString)")!)
-    let login = FakeLoginItem()
+    let login = FakeLoginItem(status: loginStatus)
     let probe = Probe()
     let model = OnboardingModel(
         importer: importer, preferences: preferences, language: languages, loginItem: login,
@@ -84,6 +84,7 @@ private func rig(withLibrary: Bool) async throws -> Rig {
 
     @Test func finishingHappensOnce() async throws {
         let r = try await rig(withLibrary: false)
+        r.model.next()
         r.model.escape()
         r.model.finish()
         #expect(r.probe.finishes == 1 && r.login.setEnabledCalls == [true])
@@ -181,9 +182,12 @@ private func rig(withLibrary: Bool) async throws -> Rig {
         #expect(r.model.step == .setup)
     }
 
+    /// The first run, the switch left on: finishing registers the login item.
     @Test func finishMarksOnboardedRegistersLoginAndOpens() async throws {
         let r = try await rig(withLibrary: false)
         #expect(r.model.launchAtLogin && !r.preferences.onboarded)
+        r.model.next()
+        #expect(r.model.step == .setup)
         r.model.finish()
         #expect(r.preferences.onboarded)
         #expect(r.login.setEnabledCalls == [true])
@@ -193,21 +197,55 @@ private func rig(withLibrary: Bool) async throws -> Rig {
     @Test func aFailingLoginRegistrationDoesNotStopFinishing() async throws {
         let r = try await rig(withLibrary: false)
         r.login.throwsOnChange = true
+        r.model.next()
         r.model.finish()
+        #expect(r.login.setEnabledCalls == [true])
         #expect(r.preferences.onboarded && r.probe.finishes == 1)
     }
 
     @Test func turningLoginOffDoesNotRegister() async throws {
         let r = try await rig(withLibrary: false)
+        r.model.next()
         r.model.launchAtLogin = false
         r.model.finish()
         #expect(r.login.setEnabledCalls.isEmpty && r.preferences.onboarded)
     }
 
-    @Test func escapeFinishes() async throws {
+    /// Run again with the app already opening at login: switching it off and finishing turns it off.
+    @Test func aRerunCanTurnOpenAtLoginOff() async throws {
+        let r = try await rig(withLibrary: false, loginStatus: .enabled)
+        r.model.launchAtLogin = true
+        r.model.next()
+        r.model.launchAtLogin = false
+        r.model.finish()
+        #expect(r.login.setEnabledCalls == [false])
+    }
+
+    /// A switch that matches how the app already opens changes nothing.
+    @Test func anUnchangedSwitchLeavesTheLoginItemAlone() async throws {
+        for status in [LoginItemStatus.enabled, .requiresApproval] {
+            let r = try await rig(withLibrary: false, loginStatus: status)
+            r.model.next()
+            r.model.finish()
+            #expect(r.login.setEnabledCalls.isEmpty)
+        }
+    }
+
+    /// Esc (or the close button) before the setup step: the person never saw the switch, so the login item stays as it is.
+    @Test func escapeOnWelcomeLeavesTheLoginItemAlone() async throws {
         let r = try await rig(withLibrary: false)
         r.model.escape()
-        #expect(r.preferences.onboarded && r.probe.finishes == 1 && r.login.setEnabledCalls == [true])
+        #expect(r.preferences.onboarded && r.probe.finishes == 1)
+        #expect(r.login.setEnabledCalls.isEmpty)
+    }
+
+    @Test func escapeOnTheSetupStepKeepsTheSwitch() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.next()
+        r.model.skipImport()
+        r.model.escape()
+        #expect(r.preferences.onboarded && r.probe.finishes == 1)
+        #expect(r.login.setEnabledCalls == [true])
     }
 
     @Test func accessibilityIsAskedAndThenSeen() async throws {
@@ -221,8 +259,19 @@ private func rig(withLibrary: Bool) async throws -> Rig {
     }
 
     @Test func launchRule() {
-        #expect(OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: true))
-        #expect(!OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: false))
-        #expect(!OnboardingModel.shouldShowAtLaunch(onboarded: true, historyIsEmpty: true))
+        #expect(OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: true, firstRunStarted: false))
+        // Someone upgrading: a history and never a first run. They are marked onboarded without it.
+        #expect(!OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: false, firstRunStarted: false))
+        // Quit midway through the first run, after copying something: it shows again.
+        #expect(OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: false, firstRunStarted: true))
+        #expect(OnboardingModel.shouldShowAtLaunch(onboarded: false, historyIsEmpty: true, firstRunStarted: true))
+        #expect(!OnboardingModel.shouldShowAtLaunch(onboarded: true, historyIsEmpty: true, firstRunStarted: true))
+        #expect(!OnboardingModel.shouldShowAtLaunch(onboarded: true, historyIsEmpty: false, firstRunStarted: true))
+    }
+
+    /// The window showing is what counts as a started first run, before anything is finished.
+    @Test func showingTheWindowMarksTheFirstRunStarted() async throws {
+        let r = try await rig(withLibrary: false)
+        #expect(r.preferences.firstRunStarted && !r.preferences.onboarded)
     }
 }

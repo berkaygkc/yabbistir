@@ -118,8 +118,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             GlobalShortcuts.onStackCopy { stack.copyIntoStack() }
             GlobalShortcuts.onStackPaste { stack.claimedPastePressed() }
             GlobalShortcuts.onRail(first: { stack.session.moveRecent(to: 0) }, second: { stack.session.moveRecent(to: 1) })
-            if OnboardingModel.shouldShowAtLaunch(onboarded: env.preferences.onboarded, historyIsEmpty: historyWasEmpty) {
-                // A new install: the first-run window asks for Accessibility itself, in its own words.
+            if OnboardingModel.shouldShowAtLaunch(onboarded: env.preferences.onboarded, historyIsEmpty: historyWasEmpty,
+                                                  firstRunStarted: env.preferences.firstRunStarted) {
+                // A new install, or a first run quit midway: the first-run window asks for Accessibility itself, in
+                // its own words.
                 onboarding.show()
             } else {
                 // Someone who already has a history needs no first run; it stays one click away in About.

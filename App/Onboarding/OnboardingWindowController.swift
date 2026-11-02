@@ -4,8 +4,8 @@ import YabLocalization
 import YabPlatform
 import YabUI
 
-/// The first-run window: shown once on a new install and again from Settings › About. Every showing is a new first-run
-/// session. Finishing (or Esc, or the close button) fades the window out, gives the keyboard back to the app that had
+/// The first-run window: shown on a new install until it is finished (quitting midway brings it back) and again from
+/// Settings › About. Every showing is a new first-run session. Finishing (or Esc, or the close button) fades the window out, gives the keyboard back to the app that had
 /// it, then opens the panel there.
 @MainActor
 final class OnboardingWindowController: NSObject, NSWindowDelegate {
