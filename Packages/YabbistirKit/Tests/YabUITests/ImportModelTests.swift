@@ -76,29 +76,53 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
         let location = PasteLibraryLocation(folder: URL(fileURLWithPath: "/nowhere"), vendor: nil)
         let english = try makeModel(location: nil)
         let turkish = try makeModel(location: nil, language: .turkish)
-        let one = PasteSummary(historyCount: 5, boards: [board(1, 2)], totalBytes: 0)
-        english.state = .ready(one, location); english.selection = PasteSelection(history: true, boards: [1])
-        turkish.state = .ready(one, location); turkish.selection = PasteSelection(history: true, boards: [1])
-        #expect(turkish.noteLine == "1 pinboard → 2 sabit öğe, kategori olarak gelecek")
+        func set(_ boards: [PasteBoard], _ chosen: Set<Int64>) {
+            for model in [english, turkish] {
+                model.state = .ready(PasteSummary(historyCount: 5, boards: boards, totalBytes: 0), location)
+                model.selection = PasteSelection(history: true, boards: chosen)
+            }
+        }
+        set([board(1, 1)], [1])
+        #expect(english.noteLine == "1 pinboard → 1 item, coming in as categories")
+        #expect(turkish.noteLine == "1 pinboard → 1 sabit öğe, kategori olarak gelecek")
+        set([board(1, 2)], [1])
         #expect(english.noteLine == "1 pinboard → 2 items, coming in as categories")
-        english.state = .ready(PasteSummary(historyCount: 5, boards: [board(1, 2), board(2, 3)], totalBytes: 0), location)
-        english.selection = PasteSelection(history: true, boards: [1, 2])
-        #expect(english.noteLine == "2 pinboards → 5 items, coming in as categories")
-        english.selection = PasteSelection(history: true, boards: [])
+        #expect(turkish.noteLine == "1 pinboard → 2 sabit öğe, kategori olarak gelecek")
+        set([board(1, 100), board(2, 140)], [1, 2])
+        #expect(english.noteLine == "2 pinboards → 240 items, coming in as categories")
+        #expect(turkish.noteLine == "2 pinboard → 240 sabit öğe, kategori olarak gelecek")
+        set([board(1, 100)], [])
         #expect(english.noteLine == "")
     }
 
     @Test func statsAreGroupedAndSized() throws {
         let location = PasteLibraryLocation(folder: URL(fileURLWithPath: "/nowhere"), vendor: nil)
         let bytes: Int64 = 130_000_000
-        let summary = PasteSummary(historyCount: 1_355, boards: [], totalBytes: bytes)
         let english = try makeModel(location: nil)
         let turkish = try makeModel(location: nil, language: .turkish)
-        english.state = .ready(summary, location)
-        turkish.state = .ready(summary, location)
-        #expect(english.statsLine == "1,355 items · \(bytes.formatted(.byteCount(style: .file).locale(AppLanguage.english.locale)))")
-        #expect(turkish.statsLine == "1.355 öğe · \(bytes.formatted(.byteCount(style: .file).locale(AppLanguage.turkish.locale)))")
+        func size(_ language: AppLanguage) -> String { bytes.formatted(.byteCount(style: .file).locale(language.locale)) }
+        for (count, en, tr) in [(1_355, "1,355 items", "1.355 öğe"), (1, "1 item", "1 öğe"), (0, "0 items", "0 öğe")] {
+            let summary = PasteSummary(historyCount: count, boards: [], totalBytes: bytes)
+            english.state = .ready(summary, location)
+            turkish.state = .ready(summary, location)
+            #expect(english.statsLine == "\(en) · \(size(.english))")
+            #expect(turkish.statsLine == "\(tr) · \(size(.turkish))")
+        }
+        english.state = .ready(PasteSummary(historyCount: 1_355, boards: [], totalBytes: bytes), location)
         #expect(english.statsLine.hasPrefix("1,355 items · 130 MB"))
+        #expect(english.itemsPhrase(1) == "1 item" && turkish.itemsPhrase(2) == "2 öğe")
+    }
+
+    @Test func theSourceLineShowsVendorAndFolder() throws {
+        let support = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support", isDirectory: true)
+        let folder = support.appendingPathComponent("com.example.lib", isDirectory: true)
+        let summary = PasteSummary(historyCount: 1, boards: [], totalBytes: 0)
+        let model = try makeModel(location: nil)
+        model.state = .ready(summary, PasteLibraryLocation(folder: folder, vendor: "Setapp"))
+        #expect(model.sourceLine == "Setapp · ~/Library/Application Support")
+        model.state = .ready(summary, PasteLibraryLocation(folder: folder, vendor: nil))
+        #expect(model.sourceLine == "~/Library/Application Support")
+        #expect(model.sourceName == "Paste")
     }
 
     @Test func anotherAppRunningIsOfferedToQuit() throws {

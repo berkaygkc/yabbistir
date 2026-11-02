@@ -6654,13 +6654,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ items · %@"
+            "value": "%@ · %@"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ öğe · %@"
+            "value": "%@ · %@"
           }
         }
       }
@@ -6682,53 +6682,19 @@
         }
       }
     },
-    "import.allHistory.count": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ items"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ öğe"
-          }
-        }
-      }
-    },
-    "import.note.one": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 pinboard → %@ items, coming in as categories"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 pinboard → %@ sabit öğe, kategori olarak gelecek"
-          }
-        }
-      }
-    },
     "import.note": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ pinboards → %@ items, coming in as categories"
+            "value": "%@ → %@, coming in as categories"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ pinboard → %@ sabit öğe, kategori olarak gelecek"
+            "value": "%@ → %@, kategori olarak gelecek"
           }
         }
       }
@@ -6807,13 +6773,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "/ %@ items"
+            "value": "/ %@"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "/ %@ öğe"
+            "value": "/ %@"
           }
         }
       }
@@ -7103,6 +7069,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste’i kapat"
+          }
+        }
+      }
+    },
+    "import.items.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 öğe"
+          }
+        }
+      }
+    },
+    "import.items": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ items"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ öğe"
+          }
+        }
+      }
+    },
+    "import.pinnedItems.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 sabit öğe"
+          }
+        }
+      }
+    },
+    "import.pinnedItems": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ items"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sabit öğe"
+          }
+        }
+      }
+    },
+    "import.pinboards.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 pinboard"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 pinboard"
+          }
+        }
+      }
+    },
+    "import.pinboards": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pinboards"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pinboard"
           }
         }
       }

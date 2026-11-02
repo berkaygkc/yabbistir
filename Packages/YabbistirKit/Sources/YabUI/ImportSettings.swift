@@ -50,10 +50,10 @@ public struct ImportSettingsView: View {
 
     private var source: some View {
         Section {
-            LabeledContent {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(model.sourceName).font(.headline)
+                Text(model.sourceLine).font(.callout).foregroundStyle(.secondary)
                 Text(model.statsLine).font(.callout).foregroundStyle(.secondary).monospacedDigit()
-            } label: {
-                Text(model.sourceLine).font(.headline)
             }
             note("import.body")
         }
@@ -92,7 +92,7 @@ public struct ImportSettingsView: View {
             ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1)))
             HStack(spacing: 4) {
                 Text(model.number(progress.done)).monospacedDigit()
-                Text(L10n.string("import.progress.of", model.language.language, model.number(progress.total))).monospacedDigit()
+                Text(L10n.string("import.progress.of", model.language.language, model.itemsPhrase(progress.total))).monospacedDigit()
             }
             .font(.callout).foregroundStyle(.secondary)
             note("import.progress.body")

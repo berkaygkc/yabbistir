@@ -126,38 +126,47 @@ public final class ImportModel {
         return summary.boards.filter { selection.boards.contains($0.id) }.reduce(0) { $0 + $1.count }
     }
 
+    /// The sub-line under the name: the vendor (when there is one) and the folder holding the library.
     public var sourceLine: String {
-        let name = string("import.source.name")
-        guard case .ready(_, let location) = state, let vendor = location.vendor else { return name }
-        return "\(name) · \(vendor)"
+        guard case .ready(_, let location) = state else { return "" }
+        let folder = (location.folder.deletingLastPathComponent().path as NSString).abbreviatingWithTildeInPath
+        guard let vendor = location.vendor else { return folder }
+        return "\(vendor) · \(folder)"
     }
+
+    public var sourceName: String { string("import.source.name") }
 
     /// "1,355 items · 130 MB".
     public var statsLine: String {
         guard case .ready(let summary, _) = state else { return "" }
         let items = summary.historyCount + summary.boards.reduce(0) { $0 + $1.count }
         let size = summary.totalBytes.formatted(.byteCount(style: .file).locale(language.language.locale))
-        return string("import.source.stats", number(items), size)
+        return string("import.source.stats", itemsPhrase(items), size)
+    }
+
+    /// "1 item", "1,355 items".
+    public func itemsPhrase(_ count: Int) -> String {
+        count == 1 ? string("import.items.one") : string("import.items", number(count))
     }
 
     public func historyCountText() -> String {
         guard case .ready(let summary, _) = state else { return "" }
-        return string("import.allHistory.count", number(summary.historyCount))
+        return number(summary.historyCount)
     }
 
     public func boardCountText(_ board: PasteBoard) -> String {
-        string("import.allHistory.count", number(board.count))
+        number(board.count)
     }
 
     /// What the chosen pinboards become; empty when none is chosen.
     public var noteLine: String {
         guard case .ready(let summary, _) = state else { return "" }
-        let chosen = summary.boards.filter { selection.boards.contains($0.id) }
-        switch chosen.count {
-        case 0: return ""
-        case 1: return string("import.note.one", number(selectedBoardItemCount))
-        default: return string("import.note", number(chosen.count), number(selectedBoardItemCount))
-        }
+        let chosen = summary.boards.filter { selection.boards.contains($0.id) }.count
+        guard chosen > 0 else { return "" }
+        let boards = chosen == 1 ? string("import.pinboards.one") : string("import.pinboards", number(chosen))
+        let pinned = selectedBoardItemCount
+        let items = pinned == 1 ? string("import.pinnedItems.one") : string("import.pinnedItems", number(pinned))
+        return string("import.note", boards, items)
     }
 
     public var resultLine: String {
