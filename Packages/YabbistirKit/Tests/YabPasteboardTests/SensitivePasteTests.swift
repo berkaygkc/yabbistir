@@ -248,10 +248,28 @@ final class FakeSensitiveBoard: SensitivePasteboard {
         var reported: [Int] = []
         var handed = 0
         let paste = sensitivePaste(board, didWrite: { reported.append($0) })
-        _ = await pasteSecret(paste, restoreInstead: { handed += 1 })
+        // The Sıra puts its head back itself (and tells the monitor through its own writer).
+        _ = await pasteSecret(paste, restoreInstead: { handed += 1; board.copyElsewhere("sıranın başı") })
+        let written = board.changeCount
         await paste.pendingRestore?.value
         #expect(handed == 1)
         #expect(board.restores.isEmpty)
-        #expect(reported == [board.changeCount])
+        #expect(reported == [written])
+    }
+
+    /// The Sıra finished while the secret waited, so it had no head to put back: the clipboard from before still comes
+    /// back over the secret.
+    @Test func aSiraWithNothingToPutBackStillTakesTheSecretAway() async {
+        let board = FakeSensitiveBoard(previous)
+        var reported: [Int] = []
+        var handed = 0
+        let paste = sensitivePaste(board, didWrite: { reported.append($0) })
+        _ = await pasteSecret(paste, restoreInstead: { handed += 1 })
+        await paste.pendingRestore?.value
+        #expect(handed == 1)
+        #expect(board.restores == [previous])
+        #expect(board.items == previous)
+        #expect(reported.count == 2)
+        #expect(reported.last == board.changeCount)
     }
 }

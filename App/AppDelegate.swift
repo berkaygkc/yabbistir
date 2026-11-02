@@ -78,10 +78,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Jobs end with the app: every waiting or running one is cancelled, then both helpers are
-    /// stopped (SIGTERM; they stop their tools' process groups) before the app exits, so no
-    /// download runs on without it.
+    /// A secret still on the clipboard gives it back before anything else. Jobs end with the app: every
+    /// waiting or running one is cancelled, then both helpers are stopped (SIGTERM; they stop their
+    /// tools' process groups) before the app exits, so no download runs on without it.
     func applicationWillTerminate(_ notification: Notification) {
+        env?.sensitivePaste.flush()
         env?.jobs?.cancelAll()
         env?.stopExtensionHosts()
     }

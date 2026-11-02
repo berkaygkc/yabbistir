@@ -86,6 +86,43 @@ import YabLocalization
         }
     }
 
+    static let sources: [NoticeKind] = [
+        .sourcePasted, .secretCopiedOnly, .sourceNotPasted, .sourceEmpty, .sourceCopied(message: "Kullanıcı adı kopyalandı."),
+        .sourceCopied(message: nil), .sourceCommandCopied,
+    ]
+
+    /// A source's notices only confirm what the person did: a title alone stays 2.4 s, a second line 4 s; none has a
+    /// button.
+    @Test func aSourcesNoticesSayWhatHappened() {
+        let turkish = Self.sources.map { [$0.titleText(.turkish), $0.bodyText(.turkish)] }
+        #expect(turkish == [
+            ["Yapıştırıldı.", ""],
+            ["⌘V ile yapıştır", "30 sn sonra panodan silinir."],
+            ["Yapıştırılmadı.", "Başka bir uygulama öne geçti."],
+            ["Boş sonuç yapıştırılmadı.", ""],
+            ["Kullanıcı adı kopyalandı.", ""],
+            ["Kopyalandı.", ""],
+            ["Komut kopyalandı.", "Terminal’de çalıştır, sonra paneli yeniden aç."],
+        ])
+        let english = Self.sources.map { [$0.titleText(.english), $0.bodyText(.english)] }
+        #expect(english == [
+            ["Pasted.", ""],
+            ["Press ⌘V to paste", "It leaves the clipboard in 30 seconds."],
+            ["Not pasted.", "Another app came to the front."],
+            ["Nothing pasted: the value was empty.", ""],
+            ["Kullanıcı adı kopyalandı.", ""],
+            ["Copied.", ""],
+            ["Command copied.", "Run it in Terminal, then open the panel again."],
+        ])
+        #expect(Self.sources.map(\.duration) == [.milliseconds(2400), .seconds(4), .seconds(4), .milliseconds(2400), .milliseconds(2400),
+                                                 .milliseconds(2400), .seconds(4)])
+        for kind in Self.sources {
+            #expect(kind.action == nil)
+            #expect(kind.actionText(.turkish) == nil)
+            #expect(!kind.offersSettings)
+        }
+    }
+
     /// The three update notices say exactly what the check found, in both languages; a failure never reads as "up to date".
     @Test func updateNoticesSayWhatTheCheckFound() {
         let available = NoticeKind.updateAvailable(version: "0.2.0", page: URL(string: "https://example.test/x")!)

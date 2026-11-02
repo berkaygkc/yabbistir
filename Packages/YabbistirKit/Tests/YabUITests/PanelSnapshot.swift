@@ -276,6 +276,100 @@ import YabLocalization
         }
     }
 
+    /// A source row's actions (a synthetic vault): the bar on an entry, with ⌘ and with ⇧ held; ⌘K; the ⇧ list (its copy
+    /// row highlighted too); the locked row's bar and ⌘K; and the source's notices. Dark Turkish, then light English.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
+    func renderSourceActions() async throws {
+        let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
+        let store = try ItemStore.temporary()
+        let now = Date()
+        for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
+                                ("Perşembe 14:00 — iade akışı demosu", 9), ("git rebase -i HEAD~3", 22)] {
+            _ = try store.ingest(CapturedClip(items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data(text.utf8))]],
+                                              source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutes * 60)))
+        }
+        let library = try Library(store: store)
+        let key = "dev.example.kasa/vault"
+        try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
+        let vault = try #require(try store.categories().first { $0.source == key })
+        let rows = [("Bulut konsolu", "ops@ornek.dev"), ("Eskiz", "melike@ornek.dev"), ("Kodhane", "melike@ornek.dev"), ("Kodhane", "deniz.k"),
+                    ("Grafikler", "ops@ornek.dev"), ("İş Portalı", "deniz.k"), ("ornek.dev", "melike@ornek.dev")]
+            .enumerated().map { SourceRow(id: "\($0.offset)", title: $0.element.0, subtitle: $0.element.1) }
+        func vaultDescriptor(_ language: AppLanguage) -> SourceDescriptor {
+            guard language == .english else { return FakeSources.vault() }
+            return SourceDescriptor(extensionID: "dev.example.kasa", extensionName: "Vault", sourceID: "vault", title: "Vault", sensitive: true, actions: [
+                SourceActionDescriptor(id: "password", kind: .secret, title: "Paste password", label: "Password"),
+                SourceActionDescriptor(id: "username", kind: .text, title: "Paste username", label: "Username", copyTitle: "Copy username",
+                                       copied: "Username copied."),
+            ])
+        }
+        func write(_ view: some View, _ name: String, dark: Bool) {
+            let framed = view
+                .padding(30)
+                .background(dark ? Color(red: 0.12, green: 0.16, blue: 0.35) : Color(red: 0.86, green: 0.89, blue: 0.97))
+                .environment(\.colorScheme, dark ? .dark : .light)
+            let renderer = ImageRenderer(content: framed)
+            renderer.scale = 2
+            NSAppearance(named: dark ? .darkAqua : .aqua)!.performAsCurrentDrawingAppearance {
+                let image = renderer.nsImage!
+                let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
+                try? rep.representation(using: .png, properties: [:])!.write(to: dir.appendingPathComponent("source-actions-\(name).png"))
+            }
+        }
+        for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
+            func model(_ state: SourceCenter.State) -> PanelViewModel {
+                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-sa-\(UUID())")!)
+                languageStore.language = language
+                let sources = FakeSources()
+                sources.descriptors = [vaultDescriptor(language)]
+                sources.states[key] = state
+                let model = PanelViewModel(library: library, language: languageStore, sources: sources, now: { now }, shiftHintDelay: .zero)
+                model.reset()
+                model.isPresented = true
+                model.toggleShown(vault.id!)
+                return model
+            }
+            func panel(_ model: PanelViewModel) -> some View {
+                var panel = PanelView(model: model, material: .tunedEffect)
+                panel.snapshot = true
+                return panel
+            }
+            let entry = model(.rows(rows))
+            _ = entry.handle(.move(2))
+            write(panel(entry), "bar-\(suffix)", dark: dark)
+            _ = entry.handle(.shiftHeld(true))
+            write(panel(entry), "shift-\(suffix)", dark: dark)
+            _ = entry.handle(.shiftHeld(false))
+            _ = entry.handle(.commandHeld(true))
+            let start = ContinuousClock.now
+            while !entry.showsIndexKeys, ContinuousClock.now - start < .seconds(5) { try await Task.sleep(for: .milliseconds(20)) }
+            write(panel(entry), "command-\(suffix)", dark: dark)
+            _ = entry.handle(.commandHeld(false))
+            _ = entry.handle(.toggleActions)
+            write(panel(entry), "menu-\(suffix)", dark: dark)
+            // The menu alone over the panel's solid surface: ImageRenderer draws its glass see-through.
+            write(ActionMenuView(model: entry) { _ in }
+                .background(Tokens.Colors.surfaceSolid, in: RoundedRectangle(cornerRadius: Tokens.Metrics.menuRadius, style: .continuous)),
+                  "menu-alone-\(suffix)", dark: dark)
+            _ = entry.handle(.escape)
+            _ = entry.handle(.toggleTransforms)
+            write(TransformPanelView(model: entry) { _ in }, "list-\(suffix)", dark: dark)
+            _ = entry.handle(.move(2))
+            write(TransformPanelView(model: entry) { _ in }, "list-copy-\(suffix)", dark: dark)
+            let locked = model(.locked(message: language == .english ? "Vault is locked" : "Kasa kilitli",
+                                       command: "kasa login --trust <e-posta>"))
+            write(panel(locked), "locked-\(suffix)", dark: dark)
+            _ = locked.handle(.toggleActions)
+            write(ActionMenuView(model: locked) { _ in }
+                .background(Tokens.Colors.surfaceSolid, in: RoundedRectangle(cornerRadius: Tokens.Metrics.menuRadius, style: .continuous)),
+                  "locked-menu-\(suffix)", dark: dark)
+            let notices: [NoticeKind] = [.sourcePasted, .sourceCopied(message: vaultDescriptor(language).copyAction?.copied), .secretCopiedOnly,
+                                         .sourceNotPasted, .sourceEmpty, .sourceCommandCopied]
+            write(VStack(alignment: .leading, spacing: 16) { ForEach(Array(notices.enumerated()), id: \.offset) { NoticeView(language: language, kind: $0.element) {} } },
+                  "notices-\(suffix)", dark: dark)
+        }
+    }
+
     /// The job card (synthetic jobs) in both themes: running with a fraction, an indeterminate
     /// state word, queued, and finished (ready, done in Finder, a missing tool); then a
     /// mix of them in English, and the status item's ring.

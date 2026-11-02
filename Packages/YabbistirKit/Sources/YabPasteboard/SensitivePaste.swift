@@ -71,7 +71,8 @@ public final class SystemSensitivePasteboard: SensitivePasteboard {
 @MainActor
 public protocol SensitivePasting: AnyObject {
     /// Writes `text` and types ⌘V. A secret (`concealed`) gives the clipboard back afterwards; text stays.
-    /// `restoreInstead` takes the place of that give-back (the paste stack puts its own head back).
+    /// `restoreInstead` takes the place of that give-back (the paste stack puts its own head back); if it writes
+    /// nothing, the give-back still happens.
     func paste(_ text: String, concealed: Bool, targetBundleID: String?, onlyIf: (() -> Bool)?,
                restoreInstead: (() -> Void)?) async -> PasteOutcome
     /// Writes `text` the same way, as text, and types nothing.
@@ -172,9 +173,10 @@ public final class SensitivePaste: SensitivePasting {
         guard board.changeCount == pending.written else { return }
         if let restoreInstead = pending.restoreInstead {
             restoreInstead()
-        } else {
-            didWrite(board.restore(pending.snapshot))
+            // The paste stack put its head back; one that finished meanwhile had none, and the secret still goes.
+            guard board.changeCount == pending.written else { return }
         }
+        didWrite(board.restore(pending.snapshot))
     }
 
     private func drop() {

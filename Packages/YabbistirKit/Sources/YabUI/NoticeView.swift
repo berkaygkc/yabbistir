@@ -26,6 +26,18 @@ public enum NoticeKind: Equatable, Sendable {
     case updateAvailable(version: String, page: URL)
     /// "Check for Updates…" could not tell (no network, an odd answer). Never worded as "up to date".
     case updateCheckFailed
+    /// A source's secret (a password) was pasted.
+    case sourcePasted
+    /// A secret could only be copied (no Accessibility, Secure Keyboard Entry): it waits for ⌘V, then leaves.
+    case secretCopiedOnly
+    /// The app a secret was for left before ⌘V: nothing was typed, and the clipboard is already back.
+    case sourceNotPasted
+    /// A source's action gave nothing (or only spaces): nothing was pasted or copied.
+    case sourceEmpty
+    /// A source's text was copied: the action's own words ("Kullanıcı adı kopyalandı."), else "Kopyalandı.".
+    case sourceCopied(message: String?)
+    /// A locked source's unlock command was copied: where to run it, and what then.
+    case sourceCommandCopied
 
     func titleText(_ language: AppLanguage) -> String {
         switch self {
@@ -38,6 +50,12 @@ public enum NoticeKind: Equatable, Sendable {
         case .upToDate(let version): L10n.string("notice.update.upToDate", language, version)
         case .updateAvailable(let version, _): L10n.string("notice.update.available", language, version)
         case .updateCheckFailed: L10n.string("notice.update.failed", language)
+        case .sourcePasted: L10n.string("notice.sourcePasted", language)
+        case .secretCopiedOnly: L10n.string("notice.secretCopiedOnly.title", language)
+        case .sourceNotPasted: L10n.string("notice.sourceNotPasted.title", language)
+        case .sourceEmpty: L10n.string("notice.sourceEmpty", language)
+        case .sourceCopied(let message): message ?? L10n.string("notice.copied", language)
+        case .sourceCommandCopied: L10n.string("notice.sourceCommandCopied.title", language)
         }
     }
 
@@ -52,6 +70,10 @@ public enum NoticeKind: Equatable, Sendable {
         case .extensionMessage(_, let message): message
         case .translationNeeded(let from, let to): LanguageNames.pair(from: from, to: to, in: language)
         case .upToDate, .updateAvailable, .updateCheckFailed: ""
+        case .secretCopiedOnly: L10n.string("notice.secretCopiedOnly.body", language)
+        case .sourceNotPasted: L10n.string("notice.sourceNotPasted.body", language)
+        case .sourceCommandCopied: L10n.string("notice.sourceCommandCopied.body", language)
+        case .sourcePasted, .sourceEmpty, .sourceCopied: ""
         }
     }
 
@@ -62,7 +84,8 @@ public enum NoticeKind: Equatable, Sendable {
         case .inputMonitoring: .inputMonitoringSettings
         case .translationNeeded(let from, let to): .downloadLanguagePack(from: from, to: to)
         case .updateAvailable(_, let page): .openURL(page)
-        case .secureInput, .copiedOnly, .extensionFailed, .extensionDisabled, .extensionMessage, .upToDate, .updateCheckFailed: nil
+        case .secureInput, .copiedOnly, .extensionFailed, .extensionDisabled, .extensionMessage, .upToDate, .updateCheckFailed,
+             .sourcePasted, .secretCopiedOnly, .sourceNotPasted, .sourceEmpty, .sourceCopied, .sourceCommandCopied: nil
         }
     }
 
@@ -76,8 +99,15 @@ public enum NoticeKind: Equatable, Sendable {
     }
 
     /// How long the notice stays up: an offer waits 8 s, so there is time to take it (a click closes it sooner); the
-    /// rest 4 s.
-    public var duration: Duration { action == nil ? .seconds(4) : .seconds(8) }
+    /// rest 4 s. A source's notice only confirms what the person just did, so it is short: its title alone 2.4 s, with
+    /// a second line 4 s.
+    public var duration: Duration {
+        switch self {
+        case .sourcePasted, .sourceEmpty, .sourceCopied: .milliseconds(2400)
+        case .secretCopiedOnly, .sourceNotPasted, .sourceCommandCopied: .seconds(4)
+        default: action == nil ? .seconds(4) : .seconds(8)
+        }
+    }
 
     /// Permission notices carry a button to the settings pane.
     var offersSettings: Bool { self == .accessibility || self == .inputMonitoring }
@@ -93,8 +123,8 @@ public enum NoticeAction: Equatable, Sendable {
 }
 
 /// Shown when an item could only be copied, not pasted, when the Sıra lacks a permission, when
-/// an extension failed, when an action answered with a message, or when a translation needs a
-/// language pack.
+/// an extension failed, when an action answered with a message, when a translation needs a
+/// language pack, or when a source's value was pasted or copied (never the value itself).
 public struct NoticeView: View {
     let language: AppLanguage
     let kind: NoticeKind

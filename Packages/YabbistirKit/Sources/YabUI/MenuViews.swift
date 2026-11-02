@@ -155,7 +155,8 @@ struct ActionSearchLine: View {
 }
 
 /// ⌘K (300 pt): every action on the selected item, grouped by hairlines, with its shortcut; a
-/// search line sits at the bottom.
+/// search line sits at the bottom. On a source's row, its own actions (a key for a secret), then Preview and
+/// Edit categories.
 struct ActionMenuView: View {
     @Bindable var model: PanelViewModel
     let onAction: (PanelAction) -> Void
@@ -173,6 +174,8 @@ struct ActionMenuView: View {
                 MenuRow(title: model.actionLabel(item), isHighlighted: index == model.menuSelection, isDestructive: item == .delete) {
                     if case .transform(let id) = item, let command = model.transformCommand(id) {
                         CommandIcon(icon: command.icon).frame(width: 16)
+                    } else if model.sourceAction(item)?.kind == .secret {
+                        SourceMark(size: 13).frame(width: 16).foregroundStyle(Tokens.Colors.textSecondary)
                     } else {
                         Image(systemName: Self.symbol(item)).font(.system(size: 13)).frame(width: 16)
                             .foregroundStyle(item == .delete ? Tokens.Colors.danger : Tokens.Colors.textSecondary)
@@ -194,7 +197,7 @@ struct ActionMenuView: View {
 
     static func group(of item: PanelActionItem) -> Int {
         switch item {
-        case .paste, .pastePlain, .copy, .addToStack: 0
+        case .paste, .pastePlain, .copy, .addToStack, .sourcePrimary, .sourceAlternate, .sourceCopy, .copySourceCommand: 0
         case .transform, .allTransforms: 1
         case .addToCategory, .preview, .editCategories: 2
         case .delete: 3
@@ -203,9 +206,9 @@ struct ActionMenuView: View {
 
     static func symbol(_ item: PanelActionItem) -> String {
         switch item {
-        case .paste: "doc.on.clipboard"
+        case .paste, .sourcePrimary, .sourceAlternate: "doc.on.clipboard"
         case .pastePlain: "textformat"
-        case .copy: "doc.on.doc"
+        case .copy, .sourceCopy, .copySourceCommand: "doc.on.doc"
         case .addToStack: "square.stack.3d.up"
         case .transform: "puzzlepiece.extension"
         case .allTransforms: "arrow.triangle.2.circlepath"
@@ -220,8 +223,9 @@ struct ActionMenuView: View {
     static func keys(_ item: PanelActionItem, shiftReturn: PanelActionItem?) -> [String] {
         if item == shiftReturn { return ["⇧", "↵"] }
         return switch item {
-        case .paste: ["↵"]
-        case .copy: ["⌘", "C"]
+        case .paste, .sourcePrimary: ["↵"]
+        case .sourceAlternate: ["⇧", "↵"]
+        case .copy, .sourceCopy, .copySourceCommand: ["⌘", "C"]
         case .pastePlain, .addToStack, .transform: []
         case .allTransforms: ["⇧"]
         case .addToCategory: ["⌘", "P"]

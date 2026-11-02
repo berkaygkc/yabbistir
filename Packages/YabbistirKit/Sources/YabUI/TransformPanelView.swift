@@ -8,7 +8,8 @@ import YabLocalization
 /// The ⇧ panel (344 pt): the item on top, its ⇧↵ default first ("Varsayılan"), "Paste as plain
 /// text" for rich text ("yabbistir"), the paste target's own actions ("Finder’a"), then its
 /// transforms grouped by extension with each one's output on the right, the highlighted one's
-/// result below, then the keys; ⌘K opens its own menu over the lower right.
+/// result below, then the keys; ⌘K opens its own menu over the lower right. On a source's row it
+/// lists that row's actions instead (`sourceList`).
 public struct TransformPanelView: View {
     @Bindable var model: PanelViewModel
     let onAction: (PanelAction) -> Void
@@ -19,6 +20,14 @@ public struct TransformPanelView: View {
     }
 
     public var body: some View {
+        if let source = model.transformSource {
+            sourceList(source)
+        } else {
+            transforms
+        }
+    }
+
+    @ViewBuilder private var transforms: some View {
         let rows = model.transformRows
         let sections = model.transformSections
         VStack(alignment: .leading, spacing: 0) {
@@ -67,24 +76,74 @@ public struct TransformPanelView: View {
         .environment(\.locale, model.language.locale)
     }
 
+    // MARK: A source's row
+
+    /// A source row's ⇧ (a vault's entry): its tile, title and username on top; its actions, each with its key (↵ runs
+    /// the highlighted one, ⇧↵ and ⌘C work as on the row); then "↵ Yapıştır" ("↵ Kopyala" on the copy row) and "← Geri".
+    /// No outputs and no result: a password has nothing to show, and the username is already on top.
+    private func sourceList(_ source: SourceSubject) -> some View {
+        let items = model.sourceListItems
+        return VStack(alignment: .leading, spacing: 0) {
+            header(title: source.row.title, subtitle: source.row.subtitle) {
+                InitialTile(title: source.row.title).frame(width: 22, height: 22)
+            }
+            ForEach(Array(items.enumerated()), id: \.element) { index, item in
+                MenuRow(title: model.actionLabel(item), isHighlighted: index == model.menuSelection, keepsTitle: true) {
+                    EmptyView()
+                } trailing: {
+                    HStack(spacing: 3) { ForEach(ActionMenuView.keys(item, shiftReturn: nil), id: \.self) { Keycap($0) } }
+                }
+                .onHover { if $0 { model.highlightMenuRow(index) } }
+                .onTapGesture {
+                    model.highlightMenuRow(index)
+                    if let action = model.handle(.confirm(plain: false)) { onAction(action) }
+                }
+            }
+            HStack(spacing: 14) {
+                hint(["↵"], model.sourceListConfirmLabel)
+                Spacer(minLength: 0)
+                hint(["←"], L10n.string("transforms.back", model.language))
+            }
+            .font(.system(size: 11.5))
+            .foregroundStyle(Tokens.Colors.textSecondary)
+            .padding(EdgeInsets(top: 8, leading: 10, bottom: 3, trailing: 10))
+            .overlay(alignment: .top) { Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5) }
+            .padding(.top, 4)
+        }
+        .padding(6)
+        .frame(width: 344)
+        .background(PanelBackground(material: PanelMaterial.current, cornerRadius: 14))
+        .environment(\.locale, model.language.locale)
+    }
+
     // MARK: Parts
 
     private func header(count: Int) -> some View {
-        HStack(spacing: 10) {
+        header(title: model.transformSubjectRow?.title ?? "", subtitle: subtitle(count: count)) {
             if let row = model.transformSubjectRow {
                 RowIcon(row: row, thumbnail: row.kind == .image ? model.thumbnails.thumbnail(for: row.itemID) : nil)
                     .frame(width: 22, height: 22)
             }
+        }
+    }
+
+    /// The subject on top: its icon, its title and a line under it, over a hairline.
+    private func header<Icon: View>(title: String, subtitle: String?, @ViewBuilder icon: () -> Icon) -> some View {
+        HStack(spacing: 10) {
+            icon()
             VStack(alignment: .leading, spacing: 1) {
-                Text(model.transformSubjectRow?.title ?? "")
+                Text(title)
                     .font(.system(size: 12.5, weight: .semibold))
                     .foregroundStyle(Tokens.Colors.text)
                     .lineLimit(1)
                     .truncationMode(.tail)
-                Text(subtitle(count: count))
-                    .font(.system(size: 11))
-                    .foregroundStyle(Tokens.Colors.textSecondary)
-                    .lineLimit(1)
+                if let subtitle, !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Tokens.Colors.textSecondary)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }
             }
             Spacer(minLength: 0)
         }

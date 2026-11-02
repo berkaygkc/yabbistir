@@ -23,6 +23,11 @@ public enum PanelAction: Equatable, Sendable {
     case runCommand(commandID: String, subjectID: Int64?, copy: Bool)
     /// ⌘C on the ⇧ panel's "Paste as plain text": the item's plain text alone to the clipboard.
     case copyPlain(itemID: Int64)
+    /// A source row's action (`SourceDescriptor`), by the row's and the action's ids: ↵, ⌘1–9 and ⇧↵ paste its value
+    /// (copy: false), ⌘C copies it (a text action's only).
+    case runSource(key: String, row: String, action: String, copy: Bool)
+    /// ↵ or ⌘C on a locked source's row: its unlock command to the clipboard.
+    case copySourceCommand(String)
 }
 
 public enum PanelActionItem: Hashable, Sendable {
@@ -32,6 +37,10 @@ public enum PanelActionItem: Hashable, Sendable {
     /// "All transforms (N)…": opens the ⇧ panel.
     case allTransforms
     case addToCategory, preview, editCategories, delete
+    /// A source row's own actions, for ⌘K and its ⇧ panel: the first (↵), the second (⇧↵), the text action's copy (⌘C).
+    case sourcePrimary, sourceAlternate, sourceCopy
+    /// The locked source row's unlock command, copied.
+    case copySourceCommand
 }
 
 public enum PreviewSource: Equatable, Sendable {
@@ -111,8 +120,11 @@ public final class PanelViewModel {
     /// "On select" categories opened from the Kategoriler menu; kept while the app runs.
     public private(set) var shownCategoryIDs: Set<Int64> = []
     public private(set) var layer: PanelLayer = .none {
-        // The ⇧ panel's ⌘K leaves with the panel.
-        didSet { if layer != .transforms, transformMenuOpen { transformMenuOpen = false } }
+        // The ⇧ panel's ⌘K, and the source row it lists, leave with the panel.
+        didSet {
+            if layer != .transforms, transformMenuOpen { transformMenuOpen = false }
+            if layer != .transforms, transformSource != nil { transformSource = nil }
+        }
     }
     /// Why the preview is open: a hover (closes when the pointer leaves) or the keyboard (stays
     /// for the session and follows the selection). Nil: closed.
@@ -160,6 +172,10 @@ public final class PanelViewModel {
     /// every transform, by title or keyword prefix.
     public var actionItems: [PanelActionItem] {
         let needle = SearchNormalizer.normalize(actionQuery.trimmingCharacters(in: .whitespaces))
+        // A source's row: its own actions (`sourceMenuItems`).
+        if let items = sourceMenuItems {
+            return needle.isEmpty ? items : items.filter { SearchNormalizer.normalize(actionLabel($0)).contains(needle) }
+        }
         let target = extensions?.target
         let lead = layerTransforms.filter { $0.isFor(target) }.map { PanelActionItem.transform($0.id) }
         var transforms = layerTransforms.filter { !$0.isFor(target) }.map { PanelActionItem.transform($0.id) }
@@ -222,6 +238,8 @@ public final class PanelViewModel {
     public private(set) var transformSubjectApp: String?
     /// Its text, for the "Paste as plain text" row's preview.
     public private(set) var transformPlainText: String?
+    /// The source row whose actions the ⇧ panel lists in place of transforms; nil while it lists an item's.
+    public private(set) var transformSource: SourceSubject?
     /// ⌘K over the ⇧ panel's lower right; the panel stays its layer.
     public private(set) var transformMenuOpen = false
     /// That menu's search text.
@@ -368,6 +386,7 @@ public final class PanelViewModel {
         case .transform(let id): return transformCommand(id)?.title ?? id
         case .allTransforms:
             return L10n.string("actions.allTransforms", language, NumberFormatting.count(layerRows.count, language: language))
+        case .sourcePrimary, .sourceAlternate, .sourceCopy, .copySourceCommand: return sourceActionLabel(item)
         default: break
         }
         let key = switch item {
@@ -378,7 +397,7 @@ public final class PanelViewModel {
         case .addToCategory: "actions.addToCategory"
         case .preview: "actions.preview"
         case .editCategories: "menu.categories.edit"
-        case .transform, .allTransforms: ""
+        case .transform, .allTransforms, .sourcePrimary, .sourceAlternate, .sourceCopy, .copySourceCommand: ""
         case .delete:
             switch focusedSource {
             case .stack: "stack.remove"
@@ -555,6 +574,7 @@ public final class PanelViewModel {
             return shift ? shiftReturnAction(rowID: id) : pasteAction(rowID: id, plain: false)
         case .copy:
             if let command = selectedCommand { return .runCommand(commandID: command.id, subjectID: subjectID, copy: true) }
+            if let source = selectedSourceRow { return sourceCopy(source) }
             return selectedItemID.map { .copy(itemID: $0) }
         case .delete:
             deleteSelected()
@@ -605,10 +625,11 @@ public final class PanelViewModel {
     }
 
     /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column (`plain`: ⌘K's
-    /// "Paste as plain text"): a Sıra row pastes its entry out of order; a command row runs. A source's row is no
-    /// item: nothing is pasted from it here.
+    /// "Paste as plain text"): a Sıra row pastes its entry out of order; a command row runs. A source's row runs its
+    /// first action; the locked one copies its command.
     public func pasteAction(rowID: Int64, plain: Bool) -> PanelAction? {
-        guard let row = focusedRows.first(where: { $0.id == rowID }), row.source == nil else { return nil }
+        guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
+        if let source = row.source { return sourceReturn(source, shift: false) }
         if let command = row.command { return .runCommand(commandID: command.commandID, subjectID: subjectID, copy: false) }
         guard focusedSource == .stack else { return .paste(itemID: row.itemID, plain: plain) }
         return .pasteFromStack(entryID: Int(-row.id), itemID: row.itemID, plain: plain)
@@ -616,9 +637,10 @@ public final class PanelViewModel {
 
     /// ⇧↵ on a row of the focused column: the item's default transform runs on it, rich text pastes
     /// as plain text, anything else pastes as it is (a Sıra row its entry, out of order). A command
-    /// row runs, as with ↵: its output is already plain.
-    private func shiftReturnAction(rowID: Int64) -> PanelAction? {
-        guard let row = focusedRows.first(where: { $0.id == rowID }), row.source == nil else { return nil }
+    /// row runs, as with ↵: its output is already plain. A source's row runs its second action.
+    func shiftReturnAction(rowID: Int64) -> PanelAction? {
+        guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
+        if let source = row.source { return sourceReturn(source, shift: true) }
         guard row.command == nil else { return pasteAction(rowID: rowID, plain: false) }
         let action = shiftReturn(itemID: row.itemID, kind: row.kind)
         if case .command(let id) = action { return .runCommand(commandID: id, subjectID: row.itemID, copy: false) }
@@ -670,9 +692,11 @@ public final class PanelViewModel {
         if showsShiftHint != (label != nil) { showsShiftHint = label != nil }
     }
 
-    /// What ⇧↵ does on the selected row, in the bar's words; nil when it pastes like ↵.
+    /// What ⇧↵ does on the selected row, in the bar's words; nil when it pastes like ↵. On a source's row, its second
+    /// action ("Kullanıcı adını yapıştır"); nil with one action, or on the locked row.
     private var currentShiftHintLabel: String? {
-        switch shiftReturnAction {
+        if case .entry? = selectedSourceRow { return selectedSourceDescriptor?.alternate?.title }
+        return switch shiftReturnAction {
         case .plainText?: L10n.string("actions.pastePlain", language)
         case .command(let id)?: selectedRow.flatMap { row in transforms(of: row.itemID).first { $0.id == id }?.title }
         case .paste?, nil: nil
@@ -829,9 +853,10 @@ public final class PanelViewModel {
         return order.flatMap { groups[$0] ?? [] }
     }
 
-    /// Opens on an item with rows (transforms, or rich text's plain paste); an item without any
-    /// gets the edge nudge instead.
+    /// Opens on an item with rows (transforms, or rich text's plain paste), or on a source's row with its
+    /// actions; an item without any, or the locked row, gets the edge nudge instead.
     private func openTransforms() {
+        if let source = selectedSourceRow { return openSourceList(source) }
         guard let id = selectedItemID else { return }
         loadLayer()
         guard !layerRows.isEmpty else {
@@ -852,6 +877,7 @@ public final class PanelViewModel {
     /// Keys while the ⇧ panel is open: typing searches, ↑/↓ move, ↵ (⇧↵ too) pastes and ⌘C copies
     /// the highlighted result, ⌘K opens the panel's own menu, ← / Esc / ⇧ close it.
     private func handleTransforms(_ command: PanelCommand) -> Consumed? {
+        if transformSource != nil { return handleSourceList(command) }
         if transformMenuOpen, let consumed = handleTransformMenu(command) { return consumed }
         switch command {
         case .type(let text):
@@ -1022,6 +1048,50 @@ public final class PanelViewModel {
         return Consumed()
     }
 
+    // MARK: A source row's ⇧ panel
+
+    /// A source's row lists its actions, the first highlighted; the locked row has none and nudges.
+    private func openSourceList(_ source: SourceRowInfo) {
+        guard case .entry(let key, let row) = source, let descriptor = sourceDescriptor(key) else {
+            edgeNudgeDirection = 1
+            edgeNudge += 1
+            return
+        }
+        transformSource = SourceSubject(descriptor: descriptor, row: row)
+        transformQuery = ""
+        menuSelection = 0
+        layer = .transforms
+    }
+
+    /// Keys while the ⇧ panel lists a source row's actions: ↑/↓ move, ↵ runs the highlighted one; ⇧↵ and ⌘C do what
+    /// they do on the row. ← / Esc / ⇧ close it. Nothing to search, and no ⌘K of its own.
+    private func handleSourceList(_ command: PanelCommand) -> Consumed? {
+        guard let subject = transformSource else { return nil }
+        let items = sourceListItems
+        switch command {
+        case .move(let delta):
+            menuSelection = max(0, min(items.count - 1, menuSelection + delta))
+        case .confirm(let shift):
+            let item = shift ? PanelActionItem.sourceAlternate : items.indices.contains(menuSelection) ? items[menuSelection] : .sourcePrimary
+            layer = .none
+            return Consumed(action: sourceRun(item, descriptor: subject.descriptor, row: subject.row))
+        case .copy:
+            guard items.contains(.sourceCopy) else { break }
+            layer = .none
+            return Consumed(action: sourceRun(.sourceCopy, descriptor: subject.descriptor, row: subject.row))
+        case .moveColumn(let delta) where delta < 0:
+            layer = .none
+        case .escape, .toggleTransforms:
+            layer = .none
+        case .toggleCategoryMenu, .togglePin, .openEditor, .commandHeld, .shiftHeld:
+            return nil
+        default:
+            // Typing, ⌘K, → and ⌘1–9 have nothing to do here.
+            break
+        }
+        return Consumed()
+    }
+
     private func run(_ item: PanelActionItem) -> PanelAction? {
         switch item {
         case .paste: return selectedID.flatMap { pasteAction(rowID: $0, plain: false) }
@@ -1043,6 +1113,11 @@ public final class PanelViewModel {
         case .delete:
             deleteSelected()
             return nil
+        case .sourcePrimary, .sourceAlternate, .sourceCopy:
+            guard case .entry(let key, let row)? = selectedSourceRow, let descriptor = sourceDescriptor(key) else { return nil }
+            return sourceRun(item, descriptor: descriptor, row: row)
+        case .copySourceCommand:
+            return selectedSourceRow.flatMap(sourceCopy)
         }
     }
 

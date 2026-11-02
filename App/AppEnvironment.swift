@@ -36,8 +36,12 @@ final class AppEnvironment {
     /// Extension sources' rows (a vault's entries), in the app's memory only: forgotten when the Mac locks or sleeps,
     /// and a source's when its extension can no longer run.
     let sources: SourceCenter
-    /// The screen locked, the Mac or its displays went to sleep, or another user took over: `sources` forgets every row.
-    private let sessionLock: SessionLockObserver
+    /// The screen locked, the Mac or its displays went to sleep, or another user took over: `sources` forgets every row,
+    /// and a secret still on the clipboard gives it back at once.
+    private var sessionLock: SessionLockObserver?
+    /// A source's value on its way to the clipboard: a password written concealed and the clipboard given back after
+    /// it, a username as text that stays. One for the app's lifetime, so a give-back that is waiting is never let go.
+    private(set) var sensitivePaste: SensitivePaste!
     /// Long actions (downloads): queued, shown on the card under the menu bar icon, delivered once.
     /// Set at launch once the panel and the Sıra exist (`AppJobEnvironment` asks them).
     var jobs: JobCenter!
@@ -100,7 +104,6 @@ final class AppEnvironment {
         extensions.installHostCalls(hostCalls)
         let sources = SourceCenter(service: extensions)
         self.sources = sources
-        sessionLock = SessionLockObserver { [weak sources] in sources?.clearAll() }
         // Whoever else follows registry changes (the panel) chains onto this one.
         // Their categories follow the usable sources. The registry scanned in its init, so the list is complete
         // already; the same sync runs again after every change below.
@@ -133,6 +136,20 @@ final class AppEnvironment {
             // becomes ready meanwhile writes after this copy and keeps its card.
             self?.jobs?.clipboardChanged()
             self?.capture.submit(clip, changeCount: changeCount)
+        }
+        sensitivePaste = SensitivePaste(
+            board: SystemSensitivePasteboard(pasteboard: .general, sourceID: Bundle.main.bundleIdentifier ?? "dev.yabbistir.app"),
+            // ⌘V even under Secure Event Input: the field a password goes into turns it on.
+            send: { [weak self] target, onlyIf in
+                guard let self else { return .copiedOnly(.targetLeft) }
+                return await makePaster().send(kind: .text, targetBundleID: target, honorsSecureInput: false, onlyIf: onlyIf)
+            },
+            // Its writes and give-backs are never captured.
+            didWrite: { [weak self] changeCount in self?.monitor.ignore(changeCount: changeCount) })
+        let sensitivePaste = sensitivePaste
+        sessionLock = SessionLockObserver { [weak sources, weak sensitivePaste] in
+            sources?.clearAll()
+            sensitivePaste?.flush()
         }
     }
 

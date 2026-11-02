@@ -2891,6 +2891,23 @@
         }
       }
     },
+    "notice.copied": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyalandı."
+          }
+        }
+      }
+    },
     "notice.copiedOnly": {
       "extractionState": "manual",
       "localizations": {
@@ -3044,6 +3061,40 @@
         }
       }
     },
+    "notice.secretCopiedOnly.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It leaves the clipboard in 30 seconds."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 sn sonra panodan silinir."
+          }
+        }
+      }
+    },
+    "notice.secretCopiedOnly.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press ⌘V to paste"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘V ile yapıştır"
+          }
+        }
+      }
+    },
     "notice.secureInput.body": {
       "extractionState": "manual",
       "localizations": {
@@ -3057,6 +3108,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güvenli Klavye Girişi açık, yapıştırmak için ⌘V'ye bas."
+          }
+        }
+      }
+    },
+    "notice.sourceCommandCopied.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run it in Terminal, then open the panel again."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal’de çalıştır, sonra paneli yeniden aç."
+          }
+        }
+      }
+    },
+    "notice.sourceCommandCopied.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Command copied."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komut kopyalandı."
+          }
+        }
+      }
+    },
+    "notice.sourceEmpty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing pasted: the value was empty."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boş sonuç yapıştırılmadı."
+          }
+        }
+      }
+    },
+    "notice.sourceNotPasted.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another app came to the front."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir uygulama öne geçti."
+          }
+        }
+      }
+    },
+    "notice.sourceNotPasted.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not pasted."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapıştırılmadı."
+          }
+        }
+      }
+    },
+    "notice.sourcePasted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasted."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapıştırıldı."
           }
         }
       }
@@ -3482,6 +3635,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dün"
+          }
+        }
+      }
+    },
+    "panel.source.copyCommand": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy command"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komutu kopyala"
           }
         }
       }

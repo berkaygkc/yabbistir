@@ -16,6 +16,8 @@ final class PanelController: NSObject, NSWindowDelegate {
     private let stack: StackSession
     private let window = PanelWindow()
     private let model: PanelViewModel
+    /// A source row's actions: the value pasted or copied without ever joining history.
+    private let sourceRunner: SourceRunner
     private let notice = NoticeHUD()
     private let pinSurface = FloatingSurface(canBecomeKey: false)
     /// The ⇧ panel: beside the selected row like a submenu; the keyboard stays with the panel.
@@ -45,6 +47,7 @@ final class PanelController: NSObject, NSWindowDelegate {
         self.stack = stack.session
         model = PanelViewModel(library: env.library, language: env.language, stack: stack.session, extensions: env.extensions,
                                sources: env.sources)
+        sourceRunner = SourceRunner(sources: env.sources, paste: env.sensitivePaste)
         super.init()
         // Installed, removed, turned on or off, or edited: the open panel's commands follow, after what the app does
         // first (a gone source's rows are forgotten).
@@ -224,6 +227,38 @@ final class PanelController: NSObject, NSWindowDelegate {
             hide()
             // The plain text goes to the clipboard alone, the Sıra open or not.
             env.copyToClipboard(id, plainTextOnly: true)
+        case .runSource(let key, let row, let action, let copy): runSource(key, row: row, action: action, copy: copy)
+        case .copySourceCommand(let command):
+            let frame = window.frame
+            hide()
+            // Never history, and never the Sıra: it waits on the clipboard for the person's ⌘V in Terminal.
+            notice.show(near: frame, language: env.language.language, kind: sourceRunner.copyCommand(command))
+        }
+    }
+
+    // MARK: Sources
+
+    /// The panel closes and the source's action runs for the app the panel opened for: a password is pasted
+    /// concealed and the clipboard given back (to the Sıra's head while it is open), a username pasted or copied
+    /// as text. Nothing joins history or counts as a use. What happened shows as a notice where the panel was.
+    private func runSource(_ key: String, row: String, action: String, copy: Bool) {
+        guard let descriptor = env.sources.descriptors.first(where: { $0.id == key }) else { return }
+        let target = targetApp?.bundleIdentifier
+        let frame = window.frame
+        let onlyIf = stillThere(target)
+        hide()
+        Task { @MainActor in
+            let restoreInstead: (() -> Void)? = stack.isOpen ? { [stack = self.stack] in stack.restoreHead() } : nil
+            let kind = await sourceRunner.run(descriptor, row: row, action: action, copy: copy, target: target, onlyIf: onlyIf,
+                                              restoreInstead: restoreInstead)
+            if let kind { notice.show(near: frame, language: env.language.language, kind: kind) }
+            // Text stays where a secret gives the clipboard back: with the Sıra open, its head goes back once the
+            // target has read the paste, as after any other paste from the panel.
+            let pastedText = kind == nil && !copy && descriptor.actions.first { $0.id == action }?.kind == .text
+            if pastedText, stack.isOpen {
+                try? await Task.sleep(for: stack.settleDuration)
+                stack.restoreHead()
+            }
         }
     }
 
@@ -550,13 +585,8 @@ final class PanelController: NSObject, NSWindowDelegate {
     private func paste(_ itemID: Int64, plain: Bool, stackEntry: Int? = nil, target: String?, frame: CGRect) async {
         guard let item = try? env.library.store.item(id: itemID),
               let representations = try? env.library.store.representations(of: itemID) else { return }
-        // Right before ⌘V the app in front is asked again, as for a job: if the person switched apps (or the
-        // panel is back) during the beat, nothing is typed and the item waits on the clipboard.
-        let stillThere: (() -> Bool)? = target.map { target in
-            { [weak self] in NSWorkspace.shared.frontmostApplication?.bundleIdentifier == target && self?.window.isVisible != true }
-        }
         let outcome = await env.makePaster().paste(representations, kind: item.kind, targetBundleID: target, plainText: plain,
-                                                   onlyIf: stillThere)
+                                                   onlyIf: stillThere(target))
         env.markUsed(itemID)
         switch outcome {
         case .pasted:
@@ -575,6 +605,14 @@ final class PanelController: NSObject, NSWindowDelegate {
             case .targetLeft: kind = .copiedOnly
             }
             notice.show(near: frame, language: env.language.language, kind: kind)
+        }
+    }
+
+    /// Asked right before ⌘V, as for a job: if the person switched apps (or the panel is back) during the
+    /// beat, nothing is typed and the value waits on the clipboard.
+    private func stillThere(_ target: String?) -> (() -> Bool)? {
+        target.map { target in
+            { [weak self] in NSWorkspace.shared.frontmostApplication?.bundleIdentifier == target && self?.window.isVisible != true }
         }
     }
 }

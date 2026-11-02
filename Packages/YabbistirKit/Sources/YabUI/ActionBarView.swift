@@ -1,9 +1,10 @@
 import SwiftUI
 import YabLocalization
 
-/// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right. While ⌘ is held it cross-fades
-/// (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one button saying what ⇧↵ does. One
-/// layer shows at a time. Nothing in it ever wraps.
+/// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right; on a source's row its own actions
+/// ("Şifreyi yapıştır ↵ | Kullanıcı adı ⇧↵ | Eylemler ⌘K"), on the locked row "Komutu kopyala ⌘C | Eylemler ⌘K". While
+/// ⌘ is held it cross-fades (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one button saying what ⇧↵
+/// does. One layer shows at a time, and a new kind of row slides its actions in from below. Nothing in it ever wraps.
 struct ActionBarView: View {
     @Bindable var model: PanelViewModel
     let onPaste: (Int64) -> Void
@@ -25,7 +26,7 @@ struct ActionBarView: View {
         HStack(spacing: 10) {
             Spacer(minLength: 0)
             ZStack(alignment: .trailing) {
-                actions
+                rowActions
                     .opacity(layer == .actions ? 1 : 0)
                     .offset(y: layer == .actions ? 0 : -5)
                     .allowsHitTesting(layer == .actions)
@@ -44,6 +45,23 @@ struct ActionBarView: View {
         .frame(height: Tokens.Metrics.footerHeight)
         .background(Tokens.Colors.footerTint)
         .overlay(alignment: .top) { Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5) }
+    }
+
+    /// An item's actions or a source row's, each kind its own: a change of kind fades the new one in from 5 pt below
+    /// as the old leaves upwards, as a held key's layer does.
+    private var rowActions: some View {
+        let source = model.sourceBar
+        return ZStack(alignment: .trailing) {
+            if let source {
+                sourceActions(source)
+                    .id(source)
+                    .transition(.asymmetric(insertion: .opacity.combined(with: .offset(y: 5)), removal: .opacity.combined(with: .offset(y: -5))))
+            } else {
+                actions
+                    .transition(.asymmetric(insertion: .opacity.combined(with: .offset(y: 5)), removal: .opacity.combined(with: .offset(y: -5))))
+            }
+        }
+        .animation(Tokens.Motion.resolved(Tokens.Motion.ease(0.18)), value: source)
     }
 
     private var actions: some View {
@@ -101,6 +119,49 @@ struct ActionBarView: View {
         }
     }
 
+    /// A source's row: ↵ its first action, ⇧↵ its second's short name, then "Eylemler ⌘K"; the locked row: "Komutu
+    /// kopyala ⌘C" (with a command) and "Eylemler ⌘K". The first button is the primary one.
+    private func sourceActions(_ bar: SourceBar) -> some View {
+        HStack(spacing: 4) {
+            if let primary = bar.primary {
+                barButton(primary, primary: true) {
+                    if let id = model.selectedID { onPaste(id) }
+                }
+                divider
+            }
+            if let alternate = bar.alternate {
+                barButton(alternate, primary: false) {
+                    if let id = model.selectedID, let action = model.shiftReturnAction(rowID: id) { onAction(action) }
+                }
+                divider
+            }
+            barButton(BarLabel(title: L10n.string("panel.footer.actions", model.language), keys: ["⌘", "K"]), primary: false) {
+                _ = model.handle(.toggleActions)
+            }
+        }
+    }
+
+    /// One of the bar's buttons: the primary in the text colour, the others quieter.
+    private func barButton(_ label: BarLabel, primary: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 9) {
+                Text(label.title).font(primary ? Tokens.Fonts.labelStrong : Tokens.Fonts.labelStrong.weight(.medium))
+                    .lineLimit(1).fixedSize()
+                HStack(spacing: 3) { ForEach(label.keys, id: \.self) { Keycap($0) } }
+            }
+            .foregroundStyle(primary ? Tokens.Colors.text : Tokens.Colors.textSecondary)
+            .padding(.leading, 10)
+            .padding(.trailing, 6)
+            .frame(height: 30)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(ActionButtonStyle())
+    }
+
+    private var divider: some View {
+        Rectangle().fill(Tokens.Colors.hairline).frame(width: 1, height: 16)
+    }
+
     /// What ⇧↵ does, as the primary button in place of the actions ("Düz metin olarak yapıştır ⇧↵").
     private var shiftReturn: some View {
         Button {
@@ -120,8 +181,23 @@ struct ActionBarView: View {
         .buttonStyle(ActionButtonStyle())
     }
 
-    /// All three ⌘ hints when they fit; otherwise the "Add to category" hint steps aside.
-    private var commandHints: some View {
+    /// All three ⌘ hints when they fit; otherwise the "Add to category" hint steps aside. A source's row has its own:
+    /// "⌘1–9 Şifreyi yapıştır · ⌘C Kullanıcı adını kopyala · ⌘K Eylemler", the middle one stepping aside the same way.
+    @ViewBuilder private var commandHints: some View {
+        if let hints = model.sourceCommandHints {
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 14) { ForEach(Array(hints.enumerated()), id: \.offset) { hint($0.element) } }
+                HStack(spacing: 14) {
+                    ForEach(Array((hints.count > 2 ? [hints[0], hints[hints.count - 1]] : hints).enumerated()), id: \.offset) { hint($0.element) }
+                }
+            }
+            .padding(.trailing, 6)
+        } else {
+            itemCommandHints
+        }
+    }
+
+    private var itemCommandHints: some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 14) {
                 hint(["⌘", "1–9"], "panel.footer.paste")
@@ -137,9 +213,13 @@ struct ActionBarView: View {
     }
 
     private func hint(_ keys: [String], _ key: String) -> some View {
+        hint(BarLabel(title: L10n.string(key, model.language), keys: keys))
+    }
+
+    private func hint(_ label: BarLabel) -> some View {
         HStack(spacing: 6) {
-            HStack(spacing: 3) { ForEach(keys, id: \.self) { Keycap($0) } }
-            Text(L10n.string(key, model.language)).font(Tokens.Fonts.label).lineLimit(1).fixedSize()
+            HStack(spacing: 3) { ForEach(label.keys, id: \.self) { Keycap($0) } }
+            Text(label.title).font(Tokens.Fonts.label).lineLimit(1).fixedSize()
         }
         .foregroundStyle(Tokens.Colors.textSecondary)
     }
