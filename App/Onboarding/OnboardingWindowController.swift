@@ -48,8 +48,8 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
 
         let window = OnboardingWindow()
         let content = OnboardingView(model: model)
-            .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { [weak self] height in
-                self?.fit(height: height)
+            .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { [weak window] height in
+                window?.fit(height: height)
             }
         let host = NSHostingView(rootView: content.ignoresSafeArea())
         // Measured before it joins the window (inside it, the title bar's safe area is added on top). From then on the
@@ -97,9 +97,18 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
     }
 
     /// The model has finished: fade out (280 ms) as the window sinks back, hand the keyboard back, then open the panel
-    /// for that app once it is in front again.
+    /// for that app once it is in front again. The session ends at once, so a `show()` during the fade builds a new
+    /// window instead of reviving this one, and the fading window takes no more keys or clicks.
     private func dismiss() {
         guard let window else { return }
+        self.window = nil
+        model = nil
+        let previousApp = previousApp
+        self.previousApp = nil
+        window.delegate = nil
+        window.onEscape = nil
+        window.onReturn = nil
+        window.ignoresMouseEvents = true
         let still = Tokens.Motion.reduceMotion()
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.28
@@ -107,38 +116,26 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
             window.animator().alphaValue = 0
             if !still { window.animator().setFrame(window.frame.offsetBy(dx: 0, dy: -10), display: true) }
         } completionHandler: {
-            MainActor.assumeIsolated { self.closed() }
+            MainActor.assumeIsolated { self.closed(window, handingBackTo: previousApp) }
         }
     }
 
-    private func closed() {
-        window?.orderOut(nil)
-        window?.delegate = nil
-        window = nil
-        model = nil
+    private func closed(_ window: OnboardingWindow, handingBackTo previousApp: NSRunningApplication?) {
+        window.orderOut(nil)
+        // Shown again during the fade: the new window keeps the keyboard and no panel opens over it.
+        guard self.window == nil else { return }
         if let app = previousApp, !app.isTerminated {
             NSApp.yieldActivation(to: app)
             app.activate()
         } else {
             NSApp.deactivate()
         }
-        previousApp = nil
         let openPanel = openPanel
         Task { @MainActor in
             // The panel opens for the app in front: give it a beat to get there.
             try? await Task.sleep(for: .milliseconds(250))
             openPanel()
         }
-    }
-
-    /// Keeps the window's middle where it is as a step makes it taller or shorter.
-    private func fit(height: CGFloat) {
-        guard let window, height > 0, abs(window.frame.height - height) > 0.5 else { return }
-        var frame = window.frame
-        frame.origin.y = frame.midY - height / 2
-        frame.size.height = height
-        window.setFrame(frame, display: true)
-        window.invalidateShadow()
     }
 
     private static let ease = CAMediaTimingFunction(controlPoints: 0.16, 1, 0.3, 1)
@@ -151,9 +148,9 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         return false
     }
 
-    func windowDidResize(_ notification: Notification) { window?.placeTrafficLights() }
-    func windowDidBecomeKey(_ notification: Notification) { window?.placeTrafficLights() }
-    func windowDidResignKey(_ notification: Notification) { window?.placeTrafficLights() }
+    func windowDidResize(_ notification: Notification) { (notification.object as? OnboardingWindow)?.placeTrafficLights() }
+    func windowDidBecomeKey(_ notification: Notification) { (notification.object as? OnboardingWindow)?.placeTrafficLights() }
+    func windowDidResignKey(_ notification: Notification) { (notification.object as? OnboardingWindow)?.placeTrafficLights() }
 }
 
 /// A titled window drawn entirely by its content: a clear, transparent title bar over the glass sheet, the system's
@@ -183,22 +180,30 @@ final class OnboardingWindow: NSWindow {
         collectionBehavior = [.moveToActiveSpace, .fullScreenNone]
     }
 
-    /// Esc finishes; Return presses the step's primary button while it is enabled. Both are taken before the views see
-    /// them, so a focused control never swallows them.
+    /// Esc finishes; Return and Enter press the step's primary button while it is enabled, even with another button
+    /// focused. Both are taken before the views see them, and a held key acts once (`OnboardingKey`).
     override func sendEvent(_ event: NSEvent) {
-        if event.type == .keyDown, event.modifierFlags.intersection([.command, .control, .option, .shift]).isEmpty {
-            switch event.keyCode {
-            case 53:
-                onEscape?()
-                return
-            case 36, 76:
-                onReturn?()
-                return
-            default:
-                break
+        if event.type == .keyDown, [53, 36, 76].contains(event.keyCode),
+           event.modifierFlags.intersection([.command, .control, .option, .shift]).isEmpty {
+            switch OnboardingKey.action(keyCode: event.keyCode, isRepeat: event.isARepeat, modifiers: event.modifierFlags) {
+            case .escape: onEscape?()
+            case .primary: onReturn?()
+            case nil: break
             }
+            // Repeats are swallowed too, so a held Return never reaches a focused button.
+            return
         }
         super.sendEvent(event)
+    }
+
+    /// Keeps the window's middle where it is as a step makes it taller or shorter.
+    func fit(height: CGFloat) {
+        guard height > 0, abs(frame.height - height) > 0.5 else { return }
+        var frame = frame
+        frame.origin.y = frame.midY - height / 2
+        frame.size.height = height
+        setFrame(frame, display: true)
+        invalidateShadow()
     }
 
     /// The title bar container grows to the 44 pt bar and the buttons are centered in it, the close button's center

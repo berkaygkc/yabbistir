@@ -139,6 +139,28 @@ private func rig(withLibrary: Bool) async throws -> Rig {
         #expect(r.probe.finishes == 1 && r.preferences.onboarded)
     }
 
+    /// Run again from About while an earlier import still runs: Welcome leads to its progress, never to the choice.
+    @Test func anImportStillRunningIsShownInsteadOfTheChoice() async throws {
+        let r = try await rig(withLibrary: true)
+        let running = ImportProgress(done: 5, total: 10, kinds: [:])
+        r.importer.state = .importing(running)
+        #expect(!r.model.showsPasteHint)
+        r.model.primary()
+        #expect(r.model.step == .importing && r.model.activeDot == 1)
+        #expect(r.importer.state == .importing(running))
+        #expect(!r.model.primaryEnabled)
+    }
+
+    @Test func aFinishedImportIsShownInsteadOfTheChoice() async throws {
+        let r = try await rig(withLibrary: true)
+        r.importer.state = .done(ImportReport())
+        #expect(!r.model.showsPasteHint)
+        r.model.next()
+        #expect(r.model.step == .importing && r.model.primaryEnabled)
+        r.model.primary()
+        #expect(r.model.step == .setup)
+    }
+
     @Test func skipGoesStraightToSetup() async throws {
         let r = try await rig(withLibrary: true)
         r.model.next()

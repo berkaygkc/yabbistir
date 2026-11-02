@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import Observation
 import YabLocalization
@@ -102,7 +103,13 @@ public final class OnboardingModel {
     public func next() {
         switch step {
         case .welcome:
-            step = libraryMissing ? .setup : .importChoice
+            // Run again while an earlier import still runs (or just ended): show its progress, never the choice, which
+            // could only wait on it.
+            if importerHasLibrary {
+                step = .importing
+            } else {
+                step = libraryMissing ? .setup : .importChoice
+            }
         case .importChoice:
             guard primaryEnabled else { return }
             step = .importing
@@ -145,5 +152,22 @@ public final class OnboardingModel {
 
     public func escape() {
         finish()
+    }
+}
+
+public enum OnboardingKeyAction: Equatable, Sendable {
+    case escape, primary
+}
+
+/// The first-run window's keys. Return and keypad Enter press the step's primary button (whatever has focus), Esc
+/// finishes. A held key acts once: its repeats are ignored, so holding Return can't run through the steps.
+public enum OnboardingKey {
+    public static func action(keyCode: UInt16, isRepeat: Bool, modifiers: NSEvent.ModifierFlags = []) -> OnboardingKeyAction? {
+        guard !isRepeat, modifiers.intersection([.command, .control, .option, .shift]).isEmpty else { return nil }
+        switch keyCode {
+        case 53: return .escape
+        case 36, 76: return .primary
+        default: return nil
+        }
     }
 }
