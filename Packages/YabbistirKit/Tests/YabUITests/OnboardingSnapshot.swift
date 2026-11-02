@@ -19,7 +19,7 @@ import YabLocalization
     ], totalBytes: 130_000_000)
     static let location = PasteLibraryLocation(
         folder: URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Library/Application Support/com.example.library"),
-        vendor: "Setapp")
+        vendor: "Ornek")
     static let kinds: [ItemKind: Int] = [.text: 612, .code: 301, .link: 248, .image: 121, .color: 39, .file: 34]
 
     private final class Flags {

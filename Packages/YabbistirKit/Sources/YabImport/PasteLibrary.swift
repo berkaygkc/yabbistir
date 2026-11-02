@@ -4,7 +4,7 @@ import YabCore
 
 public struct PasteLibraryLocation: Sendable, Equatable {
     public let folder: URL
-    /// "Setapp" for the Setapp distribution, nil otherwise.
+    /// The vendor the import screen names for the subscription build; nil for the other build.
     public let vendor: String?
 
     public init(folder: URL, vendor: String?) {

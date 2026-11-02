@@ -1,6 +1,6 @@
 import AppKit
 
-/// Another clipboard manager that may be running beside this app, both builds of it (store and Setapp).
+/// Another clipboard manager that may be running beside this app, both builds of it (its own and the subscription build).
 public enum OtherClipboardApp {
     public static let bundleIDs = ["com.wiheads.paste-setapp", "com.wiheads.paste"]
 
