@@ -150,11 +150,119 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
         #expect(!model.otherAppRunning)
     }
 
+    /// Two scans in flight: the first makes the library ready and an import starts; the second, arriving late, leaves
+    /// the import (and the choice it was started with) alone.
+    @Test func aLateScanNeverOverridesAnImport() async throws {
+        let model = try makeModel(location: try syntheticLocation())
+        let gates = Gates()
+        model.summarize = { location in
+            await gates.pass()
+            guard let library = try? PasteLibrary.open(location) else { return nil }
+            defer { library.close() }
+            return try? library.summary()
+        }
+        let first = Task { await model.scan() }
+        await gates.waitForArrivals(1)
+        let late = Task { await model.scan() }
+        await gates.waitForArrivals(2)
+        gates.open(0)
+        await first.value
+        guard case .ready = model.state else { Issue.record("not ready: \(model.state)"); return }
+        model.selection = PasteSelection(history: true, boards: [])
+        model.start()
+        gates.open(1)
+        await late.value
+        if case .ready = model.state { Issue.record("a late scan made a running import ready again") }
+        #expect(model.selection == PasteSelection(history: true, boards: []))
+        await model.finished()
+        guard case .done(let report) = model.state else { Issue.record("not done: \(model.state)"); return }
+        #expect(report.added == 2)
+    }
+
+    @Test func aSecondStartWhileImportingDoesNothing() async throws {
+        let counter = Counter()
+        let model = try makeModel(location: try syntheticLocation(), counter: counter)
+        await model.scan()
+        guard case .ready(let summary, let location) = model.state else { Issue.record("not ready: \(model.state)"); return }
+        model.start()
+        // Ready again while the first import runs, as a stray scan could once leave it.
+        model.state = .ready(summary, location)
+        model.start()
+        #expect(model.state == .ready(summary, location))
+        await model.finished()
+        #expect(counter.reloads == 1)
+    }
+
+    /// The other app held its library: once it has quit, the library is read again.
+    @Test func quittingTheOtherAppAfterAFailureScansAgain() async throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("imp-ui-\(UUID())", isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let counter = Counter()
+        let model = try makeModel(location: PasteLibraryLocation(folder: folder, vendor: nil), counter: counter)
+        await model.scan()
+        #expect(model.state == .failed)
+        try SyntheticPasteLibrary.make(in: folder, items: [
+            .init(externalID: "h1", createdAt: 100, timestamp: 110, payload: .plain([[("public.utf8-plain-text", "one")]])),
+        ])
+        model.quitOtherApp()
+        // Awaited, not polled: parallel suites can keep the main actor busy for seconds.
+        await model.quitWatch?.value
+        #expect(isReady(model.state))
+        #expect(counter.quits == 1)
+    }
+
+    @Test func theCardKeepsItsLinesWhileImporting() async throws {
+        let model = try makeModel(location: try syntheticLocation())
+        await model.scan()
+        let source = model.sourceLine, stats = model.statsLine
+        #expect(!source.isEmpty && !stats.isEmpty)
+        model.start()
+        guard case .importing = model.state else { Issue.record("not importing: \(model.state)"); return }
+        #expect(model.sourceLine == source)
+        #expect(model.statsLine == stats)
+        await model.finished()
+    }
+
     @Test func aFailedOpenShowsFailed() async throws {
         let folder = FileManager.default.temporaryDirectory.appendingPathComponent("imp-ui-\(UUID())", isDirectory: true)
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let model = try makeModel(location: PasteLibraryLocation(folder: folder, vendor: nil))
         await model.scan()
         #expect(model.state == .failed)
+    }
+}
+
+private func isReady(_ state: ImportModel.State) -> Bool {
+    if case .ready = state { true } else { false }
+}
+
+/// Holds each caller of `pass()` until its gate (by order of arrival) is opened.
+private final class Gates: @unchecked Sendable {
+    private let lock = NSLock()
+    private var waiting: [CheckedContinuation<Void, Never>?] = []
+    private var opened: Set<Int> = []
+
+    func pass() async {
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            lock.lock()
+            let index = waiting.count
+            let open = opened.contains(index)
+            waiting.append(open ? nil : continuation)
+            lock.unlock()
+            if open { continuation.resume() }
+        }
+    }
+
+    func waitForArrivals(_ count: Int) async {
+        while lock.withLock({ waiting.count }) < count { try? await Task.sleep(for: .milliseconds(5)) }
+    }
+
+    func open(_ index: Int) {
+        lock.lock()
+        opened.insert(index)
+        let continuation = index < waiting.count ? waiting[index] : nil
+        if index < waiting.count { waiting[index] = nil }
+        lock.unlock()
+        continuation?.resume()
     }
 }

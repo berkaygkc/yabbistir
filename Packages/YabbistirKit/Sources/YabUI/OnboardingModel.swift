@@ -80,7 +80,8 @@ public final class OnboardingModel {
     }
 
     /// Import needs a read library and something chosen; Continue waits for the import to end, also when it failed, so
-    /// a broken library never holds the person in this window.
+    /// a broken library never holds the person in this window. Settings may read the library again after it ended, so
+    /// only an import still running holds Continue back.
     public var primaryEnabled: Bool {
         switch step {
         case .importChoice:
@@ -94,10 +95,7 @@ public final class OnboardingModel {
     }
 
     private var importEnded: Bool {
-        switch importer.state {
-        case .done, .failed: true
-        default: false
-        }
+        if case .importing = importer.state { false } else { true }
     }
 
     public func next() {

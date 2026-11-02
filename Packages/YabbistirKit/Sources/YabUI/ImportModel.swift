@@ -30,6 +30,18 @@ public final class ImportModel {
     @ObservationIgnored private let quitOther: () -> Void
     @ObservationIgnored let language: LanguageStore
     @ObservationIgnored private var task: Task<Void, Never>?
+    /// Waits for the other app to quit, then reads its library again.
+    @ObservationIgnored private(set) var quitWatch: Task<Void, Never>?
+    /// The library being imported, so the card keeps its lines meanwhile.
+    @ObservationIgnored private var importing: (summary: PasteSummary, location: PasteLibraryLocation)?
+    /// Reads a library's summary from a copy, off the main actor (tests hold a scan back with it).
+    @ObservationIgnored var summarize: @Sendable (PasteLibraryLocation) async -> PasteSummary? = { location in
+        await Task.detached(priority: .userInitiated) { () -> PasteSummary? in
+            guard let library = try? PasteLibrary.open(location) else { return nil }
+            defer { library.close() }
+            return try? library.summary()
+        }.value
+    }
 
     public init(store: ItemStore, reload: @escaping @MainActor () -> Void, ignoredApps: @escaping @MainActor () -> Set<String>,
                 locate: @escaping () -> PasteLibraryLocation? = { PasteLibrary.find() },
@@ -47,7 +59,8 @@ public final class ImportModel {
 
     // MARK: Scanning
 
-    /// Looks for the library and summarizes it (a copy is made off the main actor); selects everything.
+    /// Looks for the library and summarizes it (a copy is made off the main actor); selects everything. Does nothing
+    /// while an import runs.
     public func scan() async {
         if case .importing = state { return }
         state = .scanning
@@ -56,11 +69,9 @@ public final class ImportModel {
             state = .unavailable
             return
         }
-        let summary = await Task.detached(priority: .userInitiated) { () -> PasteSummary? in
-            guard let library = try? PasteLibrary.open(location) else { return nil }
-            defer { library.close() }
-            return try? library.summary()
-        }.value
+        let summary = await summarize(location)
+        // Another scan answered first and an import may have started since: this answer is stale.
+        guard case .scanning = state else { return }
         guard let summary else {
             state = .failed
             return
@@ -73,7 +84,8 @@ public final class ImportModel {
 
     /// Runs the import in the background, then reloads the history index once, also after a failed run.
     public func start() {
-        guard case .ready(let summary, let location) = state else { return }
+        guard task == nil, case .ready(let summary, let location) = state else { return }
+        importing = (summary, location)
         let selection = selection
         let total = (selection.history ? summary.historyCount : 0)
             + summary.boards.filter { selection.boards.contains($0.id) }.reduce(0) { $0 + $1.count }
@@ -88,6 +100,8 @@ public final class ImportModel {
                 }
             }.value
             state = outcome.map { .done($0) } ?? .failed
+            importing = nil
+            task = nil
             // A run that stopped partway has still written what it brought (each item filed with it).
             reload()
         }
@@ -110,9 +124,22 @@ public final class ImportModel {
         otherAppRunning = isOtherAppRunning()
     }
 
+    /// Asks the other app to quit. It goes in its own time; once it has (within ten seconds), a library it kept from
+    /// being read is read again.
     public func quitOtherApp() {
         quitOther()
         refreshOtherApp()
+        quitWatch?.cancel()
+        quitWatch = Task { [weak self] in
+            for _ in 0..<100 {
+                guard let self, !Task.isCancelled else { return }
+                if !isOtherAppRunning() { break }
+                try? await Task.sleep(for: .milliseconds(100))
+            }
+            guard let self, !Task.isCancelled, !isOtherAppRunning() else { return }
+            refreshOtherApp()
+            if case .failed = state { await scan() }
+        }
     }
 
     // MARK: Text
@@ -123,9 +150,18 @@ public final class ImportModel {
         return summary.boards.filter { selection.boards.contains($0.id) }.reduce(0) { $0 + $1.count }
     }
 
+    /// The library the card shows: the one read, and while it is imported, that one.
+    private var shownLibrary: (summary: PasteSummary, location: PasteLibraryLocation)? {
+        switch state {
+        case .ready(let summary, let location): (summary, location)
+        case .importing: importing
+        default: nil
+        }
+    }
+
     /// The sub-line under the name: the vendor (when there is one) and the folder holding the library.
     public var sourceLine: String {
-        guard case .ready(_, let location) = state else { return "" }
+        guard let location = shownLibrary?.location else { return "" }
         let folder = (location.folder.deletingLastPathComponent().path as NSString).abbreviatingWithTildeInPath
         guard let vendor = location.vendor else { return folder }
         return "\(vendor) · \(folder)"
@@ -135,13 +171,13 @@ public final class ImportModel {
 
     /// "1,355 items · 130 MB".
     public var statsLine: String {
-        guard case .ready = state else { return "" }
+        guard shownLibrary != nil else { return "" }
         return string("import.source.stats", itemsPhrase(libraryItemCount), librarySize)
     }
 
     /// Every item in the library, history and pinboards together.
     public var libraryItemCount: Int {
-        guard case .ready(let summary, _) = state else { return 0 }
+        guard let summary = shownLibrary?.summary else { return 0 }
         return summary.historyCount + summary.boards.reduce(0) { $0 + $1.count }
     }
 
@@ -152,7 +188,7 @@ public final class ImportModel {
     }
 
     private var librarySize: String {
-        guard case .ready(let summary, _) = state else { return "" }
+        guard let summary = shownLibrary?.summary else { return "" }
         return summary.totalBytes.formatted(.byteCount(style: .file).locale(language.language.locale))
     }
 

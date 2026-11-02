@@ -123,6 +123,19 @@ private func rig(withLibrary: Bool) async throws -> Rig {
         #expect(r.model.step == .setup)
     }
 
+    /// Settings reads the library again on every visit, also while this step shows a finished import: Continue waits
+    /// only for an import that is running.
+    @Test func continueWaitsOnlyForARunningImport() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.next()
+        r.model.next()
+        await r.importer.finished()
+        await r.importer.scan()
+        #expect(r.model.step == .importing && r.model.primaryEnabled)
+        r.model.primary()
+        #expect(r.model.step == .setup)
+    }
+
     @Test func returnPressesTheEnabledPrimaryOnly() async throws {
         let r = try await rig(withLibrary: true)
         r.model.primary()
