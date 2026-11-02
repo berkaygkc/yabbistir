@@ -79,21 +79,8 @@ public final class ItemStore: Sendable {
     /// copy wins: its representations, preview and source replace the stored ones.
     /// Returns nil when the clip has nothing worth keeping.
     public func ingest(_ clip: CapturedClip) throws -> IngestResult? {
-        guard let classification = ItemClassifier.classify(clip.items) else { return nil }
-        // Hash each payload once: the hashes name the blobs and define the item's identity.
-        let hashes = clip.items.map { $0.map { BlobStore.hash($0.data) } }
-        let identity = Self.identityHash(clip.items, kind: classification.kind, hashes: hashes)
-
-        var stored: [(record: StoredRepresentation, data: Data)] = []
-        for (itemIndex, item) in clip.items.enumerated() {
-            for (position, rep) in item.enumerated() {
-                let blobHash = rep.data.count > Self.inlineLimit ? hashes[itemIndex][position] : nil
-                if let blobHash { try blobs.write(rep.data, hash: blobHash) }
-                stored.append((StoredRepresentation(
-                    id: nil, itemID: 0, itemIndex: itemIndex, position: position, type: rep.type,
-                    inlineData: blobHash == nil ? rep.data : nil, blobHash: blobHash, byteCount: rep.data.count), rep.data))
-            }
-        }
+        guard let prepared = try prepare(clip.items) else { return nil }
+        let classification = prepared.classification, identity = prepared.identity
 
         return try dbPool.write { db in
             var item = ClipItem(
@@ -113,14 +100,46 @@ public final class ItemStore: Sendable {
             } else {
                 try item.insert(db)
             }
-            for (var record, data) in stored {
-                record.itemID = item.id!
-                try record.insert(db)
-                // A purge may have removed a shared blob since it was written above.
-                if let blobHash = record.blobHash { try blobs.write(data, hash: blobHash) }
-            }
+            try insertRepresentations(prepared.stored, itemID: item.id!, db)
             try removeUnreferencedBlobs(released, db)
             return IngestResult(item: item, isNew: existing == nil)
+        }
+    }
+
+    /// A clip classified, identified and with its payloads written to the blob store (small ones stay inline).
+    struct PreparedClip {
+        var classification: Classification
+        var identity: String
+        var stored: [(record: StoredRepresentation, data: Data)]
+    }
+
+    /// Classification, identity and storage layout shared by `ingest` and `importClip`.
+    /// Returns nil when the clip has nothing worth keeping.
+    func prepare(_ items: [[PasteboardRepresentation]]) throws -> PreparedClip? {
+        guard let classification = ItemClassifier.classify(items) else { return nil }
+        // Hash each payload once: the hashes name the blobs and define the item's identity.
+        let hashes = items.map { $0.map { BlobStore.hash($0.data) } }
+        let identity = Self.identityHash(items, kind: classification.kind, hashes: hashes)
+
+        var stored: [(record: StoredRepresentation, data: Data)] = []
+        for (itemIndex, item) in items.enumerated() {
+            for (position, rep) in item.enumerated() {
+                let blobHash = rep.data.count > Self.inlineLimit ? hashes[itemIndex][position] : nil
+                if let blobHash { try blobs.write(rep.data, hash: blobHash) }
+                stored.append((StoredRepresentation(
+                    id: nil, itemID: 0, itemIndex: itemIndex, position: position, type: rep.type,
+                    inlineData: blobHash == nil ? rep.data : nil, blobHash: blobHash, byteCount: rep.data.count), rep.data))
+            }
+        }
+        return PreparedClip(classification: classification, identity: identity, stored: stored)
+    }
+
+    func insertRepresentations(_ stored: [(record: StoredRepresentation, data: Data)], itemID: Int64, _ db: Database) throws {
+        for (var record, data) in stored {
+            record.itemID = itemID
+            try record.insert(db)
+            // A purge may have removed a shared blob since it was written.
+            if let blobHash = record.blobHash { try blobs.write(data, hash: blobHash) }
         }
     }
 
@@ -232,7 +251,7 @@ public final class ItemStore: Sendable {
 
     /// Removes the files of blobs no representation references any more. Runs inside the write
     /// transaction, so an ingest cannot re-reference a file between the check and the removal.
-    private func removeUnreferencedBlobs(_ hashes: [String], _ db: Database) throws {
+    func removeUnreferencedBlobs(_ hashes: [String], _ db: Database) throws {
         for hash in Set(hashes)
         where try Int.fetchOne(db, sql: "SELECT COUNT(*) FROM representation WHERE blobHash = ?", arguments: [hash]) == 0 {
             try blobs.remove(hash)

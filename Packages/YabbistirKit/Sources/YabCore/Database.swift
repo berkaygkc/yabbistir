@@ -100,6 +100,16 @@ enum Schema {
             try db.alter(table: "category") { t in t.add(column: "source", .text) }
             try db.create(index: "categorySource", on: "category", columns: ["source"], unique: true, condition: Column("source") != nil)
         }
+        // Which items of another clipboard manager's library were imported: a deleted item's row stays,
+        // so it does not come back. No foreign key to item on purpose.
+        migrator.registerMigration("v6-import-origin") { db in
+            try db.create(table: "importOrigin") { t in
+                t.column("source", .text).notNull()
+                t.column("externalID", .text).notNull()
+                t.column("itemID", .integer)
+                t.primaryKey(["source", "externalID"])
+            }
+        }
         return migrator
     }
 

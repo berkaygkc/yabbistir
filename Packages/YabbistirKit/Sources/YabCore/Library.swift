@@ -137,6 +137,12 @@ public final class Library {
         changed()
     }
 
+    /// Rebuilds the index from the store after a bulk write that bypassed the library (an import).
+    public func reloadIndex() throws {
+        index = HistoryIndex(items: try store.history(limit: 200_000))
+        changed()
+    }
+
     private func changed() {
         memberships = [:]
         summaryCache = [:]

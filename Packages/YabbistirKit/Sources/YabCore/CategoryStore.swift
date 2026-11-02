@@ -172,12 +172,16 @@ extension ItemStore {
             let categorized = try Bool.fetchOne(db, sql: "SELECT EXISTS(SELECT 1 FROM categoryMembership WHERE itemID = ?)",
                                                 arguments: [itemID]) ?? false
             if categorized {
-                try db.execute(sql: "UPDATE item SET inHistory = 0 WHERE id = ?", arguments: [itemID])
+                try hideFromHistory(itemID, db)
                 return false
             }
             try deleteItems([itemID], db)
             return true
         }
+    }
+
+    func hideFromHistory(_ itemID: Int64, _ db: Database) throws {
+        try db.execute(sql: "UPDATE item SET inHistory = 0 WHERE id = ?", arguments: [itemID])
     }
 
     /// Deletes every item that is in no category (with its blobs) and takes the rest out of history.
