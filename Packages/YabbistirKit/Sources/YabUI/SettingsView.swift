@@ -62,6 +62,8 @@ public struct SettingsView: View {
                 ShortcutsSettingsView(language: models.language)
             case .extensions:
                 ExtensionsSettingsView(model: models.extensions, store: models.store)
+            case .panel:
+                PanelSettingsView(preferences: models.preferences, language: models.language)
             case let other:
                 SettingsPlaceholder(section: other, language: models.language)
             }

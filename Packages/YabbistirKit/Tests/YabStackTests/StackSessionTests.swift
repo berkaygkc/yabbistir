@@ -7,6 +7,8 @@ import YabPasteboard
 /// Records what the session puts on the clipboard.
 final class FakeWriter: PasteboardWriting {
     var writes: [[[PasteboardRepresentation]]] = []
+    /// The `plainTextOnly` flag of each write.
+    var plainFlags: [Bool] = []
     /// The clipboard's change count.
     private(set) var count = 0
 
@@ -15,6 +17,7 @@ final class FakeWriter: PasteboardWriting {
 
     func write(_ items: [[PasteboardRepresentation]], plainTextOnly: Bool) -> Int {
         writes.append(items)
+        plainFlags.append(plainTextOnly)
         count += 1
         return count
     }
@@ -61,6 +64,15 @@ final class FakeWriter: PasteboardWriting {
                                changeCount: { [writer] in writer.count },
                                replayPaste: { [writer, replays] in replays.texts.append(writer.lastText) },
                                timing: StackTiming(rail: .milliseconds(80), settle: .milliseconds(10), closeDelay: .milliseconds(20)))
+    }
+
+    /// With "always plain text" on, the stack puts the plain text alone on the clipboard.
+    @Test func alwaysPlainTextWritesPlainOnly() throws {
+        let plainSession = StackSession(library: library, writer: writer, didWrite: { _ in }, plainText: { true })
+        plainSession.append(ids[0])
+        #expect(writer.plainFlags == [true])
+        session.append(ids[1])
+        #expect(writer.plainFlags == [true, false])
     }
 
     /// A ⌘V of something the stack did not put on the clipboard (a password manager's copy,

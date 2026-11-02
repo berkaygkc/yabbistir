@@ -117,7 +117,8 @@ final class PanelController: NSObject, NSWindowDelegate {
         env.extensions.resetSession()
         // Before the columns are built: the ⇧ panel and ⌘K lead with the target's own actions.
         env.extensions.target = panelTarget
-        let anchor = anchor ?? CaretLocator.caretRect() ?? CaretLocator.mouseAnchor()
+        let anchor = PanelAnchorChoice.anchor(position: env.preferences.panelPosition, explicit: anchor,
+                                              caret: { CaretLocator.caretRect() }, pointer: { CaretLocator.mouseAnchor() })
         caret = anchor
         visibleFrame = CaretLocator.visibleFrame(containing: anchor)
         model.availableWidth = visibleFrame.width - 2 * ColumnStripLayout.screenMargin
@@ -487,9 +488,10 @@ final class PanelController: NSObject, NSWindowDelegate {
         }
         let itemID = model.selectedItemID, rowID = model.selectedID
         previewLoad?.cancel()
+        let settle = env.preferences.previewDelay.duration
         previewLoad = Task { @MainActor [weak self] in
             // Holding ↓ through big items: load only once the selection settles.
-            try? await Task.sleep(for: .milliseconds(100))
+            try? await Task.sleep(for: settle)
             guard let self, !Task.isCancelled else { return }
             let content: PreviewContent?
             if let command, let rowID {
@@ -608,8 +610,16 @@ final class PanelController: NSObject, NSWindowDelegate {
     private func paste(_ itemID: Int64, plain: Bool, stackEntry: Int? = nil) {
         let target = targetApp?.bundleIdentifier
         let frame = window.frame
+        let plan = PastePlan.resolve(destination: env.preferences.pasteDestination,
+                                     alwaysPlain: env.preferences.alwaysPlainText, requestedPlain: plain)
         hide()
-        Task { @MainActor in await paste(itemID, plain: plain, stackEntry: stackEntry, target: target, frame: frame) }
+        if plan.copyOnly {
+            // Nothing is pasted: a Sıra entry stays where it is.
+            env.copyToClipboard(itemID, plainTextOnly: plan.plainText)
+            notice.show(near: frame, language: env.language.language, kind: .copiedOnly)
+            return
+        }
+        Task { @MainActor in await paste(itemID, plain: plan.plainText, stackEntry: stackEntry, target: target, frame: frame) }
     }
 
     private func paste(_ itemID: Int64, plain: Bool, stackEntry: Int? = nil, target: String?, frame: CGRect) async {

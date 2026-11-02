@@ -59,16 +59,20 @@ public final class StackSession {
     @ObservationIgnored private var outgoing: [StackEntry] = []
     /// Posts a marked ⌘V for a held keystroke.
     @ObservationIgnored private let replayPaste: (() -> Void)?
+    /// Whether the clipboard gets plain text alone (asked at each write, so a change applies at once).
+    @ObservationIgnored private let plainText: @MainActor () -> Bool
     @ObservationIgnored private var closeTimer: Task<Void, Never>?
 
     public init(library: Library, writer: PasteboardWriting, didWrite: @escaping (Int) -> Void,
-                changeCount: (() -> Int)? = nil, replayPaste: (() -> Void)? = nil, timing: StackTiming = .init()) {
+                changeCount: (() -> Int)? = nil, replayPaste: (() -> Void)? = nil, timing: StackTiming = .init(),
+                plainText: @escaping @MainActor () -> Bool = { false }) {
         self.library = library
         self.writer = writer
         self.didWrite = didWrite
         self.currentChangeCount = changeCount
         self.replayPaste = replayPaste
         self.timing = timing
+        self.plainText = plainText
     }
 
     private var recentIndex: Int? { recentEntryID.flatMap { id in entries.firstIndex { $0.id == id } } }
@@ -257,7 +261,7 @@ public final class StackSession {
     @discardableResult
     private func put(_ itemID: Int64) -> Int? {
         guard let representations = try? library.store.representations(of: itemID), !representations.isEmpty else { return nil }
-        let changeCount = writer.write(representations, plainTextOnly: false)
+        let changeCount = writer.write(representations, plainTextOnly: plainText())
         didWrite(changeCount)
         return changeCount
     }

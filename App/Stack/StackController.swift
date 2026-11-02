@@ -47,7 +47,8 @@ final class StackController {
                                didWrite: { [weak env] changeCount in env?.monitor.ignore(changeCount: changeCount) },
                                changeCount: { NSPasteboard.general.changeCount },
                                // A held ⌘V, now that its item is on the clipboard.
-                               replayPaste: { securePaste.typePaste() })
+                               replayPaste: { securePaste.typePaste() },
+                               plainText: { [weak env] in env?.preferences.alwaysPlainText ?? false })
         session.onChange = { [weak self] in self?.sessionChanged() }
         followRailShortcuts()
     }
