@@ -138,10 +138,25 @@ public final class ImportModel {
 
     /// "1,355 items · 130 MB".
     public var statsLine: String {
+        guard case .ready = state else { return "" }
+        return string("import.source.stats", itemsPhrase(libraryItemCount), librarySize)
+    }
+
+    /// Every item in the library, history and pinboards together.
+    public var libraryItemCount: Int {
+        guard case .ready(let summary, _) = state else { return 0 }
+        return summary.historyCount + summary.boards.reduce(0) { $0 + $1.count }
+    }
+
+    /// What sits under the first-run card's large count: "items · 130 MB".
+    public var unitLine: String {
+        guard case .ready = state else { return "" }
+        return libraryItemCount == 1 ? string("import.source.unit.one", librarySize) : string("import.source.unit", librarySize)
+    }
+
+    private var librarySize: String {
         guard case .ready(let summary, _) = state else { return "" }
-        let items = summary.historyCount + summary.boards.reduce(0) { $0 + $1.count }
-        let size = summary.totalBytes.formatted(.byteCount(style: .file).locale(language.language.locale))
-        return string("import.source.stats", itemsPhrase(items), size)
+        return summary.totalBytes.formatted(.byteCount(style: .file).locale(language.language.locale))
     }
 
     /// "1 item", "1,355 items".

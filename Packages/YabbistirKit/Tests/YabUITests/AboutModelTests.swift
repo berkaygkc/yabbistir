@@ -38,4 +38,15 @@ import YabLocalization
         model.open(AboutModel.repository)
         #expect(opened == [AboutModel.repository])
     }
+
+    @Test func runningSetupAgainOnlyOpensIt() {
+        let store = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!)
+        var opened: [URL] = []
+        var reruns = 0
+        let model = AboutModel(version: "0.3.0", build: "3", language: store, checkForUpdates: {}, readNotice: { _ in nil },
+                               openURL: { opened.append($0) }, rerunSetup: { reruns += 1 })
+        #expect(reruns == 0)
+        model.rerunSetup()
+        #expect(reruns == 1 && opened.isEmpty)
+    }
 }

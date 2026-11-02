@@ -113,6 +113,22 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
         #expect(english.itemsPhrase(1) == "1 item" && turkish.itemsPhrase(2) == "2 öğe")
     }
 
+    /// The first-run card sets the count large and the unit with the size under it.
+    @Test func theCardCountsEverythingAndNamesItsUnit() throws {
+        let location = PasteLibraryLocation(folder: URL(fileURLWithPath: "/nowhere"), vendor: nil)
+        let english = try makeModel(location: nil)
+        let turkish = try makeModel(location: nil, language: .turkish)
+        let summary = PasteSummary(historyCount: 1_000, boards: [board(1, 300), board(2, 55)], totalBytes: 130_000_000)
+        english.state = .ready(summary, location)
+        turkish.state = .ready(summary, location)
+        #expect(english.libraryItemCount == 1_355)
+        #expect(english.unitLine.hasPrefix("items · 130") && turkish.unitLine.hasPrefix("öğe · 130"))
+        english.state = .ready(PasteSummary(historyCount: 1, boards: [], totalBytes: 0), location)
+        #expect(english.unitLine.hasPrefix("item · "))
+        english.state = .scanning
+        #expect(english.libraryItemCount == 0 && english.unitLine.isEmpty)
+    }
+
     @Test func theSourceLineShowsVendorAndFolder() throws {
         let support = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support", isDirectory: true)
         let folder = support.appendingPathComponent("com.example.lib", isDirectory: true)

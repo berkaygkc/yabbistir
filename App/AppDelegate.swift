@@ -11,6 +11,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: StatusItemController?
     private var jobsCard: JobsSurfaceController?
     private var settings: SettingsWindowController?
+    private var onboarding: OnboardingWindowController?
     private var effects: PreferenceEffects?
     #if DEBUG
     private let materialComparison = MaterialSpikeWindow()
@@ -23,6 +24,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         SingleInstance.yieldToLaterLaunches()
         do {
             let env = try AppEnvironment()
+            // Read before anything is captured: a new install has nothing yet.
+            let historyWasEmpty = env.library.index.count == 0
             env.start()
             // Built-ins and the person's extensions are read at launch; detectors new to the
             // history (a new extension or version) then tag it in the background. Reading them is a
@@ -60,6 +63,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
             historyModel.onRetentionApplied = { [weak env] in env?.cleanResultFiles() }
             let loginItem = SystemLoginItem()
+            // One import for Settings and the first-run window, so both show the same progress.
+            let importer = ImportModel(store: env.library.store, reload: { [weak env] in try? env?.library.reloadIndex() },
+                                       ignoredApps: { [weak env] in Set(env?.preferences.ignoredApps ?? []) },
+                                       language: env.language)
+            let onboarding = OnboardingWindowController(
+                importer: importer, preferences: env.preferences, language: env.language, loginItem: loginItem,
+                openPanel: { [weak panel] in panel?.show() })
+            self.onboarding = onboarding
             let settings = SettingsWindowController(
                 models: SettingsModels(
                     preferences: env.preferences, language: env.language,
@@ -69,15 +80,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     extensions: settingsModel, store: storeModel,
                     permissions: PermissionsModel(probe: SystemPermissionProbe(loginItem: loginItem),
                                                   loginItem: loginItem, language: env.language),
-                    importer: ImportModel(store: env.library.store, reload: { [weak env] in try? env?.library.reloadIndex() },
-                                          ignoredApps: { [weak env] in Set(env?.preferences.ignoredApps ?? []) },
-                                          language: env.language),
+                    importer: importer,
                     about: AboutModel(
                         version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
                         build: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "",
                         language: env.language,
                         checkForUpdates: { [weak env] in Task { await env?.checkForUpdates() } },
-                        readNotice: Self.bundledText),
+                        readNotice: Self.bundledText,
+                        rerunSetup: { [weak onboarding] in onboarding?.show() }),
                     presence: SettingsPresence()))
             self.settings = settings
             #if DEBUG
@@ -105,8 +115,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             GlobalShortcuts.onStackCopy { stack.copyIntoStack() }
             GlobalShortcuts.onStackPaste { stack.claimedPastePressed() }
             GlobalShortcuts.onRail(first: { stack.session.moveRecent(to: 0) }, second: { stack.session.moveRecent(to: 1) })
-            // Ask once at launch.
-            if !AccessibilityPermission.isTrusted() { AccessibilityPermission.prompt() }
+            if OnboardingModel.shouldShowAtLaunch(onboarded: env.preferences.onboarded, historyIsEmpty: historyWasEmpty) {
+                // A new install: the first-run window asks for Accessibility itself, in its own words.
+                onboarding.show()
+            } else {
+                // Someone who already has a history needs no first run; it stays one click away in About.
+                if !env.preferences.onboarded { env.preferences.onboarded = true }
+                // Ask once at launch.
+                if !AccessibilityPermission.isTrusted() { AccessibilityPermission.prompt() }
+            }
         } catch {
             NSAlert(error: error).runModal()
             NSApp.terminate(nil)

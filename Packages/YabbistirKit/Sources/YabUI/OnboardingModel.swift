@@ -78,13 +78,24 @@ public final class OnboardingModel {
         }
     }
 
+    /// Import needs a read library and something chosen; Continue waits for the import to end, also when it failed, so
+    /// a broken library never holds the person in this window.
     public var primaryEnabled: Bool {
         switch step {
         case .importChoice:
-            if case .ready = importer.state { true } else { false }
+            guard case .ready = importer.state else { return false }
+            return importer.selection.history || !importer.selection.boards.isEmpty
         case .importing:
-            if case .done = importer.state { true } else { false }
-        default: true
+            return importEnded
+        default:
+            return true
+        }
+    }
+
+    private var importEnded: Bool {
+        switch importer.state {
+        case .done, .failed: true
+        default: false
         }
     }
 
@@ -97,10 +108,16 @@ public final class OnboardingModel {
             step = .importing
             importer.start()
         case .importing:
-            if case .done = importer.state { step = .setup }
+            if importEnded { step = .setup }
         case .setup:
             break
         }
+    }
+
+    /// Return: the step's primary button, only while it is enabled. On the last step it finishes.
+    public func primary() {
+        guard primaryEnabled else { return }
+        if step == .setup { finish() } else { next() }
     }
 
     public func skipImport() {

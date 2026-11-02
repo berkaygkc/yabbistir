@@ -137,6 +137,9 @@ public struct Keycap: View {
     let label: String
     let size: CGFloat
     let font: Font
+    private var radius = Tokens.Metrics.keycapRadius
+    private var inset: CGFloat = 5
+    private var legend = Tokens.Colors.textSecondary
     /// `size` 18 with an 11 pt legend is the inline keycap in a job's title ("Hazır, ⌘V ile yapıştır").
     public init(_ label: String, size: CGFloat = 20, font: Font = Tokens.Fonts.keycap) {
         self.label = label
@@ -144,15 +147,25 @@ public struct Keycap: View {
         self.font = font
     }
 
+    /// The large flat keycap of the first-run shortcut row: 34 pt, 8 pt corners, a 15/600 legend in `text`,
+    /// no shadow or offset.
+    public static func large(_ label: String) -> Keycap {
+        var keycap = Keycap(label, size: 34, font: .system(size: 15, weight: .semibold))
+        keycap.radius = Tokens.Metrics.controlRadius
+        keycap.inset = 9
+        keycap.legend = Tokens.Colors.text
+        return keycap
+    }
+
     public var body: some View {
         Text(label)
             .font(font)
             .lineLimit(1)
             .fixedSize()
-            .foregroundStyle(Tokens.Colors.textSecondary)
-            .padding(.horizontal, 5)
+            .foregroundStyle(legend)
+            .padding(.horizontal, inset)
             .frame(minWidth: size, minHeight: size)
-            .background(Tokens.Colors.keycapFill, in: RoundedRectangle(cornerRadius: Tokens.Metrics.keycapRadius, style: .continuous))
+            .background(Tokens.Colors.keycapFill, in: RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
 }
 

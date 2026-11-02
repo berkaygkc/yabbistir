@@ -101,6 +101,44 @@ private func rig(withLibrary: Bool) async throws -> Rig {
         }
     }
 
+    @Test func importWaitsForSomethingChosen() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.next()
+        r.importer.selection = PasteSelection(history: false, boards: [])
+        #expect(!r.model.primaryEnabled)
+        r.model.primary()
+        #expect(r.model.step == .importChoice)
+        r.importer.selection.history = true
+        #expect(r.model.primaryEnabled)
+    }
+
+    @Test func aFailedImportStillLetsThePersonGoOn() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.next()
+        r.model.next()
+        await r.importer.finished()
+        r.importer.state = .failed
+        #expect(r.model.primaryEnabled)
+        r.model.next()
+        #expect(r.model.step == .setup)
+    }
+
+    @Test func returnPressesTheEnabledPrimaryOnly() async throws {
+        let r = try await rig(withLibrary: true)
+        r.model.primary()
+        #expect(r.model.step == .importChoice)
+        r.model.primary()
+        #expect(r.model.step == .importing)
+        // Still importing: Continue is disabled, so Return does nothing.
+        if case .importing = r.importer.state { r.model.primary() }
+        #expect(r.model.step == .importing)
+        await r.importer.finished()
+        r.model.primary()
+        #expect(r.model.step == .setup && r.probe.finishes == 0)
+        r.model.primary()
+        #expect(r.probe.finishes == 1 && r.preferences.onboarded)
+    }
+
     @Test func skipGoesStraightToSetup() async throws {
         let r = try await rig(withLibrary: true)
         r.model.next()

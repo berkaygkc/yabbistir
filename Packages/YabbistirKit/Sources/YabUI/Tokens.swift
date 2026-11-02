@@ -23,6 +23,11 @@ public enum Tokens {
         public static let textSelection = Color(nsColor: .selectedTextBackgroundColor)
         public static let accentSoft = Color(light: rgba(0, 122, 255, 0.16), dark: rgba(10, 132, 255, 0.22))
         public static let danger = Color(light: rgba(255, 59, 48, 1), dark: rgba(255, 69, 58, 1))
+        /// `success`: a granted permission, a switch that is on, a finished import.
+        public static let success = rgba(48, 209, 88, 1)
+        /// `system-accent`: macOS `controlAccentColor`, for controls only (the default button, a checked checkbox,
+        /// the first-run import bar), never for selection.
+        public static let systemAccent = Color(nsColor: .controlAccentColor)
         public static let matchHighlight = Color(light: rgba(255, 204, 0, 0.38), dark: rgba(255, 214, 10, 0.28))
         /// The body of a dragged stack row.
         public static let surfaceLifted = Color(light: rgba(250, 250, 252, 0.84), dark: rgba(34, 34, 40, 0.78))

@@ -16,16 +16,19 @@ public final class AboutModel {
     @ObservationIgnored private let checkForUpdatesAction: () -> Void
     @ObservationIgnored private let readNotice: (String) -> String?
     @ObservationIgnored private let openURL: (URL) -> Void
+    @ObservationIgnored private let rerunSetupAction: () -> Void
 
     public init(version: String, build: String, language: LanguageStore,
                 checkForUpdates: @escaping () -> Void, readNotice: @escaping (String) -> String?,
-                openURL: @escaping (URL) -> Void = { NSWorkspace.shared.open($0) }) {
+                openURL: @escaping (URL) -> Void = { NSWorkspace.shared.open($0) },
+                rerunSetup: @escaping () -> Void = {}) {
         self.version = version
         self.build = build
         self.languageStore = language
         self.checkForUpdatesAction = checkForUpdates
         self.readNotice = readNotice
         self.openURL = openURL
+        self.rerunSetupAction = rerunSetup
     }
 
     public var language: AppLanguage { languageStore.language }
@@ -38,6 +41,9 @@ public final class AboutModel {
     }
 
     public func checkForUpdates() { checkForUpdatesAction() }
+
+    /// Opens the first-run window again. It changes nothing by itself: importing and the settings wait for the person.
+    public func rerunSetup() { rerunSetupAction() }
 
     public func open(_ url: URL) { openURL(url) }
 }
@@ -73,10 +79,13 @@ public struct AboutSettingsView: View {
             Text("yabbistir").font(.title2.weight(.semibold))
             Text(model.versionText).foregroundStyle(.secondary).monospacedDigit()
             Text(string("settings.about.tagline")).font(.callout).foregroundStyle(.secondary)
-            Button(string("settings.about.checkForUpdates")) { model.checkForUpdates() }
-                .buttonStyle(.bordered)
-                .controlSize(.regular)
-                .padding(.top, 6)
+            HStack(spacing: 8) {
+                Button(string("settings.about.checkForUpdates")) { model.checkForUpdates() }
+                Button(string("settings.about.rerunSetup")) { model.rerunSetup() }
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.regular)
+            .padding(.top, 6)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
