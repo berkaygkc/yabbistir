@@ -52,11 +52,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             settingsModel.onPasteboardWrite = { [weak env] changeCount in env?.monitor.ignore(changeCount: changeCount) }
             let storeModel = StoreModel(
                 client: env.storeClient, registry: env.extensionRegistry, language: env.language, logs: env.extensionLogs)
+            let historyModel = HistorySettingsModel(
+                preferences: env.preferences, library: env.library, storageDirectory: env.storageDirectory)
+            historyModel.onCleared = { [weak env, weak stack] deleted in
+                for id in deleted { stack?.session.itemDeleted(id) }
+                env?.cleanResultFiles()
+            }
             let settings = SettingsWindowController(
                 models: SettingsModels(
                     preferences: env.preferences, language: env.language,
                     general: GeneralSettingsModel(preferences: env.preferences, language: env.language, loginItem: SystemLoginItem()),
-                    history: HistorySettingsModel(preferences: env.preferences, library: env.library),
+                    history: historyModel,
                     extensions: settingsModel, store: storeModel))
             self.settings = settings
             #if DEBUG

@@ -48,6 +48,8 @@ final class AppEnvironment {
     var jobs: JobCenter!
     /// Image results as files (Application Support/yabbistir/Outputs), kept while history has them.
     let resultFiles: ResultFiles
+    /// Where History lives: the database, its blobs, and the folders beside them.
+    let storageDirectory: URL
     private(set) var monitor: PasteboardMonitor!
     /// Between the monitor and history: copies go past the capture rules first.
     private var capture: CapturePipeline!
@@ -73,6 +75,7 @@ final class AppEnvironment {
     init() throws {
         let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("yabbistir", isDirectory: true)
+        storageDirectory = directory
         library = try Library(store: ItemStore(directory: directory))
         let warningLogs = extensionLogs
         extensionRegistry = ExtensionRegistry(builtInRoot: Bundle.main.resourceURL!.appendingPathComponent("BuiltinExtensions"),
@@ -185,10 +188,14 @@ final class AppEnvironment {
         try? library.purgeExpired(policy: preferences.retention, now: Date())
         Task {
             await extensions.trimOutputs()
-            // Result files go with their history items (never all of them on a failed read).
-            if let referenced = try? library.store.referencedFileURLs() {
-                resultFiles.clean(keeping: referenced, before: Date().addingTimeInterval(-60))
-            }
+            cleanResultFiles()
+        }
+    }
+
+    /// Result files go with their history items (never all of them on a failed read).
+    func cleanResultFiles() {
+        if let referenced = try? library.store.referencedFileURLs() {
+            resultFiles.clean(keeping: referenced, before: Date().addingTimeInterval(-60))
         }
     }
 

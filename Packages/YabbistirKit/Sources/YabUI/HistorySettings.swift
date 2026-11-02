@@ -15,11 +15,35 @@ public final class HistorySettingsModel {
     /// A shorter period waiting for the person's say, with how many items it removes right now.
     public private(set) var pendingRetention: RetentionPolicy?
     public private(set) var pendingCount = 0
+    /// How much disk space History uses; nil until measured.
+    public private(set) var storageBytes: Int64?
+    public var confirmingClear = false
+    /// Told which items clearing deleted, so the Sıra and result folders can follow.
+    @ObservationIgnored public var onCleared: (([Int64]) -> Void)?
+    @ObservationIgnored private let storageDirectory: URL?
 
-    public init(preferences: Preferences, library: Library, now: @escaping () -> Date = Date.init) {
+    public init(preferences: Preferences, library: Library, storageDirectory: URL? = nil, now: @escaping () -> Date = Date.init) {
         self.preferences = preferences
         self.library = library
+        self.storageDirectory = storageDirectory
         self.now = now
+    }
+
+    /// Measures History's size off the main thread.
+    public func measureStorage() {
+        guard let directory = storageDirectory else { return }
+        Task {
+            let bytes = await Task.detached(priority: .utility) { HistoryStorage.size(of: directory) }.value
+            storageBytes = bytes
+        }
+    }
+
+    /// Deletes everything in History that is in no category (the person confirmed first).
+    public func clearHistory() {
+        confirmingClear = false
+        guard let deleted = try? library.clearHistory() else { return }
+        onCleared?(deleted)
+        measureStorage()
     }
 
     public var ignoredApps: [String] { preferences.ignoredApps }
@@ -111,8 +135,17 @@ public struct HistorySettingsView: View {
                 Toggle(string("settings.history.outputs"), isOn: $preferences.showsExtensionOutputs).toggleStyle(.switch)
                 note("settings.history.outputs.note")
             }
+            Section {
+                if let bytes = model.storageBytes {
+                    Text(string("settings.history.storage.size", Self.formatted(bytes, lang))).monospacedDigit()
+                }
+                Button(string("settings.history.clear")) { model.confirmingClear = true }
+            } header: {
+                Text(string("settings.history.storage"))
+            }
         }
         .formStyle(.grouped)
+        .onAppear { model.measureStorage() }
         .navigationTitle(string("settings.section.history"))
         .confirmationDialog(
             string("settings.history.retention.confirm", model.pendingCount),
@@ -122,6 +155,19 @@ public struct HistorySettingsView: View {
             Button(string("settings.history.retention.apply"), role: .destructive) { model.confirmRetention() }
             Button(string("settings.cancel"), role: .cancel) { model.cancelRetention() }
         }
+        .confirmationDialog(
+            string("settings.history.clear.title"), isPresented: $model.confirmingClear, titleVisibility: .visible
+        ) {
+            Button(string("settings.history.clear.confirm"), role: .destructive) { model.clearHistory() }
+            Button(string("settings.cancel"), role: .cancel) {}
+        } message: {
+            Text(string("settings.history.clear.message"))
+        }
+    }
+
+    /// File-style size in the in-app language (not the system's).
+    private static func formatted(_ bytes: Int64, _ language: AppLanguage) -> String {
+        bytes.formatted(.byteCount(style: .file).locale(language.locale))
     }
 
     private func chooseApps() {

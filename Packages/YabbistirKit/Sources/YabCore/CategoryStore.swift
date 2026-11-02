@@ -180,6 +180,21 @@ extension ItemStore {
         }
     }
 
+    /// Deletes every item that is in no category (with its blobs) and takes the rest out of history.
+    /// Returns the deleted ids and the ids that only left history.
+    func clearHistory() throws -> (deleted: [Int64], kept: [Int64]) {
+        try dbPool.write { db in
+            let deleted = try Int64.fetchAll(db, sql: """
+                SELECT id FROM item WHERE NOT EXISTS (SELECT 1 FROM categoryMembership WHERE itemID = item.id)
+                """)
+            let kept = try Int64.fetchAll(db, sql: "SELECT id FROM item WHERE inHistory = 1 AND id NOT IN (\(deleted.isEmpty ? "NULL" : deleted.map { _ in "?" }.joined(separator: ",")))",
+                                          arguments: StatementArguments(deleted))
+            try deleteItems(deleted, db)
+            try db.execute(sql: "UPDATE item SET inHistory = 0 WHERE inHistory = 1")
+            return (deleted, kept)
+        }
+    }
+
     /// The category's items, most recently added first.
     public func itemIDs(inCategory categoryID: Int64) throws -> [Int64] {
         try dbPool.read { db in

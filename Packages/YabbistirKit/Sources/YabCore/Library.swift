@@ -91,6 +91,17 @@ public final class Library {
         changed()
     }
 
+    /// Clears History: items in no category are deleted, categorized ones stay but leave History.
+    /// Returns the deleted ids.
+    @discardableResult
+    public func clearHistory() throws -> [Int64] {
+        let cleared = try store.clearHistory()
+        for id in cleared.deleted { index.remove(id: id) }
+        for id in cleared.kept { if let item = try store.item(id: id) { index.upsert(item) } }
+        changed()
+        return cleared.deleted
+    }
+
     /// How many items `purgeExpired` would remove now.
     public func countExpired(policy: RetentionPolicy, now: Date) throws -> Int {
         try store.countExpired(policy: policy, now: now)
