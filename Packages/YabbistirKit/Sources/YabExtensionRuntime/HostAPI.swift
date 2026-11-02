@@ -253,8 +253,8 @@ enum HostAPI {
 
     /// A source's `list` answer: `{ rows: [{ id, title, subtitle? }] }`, or `{ locked: true, message, command? }`
     /// (which wins over rows). Titles, subtitles, the message and the command become one line (`oneLine`), and a blank
-    /// subtitle or command is none; the id goes back to `run` exactly as listed, so one that could not is refused. Rows
-    /// past `sourceRowLimit` are dropped with one line to `log`. As for every bad result, the reason names shapes and
+    /// subtitle or command is none; the id goes back to `run` exactly as listed, so one that could not, or that an
+    /// earlier row already has, is refused. Rows past `sourceRowLimit` are dropped with one line to `log`. As for every bad result, the reason names shapes and
     /// places only: a source's rows may be secrets.
     static func sourceListing(from value: JSONValue, log: (String) -> Void) throws(ExtensionError) -> SourceListing {
         let shapes = "expected {rows} or {locked}"
@@ -271,8 +271,15 @@ enum HostAPI {
             entries.removeSubrange(sourceRowLimit...)
         }
         var listed: [SourceRow] = []
+        var ids = Set<String>()
         listed.reserveCapacity(entries.count)
-        for (index, entry) in entries.enumerated() { listed.append(try sourceRow(entry, at: "rows[\(index)]")) }
+        for (index, entry) in entries.enumerated() {
+            let row = try sourceRow(entry, at: "rows[\(index)]")
+            // `run` gets only the id back: with two rows behind one id, the person could pick one and get the other's
+            // value. The host cannot tell which the extension meant, so it refuses rather than drops.
+            guard ids.insert(row.id).inserted else { throw ExtensionError(.badResult, "rows[\(index)].id repeats an earlier row's id") }
+            listed.append(row)
+        }
         return .rows(listed)
     }
 

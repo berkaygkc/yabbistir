@@ -177,8 +177,9 @@ export type CaptureRules = Record<string, CaptureRule>;
  */
 export interface SourceRow {
   /**
-   * A non-empty string of at most 256 characters. `run` gets it back exactly as listed: it is never cleaned
-   * or cut, so a longer one fails the listing. Give each row its own, the same each time it is listed.
+   * A non-empty string of at most 256 characters, its own to each row and the same each time it is listed.
+   * `run` gets it back exactly as listed: it is never cleaned or cut, so a longer one, or one an earlier row
+   * already has, fails the listing.
    */
   readonly id: string;
   /**

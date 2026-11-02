@@ -143,6 +143,8 @@ import YabExtensionKit
         (#"{ rows: [{ id: "1", title: "ornek.dev" }, { id: 2, title: "ornek.dev" }] }"#, "rows[1].id must be a non-empty string"),
         (#"{ rows: [{ id: "", title: "ornek.dev" }] }"#, "rows[0].id must be a non-empty string"),
         (#"{ rows: [{ id: "x".repeat(257), title: "ornek.dev" }] }"#, "rows[0].id is longer than 256 characters"),
+        (#"{ rows: [{ id: "1", title: "ornek.dev" }, { id: "2", title: "deniz.k" }, { id: "1", title: "Kasa" }] }"#,
+         "rows[2].id repeats an earlier row's id"),
         (#"{ rows: [{ id: "1", title: " \n " }] }"#, "rows[0].title must be a non-empty string"),
         (#"{ rows: [{ id: "1" }] }"#, "rows[0].title must be a non-empty string"),
         (#"{ rows: [{ id: "1", title: "ornek.dev", subtitle: 7 }] }"#, "rows[0].subtitle must be a string"),
