@@ -25,8 +25,9 @@ public final class SourceCenter {
         case rows([SourceRow])
         /// The source is locked: how the person unlocks it, and the line they run for it (⌘C copies it).
         case locked(message: String, command: String?)
-        /// The last ask failed and there were no rows to keep: why, in the extension's or the app's words.
-        case failed(String)
+        /// The last ask failed and there were no rows to keep: why, in the extension's or the app's words. The column
+        /// words it in the person's language from its code; the message is for developers.
+        case failed(ExtensionError)
     }
 
     /// Something a column shows changed: a list came in, or rows were forgotten. Not called by `refresh`, whose caller
@@ -84,7 +85,7 @@ public final class SourceCenter {
         case .success(.locked(let message, let command)): state = .locked(message: message, command: command)
         case .failure(let error):
             if case .rows = states[key] { return }
-            state = .failed(error.message)
+            state = .failed(error)
         }
         guard states[key] != state else { return }
         states[key] = state

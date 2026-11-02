@@ -145,8 +145,8 @@ struct PanelColumnBuilder {
 
     /// A source's column, built from what its extension last listed (in memory, never history). The app searches the
     /// rows on their title and subtitle, Turkish-folded; the locked row stays through a search, since it says why
-    /// nothing is listed. While nothing has come yet the column says it is loading; a failure gets a calm line (the
-    /// service's reason is for developers).
+    /// nothing is listed. While nothing has come yet the column says it is loading; a failure gets a calm line, or the
+    /// name of the tool that is not installed (the service's reason is for developers).
     func source(_ category: ClipCategory, descriptor: SourceDescriptor, state: SourceCenter.State,
                 identity: SourceRowIdentity) -> PanelColumn {
         let key = descriptor.id
@@ -176,8 +176,13 @@ struct PanelColumnBuilder {
             total = 1
         case .idle, .loading:
             empty = L10n.string("panel.source.loading", language)
-        case .failed:
-            empty = L10n.string("panel.source.failed", language)
+        case .failed(let error):
+            // A tool that is not installed is named as a job's card names it; any other reason is for developers.
+            if error.code == .toolMissing, let tool = JobRowPresentation.missingTool(in: error.message) {
+                empty = L10n.string("jobs.failed.toolMissing", language, tool)
+            } else {
+                empty = L10n.string("panel.source.failed", language)
+            }
         }
         return PanelColumn(id: .category(category.id ?? -1), title: descriptor.title, color: nil,
                            sections: rows.isEmpty ? [] : [RowSection(title: "", rows: rows)], total: total, emptyMessage: empty,

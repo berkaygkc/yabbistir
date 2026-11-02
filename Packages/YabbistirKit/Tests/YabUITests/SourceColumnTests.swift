@@ -164,11 +164,22 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
     /// The service's reason is for developers, in English; the column says it calmly, in the app's language.
     @Test func aFailedSourceShowsACalmLine() throws {
-        sources.states[Self.vaultKey] = .failed("vault-cli is not installed. Install it with: brew install vault-cli")
+        sources.states[Self.vaultKey] = .failed(ExtensionError(.script, "vault-cli exited with status 1"))
         model.toggleShown(vault.id!)
         let column = try #require(vaultColumn)
         #expect(column.rows.isEmpty)
         #expect(column.emptyMessage == "Liste okunamadı.")
+    }
+
+    /// A tool that is not installed is named, in the words a job's card uses; the install line stays for developers.
+    @Test func aMissingToolIsNamed() throws {
+        sources.states[Self.vaultKey] = .failed(ExtensionError(.toolMissing, "vault-cli is not installed. Install it with: brew install vault-cli"))
+        model.toggleShown(vault.id!)
+        #expect(vaultColumn?.rows.isEmpty == true)
+        #expect(vaultColumn?.emptyMessage == "vault-cli bulunamadı")
+        // One whose reason names no tool reads like any other failure.
+        sources.answer(Self.vaultKey, .failed(ExtensionError(.toolMissing, "")))
+        #expect(vaultColumn?.emptyMessage == "Liste okunamadı.")
     }
 
     @Test func aDisabledExtensionsColumnIsHidden() {

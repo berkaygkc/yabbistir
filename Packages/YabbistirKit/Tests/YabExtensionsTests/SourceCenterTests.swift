@@ -147,7 +147,7 @@ import YabExtensionKit
     @Test func aFailureWithoutRowsShowsTheMessage() async throws {
         center.refresh([Self.vault])
         try await answer(Self.vault, .failure(ExtensionError(.toolMissing, "vault-cli is not installed")))
-        #expect(center.state(of: Self.vault) == .failed("vault-cli is not installed"))
+        #expect(center.state(of: Self.vault) == .failed(ExtensionError(.toolMissing, "vault-cli is not installed")))
     }
 
     /// A failure is shown until the next answer replaces it: asking again does not blank it to "loading".
@@ -155,7 +155,7 @@ import YabExtensionKit
         center.refresh([Self.vault])
         try await answer(Self.vault, .failure(ExtensionError(.toolMissing, "vault-cli is not installed")))
         center.refresh([Self.vault])
-        #expect(center.state(of: Self.vault) == .failed("vault-cli is not installed"))
+        #expect(center.state(of: Self.vault) == .failed(ExtensionError(.toolMissing, "vault-cli is not installed")))
         try await answer(Self.vault, .success(.rows(rows)))
         #expect(center.state(of: Self.vault) == .rows(rows))
     }
