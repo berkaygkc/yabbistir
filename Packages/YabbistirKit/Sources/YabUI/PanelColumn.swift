@@ -172,6 +172,8 @@ struct PanelColumnBuilder {
         case .locked(let message, let command):
             rows = [RowModel(id: identity.lockedID(key: key), itemID: 0, kind: .text, title: message, time: "", isRemote: false,
                              colorHex: nil, linkHost: nil, source: .locked(key: key, message: message, command: command))]
+            // A search counts the one row it shows.
+            total = 1
         case .idle, .loading:
             empty = L10n.string("panel.source.loading", language)
         case .failed:

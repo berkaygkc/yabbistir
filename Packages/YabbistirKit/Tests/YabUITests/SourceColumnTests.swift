@@ -102,6 +102,9 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         _ = model.handle(.type("xyz"))
         #expect(vaultColumn?.rows.map(\.source) == [locked])
         #expect(vaultColumn?.emptyMessage == nil)
+        // The count reads what the column shows: its one row.
+        #expect(vaultColumn?.total == 1)
+        #expect(model.resultCountText == "1 sonuç")
     }
 
     @Test func aRefreshKeepsTheSelectedRow() throws {
