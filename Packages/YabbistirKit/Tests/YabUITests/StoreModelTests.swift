@@ -65,6 +65,8 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         var permissions: [String] = []
         var hosts: [String] = []
         var tools: [String] = []
+        /// The catalog says it has a sensitive source.
+        var sensitive = false
     }
 
     static let builtIns = URL(fileURLWithPath: #filePath)
@@ -176,6 +178,7 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
                 "package": "https://\(host)/v1/packages/\(entry.id).yabext",
             ]
             json["minAppVersion"] = entry.minApp ?? NSNull()
+            if entry.sensitive { json["sensitive"] = true }
             return json
         }
         let catalog: [String: Any] = ["formatVersion": 1, "generatedAt": generatedAt, "extensions": list]
@@ -451,6 +454,25 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(model.selectedCount == 0)
     }
 
+    /// An extension with a sensitive source says so in the app's words before anything is downloaded.
+    @Test func aSensitiveEntrySaysItBeforeTheDownload() async throws {
+        let fixture = StoreFixture(language: .turkish)
+        let vault = StoreFixture.Entry(id: "dev.example.vault", name: ["en": "Vault", "tr": "Kasa"], description: ["en": "Lists a vault."],
+                                       permissions: ["exec"], tools: ["vault-cli"], sensitive: true)
+        try fixture.serve([vault])
+        let model = fixture.model()
+        model.appeared()
+        await model.refreshTask?.value
+        model.setSelected(vault.id, true)
+        model.installSelected()
+        let item = try #require(model.pendingConsent?.items.first)
+        #expect(item.sentences == [
+            "Bilgisayarındaki şu programları çalıştırabilir: vault-cli. Bu programlar dosyalarına erişebilir ve internete çıkabilir.",
+            "Şifre gibi gizli kayıtları okuyup yapıştırabilir. Bunlar geçmişe ve diske yazılmaz.",
+        ])
+        #expect(fixture.packageRequests == 0)
+    }
+
     @Test func cancellingTheConsentInstallsNothing() async throws {
         let fixture = StoreFixture()
         try fixture.serve([F.video], packaged: [F.video])
@@ -659,6 +681,20 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
         #expect(fixture.registry.installed.first { $0.id == tooNew.id }?.manifest?.version == "1.0.0")
         #expect(!fixture.requests.contains("/v1/packages/\(tooNew.id).yabext"))
         #expect(model.updateCount == 0)
+    }
+
+    /// An update that asks for something new says again that the extension reads secrets (no grant records that it was
+    /// said); one that asks for nothing new says nothing.
+    @Test func anUpdateThatAsksAgainNamesTheSecrets() throws {
+        let vault = StoreFixture.Entry(id: "dev.example.vault", name: ["en": "Vault"], description: ["en": "Lists a vault."],
+                                       permissions: ["exec"], tools: ["vault-cli", "jq"], sensitive: true)
+        let entry = try #require(try StoreCatalog.decode(StoreFixture().catalog([vault])).extensions.first)
+        let older = PermissionGrant(permissions: ["exec"], domains: [], tools: ["vault-cli"])
+        #expect(StoreModel.newSentences(entry, beyond: older, language: .english) == [
+            L10n.string("permissions.exec", .english, "jq"), L10n.string("permissions.sensitive", .english),
+        ])
+        let same = PermissionGrant(permissions: ["exec"], domains: [], tools: ["vault-cli", "jq"])
+        #expect(StoreModel.newSentences(entry, beyond: same, language: .english) == [])
     }
 
     /// The sheet's line for updates that ask for nothing new.

@@ -79,6 +79,9 @@ public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
     public let permissions: [String]
     public let networkHosts: [String]
     public let tools: [String]
+    /// It has a sensitive source (secrets such as passwords): the consent sheet says so before the download. A catalog
+    /// that does not say is false.
+    public let sensitive: Bool
     /// Of the package, in lowercase hex.
     public let sha256: String
     public let size: Int
@@ -87,8 +90,8 @@ public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
     public let package: URL
 
     private enum CodingKeys: String, CodingKey {
-        case id, version, apiVersion, minAppVersion, name, description, author, categories, icon, permissions, networkHosts, tools, sha256, size
-        case updatedAt, readme, package
+        case id, version, apiVersion, minAppVersion, name, description, author, categories, icon, permissions, networkHosts, tools, sensitive
+        case sha256, size, updatedAt, readme, package
     }
 
     public init(from decoder: any Decoder) throws {
@@ -105,6 +108,7 @@ public struct StoreEntry: Decodable, Equatable, Sendable, Identifiable {
         permissions = try c.decode([String].self, forKey: .permissions)
         networkHosts = try c.decode([String].self, forKey: .networkHosts)
         tools = try c.decode([String].self, forKey: .tools)
+        sensitive = try c.decodeIfPresent(Bool.self, forKey: .sensitive) ?? false
         sha256 = try c.decode(String.self, forKey: .sha256)
         size = try c.decode(Int.self, forKey: .size)
         updatedAt = try c.decode(Date.self, forKey: .updatedAt)

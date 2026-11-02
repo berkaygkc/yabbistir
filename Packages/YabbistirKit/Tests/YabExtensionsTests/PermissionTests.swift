@@ -99,6 +99,29 @@ import YabLocalization
         #expect(english.contains("Can read your whole history"))
     }
 
+    /// A sensitive source is said in the app's own words, right after the programs that read it; the store's catalog
+    /// flag says the same before the download.
+    @Test func aSensitiveSourceAddsTheSecretSentence() throws {
+        let folder = try SourceFixture.write(in: RegistryFixture.temporary("src"), id: "dev.example.vault", permissions: ["exec", "history"],
+                                             tools: ["vault-cli"])
+        guard case .valid(let parsed, _) = ManifestValidator.validate(folder: folder) else { Issue.record("manifest is not valid"); return }
+        #expect(ConsentText.sentences(for: parsed, source: .local, language: .turkish) == [
+            "Bilgisayarındaki şu programları çalıştırabilir: vault-cli. Bu programlar dosyalarına erişebilir ve internete çıkabilir.",
+            "Şifre gibi gizli kayıtları okuyup yapıştırabilir. Bunlar geçmişe ve diske yazılmaz.",
+            "Geçmişinin tamamını okuyabilir",
+            "Yerel uzantılar imzasızdır.",
+        ])
+        #expect(ConsentText.sentences(permissions: ["exec"], domains: [], tools: ["vault-cli"], sensitive: true, language: .english) == [
+            "Can run these programs on your Mac: vault-cli. They can read and write your files and reach the internet.",
+            "Can read and paste secrets such as passwords. They’re never written to history or disk.",
+        ])
+        #expect(ConsentText.sentences(permissions: ["exec"], domains: [], tools: ["vault-cli"], language: .english).count == 1)
+        let plain = try SourceFixture.write(in: RegistryFixture.temporary("src"), id: "dev.example.notes", permissions: ["exec"], tools: ["vault-cli"],
+                                            sensitive: false)
+        guard case .valid(let notes, _) = ManifestValidator.validate(folder: plain) else { Issue.record("manifest is not valid"); return }
+        #expect(ConsentText.sentences(for: notes, source: .builtIn, language: .turkish).count == 1)
+    }
+
     @Test func theMasterSwitchStopsThirdPartyExtensions() throws {
         try RegistryFixture.write(in: builtIn, id: "dev.yabbistir.a")
         try RegistryFixture.write(in: user, id: "dev.example.b")

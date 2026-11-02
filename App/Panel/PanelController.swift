@@ -45,8 +45,11 @@ final class PanelController: NSObject, NSWindowDelegate {
         self.stack = stack.session
         model = PanelViewModel(library: env.library, language: env.language, stack: stack.session, extensions: env.extensions)
         super.init()
-        // Installed, removed, turned on or off, or edited: the open panel's commands follow.
+        // Installed, removed, turned on or off, or edited: the open panel's commands follow, after what the app does
+        // first (a gone source's rows are forgotten).
+        let appFollows = env.extensions.onExtensionsChanged
         env.extensions.onExtensionsChanged = { [weak self] in
+            appFollows?()
             guard let self, window.isVisible else { return }
             model.refresh()
         }

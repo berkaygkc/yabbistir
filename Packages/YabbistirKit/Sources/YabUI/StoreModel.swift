@@ -345,7 +345,7 @@ public final class StoreModel {
         guard installTask == nil else { return }
         let items = selectedEntries.map { entry in
             item(entry, fromVersion: nil, sentences: ConsentText.sentences(permissions: entry.permissions, domains: entry.networkHosts,
-                                                                           tools: entry.tools, language: language))
+                                                                           tools: entry.tools, sensitive: entry.sensitive, language: language))
         }
         guard !items.isEmpty else { return }
         pendingConsent = Consent(id: UUID(), kind: .install, items: items, quietUpdates: [])
@@ -366,7 +366,8 @@ public final class StoreModel {
                 let granted = registry.installed.first { $0.id == entry.id }?.grant ?? .empty
                 let added = Self.newSentences(entry, beyond: granted, language: language)
                 let sentences = added.isEmpty
-                    ? ConsentText.sentences(permissions: entry.permissions, domains: entry.networkHosts, tools: entry.tools, language: language)
+                    ? ConsentText.sentences(permissions: entry.permissions, domains: entry.networkHosts, tools: entry.tools,
+                                            sensitive: entry.sensitive, language: language)
                     : added
                 asking.append(item(entry, fromVersion: fromVersion, sentences: sentences))
             }
@@ -427,15 +428,17 @@ public final class StoreModel {
         }
     }
 
-    /// The same download with the same request: version, package hash, and the same permissions, sites and programs in
-    /// any order.
+    /// The same download with the same request: version, package hash, the same permissions, sites and programs in
+    /// any order, and the same word on secrets.
     private static func offersTheSame(_ current: StoreEntry, _ shown: StoreEntry) -> Bool {
         current.version == shown.version && current.sha256 == shown.sha256 && Set(current.permissions) == Set(shown.permissions)
             && Set(current.networkHosts) == Set(shown.networkHosts) && Set(current.tools) == Set(shown.tools)
+            && current.sensitive == shown.sensitive
     }
 
     /// What `entry` asks for beyond `granted`, one sentence per new kind of access: a site list holds only the new
-    /// sites, a program list only the new programs.
+    /// sites, a program list only the new programs. A sensitive source is no grant, so no grant says whether it was
+    /// shown before: it is said again whenever something new is asked for.
     static func newSentences(_ entry: StoreEntry, beyond granted: PermissionGrant, language: AppLanguage) -> [String] {
         let has = Set(granted.permissions)
         var permissions: [String] = [], domains: [String] = [], tools: [String] = []
@@ -467,6 +470,7 @@ public final class StoreModel {
         for permission in ["capture", "history"] where entry.permissions.contains(permission) && !has.contains(permission) {
             permissions.append(permission)
         }
-        return ConsentText.sentences(permissions: permissions, domains: domains, tools: tools, language: language)
+        return ConsentText.sentences(permissions: permissions, domains: domains, tools: tools, sensitive: entry.sensitive && !permissions.isEmpty,
+                                     language: language)
     }
 }

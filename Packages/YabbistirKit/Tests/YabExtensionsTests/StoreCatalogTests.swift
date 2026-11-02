@@ -85,6 +85,16 @@ struct StoreCatalogTests {
         }
     }
 
+    /// Whether the extension has a sensitive source, for the consent sheet before the download; a catalog made before
+    /// sources existed says nothing, which is false.
+    @Test func theSensitiveFlagIsOptional() throws {
+        #expect(try entry().sensitive == false)
+        let sensitive = Self.entryJSON().replacingOccurrences(of: #""tools":[]"#, with: #""tools":[],"sensitive":true"#)
+        #expect(try StoreCatalog.decode(Self.catalogJSON(entries: [sensitive])).extensions.first?.sensitive == true)
+        let notSensitive = Self.entryJSON().replacingOccurrences(of: #""tools":[]"#, with: #""tools":[],"sensitive":false"#)
+        #expect(try StoreCatalog.decode(Self.catalogJSON(entries: [notSensitive])).extensions.first?.sensitive == false)
+    }
+
     @Test func anUnknownFormatVersionIsNotUsed() throws {
         let future = Self.catalogJSON(format: 2, entries: [])
         #expect(throws: StoreCatalogError.needsNewerApp) { try StoreCatalog.decode(future) }

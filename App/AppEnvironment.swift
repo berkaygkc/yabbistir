@@ -33,6 +33,11 @@ final class AppEnvironment {
     /// `hostCalls`, then done by `hostServices`. Both helpers' requests come here.
     let hostServices: AppHostServices
     let hostCalls: HostCallRouter
+    /// Extension sources' rows (a vault's entries), in the app's memory only: forgotten when the Mac locks or sleeps,
+    /// and a source's when its extension can no longer run.
+    let sources: SourceCenter
+    /// The screen locked, the Mac or its displays went to sleep, or another user took over: `sources` forgets every row.
+    private let sessionLock: SessionLockObserver
     /// Long actions (downloads): queued, shown on the card under the menu bar icon, delivered once.
     /// Set at launch once the panel and the Sıra exist (`AppJobEnvironment` asks them).
     var jobs: JobCenter!
@@ -93,6 +98,11 @@ final class AppEnvironment {
         hostCalls = HostCallRouter(services: hostServices, registry: extensionRegistry)
         hostCalls.onTranslationNeeded = { [weak hostServices] from, to in hostServices?.offerTranslation(from: from, to: to) }
         extensions.installHostCalls(hostCalls)
+        let sources = SourceCenter(service: extensions)
+        self.sources = sources
+        sessionLock = SessionLockObserver { [weak sources] in sources?.clearAll() }
+        // Whoever else follows registry changes (the panel) chains onto this one.
+        extensions.onExtensionsChanged = { [weak sources] in sources?.sourcesChanged() }
         ingestQueue = IngestQueue(store: library.store) { [weak self] item in
             guard let self else { return }
             library.didIngest(item)

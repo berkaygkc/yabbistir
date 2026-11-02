@@ -11,7 +11,10 @@ import YabLocalization
 @MainActor @Observable
 public final class ExtensionService: ExtensionCommandsProviding {
     public static let hintTimeout: Duration = .milliseconds(500)
+    /// A command the person started, or a source's row action.
     public static let runTimeout: Duration = .seconds(10)
+    /// A source's list, asked as the panel opens (the panel never waits for it).
+    public static let listTimeout: Duration = .seconds(10)
 
     public let registry: ExtensionRegistry
     @ObservationIgnored public let client: ExtensionHostClient
@@ -40,6 +43,7 @@ public final class ExtensionService: ExtensionCommandsProviding {
     /// Adopts the files a command returns into `Outputs`; without it a file result fails.
     @ObservationIgnored let resultFiles: ResultFiles?
     @ObservationIgnored private var catalogCache: (language: String, revision: Int, catalog: CommandCatalog)?
+    @ObservationIgnored private var sourceCache: (language: String, revision: Int, sources: SourceCatalog)?
     @ObservationIgnored private var revision = 0
     @ObservationIgnored private var outputs: [String: ExtensionResult] = [:]
     @ObservationIgnored private var failed: Set<String> = []
@@ -713,6 +717,78 @@ public final class ExtensionService: ExtensionCommandsProviding {
         }
         guard let text else { return nil }
         return String(text.prefix(200)).replacingOccurrences(of: "\n", with: " ")
+    }
+}
+
+// MARK: Sources
+//
+// A source's list (the panel opened) and its row actions (the person chose one) are the person's own calls: the
+// network and programs are allowed, as for a run they start. What they return goes back to the caller alone: never
+// into `outputs`, history, Outputs, a job or a log line (the client logs a bad result's shape, never a value).
+
+extension ExtensionService: SourceServing {
+    /// The usable extensions' sources, in the app's language, from manifests alone.
+    public var sources: [SourceDescriptor] {
+        if let cache = sourceCache, cache.language == language, cache.revision == revision { return cache.sources.descriptors }
+        let catalog = SourceCatalog(installed: registry.installed, language: language)
+        sourceCache = (language, revision, catalog)
+        return catalog.descriptors
+    }
+
+    public func list(source key: String) async throws(ExtensionError) -> SourceListing {
+        let (installed, descriptor) = try usable(key)
+        let output = try await invoke(descriptor, of: installed, .sourceList, source: nil, timeout: Self.listTimeout)
+        guard case .listing(let listing) = output else { throw ExtensionError(.badResult, "list returned no listing") }
+        return listing
+    }
+
+    public func run(source key: String, row: String, action actionID: String) async throws(ExtensionError) -> SourceValue {
+        let (installed, descriptor) = try usable(key)
+        guard let action = descriptor.actions.first(where: { $0.id == actionID }) else {
+            throw ExtensionError(.notFound, "\(descriptor.title) has no action \(actionID)")
+        }
+        let output = try await invoke(descriptor, of: installed, .sourceRun,
+                                      source: SourceInvocation(rowID: row, actionID: action.id, kind: action.kind), timeout: Self.runTimeout)
+        // The helper holds a value to its action's kind; so does the app, as a secret passed off as text would reach
+        // the clipboard unconcealed.
+        switch output {
+        case .value(let value) where value.isKind(action.kind): return value
+        default: throw ExtensionError(.badResult, "run returned no value of the action's kind")
+        }
+    }
+
+    /// The usable extension behind `key`, ready for a call the person started: its code loaded the last time it was
+    /// tried, and every tool it requires is here (one that is missing fails it in exec's words).
+    private func usable(_ key: String) throws(ExtensionError) -> (InstalledExtension, SourceDescriptor) {
+        guard let descriptor = sources.first(where: { $0.id == key }),
+              let installed = registry.installed.first(where: { $0.id == descriptor.extensionID && $0.isUsable }),
+              let manifest = installed.manifest else {
+            throw ExtensionError(.notFound, "\(key) is not available")
+        }
+        // Not loaded again on every panel open (each failure counts against it) until its files change.
+        guard !loadFailed.contains(installed.id) else { throw ExtensionError(.unavailable, "\(descriptor.extensionName) could not load") }
+        if let missing = toolLocator.missing(manifest.requires?.tools ?? []).first {
+            throw ExtensionError(.toolMissing, "\(missing.name) is not installed. Install it with: \(missing.install)")
+        }
+        return (installed, descriptor)
+    }
+
+    /// In the main host, with the network and programs, for no target: a source's rows are the same wherever they go.
+    private func invoke(_ descriptor: SourceDescriptor, of installed: InstalledExtension, _ kind: InvokeKind, source: SourceInvocation?,
+                        timeout: Duration) async throws(ExtensionError) -> InvokeOutput {
+        try await load(installed)
+        return try await client.invoke(installed.id, kind, name: descriptor.sourceID, item: nil,
+                                       context: context(installed, trigger: .source, target: nil), effects: true, source: source,
+                                       timeout: timeout)
+    }
+}
+
+private extension SourceValue {
+    func isKind(_ kind: SourceActionSpec.Kind) -> Bool {
+        switch (self, kind) {
+        case (.secret, .secret), (.text, .text): true
+        default: false
+        }
     }
 }
 

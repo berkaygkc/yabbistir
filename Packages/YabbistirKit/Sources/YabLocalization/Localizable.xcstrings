@@ -3571,6 +3571,23 @@
         }
       }
     },
+    "permissions.sensitive": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can read and paste secrets such as passwords. They’re never written to history or disk."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şifre gibi gizli kayıtları okuyup yapıştırabilir. Bunlar geçmişe ve diske yazılmaz."
+          }
+        }
+      }
+    },
     "permissions.unsigned": {
       "extractionState": "manual",
       "localizations": {
