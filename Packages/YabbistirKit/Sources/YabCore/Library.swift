@@ -137,9 +137,12 @@ public final class Library {
         changed()
     }
 
-    /// Rebuilds the index from the store after a bulk write that bypassed the library (an import).
+    /// Rebuilds the index from the store after a bulk write that bypassed the library (an import). The person's
+    /// choice about extension outputs carries over.
     public func reloadIndex() throws {
-        index = HistoryIndex(items: try store.history(limit: 200_000))
+        var fresh = HistoryIndex(items: try store.history(limit: 200_000))
+        fresh.hidesExtensionOutputs = index.hidesExtensionOutputs
+        index = fresh
         changed()
     }
 

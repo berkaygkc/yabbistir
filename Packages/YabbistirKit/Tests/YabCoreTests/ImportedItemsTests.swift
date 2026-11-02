@@ -75,8 +75,9 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .alreadyImported)
     }
 
-    @MainActor @Test func reloadIndexNotifiesOnce() throws {
+    @MainActor @Test func reloadIndexNotifiesOnceAndKeepsTheExtensionOutputSetting() throws {
         let library = try Library(store: ItemStore.temporary())
+        library.setHidesExtensionOutputs(true)
         var calls = 0
         library.onChange = { calls += 1 }
         _ = try library.store.importClip(importedClip("dizine girer", first: now, last: now), from: "other", usedAt: now)
@@ -84,5 +85,6 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
         try library.reloadIndex()
         #expect(calls == 1)
         #expect(library.index.search("dizine", limit: 10).total == 1)
+        #expect(library.index.hidesExtensionOutputs)
     }
 }
