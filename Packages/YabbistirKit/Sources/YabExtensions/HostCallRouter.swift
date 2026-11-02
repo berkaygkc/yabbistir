@@ -21,7 +21,7 @@ public struct HostCall: Equatable, Sendable {
 }
 
 /// Answers extensions' requests to the app. The host checked them already; this checks them again, so
-/// a host that lets one through still gets no further: `effects`, the notice's limits, the link's scheme.
+/// a host that lets one through still gets no further: `effects`, a source's call, the notice's limits, the link's scheme.
 @MainActor public final class HostCallRouter {
     /// A notice's longest message, in characters.
     public static let noticeLength = 200
@@ -215,6 +215,7 @@ public struct HostCall: Equatable, Sendable {
 
     private func notify(_ call: HostCall) throws(ExtensionError) {
         try requireEffects(call)
+        try refuseSources(call)
         guard let message = call.params["message"]?.stringValue else { throw ExtensionError(.badResult, "yab.notify takes a message") }
         let now = clock()
         if let last = lastNotice[call.extensionID], now - last < Self.noticeInterval { return }
@@ -224,6 +225,7 @@ public struct HostCall: Equatable, Sendable {
 
     private func open(_ call: HostCall) throws(ExtensionError) {
         try requireEffects(call)
+        try refuseSources(call)
         guard let text = call.params["url"]?.stringValue, let url = URL(string: text),
               ["http", "https"].contains(url.scheme?.lowercased() ?? ""), url.host?.isEmpty == false else {
             throw ExtensionError(.badResult, "only http and https links open")
@@ -239,6 +241,12 @@ public struct HostCall: Equatable, Sendable {
         guard call.effects, !Self.rulesAndDetectors.contains(call.kind) else {
             throw ExtensionError(.permissionDenied, "\(call.method) is not available in hints, detectors and previews")
         }
+    }
+
+    /// A source's list or run opens no link and puts up no notice: neither needs a permission, and a link's address
+    /// could carry a value to a website.
+    private func refuseSources(_ call: HostCall) throws(ExtensionError) {
+        guard !call.kind.isSource else { throw ExtensionError.sourceCannotReachOut }
     }
 
     private func name(of extensionID: String) -> String {

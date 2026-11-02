@@ -4,6 +4,7 @@ import YabExtensionKit
 
 /// `yab.notify` and `yab.open`: the app shows the notice and opens the link. Both
 /// reach beyond the call, so only a run the person started may use them; neither needs a permission.
+/// A source's list or run may not: a link or a notice could carry its value out.
 /// They return nothing: the request goes to the app and the script goes on.
 enum NotifyOpenAPI {
     static func install(in runtime: ExtensionRuntime) {
@@ -43,6 +44,7 @@ enum NotifyOpenAPI {
         do throws(ExtensionError) {
             guard let scope = runtime.currentScope else { throw ExtensionError(.permissionDenied, "\(name) works inside a call") }
             try HostAPI.require(effectsFor: name, in: scope)
+            guard !scope.kind.isSource else { throw ExtensionError.sourceCannotReachOut }
             guard let (method, params) = try request() else { return }
             _ = runtime.hostCall(method, params, in: scope)
         } catch {

@@ -218,9 +218,10 @@ export type SourceValue = { secret: string } | { text: string };
 /**
  * A list the app shows as a column, with one or two row actions declared in the manifest under
  * `contributes.sources`. Both functions get no item, and run as the person's own action, like an action's
- * `run`: `yab.exec` works (with the `exec` permission), as do `yab.http` (a `sensitive` source has no
- * network), `yab.notify`, `yab.open`, `yab.ai` and `yab.translate`; `yab.history` rejects with
- * "permissionDenied". `ctx.trigger` is "source".
+ * `run`: `yab.exec` works (with the `exec` permission), as do `yab.http` (with the `network` permission,
+ * which an extension with a `secret` action cannot ask for), `yab.ai` and `yab.translate`. `yab.history`
+ * rejects with "permissionDenied", and `yab.open` and `yab.notify` throw "permissionDenied": a link or a
+ * notice could carry a value out. `ctx.trigger` is "source".
  */
 export interface Source {
   /**
@@ -363,15 +364,16 @@ export interface Yab {
   exec(tool: string, args: string[], options?: ExecOptions): Promise<ExecResult>;
   /**
    * Shows a calm notice titled with the extension's name. Works only in a run the person started (throws
-   * "permissionDenied" in hints, detectors, previews and capture rules); needs no permission. The message is
-   * cut to 200 characters, and an extension gets at most one notice every 3 seconds: more are dropped
-   * without an error. Returns at once; the app shows it.
+   * "permissionDenied" in hints, detectors, previews, capture rules and a source's `list` and `run`); needs
+   * no permission. The message is cut to 200 characters, and an extension gets at most one notice every 3
+   * seconds: more are dropped without an error. Returns at once; the app shows it.
    */
   notify(message: string): void;
   /**
    * Opens a web link in the default browser. Only http and https links open; any other throws "badResult".
-   * Works only in a run the person started (throws "permissionDenied" in hints, detectors, previews and
-   * capture rules); needs no permission. Returns at once; the app opens it.
+   * Works only in a run the person started (throws "permissionDenied" in hints, detectors, previews, capture
+   * rules and a source's `list` and `run`, where a link's address could carry a value out); needs no
+   * permission. Returns at once; the app opens it.
    */
   open(url: string): void;
   readonly history: {

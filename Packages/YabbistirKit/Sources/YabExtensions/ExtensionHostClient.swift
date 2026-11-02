@@ -131,7 +131,7 @@ public final class ExtensionHostClient {
             // A job (no time limit) reports its failures with a message: only a broken extension counts. A source's
             // call never counts: it is asked on every panel open, and a tool stuck at a prompt must not turn off the
             // extension it belongs to.
-            if !Self.isSource(kind), timeout == nil ? Self.isBroken(error) : !Self.isNobodysFault(error) { recordFailure(id) }
+            if !kind.isSource, timeout == nil ? Self.isBroken(error) : !Self.isNobodysFault(error) { recordFailure(id) }
             throw error
         }
     }
@@ -143,11 +143,6 @@ public final class ExtensionHostClient {
     /// The host turns off an extension that crashes, not one that says why.
     private static func isNobodysFault(_ error: ExtensionError) -> Bool {
         [.interrupted, .cancelled, .toolMissing, .networkError, .permissionDenied, .unavailable].contains(error.code)
-    }
-
-    /// A source's list or one of its row actions.
-    private static func isSource(_ kind: InvokeKind) -> Bool {
-        kind == .sourceList || kind == .sourceRun
     }
 
     /// A job's failure that means the extension is broken: what it returned is not a result, or what
@@ -405,7 +400,7 @@ public final class ExtensionHostClient {
     /// with "restarted" (their extensions load again on next use). A source's call is aborted alone instead: it is
     /// asked on every panel open, and a tool that hangs there must not cut every other call short each time.
     private func timedOut(_ id: Int) {
-        if let invoke = invokes[id], Self.isSource(invoke.kind) {
+        if let invoke = invokes[id], invoke.kind.isSource {
             guard let continuation = take(id) else { return }
             abortInHost(id)
             continuation.resume(returning: HostMessage(id: id, error: ExtensionError(.timeout, "the extension did not answer in time")))

@@ -229,6 +229,24 @@ final class RecordingTransport: HostTransport, @unchecked Sendable {
         #expect(harness.handled == 0)
     }
 
+    /// A source's list or run cannot open a link or put up a notice, whatever the helper let through: a link needs no
+    /// permission, and its address could carry a value to a website. Actions keep both.
+    @Test func sourcesCannotNotifyOrOpen() async throws {
+        let harness = try await HostCallHarness(js: #"exports.actions = { a: { run: () => ({ text: "ok" }) } };"#)
+        let refusal = ExtensionError(.permissionDenied, "a source cannot open links or show notices")
+        for kind in [InvokeKind.sourceList, .sourceRun] {
+            for (method, params) in [("notify", ["message": JSONValue.string("x")]), ("open", ["url": .string("https://ornek.dev/?p=s3cr3t-örnek")])] {
+                await #expect(throws: refusal) { try await harness.ask(method, params, kind: kind) }
+            }
+        }
+        #expect(harness.services.notifications.isEmpty)
+        #expect(harness.services.opened.isEmpty)
+        try await harness.ask("notify", ["message": .string("x")])
+        try await harness.ask("open", ["url": .string("https://ornek.dev")])
+        #expect(harness.services.notifications.map(\.message) == ["x"])
+        #expect(harness.services.opened == [URL(string: "https://ornek.dev")!])
+    }
+
     @Test func aCallsRequestsEndWithIt() async throws {
         let harness = try await HostCallHarness(js: #"""
         exports.actions = {

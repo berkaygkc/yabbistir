@@ -195,6 +195,26 @@ import YabExtensionKit
         #expect(output == .listing(.rows([SourceRow(id: "1", title: "ornek.dev")])))
     }
 
+    /// Neither call may open a link or put up a notice: a link's address (or a notice) could carry a value out, and
+    /// `yab.open` needs no permission. The refusal names no value.
+    @Test func aSourceCannotNotifyOrOpen() async throws {
+        let attempts = #"""
+        const codes = [];
+        for (const ask of [() => yab.notify("s3cr3t-örnek"), () => yab.open("https://ornek.dev/?p=s3cr3t-örnek")]) {
+          try { ask(); codes.push("sent"); } catch (e) { codes.push(e.code + ": " + e.message); }
+        }
+        """#
+        let js = """
+        module.exports = { sources: { vault: {
+          list: () => { \(attempts) return { rows: [{ id: "1", title: codes.join("|") }] }; },
+          run: () => { \(attempts) return { secret: codes.join("|") }; },
+        } } };
+        """
+        let refused = "permissionDenied: a source cannot open links or show notices"
+        #expect(try await list(js) == .listing(.rows([SourceRow(id: "1", title: "\(refused)|\(refused)")])))
+        #expect(try await run(js) == .value(.secret("\(refused)|\(refused)")))
+    }
+
     @Test func aSourceValueNeverPrintsItself() {
         for value in [SourceValue.secret("s3cr3t"), .text("s3cr3t")] {
             var dumped = ""
