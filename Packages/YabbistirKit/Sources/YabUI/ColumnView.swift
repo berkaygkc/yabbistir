@@ -24,8 +24,7 @@ struct ColumnView: View {
         HStack(spacing: 8) {
             if column.sourceKey != nil {
                 // An extension fills the column: its mark, never a hue.
-                Image(systemName: "key")
-                    .font(.system(size: 10, weight: .regular))
+                SourceMark(size: 10)
                     .foregroundStyle(Tokens.Colors.textSecondary)
             } else if let color = column.color {
                 Circle()

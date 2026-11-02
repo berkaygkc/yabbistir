@@ -46,6 +46,20 @@ struct SourceRowView: View {
     }
 }
 
+/// The mark of a source's category where other categories show their hue: a key lying on its diagonal, bow at the
+/// lower left (SF Symbols' `key` stands upright, so it is turned). The turn draws only: the layout box stays the
+/// upright symbol's, so nothing beside it moves. Coloured by the caller.
+struct SourceMark: View {
+    /// The symbol's point size: 10 in a column header.
+    var size: CGFloat = 10
+
+    var body: some View {
+        Image(systemName: "key")
+            .font(.system(size: size, weight: .regular))
+            .rotationEffect(.degrees(-135))
+    }
+}
+
 /// A source row's stand-in for a site icon: the title's first letter on the panel's grey tile. Rows carry no URL and
 /// the extension may not reach the network, so there is no favicon; a column of coloured tiles would also be loud.
 struct InitialTile: View {

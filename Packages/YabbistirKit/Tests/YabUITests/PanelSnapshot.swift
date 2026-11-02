@@ -218,8 +218,8 @@ import YabLocalization
         }
     }
 
-    /// A source's column beside History (a synthetic vault): its rows, a search on a username, the locked row, and
-    /// a source still loading; dark Turkish and light English.
+    /// A source's column beside History (a synthetic vault): its rows, a search on a username, a long username, the
+    /// locked row, and a source still loading; dark Turkish and light English.
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSources() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
@@ -236,12 +236,14 @@ import YabLocalization
         let vault = try #require(try store.categories().first { $0.source == key })
         let rows = [("Bulut konsolu", "ops@ornek.dev"), ("Eskiz", "melike@ornek.dev"), ("Kodhane", "melike@ornek.dev"), ("Kodhane", "deniz.k"),
                     ("Grafikler", "ops@ornek.dev"), ("İş Portalı", "deniz.k"), ("ornek.dev", "melike@ornek.dev"), ("Veritabanı prod", "app_rw"),
-                    ("Nöbetçi", "melike.sahin.uzun-bir-ad@ornek.dev"), ("staging.ornek.dev", "ops@ornek.dev"), ("Yayınevi", nil)]
+                    ("Nöbetçi", "melike.sahin.uzun-bir-ad-soyad@ornek.dev"), ("staging.ornek.dev", "ops@ornek.dev"), ("Yayınevi", nil)]
             .enumerated().map { SourceRow(id: "\($0.offset)", title: $0.element.0, subtitle: $0.element.1) }
         for (name, appearance, language, state, query) in [
             ("dark", NSAppearance.Name.darkAqua, AppLanguage.turkish, SourceCenter.State.rows(rows), ""),
             ("light-en", .aqua, .english, .rows(rows), ""),
             ("dark-search", .darkAqua, .turkish, .rows(rows), "deniz"),
+            // A subtitle far past 170 pt, alone at the top: it ends in "…".
+            ("dark-long", .darkAqua, .turkish, .rows(rows), "sentry"),
             ("dark-locked", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: "kasa login --trust <e-posta>"), ""),
             ("light-locked-en", .aqua, .english, .locked(message: "Vault is locked", command: "kasa login --trust <email>"), ""),
             ("dark-locked-plain", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: nil), ""),
