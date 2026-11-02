@@ -6120,6 +6120,312 @@
           }
         }
       }
+    },
+    "settings.permissions.granted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allowed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verildi"
+          }
+        }
+      }
+    },
+    "settings.permissions.needed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerekli"
+          }
+        }
+      }
+    },
+    "settings.permissions.optional": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İsteğe bağlı"
+          }
+        }
+      }
+    },
+    "settings.permissions.accessibility.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessibility"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erişilebilirlik"
+          }
+        }
+      }
+    },
+    "settings.permissions.accessibility.purpose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastes into the app you were in and finds your text caret."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulunduğun uygulamaya yapıştırır ve yazı imlecini bulur."
+          }
+        }
+      }
+    },
+    "settings.permissions.accessibility.steps": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Privacy & Security › Accessibility, find yabbistir and turn it on."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik ve Güvenlik › Erişilebilirlik’te yabbistir’i bul ve anahtarını aç."
+          }
+        }
+      }
+    },
+    "settings.permissions.inputMonitoring.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input Monitoring"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girdi İzleme"
+          }
+        }
+      }
+    },
+    "settings.permissions.inputMonitoring.purpose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lets the Stack hear your ⌘V, so the next item comes up after each paste."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıra’nın ⌘V’ni duymasını sağlar; her yapıştırmadan sonra sıradaki öğe gelir."
+          }
+        }
+      }
+    },
+    "settings.permissions.inputMonitoring.steps": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Privacy & Security › Input Monitoring, find yabbistir and turn it on."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik ve Güvenlik › Girdi İzleme’de yabbistir’i bul ve anahtarını aç."
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clipboard access"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pano erişimi"
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.purpose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lets yabbistir see what you copy, so it can keep your history."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir’in kopyaladıklarını görmesini, böylece geçmişini tutmasını sağlar."
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.steps": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If macOS asks, choose Always Allow. You can change it later in Privacy & Security."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS sorarsa “Her zaman izin ver”i seç. Sonra Gizlilik ve Güvenlik’ten değiştirebilirsin."
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.notAsked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS hasn’t asked yet."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS henüz sormadı."
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.ask": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS asks each time."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS her seferinde soruyor."
+          }
+        }
+      }
+    },
+    "settings.permissions.pasteboard.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turned off: yabbistir can’t see your copies."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapalı: yabbistir kopyaladıklarını göremiyor."
+          }
+        }
+      }
+    },
+    "settings.permissions.loginItem.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at login"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girişte başlat"
+          }
+        }
+      }
+    },
+    "settings.permissions.loginItem.purpose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts yabbistir when you log in, so your history keeps up."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açınca yabbistir’i başlatır; geçmişin hiç kesilmez."
+          }
+        }
+      }
+    },
+    "settings.permissions.loginItem.steps": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn it on in General. If macOS asks, approve it in Login Items."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel’den aç. macOS onay isterse Giriş Öğeleri’nden onayla."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

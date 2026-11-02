@@ -58,13 +58,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 for id in deleted { stack?.session.itemDeleted(id) }
                 env?.cleanResultFiles()
             }
+            let loginItem = SystemLoginItem()
             let settings = SettingsWindowController(
                 models: SettingsModels(
                     preferences: env.preferences, language: env.language,
-                    general: GeneralSettingsModel(preferences: env.preferences, language: env.language, loginItem: SystemLoginItem()),
+                    general: GeneralSettingsModel(preferences: env.preferences, language: env.language, loginItem: loginItem),
                     history: historyModel,
                     categories: CategoryEditorModel(library: env.library, language: env.language, sources: env.sources),
-                    extensions: settingsModel, store: storeModel))
+                    extensions: settingsModel, store: storeModel,
+                    permissions: PermissionsModel(probe: SystemPermissionProbe(loginItem: loginItem),
+                                                  loginItem: loginItem, language: env.language)))
             self.settings = settings
             #if DEBUG
             let comparison = materialComparison

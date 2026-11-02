@@ -30,9 +30,11 @@ public struct SettingsModels {
     public let categories: CategoryEditorModel
     public let extensions: ExtensionsSettingsModel
     public let store: StoreModel
+    public let permissions: PermissionsModel
 
     public init(preferences: Preferences, language: LanguageStore, general: GeneralSettingsModel,
-                history: HistorySettingsModel, categories: CategoryEditorModel, extensions: ExtensionsSettingsModel, store: StoreModel) {
+                history: HistorySettingsModel, categories: CategoryEditorModel, extensions: ExtensionsSettingsModel, store: StoreModel,
+                permissions: PermissionsModel) {
         self.preferences = preferences
         self.language = language
         self.general = general
@@ -40,6 +42,7 @@ public struct SettingsModels {
         self.categories = categories
         self.extensions = extensions
         self.store = store
+        self.permissions = permissions
     }
 }
 
@@ -72,6 +75,8 @@ public struct SettingsView: View {
                 HistorySettingsView(model: models.history, language: models.language)
             case .categories:
                 CategoriesSettingsView(model: models.categories)
+            case .permissions:
+                PermissionsSettingsView(model: models.permissions)
             case let other:
                 SettingsPlaceholder(section: other, language: models.language)
             }

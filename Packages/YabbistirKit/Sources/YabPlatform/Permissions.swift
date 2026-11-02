@@ -30,4 +30,7 @@ public enum InputMonitoringPermission {
 public enum SystemSettingsLink {
     public static let accessibility = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
     public static let inputMonitoring = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent")!
+    public static let pasteboard = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Pasteboard")!
+    /// The Privacy & Security pane, when a deeper link does not open.
+    public static let privacy = URL(string: "x-apple.systempreferences:com.apple.preference.security")!
 }
