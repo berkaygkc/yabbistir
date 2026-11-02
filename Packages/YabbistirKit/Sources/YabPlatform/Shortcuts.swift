@@ -19,6 +19,11 @@ public enum GlobalShortcuts {
         KeyboardShortcuts.onKeyUp(for: .togglePanel, action: action)
     }
 
+    /// Puts the two user-facing shortcuts back to their defaults.
+    public static func resetToDefaults() {
+        for shortcut in GlobalShortcut.allCases { KeyboardShortcuts.reset(shortcut.name) }
+    }
+
     public static func onStackCopy(_ action: @escaping () -> Void) {
         KeyboardShortcuts.onKeyUp(for: .stackCopy, action: action)
     }

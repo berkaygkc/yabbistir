@@ -58,6 +58,8 @@ public struct SettingsView: View {
             switch section ?? .general {
             case .general:
                 GeneralSettingsView(model: models.general)
+            case .shortcuts:
+                ShortcutsSettingsView(language: models.language)
             case .extensions:
                 ExtensionsSettingsView(model: models.extensions, store: models.store)
             case let other:
