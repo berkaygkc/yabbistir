@@ -211,6 +211,46 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
         #expect(counter.quits == 1)
     }
 
+    /// A visit to Settings › Import while the library is ready keeps it as it is: no new scan, the choice stays.
+    @Test func aVisitWhileReadyKeepsTheChoice() async throws {
+        let model = try makeModel(location: try syntheticLocation())
+        let reads = Reads()
+        let read = model.summarize
+        model.summarize = { location in
+            reads.add()
+            return await read(location)
+        }
+        await model.paneAppeared()
+        guard case .ready(let summary, let location) = model.state else { Issue.record("not ready: \(model.state)"); return }
+        #expect(reads.count == 1)
+        model.selection = PasteSelection(history: false, boards: [7])
+        await model.paneAppeared()
+        #expect(reads.count == 1)
+        #expect(model.state == .ready(summary, location))
+        #expect(model.selection == PasteSelection(history: false, boards: [7]))
+    }
+
+    /// After a failure, a missing library or a finished import, the next visit reads the library again.
+    @Test func aVisitAfterAnEndReadsAgain() async throws {
+        let model = try makeModel(location: try syntheticLocation())
+        let reads = Reads()
+        let read = model.summarize
+        model.summarize = { location in
+            reads.add()
+            return await read(location)
+        }
+        for ended in [ImportModel.State.failed, .unavailable, .done(ImportReport())] {
+            model.state = ended
+            let before = reads.count
+            await model.paneAppeared()
+            #expect(reads.count == before + 1)
+            #expect(isReady(model.state))
+        }
+        model.state = .importing(ImportProgress(done: 1, total: 4, kinds: [:]))
+        await model.paneAppeared()
+        #expect(model.state == .importing(ImportProgress(done: 1, total: 4, kinds: [:])))
+    }
+
     @Test func theCardKeepsItsLinesWhileImporting() async throws {
         let model = try makeModel(location: try syntheticLocation())
         await model.scan()
@@ -234,6 +274,14 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
 
 private func isReady(_ state: ImportModel.State) -> Bool {
     if case .ready = state { true } else { false }
+}
+
+/// Counts library reads.
+private final class Reads: @unchecked Sendable {
+    private let lock = NSLock()
+    private var value = 0
+    func add() { lock.withLock { value += 1 } }
+    var count: Int { lock.withLock { value } }
 }
 
 /// Holds each caller of `pass()` until its gate (by order of arrival) is opened.

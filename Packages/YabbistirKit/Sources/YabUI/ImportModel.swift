@@ -30,6 +30,8 @@ public final class ImportModel {
     @ObservationIgnored private let quitOther: () -> Void
     @ObservationIgnored let language: LanguageStore
     @ObservationIgnored private var task: Task<Void, Never>?
+    /// A scan has begun: `.scanning` from then on means one is under way, not that none has run.
+    @ObservationIgnored private var hasScanned = false
     /// Waits for the other app to quit, then reads its library again.
     @ObservationIgnored private(set) var quitWatch: Task<Void, Never>?
     /// The library being imported, so the card keeps its lines meanwhile.
@@ -63,6 +65,7 @@ public final class ImportModel {
     /// while an import runs.
     public func scan() async {
         if case .importing = state { return }
+        hasScanned = true
         state = .scanning
         refreshOtherApp()
         guard let location = locate() else {
@@ -78,6 +81,17 @@ public final class ImportModel {
         }
         selection = PasteSelection(history: true, boards: Set(summary.boards.map(\.id)))
         state = .ready(summary, location)
+    }
+
+    /// Settings › Import came on screen. The first visit reads the library. Later visits read it again only after a
+    /// failure, a missing library or a finished import. A ready library keeps the person's choice, and a scan or an
+    /// import under way is left alone.
+    public func paneAppeared() async {
+        switch state {
+        case .failed, .unavailable, .done: await scan()
+        case .scanning where !hasScanned: await scan()
+        case .scanning, .ready, .importing: return
+        }
     }
 
     // MARK: Importing

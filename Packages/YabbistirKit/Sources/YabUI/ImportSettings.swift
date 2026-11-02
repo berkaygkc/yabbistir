@@ -37,9 +37,7 @@ public struct ImportSettingsView: View {
         .task(id: presence.isVisible) {
             guard presence.isVisible else { return }
             model.refreshOtherApp()
-            // Read afresh on every visit, so a failure, a missing library or a finished import never sticks (a running
-            // import is left alone).
-            await model.scan()
+            await model.paneAppeared()
             // Polls only while the window is on screen, so the running notice goes away once the app quits.
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(1))
