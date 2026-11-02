@@ -13,5 +13,10 @@ public final class SettingsPresence {
 
     public func closed() { isVisible = false }
 
+    /// A window in the Dock is not on screen: pages stop polling until it comes back.
+    public func miniaturized() { isVisible = false }
+
+    public func deminiaturized() { isVisible = true }
+
     public func cameForward() { forwardCount += 1 }
 }

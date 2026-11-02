@@ -17,4 +17,13 @@ import Testing
         presence.cameForward()
         #expect(presence.forwardCount == 2)
     }
+
+    @Test func aMiniaturizedWindowIsNotVisible() {
+        let presence = SettingsPresence()
+        presence.shown()
+        presence.miniaturized()
+        #expect(!presence.isVisible)
+        presence.deminiaturized()
+        #expect(presence.isVisible)
+    }
 }

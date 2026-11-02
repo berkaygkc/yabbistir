@@ -58,6 +58,12 @@ final class SettingsWindowController {
             center.addObserver(forName: NSWindow.didBecomeKeyNotification, object: window, queue: .main) { _ in
                 MainActor.assumeIsolated { presence.cameForward() }
             },
+            center.addObserver(forName: NSWindow.didMiniaturizeNotification, object: window, queue: .main) { _ in
+                MainActor.assumeIsolated { presence.miniaturized() }
+            },
+            center.addObserver(forName: NSWindow.didDeminiaturizeNotification, object: window, queue: .main) { _ in
+                MainActor.assumeIsolated { presence.deminiaturized() }
+            },
         ]
     }
 
