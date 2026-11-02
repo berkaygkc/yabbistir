@@ -26,16 +26,13 @@ public struct CategoriesSettingsView: View {
     public var body: some View {
         Form {
             Section {
-                List {
-                    ForEach(model.rows) { row in
-                        CategorySettingsRow(model: model, row: row) { deleting = row }
-                    }
-                    .onMove { source, destination in
-                        guard let from = source.first else { return }
-                        model.move(from: from, to: destination > from ? destination - 1 : destination)
-                    }
+                ForEach(model.rows) { row in
+                    CategorySettingsRow(model: model, row: row) { deleting = row }
                 }
-                .frame(minHeight: CGFloat(max(model.rows.count, 3)) * 36)
+                .onMove { source, destination in
+                    guard let from = source.first else { return }
+                    model.move(from: from, to: destination > from ? destination - 1 : destination)
+                }
                 Button { model.addCategory() } label: {
                     Label(L10n.string("settings.categories.add", lang), systemImage: "plus")
                 }
