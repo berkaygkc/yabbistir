@@ -31,10 +31,11 @@ public struct SettingsModels {
     public let extensions: ExtensionsSettingsModel
     public let store: StoreModel
     public let permissions: PermissionsModel
+    public let about: AboutModel
 
     public init(preferences: Preferences, language: LanguageStore, general: GeneralSettingsModel,
                 history: HistorySettingsModel, categories: CategoryEditorModel, extensions: ExtensionsSettingsModel, store: StoreModel,
-                permissions: PermissionsModel) {
+                permissions: PermissionsModel, about: AboutModel) {
         self.preferences = preferences
         self.language = language
         self.general = general
@@ -43,6 +44,7 @@ public struct SettingsModels {
         self.extensions = extensions
         self.store = store
         self.permissions = permissions
+        self.about = about
     }
 }
 
@@ -77,22 +79,10 @@ public struct SettingsView: View {
                 CategoriesSettingsView(model: models.categories)
             case .permissions:
                 PermissionsSettingsView(model: models.permissions)
-            case let other:
-                SettingsPlaceholder(section: other, language: models.language)
+            case .about:
+                AboutSettingsView(model: models.about)
             }
         }
         .environment(\.locale, models.language.language.locale)
-    }
-}
-
-/// A section that is not built yet: its title, centered.
-struct SettingsPlaceholder: View {
-    let section: SettingsSection
-    let language: LanguageStore
-
-    var body: some View {
-        Text(L10n.string(section.titleKey, language.language))
-            .foregroundStyle(.secondary)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -67,7 +67,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     categories: CategoryEditorModel(library: env.library, language: env.language, sources: env.sources),
                     extensions: settingsModel, store: storeModel,
                     permissions: PermissionsModel(probe: SystemPermissionProbe(loginItem: loginItem),
-                                                  loginItem: loginItem, language: env.language)))
+                                                  loginItem: loginItem, language: env.language),
+                    about: AboutModel(
+                        version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
+                        build: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "",
+                        language: env.language,
+                        checkForUpdates: { [weak env] in Task { await env?.checkForUpdates() } },
+                        readNotice: { name in
+                            let url = (name as NSString).deletingPathExtension
+                            let ext = (name as NSString).pathExtension
+                            return Bundle.main.url(forResource: url, withExtension: ext.isEmpty ? nil : ext)
+                                .flatMap { try? String(contentsOf: $0, encoding: .utf8) }
+                        })))
             self.settings = settings
             #if DEBUG
             let comparison = materialComparison
