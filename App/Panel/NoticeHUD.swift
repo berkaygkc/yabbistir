@@ -10,6 +10,13 @@ import YabUI
 @MainActor
 final class NoticeHUD {
     private let window: NSPanel
+    /// Every notice window, for the screen sharing preference (a notice window is not in `NSApp.windows` until it is first shown).
+    private static let windows = NSHashTable<NSPanel>.weakObjects()
+
+    /// Hides or shows every notice for screen sharing.
+    static func setSharingType(_ type: NSWindow.SharingType) {
+        for window in windows.allObjects { window.sharingType = type }
+    }
     private var hideTask: Task<Void, Never>?
 
     init(sharingType: NSWindow.SharingType) {
@@ -21,6 +28,7 @@ final class NoticeHUD {
         window.hasShadow = true
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
         window.sharingType = sharingType
+        Self.windows.add(window)
     }
 
     func show(near frame: CGRect, language: AppLanguage, kind: NoticeKind) {

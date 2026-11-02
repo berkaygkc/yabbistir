@@ -38,6 +38,21 @@ func clipItem(_ id: Int64, _ text: String, kind: ItemKind = .text, device: Devic
         #expect(HistoryIndex(items: sample).search("iph", limit: 10).ids == [4])
     }
 
+    @Test func extensionOutputsCanBeHidden() {
+        var output = clipItem(5, "Çeviri sonucu", minutesAgo: 0)
+        output.sourceBundleID = "dev.yabbistir.app"
+        var index = HistoryIndex(items: sample + [output])
+        #expect(index.search("", limit: 10).ids.contains(5))
+        index.hidesExtensionOutputs = true
+        let hidden = index.search("", limit: 10)
+        #expect(!hidden.ids.contains(5))
+        #expect(hidden.total == 4)
+        #expect(index.filter([5, 1], query: "") == [5, 1])
+        #expect(index.filter([5, 1], query: "çeviri") == [5])
+        index.hidesExtensionOutputs = false
+        #expect(index.search("", limit: 10).ids.contains(5))
+    }
+
     @Test func upsertMovesToFront() {
         var index = HistoryIndex(items: sample)
         var bumped = sample[3]

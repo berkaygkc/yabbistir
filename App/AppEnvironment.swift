@@ -182,7 +182,7 @@ final class AppEnvironment {
     /// Expired history goes, then extension results over the Outputs limit (a result also trims as it joins history,
     /// `ExtensionService.ingestResult`), then the result folders nothing points at any more.
     func purge() {
-        try? library.purgeExpired(policy: .default, now: Date())
+        try? library.purgeExpired(policy: preferences.retention, now: Date())
         Task {
             await extensions.trimOutputs()
             // Result files go with their history items (never all of them on a failed read).

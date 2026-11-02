@@ -63,6 +63,19 @@ private let day: TimeInterval = 86_400
         #expect(try blobFileCount(store) == 0)
     }
 
+    @Test func countMatchesWhatPurgeDeletes() throws {
+        let store = try ItemStore.temporary()
+        _ = try store.ingest(textClip("yeni", at: now.addingTimeInterval(-10 * day)))
+        let old = try #require(try store.ingest(textClip("eski", at: now.addingTimeInterval(-40 * day))))
+        let kept = try #require(try store.ingest(textClip("kategoride", at: now.addingTimeInterval(-40 * day))))
+        let category = try store.createCategory(name: "SQL", color: .slate)
+        try store.add(itemID: kept.item.id!, toCategory: category.id!)
+        #expect(try store.countExpired(policy: .oneMonth, now: now) == 1)
+        #expect(try store.countExpired(policy: .unlimited, now: now) == 0)
+        #expect(try store.purgeExpired(policy: .oneMonth, now: now) == [old.item.id!])
+        #expect(try store.countExpired(policy: .oneMonth, now: now) == 0)
+    }
+
     @Test func defaultPolicyIsOneYear() {
         #expect(RetentionPolicy.default == .oneYear)
     }

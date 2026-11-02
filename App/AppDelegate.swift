@@ -56,6 +56,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 models: SettingsModels(
                     preferences: env.preferences, language: env.language,
                     general: GeneralSettingsModel(preferences: env.preferences, language: env.language, loginItem: SystemLoginItem()),
+                    history: HistorySettingsModel(preferences: env.preferences, library: env.library),
                     extensions: settingsModel, store: storeModel))
             self.settings = settings
             #if DEBUG

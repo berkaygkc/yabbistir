@@ -29,16 +29,26 @@ extension ItemStore {
         }
     }
 
+    /// The items a purge removes: unused since the cutoff and in no category. Shared by the purge and its count.
+    private static let expiredCondition = """
+        lastUsedAt < ?
+          AND NOT EXISTS (SELECT 1 FROM categoryMembership m WHERE m.itemID = item.id)
+        """
+
+    /// How many items `purgeExpired` would delete right now, for the same policy and time.
+    public func countExpired(policy: RetentionPolicy, now: Date) throws -> Int {
+        guard let cutoff = policy.cutoff(now: now) else { return 0 }
+        return try dbPool.read { db in
+            try Int.fetchOne(db, sql: "SELECT COUNT(*) FROM item WHERE \(Self.expiredCondition)", arguments: [cutoff]) ?? 0
+        }
+    }
+
     /// Deletes items unused since the policy's cutoff that belong to no category.
     public func purgeExpired(policy: RetentionPolicy, now: Date) throws -> [Int64] {
         guard let cutoff = policy.cutoff(now: now) else { return [] }
         // One transaction: an item renewed by a concurrent copy is never deleted after being selected.
         return try dbPool.write { db in
-            let expired = try Int64.fetchAll(db, sql: """
-                SELECT id FROM item
-                WHERE lastUsedAt < ?
-                  AND NOT EXISTS (SELECT 1 FROM categoryMembership m WHERE m.itemID = item.id)
-                """, arguments: [cutoff])
+            let expired = try Int64.fetchAll(db, sql: "SELECT id FROM item WHERE \(Self.expiredCondition)", arguments: [cutoff])
             try deleteItems(expired, db)
             return expired
         }

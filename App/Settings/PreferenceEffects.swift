@@ -25,6 +25,8 @@ final class PreferenceEffects {
         followAppearance()
         followMenuBarIcon()
         followScreenSharing()
+        followCapture()
+        followExtensionOutputs()
     }
 
     private func followAppearance() {
@@ -49,7 +51,8 @@ final class PreferenceEffects {
         statusItem.isVisible = shown
     }
 
-    /// Every window but Settings, which stays visible when the screen is shared.
+    /// yabbistir's own surfaces: the panel, the floating surfaces and the notices. The Settings window and the status item
+    /// stay as macOS shows them.
     private func followScreenSharing() {
         let hidden = withObservationTracking {
             preferences.hidesFromScreenSharing
@@ -57,8 +60,34 @@ final class PreferenceEffects {
             Task { @MainActor in self?.followScreenSharing() }
         }
         let type = Self.sharingType(hidden: hidden)
-        for window in NSApp.windows where window.identifier != NSUserInterfaceItemIdentifier("settings") {
+        for window in NSApp.windows where Self.isOwnSurface(window) {
             window.sharingType = type
         }
+        NoticeHUD.setSharingType(type)
+    }
+
+    private static func isOwnSurface(_ window: NSWindow) -> Bool {
+        window is PanelWindow || window is FloatingSurface
+    }
+
+    /// What is captured: the ignored apps and iPhone copies, which apply from the next copy.
+    private func followCapture() {
+        let (apps, remote) = withObservationTracking {
+            (preferences.ignoredApps, preferences.keepsRemoteCopies)
+        } onChange: { [weak self] in
+            Task { @MainActor in self?.followCapture() }
+        }
+        env.monitor.filter.ignoredBundleIDs = Set(apps)
+        env.monitor.filter.captureRemote = remote
+    }
+
+    /// Whether History lists the extensions' results; open views redraw.
+    private func followExtensionOutputs() {
+        let shown = withObservationTracking {
+            preferences.showsExtensionOutputs
+        } onChange: { [weak self] in
+            Task { @MainActor in self?.followExtensionOutputs() }
+        }
+        env.library.setHidesExtensionOutputs(!shown)
     }
 }

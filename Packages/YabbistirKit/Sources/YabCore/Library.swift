@@ -91,6 +91,19 @@ public final class Library {
         changed()
     }
 
+    /// How many items `purgeExpired` would remove now.
+    public func countExpired(policy: RetentionPolicy, now: Date) throws -> Int {
+        try store.countExpired(policy: policy, now: now)
+    }
+
+    /// Whether History leaves out the app's own extension results (categories always keep them);
+    /// open views refresh.
+    public func setHidesExtensionOutputs(_ hidden: Bool) {
+        guard index.hidesExtensionOutputs != hidden else { return }
+        index.hidesExtensionOutputs = hidden
+        changed()
+    }
+
     /// A category's items, most recently added first (cached).
     public func itemIDs(inCategory categoryID: Int64) -> [Int64] {
         if let cached = memberships[categoryID] { return cached }

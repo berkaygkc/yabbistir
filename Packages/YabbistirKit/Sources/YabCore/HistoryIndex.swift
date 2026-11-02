@@ -16,7 +16,12 @@ public struct HistoryIndex: Sendable {
         public var isRemote: Bool
         public var lastCopiedAt: Date
         public var inHistory: Bool
+        /// Made by an extension, which the app itself writes to history.
+        public var isExtensionOutput = false
     }
+
+    /// The bundle identifier extension results are attributed to.
+    static let ownBundleID = "dev.yabbistir.app"
 
     /// Type names users can type to filter by kind (normalized, prefix-matched, ≥2 chars).
     static let typeWords: [ItemKind: [String]] = [
@@ -25,6 +30,10 @@ public struct HistoryIndex: Sendable {
         .code: ["code", "kod"], .text: ["text", "metin"],
     ]
     static let remoteWords = ["iphone"]
+
+    /// Leaves extension results out of `search` (the History column and its search). Category columns read
+    /// their rows from their own membership and `filter`, so they keep every result.
+    public var hidesExtensionOutputs = false
 
     private var entries: [Entry] = []
     private var bytes: [[UInt8]] = []
@@ -68,7 +77,7 @@ public struct HistoryIndex: Sendable {
     public func search(_ query: String, limit: Int) -> SearchResult {
         let matcher = Matcher(query)
         var result = SearchResult(ids: [], total: 0)
-        for (position, entry) in entries.enumerated() where entry.inHistory && matcher.matches(entry, bytes[position]) {
+        for (position, entry) in entries.enumerated() where entry.inHistory && !(hidesExtensionOutputs && entry.isExtensionOutput) && matcher.matches(entry, bytes[position]) {
             result.total += 1
             if result.ids.count < limit { result.ids.append(entry.id) }
         }
@@ -114,6 +123,7 @@ public struct HistoryIndex: Sendable {
     private static func entry(for item: ClipItem) -> Entry? {
         guard let id = item.id else { return nil }
         return Entry(id: id, kind: item.kind, searchText: item.searchText,
-                     isRemote: item.device == .remote, lastCopiedAt: item.lastCopiedAt, inHistory: item.inHistory)
+                     isRemote: item.device == .remote, lastCopiedAt: item.lastCopiedAt, inHistory: item.inHistory,
+                     isExtensionOutput: item.sourceBundleID == ownBundleID)
     }
 }
