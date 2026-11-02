@@ -19,6 +19,11 @@ public struct ClipCategory: Codable, Sendable, Identifiable, Equatable, Hashable
     public var color: CategoryColor
     public var visibility: CategoryVisibility
     public var position: Int
+    /// "<extension id>/<source id>" for a category an extension's source opens; nil for the person's own.
+    public var source: String? = nil
+
+    /// Kept in step with the extensions: it cannot be renamed, deleted or filled, only shown, hidden and moved.
+    public var isSource: Bool { source != nil }
 
     public mutating func didInsert(_ inserted: InsertionSuccess) {
         id = inserted.rowID
@@ -27,6 +32,19 @@ public struct ClipCategory: Codable, Sendable, Identifiable, Equatable, Hashable
 
 public enum CategoryError: Error, Equatable {
     case emptyName, duplicateName
+    /// A source's category belongs to its extension.
+    case managedByExtension
+}
+
+/// A source category the extensions ask for.
+public struct SourceCategorySeed: Equatable, Sendable {
+    public var key: String
+    public var name: String
+
+    public init(key: String, name: String) {
+        self.key = key
+        self.name = name
+    }
 }
 
 /// Categories are ordered columns; an item in a category is kept for good, even after it
@@ -46,6 +64,37 @@ extension ItemStore {
         }
     }
 
+    /// Brings the source categories in step with `wanted`: missing ones are added at the end, renamed sources are
+    /// renamed, and the ones no longer wanted are removed. The person's own categories are left alone.
+    /// Returns true when anything changed.
+    public func syncSourceCategories(_ wanted: [SourceCategorySeed]) throws -> Bool {
+        try dbPool.write { db in
+            var changed = false
+            let existing = try ClipCategory.filter(Column("source") != nil).fetchAll(db)
+            let keys = Set(wanted.map(\.key))
+            for var category in existing where !keys.contains(category.source!) {
+                _ = try category.delete(db)
+                changed = true
+            }
+            var seen: Set<String> = []
+            for seed in wanted where seen.insert(seed.key).inserted {
+                if var category = existing.first(where: { $0.source == seed.key }) {
+                    guard category.name != seed.name else { continue }
+                    category.name = seed.name
+                    try category.update(db)
+                } else {
+                    let used = Set(try ClipCategory.fetchAll(db).map(\.color))
+                    let position = try Int.fetchOne(db, sql: "SELECT COALESCE(MAX(position), -1) + 1 FROM category") ?? 0
+                    var category = ClipCategory(id: nil, name: seed.name, color: CategoryColor.allCases.first { !used.contains($0) } ?? .teal,
+                                                visibility: .onSelect, position: position, source: seed.key)
+                    try category.insert(db)
+                }
+                changed = true
+            }
+            return changed
+        }
+    }
+
     /// The first palette color no category uses yet.
     public func nextCategoryColor() throws -> CategoryColor {
         let used = Set(try categories().map(\.color))
@@ -56,6 +105,16 @@ extension ItemStore {
     public func updateCategory(_ category: ClipCategory) throws {
         try dbPool.write { db in
             var category = category
+            if let stored = try ClipCategory.fetchOne(db, key: category.id), stored.isSource {
+                // Visibility and color may change; the name and the source key stay the extension's.
+                guard SearchNormalizer.normalize(category.name.trimmingCharacters(in: .whitespacesAndNewlines)) == SearchNormalizer.normalize(stored.name)
+                else { throw CategoryError.managedByExtension }
+                category.name = stored.name
+                category.source = stored.source
+                try category.update(db)
+                return
+            }
+            category.source = nil
             category.name = try Self.validatedName(category.name, excluding: category.id, db)
             try category.update(db)
         }
@@ -77,6 +136,7 @@ extension ItemStore {
     /// Deletes a category; its items stay unless they were kept only by it. Returns the deleted item ids.
     public func deleteCategory(id: Int64) throws -> [Int64] {
         try dbPool.write { db in
+            if try ClipCategory.fetchOne(db, key: id)?.isSource == true { throw CategoryError.managedByExtension }
             let members = try Int64.fetchAll(db, sql: "SELECT itemID FROM categoryMembership WHERE categoryID = ?", arguments: [id])
             _ = try ClipCategory.deleteOne(db, key: id)
             let orphans = try Self.orphans(among: members, db)
@@ -87,6 +147,7 @@ extension ItemStore {
 
     public func add(itemID: Int64, toCategory categoryID: Int64) throws {
         try dbPool.write { db in
+            if try ClipCategory.fetchOne(db, key: categoryID)?.isSource == true { throw CategoryError.managedByExtension }
             let position = try Int.fetchOne(db, sql: "SELECT COALESCE(MAX(position), -1) + 1 FROM categoryMembership WHERE categoryID = ?",
                                             arguments: [categoryID]) ?? 0
             try db.execute(sql: "INSERT OR IGNORE INTO categoryMembership (categoryID, itemID, position) VALUES (?, ?, ?)",
@@ -149,7 +210,7 @@ extension ItemStore {
         let name = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !name.isEmpty else { throw CategoryError.emptyName }
         let folded = SearchNormalizer.normalize(name)
-        if try ClipCategory.fetchAll(db).contains(where: { $0.id != id && SearchNormalizer.normalize($0.name) == folded }) {
+        if try ClipCategory.fetchAll(db).contains(where: { $0.id != id && !$0.isSource && SearchNormalizer.normalize($0.name) == folded }) {
             throw CategoryError.duplicateName
         }
         return name

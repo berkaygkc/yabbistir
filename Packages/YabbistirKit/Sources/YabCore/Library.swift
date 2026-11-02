@@ -74,6 +74,11 @@ public final class Library {
         changed()
     }
 
+    /// Keeps the source categories in step with the extensions' sources.
+    public func syncSourceCategories(_ wanted: [SourceCategorySeed]) throws {
+        if try store.syncSourceCategories(wanted) { changed() }
+    }
+
     public func deleteCategory(id: Int64) throws {
         for deleted in try store.deleteCategory(id: id) { index.remove(id: deleted) }
         changed()

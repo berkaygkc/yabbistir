@@ -102,7 +102,15 @@ final class AppEnvironment {
         self.sources = sources
         sessionLock = SessionLockObserver { [weak sources] in sources?.clearAll() }
         // Whoever else follows registry changes (the panel) chains onto this one.
-        extensions.onExtensionsChanged = { [weak sources] in sources?.sourcesChanged() }
+        // Their categories follow the usable sources. The registry scanned in its init, so the list is complete
+        // already; the same sync runs again after every change below.
+        let library = library
+        let extensions = extensions
+        SourceCategories.sync(library: library, sources: extensions.sources)
+        extensions.onExtensionsChanged = { [weak sources, weak extensions] in
+            sources?.sourcesChanged()
+            if let extensions { SourceCategories.sync(library: library, sources: extensions.sources) }
+        }
         ingestQueue = IngestQueue(store: library.store) { [weak self] item in
             guard let self else { return }
             library.didIngest(item)

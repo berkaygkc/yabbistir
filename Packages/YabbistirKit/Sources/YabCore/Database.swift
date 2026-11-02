@@ -94,6 +94,12 @@ enum Schema {
                 t.primaryKey(["itemID", "extensionID", "tag"])
             }
         }
+        // A source an extension provides opens its own category; the key is "<extension id>/<source id>".
+        // The person's categories keep a NULL.
+        migrator.registerMigration("v5-category-source") { db in
+            try db.alter(table: "category") { t in t.add(column: "source", .text) }
+            try db.create(index: "categorySource", on: "category", columns: ["source"], unique: true, condition: Column("source") != nil)
+        }
         return migrator
     }
 
