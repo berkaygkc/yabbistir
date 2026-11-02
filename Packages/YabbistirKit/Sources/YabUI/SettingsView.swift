@@ -32,10 +32,11 @@ public struct SettingsModels {
     public let store: StoreModel
     public let permissions: PermissionsModel
     public let about: AboutModel
+    public let presence: SettingsPresence
 
     public init(preferences: Preferences, language: LanguageStore, general: GeneralSettingsModel,
                 history: HistorySettingsModel, categories: CategoryEditorModel, extensions: ExtensionsSettingsModel, store: StoreModel,
-                permissions: PermissionsModel, about: AboutModel) {
+                permissions: PermissionsModel, about: AboutModel, presence: SettingsPresence) {
         self.preferences = preferences
         self.language = language
         self.general = general
@@ -45,6 +46,7 @@ public struct SettingsModels {
         self.store = store
         self.permissions = permissions
         self.about = about
+        self.presence = presence
     }
 }
 
@@ -66,7 +68,7 @@ public struct SettingsView: View {
         } detail: {
             switch section ?? .general {
             case .general:
-                GeneralSettingsView(model: models.general)
+                GeneralSettingsView(model: models.general, presence: models.presence)
             case .shortcuts:
                 ShortcutsSettingsView(language: models.language)
             case .extensions:
@@ -74,11 +76,11 @@ public struct SettingsView: View {
             case .panel:
                 PanelSettingsView(preferences: models.preferences, language: models.language)
             case .history:
-                HistorySettingsView(model: models.history, language: models.language)
+                HistorySettingsView(model: models.history, language: models.language, presence: models.presence)
             case .categories:
-                CategoriesSettingsView(model: models.categories)
+                CategoriesSettingsView(model: models.categories, presence: models.presence)
             case .permissions:
-                PermissionsSettingsView(model: models.permissions)
+                PermissionsSettingsView(model: models.permissions, presence: models.presence)
             case .about:
                 AboutSettingsView(model: models.about)
             }

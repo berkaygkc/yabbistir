@@ -58,6 +58,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 for id in deleted { stack?.session.itemDeleted(id) }
                 env?.cleanResultFiles()
             }
+            historyModel.onRetentionApplied = { [weak env] in env?.cleanResultFiles() }
             let loginItem = SystemLoginItem()
             let settings = SettingsWindowController(
                 models: SettingsModels(
@@ -73,12 +74,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                         build: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "",
                         language: env.language,
                         checkForUpdates: { [weak env] in Task { await env?.checkForUpdates() } },
-                        readNotice: { name in
-                            let url = (name as NSString).deletingPathExtension
-                            let ext = (name as NSString).pathExtension
-                            return Bundle.main.url(forResource: url, withExtension: ext.isEmpty ? nil : ext)
-                                .flatMap { try? String(contentsOf: $0, encoding: .utf8) }
-                        })))
+                        readNotice: Self.bundledText),
+                    presence: SettingsPresence()))
             self.settings = settings
             #if DEBUG
             let comparison = materialComparison
@@ -114,6 +111,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     /// Opening yabbistir again (Spotlight, Finder) opens Settings: the way in while the menu bar icon is hidden.
+    /// A text file shipped in the app bundle ("Name.ext"), or nil when it is missing or unreadable.
+    nonisolated private static func bundledText(named fileName: String) -> String? {
+        let baseName = (fileName as NSString).deletingPathExtension
+        let fileExtension = (fileName as NSString).pathExtension
+        return Bundle.main.url(forResource: baseName, withExtension: fileExtension.isEmpty ? nil : fileExtension)
+            .flatMap { try? String(contentsOf: $0, encoding: .utf8) }
+    }
+
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         settings?.show()
         return true

@@ -108,9 +108,11 @@ public final class PermissionsModel {
 
 public struct PermissionsSettingsView: View {
     let model: PermissionsModel
+    let presence: SettingsPresence
 
-    public init(model: PermissionsModel) {
+    public init(model: PermissionsModel, presence: SettingsPresence) {
         self.model = model
+        self.presence = presence
     }
 
     public var body: some View {
@@ -131,10 +133,11 @@ public struct PermissionsSettingsView: View {
         .formStyle(.grouped)
         .navigationTitle(string("settings.section.permissions"))
         .onAppear { model.refresh() }
-        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+        .onChange(of: presence.forwardCount) { model.refresh() }
+        // Polls only while the window is on screen: closing it ends the loop.
+        .task(id: presence.isVisible) {
+            guard presence.isVisible else { return }
             model.refresh()
-        }
-        .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(1))
                 model.refresh()

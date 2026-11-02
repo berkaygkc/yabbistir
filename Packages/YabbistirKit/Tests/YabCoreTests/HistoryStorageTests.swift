@@ -16,4 +16,21 @@ import Testing
         #expect(size >= 3000)
         #expect(size < 8000)
     }
+
+    @Test func compactingAfterClearingGivesTheSpaceBack() throws {
+        let dir = FileManager.default.temporaryDirectory.appendingPathComponent("yab-compact-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let store = try ItemStore(directory: dir)
+        for index in 0..<150 {
+            let text = "\(index) " + String(repeating: "ornek \(index) ", count: 4_000)
+            _ = try store.ingest(textClip(text, at: t0))
+        }
+        let full = HistoryStorage.size(of: dir)
+        _ = try store.clearHistory()
+        let cleared = HistoryStorage.size(of: dir)
+        try store.compact()
+        let compacted = HistoryStorage.size(of: dir)
+        #expect(full > 1_000_000)
+        #expect(compacted < cleared / 2)
+    }
 }

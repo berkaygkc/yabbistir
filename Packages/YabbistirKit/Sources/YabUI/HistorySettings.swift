@@ -15,11 +15,15 @@ public final class HistorySettingsModel {
     /// A shorter period waiting for the person's say, with how many items it removes right now.
     public private(set) var pendingRetention: RetentionPolicy?
     public private(set) var pendingCount = 0
+    /// When the waiting period was counted: confirming removes exactly what was counted.
+    @ObservationIgnored private var pendingDate = Date.distantPast
     /// How much disk space History uses; nil until measured.
     public private(set) var storageBytes: Int64?
     public var confirmingClear = false
     /// Told which items clearing deleted, so the Sıra and result folders can follow.
     @ObservationIgnored public var onCleared: (([Int64]) -> Void)?
+    /// Told after a shorter period removed items, so the result folders can follow.
+    @ObservationIgnored public var onRetentionApplied: (() -> Void)?
     @ObservationIgnored private let storageDirectory: URL?
 
     public init(preferences: Preferences, library: Library, storageDirectory: URL? = nil, now: @escaping () -> Date = Date.init) {
@@ -43,31 +47,51 @@ public final class HistorySettingsModel {
         confirmingClear = false
         guard let deleted = try? library.clearHistory() else { return }
         onCleared?(deleted)
-        measureStorage()
+        compactThenMeasure()
+    }
+
+    /// Gives the cleared items' space back (small items live inside the database file), then measures again.
+    private func compactThenMeasure() {
+        let store = library.store
+        Task {
+            await Task.detached(priority: .utility) { try? store.compact() }.value
+            measureStorage()
+        }
     }
 
     public var ignoredApps: [String] { preferences.ignoredApps }
 
-    /// Applies the period at once, unless it is shorter and would remove items: then it waits for `confirmRetention()`.
+    /// Applies the period at once, unless it is shorter and would remove items: then it waits for `confirmRetention(_:)`.
+    /// If the items cannot be counted, the current period stays.
     public func requestRetention(_ policy: RetentionPolicy) {
         guard policy != preferences.retention else { return }
         let date = now()
-        if Self.isShorter(policy, than: preferences.retention, now: date),
-           let count = try? library.countExpired(policy: policy, now: date), count > 0 {
-            pendingRetention = policy
-            pendingCount = count
-            return
+        if Self.isShorter(policy, than: preferences.retention, now: date) {
+            guard let count = try? library.countExpired(policy: policy, now: date) else { return }
+            if count > 0 {
+                pendingRetention = policy
+                pendingCount = count
+                pendingDate = date
+                return
+            }
         }
         pendingRetention = nil
         preferences.retention = policy
     }
 
-    /// Saves the waiting period and removes what it expires.
-    public func confirmRetention() {
-        guard let policy = pendingRetention else { return }
+    /// Saves the period and removes what it expired when it was counted. Takes the policy the dialog showed, so
+    /// it does not matter whether the dialog cleared the waiting one first.
+    public func confirmRetention(_ policy: RetentionPolicy) {
         pendingRetention = nil
         preferences.retention = policy
-        try? library.purgeExpired(policy: policy, now: now())
+        if (try? library.purgeExpired(policy: policy, now: pendingDate)) != nil { onRetentionApplied?() }
+    }
+
+    /// The dialog's title: how many items the waiting period removes now.
+    public static func retentionTitle(count: Int, language: AppLanguage) -> String {
+        count == 1
+            ? L10n.string("settings.history.retention.confirm.one", language)
+            : L10n.string("settings.history.retention.confirm", language, NumberFormatting.count(count, language: language))
     }
 
     public func cancelRetention() {
@@ -93,11 +117,13 @@ public final class HistorySettingsModel {
 public struct HistorySettingsView: View {
     @Bindable var model: HistorySettingsModel
     let language: LanguageStore
+    let presence: SettingsPresence
     @State private var selection: String?
 
-    public init(model: HistorySettingsModel, language: LanguageStore) {
+    public init(model: HistorySettingsModel, language: LanguageStore, presence: SettingsPresence) {
         self.model = model
         self.language = language
+        self.presence = presence
     }
 
     private var lang: AppLanguage { language.language }
@@ -146,13 +172,14 @@ public struct HistorySettingsView: View {
         }
         .formStyle(.grouped)
         .onAppear { model.measureStorage() }
+        .onChange(of: presence.forwardCount) { model.measureStorage() }
         .navigationTitle(string("settings.section.history"))
         .confirmationDialog(
-            string("settings.history.retention.confirm", model.pendingCount),
+            HistorySettingsModel.retentionTitle(count: model.pendingCount, language: lang),
             isPresented: Binding(get: { model.pendingRetention != nil }, set: { if !$0 { model.cancelRetention() } }),
-            titleVisibility: .visible
-        ) {
-            Button(string("settings.history.retention.apply"), role: .destructive) { model.confirmRetention() }
+            titleVisibility: .visible, presenting: model.pendingRetention
+        ) { policy in
+            Button(string("settings.history.retention.apply"), role: .destructive) { model.confirmRetention(policy) }
             Button(string("settings.cancel"), role: .cancel) { model.cancelRetention() }
         }
         .confirmationDialog(
@@ -206,7 +233,7 @@ private struct AppRow: View {
         HStack(spacing: 8) {
             if let url {
                 Image(nsImage: NSWorkspace.shared.icon(forFile: url.path)).resizable().frame(width: 20, height: 20)
-                Text(FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: ""))
+                Text((FileManager.default.displayName(atPath: url.path) as NSString).deletingPathExtension)
             } else {
                 Image(systemName: "app.dashed").frame(width: 20, height: 20).foregroundStyle(.secondary)
                 Text(bundleID)

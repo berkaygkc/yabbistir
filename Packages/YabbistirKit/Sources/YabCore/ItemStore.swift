@@ -61,6 +61,15 @@ public final class ItemStore: Sendable {
         if mergesDuplicates { try removeUnreferencedBlobFiles() }
     }
 
+    /// Gives the space of deleted rows back to the disk: items under `inlineLimit` live inside the database file,
+    /// which only shrinks when it is rebuilt.
+    public func compact() throws {
+        try dbPool.writeWithoutTransaction { db in
+            try db.execute(sql: "VACUUM")
+            try db.checkpoint(.truncate)
+        }
+    }
+
     public static func temporary() throws -> ItemStore {
         try ItemStore(directory: FileManager.default.temporaryDirectory
             .appendingPathComponent("yabbistir-tests-\(UUID().uuidString)", isDirectory: true))

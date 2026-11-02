@@ -40,6 +40,7 @@ public final class GeneralSettingsModel {
     /// Reads the system again (the person may have changed it in System Settings).
     public func refresh() {
         loginStatus = loginItem.status
+        if loginStatus == .enabled || loginStatus == .requiresApproval { loginFailed = false }
     }
 
     public func openSystemSettings() {
@@ -49,9 +50,11 @@ public final class GeneralSettingsModel {
 
 public struct GeneralSettingsView: View {
     @Bindable var model: GeneralSettingsModel
+    let presence: SettingsPresence
 
-    public init(model: GeneralSettingsModel) {
+    public init(model: GeneralSettingsModel, presence: SettingsPresence) {
         self.model = model
+        self.presence = presence
     }
 
     public var body: some View {
@@ -97,6 +100,7 @@ public struct GeneralSettingsView: View {
         .formStyle(.grouped)
         .navigationTitle(string("settings.section.general"))
         .onAppear { model.refresh() }
+        .onChange(of: presence.forwardCount) { model.refresh() }
     }
 
     private func string(_ key: String) -> String { L10n.string(key, model.language) }

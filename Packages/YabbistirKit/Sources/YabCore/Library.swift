@@ -102,6 +102,10 @@ public final class Library {
         return cleared.deleted
     }
 
+    /// Rebuilds the database file so cleared items give their space back. Slow: call it off the main actor
+    /// through `store.compact()`.
+    public func compact() throws { try store.compact() }
+
     /// How many items `purgeExpired` would remove now.
     public func countExpired(policy: RetentionPolicy, now: Date) throws -> Int {
         try store.countExpired(policy: policy, now: now)

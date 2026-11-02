@@ -44,7 +44,7 @@ private let day: TimeInterval = 86_400
 
     @Test func confirmingDeletesAndSaves() {
         model.requestRetention(.oneMonth)
-        model.confirmRetention()
+        model.confirmRetention(.oneMonth)
         #expect(model.pendingRetention == nil)
         #expect(itemCount == 0)
         #expect(preferences.retention == .oneMonth)
@@ -77,5 +77,47 @@ private let day: TimeInterval = 86_400
         #expect(reported == [itemID])
         #expect(!model.confirmingClear)
         #expect(itemCount == 0)
+    }
+
+    @Test func confirmingWorksEvenWhenTheDialogClearedThePendingPolicyFirst() {
+        model.requestRetention(.oneMonth)
+        model.cancelRetention()
+        model.confirmRetention(.oneMonth)
+        #expect(itemCount == 0)
+        #expect(preferences.retention == .oneMonth)
+    }
+
+    @Test func confirmingPurgesWithTheDateTheCountWasMadeAt() {
+        var clock = now
+        let timed = HistorySettingsModel(preferences: preferences, library: library, now: { clock })
+        timed.requestRetention(.oneMonth)
+        #expect(timed.pendingCount == 1)
+        // The clock moves on; the purge still uses the date of the count.
+        clock = now.addingTimeInterval(-60 * day)
+        timed.confirmRetention(.oneMonth)
+        #expect(itemCount == 0)
+    }
+
+    @Test func aFailedCountKeepsTheCurrentPolicy() throws {
+        try library.store.dbPool.write { db in try db.drop(table: "item") }
+        model.requestRetention(.oneMonth)
+        #expect(model.pendingRetention == nil)
+        #expect(preferences.retention == .oneYear)
+    }
+
+    @Test func appliedRetentionTellsTheApp() {
+        var told = 0
+        model.onRetentionApplied = { told += 1 }
+        model.requestRetention(.oneMonth)
+        model.confirmRetention(.oneMonth)
+        #expect(told == 1)
+    }
+
+    @Test func theConfirmationCountsTheItemsInTheLanguage() {
+        for (count, en, tr) in [(1, "This removes 1 item now.", "Bu ayar 1 öğeyi hemen siler."),
+                                (1355, "This removes 1,355 items now.", "Bu ayar 1.355 öğeyi hemen siler.")] {
+            #expect(HistorySettingsModel.retentionTitle(count: count, language: .english) == en)
+            #expect(HistorySettingsModel.retentionTitle(count: count, language: .turkish) == tr)
+        }
     }
 }

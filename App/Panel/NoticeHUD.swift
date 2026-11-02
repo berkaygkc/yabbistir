@@ -10,7 +10,8 @@ import YabUI
 @MainActor
 final class NoticeHUD {
     private let window: NSPanel
-    /// Every notice window, for the screen sharing preference (a notice window is not in `NSApp.windows` until it is first shown).
+    /// Every notice window, for the screen sharing preference: a notice is a plain `NSPanel`, so a type check over
+    /// `NSApp.windows` cannot tell it from any other panel.
     private static let windows = NSHashTable<NSPanel>.weakObjects()
 
     /// Hides or shows every notice for screen sharing.

@@ -13,10 +13,12 @@ public enum CategoryRowRules {
 /// Settings → Categories: rename, color, order, visibility and delete, on the editor's model.
 public struct CategoriesSettingsView: View {
     @Bindable var model: CategoryEditorModel
+    let presence: SettingsPresence
     @State private var deleting: CategoryEditorModel.Row?
 
-    public init(model: CategoryEditorModel) {
+    public init(model: CategoryEditorModel, presence: SettingsPresence) {
         self.model = model
+        self.presence = presence
     }
 
     private var lang: AppLanguage { model.language }
@@ -47,9 +49,7 @@ public struct CategoriesSettingsView: View {
         .formStyle(.grouped)
         .onAppear { model.reload() }
         // The panel's editor may have changed categories meanwhile: rows are read fresh whenever Settings comes forward.
-        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { note in
-            if (note.object as? NSWindow)?.identifier?.rawValue == "settings" { model.reload() }
-        }
+        .onChange(of: presence.forwardCount) { model.reload() }
         .navigationTitle(L10n.string("settings.section.categories", lang))
         .confirmationDialog(
             L10n.string("settings.categories.delete.title", lang, deleting?.category.name ?? ""),
@@ -88,7 +88,7 @@ private struct CategorySettingsRow: View {
                 Text(row.category.name).lineLimit(1).frame(maxWidth: .infinity, alignment: .leading)
             }
             Text(row.count.map { "\($0)" } ?? "").monospacedDigit().foregroundStyle(.secondary)
-            Picker(L10n.string("settings.section.categories", lang), selection: Binding(
+            Picker(L10n.string("editor.hint.visibility", lang), selection: Binding(
                 get: { row.category.visibility }, set: { model.setVisibility(row.id, $0) })) {
                 Text(L10n.string("settings.categories.visibility.always", lang)).tag(CategoryVisibility.always)
                 Text(L10n.string("settings.categories.visibility.onDemand", lang)).tag(CategoryVisibility.onSelect)
@@ -123,6 +123,8 @@ private struct CategorySettingsRow: View {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
+        .accessibilityLabel(L10n.string("kind.color", lang))
+        .accessibilityValue(L10n.string("category.color.\(row.category.color.rawValue)", lang))
     }
 
     @ViewBuilder private var nameView: some View {

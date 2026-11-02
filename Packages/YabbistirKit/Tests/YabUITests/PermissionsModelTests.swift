@@ -103,7 +103,7 @@ final class FakeProbe: PermissionProbing {
                 }
             }
         }
-        #expect(keys.count >= 15)
+        #expect(keys.count == 18)
         for key in keys {
             for language in AppLanguage.allCases {
                 #expect(L10n.string(key, language) != key, "\(key) has no \(language) text")

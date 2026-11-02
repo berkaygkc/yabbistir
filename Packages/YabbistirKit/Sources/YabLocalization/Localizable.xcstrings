@@ -5396,13 +5396,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This removes %d items now."
+            "value": "This removes %@ items now."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu ayar %d öğeyi hemen siler."
+            "value": "Bu ayar %@ öğeyi hemen siler."
+          }
+        }
+      }
+    },
+    "settings.history.retention.confirm.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This removes 1 item now."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ayar 1 öğeyi hemen siler."
           }
         }
       }

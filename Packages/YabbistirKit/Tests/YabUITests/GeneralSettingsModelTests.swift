@@ -50,4 +50,15 @@ import YabPlatform
         general.refresh()
         #expect(general.launchAtLogin)
     }
+
+    @Test func refreshClearsAStaleFailure() {
+        let item = FakeLoginItem(status: .disabled)
+        item.throwsOnChange = true
+        let general = model(item)
+        general.setLaunchAtLogin(true)
+        #expect(general.loginFailed)
+        item.status = .enabled
+        general.refresh()
+        #expect(!general.loginFailed)
+    }
 }

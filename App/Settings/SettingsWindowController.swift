@@ -9,6 +9,7 @@ import YabUI
 final class SettingsWindowController {
     private let models: SettingsModels
     private var window: NSWindow?
+    private var observers: [NSObjectProtocol] = []
 
     init(models: SettingsModels) {
         self.models = models
@@ -23,6 +24,7 @@ final class SettingsWindowController {
             followLanguage()
         }
         guard let window else { return }
+        models.presence.shown()
         // A menu bar app: the window comes forward only when the app does.
         NSApp.activate()
         window.makeKeyAndOrderFront(nil)
@@ -41,7 +43,22 @@ final class SettingsWindowController {
         window.setContentSize(NSSize(width: 860, height: 580))
         window.center()
         window.setFrameAutosaveName("Settings")
+        observe(window)
         return window
+    }
+
+    /// Tells the pages when the window closes and when it comes forward, so they stop polling and read the system again.
+    private func observe(_ window: NSWindow) {
+        let center = NotificationCenter.default
+        let presence = models.presence
+        observers = [
+            center.addObserver(forName: NSWindow.willCloseNotification, object: window, queue: .main) { _ in
+                MainActor.assumeIsolated { presence.closed() }
+            },
+            center.addObserver(forName: NSWindow.didBecomeKeyNotification, object: window, queue: .main) { _ in
+                MainActor.assumeIsolated { presence.cameForward() }
+            },
+        ]
     }
 
     /// The title follows the app's language while the window is open.
