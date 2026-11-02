@@ -2,7 +2,7 @@ import SwiftUI
 import YabLocalization
 
 /// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right; on a source's row its own actions
-/// ("Şifreyi yapıştır ↵ | Kullanıcı adı ⇧↵ | Eylemler ⌘K"), on the locked row "Komutu kopyala ⌘C | Eylemler ⌘K". While
+/// ("Şifreyi yapıştır ↵ | Kullanıcı adı ⇧↵ | Eylemler ⌘K"), on the locked row "Komutu kopyala ⌘C" alone. While
 /// ⌘ is held it cross-fades (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one button saying what ⇧↵
 /// does. One layer shows at a time, and a new kind of row slides its actions in from below. Nothing in it ever wraps.
 struct ActionBarView: View {
@@ -120,23 +120,25 @@ struct ActionBarView: View {
     }
 
     /// A source's row: ↵ its first action, ⇧↵ its second's short name, then "Eylemler ⌘K"; the locked row: "Komutu
-    /// kopyala ⌘C" (with a command) and "Eylemler ⌘K". The first button is the primary one.
+    /// kopyala ⌘C" alone ("Eylemler ⌘K" without a command). The first button is the primary one.
     private func sourceActions(_ bar: SourceBar) -> some View {
         HStack(spacing: 4) {
             if let primary = bar.primary {
                 barButton(primary, primary: true) {
                     if let id = model.selectedID { onPaste(id) }
                 }
-                divider
             }
             if let alternate = bar.alternate {
+                divider
                 barButton(alternate, primary: false) {
                     if let id = model.selectedID, let action = model.shiftReturnAction(rowID: id) { onAction(action) }
                 }
-                divider
             }
-            barButton(BarLabel(title: L10n.string("panel.footer.actions", model.language), keys: ["⌘", "K"]), primary: false) {
-                _ = model.handle(.toggleActions)
+            if bar.showsActions {
+                if bar.primary != nil { divider }
+                barButton(BarLabel(title: L10n.string("panel.footer.actions", model.language), keys: ["⌘", "K"]), primary: false) {
+                    _ = model.handle(.toggleActions)
+                }
             }
         }
     }

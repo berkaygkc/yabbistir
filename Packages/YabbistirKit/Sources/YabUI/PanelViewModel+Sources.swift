@@ -20,14 +20,17 @@ public struct BarLabel: Hashable, Sendable {
     }
 }
 
-/// The bar on a source's row, ahead of "Eylemler ⌘K": the first action's words with ↵, then the second's short name with
-/// ⇧↵ ("Kullanıcı adı"). On the locked row, "Komutu kopyala ⌘C" alone (nil without a command).
+/// The bar on a source's row: the first action's words with ↵, then the second's short name with ⇧↵ ("Kullanıcı adı"),
+/// then "Eylemler ⌘K". On the locked row, "Komutu kopyala ⌘C" alone, since copying its command is all the row is for
+/// (⌘K still opens its list); without a command, "Eylemler ⌘K" alone, so the bar never stands empty.
 public struct SourceBar: Hashable, Sendable {
     public let primary: BarLabel?
     public let alternate: BarLabel?
+    /// Whether "Eylemler ⌘K" follows.
+    public let showsActions: Bool
 
-    public init(primary: BarLabel?, alternate: BarLabel?) {
-        (self.primary, self.alternate) = (primary, alternate)
+    public init(primary: BarLabel?, alternate: BarLabel?, showsActions: Bool = true) {
+        (self.primary, self.alternate, self.showsActions) = (primary, alternate, showsActions)
     }
 }
 
@@ -91,14 +94,21 @@ extension PanelViewModel {
     }
 
     /// ⌘K on a source's row: its actions, then Preview and Edit categories; on the locked row, "Komutu kopyala" (when it
-    /// gives a command), Preview and Edit categories. Never "Add to Sıra", a category or Delete: the row is no item. Nil
-    /// on any other row.
+    /// gives a command) and Edit categories, with nothing to preview. Never "Add to Sıra", a category or Delete: the row
+    /// is no item. Nil on any other row.
     var sourceMenuItems: [PanelActionItem]? {
         switch selectedSourceRow {
         case .entry?: (selectedSourceDescriptor.map(sourceActionItems) ?? []) + [.preview, .editCategories]
-        case .locked(_, _, let command)?: (command == nil ? [] : [.copySourceCommand]) + [.preview, .editCategories]
+        case .locked(_, _, let command)?: (command == nil ? [] : [.copySourceCommand]) + [.editCategories]
         case nil: nil
         }
+    }
+
+    /// Whether the source still lists the row its ⇧ list is for: not once it answered locked, forgot its rows, or sent a
+    /// list without it.
+    func stillLists(_ subject: SourceSubject) -> Bool {
+        guard case .rows(let rows)? = sources?.state(of: subject.descriptor.id) else { return false }
+        return rows.contains { $0.id == subject.row.id }
     }
 
     /// The ⇧ panel's rows on a source's row (`transformSource`): its actions, each with its key.
@@ -144,7 +154,7 @@ extension PanelViewModel {
                              alternate: descriptor.alternate.map { BarLabel(title: $0.label, keys: ["⇧", "↵"]) })
         case .locked(_, _, let command)?:
             return SourceBar(primary: command.map { _ in BarLabel(title: L10n.string("panel.source.copyCommand", language), keys: ["⌘", "C"]) },
-                             alternate: nil)
+                             alternate: nil, showsActions: command == nil)
         case nil:
             return nil
         }

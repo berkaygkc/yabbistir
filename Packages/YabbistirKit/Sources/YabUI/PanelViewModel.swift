@@ -534,6 +534,8 @@ public final class PanelViewModel {
         rebuild()
         if let index = columns.firstIndex(where: { $0.id == focused }) { focusedColumn = index }
         else { focusedColumn = max(0, min(focusedColumn, columns.count - 1)) }
+        // A source's ⇧ list never outlives its row: the source answered locked, forgot its rows, or lists it no more.
+        if let subject = transformSource, !stillLists(subject) { layer = .none }
     }
 
     public func handle(_ command: PanelCommand) -> PanelAction? {

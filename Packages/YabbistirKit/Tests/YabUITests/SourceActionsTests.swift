@@ -176,15 +176,15 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         for character in "kopy" { _ = model.handle(.type(String(character))) }
         #expect(model.actionItems == [.sourceCopy])
         _ = model.handle(.escape)
-        // The locked row: its command, the preview and the editor.
+        // The locked row: its command, then the editor; nothing to preview.
         lock(command: "kasa login <e-posta>")
         _ = model.handle(.toggleActions)
-        #expect(model.actionItems == [.copySourceCommand, .preview, .editCategories])
+        #expect(model.actionItems == [.copySourceCommand, .editCategories])
         #expect(model.actionLabel(.copySourceCommand) == "Komutu kopyala")
         #expect(model.handle(.confirm(plain: false)) == .copySourceCommand("kasa login <e-posta>"))
         lock(command: nil)
         _ = model.handle(.toggleActions)
-        #expect(model.actionItems == [.preview, .editCategories])
+        #expect(model.actionItems == [.editCategories])
     }
 
     @Test func theLockedRowCopiesItsCommand() {
@@ -206,13 +206,15 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         try focusPins()
         #expect(model.sourceBar == SourceBar(primary: BarLabel(title: "PIN’i yapıştır", keys: ["↵"]), alternate: nil))
         #expect(model.sourceCommandHints == [BarLabel(title: "PIN’i yapıştır", keys: ["⌘", "1–9"]), BarLabel(title: "Eylemler", keys: ["⌘", "K"])])
-        // The locked row: its command, ⌘C.
+        // The locked row: its command, ⌘C, alone (⌘K still opens its list, and its ⌘ hint says so).
         try focusVault()
         lock(command: "kasa login <e-posta>")
-        #expect(model.sourceBar == SourceBar(primary: BarLabel(title: "Komutu kopyala", keys: ["⌘", "C"]), alternate: nil))
+        #expect(model.sourceBar == SourceBar(primary: BarLabel(title: "Komutu kopyala", keys: ["⌘", "C"]), alternate: nil, showsActions: false))
         #expect(model.sourceCommandHints == [BarLabel(title: "Komutu kopyala", keys: ["⌘", "C"]), BarLabel(title: "Eylemler", keys: ["⌘", "K"])])
+        // Without a command the bar is not left empty: "Eylemler ⌘K".
         lock(command: nil)
         #expect(model.sourceBar == SourceBar(primary: nil, alternate: nil))
+        #expect(model.sourceBar?.showsActions == true)
         #expect(model.sourceCommandHints == [BarLabel(title: "Eylemler", keys: ["⌘", "K"])])
         // An item's row keeps the bar it had.
         _ = model.handle(.moveColumn(-1))
@@ -220,6 +222,35 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(model.focusedSource == .history)
         #expect(model.sourceBar == nil)
         #expect(model.sourceCommandHints == nil)
+    }
+
+    /// The source answered locked while the ⇧ list was open: the list goes with its row.
+    @Test func aLockedAnswerClosesTheSourceList() {
+        _ = model.handle(.move(1))
+        _ = model.handle(.toggleTransforms)
+        #expect(model.transformSource?.row == Self.entries[1])
+        lock(command: "kasa login <e-posta>")
+        #expect(model.layer == .none)
+        #expect(model.transformSource == nil)
+        // Forgotten (the Mac locked): the same.
+        sources.answer(Self.vaultKey, .rows(Self.entries))
+        _ = model.handle(.toggleTransforms)
+        #expect(model.layer == .transforms)
+        sources.answer(Self.vaultKey, .idle)
+        #expect(model.layer == .none)
+    }
+
+    /// A new list without the row closes its ⇧ list; one that still has it (reordered, renamed) leaves it open.
+    @Test func aRowThatLeavesClosesTheSourceList() {
+        _ = model.handle(.move(1))
+        _ = model.handle(.toggleTransforms)
+        let renamed = SourceRow(id: "2", title: "Kodhane (iş)", subtitle: "melike@ornek.dev")
+        sources.answer(Self.vaultKey, .rows([Self.entries[2], renamed, Self.entries[0]]))
+        #expect(model.layer == .transforms)
+        #expect(model.transformSource?.row.id == "2")
+        sources.answer(Self.vaultKey, .rows([Self.entries[0], Self.entries[2]]))
+        #expect(model.layer == .none)
+        #expect(model.transformSource == nil)
     }
 
     @Test func holdingShiftOnASourceRowNamesTheAlternate() throws {
