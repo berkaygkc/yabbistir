@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 import YabCore
 import YabLocalization
@@ -45,6 +46,10 @@ public struct CategoriesSettingsView: View {
         }
         .formStyle(.grouped)
         .onAppear { model.reload() }
+        // The panel's editor may have changed categories meanwhile: rows are read fresh whenever Settings comes forward.
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { note in
+            if (note.object as? NSWindow)?.identifier?.rawValue == "settings" { model.reload() }
+        }
         .navigationTitle(L10n.string("settings.section.categories", lang))
         .confirmationDialog(
             L10n.string("settings.categories.delete.title", lang, deleting?.category.name ?? ""),
