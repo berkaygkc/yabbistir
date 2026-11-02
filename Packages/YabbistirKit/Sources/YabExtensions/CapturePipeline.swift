@@ -7,7 +7,7 @@ import YabPasteboard
 /// The library's categories as capture rules reach them: by name, never made by an extension.
 @MainActor
 public protocol CategoryResolving: AnyObject {
-    /// The existing category with this name, whatever its case and Turkish letters; nil when there is none.
+    /// The person's existing category with this name (a source's never), whatever its case and Turkish letters; nil when there is none.
     func categoryID(named name: String) -> Int64?
     func add(itemID: Int64, to categoryID: Int64)
 }
@@ -23,7 +23,7 @@ public final class LibraryCategories: CategoryResolving {
 
     public func categoryID(named name: String) -> Int64? {
         let folded = SearchNormalizer.normalize(name.trimmingCharacters(in: .whitespacesAndNewlines))
-        return ((try? library.store.categories()) ?? []).first { SearchNormalizer.normalize($0.name) == folded }?.id
+        return ((try? library.store.categories()) ?? []).first { !$0.isSource && SearchNormalizer.normalize($0.name) == folded }?.id
     }
 
     public func add(itemID: Int64, to categoryID: Int64) {

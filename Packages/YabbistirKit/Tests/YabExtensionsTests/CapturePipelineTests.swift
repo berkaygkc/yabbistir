@@ -335,4 +335,18 @@ import YabPasteboard
         #expect(library.itemIDs(inCategory: try #require(work.id)) == [item])
         #expect(try library.store.categories().count == 1)
     }
+
+    /// A source's category is the extension's: a rule naming it files into the person's namesake, or nowhere.
+    @Test func aSourceCategoryIsNeverTheOneARuleFilesInto() throws {
+        let library = try Library(store: ItemStore.temporary())
+        _ = try library.store.syncSourceCategories([SourceCategorySeed(key: "dev.ornek/vault", name: "Kasa")])
+        let categories = LibraryCategories(library: library)
+        #expect(categories.categoryID(named: "kasa") == nil)
+
+        let mine = try library.createCategory(name: "Kasa")
+        let item = try #require(try library.store.ingest(Self.text("a"))?.item.id)
+        #expect(categories.categoryID(named: "kasa") == mine.id)
+        categories.add(itemID: item, to: try #require(categories.categoryID(named: "kasa")))
+        #expect(library.itemIDs(inCategory: try #require(mine.id)) == [item])
+    }
 }
