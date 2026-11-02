@@ -57,6 +57,34 @@ enum SourceFixture {
     }
 }
 
+/// A transport that loads at once and holds every invoke until the test answers it.
+final class HeldTransport: HostTransport, @unchecked Sendable {
+    private let lock = NSLock()
+    private var onLine: (@Sendable (Data) -> Void)?
+    private var sent: [HostRequest] = []
+    private var restartCount = 0
+
+    var requests: [HostRequest] { lock.withLock { sent } }
+    var restarts: Int { lock.withLock { restartCount } }
+
+    func start(onLine: @escaping @Sendable (Data) -> Void, onExit: @escaping @Sendable () -> Void) throws { lock.withLock { self.onLine = onLine } }
+
+    func send(_ line: Data) {
+        guard let request = try? JSONDecoder().decode(HostRequest.self, from: line) else { return }
+        lock.withLock { sent.append(request) }
+        if request.load != nil { answer(HostMessage(id: request.id, done: true)) }
+    }
+
+    func answer(_ message: HostMessage) {
+        let handler = lock.withLock { onLine }
+        guard let data = try? JSONEncoder().encode(message) else { return }
+        DispatchQueue.global().async { handler?(data) }
+    }
+
+    func restart() throws { lock.withLock { restartCount += 1 } }
+    func stop() {}
+}
+
 @MainActor @Suite struct SourceServiceTests {
     let library: Library
     let builtIn = RegistryFixture.temporary("BuiltinExtensions")
@@ -72,10 +100,11 @@ enum SourceFixture {
 
     /// The extensions are in place before the registry starts watching, so no reload comes in the middle of a test.
     func service(transport: FakeTransport = SourceFixture.transport(), toolSearchPath: [String] = [], resultFiles: ResultFiles? = nil,
-                 log: @escaping (String, String) -> Void = { _, _ in }) -> ExtensionService {
+                 sourceTimeout: Duration = .seconds(10), log: @escaping (String, String) -> Void = { _, _ in }) -> ExtensionService {
         let registry = ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: RegistryFixture.temporary("Data"), settings: settings)
         return ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport, onLog: log), library: library,
-                                settings: settings, language: language, toolSearchPath: toolSearchPath, resultFiles: resultFiles)
+                                settings: settings, language: language, toolSearchPath: toolSearchPath, resultFiles: resultFiles,
+                                sourceTimeouts: (sourceTimeout, sourceTimeout))
     }
 
     @Test func sourcesComeFromUsableExtensionsOnly() throws {
@@ -192,6 +221,61 @@ enum SourceFixture {
         #expect(error?.code == .toolMissing)
         #expect(error?.message == "vault-cli is not installed. Install it with: brew install vault-cli")
         #expect(transport.requests.isEmpty)
+    }
+
+    /// A vault whose tool hangs at every open (a prompt nobody answers) runs out of time each time: its extension stays
+    /// on, the host is never restarted for it, and the panel keeps the rows it had.
+    @Test func threeSourceTimeoutsLeaveTheExtensionOn() async throws {
+        try SourceFixture.write(in: user, id: "dev.example.vault")
+        let lists = Counter()
+        let transport = FakeTransport { request in
+            guard let invoke = request.invoke else { return request.load != nil ? HostMessage(id: request.id, done: true) : nil }
+            // The first list answers; every one after it hangs.
+            guard invoke.kind == .sourceList, lists.next() == 0 else { return nil }
+            return HostMessage(id: request.id, ok: .listing(.rows([SourceRow(id: "42", title: "ornek.dev", subtitle: "deniz.k")])))
+        }
+        let service = service(transport: transport, sourceTimeout: .milliseconds(50))
+        let center = SourceCenter(service: service)
+        let rows = SourceCenter.State.rows([SourceRow(id: "42", title: "ornek.dev", subtitle: "deniz.k")])
+        center.refresh([Self.key])
+        await center.call(for: Self.key)?.value
+        #expect(center.state(of: Self.key) == rows)
+        for _ in 0..<3 {
+            center.refresh([Self.key])
+            await center.call(for: Self.key)?.value
+        }
+        #expect(center.state(of: Self.key) == rows)
+        #expect(transport.restarts == 0)
+        #expect(!service.client.isDisabled("dev.example.vault"))
+        #expect(settings.isEnabled("dev.example.vault"))
+        #expect(service.registry.installed.first { $0.id == "dev.example.vault" }?.isUsable == true)
+        #expect(service.sources.map(\.id) == [Self.key])
+        // Each hung list was aborted in the helper, the call alone.
+        let hung = transport.requests.filter { $0.invoke?.kind == .sourceList }.dropFirst().map(\.id)
+        try await eventually { Set(transport.requests.compactMap(\.cancel?.callID)) == Set(hung) }
+    }
+
+    /// A source's call that runs out of time is aborted in the helper (its signal fires, its tool stops); a call of
+    /// the same extension on its way meanwhile goes on and answers.
+    @Test func aSourceTimeoutCancelsTheCall() async throws {
+        let transport = HeldTransport()
+        let client = ExtensionHostClient(transport: transport) { _, _ in }
+        let search = ExtensionContext(language: "tr", trigger: .search)
+        let run = Task { try await client.invoke("dev.example.vault", .run, name: "a", item: nil, context: search, effects: true, timeout: nil) }
+        try await eventually { transport.requests.contains { $0.invoke?.kind == .run } }
+        let error = await #expect(throws: ExtensionError.self) {
+            _ = try await client.invoke("dev.example.vault", .sourceList, name: "vault", item: nil,
+                                        context: ExtensionContext(language: "tr", trigger: .source), effects: true, timeout: .milliseconds(50))
+        }
+        #expect(error?.code == .timeout)
+        let list = try #require(transport.requests.first { $0.invoke?.kind == .sourceList })
+        try await eventually { transport.requests.contains { $0.cancel?.callID == list.id } }
+        #expect(transport.restarts == 0)
+        let held = try #require(transport.requests.first { $0.invoke?.kind == .run })
+        #expect(!transport.requests.contains { $0.cancel?.callID == held.id })
+        transport.answer(HostMessage(id: held.id, ok: .result(.text("ok"))))
+        #expect(try await run.value == .result(.text("ok")))
+        #expect(!client.isDisabled("dev.example.vault"))
     }
 
     @Test func anUnknownSourceOrActionIsNotFound() async throws {

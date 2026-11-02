@@ -148,11 +148,35 @@ import YabExtensionKit
         center.refresh([Self.vault])
         try await answer(Self.vault, .failure(ExtensionError(.toolMissing, "vault-cli is not installed")))
         #expect(center.state(of: Self.vault) == .failed("vault-cli is not installed"))
-        // Asking again shows that it is on its way.
+    }
+
+    /// A failure is shown until the next answer replaces it: asking again does not blank it to "loading".
+    @Test func aFailureStaysUntilTheNextAnswer() async throws {
         center.refresh([Self.vault])
-        #expect(center.state(of: Self.vault) == .loading)
+        try await answer(Self.vault, .failure(ExtensionError(.toolMissing, "vault-cli is not installed")))
+        center.refresh([Self.vault])
+        #expect(center.state(of: Self.vault) == .failed("vault-cli is not installed"))
         try await answer(Self.vault, .success(.rows(rows)))
         #expect(center.state(of: Self.vault) == .rows(rows))
+    }
+
+    /// A vault whose session ran out stays locked from one open to the next: its row stays put while it is asked again.
+    @Test func aLockedRowStaysWhileRefreshing() async throws {
+        let locked = SourceListing.locked(message: "Kasa kilitli", command: "vault login deniz.k")
+        center.refresh([Self.vault])
+        try await answer(Self.vault, .success(locked))
+        var changes = 0
+        center.onChange = { changes += 1 }
+        center.refresh([Self.vault])
+        #expect(center.state(of: Self.vault) == .locked(message: "Kasa kilitli", command: "vault login deniz.k"))
+        try await answer(Self.vault, .success(locked))
+        #expect(center.state(of: Self.vault) == .locked(message: "Kasa kilitli", command: "vault login deniz.k"))
+        #expect(changes == 0)
+        // Unlocked in Terminal: the rows replace it on the next open.
+        center.refresh([Self.vault])
+        try await answer(Self.vault, .success(.rows(rows)))
+        #expect(center.state(of: Self.vault) == .rows(rows))
+        #expect(changes == 1)
     }
 
     /// A slow or failing list (a timeout, the helper restarting) never spoils the rows already shown.

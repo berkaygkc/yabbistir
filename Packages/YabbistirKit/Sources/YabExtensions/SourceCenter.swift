@@ -20,7 +20,7 @@ public final class SourceCenter {
     public enum State: Equatable, Sendable {
         /// Never asked, or forgotten since.
         case idle
-        /// Asked, with no rows to show meanwhile.
+        /// Asked, with nothing to show meanwhile.
         case loading
         case rows([SourceRow])
         /// The source is locked: how the person unlocks it, and the line they run for it (⌘C copies it).
@@ -49,13 +49,14 @@ public final class SourceCenter {
         states[key] ?? .idle
     }
 
-    /// Asks each source for its list again, unless it is already on its way. The rows shown stay until the answer
-    /// replaces them; a source with none shows that it is loading. The call is never cancelled when the panel closes:
-    /// it fills the next open's rows. A key no source has is skipped.
+    /// Asks each source for its list again, unless it is already on its way. What is shown (rows, the locked row, a
+    /// failure) stays until the answer replaces it, so a source that stays locked never flickers; a source with nothing
+    /// shows that it is loading. The call is never cancelled when the panel closes: it fills the next open's rows. A key
+    /// no source has is skipped.
     public func refresh(_ keys: [String]) {
         let known = Set(descriptors.map(\.id))
         for key in keys where known.contains(key) && calls[key] == nil {
-            if case .rows = states[key] {} else { states[key] = .loading }
+            if states[key] == nil || states[key] == .idle { states[key] = .loading }
             let id = nextCall
             nextCall += 1
             let service = service

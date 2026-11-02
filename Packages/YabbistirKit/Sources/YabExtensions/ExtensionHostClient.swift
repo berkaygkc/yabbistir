@@ -128,8 +128,10 @@ public final class ExtensionHostClient {
             // word it themselves. Nothing else from the host reaches the log but its own log events: an answer,
             // even one that does not decode, never does.
             if error.code == .badResult { onLog(id, "\(name) returned no result: \(error.message)") }
-            // A job (no time limit) reports its failures with a message: only a broken extension counts.
-            if timeout == nil ? Self.isBroken(error) : !Self.isNobodysFault(error) { recordFailure(id) }
+            // A job (no time limit) reports its failures with a message: only a broken extension counts. A source's
+            // call never counts: it is asked on every panel open, and a tool stuck at a prompt must not turn off the
+            // extension it belongs to.
+            if !Self.isSource(kind), timeout == nil ? Self.isBroken(error) : !Self.isNobodysFault(error) { recordFailure(id) }
             throw error
         }
     }
@@ -141,6 +143,11 @@ public final class ExtensionHostClient {
     /// The host turns off an extension that crashes, not one that says why.
     private static func isNobodysFault(_ error: ExtensionError) -> Bool {
         [.interrupted, .cancelled, .toolMissing, .networkError, .permissionDenied, .unavailable].contains(error.code)
+    }
+
+    /// A source's list or one of its row actions.
+    private static func isSource(_ kind: InvokeKind) -> Bool {
+        kind == .sourceList || kind == .sourceRun
     }
 
     /// A job's failure that means the extension is broken: what it returned is not a result, or what
@@ -340,12 +347,18 @@ public final class ExtensionHostClient {
     private func cancel(_ id: Int, at: ContinuousClock.Instant) {
         if isOutOfTime(id, at: at) { timedOut(id); return }
         guard let continuation = take(id) else { return }
+        abortInHost(id)
+        continuation.resume(returning: HostMessage(id: id, error: ExtensionError(.cancelled, "the call was cancelled")))
+    }
+
+    /// Tells the host to abort the call: its AbortSignal fires (`yab.exec` stops the tool's process group) and its
+    /// pending `yab` promises reject.
+    private func abortInHost(_ id: Int) {
         let transport = transport
         encoder.async {
             guard let data = try? JSONEncoder().encode(HostRequest(cancel: CancelRequest(callID: id))) else { return }
             transport.send(data)
         }
-        continuation.resume(returning: HostMessage(id: id, error: ExtensionError(.cancelled, "the call was cancelled")))
     }
 
     /// The host quit or crashed: what was in flight fails at once (nobody's fault) and the next
@@ -389,8 +402,15 @@ public final class ExtensionHostClient {
     }
 
     /// The call ran out of time: it fails, the host restarts, and everything else in flight fails
-    /// with "restarted" (their extensions load again on next use).
+    /// with "restarted" (their extensions load again on next use). A source's call is aborted alone instead: it is
+    /// asked on every panel open, and a tool that hangs there must not cut every other call short each time.
     private func timedOut(_ id: Int) {
+        if let invoke = invokes[id], Self.isSource(invoke.kind) {
+            guard let continuation = take(id) else { return }
+            abortInHost(id)
+            continuation.resume(returning: HostMessage(id: id, error: ExtensionError(.timeout, "the extension did not answer in time")))
+            return
+        }
         guard let continuation = take(id) else { return }
         continuation.resume(returning: HostMessage(id: id, error: ExtensionError(.timeout, "the extension did not answer in time")))
         try? transport.restart()

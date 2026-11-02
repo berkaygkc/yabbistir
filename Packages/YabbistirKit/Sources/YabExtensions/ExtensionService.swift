@@ -42,6 +42,8 @@ public final class ExtensionService: ExtensionCommandsProviding {
     @ObservationIgnored let toolSearchPath: [String]
     /// Adopts the files a command returns into `Outputs`; without it a file result fails.
     @ObservationIgnored let resultFiles: ResultFiles?
+    /// How long a source's list and its row actions get (`listTimeout`, `runTimeout`; tests make them short).
+    @ObservationIgnored let sourceTimeouts: (list: Duration, run: Duration)
     @ObservationIgnored private var catalogCache: (language: String, revision: Int, catalog: CommandCatalog)?
     @ObservationIgnored private var sourceCache: (language: String, revision: Int, sources: SourceCatalog)?
     @ObservationIgnored private var revision = 0
@@ -71,7 +73,8 @@ public final class ExtensionService: ExtensionCommandsProviding {
     nonisolated public static let speculativeLimit = 256 * 1024
 
     public init(registry: ExtensionRegistry, client: ExtensionHostClient, jobClient: ExtensionHostClient? = nil, library: Library,
-                settings: ExtensionSettings, language: LanguageStore, toolSearchPath: [String] = [], resultFiles: ResultFiles? = nil) {
+                settings: ExtensionSettings, language: LanguageStore, toolSearchPath: [String] = [], resultFiles: ResultFiles? = nil,
+                sourceTimeouts: (list: Duration, run: Duration) = (ExtensionService.listTimeout, ExtensionService.runTimeout)) {
         self.registry = registry
         self.client = client
         self.jobClient = jobClient ?? client
@@ -80,6 +83,7 @@ public final class ExtensionService: ExtensionCommandsProviding {
         self.languageStore = language
         self.toolSearchPath = toolSearchPath
         self.resultFiles = resultFiles
+        self.sourceTimeouts = sourceTimeouts
         registry.onChange = { [weak self] in self?.registryChanged() }
         // Off for real: the switch in Settings shows it, its commands leave, and turning it back
         // on gives it a clean slate. A job counts only when the extension is broken (see the client).
@@ -737,7 +741,7 @@ extension ExtensionService: SourceServing {
 
     public func list(source key: String) async throws(ExtensionError) -> SourceListing {
         let (installed, descriptor) = try usable(key)
-        let output = try await invoke(descriptor, of: installed, .sourceList, source: nil, timeout: Self.listTimeout)
+        let output = try await invoke(descriptor, of: installed, .sourceList, source: nil, timeout: sourceTimeouts.list)
         guard case .listing(let listing) = output else { throw ExtensionError(.badResult, "list returned no listing") }
         return listing
     }
@@ -748,7 +752,7 @@ extension ExtensionService: SourceServing {
             throw ExtensionError(.notFound, "\(descriptor.title) has no action \(actionID)")
         }
         let output = try await invoke(descriptor, of: installed, .sourceRun,
-                                      source: SourceInvocation(rowID: row, actionID: action.id, kind: action.kind), timeout: Self.runTimeout)
+                                      source: SourceInvocation(rowID: row, actionID: action.id, kind: action.kind), timeout: sourceTimeouts.run)
         // The helper holds a value to its action's kind; so does the app, as a secret passed off as text would reach
         // the clipboard unconcealed.
         switch output {
@@ -774,6 +778,7 @@ extension ExtensionService: SourceServing {
     }
 
     /// In the main host, with the network and programs, for no target: a source's rows are the same wherever they go.
+    /// Running out of time aborts the call alone, and no failure of it counts against the extension (the client).
     private func invoke(_ descriptor: SourceDescriptor, of installed: InstalledExtension, _ kind: InvokeKind, source: SourceInvocation?,
                         timeout: Duration) async throws(ExtensionError) -> InvokeOutput {
         try await load(installed)
