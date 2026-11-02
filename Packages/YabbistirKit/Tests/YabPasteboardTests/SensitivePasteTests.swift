@@ -217,6 +217,34 @@ final class FakeSensitiveBoard: SensitivePasteboard {
         #expect(board.string(forType: .string) == "deniz.k")
     }
 
+    /// The clipboard moves on in the beat before ⌘V (a flush, another value, a copy from another device): the
+    /// keystroke is not sent, so what took the value's place is never pasted.
+    @Test(arguments: [true, false])
+    func noKeystrokeOnceTheClipboardMovedOn(concealed: Bool) async {
+        let board = FakeSensitiveBoard(previous)
+        let paste = SensitivePaste(board: board, send: { _, onlyIf in
+            board.copyElsewhere("yeni kopya")
+            return onlyIf?() ?? true ? .pasted : .copiedOnly(.targetLeft)
+        }, didWrite: { _ in }, restoreDelay: Self.soon, copiedOnlyLifetime: Self.never)
+        let outcome = await paste.paste("s3cr3t-örnek", concealed: concealed, targetBundleID: "com.apple.Safari", onlyIf: nil,
+                                        restoreInstead: nil)
+        #expect(outcome == .copiedOnly(.targetLeft))
+        #expect(board.items == [[rep(TypeIdentifiers.plainText, "yeni kopya")]])
+        #expect(board.restores.isEmpty)
+    }
+
+    /// While the clipboard holds the value, ⌘V goes; the caller's own check still decides.
+    @Test(arguments: [true, false])
+    func theKeystrokeStillAsksTheCaller(concealed: Bool) async {
+        let board = FakeSensitiveBoard(previous)
+        let paste = SensitivePaste(board: board, send: { _, onlyIf in onlyIf?() ?? true ? .pasted : .copiedOnly(.targetLeft) },
+                                   didWrite: { _ in }, restoreDelay: Self.soon, copiedOnlyLifetime: Self.never)
+        #expect(await paste.paste("s3cr3t-örnek", concealed: concealed, targetBundleID: nil, onlyIf: nil, restoreInstead: nil) == .pasted)
+        #expect(await paste.paste("s3cr3t-örnek", concealed: concealed, targetBundleID: nil, onlyIf: { true }, restoreInstead: nil) == .pasted)
+        #expect(await paste.paste("s3cr3t-örnek", concealed: concealed, targetBundleID: nil, onlyIf: { false }, restoreInstead: nil)
+                == .copiedOnly(.targetLeft))
+    }
+
     /// ⌘C on a source row: the text is written and nothing is typed.
     @Test func aCopyIsWrittenAndNotSent() {
         let board = FakeSensitiveBoard(previous)

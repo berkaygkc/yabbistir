@@ -70,7 +70,8 @@ public final class SystemSensitivePasteboard: SensitivePasteboard {
 /// Pastes or copies a source's value without it ever entering history.
 @MainActor
 public protocol SensitivePasting: AnyObject {
-    /// Writes `text` and types ⌘V. A secret (`concealed`) gives the clipboard back afterwards; text stays.
+    /// Writes `text` and types ⌘V, only while the clipboard still holds it and `onlyIf` (when given) says yes. A secret
+    /// (`concealed`) gives the clipboard back afterwards; text stays.
     /// `restoreInstead` takes the place of that give-back (the paste stack puts its own head back); if it writes
     /// nothing, the give-back still happens.
     func paste(_ text: String, concealed: Bool, targetBundleID: String?, onlyIf: (() -> Bool)?,
@@ -120,8 +121,8 @@ public final class SensitivePaste: SensitivePasting {
     public func paste(_ text: String, concealed: Bool, targetBundleID: String?, onlyIf: (() -> Bool)?,
                       restoreInstead: (() -> Void)?) async -> PasteOutcome {
         guard concealed else {
-            write(text)
-            return await send(targetBundleID, onlyIf)
+            let written = write(text)
+            return await send(targetBundleID, holding(written, onlyIf))
         }
         // A secret pasted while another still waits keeps that one's clipboard: the person's, not the first secret.
         // One the clipboard moved on from has nothing left to give back.
@@ -131,7 +132,7 @@ public final class SensitivePaste: SensitivePasting {
         let written = board.write(text, concealed: true)
         didWrite(written)
         pending = Pending(snapshot: snapshot, written: written, restoreInstead: restoreInstead)
-        let outcome = await send(targetBundleID, onlyIf)
+        let outcome = await send(targetBundleID, holding(written, onlyIf))
         // A newer value, a copy or a flush may have taken its place during the send.
         guard pending?.written == written else { return outcome }
         switch outcome {
@@ -152,9 +153,18 @@ public final class SensitivePaste: SensitivePasting {
     }
 
     /// Text stays on the clipboard; a secret still waiting has nothing to give back over it.
-    private func write(_ text: String) {
+    @discardableResult
+    private func write(_ text: String) -> Int {
         drop()
-        didWrite(board.write(text, concealed: false))
+        let written = board.write(text, concealed: false)
+        didWrite(written)
+        return written
+    }
+
+    /// ⌘V goes only while the clipboard still holds the value: a flush, another value or a copy (from this Mac or
+    /// another device) that took its place in the beat before the keystroke is never pasted instead.
+    private func holding(_ written: Int, _ onlyIf: (() -> Bool)?) -> () -> Bool {
+        { [board] in board.changeCount == written && (onlyIf?() ?? true) }
     }
 
     private func restore(after delay: Duration) {
