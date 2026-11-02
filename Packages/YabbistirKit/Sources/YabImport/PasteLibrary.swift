@@ -53,6 +53,8 @@ public struct PasteItem: Sendable {
 /// temporary folder and only the copy is opened. External data files are read in place.
 public final class PasteLibrary: Sendable {
     private static let tables = ["ZITEMENTITY", "ZITEMDATAENTITY", "ZLISTENTITY", "ZAPPLICATIONENTITY"]
+    /// The name every temporary copy starts with.
+    private static let copyPrefix = "yab-library-"
 
     private let location: PasteLibraryLocation
     private let queue: DatabaseQueue
@@ -93,7 +95,7 @@ public final class PasteLibrary: Sendable {
     /// `afterCopy` runs after each copy attempt (with the attempt number) and exists so tests can change the original mid-copy.
     static func open(_ location: PasteLibraryLocation, afterCopy: (Int) -> Void) throws(PasteImportError) -> PasteLibrary {
         let fm = FileManager.default
-        let copy = fm.temporaryDirectory.appendingPathComponent("yab-library-\(UUID().uuidString)", isDirectory: true)
+        let copy = fm.temporaryDirectory.appendingPathComponent(copyPrefix + UUID().uuidString, isDirectory: true)
         let names = ["db.sqlite", "db.sqlite-wal"]
         func stamp() -> [String: [Double]] {
             var result: [String: [Double]] = [:]
@@ -145,6 +147,16 @@ public final class PasteLibrary: Sendable {
         return PasteLibrary(location: location, queue: queue, copyFolder: copy)
     }
 
+    /// Removes the temporary copies an earlier run left behind (a crash or a force quit never closed them). Call it at
+    /// launch only, before any library is opened: a copy in use would go too.
+    public static func removeStaleCopies(in directory: URL = FileManager.default.temporaryDirectory) {
+        let fm = FileManager.default
+        guard let names = try? fm.contentsOfDirectory(atPath: directory.path) else { return }
+        for name in names where name.hasPrefix(copyPrefix) {
+            try? fm.removeItem(at: directory.appendingPathComponent(name, isDirectory: true))
+        }
+    }
+
     public func summary() throws(PasteImportError) -> PasteSummary {
         do {
             let (history, boards) = try queue.read { db in
@@ -154,10 +166,10 @@ public final class PasteLibrary: Sendable {
                     FROM ZLISTENTITY l JOIN ZITEMENTITY i ON i.ZLIST = l.Z_PK
                     GROUP BY l.Z_PK ORDER BY l.Z_PK
                     """)
-                let boards = rows.map { row -> PasteBoard in
-                    let id: Int64 = row["pk"]
-                    let name = (row["name"] as String?)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-                    return PasteBoard(id: id, name: name.isEmpty ? "Pinboard \(id)" : name, count: row["n"])
+                let boards = rows.compactMap { row -> PasteBoard? in
+                    guard let id: Int64 = row.lenient("pk") else { return nil }
+                    let name = (row.lenient("name") as String?)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    return PasteBoard(id: id, name: name.isEmpty ? "Pinboard \(id)" : name, count: row.lenient("n") ?? 0)
                 }
                 return (history, boards)
             }
@@ -191,7 +203,7 @@ public final class PasteLibrary: Sendable {
             do {
                 rows = try queue.read { db in
                     try Row.fetchAll(db, sql: """
-                        SELECT i.ZIDENTIFIER AS id, i.ZLIST AS list, i.ZDISPLAYORDERINPINBOARD AS ord, i.ZCREATEDAT AS created,
+                        SELECT i.Z_PK AS pk, i.ZIDENTIFIER AS id, i.ZLIST AS list, i.ZDISPLAYORDERINPINBOARD AS ord, i.ZCREATEDAT AS created,
                                i.ZTIMESTAMP AS ts, i.ZTITLE AS title, d.ZRAWPASTEBOARDITEMS AS blob,
                                a.ZBUNDLEIDENTIFIER AS bundle, a.ZNAME AS app
                         FROM ZITEMENTITY i
@@ -204,15 +216,18 @@ public final class PasteLibrary: Sendable {
                 throw PasteImportError.unreadable
             }
             if rows.isEmpty { return }
-            try body(rows.map(item(from:)))
+            let readAt = Date()
+            try body(rows.map { item(from: $0, readAt: readAt) })
             if rows.count < size { return }
             offset += size
         }
     }
 
-    private func item(from row: Row) -> PasteItem {
+    /// Every column is read leniently: the other app's types were never ours to check, so a value of an unexpected
+    /// type reads as missing instead of trapping.
+    private func item(from row: Row, readAt: Date) -> PasteItem {
         let payload: Result<[[PasteboardRepresentation]], PasteImportError>
-        if let blob = row["blob"] as Data? {
+        if let blob: Data = row.lenient("blob") {
             do {
                 payload = .success(try PasteBlobDecoder.decode(blob, externalDataDirectory: externalDirectory))
             } catch let error as PasteImportError {
@@ -224,19 +239,23 @@ public final class PasteLibrary: Sendable {
             payload = .failure(.unknownFormat)
         }
         var source: SourceApp?
-        if let bundle = row["bundle"] as String?, !bundle.isEmpty {
-            source = SourceApp(bundleID: bundle, name: (row["app"] as String?) ?? bundle)
+        if let bundle: String = row.lenient("bundle"), !bundle.isEmpty {
+            source = SourceApp(bundleID: bundle, name: row.lenient("app") ?? bundle)
         }
-        let created = (row["created"] as Double?) ?? 0
-        let stamp = (row["ts"] as Double?) ?? created
-        return PasteItem(externalID: (row["id"] as String?) ?? "",
-                         boardID: row["list"] as Int64?,
-                         boardOrder: (row["ord"] as Int64?) ?? 0,
-                         firstCopiedAt: Date(timeIntervalSinceReferenceDate: created),
-                         lastCopiedAt: Date(timeIntervalSinceReferenceDate: stamp),
+        // A missing date takes the other one; with neither, the item is dated when it is read (never 2001-01-01).
+        let created: Double? = row.lenient("created")
+        let stamp: Double? = row.lenient("ts")
+        // A missing, empty or non-text identifier is made from the row's key, so such items never share one.
+        let identifier = (row.lenient("id") as String?).flatMap { $0.isEmpty ? nil : $0 }
+        let pk: Int64 = row.lenient("pk") ?? 0
+        return PasteItem(externalID: identifier ?? "pk:\(pk)",
+                         boardID: row.lenient("list"),
+                         boardOrder: row.lenient("ord") ?? 0,
+                         firstCopiedAt: (created ?? stamp).map(Date.init(timeIntervalSinceReferenceDate:)) ?? readAt,
+                         lastCopiedAt: (stamp ?? created).map(Date.init(timeIntervalSinceReferenceDate:)) ?? readAt,
                          source: source,
                          payload: payload,
-                         title: row["title"] as String?)
+                         title: row.lenient("title"))
     }
 
     private func folderBytes() -> Int64 {
@@ -248,5 +267,13 @@ public final class PasteLibrary: Sendable {
             total += Int64(values.fileSize ?? 0)
         }
         return total
+    }
+}
+
+private extension Row {
+    /// The column's value when it converts to `T`; nil when it is NULL or of another type. `row[column] as T?` would
+    /// trap on a value that does not convert.
+    func lenient<T: DatabaseValueConvertible>(_ column: String) -> T? {
+        T.fromDatabaseValue(self[column] as DatabaseValue)
     }
 }

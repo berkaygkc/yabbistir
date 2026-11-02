@@ -289,6 +289,27 @@ private func sample() throws -> PasteLibrary {
         #expect(try store.categories().isEmpty)
     }
 
+    /// Rows with a raw-byte identifier, no identifier at all, or no creation date all come in, each as its own item.
+    @Test func oddRowsImportAsDistinctItems() throws {
+        let store = try ItemStore.temporary()
+        let bytes = Data([0xFF, 0xFE, 0x00, 0x80, 0xC3, 0x28, 0xA0, 0xA1, 0xE2, 0x28, 0xA1, 0xF0, 0x28, 0x8C, 0xBC, 0x9F])
+        let library = try open([
+            L.Item(externalID: nil, identifierBytes: bytes, createdAt: 1, timestamp: 2, payload: .plain(text("raw bytes"))),
+            L.Item(externalID: nil, createdAt: 1, timestamp: 3, payload: .plain(text("no id"))),
+            L.Item(externalID: nil, createdAt: 1, timestamp: 4, payload: .plain(text("no id either"))),
+            L.Item(externalID: "undated", createdAt: nil, timestamp: 5, payload: .plain(text("no created date"))),
+        ])
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: PasteSelection(history: true, boards: [])) { _ in }
+        #expect(report.added == 4 && report.skipped == 0 && report.failed == 0)
+        let items = try store.history(limit: 10)
+        #expect(Set(items.map(\.previewText)) == ["raw bytes", "no id", "no id either", "no created date"])
+        let undated = try #require(items.first { $0.previewText == "no created date" })
+        #expect(undated.firstCopiedAt == Date(timeIntervalSinceReferenceDate: 5))
+        let again = try importer(store).run(library, selection: PasteSelection(history: true, boards: [])) { _ in }
+        #expect(again.added == 0 && again.skipped == 4)
+    }
+
     @Test func kindsAreCounted() throws {
         let store = try ItemStore.temporary()
         let library = try open([

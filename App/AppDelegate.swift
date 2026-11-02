@@ -1,5 +1,6 @@
 import AppKit
 import YabExtensions
+import YabImport
 import YabPlatform
 import YabUI
 
@@ -22,6 +23,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Before the store opens or the clipboard is watched: the other build may be using both.
         SingleInstance.replaceCounterpart()
         SingleInstance.yieldToLaterLaunches()
+        // Before anything can open another clipboard manager's library: copies of it an earlier run left behind go.
+        PasteLibrary.removeStaleCopies()
         do {
             let env = try AppEnvironment()
             // Read before anything is captured: a new install has nothing yet.

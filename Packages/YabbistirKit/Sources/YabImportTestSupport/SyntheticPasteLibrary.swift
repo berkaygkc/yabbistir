@@ -18,11 +18,14 @@ public enum SyntheticPasteLibrary {
     }
 
     public struct Item: Sendable {
-        public var externalID: String
+        /// `ZIDENTIFIER` as text; nil stores NULL.
+        public var externalID: String?
+        /// When set, `ZIDENTIFIER` holds these raw bytes (a BLOB) instead of text.
+        public var identifierBytes: Data?
         public var title: String?
-        /// Core Data seconds since 2001-01-01.
-        public var createdAt: Double
-        public var timestamp: Double
+        /// Core Data seconds since 2001-01-01; nil stores NULL.
+        public var createdAt: Double?
+        public var timestamp: Double?
         /// `ZLISTENTITY.Z_PK`; nil for history.
         public var board: Int64?
         public var order: Int64
@@ -30,9 +33,11 @@ public enum SyntheticPasteLibrary {
         public var app: Int64?
         public var payload: Payload
 
-        public init(externalID: String = UUID().uuidString, title: String? = nil, createdAt: Double, timestamp: Double,
-                    board: Int64? = nil, order: Int64 = 0, app: Int64? = nil, payload: Payload) {
-            self.externalID = externalID; self.title = title; self.createdAt = createdAt; self.timestamp = timestamp
+        public init(externalID: String? = UUID().uuidString, identifierBytes: Data? = nil, title: String? = nil,
+                    createdAt: Double?, timestamp: Double?, board: Int64? = nil, order: Int64 = 0, app: Int64? = nil,
+                    payload: Payload) {
+            self.externalID = externalID; self.identifierBytes = identifierBytes; self.title = title
+            self.createdAt = createdAt; self.timestamp = timestamp
             self.board = board; self.order = order; self.app = app; self.payload = payload
         }
     }
@@ -88,10 +93,11 @@ public enum SyntheticPasteLibrary {
                     dataPK = Int64(index + 1)
                     try db.execute(sql: "INSERT INTO ZITEMDATAENTITY (Z_PK, ZRAWPASTEBOARDITEMS) VALUES (?, ?)", arguments: [dataPK, blob])
                 }
+                let identifier: (any DatabaseValueConvertible)? = if let bytes = item.identifierBytes { bytes } else { item.externalID }
                 try db.execute(sql: """
                     INSERT INTO ZITEMENTITY (Z_PK, ZIDENTIFIER, ZCREATEDAT, ZTIMESTAMP, ZTITLE, ZDATA, ZLIST, ZDISPLAYORDERINPINBOARD, ZSOURCEAPPLICATION)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """, arguments: [index + 1, item.externalID, item.createdAt, item.timestamp, item.title, dataPK, item.board, item.order, item.app])
+                    """, arguments: [index + 1, identifier, item.createdAt, item.timestamp, item.title, dataPK, item.board, item.order, item.app])
             }
         }
         return queue

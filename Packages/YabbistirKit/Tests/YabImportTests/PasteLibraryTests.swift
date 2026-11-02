@@ -94,6 +94,54 @@ private func collect(_ library: PasteLibrary, history: Bool, boards: Set<Int64>)
         #expect(item.title == "ornek.dev note")
     }
 
+    /// An identifier stored as raw bytes that are not text (as a UUID attribute would be) decodes without a crash.
+    @Test func aRawByteIdentifierDecodesWithoutACrash() throws {
+        let folder = try tempFolder()
+        let bytes = Data([0xFF, 0xFE, 0x00, 0x80, 0xC3, 0x28, 0xA0, 0xA1, 0xE2, 0x28, 0xA1, 0xF0, 0x28, 0x8C, 0xBC, 0x9F])
+        try SyntheticPasteLibrary.make(in: folder, items: [
+            SyntheticPasteLibrary.Item(externalID: nil, identifierBytes: bytes, createdAt: 1, timestamp: 2, payload: .plain(text("raw"))),
+        ])
+        let library = try PasteLibrary.open(PasteLibraryLocation(folder: folder, vendor: nil))
+        defer { library.close() }
+        #expect(try collect(library, history: true, boards: []).map(\.externalID) == ["pk:1"])
+    }
+
+    /// Missing or empty identifiers are made from the row's key, so such items never collide.
+    @Test func missingIdentifiersStayDistinct() throws {
+        let folder = try tempFolder()
+        try SyntheticPasteLibrary.make(in: folder, items: [
+            SyntheticPasteLibrary.Item(externalID: nil, createdAt: 1, timestamp: 2, payload: .plain(text("one"))),
+            SyntheticPasteLibrary.Item(externalID: nil, createdAt: 1, timestamp: 3, payload: .plain(text("two"))),
+            SyntheticPasteLibrary.Item(externalID: "", createdAt: 1, timestamp: 4, payload: .plain(text("three"))),
+            SyntheticPasteLibrary.Item(externalID: "kept", createdAt: 1, timestamp: 5, payload: .plain(text("four"))),
+        ])
+        let library = try PasteLibrary.open(PasteLibraryLocation(folder: folder, vendor: nil))
+        defer { library.close() }
+        #expect(try collect(library, history: true, boards: []).map(\.externalID) == ["pk:1", "pk:2", "pk:3", "kept"])
+    }
+
+    /// A missing creation date takes the last-copied one; with neither, the item is dated when it is read, never 2001.
+    @Test func aMissingDateFallsBack() throws {
+        let folder = try tempFolder()
+        try SyntheticPasteLibrary.make(in: folder, items: [
+            SyntheticPasteLibrary.Item(externalID: "undated", createdAt: nil, timestamp: nil, payload: .plain(text("one"))),
+            SyntheticPasteLibrary.Item(externalID: "stamped", createdAt: nil, timestamp: 500, payload: .plain(text("two"))),
+            SyntheticPasteLibrary.Item(externalID: "created", createdAt: 600, timestamp: nil, payload: .plain(text("three"))),
+        ])
+        let library = try PasteLibrary.open(PasteLibraryLocation(folder: folder, vendor: nil))
+        defer { library.close() }
+        let before = Date()
+        let items = Dictionary(uniqueKeysWithValues: try collect(library, history: true, boards: []).map { ($0.externalID, $0) })
+        let after = Date()
+        let undated = try #require(items["undated"])
+        #expect(undated.firstCopiedAt >= before && undated.firstCopiedAt <= after)
+        #expect(undated.lastCopiedAt >= before && undated.lastCopiedAt <= after)
+        #expect(items["stamped"]?.firstCopiedAt == Date(timeIntervalSinceReferenceDate: 500))
+        #expect(items["stamped"]?.lastCopiedAt == Date(timeIntervalSinceReferenceDate: 500))
+        #expect(items["created"]?.firstCopiedAt == Date(timeIntervalSinceReferenceDate: 600))
+        #expect(items["created"]?.lastCopiedAt == Date(timeIntervalSinceReferenceDate: 600))
+    }
+
     @Test func aMissingLibraryReportsUnavailable() throws {
         let folder = try tempFolder().appendingPathComponent("nope")
         #expect(throws: PasteImportError.unavailable) {
@@ -143,6 +191,18 @@ private func collect(_ library: PasteLibrary, history: Bool, boards: Set<Int64>)
         defer { library.close() }
         #expect(try library.summary().historyCount == 3)
         #expect(try collect(library, history: true, boards: [7]).count == 5)
+    }
+
+    /// Copies a run left behind without closing its library (a crash, a force quit) are swept; nothing else is.
+    @Test func staleCopiesAreRemoved() throws {
+        let folder = try tempFolder()
+        let fm = FileManager.default
+        for name in ["yab-library-1", "yab-library-2", "yab-libraryX", "lib-other"] {
+            try fm.createDirectory(at: folder.appendingPathComponent(name), withIntermediateDirectories: true)
+        }
+        try Data("x".utf8).write(to: folder.appendingPathComponent("yab-library-1/db.sqlite"))
+        PasteLibrary.removeStaleCopies(in: folder)
+        #expect(Set(try fm.contentsOfDirectory(atPath: folder.path)) == ["yab-libraryX", "lib-other"])
     }
 
     @Test func aChangingOriginalIsRetriedThenGivenUp() throws {
