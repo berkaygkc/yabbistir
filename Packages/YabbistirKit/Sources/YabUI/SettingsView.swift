@@ -3,7 +3,7 @@ import YabLocalization
 
 /// The Settings sidebar's sections, in the order they are listed.
 public enum SettingsSection: String, CaseIterable, Hashable {
-    case general, shortcuts, panel, history, categories, extensions, permissions, about
+    case general, shortcuts, panel, history, categories, extensions, permissions, `import`, about
 
     public var titleKey: String { "settings.section.\(rawValue)" }
 
@@ -16,6 +16,7 @@ public enum SettingsSection: String, CaseIterable, Hashable {
         case .categories: "tag"
         case .extensions: "puzzlepiece.extension"
         case .permissions: "hand.raised"
+        case .import: "square.and.arrow.down"
         case .about: "info.circle"
         }
     }
@@ -31,12 +32,13 @@ public struct SettingsModels {
     public let extensions: ExtensionsSettingsModel
     public let store: StoreModel
     public let permissions: PermissionsModel
+    public let importer: ImportModel
     public let about: AboutModel
     public let presence: SettingsPresence
 
     public init(preferences: Preferences, language: LanguageStore, general: GeneralSettingsModel,
                 history: HistorySettingsModel, categories: CategoryEditorModel, extensions: ExtensionsSettingsModel, store: StoreModel,
-                permissions: PermissionsModel, about: AboutModel, presence: SettingsPresence) {
+                permissions: PermissionsModel, importer: ImportModel, about: AboutModel, presence: SettingsPresence) {
         self.preferences = preferences
         self.language = language
         self.general = general
@@ -45,6 +47,7 @@ public struct SettingsModels {
         self.extensions = extensions
         self.store = store
         self.permissions = permissions
+        self.importer = importer
         self.about = about
         self.presence = presence
     }
@@ -81,6 +84,8 @@ public struct SettingsView: View {
                 CategoriesSettingsView(model: models.categories, presence: models.presence)
             case .permissions:
                 PermissionsSettingsView(model: models.permissions, presence: models.presence)
+            case .import:
+                ImportSettingsView(model: models.importer, presence: models.presence)
             case .about:
                 AboutSettingsView(model: models.about)
             }

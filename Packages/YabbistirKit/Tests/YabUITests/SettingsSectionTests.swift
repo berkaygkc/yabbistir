@@ -5,7 +5,7 @@ import YabLocalization
 @Suite struct SettingsSectionTests {
     @Test func sectionsComeInTheSpecOrder() {
         #expect(SettingsSection.allCases == [
-            .general, .shortcuts, .panel, .history, .categories, .extensions, .permissions, .about,
+            .general, .shortcuts, .panel, .history, .categories, .extensions, .permissions, .import, .about,
         ])
     }
 

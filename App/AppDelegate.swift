@@ -69,6 +69,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     extensions: settingsModel, store: storeModel,
                     permissions: PermissionsModel(probe: SystemPermissionProbe(loginItem: loginItem),
                                                   loginItem: loginItem, language: env.language),
+                    importer: ImportModel(store: env.library.store, reload: { [weak env] in try? env?.library.reloadIndex() },
+                                          ignoredApps: { [weak env] in Set(env?.preferences.ignoredApps ?? []) },
+                                          language: env.language),
                     about: AboutModel(
                         version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
                         build: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "",
