@@ -1,6 +1,8 @@
 import Foundation
 import Testing
 import YabCore
+import YabExtensionKit
+import YabExtensions
 import YabLocalization
 @testable import YabUI
 
@@ -91,5 +93,67 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         let created = try #require(try library.store.categories().last)
         #expect(created.name == "Yeni kategori")
         #expect(editor.selectedID == created.id)
+    }
+
+    // MARK: A source's category
+
+    static let vaultKey = "dev.example.kasa/vault"
+
+    /// The vault's category, made by its extension, after the person's two; the editor reads its rows from `sources`.
+    private func addVault(sources: FakeSources? = nil) throws -> (CategoryEditorModel, CategoryEditorModel.Row) {
+        try library.syncSourceCategories([SourceCategorySeed(key: Self.vaultKey, name: "Kasa")])
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-src-\(UUID().uuidString)")!)
+        language.language = .turkish
+        let editor = CategoryEditorModel(library: library, language: language, sources: sources)
+        return (editor, try #require(editor.rows.first { $0.isSource }))
+    }
+
+    /// Its extension names and fills it: the editor keeps its name, colour and existence as they are, and says so.
+    @Test func aSourceCategoryCannotBeRenamedRecolouredOrDeletedInTheEditor() throws {
+        let (editor, vault) = try addVault()
+        #expect(vault.category.name == "Kasa")
+        #expect(editor.rows.map(\.isSource) == [false, false, true])
+        let color = vault.category.color
+        let other = try #require(CategoryColor.allCases.first { $0 != color })
+        #expect(!editor.rename(vault.id, to: "Şifreler"))
+        #expect(!editor.setColor(vault.id, other))
+        #expect(!editor.delete(vault.id))
+        let stored = try #require(try library.store.categories().first { $0.source == Self.vaultKey })
+        #expect(stored.name == "Kasa")
+        #expect(stored.color == color)
+        #expect(editor.rows.map(\.category.name) == ["Kod", "Bağlantılar", "Kasa"])
+        // The person's own still change.
+        #expect(editor.setColor(code.id!, other))
+        #expect(editor.delete(links.id!))
+        #expect(editor.rows.map(\.category.name) == ["Kod", "Kasa"])
+    }
+
+    /// Visibility (the segments and ⇥) and order (dragging) are the person's, for a source's category too; its count is
+    /// the rows its list holds, and nothing while it has none at hand.
+    @Test func theEditorKeepsVisibilityAndOrderForSources() throws {
+        let sources = FakeSources()
+        sources.descriptors = [FakeSources.vault()]
+        sources.states[Self.vaultKey] = .rows([SourceRow(id: "1", title: "Kodhane", subtitle: "deniz.k"), SourceRow(id: "2", title: "ornek.dev")])
+        let (editor, vault) = try addVault(sources: sources)
+        func stored() throws -> ClipCategory { try #require(try library.store.categories().first { $0.source == Self.vaultKey }) }
+        #expect(vault.count == 2)
+        #expect(editor.rows.first { $0.id == code.id }?.count == 2)
+
+        editor.moveSelection(by: 2)
+        #expect(editor.selectedID == vault.id)
+        editor.toggleSelectedVisibility()
+        #expect(try stored().visibility == .always)
+        editor.setVisibility(vault.id, .onSelect)
+        #expect(try stored().visibility == .onSelect)
+
+        editor.move(from: 2, to: 0)
+        #expect(editor.rows.map(\.category.name) == ["Kasa", "Kod", "Bağlantılar"])
+        #expect(editor.selectedID == vault.id)
+        editor.moveSelection(by: 1)
+        #expect(editor.selectedID == code.id)
+
+        sources.states[Self.vaultKey] = .locked(message: "Kasa kilitli", command: nil)
+        editor.reload()
+        #expect(editor.rows.first { $0.id == vault.id }?.count == nil)
     }
 }

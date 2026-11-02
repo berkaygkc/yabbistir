@@ -1,6 +1,8 @@
 import Foundation
 import Testing
 @testable import YabCore
+import YabExtensionKit
+import YabExtensions
 import YabLocalization
 import YabPasteboard
 import YabStack
@@ -259,6 +261,38 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         #expect(!model.isPreviewVisible)
     }
 
+    /// The Kategoriler menu lists a source's category among the others (its row draws the key, `isSource`); once it is
+    /// open as a column, the button shows the key after the other open categories' dots.
+    @Test func theCategoryMenuMarksSources() throws {
+        let key = FakeSources.vault().id
+        try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
+        let vault = try #require(try library.store.categories().first { $0.source == key })
+        let sources = FakeSources()
+        sources.descriptors = [FakeSources.vault()]
+        sources.states[key] = .rows([SourceRow(id: "1", title: "Kodhane", subtitle: "deniz.k")])
+        let model = PanelViewModel(library: library, language: language, sources: sources, now: { now })
+        model.reset()
+        _ = model.handle(.toggleCategoryMenu)
+        #expect(model.categoryMenu == [.category(links, isShown: false), .category(vault, isShown: false), .editCategories])
+        #expect(vault.isSource)
+        #expect(model.categoryButtonDots.isEmpty)
+        #expect(!model.categoryButtonMarksSource)
+
+        _ = model.handle(.move(1))
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.categoryMenu[1] == .category(vault, isShown: true))
+        #expect(model.categoryButtonDots.isEmpty)
+        #expect(model.categoryButtonMarksSource)
+        _ = model.handle(.move(-1))
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.categoryButtonDots == [links.color])
+        #expect(model.categoryButtonMarksSource)
+        _ = model.handle(.move(1))
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.categoryButtonDots == [links.color])
+        #expect(!model.categoryButtonMarksSource)
+    }
+
     @Test func typingInActionsFiltersActionsNotHistory() {
         _ = model.handle(.toggleActions)
         _ = model.handle(.type("kop"))
@@ -298,6 +332,27 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         _ = model.handle(.type("KOD"))
         #expect(!model.pinOptions.contains(.create(name: "KOD")))
     }
+    /// A source's category is filled by its extension: neither ⌘P nor ⌘K's "Kategoriye ekle" offers it, and its name
+    /// is free for one of the person's own.
+    @Test func pinningNeverOffersASourceCategory() throws {
+        try library.syncSourceCategories([SourceCategorySeed(key: "dev.example.kasa/vault", name: "Kasa")])
+        func offersASource() -> Bool { model.pinOptions.contains { if case .category(let category, _) = $0 { category.isSource } else { false } } }
+        _ = model.handle(.togglePin)
+        #expect(model.layer == .pin)
+        #expect(model.pinOptions.count == 2)
+        #expect(!offersASource())
+        _ = model.handle(.type("Kasa"))
+        #expect(model.pinOptions == [.create(name: "Kasa")])
+        _ = model.handle(.escape)
+
+        _ = model.handle(.toggleActions)
+        _ = model.handle(.type("kategoriye"))
+        _ = model.handle(.confirm(plain: false))
+        #expect(model.layer == .pin)
+        #expect(model.pinOptions.count == 2)
+        #expect(!offersASource())
+    }
+
     @Test func creatingFromPinAddsTheItemAndOpensTheColumn() throws {
         let id = model.selectedID!
         _ = model.handle(.togglePin)

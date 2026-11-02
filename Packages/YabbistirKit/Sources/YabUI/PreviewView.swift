@@ -7,7 +7,7 @@ import YabLocalization
 
 /// The preview (400 pt glass): the item on top — text, highlighted code,
 /// image, color swatch, link card or files — then a quiet Info table. Opened from the keyboard,
-/// it ends with a hint bar.
+/// it ends with a hint bar. A source's row shows only what the row has, with no Info table.
 public struct PreviewView: View {
     let content: PreviewContent
     let language: AppLanguage
@@ -48,16 +48,26 @@ public struct PreviewView: View {
     private var details: some View {
         VStack(alignment: .leading, spacing: 0) {
             item
-            extensionSections
-            Text(L10n.string("preview.info", language))
-                .font(Tokens.Fonts.section)
-                .foregroundStyle(Tokens.Colors.textSecondary)
-                .padding(.top, 18)
-                .padding(.bottom, 4)
-            info
+            if !isSource {
+                extensionSections
+                Text(L10n.string("preview.info", language))
+                    .font(Tokens.Fonts.section)
+                    .foregroundStyle(Tokens.Colors.textSecondary)
+                    .padding(.top, 18)
+                    .padding(.bottom, 4)
+                info
+            }
         }
         .padding(EdgeInsets(top: 16, leading: 18, bottom: 14, trailing: 18))
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// A source's row is no item: it has no Info table to show.
+    private var isSource: Bool {
+        switch content.body {
+        case .source, .lockedSource: true
+        default: false
+        }
     }
 
     // MARK: The item
@@ -135,6 +145,52 @@ public struct PreviewView: View {
             }
         case .command(let command):
             commandBody(command)
+        case .source(let title, let subtitle, let note):
+            sourceBody(title: title, subtitle: subtitle, note: note)
+        case .lockedSource(let command):
+            lockedSourceBody(command)
+        }
+    }
+
+    // MARK: A source's row
+
+    /// The row's tile, title and subtitle as a header (13/600, 11.5 secondary), and under it the one quiet line that says
+    /// the secret is never shown.
+    private func sourceBody(title: String, subtitle: String?, note: String?) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 10) {
+                InitialTile(title: title)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title).font(.system(size: 13, weight: .semibold)).foregroundStyle(Tokens.Colors.text)
+                    if let subtitle, !subtitle.isEmpty {
+                        Text(subtitle).font(.system(size: 11.5)).foregroundStyle(Tokens.Colors.textSecondary)
+                    }
+                }
+                .lineLimit(1)
+                .truncationMode(.tail)
+            }
+            if let note {
+                Text(note).font(Tokens.Fonts.label).foregroundStyle(Tokens.Colors.textSecondary)
+            }
+        }
+    }
+
+    /// "Run in Terminal" over the command in a code block, then what to do once signed in.
+    private func lockedSourceBody(_ command: String?) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if let command {
+                outputHeader("preview.source.runInTerminal")
+                Text(command)
+                    .font(.system(size: 12, design: .monospaced))
+                    .lineSpacing(5)
+                    .foregroundStyle(Tokens.Colors.text)
+                    .textSelection(.enabled)
+                    .contentBlock()
+                    .padding(.bottom, 9)
+            }
+            Text(L10n.string("preview.source.reopen", language))
+                .font(Tokens.Fonts.label)
+                .foregroundStyle(Tokens.Colors.textSecondary)
         }
     }
 
@@ -378,10 +434,13 @@ public struct PreviewView: View {
         NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID).map { NSWorkspace.shared.icon(forFile: $0.path) }
     }
 
+    /// "␣ Close", then "↵ Paste", or a source row's own action ("↵ Şifreyi yapıştır", "⌘C Komutu kopyala").
     private var hints: some View {
         HStack(spacing: 14) {
-            hint("␣", "preview.close")
-            hint("↵", "panel.footer.paste")
+            hint(["␣"], L10n.string("preview.close", language))
+            ForEach(content.actionHints ?? [BarLabel(title: L10n.string("panel.footer.paste", language), keys: ["↵"])], id: \.self) {
+                hint($0.keys, $0.title)
+            }
             Spacer(minLength: 0)
         }
         .font(Tokens.Fonts.label)
@@ -390,10 +449,10 @@ public struct PreviewView: View {
         .overlay(alignment: .top) { Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5) }
     }
 
-    private func hint(_ key: String, _ label: String) -> some View {
+    private func hint(_ keys: [String], _ label: String) -> some View {
         HStack(spacing: 6) {
-            Keycap(key)
-            Text(L10n.string(label, language))
+            HStack(spacing: 3) { ForEach(keys, id: \.self) { Keycap($0) } }
+            Text(label)
         }
     }
 }

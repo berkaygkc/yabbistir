@@ -53,28 +53,27 @@ struct MenuSeparator: View {
     }
 }
 
-/// "Kategoriler ⌄" at the right of the search row, led by the dots of the opened on-select categories.
+/// "Kategoriler ⌄" at the right of the search row, led by the dots of the opened on-select categories, and a source's
+/// key after them when one of those is a source's (in the button's own colour).
 struct CategoryDropdown: View {
     @Bindable var model: PanelViewModel
     @State private var hovering = false
-
-    private var shownDots: [CategoryColor] {
-        model.categories.filter { $0.visibility == .onSelect && model.shownCategoryIDs.contains($0.id ?? -1) }.prefix(3).map(\.color)
-    }
 
     var body: some View {
         Button {
             _ = model.handle(.toggleCategoryMenu)
         } label: {
             HStack(spacing: 6) {
-                if !shownDots.isEmpty {
+                let dots = model.categoryButtonDots
+                if !dots.isEmpty {
                     HStack(spacing: -3) {
-                        ForEach(Array(shownDots.enumerated()), id: \.offset) { _, color in
+                        ForEach(Array(dots.enumerated()), id: \.offset) { _, color in
                             Circle().fill(Tokens.Colors.category(color)).frame(width: 8, height: 8)
                                 .overlay(Circle().strokeBorder(Tokens.Colors.surfaceSolid, lineWidth: 1))
                         }
                     }
                 }
+                if model.categoryButtonMarksSource { SourceMark(size: 10) }
                 Text(L10n.string("panel.categories.button", model.language))
                     .font(Tokens.Fonts.labelStrong.weight(.medium))
                 Image(systemName: "chevron.down").font(.system(size: 9, weight: .semibold))
@@ -91,8 +90,8 @@ struct CategoryDropdown: View {
     }
 }
 
-/// The Kategoriler menu (264 pt): "on select" categories with a check when open as a column,
-/// then "Edit categories ⌘E".
+/// The Kategoriler menu (264 pt): "on select" categories with a check when open as a column (a source's led by its key
+/// in the dot's place), then "Edit categories ⌘E".
 struct CategoryMenuView: View {
     @Bindable var model: PanelViewModel
     let onAction: (PanelAction) -> Void
@@ -107,7 +106,12 @@ struct CategoryMenuView: View {
                 switch option {
                 case .category(let category, let isShown):
                     MenuRow(title: category.name, isHighlighted: index == model.menuSelection) {
-                        Circle().fill(Tokens.Colors.category(category.color)).frame(width: 9, height: 9)
+                        if category.isSource {
+                            // In the dot's slot, so its name lines up with the others'.
+                            SourceMark(size: 12).foregroundStyle(Tokens.Colors.textSecondary).frame(width: 9, height: 9)
+                        } else {
+                            Circle().fill(Tokens.Colors.category(category.color)).frame(width: 9, height: 9)
+                        }
                     } trailing: {
                         Image(systemName: "checkmark").font(.system(size: 12, weight: .semibold)).opacity(isShown ? 1 : 0)
                     }

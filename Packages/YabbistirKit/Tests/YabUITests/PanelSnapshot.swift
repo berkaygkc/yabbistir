@@ -370,6 +370,117 @@ import YabLocalization
         }
     }
 
+    /// Around a source's column (a synthetic vault): an entry's preview (from the keyboard, and on hover), the locked row's
+    /// (with and without a command), the category editor with the vault's row (selected too), the Kategoriler menu with
+    /// it open, and the button's dots with its key. Dark Turkish, then light English.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
+    func renderSourceSurroundings() throws {
+        let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
+        let store = try ItemStore.temporary()
+        let now = Date()
+        var ids: [Int64] = []
+        for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
+                                ("Perşembe 14:00 — iade akışı demosu", 9), ("git rebase -i HEAD~3", 22), ("ops@ornek.dev", 1600)] {
+            ids.append(try #require(try store.ingest(CapturedClip(items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data(text.utf8))]],
+                                                                  source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutes * 60)))).item.id!)
+        }
+        let code = try store.createCategory(name: "SQL", color: .slate, visibility: .always)
+        let links = try store.createCategory(name: "Linkler", color: .sage)
+        _ = try store.createCategory(name: "Müşteri yanıtları", color: .clay)
+        try store.add(itemID: ids[0], toCategory: code.id!)
+        try store.add(itemID: ids[1], toCategory: links.id!)
+        let library = try Library(store: store)
+        let key = "dev.example.kasa/vault"
+        try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
+        let vault = try #require(try store.categories().first { $0.source == key })
+        let rows = [("Bulut konsolu", "ops@ornek.dev"), ("Eskiz", "melike@ornek.dev"), ("Kodhane", "melike@ornek.dev"), ("Kodhane", "deniz.k"),
+                    ("Grafikler", "ops@ornek.dev"), ("İş Portalı", "deniz.k"), ("ornek.dev", "melike@ornek.dev"), ("Veritabanı prod", "app_rw"),
+                    ("Nöbetçi", "ops@ornek.dev"), ("staging.ornek.dev", "ops@ornek.dev"), ("Yayınevi", nil)]
+            .enumerated().map { SourceRow(id: "\($0.offset)", title: $0.element.0, subtitle: $0.element.1) }
+        func descriptor(_ language: AppLanguage) -> SourceDescriptor {
+            guard language == .english else { return FakeSources.vault() }
+            return SourceDescriptor(extensionID: "dev.example.kasa", extensionName: "Vault", sourceID: "vault", title: "Vault", sensitive: true, actions: [
+                SourceActionDescriptor(id: "password", kind: .secret, title: "Paste password", label: "Password"),
+                SourceActionDescriptor(id: "username", kind: .text, title: "Paste username", label: "Username", copyTitle: "Copy username",
+                                       copied: "Username copied."),
+            ])
+        }
+        func write(_ view: some View, _ name: String, dark: Bool) {
+            let framed = view
+                .padding(30)
+                .background(dark ? Color(red: 0.12, green: 0.16, blue: 0.35) : Color(red: 0.86, green: 0.89, blue: 0.97))
+                .environment(\.colorScheme, dark ? .dark : .light)
+            let renderer = ImageRenderer(content: framed)
+            renderer.scale = 2
+            NSAppearance(named: dark ? .darkAqua : .aqua)!.performAsCurrentDrawingAppearance {
+                let image = renderer.nsImage!
+                let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
+                try? rep.representation(using: .png, properties: [:])!.write(to: dir.appendingPathComponent("source-around-\(name).png"))
+            }
+        }
+        /// Drawn through AppKit at 2×, as the editor's window draws it (its text fields need a window).
+        func writeHosted(_ view: some View, _ name: String, dark: Bool) {
+            let host = NSHostingView(rootView: view
+                .padding(30)
+                .background(dark ? Color(red: 0.12, green: 0.16, blue: 0.35) : Color(red: 0.86, green: 0.89, blue: 0.97))
+                .environment(\.colorScheme, dark ? .dark : .light))
+            let size = host.fittingSize
+            let window = NSWindow(contentRect: NSRect(origin: .zero, size: size), styleMask: [.borderless], backing: .buffered, defer: false)
+            window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua)
+            window.contentView = host
+            host.layoutSubtreeIfNeeded()
+            RunLoop.main.run(until: Date().addingTimeInterval(0.2))
+            guard let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width * 2), pixelsHigh: Int(size.height * 2),
+                                                bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+                                                colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0) else { return }
+            bitmap.size = size
+            host.cacheDisplay(in: host.bounds, to: bitmap)
+            try? bitmap.representation(using: .png, properties: [:])?.write(to: dir.appendingPathComponent("source-around-\(name).png"))
+        }
+        for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-around-\(UUID())")!)
+            languageStore.language = language
+            let sources = FakeSources()
+            sources.descriptors = [descriptor(language)]
+            sources.states[key] = .rows(rows)
+            let vaultDescriptor = descriptor(language)
+            let entry = PreviewLoader.load(source: .entry(key: key, row: rows[2]), descriptor: vaultDescriptor, language: language)
+            write(PreviewView(content: entry, language: language, showsHints: true, measuring: true), "preview-\(suffix)", dark: dark)
+            write(PreviewView(content: entry, language: language, showsHints: false, measuring: true), "preview-hover-\(suffix)", dark: dark)
+            let command = language == .english ? "kasa login --trust <email>" : "kasa login --trust <e-posta>"
+            let message = language == .english ? "Vault is locked" : "Kasa kilitli"
+            let locked = PreviewLoader.load(source: .locked(key: key, message: message, command: command), descriptor: vaultDescriptor,
+                                            language: language)
+            write(PreviewView(content: locked, language: language, showsHints: true, measuring: true), "locked-preview-\(suffix)", dark: dark)
+            let bare = PreviewLoader.load(source: .locked(key: key, message: message, command: nil), descriptor: vaultDescriptor, language: language)
+            write(PreviewView(content: bare, language: language, showsHints: true, measuring: true), "locked-plain-preview-\(suffix)", dark: dark)
+
+            let editor = CategoryEditorModel(library: library, language: languageStore, sources: sources)
+            writeHosted(CategoryEditorView(model: editor) {}, "editor-\(suffix)", dark: dark)
+            editor.select(vault.id!)
+            writeHosted(CategoryEditorView(model: editor) {}, "editor-selected-\(suffix)", dark: dark)
+
+            let model = PanelViewModel(library: library, language: languageStore, sources: sources, now: { now })
+            model.reset()
+            model.isPresented = true
+            model.toggleShown(links.id!)
+            model.toggleShown(vault.id!)
+            _ = model.handle(.toggleCategoryMenu)
+            _ = model.handle(.move(1))
+            write(CategoryMenuView(model: model) { _ in }
+                .background(Tokens.Colors.surfaceSolid, in: RoundedRectangle(cornerRadius: Tokens.Metrics.menuRadius, style: .continuous)),
+                  "menu-\(suffix)", dark: dark)
+            _ = model.handle(.escape)
+            write(CategoryDropdown(model: model).padding(10).background(Tokens.Colors.surfaceSolid), "dropdown-\(suffix)", dark: dark)
+            model.toggleShown(links.id!)
+            write(CategoryDropdown(model: model).padding(10).background(Tokens.Colors.surfaceSolid), "dropdown-key-only-\(suffix)", dark: dark)
+            model.toggleShown(links.id!)
+            var panel = PanelView(model: model, material: .tunedEffect)
+            panel.snapshot = true
+            write(panel, "panel-\(suffix)", dark: dark)
+        }
+    }
+
     /// The job card (synthetic jobs) in both themes: running with a fraction, an indeterminate
     /// state word, queued, and finished (ready, done in Finder, a missing tool); then a
     /// mix of them in English, and the status item's ring.

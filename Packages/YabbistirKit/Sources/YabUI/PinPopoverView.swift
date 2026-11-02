@@ -2,8 +2,8 @@ import SwiftUI
 import YabCore
 import YabLocalization
 
-/// ⌘P (264 pt): a search line, then category rows with a check for the ones the item is in,
-/// and "New category: …" when the query names none.
+/// ⌘P (264 pt): a search line, then the person's category rows with a check for the ones the item is in (a source's
+/// category is its extension's to fill, so it is not listed), and "New category: …" when the query names none.
 public struct PinPopoverView: View {
     @Bindable var model: PanelViewModel
 

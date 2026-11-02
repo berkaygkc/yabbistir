@@ -2,16 +2,22 @@ import Foundation
 import Observation
 import SwiftUI
 import YabCore
+import YabExtensions
 import YabLocalization
 
 /// The category editor (⌘E): reorder, recolor, rename, set visibility, delete. Every change
-/// goes through the Library, so the panel behind it updates live.
+/// goes through the Library, so the panel behind it updates live. A source's category is its extension's to name, fill
+/// and remove: only its visibility and place are the person's.
 @MainActor @Observable
 public final class CategoryEditorModel {
     public struct Row: Identifiable, Equatable {
         public var category: ClipCategory
-        public var count: Int
+        /// Its items; a source's category counts the rows its list holds now, nil while it has none at hand (locked,
+        /// not listed yet).
+        public var count: Int?
         public var id: Int64 { category.id ?? -1 }
+        /// An extension's source fills it: no colour, name field or delete, only visibility and order.
+        public var isSource: Bool { category.isSource }
     }
 
     public private(set) var rows: [Row] = []
@@ -20,10 +26,13 @@ public final class CategoryEditorModel {
 
     @ObservationIgnored private let library: Library
     @ObservationIgnored private let languageStore: LanguageStore
+    /// Where a source's category counts its rows.
+    @ObservationIgnored private let sources: SourceProviding?
 
-    public init(library: Library, language: LanguageStore) {
+    public init(library: Library, language: LanguageStore, sources: SourceProviding? = nil) {
         self.library = library
         self.languageStore = language
+        self.sources = sources
         reload()
     }
 
@@ -32,7 +41,9 @@ public final class CategoryEditorModel {
     public func reload() {
         let previous = rows.firstIndex { $0.id == selectedID } ?? 0
         let counts = (try? library.store.itemCounts()) ?? [:]
-        rows = ((try? library.store.categories()) ?? []).map { Row(category: $0, count: counts[$0.id ?? -1] ?? 0) }
+        rows = ((try? library.store.categories()) ?? []).map { category in
+            Row(category: category, count: category.source.map(sourceCount) ?? counts[category.id ?? -1] ?? 0)
+        }
         if !rows.contains(where: { $0.id == selectedID }) {
             selectedID = rows.isEmpty ? nil : rows[min(previous, rows.count - 1)].id
         }
@@ -53,18 +64,20 @@ public final class CategoryEditorModel {
         setVisibility(row.id, row.category.visibility == .always ? .onSelect : .always)
     }
 
-    /// False (and the old name stays) for a blank name or one another category already has.
+    /// False (and the old name stays) for a blank name, one another category already has, or a source's category.
     @discardableResult
     public func rename(_ id: Int64, to name: String) -> Bool {
-        guard var category = rows.first(where: { $0.id == id })?.category else { return false }
+        guard var category = rows.first(where: { $0.id == id })?.category, !category.isSource else { return false }
         category.name = name
         return save(category)
     }
 
-    public func setColor(_ id: Int64, _ color: CategoryColor) {
-        guard var category = rows.first(where: { $0.id == id })?.category else { return }
+    /// False for a source's category, which shows its key, not a colour.
+    @discardableResult
+    public func setColor(_ id: Int64, _ color: CategoryColor) -> Bool {
+        guard var category = rows.first(where: { $0.id == id })?.category, !category.isSource else { return false }
         category.color = color
-        save(category)
+        return save(category)
     }
 
     public func setVisibility(_ id: Int64, _ visibility: CategoryVisibility) {
@@ -79,9 +92,12 @@ public final class CategoryEditorModel {
         reload()
     }
 
-    public func delete(_ id: Int64) {
-        try? library.deleteCategory(id: id)
-        reload()
+    /// False for a source's category: it leaves when its extension does.
+    @discardableResult
+    public func delete(_ id: Int64) -> Bool {
+        guard let row = rows.first(where: { $0.id == id }), !row.isSource else { return false }
+        defer { reload() }
+        return (try? library.deleteCategory(id: id)) != nil
     }
 
     /// "New category", then "New category 2", "New category 3"…: on select, next unused color,
@@ -101,6 +117,12 @@ public final class CategoryEditorModel {
         if let id = created?.id { selectedID = id }
     }
 
+    /// The rows a source lists now; nil while it has none at hand.
+    private func sourceCount(_ key: String) -> Int? {
+        guard case .rows(let rows)? = sources?.state(of: key) else { return nil }
+        return rows.count
+    }
+
     @discardableResult
     private func save(_ category: ClipCategory) -> Bool {
         defer { reload() }
@@ -114,7 +136,8 @@ public final class CategoryEditorModel {
 }
 
 /// 440 pt glass sheet: title and description, 46 pt rows with a
-/// grip, color well, inline name, item count, Always / On select segments and delete.
+/// grip, color well, inline name, item count, Always / On select segments and delete. A source's row has its key in
+/// the well's place, its name as fixed text and an empty slot where delete would be, so the columns stay in line.
 public struct CategoryEditorView: View {
     @Bindable var model: CategoryEditorModel
     let onClose: () -> Void
@@ -270,30 +293,36 @@ private struct EditorRow: View {
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "line.3.horizontal").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textTertiary)
-            colorWell
-            TextField("", text: $name)
-                .textFieldStyle(.plain)
-                .font(Tokens.Fonts.body)
-                .foregroundStyle(Tokens.Colors.text)
-                .focused(focus, equals: row.id)
-                .padding(.horizontal, 6)
-                .frame(height: 26)
-                .background(editing ? Tokens.Colors.tile : .clear, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: 6, style: .continuous)
-                    .strokeBorder(editing ? Tokens.Colors.accentSoft : .clear, lineWidth: 2))
-                .onSubmit(commit)
-                .onChange(of: focus.wrappedValue) { old, new in if old == row.id, new != row.id { commit() } }
-            Text("\(row.count)").font(Tokens.Fonts.label).monospacedDigit().foregroundStyle(Tokens.Colors.textSecondary)
+            if row.isSource {
+                SourceMark(size: 13).foregroundStyle(Tokens.Colors.textSecondary).frame(width: 20, height: 20)
+                // The extension names it: fixed text, set where the field's text sits.
+                Text(row.category.name)
+                    .font(Tokens.Fonts.body)
+                    .foregroundStyle(Tokens.Colors.text)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .padding(.horizontal, 6)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 26)
+            } else {
+                colorWell
+                nameField
+            }
+            Text(row.count.map { "\($0)" } ?? "").font(Tokens.Fonts.label).monospacedDigit().foregroundStyle(Tokens.Colors.textSecondary)
                 .fixedSize()
             segments
-            Button { model.delete(row.id) } label: {
-                Image(systemName: "trash").font(.system(size: 12))
-                    .foregroundStyle(hoveringDelete ? Tokens.Colors.danger : Tokens.Colors.textSecondary)
-                    .frame(width: 26, height: 26)
+            if row.isSource {
+                Color.clear.frame(width: 26, height: 26)
+            } else {
+                Button { model.delete(row.id) } label: {
+                    Image(systemName: "trash").font(.system(size: 12))
+                        .foregroundStyle(hoveringDelete ? Tokens.Colors.danger : Tokens.Colors.textSecondary)
+                        .frame(width: 26, height: 26)
+                }
+                .buttonStyle(.plain)
+                .onHover { hoveringDelete = $0 }
+                .accessibilityLabel(L10n.string("actions.delete", model.language))
             }
-            .buttonStyle(.plain)
-            .onHover { hoveringDelete = $0 }
-            .accessibilityLabel(L10n.string("actions.delete", model.language))
         }
         .padding(.horizontal, 8)
         .frame(height: 46)
@@ -303,6 +332,21 @@ private struct EditorRow: View {
         .onTapGesture { model.select(row.id) }
         .onAppear { name = row.category.name }
         .onChange(of: row.category.name) { _, new in if !editing { name = new } }
+    }
+
+    private var nameField: some View {
+        TextField("", text: $name)
+            .textFieldStyle(.plain)
+            .font(Tokens.Fonts.body)
+            .foregroundStyle(Tokens.Colors.text)
+            .focused(focus, equals: row.id)
+            .padding(.horizontal, 6)
+            .frame(height: 26)
+            .background(editing ? Tokens.Colors.tile : .clear, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 6, style: .continuous)
+                .strokeBorder(editing ? Tokens.Colors.accentSoft : .clear, lineWidth: 2))
+            .onSubmit(commit)
+            .onChange(of: focus.wrappedValue) { old, new in if old == row.id, new != row.id { commit() } }
     }
 
     private func commit() {

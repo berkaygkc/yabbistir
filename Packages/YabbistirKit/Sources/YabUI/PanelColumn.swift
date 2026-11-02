@@ -32,7 +32,7 @@ public struct RowModel: Identifiable, Equatable, Sendable {
 }
 
 /// What a source row draws: one of the rows its extension listed, or the one calm row of a locked source.
-public enum SourceRowInfo: Equatable, Sendable {
+public enum SourceRowInfo: Hashable, Sendable {
     case entry(key: String, row: SourceRow)
     /// `command`: the line the person runs to unlock it; nil when the source gives none.
     case locked(key: String, message: String, command: String?)

@@ -52,13 +52,21 @@ public struct PreviewContent: Sendable {
         /// Files, with a picture of the first one when it is an image.
         case files([URL], thumbnail: CGImage?)
         case command(CommandPreview)
+        /// A source's row (a vault's entry): what the row already shows, and `note`, the line saying its secret is never
+        /// shown (nil when it has none). No value is fetched for it.
+        case source(title: String, subtitle: String?, note: String?)
+        /// A locked source: the line the person runs in Terminal to unlock it, when it gives one.
+        case lockedSource(command: String?)
     }
 
+    /// The item's id, or the command row's; 0 for a source's row, which is no item.
     public var itemID: Int64
     public var body: Body
     public var info: [PreviewInfoRow]
     /// Blocks extensions' detectors add, drawn under the item.
     public var extensionSections: [PreviewSection] = []
+    /// The keyboard hint bar's actions after "␣ Close": nil for an item's "↵ Paste"; a source's row names its own.
+    public var actionHints: [BarLabel]? = nil
 }
 
 /// Builds previews off the main thread: payloads can be tens of megabytes, so text is capped and
@@ -184,6 +192,21 @@ public enum PreviewLoader {
         }
         let preview = CommandPreview(input: input, output: output, extensionName: command.extensionName, icon: command.icon)
         return PreviewContent(itemID: rowID, body: .command(preview), info: info)
+    }
+
+    /// A source row's preview, from what the row already has. The source is never run for it, so no value is fetched,
+    /// let alone shown: an entry shows its title and subtitle and says its secret is never shown; the locked row, the
+    /// command to run and what to do after.
+    public static func load(source: SourceRowInfo, descriptor: SourceDescriptor, language: AppLanguage) -> PreviewContent {
+        switch source {
+        case .entry(_, let row):
+            let note = descriptor.secretLabel.map { L10n.string("preview.source.neverShown", language, $0) }
+            return PreviewContent(itemID: 0, body: .source(title: row.title, subtitle: row.subtitle, note: note), info: [],
+                                  actionHints: [BarLabel(title: descriptor.primary.title, keys: ["↵"])])
+        case .locked(_, _, let command):
+            let copy = BarLabel(title: L10n.string("panel.source.copyCommand", language), keys: ["⌘", "C"])
+            return PreviewContent(itemID: 0, body: .lockedSource(command: command), info: [], actionHints: command == nil ? [] : [copy])
+        }
     }
 
     /// An item's text: plain text, else the rich text's characters, else the stored preview line.

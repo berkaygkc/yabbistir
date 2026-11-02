@@ -24,14 +24,14 @@ final class PanelController: NSObject, NSWindowDelegate {
     private let transformSurface = FloatingSurface(canBecomeKey: false)
     private let previewSurface = FloatingSurface(canBecomeKey: false)
     private var previewContent: PreviewContent?
-    /// What the loaded preview shows: "item:<id>", or a command on its subject (with the hint
-    /// revision, so a value that arrives later replaces the spinner).
+    /// What the loaded preview shows: "item:<id>", a command on its subject (with the hint
+    /// revision, so a value that arrives later replaces the spinner), or a source's row as it is listed now.
     private var previewKey: String?
     private var previewSide: PreviewSide?
     private var previewLoad: Task<Void, Never>?
     /// The category editor takes keyboard focus while a name is edited.
     private let editorSurface = FloatingSurface(canBecomeKey: true)
-    private lazy var editor = CategoryEditorModel(library: env.library, language: env.language)
+    private lazy var editor = CategoryEditorModel(library: env.library, language: env.language, sources: env.sources)
     private var targetApp: NSRunningApplication?
     /// The app the panel opened for, as extensions see it; jobs started from this panel keep it.
     private var panelTarget: TargetInfo?
@@ -440,6 +440,7 @@ final class PanelController: NSObject, NSWindowDelegate {
             _ = model.previewSource
             _ = model.selectedItemID
             _ = model.selectedID
+            _ = model.selectedSourceRow
             _ = model.hintRevision
             _ = model.selectedRowFrame
             _ = model.focusedColumn
@@ -452,10 +453,14 @@ final class PanelController: NSObject, NSWindowDelegate {
         }
     }
 
-    /// The selection's preview: an item, or a command row's input and output.
+    /// The selection's preview: an item, a command row's input and output, or a source's row.
     private func updatePreview() {
         guard window.isVisible, !editorSurface.isVisible, model.isPreviewVisible else {
             hidePreview()
+            return
+        }
+        if let source = model.selectedSourceRow {
+            showSourcePreview(source)
             return
         }
         let command = model.selectedCommand
@@ -494,6 +499,24 @@ final class PanelController: NSObject, NSWindowDelegate {
             previewKey = key
             placePreview()
         }
+    }
+
+    /// A source's row previews what it shows, made at once from the row: the source is never asked for its value.
+    private func showSourcePreview(_ source: SourceRowInfo) {
+        guard let descriptor = model.selectedSourceDescriptor, let rowID = model.selectedID else {
+            hidePreview()
+            return
+        }
+        // A list that renames the row or locks the source changes what it shows, under the same id.
+        let key = "source:\(rowID)|\(source.hashValue)"
+        guard previewKey != key else {
+            placePreview()
+            return
+        }
+        previewLoad?.cancel()
+        previewContent = PreviewLoader.load(source: source, descriptor: descriptor, language: env.language.language)
+        previewKey = key
+        placePreview()
     }
 
     private func placePreview() {

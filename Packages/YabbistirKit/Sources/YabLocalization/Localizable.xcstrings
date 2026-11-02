@@ -4251,6 +4251,57 @@
         }
       }
     },
+    "preview.source.neverShown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is never shown."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ hiçbir zaman gösterilmez."
+          }
+        }
+      }
+    },
+    "preview.source.reopen": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After you sign in, open the panel again."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giriş yaptıktan sonra paneli yeniden aç."
+          }
+        }
+      }
+    },
+    "preview.source.runInTerminal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run in Terminal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal’de çalıştır"
+          }
+        }
+      }
+    },
     "preview.words": {
       "extractionState": "manual",
       "localizations": {

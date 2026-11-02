@@ -150,15 +150,17 @@ public final class PanelViewModel {
     public private(set) var subjectID: Int64?
 
     /// ⌘P: categories whose name contains the query, with a check when the item is in them, then
-    /// "New category: …" for a trimmed query that names no existing category.
+    /// "New category: …" for a trimmed query that names no existing category. A source's category is never offered: its
+    /// extension fills it, and its name is free for one of the person's own.
     public var pinOptions: [PinOption] {
         _ = pinRevision
         let trimmed = pinQuery.trimmingCharacters(in: .whitespaces)
         let needle = SearchNormalizer.normalize(trimmed)
-        var options: [PinOption] = categories
+        let own = categories.filter { !$0.isSource }
+        var options: [PinOption] = own
             .filter { needle.isEmpty || SearchNormalizer.normalize($0.name).contains(needle) }
             .map { .category($0, isMember: pinMembership.contains($0.id ?? -1)) }
-        if !trimmed.isEmpty, !categories.contains(where: { SearchNormalizer.normalize($0.name) == needle }) {
+        if !trimmed.isEmpty, !own.contains(where: { SearchNormalizer.normalize($0.name) == needle }) {
             options.append(.create(name: trimmed))
         }
         return options
@@ -410,10 +412,25 @@ public final class PanelViewModel {
     /// All categories in column order (the editor's order).
     public private(set) var categories: [ClipCategory] = []
 
-    /// The Kategoriler menu: "on select" categories with their checkmark, then "Edit categories".
+    /// The Kategoriler menu: "on select" categories with their checkmark (a source's with its key), then "Edit
+    /// categories".
     public var categoryMenu: [CategoryMenuOption] {
         categories.filter { $0.visibility == .onSelect }
             .map { .category($0, isShown: shownCategoryIDs.contains($0.id ?? -1)) } + [.editCategories]
+    }
+
+    /// The Kategoriler button's dots: the hues of up to three open "on select" categories; a source's has none.
+    public var categoryButtonDots: [CategoryColor] {
+        Array(shownOnSelectCategories.filter { !$0.isSource }.prefix(3).map(\.color))
+    }
+
+    /// Whether a source's category is open among them: the button then shows its key after the dots.
+    public var categoryButtonMarksSource: Bool {
+        shownOnSelectCategories.contains(where: \.isSource)
+    }
+
+    private var shownOnSelectCategories: [ClipCategory] {
+        categories.filter { $0.visibility == .onSelect && shownCategoryIDs.contains($0.id ?? -1) }
     }
     /// −1 at the first column, +1 at the last.
     public private(set) var edgeNudgeDirection = 0
