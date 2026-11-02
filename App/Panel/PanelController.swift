@@ -43,7 +43,8 @@ final class PanelController: NSObject, NSWindowDelegate {
     init(env: AppEnvironment, stack: StackController) {
         self.env = env
         self.stack = stack.session
-        model = PanelViewModel(library: env.library, language: env.language, stack: stack.session, extensions: env.extensions)
+        model = PanelViewModel(library: env.library, language: env.language, stack: stack.session, extensions: env.extensions,
+                               sources: env.sources)
         super.init()
         // Installed, removed, turned on or off, or edited: the open panel's commands follow, after what the app does
         // first (a gone source's rows are forgotten).

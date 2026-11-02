@@ -48,9 +48,12 @@ struct HistoryRowView: View {
         .contentShape(Rectangle())
     }
 
-    private var attributedTitle: AttributedString {
-        var text = AttributedString(row.title)
-        for range in PanelViewModel.highlights(in: row.title, query: query) {
+    private var attributedTitle: AttributedString { Self.highlighted(row.title, query: query) }
+
+    /// `string` with what the query matches (Turkish-folded) marked.
+    static func highlighted(_ string: String, query: String) -> AttributedString {
+        var text = AttributedString(string)
+        for range in PanelViewModel.highlights(in: string, query: query) {
             guard let lower = AttributedString.Index(range.lowerBound, within: text),
                   let upper = AttributedString.Index(range.upperBound, within: text) else { continue }
             text[lower..<upper].backgroundColor = Tokens.Colors.matchHighlight

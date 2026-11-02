@@ -198,10 +198,10 @@ public final class PanelViewModel {
         }
     }
 
-    /// What ⇧↵ does on the selected item (`ShiftReturn.resolve`). Nil without one: no row, or a
-    /// command row, where ⇧↵ runs it like ↵.
+    /// What ⇧↵ does on the selected item (`ShiftReturn.resolve`). Nil without one: no row, a
+    /// command row, where ⇧↵ runs it like ↵, or a source's row, which is no item.
     public var shiftReturnAction: ShiftReturnAction? {
-        guard let row = selectedRow, row.command == nil else { return nil }
+        guard let row = selectedRow, row.command == nil, row.source == nil else { return nil }
         return shiftReturn(itemID: row.itemID, kind: row.kind)
     }
 
@@ -417,6 +417,9 @@ public final class PanelViewModel {
     @ObservationIgnored private let languageStore: LanguageStore
     @ObservationIgnored private let now: () -> Date
     @ObservationIgnored let extensions: ExtensionCommandsProviding?
+    /// Extensions' sources: their columns' rows, kept in memory by the sources and read on every rebuild.
+    @ObservationIgnored let sources: SourceProviding?
+    @ObservationIgnored private let sourceIdentity = SourceRowIdentity()
     /// The Komutlar section's commands, in row order.
     @ObservationIgnored var visibleCommands: [ExtensionCommand] = []
     /// The selected item's transforms while ⌘K or the ⇧ panel is open, grouped by extension.
@@ -436,13 +439,14 @@ public final class PanelViewModel {
     @ObservationIgnored private var pointerInPreview = false
 
     public init(library: Library, language: LanguageStore, stack: StackSession? = nil, extensions: ExtensionCommandsProviding? = nil,
-                now: @escaping () -> Date = Date.init, shiftDefaults: ShiftReturnDefaults = .init(),
+                sources: SourceProviding? = nil, now: @escaping () -> Date = Date.init, shiftDefaults: ShiftReturnDefaults = .init(),
                 shiftHintDelay: Duration = .milliseconds(200)) {
         self.library = library
         self.stack = stack
         self.thumbnails = RowThumbnails(library: library)
         self.languageStore = language
         self.extensions = extensions
+        self.sources = sources
         self.now = now
         self.shiftDefaults = shiftDefaults
         self.shiftHintDelay = shiftHintDelay
@@ -450,6 +454,8 @@ public final class PanelViewModel {
             self?.hintRevision += 1
             self?.refresh()
         }
+        // A list came in, or rows were forgotten: it quietly takes the old one's place, the selection on the same row.
+        sources?.onChange = { [weak self] in self?.refresh() }
     }
 
     public var language: AppLanguage { languageStore.language }
@@ -469,6 +475,9 @@ public final class PanelViewModel {
         return focusedRows.first { $0.id == id }?.itemID
     }
 
+    /// The focused selection when it is a source's row (or its locked row); such a row is no item.
+    public var selectedSourceRow: SourceRowInfo? { selectedRow?.source }
+
     /// The focused column's sections and empty message (the single-column view until columns are drawn).
     public var sections: [RowSection] { columns.indices.contains(focusedColumn) ? columns[focusedColumn].sections : [] }
     public var emptyMessage: String? { columns.indices.contains(focusedColumn) ? columns[focusedColumn].emptyMessage : nil }
@@ -481,7 +490,8 @@ public final class PanelViewModel {
     }
 
     /// A fresh panel: empty search, History focused (the Sıra sits to its left), first rows
-    /// selected, no layer, no preview.
+    /// selected, no layer, no preview. The visible sources are asked for new lists; the panel opens on what they
+    /// already have and never waits for them.
     public func reset() {
         query = ""
         subjectID = nil
@@ -494,7 +504,7 @@ public final class PanelViewModel {
         commandHold?.cancel()
         showsIndexKeys = false
         endShiftHold()
-        rebuild()
+        rebuild(refreshingSources: true)
         focusedColumn = columns.firstIndex { $0.id == .history } ?? 0
         revealSelection()
     }
@@ -595,9 +605,10 @@ public final class PanelViewModel {
     }
 
     /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column (`plain`: ⌘K's
-    /// "Paste as plain text"): a Sıra row pastes its entry out of order; a command row runs.
+    /// "Paste as plain text"): a Sıra row pastes its entry out of order; a command row runs. A source's row is no
+    /// item: nothing is pasted from it here.
     public func pasteAction(rowID: Int64, plain: Bool) -> PanelAction? {
-        guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
+        guard let row = focusedRows.first(where: { $0.id == rowID }), row.source == nil else { return nil }
         if let command = row.command { return .runCommand(commandID: command.commandID, subjectID: subjectID, copy: false) }
         guard focusedSource == .stack else { return .paste(itemID: row.itemID, plain: plain) }
         return .pasteFromStack(entryID: Int(-row.id), itemID: row.itemID, plain: plain)
@@ -607,7 +618,7 @@ public final class PanelViewModel {
     /// as plain text, anything else pastes as it is (a Sıra row its entry, out of order). A command
     /// row runs, as with ↵: its output is already plain.
     private func shiftReturnAction(rowID: Int64) -> PanelAction? {
-        guard let row = focusedRows.first(where: { $0.id == rowID }) else { return nil }
+        guard let row = focusedRows.first(where: { $0.id == rowID }), row.source == nil else { return nil }
         guard row.command == nil else { return pasteAction(rowID: rowID, plain: false) }
         let action = shiftReturn(itemID: row.itemID, kind: row.kind)
         if case .command(let id) = action { return .runCommand(commandID: id, subjectID: row.itemID, copy: false) }
@@ -771,7 +782,7 @@ public final class PanelViewModel {
 
     /// Reads the selected item for ⌘K or the ⇧ panel: its transforms, kind and whether it is rich text.
     private func loadLayer() {
-        guard let row = selectedRow, row.command == nil else {
+        guard let row = selectedRow, row.command == nil, row.source == nil else {
             (layerTransforms, layerItem) = ([], nil)
             return
         }
@@ -1055,9 +1066,14 @@ public final class PanelViewModel {
     /// The glass sheet's width: one column width per visible column.
     public var sheetWidth: CGFloat { CGFloat(visibleColumnCount) * ColumnStripLayout.columnWidth }
 
-    /// Opens or closes an "on select" category column; opening focuses it.
+    /// Opens or closes an "on select" category column; opening focuses it. A source's column asks for a new list as
+    /// it opens, showing the last one (or that it is loading) meanwhile.
     public func toggleShown(_ categoryID: Int64) {
         if shownCategoryIDs.remove(categoryID) == nil { shownCategoryIDs.insert(categoryID) }
+        if shownCategoryIDs.contains(categoryID), let sources, let key = categories.first(where: { $0.id == categoryID })?.source,
+           sources.descriptors.contains(where: { $0.id == key }) {
+            sources.refresh([key])
+        }
         let focused = focusedSource
         rebuild()
         if shownCategoryIDs.contains(categoryID), let index = columns.firstIndex(where: { $0.id == .category(categoryID) }) {
@@ -1121,17 +1137,27 @@ public final class PanelViewModel {
         revealSelection()
     }
 
-    /// Rebuilds every column and keeps each selection by id, or by position when its row left.
-    private func rebuild() {
+    /// Rebuilds every column and keeps each selection by id, or by position when its row left. A source's category is
+    /// a column only while its extension offers the source; `refreshingSources` (the panel opening) asks the visible
+    /// ones for new lists first, which leaves what they have in place.
+    private func rebuild(refreshingSources: Bool = false) {
         transformCountCache = nil
         let previousRows = Dictionary(uniqueKeysWithValues: columns.map { ($0.id, $0.rows.map(\.id)) })
         var builder = PanelColumnBuilder(library: library, query: query, language: language, now: now(), limit: Self.resultLimit)
         if let extensions { builder.tagLabels = { extensions.tagLabels($0) } }
         categories = (try? library.store.categories()) ?? []
+        let descriptors = Dictionary((sources?.descriptors ?? []).map { ($0.id, $0) }) { first, _ in first }
+        let visible = categories.filter { category in
+            guard category.visibility == .always || shownCategoryIDs.contains(category.id ?? -1) else { return false }
+            return category.source.map { descriptors[$0] != nil } ?? true
+        }
+        let sourceKeys = visible.compactMap(\.source)
+        if refreshingSources, let sources, !sourceKeys.isEmpty { sources.refresh(sourceKeys) }
         let stackColumn = stack.flatMap { $0.isOpen ? builder.stack($0) : nil }
-        columns = (stackColumn.map { [$0] } ?? []) + [builder.history(commands: matchCommands())] + categories
-            .filter { $0.visibility == .always || shownCategoryIDs.contains($0.id ?? -1) }
-            .map(builder.category)
+        columns = (stackColumn.map { [$0] } ?? []) + [builder.history(commands: matchCommands())] + visible.map { category in
+            guard let key = category.source, let sources, let descriptor = descriptors[key] else { return builder.category(category) }
+            return builder.source(category, descriptor: descriptor, state: sources.state(of: key), identity: sourceIdentity)
+        }
         var kept: [PanelColumn.Source: Int64] = [:]
         for column in columns {
             let ids = column.rows.map(\.id)

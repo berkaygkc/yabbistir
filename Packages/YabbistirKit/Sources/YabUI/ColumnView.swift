@@ -1,7 +1,7 @@
 import SwiftUI
 import YabCore
 
-/// One column: a 32 pt header (category dot and name) over its own scrolling list. The focused
+/// One column: a 32 pt header (category dot, or a source's key, and name) over its own scrolling list. The focused
 /// column's selection is the sliding grey fill; other columns keep theirs as a hairline ring.
 struct ColumnView: View {
     let column: PanelColumn
@@ -22,7 +22,12 @@ struct ColumnView: View {
 
     private var header: some View {
         HStack(spacing: 8) {
-            if let color = column.color {
+            if column.sourceKey != nil {
+                // An extension fills the column: its mark, never a hue.
+                Image(systemName: "key")
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundStyle(Tokens.Colors.textSecondary)
+            } else if let color = column.color {
                 Circle()
                     .fill(Tokens.Colors.category(color))
                     .frame(width: 8, height: 8)
@@ -127,6 +132,11 @@ struct ColumnView: View {
     @ViewBuilder private func rowView(_ row: RowModel) -> some View {
         if let command = row.command {
             CommandRowView(command: command, indexKey: indexKey(for: row))
+        } else if case .entry(_, let entry)? = row.source {
+            SourceRowView(row: row, subtitle: entry.subtitle, query: model.query, indexKey: indexKey(for: row))
+        } else if case .locked(_, let message, let command)? = row.source {
+            // The column's only row, standing in for an empty text: no ⌘1–9 keycap.
+            LockedSourceRowView(message: message, command: command, language: model.language)
         } else {
             HistoryRowView(row: row, query: model.query,
                            thumbnail: row.kind == .image ? model.thumbnails.thumbnail(for: row.itemID) : nil,

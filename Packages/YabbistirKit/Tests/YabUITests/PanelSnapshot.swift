@@ -218,6 +218,62 @@ import YabLocalization
         }
     }
 
+    /// A source's column beside History (a synthetic vault): its rows, a search on a username, the locked row, and
+    /// a source still loading; dark Turkish and light English.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
+    func renderSources() throws {
+        let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
+        let store = try ItemStore.temporary()
+        let now = Date()
+        for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
+                                ("Perşembe 14:00 — iade akışı demosu", 9), ("git rebase -i HEAD~3", 22), ("ops@ornek.dev", 1600)] {
+            _ = try store.ingest(CapturedClip(items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data(text.utf8))]],
+                                              source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutes * 60)))
+        }
+        let library = try Library(store: store)
+        let key = "dev.example.kasa/vault"
+        try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
+        let vault = try #require(try store.categories().first { $0.source == key })
+        let rows = [("Bulut konsolu", "ops@ornek.dev"), ("Eskiz", "melike@ornek.dev"), ("Kodhane", "melike@ornek.dev"), ("Kodhane", "deniz.k"),
+                    ("Grafikler", "ops@ornek.dev"), ("İş Portalı", "deniz.k"), ("ornek.dev", "melike@ornek.dev"), ("Veritabanı prod", "app_rw"),
+                    ("Nöbetçi", "melike.sahin.uzun-bir-ad@ornek.dev"), ("staging.ornek.dev", "ops@ornek.dev"), ("Yayınevi", nil)]
+            .enumerated().map { SourceRow(id: "\($0.offset)", title: $0.element.0, subtitle: $0.element.1) }
+        for (name, appearance, language, state, query) in [
+            ("dark", NSAppearance.Name.darkAqua, AppLanguage.turkish, SourceCenter.State.rows(rows), ""),
+            ("light-en", .aqua, .english, .rows(rows), ""),
+            ("dark-search", .darkAqua, .turkish, .rows(rows), "deniz"),
+            ("dark-locked", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: "kasa login --trust <e-posta>"), ""),
+            ("light-locked-en", .aqua, .english, .locked(message: "Vault is locked", command: "kasa login --trust <email>"), ""),
+            ("dark-locked-plain", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: nil), ""),
+            ("dark-loading", .darkAqua, .turkish, .loading, ""),
+        ] {
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-s-\(UUID())")!)
+            languageStore.language = language
+            let sources = FakeSources()
+            sources.descriptors = [FakeSources.vault()]
+            sources.states[key] = state
+            let model = PanelViewModel(library: library, language: languageStore, sources: sources, now: { now })
+            model.reset()
+            model.isPresented = true
+            model.toggleShown(vault.id!)
+            for character in query { _ = model.handle(.type(String(character))) }
+            if query.isEmpty { _ = model.handle(.move(2)) }
+            var panel = PanelView(model: model, material: .tunedEffect)
+            panel.snapshot = true
+            let view = panel
+                .padding(30)
+                .background(appearance == .darkAqua ? Color(red: 0.12, green: 0.16, blue: 0.35) : Color(red: 0.86, green: 0.89, blue: 0.97))
+                .environment(\.colorScheme, appearance == .darkAqua ? .dark : .light)
+            let renderer = ImageRenderer(content: view)
+            renderer.scale = 2
+            NSAppearance(named: appearance)!.performAsCurrentDrawingAppearance {
+                let image = renderer.nsImage!
+                let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
+                try? rep.representation(using: .png, properties: [:])!.write(to: dir.appendingPathComponent("sources-\(name).png"))
+            }
+        }
+    }
+
     /// The job card (synthetic jobs) in both themes: running with a fraction, an indeterminate
     /// state word, queued, and finished (ready, done in Finder, a missing tool); then a
     /// mix of them in English, and the status item's ring.
