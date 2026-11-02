@@ -120,11 +120,113 @@ private func sample() throws -> PasteLibrary {
         })
         defer { library.close() }
         let calls = Calls()
-        _ = try importer(store).run(library, selection: PasteSelection(history: true, boards: [])) { calls.add($0) }
+        let slow = PasteImporter(store: store, ignoredApps: [], now: now,
+                                 throttle: .init(step: 50, interval: .seconds(3600)))
+        _ = try slow.run(library, selection: PasteSelection(history: true, boards: [])) { calls.add($0) }
         let all = calls.all
-        #expect(all.count <= 15)
+        #expect(all.count == 13)
         #expect(all.last?.done == 600 && all.last?.total == 600)
         #expect(all.map(\.done) == all.map(\.done).sorted())
+        #expect(all.last?.kinds == [.text: 600])
+    }
+
+    @Test func theTimeTriggerFiresWhenTheIntervalIsTiny() throws {
+        let store = try ItemStore.temporary()
+        let library = try open((0..<20).map {
+            L.Item(externalID: "n\($0)", createdAt: Double($0), timestamp: Double($0), payload: .plain(text("item \($0)")))
+        })
+        defer { library.close() }
+        let calls = Calls()
+        let eager = PasteImporter(store: store, ignoredApps: [], now: now, throttle: .init(step: 1000, interval: .zero))
+        _ = try eager.run(library, selection: PasteSelection(history: true, boards: [])) { calls.add($0) }
+        #expect(calls.all.count == 20)
+    }
+
+    @Test func anEmptyBoardNameBecomesPinboardN() throws {
+        let store = try ItemStore.temporary()
+        let library = try open([
+            L.Item(externalID: "b", createdAt: 1, timestamp: 1, board: 7, order: 1, payload: .plain(text("pinned"))),
+        ], boards: [.init(pk: 7, name: "   ")])
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: PasteSelection(history: false, boards: [7])) { _ in }
+        #expect(report.added == 1 && report.failed == 0)
+        #expect(try store.categories().map(\.name) == ["Pinboard 7"])
+    }
+
+    @Test func aBoardThatFailsToFileLeavesItsItemsVisibleAndTheRestCompletes() throws {
+        let store = try ItemStore.temporary()
+        let library = try open([
+            L.Item(externalID: "h", createdAt: 1, timestamp: 1, payload: .plain(text("history"))),
+            L.Item(externalID: "a", createdAt: 1, timestamp: 2, board: 7, order: 1, payload: .plain(text("board seven"))),
+            L.Item(externalID: "b", createdAt: 1, timestamp: 3, board: 8, order: 1, payload: .plain(text("board eight"))),
+        ], boards: [.init(pk: 7, name: "Seven"), .init(pk: 8, name: "Eight")])
+        defer { library.close() }
+        struct Boom: Error {}
+        let doomed = Doomed()
+        let flaky = PasteImporter(store: store, ignoredApps: [], now: now, throttle: .init()) { id in
+            if try doomed.isDoomed(id, store: store) { throw Boom() }
+        }
+        let report = try flaky.run(library, selection: PasteSelection(history: true, boards: [7, 8])) { _ in }
+        #expect(report.failed == 1 && report.added == 2)
+        #expect(try store.categories().map(\.name).sorted() == ["Eight", "Seven"])
+        let seven = try #require(try store.categories().first { $0.name == "Seven" })
+        #expect(try store.itemIDs(inCategory: seven.id!).isEmpty)
+        let visible = try store.history(limit: 10).filter(\.inHistory).map(\.previewText)
+        #expect(Set(visible) == ["history", "board seven"])
+    }
+
+    @Test func aMergedBoardItemStaysInHistoryAndJoinsTheCategory() throws {
+        let store = try ItemStore.temporary()
+        let existing = try #require(try store.ingest(CapturedClip(
+            items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data("already here".utf8))]],
+            source: nil, device: .local, capturedAt: now)))
+        let library = try open([
+            L.Item(externalID: "b", createdAt: 1, timestamp: 1, board: 7, order: 1, payload: .plain(text("already here"))),
+        ], boards: [.init(pk: 7, name: "Links")])
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: PasteSelection(history: false, boards: [7])) { _ in }
+        #expect(report.merged == 1 && report.added == 0)
+        #expect(try store.item(id: existing.item.id!)?.inHistory == true)
+        let category = try #require(try store.categories().first)
+        #expect(try store.itemIDs(inCategory: category.id!) == [existing.item.id!])
+    }
+
+    @Test func aSameNamedSourceCategoryIsNotJoined() throws {
+        let store = try ItemStore.temporary()
+        _ = try store.syncSourceCategories([SourceCategorySeed(key: "ext/src", name: "Links")])
+        let library = try sample()
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: everything) { _ in }
+        #expect(report.categoriesCreated == 1)
+        let all = try store.categories()
+        #expect(all.count == 2)
+        let source = try #require(all.first { $0.isSource })
+        #expect(try store.itemIDs(inCategory: source.id!).isEmpty)
+    }
+
+    @Test func categoriesCreatedCountsOnlyNewOnes() throws {
+        let store = try ItemStore.temporary()
+        _ = try store.createCategory(name: "Links", color: .sage)
+        let library = try open([
+            L.Item(externalID: "a", createdAt: 1, timestamp: 1, board: 7, order: 1, payload: .plain(text("one"))),
+            L.Item(externalID: "b", createdAt: 1, timestamp: 2, board: 8, order: 1, payload: .plain(text("two"))),
+        ], boards: [.init(pk: 7, name: "Links"), .init(pk: 8, name: "Fresh")])
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: PasteSelection(history: false, boards: [7, 8])) { _ in }
+        #expect(report.categoriesCreated == 1)
+        #expect(try store.categories().count == 2)
+    }
+
+    @Test func aConcealedTypeOnALaterItemSkipsTheWholeItem() throws {
+        let store = try ItemStore.temporary()
+        let library = try open([
+            L.Item(externalID: "s", createdAt: 1, timestamp: 1, payload: .plain([
+                [("public.utf8-plain-text", "first")], [("org.nspasteboard.TransientType", "")]])),
+        ])
+        defer { library.close() }
+        let report = try importer(store).run(library, selection: PasteSelection(history: true, boards: [])) { _ in }
+        #expect(report.skipped == 1 && report.added == 0)
+        #expect(try store.history(limit: 10).isEmpty)
     }
 
     @Test func kindsAreCounted() throws {
@@ -138,6 +240,18 @@ private func sample() throws -> PasteLibrary {
         defer { library.close() }
         let report = try importer(store).run(library, selection: PasteSelection(history: true, boards: [])) { _ in }
         #expect(report.kinds == [.text: 2, .link: 1, .color: 1])
+    }
+}
+
+/// Dooms the first board item that reaches filing (the one on the lower-numbered board is filed first).
+private final class Doomed: @unchecked Sendable {
+    private let lock = NSLock()
+    private var fired = false
+    func isDoomed(_ id: Int64, store: ItemStore) throws -> Bool {
+        lock.lock(); defer { lock.unlock() }
+        if fired { return false }
+        fired = true
+        return true
     }
 }
 
