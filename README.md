@@ -119,16 +119,18 @@ The app is signed with a Developer ID and notarized by Apple.
 
 ## First launch
 
-Open yabbistir from Applications. It lives in the menu bar, with no Dock icon. Click the icon to open the panel (or, while jobs run, to show their card); right-click it for the menu, with Language (English or Turkish), Check for Updates… and Settings…. To start yabbistir with your Mac, add it in System Settings → General → Login Items & Extensions.
+Open yabbistir from Applications. A short first-run window walks you through the start: pick English or Turkish, bring over another clipboard manager's library if a supported one is found, check the shortcut, allow pasting and choose whether yabbistir opens at login. Settings → About runs it again.
 
-yabbistir asks for two permissions, each when it first needs it:
+yabbistir lives in the menu bar, with no Dock icon. Click the icon to open the panel (or, while jobs run, to show their card); right-click it for the menu, with Language (English or Turkish), Check for Updates… and Settings…. Settings covers the rest: the shortcuts, where the panel opens and what ↵ does, how long history is kept and which apps it ignores, your categories, permissions, imports and extensions.
+
+yabbistir asks for two permissions, each when it first needs it. Settings → Permissions shows where each one stands and how to allow it:
 
 | Permission | Why |
 |---|---|
-| **Accessibility** | To paste: yabbistir sends ⌘V to the app you were in, and reads where its text caret is so the panel can open under it. macOS asks the first time you open yabbistir. Until you allow it, ↵ copies the item and you press ⌘V yourself. |
+| **Accessibility** | To paste: yabbistir sends ⌘V to the app you were in, and reads where its text caret is so the panel can open under it. The first-run window asks for it. Until you allow it, ↵ copies the item and you press ⌘V yourself. |
 | **Input Monitoring** | For the Stack only: yabbistir listens for your ⌘V so the next item comes up after each paste. macOS asks the first time you use the Stack. Without it, you can still paste from the Stack in the panel; ⌘V just doesn't move it along. |
 
-**Coming from another clipboard manager?** The shortcuts, ⇧⌘V and ⇧⌘C, may clash with yours, so quit it and take it out of Login Items first: two apps watching the clipboard at once get in each other's way, and with both running, one ⌘V could move two stacks.
+**Coming from another clipboard manager?** If yabbistir supports it, the first-run window or Settings → Import brings its history and pinboards over. Pinboards become categories, items keep the dates they were copied, nothing comes over twice, and the other app's data is only read; import again later to bring over only what's new. Then quit the other app and take it out of Login Items. The shortcuts, ⇧⌘V and ⇧⌘C, may clash with yours, two apps watching the clipboard at once get in each other's way, and with both running, one ⌘V could move two stacks.
 
 ## Extensions
 

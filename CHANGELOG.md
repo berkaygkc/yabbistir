@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-11-03
+
+- **First run:** a short window on a new install. Pick English or Turkish, bring over another clipboard manager's library, check the shortcut that opens the panel, allow pasting and choose whether yabbistir opens at login. Settings → About → Run First Setup Again… brings it back.
+- **Import:** Settings → Import brings over the history and pinboards of another clipboard manager when yabbistir supports it. Pick the history, the pinboards or both; pinboards become categories that open when you pick them. Items keep the dates they were copied and aren't removed by your history's time limit right after they come in. Nothing is imported twice, so importing again brings over only what's new. The other app's data is only read: yabbistir copies it aside first and never writes to it.
+- **Settings, every section:**
+  - General: language, appearance, open at login, the menu bar icon, and hiding the panel, the Stack and notices from screen sharing.
+  - Shortcuts: record the shortcuts that open the panel and copy to the Stack, and see the panel's own keys.
+  - Panel: whether it opens under the text caret or the mouse pointer, the preview delay, whether ↵ pastes or only copies, and always pasting plain text.
+  - History: how long items are kept, counted from their last use, with a warning that says how many items go before anything is removed. Also ignored apps, copies from iPhone, extension results in History, how much space history uses, and clearing it. Items in a category are never removed.
+  - Categories: rename, color, reorder, choose when each opens as a column, and delete.
+  - Permissions: where Accessibility and Input Monitoring stand right now, with a short guide and a button that opens the right place in System Settings.
+  - About: the version, updates, release notes, licenses and a quiet link to support the project.
+
 ## 0.3.0 — 2026-11-02
 
 - **New icon:** a "y" made of stacked glass cards, like the copies waiting in the Stack.
