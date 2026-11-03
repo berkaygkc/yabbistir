@@ -429,9 +429,9 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(!held.showsShiftHint)
         _ = held.handle(.shiftHeld(true))
         #expect(!held.showsShiftHint)
-        // Polled, not slept: parallel suites can keep the main actor busy.
-        let start = ContinuousClock.now
-        while !held.showsShiftHint, ContinuousClock.now - start < .seconds(5) { try await Task.sleep(for: .milliseconds(10)) }
+        // Polled by turns, not by the clock: another suite can hold the main actor for seconds, and a wall-clock
+        // deadline then runs out before the hold's own turn comes.
+        for _ in 0..<500 where !held.showsShiftHint { try await Task.sleep(for: .milliseconds(10)) }
         #expect(held.showsShiftHint)
     }
 
