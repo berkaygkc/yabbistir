@@ -4,8 +4,9 @@
 
 <h1>yabbistir</h1>
 
-<p><b>A keyboard-first clipboard history for macOS.</b><br>
-It opens right under your text caret, finds anything you copied as you type, and pastes it with ↵.</p>
+<p><b>An extensible, keyboard-first clipboard history for macOS.</b><br>
+It opens right under your text caret, finds anything you copied as you type, and pastes it with ↵.<br>
+Extensions teach it what your copies are and what to do with them.</p>
 
 <p>
 <a href="https://github.com/berkaygkc/yabbistir/releases/latest"><img src="https://img.shields.io/github/v/release/berkaygkc/yabbistir?style=flat-square&label=release&color=3a3a3c" alt="Latest release"></a>
@@ -35,6 +36,8 @@ https://github.com/user-attachments/assets/fcbe3702-014e-4cd2-b894-cf8d4f1abd1e
 ## Why yabbistir
 
 A clipboard history is only useful if reaching it doesn't break your flow. Press ⇧⌘V and yabbistir opens where your eyes already are: just under the text caret, never on top of it. Start typing and it searches. ↵ pastes into the app you were in. You never have to touch the mouse.
+
+What sets it apart is that it grows. Extensions are small JavaScript packages that recognize what you copy, clean it before it's saved, transform it, act on it or fill a column of their own: decode a JWT, strip tracking parameters from a link, download a video, translate a paragraph on your Mac, list your LastPass entries next to your history. yabbistir draws every piece of their interface, so they look and work like the rest of the app, and each one shows what it wants to do (reach websites, run a program, read your history) before you install it. The [store](https://github.com/berkaygkc/yabbistir-extensions) is an open repository with a signed catalog, and writing your own starts from a template.
 
 It stays out of the way the rest of the time. Rows are one line each, details show up only when you ask for them, and the whole app is a quiet menu bar icon with no Dock icon. The name is a playful way of saying *yapıştır*, Turkish for "paste".
 
