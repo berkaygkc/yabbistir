@@ -21,6 +21,10 @@ It opens right under your text caret, finds anything you copied as you type, and
 
 <br>
 
+https://github.com/user-attachments/assets/fcbe3702-014e-4cd2-b894-cf8d4f1abd1e
+
+<br>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero-dark.png">
   <img src=".github/assets/hero-light.png" width="100%" alt="A text editor with its caret at the end of a line, and the yabbistir panel open just under the caret with the clipboard history; a download runs on a small card under the yabbistir icon in the menu bar">
