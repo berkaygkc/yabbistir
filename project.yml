@@ -35,9 +35,14 @@ targets:
         CFBundleVersion: "4"
         LSUIElement: true
         LSApplicationCategoryType: public.app-category.productivity
+        # Store extensions such as Browser Tabs and Send To run osascript to read another app's tabs or add a note to it.
+        # macOS attributes those Apple events to yabbistir and shows this text when it asks, once per app.
+        NSAppleEventsUsageDescription: "Some extensions you install talk to other apps, for example to read Safari's open tabs or to add a note to Notes. macOS asks once for each app."
     entitlements:
       path: App/Yabbistir.entitlements
-      properties: {}
+      properties:
+        # Hardened runtime blocks Apple events without it, so macOS would refuse an extension's osascript without asking.
+        com.apple.security.automation.apple-events: true
     dependencies:
       - package: YabbistirKit
         product: YabCore
@@ -88,6 +93,8 @@ targets:
       properties:
         # Measured: the helper's JavaScriptCore is ~15x faster with the JIT. Never on the app.
         com.apple.security.cs.allow-jit: true
+        # The helper starts an extension's tools (yab.exec), osascript among them; see the app's entitlement.
+        com.apple.security.automation.apple-events: true
     dependencies:
       - package: YabbistirKit
         product: YabExtensionRuntime

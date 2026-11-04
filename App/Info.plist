@@ -29,5 +29,7 @@
 	<string>public.app-category.productivity</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Some extensions you install talk to other apps, for example to read Safari's open tabs or to add a note to Notes. macOS asks once for each app.</string>
 </dict>
 </plist>
