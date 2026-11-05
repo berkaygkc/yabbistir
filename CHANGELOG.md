@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 — 2026-11-05
 
 - **Extensions that talk to other apps:** yabbistir can now ask macOS for Automation access when a store extension needs it, such as Browser Tabs reading Safari's open tabs or Send To adding a note to Notes. macOS asks once for each app, and System Settings › Privacy & Security › Automation keeps your answers. Before this, macOS refused those requests without asking.
 

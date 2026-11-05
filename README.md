@@ -137,6 +137,8 @@ yabbistir asks for two permissions, each when it first needs it. Settings → Pe
 | **Accessibility** | To paste: yabbistir sends ⌘V to the app you were in, and reads where its text caret is so the panel can open under it. The first-run window asks for it. Until you allow it, ↵ copies the item and you press ⌘V yourself. |
 | **Input Monitoring** | For the Stack only: yabbistir listens for your ⌘V so the next item comes up after each paste. macOS asks the first time you use the Stack. Without it, you can still paste from the Stack in the panel; ⌘V just doesn't move it along. |
 
+An extension that talks to another app, such as Browser Tabs reading your open tabs, also needs **Automation** access. macOS asks once for each app the first time the extension needs it, and System Settings → Privacy & Security → Automation keeps your answers.
+
 **Coming from another clipboard manager?** If yabbistir supports it, the first-run window or Settings → Import brings its history and pinboards over. Pinboards become categories, items keep the dates they were copied, nothing comes over twice, and the other app's data is only read; import again later to bring over only what's new. Then quit the other app and take it out of Login Items. The shortcuts, ⇧⌘V and ⇧⌘C, may clash with yours, two apps watching the clipboard at once get in each other's way, and with both running, one ⌘V could move two stacks.
 
 ## Extensions
