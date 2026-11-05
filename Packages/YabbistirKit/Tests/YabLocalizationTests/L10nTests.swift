@@ -16,6 +16,18 @@ import Testing
         #expect(L10n.string("panel.empty.noResults", .english, "uuid") == "No results for “uuid”")
     }
 
+    /// The ⇧ panel's count is a plural, so one transform never reads "1 transforms". Turkish keeps the noun singular
+    /// after a number.
+    @Test(arguments: [
+        (1, "1 transform", "1 dönüşüm"),
+        (2, "2 transforms", "2 dönüşüm"),
+        (0, "0 transforms", "0 dönüşüm"),
+    ])
+    func transformCountIsAPlural(count: Int, english: String, turkish: String) {
+        #expect(L10n.string("transforms.count", .english, count) == english)
+        #expect(L10n.string("transforms.count", .turkish, count) == turkish)
+    }
+
     /// Every key the app's sources use exists in both languages (a missing key would show as its name).
     @Test func everyKeyUsedInSourcesIsTranslated() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()

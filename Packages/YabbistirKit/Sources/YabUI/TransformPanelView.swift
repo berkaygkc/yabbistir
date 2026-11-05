@@ -153,7 +153,8 @@ public struct TransformPanelView: View {
     }
 
     private func subtitle(count: Int) -> String {
-        let transforms = L10n.string("transforms.count", model.language, NumberFormatting.count(count, language: model.language))
+        // The number itself goes in, not its text: the plural ("1 transform", "2 transforms") is chosen from it.
+        let transforms = L10n.string("transforms.count", model.language, count)
         return [model.transformSubjectApp, transforms].compactMap { $0 }.joined(separator: " · ")
     }
 
