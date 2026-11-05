@@ -14,9 +14,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var settings: SettingsWindowController?
     private var onboarding: OnboardingWindowController?
     private var effects: PreferenceEffects?
-    #if DEBUG
-    private let materialComparison = MaterialSpikeWindow()
-    #endif
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
@@ -93,17 +90,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                         rerunSetup: { [weak onboarding] in onboarding?.show() }),
                     presence: SettingsPresence()))
             self.settings = settings
-            #if DEBUG
-            let comparison = materialComparison
-            statusItem = StatusItemController(env: env, jobsCard: jobsCard, isPanelVisible: isPanelVisible,
-                                              openPanel: { panel.toggle(anchor: $0) }, openSettings: { settings.show() },
-                                              openMaterialComparison: { comparison.show(env: env) })
-            // `open yabbistir.app --args -materialComparison YES` opens it directly.
-            if UserDefaults.standard.bool(forKey: "materialComparison") { comparison.show(env: env) }
-            #else
             statusItem = StatusItemController(env: env, jobsCard: jobsCard, isPanelVisible: isPanelVisible,
                                               openPanel: { panel.toggle(anchor: $0) }, openSettings: { settings.show() })
-            #endif
             if let statusItem {
                 let effects = PreferenceEffects(preferences: env.preferences, env: env, statusItem: statusItem)
                 effects.start()

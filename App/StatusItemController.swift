@@ -16,7 +16,6 @@ final class StatusItemController: NSObject, NSMenuDelegate, NSMenuItemValidation
     private let isPanelVisible: () -> Bool
     private let openPanel: (CGRect?) -> Void
     private let menu = NSMenu()
-    private let openMaterialComparison: () -> Void
     private let openSettings: () -> Void
     private let restingImage: NSImage?
     /// A "Check for Updates…" is in flight: its menu item stays off until the answer comes.
@@ -32,14 +31,12 @@ final class StatusItemController: NSObject, NSMenuDelegate, NSMenuItemValidation
     }
 
     init(env: AppEnvironment, jobsCard: JobsSurfaceController, isPanelVisible: @escaping () -> Bool,
-         openPanel: @escaping (CGRect?) -> Void, openSettings: @escaping () -> Void,
-         openMaterialComparison: @escaping () -> Void = {}) {
+         openPanel: @escaping (CGRect?) -> Void, openSettings: @escaping () -> Void) {
         self.env = env
         self.jobsCard = jobsCard
         self.isPanelVisible = isPanelVisible
         self.openPanel = openPanel
         self.openSettings = openSettings
-        self.openMaterialComparison = openMaterialComparison
         let image = NSImage(systemSymbolName: StatusRingImage.glyphName, accessibilityDescription: "yabbistir")
         image?.isTemplate = true
         restingImage = image
@@ -169,13 +166,6 @@ final class StatusItemController: NSObject, NSMenuDelegate, NSMenuItemValidation
         settings.target = self
         menu.addItem(settings)
 
-        #if DEBUG
-        menu.addItem(.separator())
-        let comparison = NSMenuItem(title: "Malzeme karşılaştırması", action: #selector(materialComparisonAction), keyEquivalent: "")
-        comparison.target = self
-        menu.addItem(comparison)
-        #endif
-
         menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: L10n.string("menu.quit", language), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
     }
@@ -223,10 +213,6 @@ final class StatusItemController: NSObject, NSMenuDelegate, NSMenuItemValidation
 
     @objc private func openSettingsAction() {
         DispatchQueue.main.async { self.openSettings() }
-    }
-
-    @objc private func materialComparisonAction() {
-        DispatchQueue.main.async { self.openMaterialComparison() }
     }
 
     @objc private func selectLanguage(_ sender: NSMenuItem) {

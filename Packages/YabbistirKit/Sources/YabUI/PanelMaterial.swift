@@ -1,8 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// The two candidate surfaces for every floating panel. The user picks one in the
-/// material comparison (Debug builds); `current` holds the decision.
+/// The two surfaces a floating panel can use. `current` holds the one the app uses, Liquid Glass;
+/// `tunedEffect`, a blur under a tinted fill, is what the snapshot tests render.
 public enum PanelMaterial: String, CaseIterable, Sendable {
     case liquidGlass
     case tunedEffect
