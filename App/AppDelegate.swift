@@ -14,6 +14,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var settings: SettingsWindowController?
     private var onboarding: OnboardingWindowController?
     private var effects: PreferenceEffects?
+    /// `yabbistir://` links that came before Settings existed, such as the one that launched the app.
+    private var pendingLinks: [URL] = []
+
+    /// The website's Install buttons open `yabbistir://` links. SwiftUI's app delegate sits in front of this one and
+    /// routes URLs to its scenes first; taking the GURL Apple event here keeps every link ours. It is set before launch
+    /// finishes, as the link that launched the app arrives in between.
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleGetURL(_:withReplyEvent:)),
+                                                     forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+    }
+
+    @objc private func handleGetURL(_ event: NSAppleEventDescriptor, withReplyEvent reply: NSAppleEventDescriptor) {
+        guard let text = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue, let url = URL(string: text) else { return }
+        open([url])
+    }
+
+    /// The same links, should they come the usual way instead.
+    func application(_ application: NSApplication, open urls: [URL]) {
+        open(urls)
+    }
+
+    private func open(_ urls: [URL]) {
+        guard let settings else {
+            pendingLinks += urls
+            return
+        }
+        for url in urls { settings.open(AppLink(url: url)) }
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
@@ -88,7 +116,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                         checkForUpdates: { [weak env] in Task { await env?.checkForUpdates() } },
                         readNotice: Self.bundledText,
                         rerunSetup: { [weak onboarding] in onboarding?.show() }),
-                    presence: SettingsPresence()))
+                    presence: SettingsPresence(),
+                    navigation: SettingsNavigation()))
             self.settings = settings
             statusItem = StatusItemController(env: env, jobsCard: jobsCard, isPanelVisible: isPanelVisible,
                                               openPanel: { panel.toggle(anchor: $0) }, openSettings: { settings.show() })
@@ -117,6 +146,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 // Ask once at launch.
                 if !AccessibilityPermission.isTrusted() { AccessibilityPermission.prompt() }
             }
+            // Last, so the Store a link opens comes forward over anything launch showed.
+            let links = pendingLinks
+            pendingLinks = []
+            open(links)
         } catch {
             NSAlert(error: error).runModal()
             NSApp.terminate(nil)

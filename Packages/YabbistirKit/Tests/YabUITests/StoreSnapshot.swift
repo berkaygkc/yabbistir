@@ -112,6 +112,41 @@ import YabLocalization
         }
     }
 
+    /// What an install link leaves on screen when it cannot offer everything: a footer line alone, a footer line beside
+    /// the saved-list line, and the unreachable store with the link waiting.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
+    func renderLinks() async throws {
+        for (language, scheme, appearance) in [(AppLanguage.english, "dark", NSAppearance.Name.darkAqua), (.turkish, "light", .aqua)] {
+            let fixture = StoreFixture(language: language)
+            try fixture.installLocally(F.jwt)
+            try fixture.serve([F.video, F.linkClean, F.translate, F.jwt])
+            let model = fixture.model()
+            model.appeared()
+            await model.refreshTask?.value
+            model.offer(["dev.example.nowhere"])
+            while let task = model.refreshTask { await task.value }
+            render(ExtensionsSettingsView(model: settings(fixture), store: model, tab: .store).frame(width: 660, height: 560),
+                   size: NSSize(width: 660, height: 560), name: "store-link-missing-\(scheme)-\(language.rawValue).png", appearance: appearance)
+
+            fixture.serveOffline()
+            model.refresh()
+            await model.refreshTask?.value
+            model.offer([F.jwt.id])
+            render(ExtensionsSettingsView(model: settings(fixture), store: model, tab: .store).frame(width: 660, height: 560),
+                   size: NSSize(width: 660, height: 560), name: "store-link-installed-offline-\(scheme)-\(language.rawValue).png",
+                   appearance: appearance)
+
+            let bare = StoreFixture(language: language)
+            bare.serveOffline()
+            let empty = bare.model()
+            empty.offer([F.jwt.id])
+            empty.appeared()
+            while let task = empty.refreshTask { await task.value }
+            render(ExtensionsSettingsView(model: settings(bare), store: empty, tab: .store).frame(width: 660, height: 560),
+                   size: NSSize(width: 660, height: 560), name: "store-link-retry-\(scheme)-\(language.rawValue).png", appearance: appearance)
+        }
+    }
+
     /// No saved catalog and one that is not signed by a known key: what the store shows until its keys ship.
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderUnverified() async throws {

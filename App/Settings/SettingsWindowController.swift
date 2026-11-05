@@ -30,6 +30,12 @@ final class SettingsWindowController {
         window.makeKeyAndOrderFront(nil)
     }
 
+    /// Follows a `yabbistir://` link: the Store, with the extensions an install link names offered there, or only the
+    /// app forward for any other address.
+    func open(_ link: AppLink) {
+        models.navigation.open(link, store: models.store, showWindow: { show() }, bringForward: { NSApp.activate() })
+    }
+
     private func makeWindow() -> NSWindow {
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 860, height: 580),
                               styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],

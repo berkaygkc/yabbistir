@@ -1718,6 +1718,176 @@
         }
       }
     },
+    "extensions.store.link.missing.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extension from the link isn’t in the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantı mağazada yok."
+          }
+        }
+      }
+    },
+    "extensions.store.link.missing.many": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extensions from the link aren’t in the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantılar mağazada yok."
+          }
+        }
+      }
+    },
+    "extensions.store.link.missing.some": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some extensions from the link aren’t in the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantıların bazıları mağazada yok."
+          }
+        }
+      }
+    },
+    "extensions.store.link.installed.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extension from the link is already installed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantı zaten kurulu."
+          }
+        }
+      }
+    },
+    "extensions.store.link.installed.many": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extensions from the link are already installed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantılar zaten kurulu."
+          }
+        }
+      }
+    },
+    "extensions.store.link.incompatible.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extension from the link needs a newer yabbistir."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantı daha yeni bir yabbistir istiyor."
+          }
+        }
+      }
+    },
+    "extensions.store.link.incompatible.many": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extensions from the link need a newer yabbistir."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantılar daha yeni bir yabbistir istiyor."
+          }
+        }
+      }
+    },
+    "extensions.store.link.incompatible.some": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some extensions from the link need a newer yabbistir."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantıların bazıları daha yeni bir yabbistir istiyor."
+          }
+        }
+      }
+    },
+    "extensions.store.link.waiting.one": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extension from the link is waiting for the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantı mağazayı bekliyor."
+          }
+        }
+      }
+    },
+    "extensions.store.link.waiting.many": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The extensions from the link are waiting for the store."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linkteki uzantılar mağazayı bekliyor."
+          }
+        }
+      }
+    },
     "extensions.store.loading": {
       "extractionState": "manual",
       "localizations": {

@@ -97,6 +97,26 @@ public final class StoreModel {
     public private(set) var refreshTask: Task<Void, Never>?
     /// The installs or updates under way, if any.
     public private(set) var installTask: Task<Void, Never>?
+    /// A row a link named, for the list to scroll to once; see `didReveal()`.
+    public private(set) var revealID: String?
+
+    /// An install link waiting to be answered. `checked` is set once a store check has ended since it came.
+    private struct LinkOffer {
+        let ids: [String]
+        var checked = false
+    }
+
+    /// Why part of a link was not offered: listed as missing, needing a newer yabbistir, or already installed.
+    enum LinkShortfall: Equatable {
+        /// One id was asked for, every one of several, or part of them.
+        enum Extent: Equatable { case one, all, part }
+        case missing(Extent)
+        case incompatible(Extent)
+        case installed(Extent)
+    }
+
+    private var linkOffer: LinkOffer?
+    private var linkShortfall: LinkShortfall?
 
     @ObservationIgnored private var refreshedThisSession = false
     @ObservationIgnored private var cacheLoaded = false
@@ -132,18 +152,23 @@ public final class StoreModel {
             if client.catalog == nil { client.loadCache() }
         }
         pruneSelection()
-        guard !refreshedThisSession else { return }
-        refreshedThisSession = true
-        refresh()
+        if !refreshedThisSession {
+            refreshedThisSession = true
+            refresh()
+        }
+        resolveLinkOffer()
     }
 
     public func disappeared() {
         isVisible = false
     }
 
-    /// The Settings window was opened again: the next look at the tab refreshes once more (now, if it is on screen).
+    /// The Settings window was opened again: the next look at the tab refreshes once more (now, if it is on screen). A
+    /// link left from the last visit is dropped, so it never surfaces later on its own.
     public func beginSession() {
         refreshedThisSession = false
+        linkOffer = nil
+        linkShortfall = nil
         if isVisible { appeared() }
     }
 
@@ -155,6 +180,9 @@ public final class StoreModel {
             await client.refresh()
             pruneSelection()
             refreshTask = nil
+            // A link that came before this check ended is answered from it.
+            linkOffer?.checked = true
+            resolveLinkOffer()
         }
     }
 
@@ -425,7 +453,89 @@ public final class StoreModel {
             }
             pruneSelection()
             installTask = nil
+            // A link that came during the install is offered now.
+            resolveLinkOffer()
         }
+    }
+
+    // MARK: Links
+
+    /// Hands over an install link's ids (`yabbistir://store/install`). Once the tab is on screen and the catalog has
+    /// been checked, the ones that can be installed are picked, in place of any earlier picks, and the sheet of
+    /// Install (N) comes up; nothing installs unless it is confirmed. One already here is not offered again, as its row
+    /// cannot be picked. Ids the store does not list are named under the list.
+    public func offer(_ ids: [String]) {
+        guard !ids.isEmpty else { return }
+        linkOffer = LinkOffer(ids: ids)
+        linkShortfall = nil
+        // The newest link wins over a sheet still waiting for an answer; closing it unanswered installs nothing.
+        pendingConsent = nil
+        // The rows the link names stay in view, whatever was being searched.
+        query = ""
+        category = nil
+        resolveLinkOffer()
+    }
+
+    /// The ids of a link still waiting for the tab or the catalog.
+    var pendingLinkIDs: [String]? { linkOffer?.ids }
+
+    /// Why the last link offered less than it named, in the footer beside the catalog's own notice.
+    public var linkNotice: Notice? {
+        guard let linkShortfall else { return nil }
+        return switch linkShortfall {
+        case .missing(.one): Notice(symbol: "link", text: string("extensions.store.link.missing.one"))
+        case .missing(.all): Notice(symbol: "link", text: string("extensions.store.link.missing.many"))
+        case .missing(.part): Notice(symbol: "link", text: string("extensions.store.link.missing.some"))
+        case .incompatible(.one): Notice(symbol: "arrow.up.circle", text: string("extensions.store.link.incompatible.one"))
+        case .incompatible(.all): Notice(symbol: "arrow.up.circle", text: string("extensions.store.link.incompatible.many"))
+        case .incompatible(.part): Notice(symbol: "arrow.up.circle", text: string("extensions.store.link.incompatible.some"))
+        case .installed(.one): Notice(symbol: "checkmark.circle", text: string("extensions.store.link.installed.one"))
+        case .installed(.all), .installed(.part): Notice(symbol: "checkmark.circle", text: string("extensions.store.link.installed.many"))
+        }
+    }
+
+    /// Under "Couldn’t reach the store" while a link waits for the catalog; Try Again or Refresh answers it.
+    public var linkWaiting: String? {
+        guard let linkOffer, unavailable != nil else { return nil }
+        return string(linkOffer.ids.count == 1 ? "extensions.store.link.waiting.one" : "extensions.store.link.waiting.many")
+    }
+
+    /// The list scrolled to this row once.
+    public func didReveal() {
+        revealID = nil
+    }
+
+    /// Answers the waiting link when nothing else is under way: a refresh, an install, or a tab not on screen. A link
+    /// naming an id the list lacks checks the store once more first, since the website can be newer than the saved
+    /// list. With no list at all it keeps waiting, and Try Again or Refresh finishes it.
+    private func resolveLinkOffer() {
+        guard var offer = linkOffer, isVisible, refreshTask == nil, installTask == nil else { return }
+        let listed = offer.ids.compactMap { id in client.catalog?.extensions.first { $0.id == id } }
+        if listed.count < offer.ids.count, !offer.checked {
+            offer.checked = true
+            linkOffer = offer
+            refresh()
+            return
+        }
+        guard client.catalog != nil else { return }
+        linkOffer = nil
+        let installable = listed.filter { client.status(of: $0) == .notInstalled }
+        linkShortfall = Self.shortfall(requested: offer.ids.count, listed: listed.map(client.status(of:)))
+        revealID = (installable.first ?? listed.first)?.id
+        guard !installable.isEmpty else { return }
+        selection = Set(installable.map(\.id))
+        installSelected()
+    }
+
+    /// What kept part of a link out of the sheet, the most telling first: ids the store does not list, then ones that
+    /// need a newer yabbistir, then (when nothing is left to install) ones already here. Nil when the sheet holds it all.
+    static func shortfall(requested: Int, listed: [EntryStatus]) -> LinkShortfall? {
+        func extent(_ count: Int) -> LinkShortfall.Extent { requested == 1 ? .one : count == requested ? .all : .part }
+        if listed.count < requested { return .missing(extent(requested - listed.count)) }
+        let incompatible = listed.filter { if case .incompatible = $0 { true } else { false } }.count
+        if incompatible > 0 { return .incompatible(extent(incompatible)) }
+        if !listed.contains(.notInstalled) { return .installed(extent(listed.count)) }
+        return nil
     }
 
     /// The same download with the same request: version, package hash, the same permissions, sites and programs in

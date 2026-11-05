@@ -38,6 +38,12 @@ targets:
         # Store extensions such as Browser Tabs and Send To run osascript to read another app's tabs or add a note to it.
         # macOS attributes those Apple events to yabbistir and shows this text when it asks, once per app.
         NSAppleEventsUsageDescription: "Some extensions you install talk to other apps, for example to read Safari's open tabs or to add a note to Notes. macOS asks once for each app."
+        # yabbistir://store opens Settings › Extensions › Store; yabbistir://store/install?id=… (the website's Install
+        # buttons) also picks those extensions and shows the consent sheet. A link never installs anything by itself.
+        CFBundleURLTypes:
+          - CFBundleURLName: dev.yabbistir.app
+            CFBundleTypeRole: Viewer
+            CFBundleURLSchemes: [yabbistir]
     entitlements:
       path: App/Yabbistir.entitlements
       properties:

@@ -10,7 +10,9 @@ import YabLocalization
 public struct ExtensionsSettingsView: View {
     @Bindable var model: ExtensionsSettingsModel
     let store: StoreModel
-    @State private var tab: Tab
+    @State private var ownTab: Tab
+    /// The Settings window's tab, which a link can change; nil when the view keeps its own.
+    private let sharedTab: Binding<Tab>?
     @State private var removing: ExtensionsSettingsModel.Row?
 
     public enum Tab: Hashable, Sendable {
@@ -20,12 +22,23 @@ public struct ExtensionsSettingsView: View {
     public init(model: ExtensionsSettingsModel, store: StoreModel, tab: Tab = .installed) {
         self.model = model
         self.store = store
-        _tab = State(initialValue: tab)
+        _ownTab = State(initialValue: tab)
+        sharedTab = nil
     }
+
+    /// The tab follows `tab`, so it can be switched from outside the view.
+    public init(model: ExtensionsSettingsModel, store: StoreModel, tab: Binding<Tab>) {
+        self.model = model
+        self.store = store
+        _ownTab = State(initialValue: tab.wrappedValue)
+        sharedTab = tab
+    }
+
+    private var tab: Binding<Tab> { sharedTab ?? $ownTab }
 
     public var body: some View {
         VStack(spacing: 0) {
-            Picker("", selection: $tab) {
+            Picker("", selection: tab) {
                 Text(string("extensions.tab.installed")).tag(Tab.installed)
                 Text(string("extensions.tab.store")).tag(Tab.store)
                 Text(string("extensions.tab.development")).tag(Tab.development)
@@ -35,7 +48,7 @@ public struct ExtensionsSettingsView: View {
             .fixedSize()
             .padding(.vertical, 12)
             Divider()
-            switch tab {
+            switch tab.wrappedValue {
             case .installed: installed
             // Only this tab reaches the network, and only once it is shown.
             case .store: StoreView(model: store)

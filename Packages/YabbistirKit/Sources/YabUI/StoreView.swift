@@ -106,7 +106,7 @@ struct StoreView: View {
 
     @ViewBuilder private var content: some View {
         if let unavailable = model.unavailable {
-            StoreUnavailableView(unavailable: unavailable, tryAgain: string("extensions.store.tryAgain"),
+            StoreUnavailableView(unavailable: unavailable, linkWaiting: model.linkWaiting, tryAgain: string("extensions.store.tryAgain"),
                                  isRefreshing: model.isRefreshing, onTryAgain: model.refresh)
         } else if model.isLoading {
             VStack(spacing: 10) {
@@ -168,6 +168,13 @@ struct StoreView: View {
                 model.installSelected()
                 return .handled
             }
+            // A link's row comes into view, also when the list first appears with the catalog the link waited for.
+            .onChange(of: model.revealID, initial: true) { _, id in
+                guard let id else { return }
+                cursor = id
+                model.didReveal()
+                DispatchQueue.main.async { proxy.scrollTo(id, anchor: .center) }
+            }
         }
     }
 
@@ -184,16 +191,10 @@ struct StoreView: View {
 
     private var footer: some View {
         HStack(spacing: 8) {
-            if let notice = model.notice {
-                Image(systemName: notice.symbol)
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-                    .accessibilityHidden(true)
-                Text(notice.text)
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+            // What a link could not offer, over why the list may be out of date.
+            VStack(alignment: .leading, spacing: 4) {
+                if let link = model.linkNotice { noticeLine(link) }
+                if let notice = model.notice { noticeLine(notice) }
             }
             Spacer(minLength: 12)
             Button(model.installTitle) { model.installSelected() }
@@ -202,6 +203,21 @@ struct StoreView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .frame(minHeight: 46)
+    }
+
+    private func noticeLine(_ notice: StoreModel.Notice) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: notice.symbol)
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+                .frame(width: 14)
+                .accessibilityHidden(true)
+            Text(notice.text)
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
 
@@ -307,9 +323,11 @@ struct StoreRowView: View {
     }
 }
 
-/// No catalog to show: what happened, in one calm line and a hint, and a way to try again.
+/// No catalog to show: what happened, in one calm line and a hint, and a way to try again. While a link waits, a
+/// last line says it waits for the store.
 struct StoreUnavailableView: View {
     let unavailable: StoreModel.Unavailable
+    var linkWaiting: String?
     let tryAgain: String
     let isRefreshing: Bool
     let onTryAgain: () -> Void
@@ -326,6 +344,11 @@ struct StoreUnavailableView: View {
                 Text(unavailable.message)
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
+                if let linkWaiting {
+                    Text(linkWaiting)
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                }
             }
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
