@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSAppleEventsUsageDescription" : {
+      "comment" : "Shown by macOS when an installed extension first sends Apple events to another app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some extensions you install talk to other apps, for example to read Safari's open tabs or to add a note to Notes. macOS asks once for each app."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurduğun bazı uzantılar başka uygulamalarla konuşur; örneğin Safari'de açık sekmeleri okur ya da Notlar'a not ekler. macOS her uygulama için bir kez sorar."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

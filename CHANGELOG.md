@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Extensions that talk to other apps:** yabbistir can now ask macOS for Automation access when a store extension needs it, such as Browser Tabs reading Safari's open tabs or Send To adding a note to Notes. macOS asks once for each app, and System Settings › Privacy & Security › Automation keeps your answers. Before this, macOS refused those requests without asking.
+
 ## 0.4.0 — 2026-11-03
 
 - **First run:** a short window on a new install. Pick English or Turkish, bring over another clipboard manager's library, check the shortcut that opens the panel, allow pasting and choose whether yabbistir opens at login. Settings → About → Run First Setup Again… brings it back.
