@@ -416,6 +416,14 @@ final class PanelController: NSObject, NSWindowDelegate {
         var y = fit?.scrolls == true ? visibleFrame.maxY - margin - size.height : row.maxY + 8 - size.height
         y = max(visibleFrame.minY + margin, min(y, visibleFrame.maxY - margin - size.height))
         transformSurface.show(content, frame: CGRect(x: x, y: y, width: size.width, height: size.height), above: window)
+        surfaceMoved()
+    }
+
+    /// The ⇧ panel or ⌘P is in its final place: an input method composing in its search line asks again where the line
+    /// is, so the candidate window settles under it (the first letter grows the ⇧ panel by its search line).
+    private func surfaceMoved() {
+        guard let textInput = window.textInput, textInput.hasMarkedText() else { return }
+        textInput.inputContext?.invalidateCharacterCoordinates()
     }
 
     /// The ⇧ panel's rows against the screen's height inside its margins, less the panel's other parts with the result
@@ -471,6 +479,7 @@ final class PanelController: NSObject, NSWindowDelegate {
         var y = row.maxY - 6 - size.height
         y = max(y, visibleFrame.minY + 12)
         pinSurface.show(content, frame: CGRect(x: x, y: y, width: size.width, height: size.height), above: window)
+        surfaceMoved()
     }
 
     // MARK: Preview

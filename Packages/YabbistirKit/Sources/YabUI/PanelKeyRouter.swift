@@ -27,13 +27,14 @@ public enum PanelKeyRoute: Equatable, Sendable {
 /// the panel has no menu, and ⌘Q or ⌘, must not reach the app's main menu.
 public enum PanelKeyRouter {
     /// While text is being composed (`composing`), every key without ⌘ belongs to the input method: ↵, Esc, the arrows,
-    /// Space and ⌫ never paste, close or move. With an input method active (`inputMethod`), typing starts with it too;
-    /// the panel's own keys (Space, ↵, Esc, arrows, ⇥, ⌫) work as on any layout while nothing is composed.
+    /// Space and ⌫ never paste, close or move. With an input method active (`inputMethod`), typing starts with it too,
+    /// where a line takes text (`acceptsText`; not the Kategoriler menu or a source's list, where nothing would show the
+    /// composition). The panel's own keys (Space, ↵, Esc, arrows, ⇥, ⌫) work as on any layout while nothing is composed.
     public static func route(keyCode: UInt16, characters: String?, modifiers: NSEvent.ModifierFlags,
-                             composing: Bool, inputMethod: Bool) -> PanelKeyRoute {
+                             composing: Bool, inputMethod: Bool, acceptsText: Bool = true) -> PanelKeyRoute {
         if composing, !modifiers.contains(.command) { return .inputMethod }
         guard let command = command(keyCode: keyCode, characters: characters, modifiers: modifiers) else { return .system }
-        if case .type = command, inputMethod { return .inputMethod }
+        if case .type = command, inputMethod, acceptsText { return .inputMethod }
         return .command(command)
     }
 

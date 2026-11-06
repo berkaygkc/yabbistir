@@ -40,6 +40,9 @@ public final class PanelTextInputView: NSView, @preconcurrency NSTextInputClient
         super.keyDown(with: event)
     }
 
+    /// Some line takes typing now; the Kategoriler menu and a source's list take none.
+    public var acceptsText: Bool { model.typingTarget != nil }
+
     /// The panel is closing: a composition left open ends with it, without a result.
     public func discardComposition() {
         guard hasMarkedText() else { return }

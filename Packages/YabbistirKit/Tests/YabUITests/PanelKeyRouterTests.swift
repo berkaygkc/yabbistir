@@ -70,6 +70,19 @@ import Testing
         #expect(route(125, nil, [], composing: true, inputMethod: true) == .inputMethod)
         #expect(route(51, "\u{7f}", [], composing: true, inputMethod: true) == .inputMethod)
     }
+    /// The Kategoriler menu or a source's list takes no text: a letter goes to the panel, which ignores it there, and no
+    /// input method composes where nothing would show it.
+    @Test func noCompositionWhereNothingTakesText() {
+        #expect(PanelKeyRouter.route(keyCode: 0, characters: "n", modifiers: [], composing: false, inputMethod: true,
+                                     acceptsText: false) == .command(.type("n")))
+        #expect(PanelKeyRouter.route(keyCode: 0, characters: "n", modifiers: [], composing: false, inputMethod: true,
+                                     acceptsText: true) == .inputMethod)
+    }
+    /// A composition already under way (a menu opened by a click meanwhile) still ends with the input method: Esc cancels it.
+    @Test func aCompositionUnderWayKeepsItsKeys() {
+        #expect(PanelKeyRouter.route(keyCode: 53, characters: "\u{1b}", modifiers: [], composing: true, inputMethod: true,
+                                     acceptsText: false) == .inputMethod)
+    }
     @Test func plainLayoutsTypeAsToday() {
         #expect(route(0, "a", [], composing: false, inputMethod: false) == .command(.type("a")))
     }

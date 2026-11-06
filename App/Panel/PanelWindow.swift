@@ -82,7 +82,8 @@ final class PanelWindow: NSPanel, PanelTextInputHost {
         if event.type == .keyDown {
             shiftTap.keyDown()
             let route = PanelKeyRouter.route(keyCode: event.keyCode, characters: event.characters, modifiers: event.modifierFlags,
-                                             composing: textInput?.hasMarkedText() ?? false, inputMethod: refreshInputSource())
+                                             composing: textInput?.hasMarkedText() ?? false, inputMethod: refreshInputSource(),
+                                             acceptsText: textInput?.acceptsText ?? true)
             switch route {
             case .inputMethod:
                 if inputMethodTakes(event) { return }
