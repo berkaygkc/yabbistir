@@ -41,8 +41,26 @@ import Testing
         return result
     }
 
-    private static func placeholders(_ value: String) -> [String] {
-        value.matches(of: /%(?:\d+\$)?(?:@|lld|d|f|n)/).map { String($0.0) }.sorted()
+    /// A string's format arguments as (argument index, conversion) pairs. Plain specifiers are numbered 1, 2, 3… in
+    /// order of appearance, positional ones (`%2$@`) use their own number; `%%` is not an argument.
+    static func arguments(_ value: String) -> Set<String> {
+        var next = 1
+        var result = Set<String>()
+        for match in value.matches(of: /%%|%(?:(\d+)\$)?[-+ #0]*\d*(?:\.\d+)?(lld|llu|ld|lu|@|d|u|f|s)/) {
+            guard let type = match.2 else { continue }
+            if let position = match.1.flatMap({ Int($0) }) {
+                result.insert("\(position)\(type)")
+            } else {
+                result.insert("\(next)\(type)")
+                next += 1
+            }
+        }
+        return result
+    }
+
+    /// Whether a translation takes the same arguments as English, by index and type; it may reorder or reuse them.
+    static func placeholdersMatch(_ english: String, _ translation: String) -> Bool {
+        arguments(english) == arguments(translation)
     }
 
     @Test(arguments: shippedLanguages)
@@ -71,9 +89,9 @@ import Testing
                 for (form, unit) in units {
                     // A language may have plural forms English lacks; they carry the same placeholders as English's "other".
                     guard let reference = english[form] ?? english["other"] ?? english[""] else { continue }
-                    let expected = Self.placeholders(reference["value"] as? String ?? "")
-                    let actual = Self.placeholders(unit["value"] as? String ?? "")
-                    if expected != actual { problems.append("\(file): \(key) [\(form)] \(code) \(actual) != en \(expected)") }
+                    let expected = reference["value"] as? String ?? ""
+                    let actual = unit["value"] as? String ?? ""
+                    if !Self.placeholdersMatch(expected, actual) { problems.append("\(file): \(key) [\(form)] \(code) \"\(actual)\" != en \"\(expected)\"") }
                 }
             }
         }
@@ -94,5 +112,19 @@ import Testing
             let entry = try #require(strings[key], "\(key) is missing")
             for code in ["en", "tr"] { #expect(Self.units(entry, code) != nil, "\(key) has no \(code)") }
         }
+    }
+}
+
+/// The parity comparison itself: arguments are matched by index and type, so a translation may reorder them.
+@Suite struct PlaceholderParityTests {
+    @Test(arguments: [
+        ("%@ copied to %@", "%2$@ に %1$@ をコピーしました", true),
+        ("%@ copied", "%lld copied", false),
+        ("%lld items", "%1$lld 件", true),
+        ("%@ and %@", "%1$@", false),
+        ("50%% done %@", "%@ fertig zu 50%%", true),
+    ])
+    func comparison(english: String, translation: String, equal: Bool) {
+        #expect(CatalogTests.placeholdersMatch(english, translation) == equal)
     }
 }
