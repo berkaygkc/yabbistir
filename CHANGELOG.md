@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.5.0 — Unreleased
+## 0.5.0 — 2026-11-06
 
-- **Install from the website:** an extension's Install button on the yabbistir website opens Settings → Extensions → Store with that extension picked and shows the same permissions sheet as the store's own Install button. Nothing is installed until you confirm it. If the extension is already installed, needs a newer yabbistir or isn't in the store, the store says so under the list.
+- **Install from the website:** an extension's Install button on the [yabbistir website](https://berkaygkc.github.io/yabbistir-site/extensions/) opens Settings → Extensions → Store with that extension picked and shows the same permissions sheet as the store's own Install button. Nothing is installed until you confirm it. If the extension is already installed, needs a newer yabbistir or isn't in the store, the store says so under the list.
   - The links are `yabbistir://store` and `yabbistir://store/install?id=<extension id>`; `id` can repeat to pick several extensions at once.
 - **Fixes:** the ⇧ panel's header says "1 transform" when one is left, not "1 transforms".
 

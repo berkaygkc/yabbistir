@@ -152,7 +152,7 @@ Built in:
 
 An extension can also fill a column of its own. **LastPass**, in the store, lists your vault's entries by name and username through the `lpass` command-line tool: ↵ pastes the password into the field you're in, ⇧↵ the username.
 
-The open store, [yabbistir-extensions](https://github.com/berkaygkc/yabbistir-extensions), has 36 extensions: open Settings → Extensions → Store, pick the ones you want and install them together. The store's catalog is signed, and yabbistir checks every package before installing it. Before an extension is installed, it shows what it wants to do: reach websites, run command-line programs, read your history or see what you copy. Nothing happens until you allow it. To write your own, start with the store's README; Settings → Extensions also installs one from a folder or a `.yabext` file.
+The open store, [yabbistir-extensions](https://github.com/berkaygkc/yabbistir-extensions), has 36 extensions: open Settings → Extensions → Store, pick the ones you want and install them together, or press Install on an extension's page on the [website](https://berkaygkc.github.io/yabbistir-site/extensions/) and yabbistir opens the store with it picked. The store's catalog is signed, and yabbistir checks every package before installing it. Before an extension is installed, it shows what it wants to do: reach websites, run command-line programs, read your history or see what you copy. Nothing happens until you allow it. To write your own, start with the store's README; Settings → Extensions also installs one from a folder or a `.yabext` file.
 
 ## Privacy
 
