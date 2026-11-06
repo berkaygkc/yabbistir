@@ -141,6 +141,10 @@ struct ActionSearchLine: View {
     static let height: CGFloat = 42.5
 
     let query: String
+    /// What an input method is composing here.
+    var marked = ""
+    /// Which menu's line it is, for the input method's candidate window.
+    let target: TypingTarget
     let language: AppLanguage
 
     var body: some View {
@@ -149,14 +153,15 @@ struct ActionSearchLine: View {
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textSecondary)
                 HStack(spacing: 0) {
-                    Text(query).font(Tokens.Fonts.body).foregroundStyle(Tokens.Colors.text)
+                    Text(.typed(query, marked: marked)).font(Tokens.Fonts.body).foregroundStyle(Tokens.Colors.text)
                     BlinkingCaret().scaleEffect(0.75, anchor: .leading)
-                    if query.isEmpty {
+                    if query.isEmpty, marked.isEmpty {
                         Text(L10n.string("actions.search", language)).font(Tokens.Fonts.body)
                             .foregroundStyle(Tokens.Colors.textSecondary).padding(.leading, 2)
                     }
                 }
-                Spacer(minLength: 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background { TextInputAnchor(target: target, font: .body) }
             }
             .padding(.horizontal, 10)
             .frame(height: 36)
@@ -190,7 +195,9 @@ struct ActionMenuView: View {
             } else {
                 rows(items)
             }
-            ActionSearchLine(query: model.actionQuery, language: model.language)
+            // Under the rows, never scrolled with them: an input method's candidate window opens under its text.
+            ActionSearchLine(query: model.actionQuery, marked: model.markedText(in: .actions), target: .actions,
+                             language: model.language)
         }
     }
 

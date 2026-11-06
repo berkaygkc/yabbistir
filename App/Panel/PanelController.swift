@@ -380,6 +380,8 @@ final class PanelController: NSObject, NSWindowDelegate {
             _ = model.selectedRowFrame
             _ = model.transformRows.count
             _ = model.transformQuery
+            // Composing shows the search line before anything is typed: the panel grows by it.
+            _ = model.markedText(in: .transforms)
             _ = model.menuSelection
             _ = model.hintRevision
         } onChange: { [weak self] in
@@ -402,7 +404,9 @@ final class PanelController: NSObject, NSWindowDelegate {
         }
         let fit = transformListFit()
         let list: TransformPanelView.ListMode = fit.map { $0.scrolls ? .scrolls(height: $0.height) : .full } ?? .full
+        // Shown content only: its search line tells an input method where it is (the measuring stand-in never does).
         let content = TransformPanelView(model: model, list: list) { [weak self] action in self?.perform(action) }
+            .textInputAnchors(of: model)
         let size = transformSurface.fittingSize(of: content)
         let margin = ColumnStripLayout.screenMargin
         let column = columnRect()
@@ -421,8 +425,11 @@ final class PanelController: NSObject, NSWindowDelegate {
         guard model.transformSource == nil else { return nil }
         let rows = model.transformRows.count
         guard rows > 0 else { return nil }
-        let key = TransformListLayout.ChromeCache.Key(subject: model.transformSubjectID, searching: !model.transformQuery.isEmpty)
+        // The search line stands while something is typed or an input method composes there (`TransformPanelView`).
+        let searching = !model.transformQuery.isEmpty || !model.markedText(in: .transforms).isEmpty
+        let key = TransformListLayout.ChromeCache.Key(subject: model.transformSubjectID, searching: searching)
         let chrome = transformChrome.height(for: key) {
+            // No input-method anchors here: the stand-in's search line must not take the shown line's place.
             transformSurface.measuredSize(of: TransformPanelView(model: model, list: .chrome) { _ in }).height
         }
         let available = visibleFrame.height - 2 * ColumnStripLayout.screenMargin - chrome
@@ -457,7 +464,7 @@ final class PanelController: NSObject, NSWindowDelegate {
             pinSurface.hide()
             return
         }
-        let content = PinPopoverView(model: model)
+        let content = PinPopoverView(model: model).textInputAnchors(of: model)
         let size = pinSurface.fittingSize(of: content)
         var x = min(row.maxX - 40, visibleFrame.maxX - 12 - size.width)
         x = max(x, visibleFrame.minX + 12)

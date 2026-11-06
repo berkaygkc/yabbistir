@@ -79,7 +79,8 @@ public enum Tokens {
         public static let section = Font.system(size: 11.5, weight: .semibold)
         public static let columnHeader = Font.system(size: 12, weight: .semibold)
         public static let keycap = Font.system(size: 11.5, weight: .medium)
-        public static let body = Font.system(size: 13)
+        public static let bodySize: CGFloat = 13
+        public static let body = Font.system(size: bodySize)
     }
 
     public enum Motion {

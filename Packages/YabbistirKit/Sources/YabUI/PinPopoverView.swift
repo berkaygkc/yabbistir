@@ -16,14 +16,16 @@ public struct PinPopoverView: View {
             HStack(spacing: 8) {
                 Image(systemName: "tag").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textSecondary)
                 HStack(spacing: 0) {
-                    Text(model.pinQuery).font(Tokens.Fonts.body).foregroundStyle(Tokens.Colors.text)
+                    Text(.typed(model.pinQuery, marked: model.markedText(in: .pin))).font(Tokens.Fonts.body)
+                        .foregroundStyle(Tokens.Colors.text)
                     BlinkingCaret().scaleEffect(0.75, anchor: .leading)
-                    if model.pinQuery.isEmpty {
+                    if model.pinQuery.isEmpty, model.markedText(in: .pin).isEmpty {
                         Text(L10n.string("pin.search", model.language)).font(Tokens.Fonts.body)
                             .foregroundStyle(Tokens.Colors.textSecondary).padding(.leading, 2)
                     }
                 }
-                Spacer(minLength: 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background { TextInputAnchor(target: .pin, font: .body) }
             }
             .padding(.horizontal, 10)
             .frame(height: 34)

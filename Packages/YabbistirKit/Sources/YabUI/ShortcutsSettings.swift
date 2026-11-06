@@ -6,6 +6,8 @@ import YabPlatform
 public struct PanelKeyReference: Sendable {
     public let keys: [String]
     public let titleKey: String
+    /// A title can have two keys (⇧ and ⌘T both open the ⇧ panel).
+    public var id: String { titleKey + keys.joined() }
 
     public static let all: [PanelKeyReference] = [
         .init(keys: ["↑", "↓"], titleKey: "settings.keys.move"),
@@ -13,6 +15,8 @@ public struct PanelKeyReference: Sendable {
         .init(keys: ["↵"], titleKey: "settings.keys.paste"),
         .init(keys: ["⇧", "↵"], titleKey: "settings.keys.shiftReturn"),
         .init(keys: ["⇧"], titleKey: "settings.keys.transforms"),
+        // Under an input method a ⇧ tap is the method's; ⌘T works with any keyboard.
+        .init(keys: ["⌘", "T"], titleKey: "settings.keys.transforms"),
         .init(keys: ["⌘", "K"], titleKey: "settings.keys.actions"),
         .init(keys: ["⌘", "C"], titleKey: "settings.keys.copy"),
         .init(keys: ["⌘", "P"], titleKey: "settings.keys.addToCategory"),
@@ -40,7 +44,7 @@ public struct ShortcutsSettingsView: View {
                 Text(string("settings.shortcuts.global"))
             }
             Section {
-                ForEach(PanelKeyReference.all, id: \.titleKey) { row in
+                ForEach(PanelKeyReference.all, id: \.id) { row in
                     LabeledContent {
                         HStack(spacing: 3) { ForEach(row.keys, id: \.self) { Keycap($0) } }
                     } label: {

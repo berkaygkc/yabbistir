@@ -90,6 +90,14 @@ import Testing
         #expect(command(17, "か", .command) == .toggleTransforms)
         #expect(command(12, "ㅂ", .command) == .swallow)
     }
+    /// A Latin layout's own letters and symbols under ⌘ (Turkish F, AZERTY, Czech) are never read as another key.
+    @Test func latinCommandKeysKeepTheirLayout() {
+        #expect(command(14, "ğ", .command) == .swallow)
+        #expect(command(19, "é", .command) == .swallow)
+        #expect(command(22, "§", .command) == .swallow)
+        #expect(command(20, "š", .command) == .swallow)
+        #expect(command(14, "ế", .command) == .swallow)
+    }
     @Test func shiftTapOpensTransformsOnPlainLayoutsOnly() {
         #expect(PanelKeyRouter.shiftTapCommand(inputMethod: false) == .toggleTransforms)
         #expect(PanelKeyRouter.shiftTapCommand(inputMethod: true) == nil)

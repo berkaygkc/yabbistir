@@ -3,6 +3,13 @@ import YabLocalization
 @testable import YabUI
 
 @Suite struct PanelKeyReferenceTests {
+    /// ⌘T opens the ⇧ panel for everyone, and under an input method it is the only key that does.
+    @Test func transformsListBothKeys() {
+        let keys = PanelKeyReference.all.filter { $0.titleKey == "settings.keys.transforms" }.map(\.keys)
+        #expect(keys == [["⇧"], ["⌘", "T"]])
+        #expect(Set(PanelKeyReference.all.map(\.id)).count == PanelKeyReference.all.count)
+    }
+
     @Test func everyRowIsTranslated() {
         #expect(!PanelKeyReference.all.isEmpty)
         for row in PanelKeyReference.all {

@@ -62,8 +62,9 @@ public enum PanelKeyRouter {
         }
         if modifiers.contains(.command) {
             guard modifiers.isDisjoint(with: [.control, .option, .shift]), var key = characters?.lowercased() else { return .swallow }
-            // Hangul or Kana under ⌘ ("ㅏ" for K): the key's place on an ANSI keyboard names the shortcut.
-            if !key.unicodeScalars.allSatisfy(\.isASCII), let ansi = ansiKeys[keyCode] { key = ansi }
+            // Hangul or Kana under ⌘ ("ㅏ" for K): the key's place on an ANSI keyboard names the shortcut. A Latin
+            // layout's own keys (ğ on Turkish F, é and § on AZERTY, š on Czech) stay what they are.
+            if !isLatin(key), let ansi = ansiKeys[keyCode] { key = ansi }
             if let digit = Int(key), (1...9).contains(digit) { return .pasteIndex(digit) }
             switch key {
             case "a": return .selectAll
@@ -81,6 +82,11 @@ public enum PanelKeyRouter {
               characters.unicodeScalars.allSatisfy({ $0.value >= 0x20 && !(0xF700...0xF8FF).contains($0.value) && $0.value != 0x7F })
         else { return nil }
         return .type(characters)
+    }
+
+    /// Latin script with its symbols: ASCII, Latin-1, Latin Extended-A and -B, and Latin Extended Additional (Vietnamese).
+    private static func isLatin(_ text: String) -> Bool {
+        text.unicodeScalars.contains { $0.value < 0x250 || (0x1E00...0x1EFF).contains($0.value) }
     }
 
     /// The ⌘ shortcuts' keys by ANSI key code, for a layout that types no Latin letter under ⌘.

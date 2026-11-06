@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 import Testing
 @testable import YabCore
 import YabLocalization
@@ -7,20 +7,23 @@ import YabPasteboard
 
 private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
-private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
-    CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(s.utf8))]],
-                 source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutesAgo * 60))
+private func clip(_ s: String, minutesAgo: Double, rtf: Bool = false) -> CapturedClip {
+    let plain = PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(s.utf8))
+    let reps = rtf ? [plain, PasteboardRepresentation(type: TypeIdentifiers.rtf, data: Data("{\\rtf1 \(s)}".utf8))] : [plain]
+    return CapturedClip(items: [reps], source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutesAgo * 60))
 }
 
 /// An input method's text in the search: composed (marked) text shows but is not searched; committed text is typed.
 @MainActor @Suite struct MarkedTextTests {
     let model: PanelViewModel
+    /// Rich text, so the ⇧ panel opens on it ("Paste as plain text") without any extension.
+    let richID: Int64
 
     init() throws {
         let store = try ItemStore.temporary()
-        for (text, minutes) in [("你好世界", 1.0), ("haftalık rapor", 2), ("eski not", 3)] {
-            _ = try store.ingest(clip(text, minutesAgo: minutes))
-        }
+        _ = try store.ingest(clip("你好世界", minutesAgo: 1))
+        richID = try #require(try store.ingest(clip("haftalık rapor", minutesAgo: 2, rtf: true))).item.id!
+        _ = try store.ingest(clip("eski not", minutesAgo: 3))
         let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!)
         model = PanelViewModel(library: try Library(store: store), language: language, now: { now })
         model.reset()
@@ -92,9 +95,139 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         #expect(model.selectedID == selected)
     }
 
+    // MARK: Where the composition goes
+
+    /// The search line composes while nothing is open over the list.
+    @Test func theSearchComposesWhenNoMenuIsOpen() {
+        #expect(model.typingTarget == .search)
+        model.setMarkedText("ni")
+        #expect(model.markedText(in: .search) == "ni")
+        #expect(model.typedText(in: .search) == "")
+    }
+
+    @Test func actionsMenuComposesInItsOwnLine() {
+        _ = model.handle(.toggleActions)
+        #expect(model.typingTarget == .actions)
+        model.setMarkedText("fu")
+        #expect(model.markedText(in: .actions) == "fu")
+        #expect(model.markedText(in: .search) == "")
+        #expect(model.actionQuery == "")
+        model.commitText("复制")
+        #expect(model.actionQuery == "复制")
+        #expect(model.typedText(in: .actions) == "复制")
+        #expect(model.query == "")
+        #expect(model.markedText(in: .actions) == "")
+    }
+
+    @Test func pinMenuComposesInItsOwnLine() {
+        _ = model.handle(.togglePin)
+        #expect(model.layer == .pin)
+        #expect(model.typingTarget == .pin)
+        model.setMarkedText("ni")
+        #expect(model.markedText(in: .pin) == "ni")
+        #expect(model.markedText(in: .search) == "")
+        model.commitText("你")
+        #expect(model.pinQuery == "你")
+        #expect(model.typedText(in: .pin) == "你")
+        #expect(model.query == "")
+    }
+
+    @Test func transformsPanelComposesInItsOwnLine() {
+        model.select(richID, in: .history)
+        _ = model.handle(.toggleTransforms)
+        #expect(model.layer == .transforms)
+        #expect(model.typingTarget == .transforms)
+        model.setMarkedText("chun")
+        #expect(model.markedText(in: .transforms) == "chun")
+        #expect(model.markedText(in: .search) == "")
+        model.commitText("纯")
+        #expect(model.transformQuery == "纯")
+        #expect(model.typedText(in: .transforms) == "纯")
+        #expect(model.query == "")
+    }
+
+    @Test func transformsMenuComposesInItsOwnLine() {
+        model.select(richID, in: .history)
+        _ = model.handle(.toggleTransforms)
+        _ = model.handle(.toggleActions)
+        #expect(model.transformMenuOpen)
+        #expect(model.typingTarget == .transformMenu)
+        model.setMarkedText("mo")
+        #expect(model.markedText(in: .transformMenu) == "mo")
+        #expect(model.markedText(in: .transforms) == "")
+        model.commitText("默认")
+        #expect(model.transformMenuQuery == "默认")
+        #expect(model.typedText(in: .transformMenu) == "默认")
+        #expect(model.transformQuery == "")
+    }
+
+    /// The Kategoriler menu takes no typing: nothing composes in any line.
+    @Test func categoryMenuComposesNowhere() {
+        _ = model.handle(.toggleCategoryMenu)
+        #expect(model.typingTarget == nil)
+        model.setMarkedText("ni")
+        #expect(model.markedText(in: .search) == "")
+    }
+
+    /// A ⌘A selection is the search's: composing in an open menu leaves it.
+    @Test func composingInAMenuKeepsTheSearchSelection() {
+        _ = model.handle(.type("rapor"))
+        _ = model.handle(.selectAll)
+        _ = model.handle(.toggleActions)
+        model.setMarkedText("ni")
+        #expect(model.query == "rapor")
+        #expect(model.isQuerySelected)
+    }
+
     @Test func aFreshPanelComposesNothing() {
         model.setMarkedText("ni")
         model.reset()
         #expect(model.markedText == "")
+    }
+}
+
+/// Where an input method's candidate window goes: measured from the line's leading edge, so it never depends on the line
+/// having been laid out for the newest text, and kept inside the line.
+@MainActor @Suite struct CompositionRectTests {
+    let line = NSRect(x: 20, y: 5, width: 200, height: 21)
+    let font = LineFont.search
+
+    func rect(_ range: NSRange, in text: String) -> (rect: NSRect, found: NSRange) {
+        LineFont.compositionRect(of: range, in: text as NSString, line: line, font: font)
+    }
+
+    @Test func theStartIsTheLineStart() {
+        let (rect, found) = rect(NSRange(location: 0, length: 2), in: "ni")
+        #expect(rect.minX == line.minX)
+        #expect(rect.width == font.width(of: "ni"))
+        #expect(rect.minY == line.minY)
+        #expect(rect.height == line.height)
+        #expect(found == NSRange(location: 0, length: 2))
+    }
+
+    /// Marked text after a typed query starts where the query ends.
+    @Test func markedTextStartsAfterTheQuery() {
+        let (rect, _) = rect(NSRange(location: 2, length: 2), in: "你好ni")
+        #expect(rect.minX == line.minX + font.width(of: "你好"))
+        #expect(rect.width == font.width(of: "ni"))
+    }
+
+    @Test func noLocationMeansTheEnd() {
+        let (rect, found) = rect(NSRange(location: NSNotFound, length: 0), in: "nihao")
+        #expect(rect.minX == line.minX + font.width(of: "nihao"))
+        #expect(found == NSRange(location: 5, length: 0))
+    }
+
+    @Test func aRangePastTheTextIsClamped() {
+        let (_, found) = rect(NSRange(location: 3, length: 10), in: "nihao")
+        #expect(found == NSRange(location: 3, length: 2))
+    }
+
+    /// A query longer than the line is cut at its end; the candidate window stays under the line.
+    @Test func aLongQueryStaysInsideTheLine() {
+        let long = String(repeating: "长", count: 40)
+        let (rect, _) = rect(NSRange(location: 38, length: 2), in: long)
+        #expect(rect.minX == line.maxX)
+        #expect(rect.width == 0)
     }
 }

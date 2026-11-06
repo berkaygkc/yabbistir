@@ -56,6 +56,8 @@ public struct PanelView: View {
         .offset(y: model.isPresented ? 0 : -6)
         .opacity(model.isPresented ? 1 : 0)
         .environment(\.locale, model.language.locale)
+        // ⌘K's search line tells an input method where it is; never in a snapshot.
+        .environment(\.textInputAnchors, snapshot ? nil : model.textInputAnchors)
     }
 
     // MARK: Search
@@ -63,7 +65,7 @@ public struct PanelView: View {
     private var searchRow: some View {
         HStack(spacing: 12) {
             HStack(spacing: 0) {
-                Text(searchText)
+                Text(.typed(model.query, marked: model.markedText(in: .search)))
                     .font(Tokens.Fonts.search)
                     .tracking(Tokens.Fonts.searchTracking)
                     .foregroundStyle(Tokens.Colors.text)
@@ -75,11 +77,9 @@ public struct PanelView: View {
                                 .padding(.horizontal, -1)
                         }
                     }
-                    // Input methods compose here: its bounds are the text's, so the candidate window opens under it.
-                    .background { if !snapshot { PanelTextInput(model: model) } }
                 // Hidden, not removed, so selecting never shifts the line.
                 BlinkingCaret().opacity(model.isQuerySelected ? 0 : 1)
-                if model.query.isEmpty, model.markedText.isEmpty {
+                if model.query.isEmpty, model.markedText(in: .search).isEmpty {
                     Text(L10n.string("panel.search.placeholder", model.language))
                         .font(Tokens.Fonts.search)
                         .tracking(Tokens.Fonts.searchTracking)
@@ -88,6 +88,8 @@ public struct PanelView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            // Input methods compose here: behind the whole line, its leading edge where the text starts.
+            .background { if !snapshot { PanelTextInput(model: model) } }
             if let count = model.resultCountText {
                 Text(count).font(Tokens.Fonts.label).foregroundStyle(Tokens.Colors.textSecondary).monospacedDigit()
             }
@@ -96,16 +98,6 @@ public struct PanelView: View {
         .padding(.leading, 20)
         .padding(.trailing, 12)
         .frame(height: Tokens.Metrics.searchHeight)
-    }
-
-    /// The query, then what an input method is composing, underlined as macOS marks it.
-    private var searchText: AttributedString {
-        var text = AttributedString(model.query)
-        guard !model.markedText.isEmpty else { return text }
-        var marked = AttributedString(model.markedText)
-        marked.underlineStyle = .single
-        text.append(marked)
-        return text
     }
 
     // MARK: Columns

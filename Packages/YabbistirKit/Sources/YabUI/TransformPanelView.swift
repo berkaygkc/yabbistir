@@ -46,7 +46,7 @@ public struct TransformPanelView: View {
         let sections = model.transformSections
         VStack(alignment: .leading, spacing: 0) {
             header(count: rows.count)
-            if !model.transformQuery.isEmpty { queryLine }
+            if !model.transformQuery.isEmpty || !model.markedText(in: .transforms).isEmpty { queryLine }
             switch list {
             case .full: rowList(rows, sections)
             case .scrolls(let height): scrollingRows(rows, sections, height: height)
@@ -212,14 +212,19 @@ public struct TransformPanelView: View {
         return [model.transformSubjectApp, transforms].compactMap { $0 }.joined(separator: " · ")
     }
 
+    /// The search's font; an input method's candidate window is placed by it.
+    private static let queryFont = LineFont(size: 12.5)
+
     private var queryLine: some View {
         HStack(spacing: 7) {
             Image(systemName: "magnifyingglass").font(.system(size: 12)).foregroundStyle(Tokens.Colors.textSecondary)
             HStack(spacing: 0) {
-                Text(model.transformQuery).font(.system(size: 12.5)).foregroundStyle(Tokens.Colors.text)
+                Text(.typed(model.transformQuery, marked: model.markedText(in: .transforms)))
+                    .font(.system(size: Self.queryFont.size)).foregroundStyle(Tokens.Colors.text)
                 BlinkingCaret().scaleEffect(0.7, anchor: .leading)
             }
-            Spacer(minLength: 0)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background { TextInputAnchor(target: .transforms, font: Self.queryFont) }
         }
         .padding(.horizontal, 10)
         .frame(height: 28)
@@ -420,7 +425,8 @@ public struct TransformPanelView: View {
                 .onHover { if $0, model.acceptsHover() { model.highlightTransformMenuItem(index) } }
                 .onTapGesture { if let action = model.activateTransformMenuItem(index) { onAction(action) } }
             }
-            ActionSearchLine(query: model.transformMenuQuery, language: model.language)
+            ActionSearchLine(query: model.transformMenuQuery, marked: model.markedText(in: .transformMenu), target: .transformMenu,
+                             language: model.language)
         }
         // Its own height, not the footer's it is laid over.
         .fixedSize(horizontal: false, vertical: true)

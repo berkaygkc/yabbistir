@@ -98,6 +98,12 @@ public enum TransformMenuItem: Hashable, Sendable {
     case setDefault, clearDefault, run, copy
 }
 
+/// The line typing goes to: the search, or the open menu's own search (⌘K, ⌘P, the ⇧ panel, the ⇧ panel's ⌘K). An input
+/// method composes there.
+public enum TypingTarget: Hashable, Sendable {
+    case search, actions, pin, transforms, transformMenu
+}
+
 /// What sits on top of the list and takes the keyboard: the Kategoriler menu, ⌘K, ⌘P or the ⇧ panel.
 public enum PanelLayer: Equatable, Sendable {
     case none, categoryMenu, actions, pin, transforms
@@ -115,6 +121,8 @@ public final class PanelViewModel {
     /// The keyboard's input source is an input method; the window keeps it current. The ⇧ tap is the method's then,
     /// so the footer offers ⌘T for the ⇧ panel.
     public var inputMethodActive = false
+    /// Where views behind the search lines tell an input method where each line is; the live panel's only.
+    @ObservationIgnored let textInputAnchors = TextInputAnchors()
     public private(set) var columns: [PanelColumn] = [] { didSet { updateStrip() } }
     public private(set) var focusedColumn = 0 { didSet { updateStrip() } }
     /// Each column keeps its own selection while focus moves between columns.
@@ -665,15 +673,41 @@ public final class PanelViewModel {
         return nil
     }
 
+    /// Where typing goes now; nil where it does nothing (the Kategoriler menu, a source's list in the ⇧ panel).
+    public var typingTarget: TypingTarget? {
+        switch layer {
+        case .none: .search
+        case .actions: .actions
+        case .pin: .pin
+        case .transforms: transformSource != nil ? nil : transformMenuOpen ? .transformMenu : .transforms
+        case .categoryMenu: nil
+        }
+    }
+
+    /// What `target`'s line holds: its query, as typed so far.
+    public func typedText(in target: TypingTarget) -> String {
+        switch target {
+        case .search: query
+        case .actions: actionQuery
+        case .pin: pinQuery
+        case .transforms: transformQuery
+        case .transformMenu: transformMenuQuery
+        }
+    }
+
+    /// What an input method is composing in `target`'s line: the marked text while typing goes there, else nothing.
+    public func markedText(in target: TypingTarget) -> String {
+        typingTarget == target ? markedText : ""
+    }
+
     /// The input method's text in progress (empty when it ends without a result). As in a text field, composing over a
     /// ⌘A-selected search replaces it.
     public func setMarkedText(_ text: String) {
-        if !text.isEmpty, isQuerySelected, layer == .none { setQuery("") }
+        if !text.isEmpty, isQuerySelected, typingTarget == .search { setQuery("") }
         markedText = text
     }
 
-    /// The input method's result (你好 for "nihao"): typed like any key, where typing goes now (the search, or the open
-    /// menu's own search).
+    /// The input method's result (你好 for "nihao"): typed like any key, into `typingTarget`'s line.
     public func commitText(_ text: String) {
         markedText = ""
         guard !text.isEmpty else { return }
