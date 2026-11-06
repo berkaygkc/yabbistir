@@ -1,10 +1,11 @@
 import SwiftUI
 import YabLocalization
 
-/// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right; on a source's row its own actions
-/// ("Şifreyi yapıştır ↵ | Kullanıcı adı ⇧↵ | Eylemler ⌘K"), on the locked row "Komutu kopyala ⌘C" alone. While
-/// ⌘ is held it cross-fades (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one button saying what ⇧↵
-/// does. One layer shows at a time, and a new kind of row slides its actions in from below. Nothing in it ever wraps.
+/// The 42 pt footer: "Paste ↵ | (Transform ⇧ |) Actions ⌘K" at the right, Transform ⌘T under an input method; on a
+/// source's row its own actions ("Şifreyi yapıştır ↵ | Kullanıcı adı ⇧↵ | Eylemler ⌘K"), on the locked row "Komutu
+/// kopyala ⌘C" alone. While ⌘ is held it cross-fades (5 pt vertical slide) to the ⌘ shortcuts; while ⇧ is held, to one
+/// button saying what ⇧↵ does. One layer shows at a time, and a new kind of row slides its actions in from below.
+/// Nothing in it ever wraps.
 struct ActionBarView: View {
     @Bindable var model: PanelViewModel
     let onPaste: (Int64) -> Void
@@ -89,7 +90,12 @@ struct ActionBarView: View {
                     HStack(spacing: 9) {
                         Text(L10n.string("panel.footer.transform", model.language)).font(Tokens.Fonts.labelStrong.weight(.medium))
                             .lineLimit(1).fixedSize()
-                        Keycap("⇧")
+                        // Under an input method a ⇧ tap is the method's: ⌘T opens the panel instead.
+                        if model.inputMethodActive {
+                            HStack(spacing: 3) { Keycap("⌘"); Keycap("T") }
+                        } else {
+                            Keycap("⇧")
+                        }
                     }
                     .foregroundStyle(model.layer == .transforms ? Tokens.Colors.text : Tokens.Colors.textSecondary)
                     .padding(.leading, 10)

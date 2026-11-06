@@ -79,6 +79,8 @@ final class PanelController: NSObject, NSWindowDelegate {
         window.delegate = self
         window.onCommand = { [weak self] in self?.handle($0) }
         window.showsShiftHint = { [weak self] in self?.model.showsShiftHint ?? false }
+        // The footer's Transform reads ⌘T while an input method has the ⇧ tap.
+        window.onInputMethodChange = { [weak self] in self?.model.inputMethodActive = $0 }
         window.contentView = PanelPresentation.host(PanelView(model: model, material: PanelMaterial.current) { [weak self] action in
             self?.perform(action)
         })
@@ -133,6 +135,8 @@ final class PanelController: NSObject, NSWindowDelegate {
         model.panelHeight = placed.frame.height
         model.growAnchor = UnitPoint(x: min(1, max(0, (anchor.minX - placed.frame.minX) / placed.frame.width)),
                                      y: placed.opensAbove ? 1 : 0)
+        // The footer's Transform keycap (⇧ or ⌘T) is right from the first frame.
+        window.refreshInputSource()
         PanelPresentation.show(window, frame: placed.frame, model: model)
         Task { @MainActor in
             try? await Task.sleep(for: .milliseconds(360))

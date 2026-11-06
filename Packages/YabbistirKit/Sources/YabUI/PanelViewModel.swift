@@ -110,6 +110,11 @@ public final class PanelViewModel {
     public static let resultLimit = 200
 
     public private(set) var query = ""
+    /// What an input method (Pinyin, Kana, Hangul…) is composing: shown underlined after the search, not searched yet.
+    public private(set) var markedText = ""
+    /// The keyboard's input source is an input method; the window keeps it current. The ⇧ tap is the method's then,
+    /// so the footer offers ⌘T for the ⇧ panel.
+    public var inputMethodActive = false
     public private(set) var columns: [PanelColumn] = [] { didSet { updateStrip() } }
     public private(set) var focusedColumn = 0 { didSet { updateStrip() } }
     /// Each column keeps its own selection while focus moves between columns.
@@ -538,6 +543,7 @@ public final class PanelViewModel {
     /// already have and never waits for them.
     public func reset() {
         query = ""
+        markedText = ""
         subjectID = nil
         isQuerySelected = false
         selections = [:]
@@ -570,6 +576,12 @@ public final class PanelViewModel {
         if !command.isModifierChange { endShiftHold() }
         // A key may scroll a list or change its rows under a resting pointer: the row that lands under it is not chosen.
         if !command.isModifierChange { hoverGate.keyboardActed(pointer: pointerLocation()) }
+        // The window hands these keys to the input method while it composes. One that still gets here (the method
+        // did not take it) never pastes, moves or closes; Esc drops the composition.
+        if !markedText.isEmpty, command.belongsToComposition {
+            if command == .escape { markedText = "" }
+            return nil
+        }
         if layer == .categoryMenu, let consumed = handleCategoryMenu(command) { return consumed.action }
         if layer == .actions, let consumed = handleActions(command) { return consumed.action }
         if layer == .pin, let consumed = handlePin(command) { return consumed.action }
@@ -651,6 +663,21 @@ public final class PanelViewModel {
             break
         }
         return nil
+    }
+
+    /// The input method's text in progress (empty when it ends without a result). As in a text field, composing over a
+    /// ⌘A-selected search replaces it.
+    public func setMarkedText(_ text: String) {
+        if !text.isEmpty, isQuerySelected, layer == .none { setQuery("") }
+        markedText = text
+    }
+
+    /// The input method's result (你好 for "nihao"): typed like any key, where typing goes now (the search, or the open
+    /// menu's own search).
+    public func commitText(_ text: String) {
+        markedText = ""
+        guard !text.isEmpty else { return }
+        _ = handle(.type(text))
     }
 
     /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column (`plain`: ⌘K's
@@ -1355,7 +1382,15 @@ private extension PanelCommand {
 
     var isCommandShortcut: Bool {
         switch self {
-        case .pasteIndex, .copy, .delete, .toggleActions, .togglePin, .openEditor, .selectAll, .swallow: true
+        case .pasteIndex, .copy, .delete, .toggleActions, .toggleTransforms, .togglePin, .openEditor, .selectAll, .swallow: true
+        default: false
+        }
+    }
+
+    /// ↵, Esc, the arrows, Space, ⌫ and ⇥: an input method's keys while it composes.
+    var belongsToComposition: Bool {
+        switch self {
+        case .confirm, .escape, .move, .moveColumn, .moveItem, .togglePreview, .deleteBackward, .toggleCategoryMenu: true
         default: false
         }
     }

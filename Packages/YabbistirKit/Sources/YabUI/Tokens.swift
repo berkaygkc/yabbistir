@@ -69,8 +69,9 @@ public enum Tokens {
     }
 
     public enum Fonts {
-        public static let search = Font.system(size: 17)
-        public static let searchTracking: CGFloat = -0.015 * 17
+        public static let searchSize: CGFloat = 17
+        public static let search = Font.system(size: searchSize)
+        public static let searchTracking: CGFloat = -0.015 * searchSize
         public static let row = Font.system(size: 13.5)
         public static let mono = Font.system(size: 12.3, design: .monospaced)
         public static let label = Font.system(size: 12)

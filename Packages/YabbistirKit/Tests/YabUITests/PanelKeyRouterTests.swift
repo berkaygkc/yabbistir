@@ -7,6 +7,14 @@ import Testing
         PanelKeyRouter.command(keyCode: keyCode, characters: characters, modifiers: modifiers)
     }
 
+    func route(_ keyCode: UInt16, _ characters: String?, _ modifiers: NSEvent.ModifierFlags, composing: Bool, inputMethod: Bool) -> PanelKeyRoute {
+        PanelKeyRouter.route(keyCode: keyCode, characters: characters, modifiers: modifiers, composing: composing, inputMethod: inputMethod)
+    }
+
+    func command(_ keyCode: UInt16, _ characters: String?, _ modifiers: NSEvent.ModifierFlags = []) -> PanelCommand? {
+        PanelKeyRouter.command(keyCode: keyCode, characters: characters, modifiers: modifiers)
+    }
+
     @Test func returnConfirms() { #expect(route(36, "\r") == .confirm(plain: false)) }
     @Test func shiftReturnConfirmsPlain() { #expect(route(36, "\r", .shift) == .confirm(plain: true)) }
     @Test func arrowsMove() {
@@ -46,6 +54,47 @@ import Testing
         #expect(PanelKeyRouter.commandHeld(.command))
         #expect(!PanelKeyRouter.commandHeld([.command, .shift]))
     }
+
+    // MARK: Input methods
+
+    @Test func lettersGoToTheInputMethod() {
+        #expect(route(0, "n", [], composing: false, inputMethod: true) == .inputMethod)
+    }
+    @Test func spaceOpensThePreviewWhenNothingIsComposed() {
+        #expect(route(49, " ", [], composing: false, inputMethod: true) == .command(.togglePreview))
+    }
+    @Test func composingKeysBelongToTheInputMethod() {
+        #expect(route(49, " ", [], composing: true, inputMethod: true) == .inputMethod)
+        #expect(route(36, "\r", [], composing: true, inputMethod: true) == .inputMethod)
+        #expect(route(53, "\u{1b}", [], composing: true, inputMethod: true) == .inputMethod)
+        #expect(route(125, nil, [], composing: true, inputMethod: true) == .inputMethod)
+        #expect(route(51, "\u{7f}", [], composing: true, inputMethod: true) == .inputMethod)
+    }
+    @Test func plainLayoutsTypeAsToday() {
+        #expect(route(0, "a", [], composing: false, inputMethod: false) == .command(.type("a")))
+    }
+    @Test func returnPastesWhenNothingIsComposed() {
+        #expect(route(36, "\r", [], composing: false, inputMethod: true) == .command(.confirm(plain: false)))
+    }
+    @Test func commandShortcutsWorkWhileComposing() {
+        #expect(route(40, "k", .command, composing: true, inputMethod: true) == .command(.toggleActions))
+    }
+    @Test func keysWithoutACommandGoToTheSystem() {
+        #expect(route(0, "\u{1}", .control, composing: false, inputMethod: false) == .system)
+    }
+    @Test func commandTTogglesTransforms() { #expect(command(17, "t", .command) == .toggleTransforms) }
+    @Test func commandShortcutsFollowTheKeyUnderHangulAndKana() {
+        #expect(command(40, "ㅏ", .command) == .toggleActions)
+        #expect(command(8, "ㅊ", .command) == .copy)
+        #expect(command(18, "ぬ", .command) == .pasteIndex(1))
+        #expect(command(17, "か", .command) == .toggleTransforms)
+        #expect(command(12, "ㅂ", .command) == .swallow)
+    }
+    @Test func shiftTapOpensTransformsOnPlainLayoutsOnly() {
+        #expect(PanelKeyRouter.shiftTapCommand(inputMethod: false) == .toggleTransforms)
+        #expect(PanelKeyRouter.shiftTapCommand(inputMethod: true) == nil)
+    }
+
     @Test func shiftAloneIsHeld() {
         #expect(PanelKeyRouter.shiftHeld(.shift))
         #expect(PanelKeyRouter.shiftHeld([.shift, .capsLock]))
