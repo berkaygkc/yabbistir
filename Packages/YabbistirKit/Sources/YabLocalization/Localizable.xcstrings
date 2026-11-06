@@ -4,6 +4,12 @@
     "actions.addToCategory": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Kategorie hinzufügen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -21,6 +27,12 @@
     "actions.addToStack": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Stapel hinzufügen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -38,6 +50,12 @@
     "actions.allTransforms": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Umwandlungen (%@) …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -55,6 +73,12 @@
     "actions.copy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In die Zwischenablage kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -72,6 +96,12 @@
     "actions.delete": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -89,6 +119,12 @@
     "actions.none": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Aktionen gefunden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -106,6 +142,12 @@
     "actions.paste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -123,6 +165,12 @@
     "actions.pastePlain": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als reinen Text einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -140,6 +188,12 @@
     "actions.preview": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorschau"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -157,6 +211,12 @@
     "actions.removeFromCategory": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus Kategorie entfernen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -174,6 +234,12 @@
     "actions.search": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktionen suchen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -191,6 +257,12 @@
     "ai.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence konnte nicht antworten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -208,6 +280,12 @@
     "ai.failed.busy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence ist ausgelastet, versuche es gleich erneut"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -225,6 +303,12 @@
     "ai.failed.declined": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence beantwortet das nicht"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -242,6 +326,12 @@
     "ai.failed.language": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence unterstützt diese Sprache noch nicht"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -259,6 +349,12 @@
     "ai.failed.tooLong": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Text ist zu lang für Apple Intelligence"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -276,6 +372,12 @@
     "ai.unavailable.device": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence läuft nicht auf diesem Mac"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -293,6 +395,12 @@
     "ai.unavailable.disabled": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiviere Apple Intelligence in den Systemeinstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -310,6 +418,12 @@
     "ai.unavailable.notReady": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence wird noch vorbereitet"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -327,6 +441,12 @@
     "category.color.clay": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terrakotta"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -344,6 +464,12 @@
     "category.color.ochre": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocker"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -361,6 +487,12 @@
     "category.color.plum": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pflaume"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -378,6 +510,12 @@
     "category.color.sage": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salbei"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -395,6 +533,12 @@
     "category.color.slate": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schiefer"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -412,6 +556,12 @@
     "category.color.teal": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petrol"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -429,6 +579,12 @@
     "editor.always": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immer"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -446,6 +602,12 @@
     "editor.close": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -463,6 +625,12 @@
     "editor.hint.new": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -480,6 +648,12 @@
     "editor.hint.select": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auswählen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -497,6 +671,12 @@
     "editor.hint.visibility": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sichtbarkeit"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -514,6 +694,12 @@
     "editor.new": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Kategorie"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -531,6 +717,12 @@
     "editor.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien mit „Immer“ öffnen sich als Spalten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -548,6 +740,12 @@
     "editor.onSelect": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Auswahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -565,6 +763,12 @@
     "editor.subtitle": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziehe, um die Spalten neu anzuordnen. Das Panel aktualisiert sich live."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -582,6 +786,12 @@
     "editor.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -599,6 +809,12 @@
     "extensions.cancel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -616,6 +832,12 @@
     "extensions.commands": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehle"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -633,6 +855,12 @@
     "extensions.consent.allow": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -650,6 +878,12 @@
     "extensions.consent.decline": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht installieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -667,6 +901,12 @@
     "extensions.consent.install": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben und installieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -684,6 +924,12 @@
     "extensions.consent.review": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungen prüfen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -701,6 +947,12 @@
     "extensions.consent.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ möchte Folgendes:"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -718,6 +970,12 @@
     "extensions.folder.choose": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wählen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -735,6 +993,12 @@
     "extensions.folder.clear": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -752,6 +1016,12 @@
     "extensions.folder.none": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Ordner ausgewählt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -769,6 +1039,12 @@
     "extensions.folder.suggested": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorschlag: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -786,6 +1062,12 @@
     "extensions.install.archive": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".yabext installieren …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -803,6 +1085,12 @@
     "extensions.install.folder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus Ordner installieren …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -820,6 +1108,12 @@
     "extensions.issues": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probleme"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -837,6 +1131,12 @@
     "extensions.link": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwicklungsordner verknüpfen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -854,6 +1154,12 @@
     "extensions.log": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protokoll"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -871,6 +1177,12 @@
     "extensions.log.empty": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nichts protokolliert. console.log und Fehler von Erweiterungen erscheinen hier."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -888,6 +1200,12 @@
     "extensions.openFolder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erweiterungsordner öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -905,6 +1223,12 @@
     "extensions.permissions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -922,6 +1246,12 @@
     "extensions.preference.turnOn": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -939,6 +1269,12 @@
     "extensions.preferences": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -956,6 +1292,12 @@
     "extensions.reload": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu laden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -973,6 +1315,12 @@
     "extensions.remove": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -990,6 +1338,12 @@
     "extensions.remove.confirm": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Möchtest du %@ wirklich entfernen?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1007,6 +1361,12 @@
     "extensions.result.image": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bild"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1024,6 +1384,12 @@
     "extensions.rules": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopierregeln"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1041,6 +1407,12 @@
     "extensions.secret.clear": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1058,6 +1430,12 @@
     "extensions.secret.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der geheime Wert konnte nicht im Schlüsselbund gesichert werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1075,6 +1453,12 @@
     "extensions.secret.save": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sichern"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1092,6 +1476,12 @@
     "extensions.secret.saved": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesichert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1109,6 +1499,12 @@
     "extensions.source.builtIn": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Integriert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1126,6 +1522,12 @@
     "extensions.source.development": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwicklung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1143,6 +1545,12 @@
     "extensions.source.local": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokal"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1160,6 +1568,12 @@
     "extensions.store.badSignature.cached": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Store-Liste konnte nicht überprüft werden. Die gespeicherte Liste wird angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1177,6 +1591,12 @@
     "extensions.store.badSignature.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Store-Signatur stimmte nicht überein. Versuche es später erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1194,6 +1614,12 @@
     "extensions.store.badSignature.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store konnte nicht überprüft werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1211,6 +1637,12 @@
     "extensions.store.category": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1228,6 +1660,12 @@
     "extensions.store.category.ai": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1245,6 +1683,12 @@
     "extensions.store.category.all": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Kategorien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1262,6 +1706,12 @@
     "extensions.store.category.developer": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwickler"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1279,6 +1729,12 @@
     "extensions.store.category.files": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1296,6 +1752,12 @@
     "extensions.store.category.images": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilder"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1313,6 +1775,12 @@
     "extensions.store.category.links": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Links"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1330,6 +1798,12 @@
     "extensions.store.category.media": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1347,6 +1821,12 @@
     "extensions.store.category.productivity": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Produktivität"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1364,6 +1844,12 @@
     "extensions.store.category.text": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1381,6 +1867,12 @@
     "extensions.store.consent.allowUpdate": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben und aktualisieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1398,6 +1890,12 @@
     "extensions.store.consent.alsoUpdating": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außerdem aktualisiert (keine neuen Berechtigungen): %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1415,6 +1913,12 @@
     "extensions.store.consent.install.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Erweiterungen installieren?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1432,6 +1936,12 @@
     "extensions.store.consent.install.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ installieren?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1449,6 +1959,12 @@
     "extensions.store.consent.newPermissions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Berechtigungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1466,6 +1982,12 @@
     "extensions.store.consent.nothing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Braucht keine besonderen Berechtigungen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1483,6 +2005,12 @@
     "extensions.store.consent.update.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Erweiterungen aktualisieren?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1500,6 +2028,12 @@
     "extensions.store.consent.update.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ aktualisieren?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1517,6 +2051,12 @@
     "extensions.store.empty.catalog": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Store gibt es noch keine Erweiterungen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1534,6 +2074,12 @@
     "extensions.store.empty.category": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Erweiterungen in dieser Kategorie."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1551,6 +2097,12 @@
     "extensions.store.empty.search": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Erweiterungen für „%@“"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1568,6 +2120,12 @@
     "extensions.store.failed.changed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Store-Liste hat sich geändert; prüfe sie und versuche es erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1585,6 +2143,12 @@
     "extensions.store.failed.incompatible": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung lässt sich in dieser yabbistir-Version nicht installieren."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1602,6 +2166,12 @@
     "extensions.store.failed.offline": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung konnte nicht heruntergeladen werden. Prüfe deine Verbindung und versuche es erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1619,6 +2189,12 @@
     "extensions.store.failed.package": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Download stimmte nicht mit dem Katalog überein und wurde daher nicht installiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1636,6 +2212,12 @@
     "extensions.store.failed.registry": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung konnte nicht installiert werden. Details findest du im Tab „Entwicklung“."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1653,6 +2235,12 @@
     "extensions.store.failed.unverified": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Überprüfung fehlgeschlagen; es wurde nichts installiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1670,6 +2258,12 @@
     "extensions.store.install": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1687,6 +2281,12 @@
     "extensions.store.install.count": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installieren (%@)"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1704,6 +2304,12 @@
     "extensions.store.installing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird installiert …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1721,6 +2327,12 @@
     "extensions.store.link.missing.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung aus dem Link ist nicht im Store."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1738,6 +2350,12 @@
     "extensions.store.link.missing.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterungen aus dem Link sind nicht im Store."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1755,6 +2373,12 @@
     "extensions.store.link.missing.some": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einige Erweiterungen aus dem Link sind nicht im Store."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1772,6 +2396,12 @@
     "extensions.store.link.installed.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung aus dem Link ist bereits installiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1789,6 +2419,12 @@
     "extensions.store.link.installed.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterungen aus dem Link sind bereits installiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1806,6 +2442,12 @@
     "extensions.store.link.incompatible.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung aus dem Link braucht eine neuere yabbistir-Version."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1823,6 +2465,12 @@
     "extensions.store.link.incompatible.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterungen aus dem Link brauchen eine neuere yabbistir-Version."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1840,6 +2488,12 @@
     "extensions.store.link.incompatible.some": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einige Erweiterungen aus dem Link brauchen eine neuere yabbistir-Version."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1857,6 +2511,12 @@
     "extensions.store.link.waiting.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung aus dem Link wartet auf den Store."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1874,6 +2534,12 @@
     "extensions.store.link.waiting.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterungen aus dem Link warten auf den Store."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1891,6 +2557,12 @@
     "extensions.store.loading": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Store wird geladen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1908,6 +2580,12 @@
     "extensions.store.malformed.cached": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Store-Liste konnte nicht gelesen werden. Die gespeicherte Liste wird angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1925,6 +2603,12 @@
     "extensions.store.malformed.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versuche es später erneut oder aktualisiere yabbistir."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1942,6 +2626,12 @@
     "extensions.store.malformed.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Store-Liste konnte nicht gelesen werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1959,6 +2649,12 @@
     "extensions.store.newerApp.cached": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store braucht jetzt eine neuere yabbistir-Version. Die gespeicherte Liste wird angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1976,6 +2672,12 @@
     "extensions.store.newerApp.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualisiere yabbistir und versuche es dann erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -1993,6 +2695,12 @@
     "extensions.store.newerApp.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store braucht eine neuere yabbistir-Version."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2010,6 +2718,12 @@
     "extensions.store.offline.cached": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store ist nicht erreichbar. Die gespeicherte Liste wird angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2027,6 +2741,12 @@
     "extensions.store.offline.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfe deine Internetverbindung und versuche es dann erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2044,6 +2764,12 @@
     "extensions.store.offline.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store ist nicht erreichbar."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2061,6 +2787,12 @@
     "extensions.store.older.cached": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Store hat eine ältere Liste gesendet. Die gespeicherte Liste wird angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2078,6 +2810,12 @@
     "extensions.store.refresh": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualisieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2095,6 +2833,12 @@
     "extensions.store.refreshing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Store wird geprüft …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2112,6 +2856,12 @@
     "extensions.store.search": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erweiterungen suchen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2129,6 +2879,12 @@
     "extensions.store.status.incompatible": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfordert eine neuere yabbistir-Version"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2146,6 +2902,12 @@
     "extensions.store.status.installed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2163,6 +2925,12 @@
     "extensions.store.status.update": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update verfügbar"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2180,6 +2948,12 @@
     "extensions.store.summary.capture": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sieht, was du kopierst"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2197,6 +2971,12 @@
     "extensions.store.summary.exec": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Führt aus: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2214,6 +2994,12 @@
     "extensions.store.summary.exec.any": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Führt Programme aus"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2231,6 +3017,12 @@
     "extensions.store.summary.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liest deinen Verlauf"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2248,6 +3040,12 @@
     "extensions.store.summary.network.any": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netzwerk: jede Website"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2265,6 +3063,12 @@
     "extensions.store.summary.network.site": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netzwerk: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2282,6 +3086,12 @@
     "extensions.store.summary.network.sites": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netzwerk: %@ Websites"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2299,6 +3109,12 @@
     "extensions.store.tryAgain": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut versuchen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2316,6 +3132,12 @@
     "extensions.store.updateAll": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle aktualisieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2333,6 +3155,12 @@
     "extensions.store.updates.many": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Updates"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2350,6 +3178,12 @@
     "extensions.store.updates.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Update"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2367,6 +3201,12 @@
     "extensions.tab.development": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwicklung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2384,6 +3224,12 @@
     "extensions.tab.installed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2401,6 +3247,12 @@
     "extensions.tab.store": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Store"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2418,6 +3270,12 @@
     "extensions.thirdParty": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drittanbieter-Erweiterungen deaktivieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2435,6 +3293,12 @@
     "extensions.tools.copy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2452,6 +3316,12 @@
     "extensions.tools.missing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ist nicht installiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2469,6 +3339,12 @@
     "extensions.waiting": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wartet auf deine Erlaubnis"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2486,6 +3362,12 @@
     "history.denied.kind": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Verlauf ist hier nicht verfügbar"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2503,6 +3385,12 @@
     "history.denied.permission": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Erweiterung darf deinen Verlauf nicht lesen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2520,6 +3408,12 @@
     "host.tooSlow": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das hat zu lange gedauert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2537,6 +3431,12 @@
     "jobs.cancel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2554,6 +3454,12 @@
     "jobs.card": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir-Aufträge"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2571,6 +3477,12 @@
     "jobs.close": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2588,6 +3500,12 @@
     "jobs.done.finder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Finder gesichert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2605,6 +3523,12 @@
     "jobs.done.pasted": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingesetzt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2622,6 +3546,12 @@
     "jobs.done.stack": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Stapel hinzugefügt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2639,6 +3569,12 @@
     "jobs.failed.generic": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fehlgeschlagen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2656,6 +3592,12 @@
     "jobs.failed.interrupted": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung wurde unerwartet beendet"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2673,6 +3615,12 @@
     "jobs.failed.network": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Verbindung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2690,6 +3638,12 @@
     "jobs.failed.permission": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht erlaubt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2707,6 +3661,12 @@
     "jobs.failed.toolMissing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ist nicht installiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2724,6 +3684,12 @@
     "jobs.failed.unavailable": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erweiterung ist gerade nicht verfügbar"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2741,6 +3707,12 @@
     "jobs.menu.cancel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2758,6 +3730,12 @@
     "jobs.menu.section": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laufende Aufträge"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2775,6 +3753,12 @@
     "jobs.queued": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Warteschlange"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2792,6 +3776,12 @@
     "jobs.ready": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bereit, %@ zum Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2809,6 +3799,12 @@
     "jobs.starting": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird gestartet"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2826,6 +3822,12 @@
     "jobs.superseded": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Verlauf hinzugefügt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2843,6 +3845,12 @@
     "kind.code": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2860,6 +3868,12 @@
     "kind.color": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farbe"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2877,6 +3891,12 @@
     "kind.file": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2894,6 +3914,12 @@
     "kind.image": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bild"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2911,6 +3937,12 @@
     "kind.link": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2928,6 +3960,12 @@
     "kind.text": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2945,6 +3983,12 @@
     "menu.categories.edit": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien bearbeiten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2962,6 +4006,12 @@
     "menu.categories.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markierte öffnen sich als Spalte"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2979,6 +4029,12 @@
     "menu.language": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -2996,6 +4052,12 @@
     "menu.open": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3013,6 +4075,12 @@
     "menu.quit": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir beenden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3030,6 +4098,12 @@
     "menu.checkForUpdates": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Updates suchen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3047,6 +4121,12 @@
     "menu.settings": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3064,6 +4144,12 @@
     "notice.copied": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3081,6 +4167,12 @@
     "notice.copiedOnly": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert, mit ⌘V einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3098,6 +4190,12 @@
     "notice.copiedOnly.action": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3115,6 +4213,12 @@
     "notice.copiedOnly.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaube Bedienungshilfen, um direkt einzusetzen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3132,6 +4236,12 @@
     "notice.copiedOnly.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In die Zwischenablage kopiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3149,6 +4259,12 @@
     "notice.extensionDisabled.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ wurde nach wiederholten Fehlern deaktiviert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3166,6 +4282,12 @@
     "notice.extensionFailed.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3183,6 +4305,12 @@
     "notice.extensionFailed.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erweiterung fehlgeschlagen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3200,6 +4328,12 @@
     "notice.inputMonitoring.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaube sie, damit nach jedem ⌘V das nächste Objekt folgt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3217,6 +4351,12 @@
     "notice.inputMonitoring.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Stapel braucht Eingabeüberwachung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3234,6 +4374,12 @@
     "notice.secretCopiedOnly.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es verschwindet in 30 Sekunden aus der Zwischenablage."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3251,6 +4397,12 @@
     "notice.secretCopiedOnly.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drücke ⌘V zum Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3268,6 +4420,12 @@
     "notice.sourceCommandCopied.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Führe ihn im Terminal aus und öffne dann das Panel erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3285,6 +4443,12 @@
     "notice.sourceCommandCopied.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl kopiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3302,6 +4466,12 @@
     "notice.sourceEmpty": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts eingesetzt: Der Wert war leer."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3319,6 +4489,12 @@
     "notice.sourceNotPasted.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine andere App kam in den Vordergrund."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3336,6 +4512,12 @@
     "notice.sourceNotPasted.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht eingesetzt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3353,6 +4535,12 @@
     "notice.sourcePasted": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingesetzt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3370,6 +4558,12 @@
     "notice.translationDownload": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3387,6 +4581,12 @@
     "notice.translationNeeded.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Übersetzung braucht ein Sprachpaket"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3404,6 +4604,12 @@
     "notice.update.available": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@ ist verfügbar"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3421,6 +4627,12 @@
     "notice.update.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche nach Updates fehlgeschlagen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3438,6 +4650,12 @@
     "notice.update.upToDate": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir ist aktuell (%@)"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3455,6 +4673,12 @@
     "panel.categories.button": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3472,6 +4696,12 @@
     "panel.column.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3489,6 +4719,12 @@
     "panel.column.stack": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3506,6 +4742,12 @@
     "panel.empty.category": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Kategorie ist leer.\nWähle ein Objekt aus und drücke ⌘P, um es hinzuzufügen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3523,6 +4765,12 @@
     "panel.empty.categoryNoResults": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ ist nicht in dieser Kategorie."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3540,6 +4788,12 @@
     "panel.empty.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiere etwas, dann erscheint es hier."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3557,6 +4811,12 @@
     "panel.empty.noResults": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Ergebnisse für „%@“"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3574,6 +4834,12 @@
     "panel.footer.actions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktionen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3591,6 +4857,12 @@
     "panel.footer.addToCategory": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Kategorie hinzufügen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3608,6 +4880,12 @@
     "panel.footer.context.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwischenablage-Verlauf"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3625,6 +4903,12 @@
     "panel.footer.paste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3642,6 +4926,12 @@
     "panel.footer.transform": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umwandeln"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3659,6 +4949,12 @@
     "panel.search.placeholder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwischenablage durchsuchen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3676,6 +4972,12 @@
     "panel.search.resultCount": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Ergebnisse"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3693,6 +4995,12 @@
     "panel.search.resultCount.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Ergebnis"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3710,6 +5018,12 @@
     "panel.section.commands": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehle"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3727,6 +5041,12 @@
     "panel.section.older": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Älter"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3744,6 +5064,12 @@
     "panel.section.thisWeek": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Woche"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3761,6 +5087,12 @@
     "panel.section.today": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3778,6 +5110,12 @@
     "panel.section.yesterday": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestern"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3795,6 +5133,12 @@
     "panel.source.copyCommand": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3812,6 +5156,12 @@
     "panel.source.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Liste konnte nicht gelesen werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3829,6 +5179,12 @@
     "panel.source.inTerminal": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Terminal:"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3846,6 +5202,12 @@
     "panel.source.loading": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laden …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3863,6 +5225,12 @@
     "permissions.capture": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann alles sehen, was du kopierst"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3880,6 +5248,12 @@
     "permissions.exec": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann diese Programme auf deinem Mac ausführen: %@. Diese Programme können deine Dateien lesen und schreiben und auf das Internet zugreifen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3897,6 +5271,12 @@
     "permissions.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann deinen gesamten Verlauf lesen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3914,6 +5294,12 @@
     "permissions.network.any": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann auf jede Website zugreifen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3931,6 +5317,12 @@
     "permissions.network.domains": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann zugreifen auf: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3948,6 +5340,12 @@
     "permissions.sensitive": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann geheime Daten wie Passwörter lesen und einsetzen. Diese werden nie in den Verlauf oder auf die Festplatte geschrieben."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3965,6 +5363,12 @@
     "permissions.unsigned": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokale Erweiterungen sind nicht signiert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3982,6 +5386,12 @@
     "pin.new": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Kategorie: „%@“"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -3999,6 +5409,12 @@
     "pin.search": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Kategorie hinzufügen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4016,6 +5432,12 @@
     "preview.app": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4033,6 +5455,12 @@
     "preview.category": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4050,6 +5478,12 @@
     "preview.characters": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeichen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4067,6 +5501,12 @@
     "preview.close": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4084,6 +5524,12 @@
     "preview.command.extension": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erweiterung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4101,6 +5547,12 @@
     "preview.command.generator": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generator · braucht keine Eingabe"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4118,6 +5570,12 @@
     "preview.command.input": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingabe"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4135,6 +5593,12 @@
     "preview.command.keywords": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlagwörter"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4152,6 +5616,12 @@
     "preview.command.kind": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Art"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4169,6 +5639,12 @@
     "preview.command.length": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ Zeichen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4186,6 +5662,12 @@
     "preview.command.lengthLabel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Länge"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4203,6 +5685,12 @@
     "preview.command.output": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird eingesetzt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4220,6 +5708,12 @@
     "preview.command.runsWhenUsed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läuft, wenn du es einsetzt oder kopierst"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4237,6 +5731,12 @@
     "preview.command.transformer": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umwandler · wirkt auf das ausgewählte Objekt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4254,6 +5754,12 @@
     "preview.content": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inhalt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4271,6 +5777,12 @@
     "preview.copied": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4288,6 +5800,12 @@
     "preview.device": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerät"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4305,6 +5823,12 @@
     "preview.deviceRemote": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · Universelle Zwischenablage"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4322,6 +5846,12 @@
     "preview.domain": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domain"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4339,6 +5869,12 @@
     "preview.hidden": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ weitere Zeichen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4356,6 +5892,12 @@
     "preview.info": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4373,6 +5915,12 @@
     "preview.location": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ort"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4390,6 +5938,12 @@
     "preview.size": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Größe"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4407,6 +5961,12 @@
     "preview.source.neverShown": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ wird nie angezeigt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4424,6 +5984,12 @@
     "preview.source.reopen": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffne das Panel nach der Anmeldung erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4441,6 +6007,12 @@
     "preview.source.runInTerminal": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Terminal ausführen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4458,6 +6030,12 @@
     "preview.words": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wörter"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4475,6 +6053,12 @@
     "settings.section.extensions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erweiterungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4492,6 +6076,12 @@
     "settings.section.general": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allgemein"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4509,6 +6099,12 @@
     "settings.section.shortcuts": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturkurzbefehle"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4526,6 +6122,12 @@
     "settings.section.panel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4543,6 +6145,12 @@
     "settings.section.history": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4560,6 +6168,12 @@
     "settings.section.categories": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4577,6 +6191,12 @@
     "settings.section.permissions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4594,6 +6214,12 @@
     "settings.section.import": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4611,6 +6237,12 @@
     "settings.about.version": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@ (%@)"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4628,6 +6260,12 @@
     "settings.about.tagline": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles, was du kopierst, direkt unter deiner Einfügemarke."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4645,6 +6283,12 @@
     "settings.about.checkForUpdates": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Updates suchen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4662,6 +6306,12 @@
     "settings.about.github": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4679,6 +6329,12 @@
     "settings.about.releaseNotes": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versionshinweise"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4696,6 +6352,12 @@
     "settings.about.licenses": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lizenzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4713,6 +6375,12 @@
     "settings.about.support": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir unterstützen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4730,6 +6398,12 @@
     "settings.done": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4747,6 +6421,12 @@
     "settings.section.about": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4764,6 +6444,12 @@
     "settings.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4781,6 +6467,12 @@
     "stack.count": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ im Stapel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4798,6 +6490,12 @@
     "stack.done": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4815,6 +6513,12 @@
     "stack.emptyHint": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was du jetzt kopierst, reiht sich hier ein."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4832,6 +6536,12 @@
     "stack.footer.pasteNext": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächstes einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4849,6 +6559,12 @@
     "stack.rail.first": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach oben"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4866,6 +6582,12 @@
     "stack.rail.new": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Kopie"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4883,6 +6605,12 @@
     "stack.rail.second": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf Platz 2"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4900,6 +6628,12 @@
     "stack.remove": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus dem Stapel entfernen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4917,6 +6651,12 @@
     "stack.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4934,6 +6674,12 @@
     "stack.toTop": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach oben bewegen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4951,6 +6697,12 @@
     "time.days": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Tg."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4968,6 +6720,12 @@
     "time.hours": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Std."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -4985,6 +6743,12 @@
     "time.minutes": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Min."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5002,6 +6766,12 @@
     "time.now": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5019,6 +6789,12 @@
     "time.yesterday": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gestern"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5036,6 +6812,12 @@
     "transforms.back": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5053,6 +6835,12 @@
     "transforms.copy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5070,6 +6858,12 @@
     "transforms.copyAfter": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ und kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5087,6 +6881,24 @@
     "transforms.count": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Umwandlung"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Umwandlungen"
+                }
+              }
+            }
+          }
+        },
         "en": {
           "variations": {
             "plural": {
@@ -5128,6 +6940,12 @@
     "transforms.empty": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Umwandlung für „%@“"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5145,6 +6963,12 @@
     "transforms.menu.clearDefault": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard entfernen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5162,6 +6986,12 @@
     "transforms.menu.setDefault": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als Standard für ⇧↵ festlegen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5179,6 +7009,12 @@
     "transforms.paste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5196,6 +7032,12 @@
     "transforms.result.pasteAsFile": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird als Datei eingesetzt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5213,6 +7055,12 @@
     "transforms.result.toFinder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In den geöffneten Finder-Ordner"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5230,6 +7078,12 @@
     "transforms.section.app": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5247,6 +7101,12 @@
     "transforms.section.default": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5264,6 +7124,12 @@
     "transforms.section.finder": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In den Finder"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5281,6 +7147,12 @@
     "transforms.section.yabbistir": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5298,6 +7170,12 @@
     "transforms.start": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5315,6 +7193,12 @@
     "translate.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Text konnte nicht übersetzt werden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5332,6 +7216,12 @@
     "translate.notInstalled": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Sprachpaket %@ → %@ ist nicht geladen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5349,6 +7239,12 @@
     "translate.unknownSource": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sprache konnte nicht erkannt werden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5366,6 +7262,12 @@
     "translate.unsupported": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kann auf diesem Mac nicht übersetzt werden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5383,6 +7285,12 @@
     "settings.general.language": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5400,6 +7308,12 @@
     "settings.general.appearance": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheinungsbild"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5417,6 +7331,12 @@
     "settings.general.appearance.system": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5434,6 +7354,12 @@
     "settings.general.appearance.light": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hell"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5451,6 +7377,12 @@
     "settings.general.appearance.dark": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dunkel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5468,6 +7400,12 @@
     "settings.general.launchAtLogin": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei der Anmeldung öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5485,6 +7423,12 @@
     "settings.general.launchAtLogin.approval": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Braucht deine Bestätigung in den Systemeinstellungen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5502,6 +7446,12 @@
     "settings.general.launchAtLogin.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konnte nicht aktiviert werden. Versuche es in den Systemeinstellungen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5519,6 +7469,12 @@
     "settings.openSystemSettings": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systemeinstellungen öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5536,6 +7492,12 @@
     "settings.general.menuBarIcon": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menüleistensymbol"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5553,6 +7515,12 @@
     "settings.general.menuBarIcon.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist es ausgeblendet, öffne yabbistir erneut, um zu den Einstellungen zu gelangen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5570,6 +7538,12 @@
     "settings.history.retention": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf behalten für"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5587,6 +7561,12 @@
     "settings.history.retention.oneWeek": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Woche"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5604,6 +7584,12 @@
     "settings.history.retention.oneMonth": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Monat"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5621,6 +7607,12 @@
     "settings.history.retention.threeMonths": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 Monate"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5638,6 +7630,12 @@
     "settings.history.retention.oneYear": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Jahr"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5655,6 +7653,12 @@
     "settings.history.retention.unlimited": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbegrenzt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5672,6 +7676,12 @@
     "settings.history.retention.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezählt ab der letzten Verwendung eines Objekts. Objekte in einer Kategorie werden nie entfernt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5689,6 +7699,12 @@
     "settings.history.retention.confirm": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dadurch werden jetzt %@ Objekte entfernt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5706,6 +7722,12 @@
     "settings.history.retention.confirm.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dadurch wird jetzt 1 Objekt entfernt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5723,6 +7745,12 @@
     "settings.history.retention.apply": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen und anwenden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5740,6 +7768,12 @@
     "settings.cancel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5757,6 +7791,12 @@
     "settings.categories.add": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie hinzufügen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5774,6 +7814,12 @@
     "settings.categories.visibility.always": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immer"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5791,6 +7837,12 @@
     "settings.categories.visibility.onDemand": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Auswahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5808,6 +7860,12 @@
     "settings.categories.delete.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Möchtest du „%@“ wirklich löschen?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5825,6 +7883,12 @@
     "settings.categories.delete.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objekte in deinem Verlauf bleiben erhalten. Objekte, die nur in dieser Kategorie liegen, werden gelöscht."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5842,6 +7906,12 @@
     "settings.categories.delete.confirm": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5859,6 +7929,12 @@
     "settings.categories.source.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird von ihrer Erweiterung gefüllt; du kannst ändern, wo sie erscheint."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5876,6 +7952,12 @@
     "settings.history.ignored": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorierte Apps"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5893,6 +7975,12 @@
     "settings.history.ignored.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was du in diesen Apps kopierst, wird nicht gespeichert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5910,6 +7998,12 @@
     "settings.history.remote": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopien vom iPhone behalten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5927,6 +8021,12 @@
     "settings.history.outputs": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergebnisse von Erweiterungen im Verlauf zeigen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5944,6 +8044,12 @@
     "settings.history.storage": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speicher"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5961,6 +8067,12 @@
     "settings.history.storage.size": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Verlauf belegt %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5978,6 +8090,12 @@
     "settings.history.clear": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf löschen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -5995,6 +8113,12 @@
     "settings.history.clear.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Möchtest du deinen gesamten Verlauf wirklich löschen?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6012,6 +8136,12 @@
     "settings.history.clear.message": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objekte in deinen Kategorien bleiben erhalten. Das kann nicht widerrufen werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6029,6 +8159,12 @@
     "settings.history.clear.confirm": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf löschen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6046,6 +8182,12 @@
     "settings.history.outputs.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergebnisse lassen sich weiterhin über ihre Auftragskarte und Kategorien einsetzen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6063,6 +8205,12 @@
     "settings.general.hideFromSharing": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Bildschirmfreigabe ausblenden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6080,6 +8228,12 @@
     "settings.general.hideFromSharing.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel, der Stapel und Hinweise erscheinen nicht in Aufnahmen oder freigegebenen Bildschirmen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6097,6 +8251,12 @@
     "settings.shortcuts.global": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturkurzbefehle"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6114,6 +8274,12 @@
     "settings.shortcuts.togglePanel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6131,6 +8297,12 @@
     "settings.shortcuts.stackCopy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In den Stapel kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6148,6 +8320,12 @@
     "settings.shortcuts.reset": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard wiederherstellen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6165,6 +8343,12 @@
     "settings.shortcuts.inPanel": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Panel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6182,6 +8366,12 @@
     "settings.keys.move": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der Liste bewegen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6199,6 +8389,12 @@
     "settings.keys.columns": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spalten wechseln"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6216,6 +8412,12 @@
     "settings.keys.paste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6233,6 +8435,12 @@
     "settings.keys.shiftReturn": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit der zweiten Option einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6250,6 +8458,12 @@
     "settings.keys.transforms": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umwandlungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6267,6 +8481,12 @@
     "settings.keys.actions": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktionen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6284,6 +8504,12 @@
     "settings.keys.copy": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6301,6 +8527,12 @@
     "settings.keys.addToCategory": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu einer Kategorie hinzufügen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6318,6 +8550,12 @@
     "settings.keys.editCategories": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorien bearbeiten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6335,6 +8573,12 @@
     "settings.keys.quickPaste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eines der ersten neun einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6352,6 +8596,12 @@
     "settings.keys.close": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6369,6 +8619,12 @@
     "settings.panel.position": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnet unter"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6386,6 +8642,12 @@
     "settings.panel.position.caret": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einfügemarke"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6403,6 +8665,12 @@
     "settings.panel.position.pointer": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeiger"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6420,6 +8688,12 @@
     "settings.panel.previewDelay": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorschauverzögerung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6437,6 +8711,12 @@
     "settings.panel.previewDelay.short": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurz"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6454,6 +8734,12 @@
     "settings.panel.previewDelay.medium": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mittel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6471,6 +8757,12 @@
     "settings.panel.previewDelay.long": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lang"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6488,6 +8780,12 @@
     "settings.panel.returnKey": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit ↵"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6505,6 +8803,12 @@
     "settings.panel.returnKey.app": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In die App einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6522,6 +8826,12 @@
     "settings.panel.returnKey.clipboard": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur in die Zwischenablage kopieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6539,6 +8849,12 @@
     "settings.panel.alwaysPlain": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immer als reinen Text einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6556,6 +8872,12 @@
     "settings.panel.alwaysPlain.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Einsetzen aus dem Panel und dem Stapel gehen Schriften, Farben und Linkformatierung verloren."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6573,6 +8895,12 @@
     "settings.permissions.granted": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaubt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6590,6 +8918,12 @@
     "settings.permissions.needed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erforderlich"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6607,6 +8941,12 @@
     "settings.permissions.optional": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6624,6 +8964,12 @@
     "settings.permissions.accessibility.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedienungshilfen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6641,6 +8987,12 @@
     "settings.permissions.accessibility.purpose": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setzt in die App ein, in der du warst, und findet deine Einfügemarke."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6658,6 +9010,12 @@
     "settings.permissions.accessibility.steps": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche unter Datenschutz & Sicherheit › Bedienungshilfen nach yabbistir und schalte es ein."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6675,6 +9033,12 @@
     "settings.permissions.inputMonitoring.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingabeüberwachung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6692,6 +9056,12 @@
     "settings.permissions.inputMonitoring.purpose": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lässt den Stapel dein ⌘V erkennen, damit nach jedem Einsetzen das nächste Objekt bereitsteht."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6709,6 +9079,12 @@
     "settings.permissions.inputMonitoring.steps": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche unter Datenschutz & Sicherheit › Eingabeüberwachung nach yabbistir und schalte es ein."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6726,6 +9102,12 @@
     "settings.permissions.pasteboard.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus anderen Apps einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6743,6 +9125,12 @@
     "settings.permissions.pasteboard.purpose": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lässt yabbistir sehen, was du kopierst, damit es deinen Verlauf führen kann."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6760,6 +9148,12 @@
     "settings.permissions.pasteboard.steps": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn macOS fragt, wähle „Immer erlauben“. Du kannst das später unter Datenschutz & Sicherheit ändern."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6777,6 +9171,12 @@
     "settings.permissions.pasteboard.notAsked": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS hat noch nicht gefragt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6794,6 +9194,12 @@
     "settings.permissions.pasteboard.ask": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS fragt jedes Mal."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6811,6 +9217,12 @@
     "settings.permissions.pasteboard.denied": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deaktiviert: yabbistir kann nicht sehen, was du kopierst."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6828,6 +9240,12 @@
     "settings.permissions.loginItem.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei der Anmeldung öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6845,6 +9263,12 @@
     "settings.permissions.loginItem.purpose": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startet yabbistir bei der Anmeldung, damit dein Verlauf nichts verpasst."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6862,6 +9286,12 @@
     "settings.permissions.loginItem.steps": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schalte es unter „Allgemein“ ein. Wenn macOS fragt, bestätige es in den Anmeldeobjekten."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6879,6 +9309,12 @@
     "import.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lass uns deine Paste-Bibliothek übernehmen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6896,6 +9332,12 @@
     "import.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Pinboards werden zu Kategorien. Deine Daten in Paste werden nur gelesen, nie geändert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6913,6 +9355,12 @@
     "import.source.name": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6930,6 +9378,12 @@
     "import.source.stats": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6947,6 +9401,12 @@
     "import.allHistory": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamter Verlauf"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6964,6 +9424,12 @@
     "import.note": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@, als Kategorien übernommen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6981,6 +9447,12 @@
     "import.start": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -6998,6 +9470,12 @@
     "import.skip": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Später"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7015,6 +9493,12 @@
     "import.progress.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird übernommen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7032,6 +9516,12 @@
     "import.progress.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilder und formatierter Text kommen mit."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7049,6 +9539,12 @@
     "import.progress.of": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7066,6 +9562,12 @@
     "import.done.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles da."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7083,6 +9585,12 @@
     "import.kind.text": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7100,6 +9608,12 @@
     "import.kind.code": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7117,6 +9631,12 @@
     "import.kind.link": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7134,6 +9654,12 @@
     "import.kind.image": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bild"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7151,6 +9677,12 @@
     "import.kind.color": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farbe"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7168,6 +9700,12 @@
     "import.kind.file": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7185,6 +9723,12 @@
     "import.result.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 neues Objekt hinzugefügt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7202,6 +9746,12 @@
     "import.result": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ neue Objekte hinzugefügt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7219,6 +9769,12 @@
     "import.result.none": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts Neues zu importieren."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7236,6 +9792,12 @@
     "import.failed.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Objekt konnte nicht importiert werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7253,6 +9815,12 @@
     "import.failed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Objekte konnten nicht importiert werden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7270,6 +9838,12 @@
     "import.error": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Bibliothek konnte nicht gelesen werden. Beende Paste und versuche es erneut."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7287,6 +9861,12 @@
     "import.none": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Mac wurde keine Paste-Bibliothek gefunden."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7304,6 +9884,12 @@
     "import.running.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste läuft noch"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7321,6 +9907,12 @@
     "import.running.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beide nutzen dieselben Kurzbefehle. Beende Paste und entferne es aus den Anmeldeobjekten."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7338,6 +9930,12 @@
     "import.running.quit": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste beenden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7355,6 +9953,12 @@
     "import.items.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Objekt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7372,6 +9976,12 @@
     "import.items": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Objekte"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7389,6 +9999,12 @@
     "import.pinnedItems.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 angepinntes Objekt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7406,6 +10022,12 @@
     "import.pinnedItems": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ angepinnte Objekte"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7423,6 +10045,12 @@
     "import.pinboards.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Pinboard"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7440,6 +10068,12 @@
     "import.pinboards": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Pinboards"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7457,6 +10091,12 @@
     "onboarding.welcome.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles, was du kopierst, direkt unter deiner Einfügemarke."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7474,6 +10114,12 @@
     "onboarding.welcome.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir merkt sich deinen Verlauf. Drücke den Kurzbefehl, tippe los, setze mit ↵ ein. Ganz ohne Maus."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7491,6 +10137,12 @@
     "onboarding.welcome.start": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los geht’s"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7508,6 +10160,12 @@
     "onboarding.welcome.importHint": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Paste-Bibliothek kommt auch mit"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7525,6 +10183,12 @@
     "onboarding.continue": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fortfahren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7542,6 +10206,12 @@
     "onboarding.setup.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein paar letzte Einstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7559,6 +10229,12 @@
     "onboarding.setup.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst sie jederzeit in den Einstellungen ändern."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7576,6 +10252,12 @@
     "onboarding.setup.shortcut.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehl zum Öffnen des Panels"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7593,6 +10275,12 @@
     "onboarding.setup.shortcut.fromPaste": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der, den du von Paste kennst"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7610,6 +10298,12 @@
     "onboarding.setup.shortcut.change": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst ihn in den Einstellungen ändern."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7627,6 +10321,12 @@
     "onboarding.setup.paste.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direkt einsetzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7644,6 +10344,12 @@
     "onboarding.setup.paste.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Bedienungshilfen werden Objekte nur in die Zwischenablage kopiert"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7661,6 +10367,12 @@
     "onboarding.setup.paste.allow": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7678,6 +10390,12 @@
     "onboarding.setup.paste.allowed": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaubt"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7695,6 +10413,12 @@
     "onboarding.setup.login.title": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei der Anmeldung öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7712,6 +10436,12 @@
     "onboarding.setup.login.body": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Hintergrund bereit, sobald dein Mac startet"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7729,6 +10459,12 @@
     "onboarding.finish": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig, Panel anzeigen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7746,6 +10482,12 @@
     "settings.about.rerunSetup": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ersteinrichtung erneut starten …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7763,6 +10505,12 @@
     "import.scanning": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Bibliothek wird gelesen …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7780,6 +10528,12 @@
     "import.source.unit": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objekte · %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -7797,6 +10551,12 @@
     "import.source.unit.one": {
       "extractionState": "manual",
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objekt · %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",

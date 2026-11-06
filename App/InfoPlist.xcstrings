@@ -5,6 +5,12 @@
       "comment" : "Shown by macOS when an installed extension first sends Apple events to another app.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Erweiterungen, die du installierst, kommunizieren mit anderen Apps, zum Beispiel um die offenen Tabs in Safari zu lesen oder eine Notiz in Notizen anzulegen. macOS fragt für jede App einmal."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
