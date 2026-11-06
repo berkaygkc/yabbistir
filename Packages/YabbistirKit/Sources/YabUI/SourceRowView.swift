@@ -64,20 +64,21 @@ struct SourceMark: View {
 /// the extension may not reach the network, so there is no favicon; a column of coloured tiles would also be loud.
 struct InitialTile: View {
     let title: String
+    @Environment(\.locale) private var locale
 
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Tokens.Metrics.keycapRadius, style: .continuous)
         shape.fill(Tokens.Colors.tile)
             .overlay(shape.strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
-            .overlay(Text(Self.initial(of: title))
+            .overlay(Text(Self.initial(of: title, locale: locale))
                 .font(.system(size: 10.5, weight: .bold))
                 .foregroundStyle(Tokens.Colors.textSecondary))
             .frame(width: Tokens.Metrics.iconSize, height: Tokens.Metrics.iconSize)
     }
 
-    /// "iş portalı" → "İ": Turkish capitals, whatever the app's language.
-    static func initial(of title: String) -> String {
-        String(title.trimmingCharacters(in: .whitespaces).prefix(1)).uppercased(with: Locale(identifier: "tr"))
+    /// "iş portalı" → "İ" in Turkish, "I" in English: capitals follow the app's language (the views' locale).
+    static func initial(of title: String, locale: Locale) -> String {
+        String(title.trimmingCharacters(in: .whitespaces).prefix(1)).uppercased(with: locale)
     }
 }
 

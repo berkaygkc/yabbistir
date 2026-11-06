@@ -4,21 +4,17 @@ import Foundation
 public enum ShortRelativeTime {
     public static func string(from date: Date, now: Date, language: AppLanguage) -> String {
         let elapsed = max(0, now.timeIntervalSince(date))
-        let turkish = language == .turkish
         switch elapsed {
         case ..<60:
-            return turkish ? "şimdi" : "now"
+            return L10n.string("time.now", language)
         case ..<3600:
-            let minutes = Int(elapsed / 60)
-            return turkish ? "\(minutes) dk" : "\(minutes)m"
+            return L10n.string("time.minutes", language, Int(elapsed / 60))
         case ..<86_400:
-            let hours = Int((elapsed / 3600).rounded())
-            return turkish ? "\(hours) sa" : "\(hours)h"
+            return L10n.string("time.hours", language, Int((elapsed / 3600).rounded()))
         case ..<172_800:
-            return turkish ? "dün" : "yesterday"
+            return L10n.string("time.yesterday", language)
         default:
-            let days = Int((elapsed / 86_400).rounded())
-            return turkish ? "\(days) gün" : "\(days)d"
+            return L10n.string("time.days", language, Int((elapsed / 86_400).rounded()))
         }
     }
 }

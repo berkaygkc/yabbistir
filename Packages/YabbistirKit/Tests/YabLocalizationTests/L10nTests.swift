@@ -32,7 +32,7 @@ import Testing
     @Test func everyKeyUsedInSourcesIsTranslated() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let folders = [root.appendingPathComponent("Sources"), root.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("App")]
-        let pattern = /"((?:panel|menu|notice|kind|actions|pin|editor|preview|category|stack|extensions|transforms|settings|permissions|jobs|ai(?=\.(?:unavailable|failed))|history(?=\.denied)|host(?=\.tooSlow)|translate|import|onboarding)\.[A-Za-z.]+)"/
+        let pattern = /"((?:panel|menu|notice|kind|actions|pin|editor|preview|category|stack|extensions|transforms|settings|permissions|jobs|ai(?=\.(?:unavailable|failed))|history(?=\.denied)|host(?=\.tooSlow)|translate|import|onboarding|time)\.[A-Za-z.]+)"/
         var keys = Set<String>()
         for folder in folders {
             let files = FileManager.default.enumerator(at: folder, includingPropertiesForKeys: nil)?.compactMap { $0 as? URL } ?? []
