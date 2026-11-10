@@ -41,6 +41,8 @@ What sets it apart is that it grows. Extensions are small JavaScript packages th
 
 It stays out of the way the rest of the time. Rows are one line each, details show up only when you ask for them, and the whole app is a quiet menu bar icon with no Dock icon. The name is a playful way of saying *yapıştır*, Turkish for "paste".
 
+yabbistir speaks nine languages: English, Deutsch, Español, Français, Türkçe, 日本語, 한국어, 简体中文 and 繁體中文. Spotted a wording that sounds off? [Suggest a fix](https://github.com/berkaygkc/yabbistir/issues/new?template=translation.yml).
+
 ## Features
 
 <table>
@@ -62,7 +64,7 @@ Copy several things in a row with ⇧⌘C, then paste them in order: each ⌘V b
 <td valign="top">
 
 #### Transforms
-Tap ⇧ on an item to see what can be done with it: encode Base64, turn a color into RGB, HSL, OKLCH or a SwiftUI `Color`, convert an image or read the text in it. ⌘K lists every action. ↵ always pastes the item as it is.
+Tap ⇧ (or press ⌘T) on an item to see what can be done with it: encode Base64, turn a color into RGB, HSL, OKLCH or a SwiftUI `Color`, convert an image or read the text in it. ⌘K lists every action. ↵ always pastes the item as it is.
 
 </td>
 <td valign="top">
@@ -126,9 +128,9 @@ The app is signed with a Developer ID and notarized by Apple.
 
 ## First launch
 
-Open yabbistir from Applications. A short first-run window walks you through the start: pick English or Turkish, bring over another clipboard manager's library if a supported one is found, check the shortcut, allow pasting and choose whether yabbistir opens at login. Settings → About runs it again.
+Open yabbistir from Applications. A short first-run window walks you through the start: pick your language, bring over another clipboard manager's library if a supported one is found, check the shortcut, allow pasting and choose whether yabbistir opens at login. Settings → About runs it again.
 
-yabbistir lives in the menu bar, with no Dock icon. Click the icon to open the panel (or, while jobs run, to show their card); right-click it for the menu, with Language (English or Turkish), Check for Updates… and Settings…. Settings covers the rest: the shortcuts, where the panel opens and what ↵ does, how long history is kept and which apps it ignores, your categories, permissions, imports and extensions.
+yabbistir lives in the menu bar, with no Dock icon. Click the icon to open the panel (or, while jobs run, to show their card); right-click it for the menu, with Language, Check for Updates… and Settings…. Settings covers the rest: the shortcuts, where the panel opens and what ↵ does, how long history is kept and which apps it ignores, your categories, permissions, imports and extensions.
 
 yabbistir asks for two permissions, each when it first needs it. Settings → Permissions shows where each one stands and how to allow it:
 

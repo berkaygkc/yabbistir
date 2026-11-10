@@ -1,0 +1,38 @@
+name: Translation fix
+description: A wording in yabbistir sounds wrong, is cut off or is missing in your language.
+labels: ["translation"]
+body:
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - English
+        - Deutsch
+        - Español (España)
+        - Français (France)
+        - Türkçe
+        - 日本語
+        - 한국어
+        - 简体中文
+        - 繁體中文 (台灣)
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Where does it appear?
+      description: The screen, menu or button, such as the panel's footer, Settings → General, or a store extension. A screenshot helps; check it doesn't show private clipboard content.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What does it say now?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording
+      description: What it should say, and why if it isn't obvious. Mention the wording macOS itself uses, if you know it.
