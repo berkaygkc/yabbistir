@@ -248,6 +248,9 @@ public enum ManifestValidator {
                     memberID(in: variantObject, path: "\(variantPath).id", what: "variant", seen: &variantIDs)
                     localeKey("title", in: variantObject, path: "\(variantPath).title")
                     if variantObject["failTitle"] != nil { localeKey("failTitle", in: variantObject, path: "\(variantPath).failTitle") }
+                    if let preference = variantObject["preference"], preference != .null {
+                        variantPreference(preference, path: "\(variantPath).preference")
+                    }
                 }
             }
             var ruleIDs = Set<String>()
@@ -337,6 +340,25 @@ public enum ManifestValidator {
             if let pattern = object["pattern"]?.stringValue, (try? NSRegularExpression(pattern: pattern)) == nil {
                 issue("\(path).pattern", "\"\(pattern)\" is not a valid regular expression", fix: "Fix the pattern so it compiles as an ICU regular expression.", code: "invalidPattern")
             }
+        }
+
+        /// A variant's `preference` names one of the extension's toggles, which shows and hides it. Anything else is a
+        /// warning: the extension loads, and the variant is always offered.
+        private mutating func variantPreference(_ value: JSONValue, path: String) {
+            guard let id = value.stringValue else {
+                return warn(path, "\"preference\" must be the id of a toggle preference; this variant is always offered")
+            }
+            // The first preference with the id decides, as when values are read.
+            let named = (root["preferences"]?.arrayValue ?? []).lazy.compactMap(\.objectValue).first { $0["id"]?.stringValue == id }
+            guard let named else { return warn(path, "there is no preference \"\(id)\"; this variant is always offered") }
+            let type = named["type"]?.stringValue
+            guard type != PreferenceSpec.Kind.toggle.rawValue else { return }
+            warn(path, "\"\(id)\" is \(type.map { "a \($0) preference" } ?? "a preference"), not a toggle; this variant is always offered")
+        }
+
+        private mutating func warn(_ path: String, _ message: String) {
+            issues.append(ManifestIssue(path, message, fix: "Name one of this extension's \"toggle\" preferences, or remove \"preference\".",
+                                        severity: .warning, code: "variantPreference"))
         }
 
         /// An action, variant, preference or detector id: present, once in its list, and made of

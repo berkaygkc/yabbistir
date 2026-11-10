@@ -31,15 +31,19 @@ public struct ExtensionCommand: Identifiable, Hashable, Sendable {
     public let verb: String?
     /// A failed job's title ("Video indirilemedi"), in the catalog's language; nil keeps `title`.
     public let failTitle: String?
+    /// The extension's toggle preference that shows this variant: it is offered only while that toggle is on
+    /// (`CommandCatalog.offered`). Nil: always offered.
+    public let preference: String?
 
     public init(id: String, extensionID: String, extensionName: String, icon: String, title: String, subtitle: String?, keywords: [String],
                 input: ActionInput, output: ActionOutput, hint: Bool, priority: Int, actionID: String, variant: String?,
                 source: ExtensionSource, accepts: AcceptSpec?, targets: [TargetClass] = [], targetsOnly: Bool = false, isJob: Bool = false,
-                verb: String? = nil, failTitle: String? = nil) {
+                verb: String? = nil, failTitle: String? = nil, preference: String? = nil) {
         (self.id, self.extensionID, self.extensionName, self.icon, self.title, self.subtitle) = (id, extensionID, extensionName, icon, title, subtitle)
         (self.keywords, self.input, self.output, self.hint, self.priority) = (keywords, input, output, hint, priority)
         (self.actionID, self.variant, self.source, self.accepts) = (actionID, variant, source, accepts)
         (self.targets, self.targetsOnly, self.isJob, self.verb, self.failTitle) = (targets, targetsOnly, isJob, verb, failTitle)
+        self.preference = preference
     }
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -69,30 +73,53 @@ public struct CommandCatalog: Sendable {
         for entry in installed where entry.isUsable {
             guard let manifest = entry.manifest, let localization = entry.localization else { continue }
             let name = localization.string(manifest.name, language: language)
+            let toggles = Self.toggles(of: manifest)
             for action in manifest.contributes.actions {
                 let keywords = localization.keywords(action.keywords, language: language)
                 let accepts = action.accepts.map { Self.qualified($0, extensionID: manifest.id) }
                 let subtitle = action.subtitle.map { localization.string($0, language: language) }
                 let verb = action.verb.map { localization.string($0, language: language) }
                 let failTitle = action.failTitle.map { localization.string($0, language: language) }
-                let variants: [(id: String?, title: String, subtitle: String?, failTitle: String?)] = action.variants.isEmpty
-                    ? [(nil, localization.string(action.title, language: language), subtitle, failTitle)]
+                let variants: [(id: String?, title: String, subtitle: String?, failTitle: String?, preference: String?)] = action.variants.isEmpty
+                    ? [(nil, localization.string(action.title, language: language), subtitle, failTitle, nil)]
                     : action.variants.map { ($0.id, localization.string($0.title, language: language),
                                              $0.subtitle.map { localization.string($0, language: language) } ?? subtitle,
-                                             $0.failTitle.map { localization.string($0, language: language) } ?? failTitle) }
+                                             $0.failTitle.map { localization.string($0, language: language) } ?? failTitle,
+                                             // One that names no toggle is ignored (the validator warns): the variant always shows.
+                                             $0.preference.flatMap { toggles.contains($0) ? $0 : nil }) }
                 for variant in variants {
                     commands.append(ExtensionCommand(
                         id: "\(manifest.id)/\(action.id)" + (variant.id.map { "#\($0)" } ?? ""), extensionID: manifest.id, extensionName: name,
                         icon: Self.icon(manifest.icon, in: entry.folder), title: variant.title, subtitle: variant.subtitle, keywords: keywords, input: action.input,
                         output: action.output, hint: action.hint, priority: action.priority, actionID: action.id, variant: variant.id,
                         source: entry.source, accepts: accepts, targets: action.targets, targetsOnly: action.targetsOnly, isJob: action.job,
-                        verb: verb, failTitle: variant.failTitle))
+                        verb: verb, failTitle: variant.failTitle, preference: variant.preference))
                 }
             }
         }
         self.commands = commands
         folded = Dictionary(commands.map { ($0.id, $0.keywords.map(SearchNormalizer.normalize)) }) { first, _ in first }
         patterns = PatternCache()
+    }
+
+    /// The ids of the manifest's toggle preferences; with two preferences under one id, the first decides, as when
+    /// their values are read.
+    static func toggles(of manifest: ExtensionManifest) -> Set<String> {
+        let kinds = Dictionary(manifest.preferences.map { ($0.id, $0.type) }) { first, _ in first }
+        return Set(kinds.filter { $0.value == .toggle }.keys)
+    }
+
+    /// What is offered now: a variant tied to a toggle (`ExtensionCommand.preference`) only while that toggle is on, so
+    /// an action whose variants are all switched off is gone. `preferences` gives an extension's values as Settings
+    /// holds them now; it is asked once per extension.
+    public static func offered(_ commands: [ExtensionCommand], preferences: (String) -> [String: JSONValue]) -> [ExtensionCommand] {
+        var values: [String: [String: JSONValue]] = [:]
+        return commands.filter { command in
+            guard let preference = command.preference else { return true }
+            let own = values[command.extensionID] ?? preferences(command.extensionID)
+            values[command.extensionID] = own
+            return own[preference] == .bool(true)
+        }
     }
 
     /// "sf:<symbol>" as it is; a file name becomes its path, so the panel can draw it.

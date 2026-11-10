@@ -1,0 +1,50 @@
+{
+  "about": "A variant names a toggle preference: it is offered only while that toggle is on.",
+  "folder": "dev.example.sample",
+  "manifest": {
+    "id": "dev.example.sample",
+    "version": "1.0.0",
+    "apiVersion": 1,
+    "minAppVersion": "0.5.1",
+    "defaultLocale": "en",
+    "name": "name",
+    "description": "description",
+    "icon": "sf:number",
+    "author": "example",
+    "license": "MIT",
+    "categories": ["text"],
+    "preferences": [
+      {"id": "upper", "type": "toggle", "title": "upper", "default": true},
+      {"id": "lower", "type": "toggle", "title": "upper", "default": false}
+    ],
+    "contributes": {
+      "actions": [
+        {
+          "id": "encode",
+          "title": "encode.title",
+          "keywords": "encode.keywords",
+          "input": "item",
+          "accepts": {"kinds": ["text", "code"]},
+          "output": "text",
+          "variants": [
+            {"id": "upper", "title": "encode.title", "preference": "upper"},
+            {"id": "lower", "title": "decode.title", "preference": "lower"},
+            {"id": "plain", "title": "decode.title"}
+          ]
+        }
+      ]
+    }
+  },
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "decode.title": "Decode",
+      "decode.keywords": ["decode", "b64"],
+      "encode.title": "Encode",
+      "encode.keywords": ["encode"],
+      "upper": "Show upper case"
+    }
+  },
+  "files": ["index.js"]
+}

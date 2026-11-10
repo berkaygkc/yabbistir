@@ -1,0 +1,51 @@
+{
+  "about": "A variant's preference that names no toggle loads, with a warning: the app always offers that variant. The store refuses it.",
+  "folder": "dev.example.sample",
+  "manifest": {
+    "id": "dev.example.sample",
+    "version": "1.0.0",
+    "apiVersion": 1,
+    "minAppVersion": "0.5.1",
+    "defaultLocale": "en",
+    "name": "name",
+    "description": "description",
+    "icon": "sf:number",
+    "author": "example",
+    "license": "MIT",
+    "categories": ["text"],
+    "preferences": [
+      {"id": "upper", "type": "toggle", "title": "upper", "default": true},
+      {"id": "mode", "type": "choice", "title": "upper", "default": "a", "options": [{"id": "a", "title": "decode.title"}]}
+    ],
+    "contributes": {
+      "actions": [
+        {
+          "id": "encode",
+          "title": "encode.title",
+          "keywords": "encode.keywords",
+          "input": "item",
+          "accepts": {"kinds": ["text", "code"]},
+          "output": "text",
+          "variants": [
+            {"id": "missing", "title": "encode.title", "preference": "lower"},
+            {"id": "choice", "title": "decode.title", "preference": "mode"},
+            {"id": "number", "title": "decode.title", "preference": 1},
+            {"id": "fine", "title": "decode.title", "preference": "upper"}
+          ]
+        }
+      ]
+    }
+  },
+  "locales": {
+    "en": {
+      "name": "Sample",
+      "description": "A sample",
+      "decode.title": "Decode",
+      "decode.keywords": ["decode", "b64"],
+      "encode.title": "Encode",
+      "encode.keywords": ["encode"],
+      "upper": "Show upper case"
+    }
+  },
+  "files": ["index.js"]
+}

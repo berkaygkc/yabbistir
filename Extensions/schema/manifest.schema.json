@@ -85,7 +85,8 @@
           "items": {
             "type": "object", "required": ["id", "title"], "additionalProperties": false,
             "properties": { "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" }, "title": { "$ref": "#/$defs/localeKey" }, "subtitle": { "$ref": "#/$defs/localeKey" },
-                            "failTitle": { "$ref": "#/$defs/localeKey" } }
+                            "failTitle": { "$ref": "#/$defs/localeKey" },
+                            "preference": { "type": "string", "description": "The id of one of the extension's toggle preferences: the variant is offered only while that toggle is on." } }
           }
         },
         "hint": { "type": "boolean", "description": "Run early (500 ms limit) and show the output as the row's hint." },

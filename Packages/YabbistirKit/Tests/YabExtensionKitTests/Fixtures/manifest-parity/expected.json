@@ -85,5 +85,7 @@
   "valid/nulls-in-optional-fields.json": [],
   "valid/sample.json": [],
   "valid/secret-and-folder-preferences.json": [],
-  "valid/source-sensitive.json": []
+  "valid/source-sensitive.json": [],
+  "valid/variant-preference-not-a-toggle.json": ["variantPreference"],
+  "valid/variant-preference.json": []
 }

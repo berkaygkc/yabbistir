@@ -319,4 +319,48 @@ import Testing
             #expect(!description.contains("while the job works"))
         }
     }
+
+    // MARK: A variant shown by a toggle
+
+    /// `preference` is optional: a manifest without it reads as before, one with it carries the toggle's id, and one that
+    /// is not text never keeps the extension from loading.
+    @Test func aVariantsPreferenceIsReadAndNeverRefused() throws {
+        func variants(_ list: [[String: Any]]) throws -> [VariantSpec] {
+            let manifest = Fixture.manifest(id: "dev.example.sample").setting("contributes.actions.1.variants", list)
+            let fixture = try Fixture(manifest: manifest)
+            guard case .valid(let parsed, _) = ManifestValidator.validate(folder: fixture.root) else {
+                Issue.record("expected a valid manifest: \(ManifestValidator.validate(folder: fixture.root).issues)"); return []
+            }
+            return parsed.contributes.actions[1].variants
+        }
+        #expect(try variants([["id": "a", "title": "encode.title"]]).map(\.preference) == [nil])
+        #expect(try variants([["id": "a", "title": "encode.title", "preference": "upper"]]).map(\.preference) == ["upper"])
+        #expect(try variants([["id": "a", "title": "encode.title", "preference": 1]]).map(\.preference) == [nil])
+        #expect(try variants([["id": "a", "title": "encode.title", "preference": NSNull()]]).map(\.preference) == [nil])
+    }
+
+    /// A `preference` that names no toggle is a warning: the extension loads and the app offers the variant always.
+    @Test func aVariantPreferenceThatNamesNoToggleWarns() throws {
+        let manifest = Fixture.manifest(id: "dev.example.sample")
+            .setting("preferences", [["id": "upper", "type": "toggle", "title": "upper", "default": true],
+                                     ["id": "mode", "type": "choice", "title": "upper", "default": "a", "options": [["id": "a", "title": "upper"]]]])
+            .setting("contributes.actions.1.variants", [["id": "a", "title": "encode.title", "preference": "upper"],
+                                                        ["id": "b", "title": "encode.title", "preference": "lower"],
+                                                        ["id": "c", "title": "encode.title", "preference": "mode"],
+                                                        ["id": "d", "title": "encode.title", "preference": true]])
+        let fixture = try Fixture(manifest: manifest)
+        guard case .valid = ManifestValidator.validate(folder: fixture.root) else {
+            Issue.record("expected a valid manifest: \(ManifestValidator.validate(folder: fixture.root).issues)"); return
+        }
+        let warnings = ManifestValidator.warnings(folder: fixture.root)
+        #expect(warnings.map(\.code) == ["variantPreference", "variantPreference", "variantPreference"])
+        #expect(warnings.allSatisfy { $0.severity == .warning && $0.fix != nil })
+        #expect(warnings.map(\.path) == ["contributes.actions[1].variants[1].preference", "contributes.actions[1].variants[2].preference",
+                                         "contributes.actions[1].variants[3].preference"])
+        #expect(warnings.map(\.message) == [
+            "there is no preference \"lower\"; this variant is always offered",
+            "\"mode\" is a choice preference, not a toggle; this variant is always offered",
+            "\"preference\" must be the id of a toggle preference; this variant is always offered",
+        ])
+    }
 }

@@ -204,6 +204,19 @@ public struct VariantSpec: Codable, Equatable, Sendable {
     public var subtitle: String?
     /// Locale key of the variant's own failure title, in place of its action's.
     public var failTitle: String?
+    /// The id of one of the extension's `toggle` preferences: the variant is offered only while it is on. One that
+    /// names no toggle (or is not text) leaves the variant always offered; the validator warns about it.
+    public var preference: String?
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        title = try c.decode(String.self, forKey: .title)
+        subtitle = try c.decodeIfPresent(String.self, forKey: .subtitle)
+        failTitle = try c.decodeIfPresent(String.self, forKey: .failTitle)
+        // Never a reason to refuse the extension: a variant whose setting can't be read is simply always offered.
+        preference = (try? c.decodeIfPresent(String.self, forKey: .preference)) ?? nil
+    }
 }
 
 /// Which items an action or detector applies to; decided from the manifest alone (no JavaScript).

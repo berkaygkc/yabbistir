@@ -122,13 +122,22 @@ public final class ExtensionService: ExtensionCommandsProviding {
     // MARK: ExtensionCommandsProviding
 
     public func commands(matching query: String, subjectID: Int64?) -> [ExtensionCommand] {
-        catalog.commands(matching: query, subject: subjectID.flatMap { item(for: $0, includeImage: false) }, target: target)
-            .filter { !loadFailed.contains($0.extensionID) }
+        offered(catalog.commands(matching: query, subject: subjectID.flatMap { item(for: $0, includeImage: false) }, target: target))
     }
 
+    /// The ⇧ panel's rows, ⌘K's transforms and what ⇧↵ may run all come from here.
     public func transforms(forItemID itemID: Int64) -> [ExtensionCommand] {
         guard let item = item(for: itemID, includeImage: false) else { return [] }
-        return catalog.transforms(for: item, target: target).filter { !loadFailed.contains($0.extensionID) }
+        return offered(catalog.transforms(for: item, target: target))
+    }
+
+    /// Less the extensions that failed to load, and the variants whose toggle is off in Settings, read at each call: a
+    /// toggle switched off there hides its variant from the next list.
+    private func offered(_ commands: [ExtensionCommand]) -> [ExtensionCommand] {
+        let loaded = commands.filter { !loadFailed.contains($0.extensionID) }
+        return CommandCatalog.offered(loaded) { [registry, settings] id in
+            settings.preferences(id, specs: registry.installed.first { $0.id == id }?.manifest?.preferences ?? [])
+        }
     }
 
     public func hint(for command: ExtensionCommand, subjectID: Int64?) -> String? {
