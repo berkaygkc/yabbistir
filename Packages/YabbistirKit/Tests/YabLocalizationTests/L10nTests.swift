@@ -66,6 +66,21 @@ import Testing
         #expect(ShortRelativeTime.string(from: date, now: now, language: .turkish) == turkish)
     }
 
+    /// The labels are read from the catalog once and joined to their count: they read as formatting the catalog's own
+    /// string would, in every language.
+    @Test func countLabelsReadAsTheCatalogsFormat() {
+        let cases: [(key: String, seconds: Double, count: Int)] = [
+            ("time.minutes", 7 * 60, 7), ("time.hours", 5 * 3600, 5), ("time.days", 12 * 86_400, 12), ("time.days", 1234 * 86_400, 1234),
+        ]
+        for language in AppLanguage.allCases {
+            for c in cases {
+                let catalog = String(format: L10n.string(c.key, language), locale: language.locale, c.count)
+                let label = ShortRelativeTime.string(from: now.addingTimeInterval(-c.seconds), now: now, language: language)
+                #expect(label == catalog, "\(language) \(c.key)")
+            }
+        }
+    }
+
     /// Language names are written in the app's language, whatever the system's.
     @Test func languagePairsAreNamedInTheAppsLanguage() {
         #expect(LanguageNames.pair(from: "en", to: "tr", in: .turkish) == "İngilizce → Türkçe")
