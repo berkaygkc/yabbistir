@@ -22,6 +22,8 @@ final class PanelController: NSObject, NSWindowDelegate {
     private let pinSurface: FloatingSurface
     /// The ⇧ panel: beside the selected row like a submenu; the keyboard stays with the panel.
     private let transformSurface: FloatingSurface
+    /// Its parts other than the rows, measured once per opening (and when its search line comes or goes).
+    private var transformChrome = TransformListLayout.ChromeCache()
     private let previewSurface: FloatingSurface
     private var previewContent: PreviewContent?
     /// What the loaded preview shows: "item:<id>", a command on its subject (with the hint
@@ -144,6 +146,7 @@ final class PanelController: NSObject, NSWindowDelegate {
     func hide() {
         pinSurface.hide()
         transformSurface.hide()
+        transformChrome.reset()
         hidePreview()
         editorSurface.hide()
         window.orderOut(nil)
@@ -390,6 +393,7 @@ final class PanelController: NSObject, NSWindowDelegate {
     private func updateTransforms() {
         guard window.isVisible, model.layer == .transforms, let row = screenRect(of: model.selectedRowFrame) else {
             transformSurface.hide()
+            transformChrome.reset()
             return
         }
         let fit = transformListFit()
@@ -407,13 +411,16 @@ final class PanelController: NSObject, NSWindowDelegate {
     }
 
     /// The ⇧ panel's rows against the screen's height inside its margins, less the panel's other parts with the result
-    /// at its tallest (measured apart, so the shown list keeps its scroll). Nil without rows, and on a source's row,
-    /// whose few actions always fit.
+    /// at its tallest (measured apart, so the shown list keeps its scroll; once per opening, and again when the search
+    /// line comes or goes). Nil without rows, and on a source's row, whose few actions always fit.
     private func transformListFit() -> TransformListLayout.Fit? {
         guard model.transformSource == nil else { return nil }
         let rows = model.transformRows.count
         guard rows > 0 else { return nil }
-        let chrome = transformSurface.measuredSize(of: TransformPanelView(model: model, list: .chrome) { _ in }).height
+        let key = TransformListLayout.ChromeCache.Key(subject: model.transformSubjectID, searching: !model.transformQuery.isEmpty)
+        let chrome = transformChrome.height(for: key) {
+            transformSurface.measuredSize(of: TransformPanelView(model: model, list: .chrome) { _ in }).height
+        }
         let available = visibleFrame.height - 2 * ColumnStripLayout.screenMargin - chrome
         return TransformListLayout.fit(rows: rows, sections: model.transformSections.count, available: available)
     }

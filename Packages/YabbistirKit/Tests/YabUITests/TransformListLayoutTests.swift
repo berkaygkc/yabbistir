@@ -41,6 +41,31 @@ import YabLocalization
     @Test func noRowsNeedNoRoom() {
         #expect(TransformListLayout.fit(rows: 0, available: 0) == .init(height: 0, scrolls: false))
     }
+
+    /// The panel's other parts are measured when it opens and when its search line comes or goes; ↑ ↓ never measure.
+    @Test func theChromeIsMeasuredOncePerOpeningAndWhenTheSearchLineChanges() {
+        var cache = TransformListLayout.ChromeCache()
+        var measured = 0
+        func chrome(_ subject: Int64, searching: Bool = false) -> CGFloat {
+            cache.height(for: .init(subject: subject, searching: searching)) {
+                measured += 1
+                return searching ? 140 : 112
+            }
+        }
+        #expect(chrome(7) == 112)
+        for _ in 0..<5 { _ = chrome(7) }
+        #expect(measured == 1)
+        #expect(chrome(7, searching: true) == 140)
+        _ = chrome(7, searching: true)
+        #expect(measured == 2)
+        #expect(chrome(7) == 112)
+        #expect(measured == 3)
+        cache.reset()
+        _ = chrome(7)
+        #expect(measured == 4)
+        _ = chrome(8)
+        #expect(measured == 5)
+    }
 }
 
 /// The panel drawn: the list's arithmetic matches its rows and headers, `.chrome` measures everything else with the

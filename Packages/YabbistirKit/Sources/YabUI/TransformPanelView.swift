@@ -232,7 +232,10 @@ public struct TransformPanelView: View {
                     .scaleEffect(0.85)
                     .frame(width: 14, height: 14)
             }
+            // One line, as `TransformListLayout.sectionHeight` counts it: a long name shortens rather than wraps.
             Text(section.title)
+                .lineLimit(1)
+                .truncationMode(.tail)
         }
         .font(.system(size: 11.5, weight: .semibold))
         .foregroundStyle(Tokens.Colors.textSecondary)
