@@ -48,6 +48,9 @@ struct MenuSurface<Content: View>: View {
 }
 
 struct MenuSeparator: View {
+    /// Its 1 pt line and 5 pt above and below.
+    static let height: CGFloat = 11
+
     var body: some View {
         Rectangle().fill(Tokens.Colors.hairline).frame(height: 1).padding(.horizontal, 6).padding(.vertical, 5)
     }
@@ -115,7 +118,7 @@ struct CategoryMenuView: View {
                     } trailing: {
                         Image(systemName: "checkmark").font(.system(size: 12, weight: .semibold)).opacity(isShown ? 1 : 0)
                     }
-                    .onHover { if $0 { model.highlightMenuRow(index) } }
+                    .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                     .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
                 case .editCategories:
                     if index > 0 { MenuSeparator() }
@@ -124,7 +127,7 @@ struct CategoryMenuView: View {
                     } trailing: {
                         HStack(spacing: 3) { Keycap("⌘"); Keycap("E") }
                     }
-                    .onHover { if $0 { model.highlightMenuRow(index) } }
+                    .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                     .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
                 }
             }
@@ -134,6 +137,9 @@ struct CategoryMenuView: View {
 
 /// The search line at the foot of a ⌘K menu: the query and a caret, or "Search actions…".
 struct ActionSearchLine: View {
+    /// 6 pt above its hairline, the hairline, and the 36 pt line.
+    static let height: CGFloat = 42.5
+
     let query: String
     let language: AppLanguage
 
@@ -160,20 +166,46 @@ struct ActionSearchLine: View {
 
 /// ⌘K (300 pt): every action on the selected item, grouped by hairlines, with its shortcut; a
 /// search line sits at the bottom. On a source's row, its own actions (a key for a secret), then Preview and
-/// Edit categories.
+/// Edit categories. Taller than `maxHeight` (the panel's room above its action bar), its rows scroll above the search
+/// line, and the keyboard's highlight stays in view.
 struct ActionMenuView: View {
+    /// The menu's padding and its search line, what is not its rows, rounded up to a whole point (the hairline's half
+    /// point), so a menu fitted to its room never overshoots it.
+    static let chrome: CGFloat = (2 * 6 + ActionSearchLine.height).rounded(.up)
+
     @Bindable var model: PanelViewModel
+    var maxHeight: CGFloat = .infinity
     let onAction: (PanelAction) -> Void
 
     var body: some View {
         MenuSurface(width: 300) {
             let items = model.actionItems
-            let shiftReturn = model.shiftReturnItem
+            let fit = listFit(items)
             if items.isEmpty {
                 MenuRow(title: L10n.string("actions.none", model.language)) { EmptyView() } trailing: { EmptyView() }
                     .foregroundStyle(Tokens.Colors.textSecondary)
             }
-            ForEach(Array(items.enumerated()), id: \.element) { index, item in
+            if fit.scrolls {
+                scrollingRows(items, height: fit.height)
+            } else {
+                rows(items)
+            }
+            ActionSearchLine(query: model.actionQuery, language: model.language)
+        }
+    }
+
+    /// Rows of 32 pt and an 11 pt separator between groups, against the room the search line and padding leave.
+    func listFit(_ items: [PanelActionItem]) -> TransformListLayout.Fit {
+        let separators = items.indices.dropFirst().filter { group(of: items[$0 - 1]) != group(of: items[$0]) }.count
+        return TransformListLayout.fit(rows: items.count, sections: separators, sectionHeight: MenuSeparator.height,
+                                       available: maxHeight - Self.chrome)
+    }
+
+    /// Each row under the separator that opens its group, if any: one piece, so a group's first row brings its line.
+    private func rows(_ items: [PanelActionItem]) -> some View {
+        let shiftReturn = model.shiftReturnItem
+        return ForEach(Array(items.enumerated()), id: \.element) { index, item in
+            VStack(alignment: .leading, spacing: 0) {
                 if index > 0, group(of: items[index - 1]) != group(of: item) { MenuSeparator() }
                 MenuRow(title: model.actionLabel(item), isHighlighted: index == model.menuSelection, isDestructive: item == .delete) {
                     if case .transform(let id) = item, let command = model.transformCommand(id) {
@@ -187,10 +219,34 @@ struct ActionMenuView: View {
                 } trailing: {
                     HStack(spacing: 3) { ForEach(Self.keys(item, shiftReturn: shiftReturn), id: \.self) { Keycap($0) } }
                 }
-                .onHover { if $0 { model.highlightMenuRow(index) } }
+                .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                 .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
             }
-            ActionSearchLine(query: model.actionQuery, language: model.language)
+            .id(item)
+        }
+    }
+
+    /// The rows under a ghost scroller, cut clean at the menu's top and at the search line. ↑ ↓ and the search bring the
+    /// highlighted row into view; pointing never scrolls.
+    private func scrollingRows(_ items: [PanelActionItem], height: CGFloat) -> some View {
+        ScrollViewReader { proxy in
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: 0) { rows(items) }
+                    .background(OverlayScrollerStyle())
+            }
+            .scrollIndicators(.automatic)
+            .frame(height: height)
+            .onAppear {
+                // Laid out first: a scroll asked for before that is lost.
+                guard items.indices.contains(model.menuSelection), model.menuSelection > 0 else { return }
+                let item = items[model.menuSelection]
+                DispatchQueue.main.async { proxy.scrollTo(item) }
+            }
+            .onChange(of: model.menuReveal) {
+                let items = model.actionItems
+                guard items.indices.contains(model.menuSelection) else { return }
+                withAnimation(Tokens.Motion.resolved(Tokens.Motion.ease(0.2))) { proxy.scrollTo(items[model.menuSelection]) }
+            }
         }
     }
 

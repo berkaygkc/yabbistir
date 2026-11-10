@@ -93,7 +93,7 @@ public struct TransformPanelView: View {
                     }
                 }
                 // While ⌘K is open the highlighted row is the one it acts on, so the pointer leaves it be.
-                .onHover { if $0, !model.transformMenuOpen { model.highlightMenuRow(index) } }
+                .onHover { if $0, !model.transformMenuOpen, model.acceptsHover() { model.highlightMenuRow(index) } }
                 .onTapGesture {
                     // A click beside the open menu closes it, as a click outside any menu does.
                     guard !model.transformMenuOpen else { _ = model.handle(.toggleActions); return }
@@ -122,7 +122,7 @@ public struct TransformPanelView: View {
                 let id = rows[model.menuSelection].id
                 DispatchQueue.main.async { proxy.scrollTo(id) }
             }
-            .onChange(of: model.transformReveal) {
+            .onChange(of: model.menuReveal) {
                 let rows = model.transformRows
                 guard rows.indices.contains(model.menuSelection) else { return }
                 withAnimation(Tokens.Motion.resolved(Tokens.Motion.ease(0.2))) { proxy.scrollTo(rows[model.menuSelection].id) }
@@ -147,7 +147,7 @@ public struct TransformPanelView: View {
                 } trailing: {
                     HStack(spacing: 3) { ForEach(ActionMenuView.keys(item, shiftReturn: nil), id: \.self) { Keycap($0) } }
                 }
-                .onHover { if $0 { model.highlightMenuRow(index) } }
+                .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                 .onTapGesture {
                     model.highlightMenuRow(index)
                     if let action = model.handle(.confirm(plain: false)) { onAction(action) }
@@ -417,7 +417,7 @@ public struct TransformPanelView: View {
                 } trailing: {
                     HStack(spacing: 3) { ForEach(Self.keys(item), id: \.self) { Keycap($0) } }
                 }
-                .onHover { if $0 { model.highlightTransformMenuItem(index) } }
+                .onHover { if $0, model.acceptsHover() { model.highlightTransformMenuItem(index) } }
                 .onTapGesture { if let action = model.activateTransformMenuItem(index) { onAction(action) } }
             }
             ActionSearchLine(query: model.transformMenuQuery, language: model.language)

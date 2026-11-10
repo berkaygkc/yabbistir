@@ -39,7 +39,8 @@ public struct PanelView: View {
         }
         .overlay(alignment: .bottomTrailing) {
             if model.layer == .actions {
-                ActionMenuView(model: model, onAction: onAction)
+                // Inside the sheet, 8 pt below its top at most: a taller menu scrolls.
+                ActionMenuView(model: model, maxHeight: model.panelHeight - Tokens.Metrics.footerHeight - 4 - 8, onAction: onAction)
                     .padding(.bottom, Tokens.Metrics.footerHeight + 4)
                     .padding(.trailing, 8)
                     .transition(.opacity.combined(with: .offset(y: 4)))

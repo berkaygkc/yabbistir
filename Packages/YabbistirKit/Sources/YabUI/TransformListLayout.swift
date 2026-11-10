@@ -1,8 +1,9 @@
 import CoreGraphics
 
-/// How tall the ⇧ panel's list stands. While its rows fit under the panel's other parts inside the screen, the list is
-/// as tall as they are and nothing scrolls: the panel looks as it always has. Once they don't, the list keeps the height
-/// that is left and scrolls, so the panel never runs past the screen's visible frame.
+/// How tall the ⇧ panel's list stands (and ⌘K's, with its separators for headers). While its rows fit under the
+/// panel's other parts inside the screen, the list is as tall as they are and nothing scrolls: the panel looks as it
+/// always has. Once they don't, the list keeps the height that is left and scrolls, so the panel never runs past the
+/// screen's visible frame.
 public enum TransformListLayout {
     public struct Fit: Equatable, Sendable {
         /// The list's height on screen.

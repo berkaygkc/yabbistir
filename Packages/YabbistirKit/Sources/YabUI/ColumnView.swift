@@ -99,6 +99,8 @@ struct ColumnView: View {
                                 if hoverIntent?.row == row.id { hoverIntent?.task.cancel(); hoverIntent = nil }
                                 return
                             }
+                            // A row that ↑/↓ scrolled under a resting pointer keeps the keyboard's selection.
+                            guard model.acceptsHover() else { return }
                             hoverIntent?.task.cancel()
                             model.select(row.id, in: column.id)
                             // Resting on a row for ~380 ms opens the hover preview.

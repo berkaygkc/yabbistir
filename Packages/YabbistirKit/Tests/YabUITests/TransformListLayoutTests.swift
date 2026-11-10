@@ -68,6 +68,28 @@ import YabLocalization
     }
 }
 
+/// The keyboard owns the highlight until the pointer moves.
+@Suite struct HoverGateTests {
+    @Test func thePointerLeadsUntilAKey() {
+        var gate = HoverGate()
+        let first = gate.accepts(pointer: CGPoint(x: 10, y: 10)), again = gate.accepts(pointer: CGPoint(x: 10, y: 10))
+        #expect(first && again)
+    }
+
+    @Test func afterAKeyARestingPointerSelectsNothingUntilItMoves() {
+        var gate = HoverGate()
+        let resting = CGPoint(x: 240, y: 512)
+        gate.keyboardActed(pointer: resting)
+        let still = [gate.accepts(pointer: resting), gate.accepts(pointer: resting)]
+        #expect(still == [false, false])
+        let moved = gate.accepts(pointer: CGPoint(x: 241, y: 512))
+        #expect(moved)
+        // The pointer leads again: even back where it rested.
+        let back = gate.accepts(pointer: resting)
+        #expect(back)
+    }
+}
+
 /// The panel drawn: the list's arithmetic matches its rows and headers, `.chrome` measures everything else with the
 /// result at its tallest, and a scrolling list stands exactly as tall as it is told.
 @MainActor @Suite struct TransformListDrawingTests {
@@ -109,16 +131,69 @@ import YabLocalization
         #expect(height(.scrolls(height: 100)) == height(.chrome) + 100)
     }
 
+    /// A key scrolls the list under the resting pointer: the row that lands under it doesn't take the highlight until the
+    /// pointer moves. A modifier alone (holding ⌘ or ⇧) is not such a key.
+    @Test func aKeyKeepsTheHighlightUntilThePointerMoves() {
+        final class Pointer { var at = CGPoint(x: 300, y: 400) }
+        let pointer = Pointer()
+        model.pointerLocation = { pointer.at }
+        #expect(model.acceptsHover())
+        _ = model.handle(.shiftHeld(true))
+        #expect(model.acceptsHover())
+        _ = model.handle(.move(1))
+        #expect(!model.acceptsHover())
+        pointer.at.y -= 2
+        #expect(model.acceptsHover())
+        #expect(model.acceptsHover())
+    }
+
+    func menuHeight(maxHeight: CGFloat = .infinity) -> CGFloat {
+        NSHostingView(rootView: ActionMenuView(model: model, maxHeight: maxHeight) { _ in }).fittingSize.height
+    }
+
+    func openActions() {
+        _ = model.handle(.escape)
+        _ = model.handle(.toggleActions)
+    }
+
+    /// ⌘K is its rows, the separators between groups, its padding and its search line.
+    @Test func theActionMenuIsItsRowsSeparatorsAndSearchLine() throws {
+        openActions()
+        try #require(model.layer == .actions)
+        let items = model.actionItems
+        let view = ActionMenuView(model: model) { _ in }
+        let fit = view.listFit(items)
+        #expect(!fit.scrolls)
+        #expect(menuHeight() == ActionMenuView.chrome + fit.height)
+        #expect(fit.height > TransformListLayout.contentHeight(rows: items.count))
+    }
+
+    /// Taller than its room, ⌘K keeps to it and scrolls; ↑ ↓ bring the highlight into view, the pointer doesn't.
+    @Test func aTallActionMenuScrollsInsideItsRoom() throws {
+        openActions()
+        let view = ActionMenuView(model: model, maxHeight: 220) { _ in }
+        let fit = view.listFit(model.actionItems)
+        #expect(fit.scrolls)
+        #expect(menuHeight(maxHeight: 220) == ActionMenuView.chrome + fit.height)
+        #expect(menuHeight(maxHeight: 220) <= 220)
+        let start = model.menuReveal
+        model.highlightMenuRow(3)
+        #expect(model.menuReveal == start)
+        _ = model.handle(.move(1))
+        #expect(model.menuSelection == 4)
+        #expect(model.menuReveal == start + 1)
+    }
+
     /// ↑ ↓ and the search bring the highlight into view; pointing at a row highlights it and leaves the list be.
     @Test func theKeyboardRevealsTheHighlightAndThePointerDoesNot() {
-        let start = model.transformReveal
+        let start = model.menuReveal
         model.highlightMenuRow(5)
-        #expect(model.transformReveal == start)
+        #expect(model.menuReveal == start)
         _ = model.handle(.move(1))
         #expect(model.menuSelection == 6)
-        #expect(model.transformReveal == start + 1)
+        #expect(model.menuReveal == start + 1)
         _ = model.handle(.type("s"))
         #expect(model.menuSelection == 0)
-        #expect(model.transformReveal == start + 2)
+        #expect(model.menuReveal == start + 2)
     }
 }

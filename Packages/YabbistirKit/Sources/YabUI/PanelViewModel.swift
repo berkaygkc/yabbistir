@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import Observation
 import SwiftUI
@@ -137,9 +138,9 @@ public final class PanelViewModel {
     public private(set) var edgeNudge = 0
     /// Highlighted row of the open menu.
     public private(set) var menuSelection = 0
-    /// Bumped when the keyboard moves the ⇧ panel's highlight (↑/↓, its search, a new ⇧↵ default): a list that
-    /// scrolls brings the row into view. Pointing at a row highlights it but never scrolls.
-    public private(set) var transformReveal = 0
+    /// Bumped when the keyboard moves the highlight of the ⇧ panel or ⌘K (↑/↓, their search, a new ⇧↵ default): a list
+    /// that scrolls brings the row into view. Pointing at a row highlights it but never scrolls.
+    public private(set) var menuReveal = 0
     /// ⌘P search text.
     public private(set) var pinQuery = ""
     /// Categories the selected item belongs to, read when ⌘P opens and after each change.
@@ -468,6 +469,10 @@ public final class PanelViewModel {
     /// The user's ⇧↵ default per item kind.
     @ObservationIgnored private let shiftDefaults: ShiftReturnDefaults
     @ObservationIgnored private var transformCountCache: (itemID: Int64, count: Int)?
+    /// Keys own the highlight until the pointer moves (`acceptsHover`).
+    @ObservationIgnored private var hoverGate = HoverGate()
+    /// The pointer's place on screen; tests give their own.
+    @ObservationIgnored public var pointerLocation: () -> CGPoint = { NSEvent.mouseLocation }
     @ObservationIgnored private var commandHold: Task<Void, Never>?
     /// ⇧ is down on its own and the hint's delay is running.
     @ObservationIgnored private var shiftHold: Task<Void, Never>?
@@ -563,6 +568,8 @@ public final class PanelViewModel {
         if command.isCommandShortcut { commandHold?.cancel() }
         // Any key puts the bar back from the ⇧↵ hint; only ⇧ itself, held or let go, decides it.
         if !command.isModifierChange { endShiftHold() }
+        // A key may scroll a list or change its rows under a resting pointer: the row that lands under it is not chosen.
+        if !command.isModifierChange { hoverGate.keyboardActed(pointer: pointerLocation()) }
         if layer == .categoryMenu, let consumed = handleCategoryMenu(command) { return consumed.action }
         if layer == .actions, let consumed = handleActions(command) { return consumed.action }
         if layer == .pin, let consumed = handlePin(command) { return consumed.action }
@@ -752,6 +759,12 @@ public final class PanelViewModel {
         }
     }
 
+    /// Whether the row the pointer just entered may take the highlight: every list and menu asks before a hover selects.
+    /// After a key, not until the pointer moves; a list that scrolled under a resting pointer keeps the keyboard's row.
+    public func acceptsHover() -> Bool {
+        hoverGate.accepts(pointer: pointerLocation())
+    }
+
     /// Pointer over a menu row.
     public func highlightMenuRow(_ index: Int) {
         menuSelection = index
@@ -792,14 +805,18 @@ public final class PanelViewModel {
         case .type(let text):
             actionQuery += text
             menuSelection = 0
+            menuReveal += 1
         case .togglePreview:
             actionQuery += " "
             menuSelection = 0
+            menuReveal += 1
         case .deleteBackward:
             if !actionQuery.isEmpty { actionQuery.removeLast() }
             menuSelection = 0
+            menuReveal += 1
         case .move(let delta):
             menuSelection = max(0, min(actionItems.count - 1, menuSelection + delta))
+            menuReveal += 1
         case .confirm:
             let items = actionItems
             guard items.indices.contains(menuSelection) else { return Consumed() }
@@ -809,6 +826,7 @@ public final class PanelViewModel {
             // ⌘⌫ in a search field clears it; it never deletes the item under the menu.
             actionQuery = ""
             menuSelection = 0
+            menuReveal += 1
         case .escape, .toggleCategoryMenu, .toggleActions, .togglePin, .openEditor, .commandHeld, .shiftHeld:
             return nil
         default:
@@ -905,23 +923,23 @@ public final class PanelViewModel {
         case .type(let text):
             transformQuery += text
             menuSelection = 0
-            transformReveal += 1
+            menuReveal += 1
         case .togglePreview:
             transformQuery += " "
             menuSelection = 0
-            transformReveal += 1
+            menuReveal += 1
         case .deleteBackward:
             if !transformQuery.isEmpty { transformQuery.removeLast() }
             menuSelection = 0
-            transformReveal += 1
+            menuReveal += 1
         case .delete:
             // ⌘⌫ in a search field clears it.
             transformQuery = ""
             menuSelection = 0
-            transformReveal += 1
+            menuReveal += 1
         case .move(let delta):
             menuSelection = max(0, min(transformRows.count - 1, menuSelection + delta))
-            transformReveal += 1
+            menuReveal += 1
         case .confirm, .copy:
             return Consumed(action: runTransformRow(copy: command == .copy))
         case .toggleActions:
@@ -1009,7 +1027,7 @@ public final class PanelViewModel {
         defaultsRevision += 1
         if !transformQuery.isEmpty { transformQuery = "" }
         menuSelection = transformRows.firstIndex { $0.id == id } ?? 0
-        transformReveal += 1
+        menuReveal += 1
     }
 
     /// Pointer over an item of the ⇧ panel's ⌘K.

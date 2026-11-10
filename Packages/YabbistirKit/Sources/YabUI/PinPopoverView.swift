@@ -30,7 +30,7 @@ public struct PinPopoverView: View {
             Rectangle().fill(Tokens.Colors.hairline).frame(height: 0.5).padding(.bottom, 4)
             ForEach(Array(model.pinOptions.enumerated()), id: \.offset) { index, option in
                 row(option, index: index)
-                    .onHover { if $0 { model.highlightMenuRow(index) } }
+                    .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                     .onTapGesture { _ = model.activateMenuRow(index) }
             }
         }
