@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.1 — 2026-11-10
+
+- **Fixes,** both reported by @sushi4rolls:
+  - The ⇧ panel stays on the screen. With many extensions installed, its transforms could run past the bottom edge, and the last ones couldn't be reached. Now its list scrolls when they don't all fit, and ↑ ↓ keep the highlighted one in view.
+  - Switching an option off in an extension's settings hides it. Send To's "Show …" switches used to leave every destination in the list, and a switched-off one only said it was off when you picked it. Now it leaves the ⇧ panel, ⌘K, search and ⇧↵. This needs Send To 1.0.1 from the store.
+- **For extension authors:** a variant can name one of its extension's toggle preferences with `"preference"`, and is offered only while that toggle is on. See the store's [manifest reference](https://github.com/berkaygkc/yabbistir-extensions/blob/main/docs/manifest.md).
+
 ## 0.5.0 — 2026-11-06
 
 - **Install from the website:** an extension's Install button on the [yabbistir website](https://berkaygkc.github.io/yabbistir-site/extensions/) opens Settings → Extensions → Store with that extension picked and shows the same permissions sheet as the store's own Install button. Nothing is installed until you confirm it. If the extension is already installed, needs a newer yabbistir or isn't in the store, the store says so under the list.
