@@ -28,6 +28,12 @@
             "state" : "translated",
             "value" : "Kurduğun bazı uzantılar başka uygulamalarla konuşur; örneğin Safari'de açık sekmeleri okur ya da Notlar'a not ekler. macOS her uygulama için bir kez sorar."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你安装的某些扩展会与其他App通信，例如读取“Safari浏览器”中已打开的标签页，或在“备忘录”中新建一条备忘录。macOS会对每个App询问一次。"
+          }
         }
       }
     }

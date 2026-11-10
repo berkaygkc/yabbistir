@@ -27,6 +27,12 @@
             "state": "translated",
             "value": "Kategoriye ekle…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加到分类…"
+          }
         }
       }
     },
@@ -55,6 +61,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıraya ekle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加到粘贴队列"
           }
         }
       }
@@ -85,6 +97,12 @@
             "state": "translated",
             "value": "Tüm dönüşümler (%@)…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有转换（%@）…"
+          }
         }
       }
     },
@@ -113,6 +131,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Panoya kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝至剪贴板"
           }
         }
       }
@@ -143,6 +167,12 @@
             "state": "translated",
             "value": "Sil"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
         }
       }
     },
@@ -171,6 +201,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eylem bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到操作"
           }
         }
       }
@@ -201,6 +237,12 @@
             "state": "translated",
             "value": "Yapıştır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴"
+          }
         }
       }
     },
@@ -229,6 +271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Düz metin olarak yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴为纯文本"
           }
         }
       }
@@ -259,6 +307,12 @@
             "state": "translated",
             "value": "Önizle"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预览"
+          }
         }
       }
     },
@@ -287,6 +341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategoriden çıkar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从分类移除"
           }
         }
       }
@@ -317,6 +377,12 @@
             "state": "translated",
             "value": "Eylem ara…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索操作…"
+          }
         }
       }
     },
@@ -345,6 +411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence yanıt veremedi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple智能无法回答"
           }
         }
       }
@@ -375,6 +447,12 @@
             "state": "translated",
             "value": "Apple Intelligence meşgul, birazdan yeniden dene"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple智能正忙，请稍后再试"
+          }
         }
       }
     },
@@ -403,6 +481,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence buna yanıt vermiyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple智能不会回答这个问题"
           }
         }
       }
@@ -433,6 +517,12 @@
             "state": "translated",
             "value": "Apple Intelligence bu dili henüz desteklemiyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple智能暂不支持这种语言"
+          }
         }
       }
     },
@@ -461,6 +551,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu metin Apple Intelligence için çok uzun"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这段文本对Apple智能来说太长了"
           }
         }
       }
@@ -491,6 +587,12 @@
             "state": "translated",
             "value": "Bu Mac Apple Intelligence’ı çalıştıramıyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这台Mac无法运行Apple智能"
+          }
         }
       }
     },
@@ -519,6 +621,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence’ı Sistem Ayarları’ndan aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在系统设置中打开Apple智能"
           }
         }
       }
@@ -549,6 +657,12 @@
             "state": "translated",
             "value": "Apple Intelligence henüz hazırlanıyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple智能仍在准备中"
+          }
         }
       }
     },
@@ -577,6 +691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "陶土色"
           }
         }
       }
@@ -607,6 +727,12 @@
             "state": "translated",
             "value": "Hardal"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "赭石色"
+          }
         }
       }
     },
@@ -635,6 +761,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erik"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "梅紫"
           }
         }
       }
@@ -665,6 +797,12 @@
             "state": "translated",
             "value": "Adaçayı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠尾草绿"
+          }
         }
       }
     },
@@ -693,6 +831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Arduvaz"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "石板灰"
           }
         }
       }
@@ -723,6 +867,12 @@
             "state": "translated",
             "value": "Deniz"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "青绿"
+          }
         }
       }
     },
@@ -751,6 +901,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Her zaman"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "始终"
           }
         }
       }
@@ -781,6 +937,12 @@
             "state": "translated",
             "value": "Kapat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
         }
       }
     },
@@ -809,6 +971,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建"
           }
         }
       }
@@ -839,6 +1007,12 @@
             "state": "translated",
             "value": "Seç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择"
+          }
         }
       }
     },
@@ -867,6 +1041,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Görünürlük"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示方式"
           }
         }
       }
@@ -897,6 +1077,12 @@
             "state": "translated",
             "value": "Yeni kategori"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建分类"
+          }
         }
       }
     },
@@ -925,6 +1111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“Her zaman” olanlar sütun olarak açılır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设为“始终”的分类会以列的形式打开"
           }
         }
       }
@@ -955,6 +1147,12 @@
             "state": "translated",
             "value": "Seçilince"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选取时"
+          }
         }
       }
     },
@@ -983,6 +1181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürükleyerek sütun sırasını değiştir. Panel arkada canlı güncellenir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拖移以重新排列列。面板会实时更新。"
           }
         }
       }
@@ -1013,6 +1217,12 @@
             "state": "translated",
             "value": "Kategoriler"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类"
+          }
         }
       }
     },
@@ -1041,6 +1251,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İptal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
           }
         }
       }
@@ -1071,6 +1287,12 @@
             "state": "translated",
             "value": "Komutlar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "命令"
+          }
         }
       }
     },
@@ -1099,6 +1321,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzin ver"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许"
           }
         }
       }
@@ -1129,6 +1357,12 @@
             "state": "translated",
             "value": "Kurma"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不安装"
+          }
         }
       }
     },
@@ -1157,6 +1391,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzin ver ve kur"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许并安装"
           }
         }
       }
@@ -1187,6 +1427,12 @@
             "state": "translated",
             "value": "İzinleri onayla…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看权限…"
+          }
         }
       }
     },
@@ -1215,6 +1461,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” şunları istiyor:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”想要："
           }
         }
       }
@@ -1245,6 +1497,12 @@
             "state": "translated",
             "value": "Seç…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选取…"
+          }
         }
       }
     },
@@ -1273,6 +1531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除"
           }
         }
       }
@@ -1303,6 +1567,12 @@
             "state": "translated",
             "value": "Klasör seçilmedi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未选取文件夹"
+          }
         }
       }
     },
@@ -1331,6 +1601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Önerilen: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "建议：%@"
           }
         }
       }
@@ -1361,6 +1637,12 @@
             "state": "translated",
             "value": ".yabext kur…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装.yabext…"
+          }
         }
       }
     },
@@ -1389,6 +1671,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klasörden kur…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从文件夹安装…"
           }
         }
       }
@@ -1419,6 +1707,12 @@
             "state": "translated",
             "value": "Sorunlar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "问题"
+          }
         }
       }
     },
@@ -1447,6 +1741,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geliştirme klasörü bağla…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接开发文件夹…"
           }
         }
       }
@@ -1477,6 +1777,12 @@
             "state": "translated",
             "value": "Günlük"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日志"
+          }
         }
       }
     },
@@ -1505,6 +1811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Henüz kayıt yok. Uzantıların console.log çıktıları ve hataları burada görünür."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚无日志。扩展的console.log和错误会显示在这里。"
           }
         }
       }
@@ -1535,6 +1847,12 @@
             "state": "translated",
             "value": "Uzantı klasörünü aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开扩展文件夹"
+          }
         }
       }
     },
@@ -1563,6 +1881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzinler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权限"
           }
         }
       }
@@ -1593,6 +1917,12 @@
             "state": "translated",
             "value": "Aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开"
+          }
         }
       }
     },
@@ -1621,6 +1951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tercihler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏好设置"
           }
         }
       }
@@ -1651,6 +1987,12 @@
             "state": "translated",
             "value": "Yeniden yükle"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新载入"
+          }
         }
       }
     },
@@ -1679,6 +2021,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kaldır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除"
           }
         }
       }
@@ -1709,6 +2057,12 @@
             "state": "translated",
             "value": "%@ kaldırılsın mı?"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要移除%@吗？"
+          }
         }
       }
     },
@@ -1737,6 +2091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Görsel"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图像"
           }
         }
       }
@@ -1767,6 +2127,12 @@
             "state": "translated",
             "value": "Kopyalama kuralları"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝时的规则"
+          }
         }
       }
     },
@@ -1795,6 +2161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除"
           }
         }
       }
@@ -1825,6 +2197,12 @@
             "state": "translated",
             "value": "Gizli değer Anahtar Zinciri'ne kaydedilemedi."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法将机密信息存储到钥匙串。"
+          }
         }
       }
     },
@@ -1853,6 +2231,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kaydet"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存储"
           }
         }
       }
@@ -1883,6 +2267,12 @@
             "state": "translated",
             "value": "Kayıtlı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已存储"
+          }
         }
       }
     },
@@ -1911,6 +2301,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yerleşik"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内置"
           }
         }
       }
@@ -1941,6 +2337,12 @@
             "state": "translated",
             "value": "Geliştirme"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发"
+          }
         }
       }
     },
@@ -1969,6 +2371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yerel"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地"
           }
         }
       }
@@ -1999,6 +2407,12 @@
             "state": "translated",
             "value": "Mağaza listesi doğrulanamadı. Önbellekteki liste gösteriliyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法验证商店的列表。正在显示已存储的列表。"
+          }
         }
       }
     },
@@ -2027,6 +2441,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağazanın imzası tutmadı. Daha sonra yeniden dene."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店的签名不匹配。请稍后重试。"
           }
         }
       }
@@ -2057,6 +2477,12 @@
             "state": "translated",
             "value": "Mağaza doğrulanamadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法验证商店。"
+          }
         }
       }
     },
@@ -2085,6 +2511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategori"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类"
           }
         }
       }
@@ -2115,6 +2547,12 @@
             "state": "translated",
             "value": "Yapay zekâ"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
         }
       }
     },
@@ -2143,6 +2581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tüm kategoriler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有分类"
           }
         }
       }
@@ -2173,6 +2617,12 @@
             "state": "translated",
             "value": "Geliştirici"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发者"
+          }
         }
       }
     },
@@ -2201,6 +2651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dosyalar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件"
           }
         }
       }
@@ -2231,6 +2687,12 @@
             "state": "translated",
             "value": "Görseller"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图像"
+          }
         }
       }
     },
@@ -2259,6 +2721,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接"
           }
         }
       }
@@ -2289,6 +2757,12 @@
             "state": "translated",
             "value": "Medya"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "媒体"
+          }
         }
       }
     },
@@ -2317,6 +2791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verimlilik"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "效率"
           }
         }
       }
@@ -2347,6 +2827,12 @@
             "state": "translated",
             "value": "Metin"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文本"
+          }
         }
       }
     },
@@ -2375,6 +2861,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzin ver ve güncelle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许并更新"
           }
         }
       }
@@ -2405,6 +2897,12 @@
             "state": "translated",
             "value": "Ayrıca güncellenecek (yeni izin yok): %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同时更新（无需新权限）：%@"
+          }
         }
       }
     },
@@ -2433,6 +2931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ uzantı kurulsun mu?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要安装%@个扩展吗？"
           }
         }
       }
@@ -2463,6 +2967,12 @@
             "state": "translated",
             "value": "“%@” kurulsun mu?"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要安装“%@”吗？"
+          }
         }
       }
     },
@@ -2491,6 +3001,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni izinler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新权限"
           }
         }
       }
@@ -2521,6 +3037,12 @@
             "state": "translated",
             "value": "Özel bir izin istemiyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无需特殊权限。"
+          }
         }
       }
     },
@@ -2549,6 +3071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ uzantı güncellensin mi?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要更新%@个扩展吗？"
           }
         }
       }
@@ -2579,6 +3107,12 @@
             "state": "translated",
             "value": "“%@” güncellensin mi?"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要更新“%@”吗？"
+          }
         }
       }
     },
@@ -2607,6 +3141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağazada henüz uzantı yok."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店中还没有扩展。"
           }
         }
       }
@@ -2637,6 +3177,12 @@
             "state": "translated",
             "value": "Bu kategoride uzantı yok."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此分类中没有扩展。"
+          }
         }
       }
     },
@@ -2665,6 +3211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” için uzantı yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有与“%@”匹配的扩展"
           }
         }
       }
@@ -2695,6 +3247,12 @@
             "state": "translated",
             "value": "Mağaza listesi değişti; gözden geçirip yeniden dene."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店列表已更改；请查看后重试。"
+          }
         }
       }
     },
@@ -2723,6 +3281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir’in bu sürümüne kurulamıyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法在此版本的yabbistir上安装。"
           }
         }
       }
@@ -2753,6 +3317,12 @@
             "state": "translated",
             "value": "İndirilemedi. Bağlantını kontrol edip yeniden dene."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法下载。请检查网络连接后重试。"
+          }
         }
       }
     },
@@ -2781,6 +3351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İndirilen paket katalogla uyuşmadı; kurulmadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载内容与目录不符，因此未安装。"
           }
         }
       }
@@ -2811,6 +3387,12 @@
             "state": "translated",
             "value": "Kurulamadı. Ayrıntılar Geliştirme sekmesinde."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法安装。详细信息见“开发”标签页。"
+          }
         }
       }
     },
@@ -2839,6 +3421,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Doğrulanamadı; hiçbir şey kurulmadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法验证；未安装任何内容。"
           }
         }
       }
@@ -2869,6 +3457,12 @@
             "state": "translated",
             "value": "Kur"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装"
+          }
         }
       }
     },
@@ -2897,6 +3491,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kur (%@)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装（%@）"
           }
         }
       }
@@ -2927,6 +3527,12 @@
             "state": "translated",
             "value": "Kuruluyor…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在安装…"
+          }
         }
       }
     },
@@ -2955,6 +3561,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkteki uzantı mağazada yok."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的扩展不在商店中。"
           }
         }
       }
@@ -2985,6 +3597,12 @@
             "state": "translated",
             "value": "Linkteki uzantılar mağazada yok."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的这些扩展不在商店中。"
+          }
         }
       }
     },
@@ -3013,6 +3631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkteki uzantıların bazıları mağazada yok."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的部分扩展不在商店中。"
           }
         }
       }
@@ -3043,6 +3667,12 @@
             "state": "translated",
             "value": "Linkteki uzantı zaten kurulu."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的扩展已安装。"
+          }
         }
       }
     },
@@ -3071,6 +3701,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkteki uzantılar zaten kurulu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的这些扩展已安装。"
           }
         }
       }
@@ -3101,6 +3737,12 @@
             "state": "translated",
             "value": "Linkteki uzantı daha yeni bir yabbistir istiyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的扩展需要更新版本的yabbistir。"
+          }
         }
       }
     },
@@ -3129,6 +3771,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkteki uzantılar daha yeni bir yabbistir istiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的这些扩展需要更新版本的yabbistir。"
           }
         }
       }
@@ -3159,6 +3807,12 @@
             "state": "translated",
             "value": "Linkteki uzantıların bazıları daha yeni bir yabbistir istiyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的部分扩展需要更新版本的yabbistir。"
+          }
         }
       }
     },
@@ -3187,6 +3841,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkteki uzantı mağazayı bekliyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的扩展正在等待商店。"
           }
         }
       }
@@ -3217,6 +3877,12 @@
             "state": "translated",
             "value": "Linkteki uzantılar mağazayı bekliyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接中的这些扩展正在等待商店。"
+          }
         }
       }
     },
@@ -3245,6 +3911,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağaza yükleniyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在载入商店…"
           }
         }
       }
@@ -3275,6 +3947,12 @@
             "state": "translated",
             "value": "Mağaza listesi okunamadı. Önbellekteki liste gösteriliyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法读取商店的列表。正在显示已存储的列表。"
+          }
         }
       }
     },
@@ -3303,6 +3981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Daha sonra yeniden dene ya da yabbistir’i güncelle."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请稍后重试，或更新yabbistir。"
           }
         }
       }
@@ -3333,6 +4017,12 @@
             "state": "translated",
             "value": "Mağaza listesi okunamadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法读取商店的列表。"
+          }
         }
       }
     },
@@ -3361,6 +4051,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağaza artık daha yeni bir yabbistir istiyor. Önbellekteki liste gösteriliyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店现在需要更新版本的yabbistir。正在显示已存储的列表。"
           }
         }
       }
@@ -3391,6 +4087,12 @@
             "state": "translated",
             "value": "yabbistir’i güncelledikten sonra yeniden dene."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请更新yabbistir，然后重试。"
+          }
         }
       }
     },
@@ -3419,6 +4121,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağaza daha yeni bir yabbistir istiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店需要更新版本的yabbistir。"
           }
         }
       }
@@ -3449,6 +4157,12 @@
             "state": "translated",
             "value": "Mağazaya ulaşılamadı. Önbellekteki liste gösteriliyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法连接商店。正在显示已存储的列表。"
+          }
         }
       }
     },
@@ -3477,6 +4191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İnternet bağlantını kontrol edip yeniden dene."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请检查互联网连接，然后重试。"
           }
         }
       }
@@ -3507,6 +4227,12 @@
             "state": "translated",
             "value": "Mağazaya ulaşılamadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法连接商店。"
+          }
         }
       }
     },
@@ -3535,6 +4261,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağaza daha eski bir liste gönderdi. Önbellekteki liste gösteriliyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店发送了较旧的列表。正在显示已存储的列表。"
           }
         }
       }
@@ -3565,6 +4297,12 @@
             "state": "translated",
             "value": "Yenile"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新"
+          }
         }
       }
     },
@@ -3593,6 +4331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağazaya bakılıyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在检查商店…"
           }
         }
       }
@@ -3623,6 +4367,12 @@
             "state": "translated",
             "value": "Uzantılarda ara"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索扩展"
+          }
         }
       }
     },
@@ -3651,6 +4401,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Daha yeni bir yabbistir gerekiyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要更新版本的yabbistir"
           }
         }
       }
@@ -3681,6 +4437,12 @@
             "state": "translated",
             "value": "Kurulu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装"
+          }
         }
       }
     },
@@ -3709,6 +4471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncelleme var"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有可用更新"
           }
         }
       }
@@ -3739,6 +4507,12 @@
             "state": "translated",
             "value": "Kopyaladıklarını görür"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "能看到你拷贝的内容"
+          }
         }
       }
     },
@@ -3767,6 +4541,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Program: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行：%@"
           }
         }
       }
@@ -3797,6 +4577,12 @@
             "state": "translated",
             "value": "Program çalıştırır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行程序"
+          }
         }
       }
     },
@@ -3825,6 +4611,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmişini okur"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "读取你的历史记录"
           }
         }
       }
@@ -3855,6 +4647,12 @@
             "state": "translated",
             "value": "Ağ: her site"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网络：任意网站"
+          }
         }
       }
     },
@@ -3883,6 +4681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ağ: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网络：%@"
           }
         }
       }
@@ -3913,6 +4717,12 @@
             "state": "translated",
             "value": "Ağ: %@ site"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网络：%@个网站"
+          }
         }
       }
     },
@@ -3941,6 +4751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeniden dene"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重试"
           }
         }
       }
@@ -3971,6 +4787,12 @@
             "state": "translated",
             "value": "Tümünü güncelle"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部更新"
+          }
         }
       }
     },
@@ -3999,6 +4821,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ güncelleme"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@个更新"
           }
         }
       }
@@ -4029,6 +4857,12 @@
             "state": "translated",
             "value": "1 güncelleme"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个更新"
+          }
         }
       }
     },
@@ -4057,6 +4891,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geliştirme"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发"
           }
         }
       }
@@ -4087,6 +4927,12 @@
             "state": "translated",
             "value": "Kurulu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装"
+          }
         }
       }
     },
@@ -4115,6 +4961,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mağaza"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店"
           }
         }
       }
@@ -4145,6 +4997,12 @@
             "state": "translated",
             "value": "Üçüncü taraf uzantıları kapat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭第三方扩展"
+          }
         }
       }
     },
@@ -4173,6 +5031,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝"
           }
         }
       }
@@ -4203,6 +5067,12 @@
             "state": "translated",
             "value": "%@ bulunamadı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装%@"
+          }
         }
       }
     },
@@ -4231,6 +5101,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İznini bekliyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "等待你的许可"
           }
         }
       }
@@ -4261,6 +5137,12 @@
             "state": "translated",
             "value": "Geçmiş burada kullanılamaz"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此处无法使用历史记录"
+          }
         }
       }
     },
@@ -4289,6 +5171,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu uzantının geçmişini okuma izni yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此扩展无权读取你的历史记录"
           }
         }
       }
@@ -4319,6 +5207,12 @@
             "state": "translated",
             "value": "Bu çok uzun sürdü"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "耗时太长"
+          }
         }
       }
     },
@@ -4347,6 +5241,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İptal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
           }
         }
       }
@@ -4377,6 +5277,12 @@
             "state": "translated",
             "value": "yabbistir işleri"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir任务"
+          }
         }
       }
     },
@@ -4405,6 +5311,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kapat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
           }
         }
       }
@@ -4435,6 +5347,12 @@
             "state": "translated",
             "value": "Finder’a kaydedildi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已存储到访达"
+          }
         }
       }
     },
@@ -4463,6 +5381,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yapıştırıldı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已粘贴"
           }
         }
       }
@@ -4493,6 +5417,12 @@
             "state": "translated",
             "value": "Sıraya eklendi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已添加到粘贴队列"
+          }
         }
       }
     },
@@ -4521,6 +5451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tamamlanamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法完成"
           }
         }
       }
@@ -4551,6 +5487,12 @@
             "state": "translated",
             "value": "Uzantı beklenmedik biçimde durdu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展意外停止"
+          }
         }
       }
     },
@@ -4579,6 +5521,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bağlantı kurulamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法连接"
           }
         }
       }
@@ -4609,6 +5557,12 @@
             "state": "translated",
             "value": "İzin verilmedi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未获允许"
+          }
         }
       }
     },
@@ -4637,6 +5591,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装%@"
           }
         }
       }
@@ -4667,6 +5627,12 @@
             "state": "translated",
             "value": "Uzantı şu an kullanılamıyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展目前不可用"
+          }
         }
       }
     },
@@ -4695,6 +5661,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İptal: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消：%@"
           }
         }
       }
@@ -4725,6 +5697,12 @@
             "state": "translated",
             "value": "Süren işler"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在运行的任务"
+          }
         }
       }
     },
@@ -4753,6 +5731,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sırada"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "排队中"
           }
         }
       }
@@ -4783,6 +5767,12 @@
             "state": "translated",
             "value": "Hazır, %@ ile yapıştır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已就绪，按%@粘贴"
+          }
         }
       }
     },
@@ -4811,6 +5801,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başlıyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在启动"
           }
         }
       }
@@ -4841,6 +5837,12 @@
             "state": "translated",
             "value": "Geçmişe eklendi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已添加到历史记录"
+          }
         }
       }
     },
@@ -4869,6 +5871,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kod"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "代码"
           }
         }
       }
@@ -4899,6 +5907,12 @@
             "state": "translated",
             "value": "Renk"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "颜色"
+          }
         }
       }
     },
@@ -4927,6 +5941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dosya"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件"
           }
         }
       }
@@ -4957,6 +5977,12 @@
             "state": "translated",
             "value": "Görsel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图像"
+          }
         }
       }
     },
@@ -4985,6 +6011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接"
           }
         }
       }
@@ -5015,6 +6047,12 @@
             "state": "translated",
             "value": "Metin"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文本"
+          }
         }
       }
     },
@@ -5043,6 +6081,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategorileri düzenle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑分类"
           }
         }
       }
@@ -5073,6 +6117,12 @@
             "state": "translated",
             "value": "Seçince sütun olarak açılır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勾选后以列的形式打开"
+          }
         }
       }
     },
@@ -5101,6 +6151,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "语言"
           }
         }
       }
@@ -5131,6 +6187,12 @@
             "state": "translated",
             "value": "Paneli aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开面板"
+          }
         }
       }
     },
@@ -5159,6 +6221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir'den çık"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出yabbistir"
           }
         }
       }
@@ -5189,6 +6257,12 @@
             "state": "translated",
             "value": "Güncellemeleri denetle…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
+          }
         }
       }
     },
@@ -5217,6 +6291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayarlar…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置…"
           }
         }
       }
@@ -5247,6 +6327,12 @@
             "state": "translated",
             "value": "Kopyalandı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝。"
+          }
         }
       }
     },
@@ -5275,6 +6361,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyalandı, ⌘V ile yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝，按⌘V粘贴"
           }
         }
       }
@@ -5305,6 +6397,12 @@
             "state": "translated",
             "value": "Ayarları aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开设置"
+          }
         }
       }
     },
@@ -5333,6 +6431,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Doğrudan yapıştırmak için Erişilebilirlik izni ver."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许使用辅助功能，即可直接粘贴。"
           }
         }
       }
@@ -5363,6 +6467,12 @@
             "state": "translated",
             "value": "Panoya kopyalandı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝至剪贴板"
+          }
         }
       }
     },
@@ -5391,6 +6501,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ üst üste hata verdiği için kapatıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@因反复出错而被关闭。"
           }
         }
       }
@@ -5421,6 +6537,12 @@
             "state": "translated",
             "value": "%@: %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@：%@"
+          }
         }
       }
     },
@@ -5449,6 +6571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uzantı hata verdi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展出错"
           }
         }
       }
@@ -5479,6 +6607,12 @@
             "state": "translated",
             "value": "Her ⌘V'den sonra sıradakinin gelmesi için izin ver."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许后，每次按⌘V都会接着粘贴下一个项目。"
+          }
         }
       }
     },
@@ -5507,6 +6641,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıra için Girdi İzleme gerekli"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴队列需要输入监控权限"
           }
         }
       }
@@ -5537,6 +6677,12 @@
             "state": "translated",
             "value": "30 sn sonra panodan silinir."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30秒后会从剪贴板中移除。"
+          }
         }
       }
     },
@@ -5565,6 +6711,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌘V ile yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按⌘V粘贴"
           }
         }
       }
@@ -5595,6 +6747,12 @@
             "state": "translated",
             "value": "Terminal’de çalıştır, sonra paneli yeniden aç."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在终端中运行它，然后再次打开面板。"
+          }
         }
       }
     },
@@ -5623,6 +6781,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Komut kopyalandı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝命令。"
           }
         }
       }
@@ -5653,6 +6817,12 @@
             "state": "translated",
             "value": "Boş sonuç yapıştırılmadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未粘贴：值为空。"
+          }
         }
       }
     },
@@ -5681,6 +6851,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başka bir uygulama öne geçti."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一个App已移到前台。"
           }
         }
       }
@@ -5711,6 +6887,12 @@
             "state": "translated",
             "value": "Yapıştırılmadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未粘贴。"
+          }
         }
       }
     },
@@ -5739,6 +6921,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yapıştırıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已粘贴。"
           }
         }
       }
@@ -5769,6 +6957,12 @@
             "state": "translated",
             "value": "İndir"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载"
+          }
         }
       }
     },
@@ -5797,6 +6991,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Çeviri için dil paketi gerekli"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "翻译需要语言包"
           }
         }
       }
@@ -5827,6 +7027,12 @@
             "state": "translated",
             "value": "yabbistir %@ çıktı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@现已可用"
+          }
         }
       }
     },
@@ -5855,6 +7061,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncellemeler denetlenemedi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法检查更新"
           }
         }
       }
@@ -5885,6 +7097,12 @@
             "state": "translated",
             "value": "yabbistir güncel (%@)"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir已是最新版本（%@）"
+          }
         }
       }
     },
@@ -5913,6 +7131,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategoriler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类"
           }
         }
       }
@@ -5943,6 +7167,12 @@
             "state": "translated",
             "value": "Geçmiş"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录"
+          }
         }
       }
     },
@@ -5971,6 +7201,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıra"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴队列"
           }
         }
       }
@@ -6001,6 +7237,12 @@
             "state": "translated",
             "value": "Bu kategori boş.\nBir öğeyi seçip ⌘P ile ekle."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此分类为空。\n选择一个项目并按⌘P即可添加。"
+          }
         }
       }
     },
@@ -6029,6 +7271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” bu kategoride yok."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此分类中没有“%@”。"
           }
         }
       }
@@ -6059,6 +7307,12 @@
             "state": "translated",
             "value": "Bir şey kopyala, burada görünsün."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝内容后，它会显示在这里。"
+          }
         }
       }
     },
@@ -6087,6 +7341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” için sonuç yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有“%@”的结果"
           }
         }
       }
@@ -6117,6 +7377,12 @@
             "state": "translated",
             "value": "Eylemler"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作"
+          }
         }
       }
     },
@@ -6145,6 +7411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategoriye ekle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加到分类"
           }
         }
       }
@@ -6175,6 +7447,12 @@
             "state": "translated",
             "value": "Pano geçmişi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剪贴板历史记录"
+          }
         }
       }
     },
@@ -6203,6 +7481,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴"
           }
         }
       }
@@ -6233,6 +7517,12 @@
             "state": "translated",
             "value": "Dönüştür"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "转换"
+          }
         }
       }
     },
@@ -6261,6 +7551,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyaladıklarında ara…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索剪贴板…"
           }
         }
       }
@@ -6291,6 +7587,12 @@
             "state": "translated",
             "value": "%@ sonuç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@个结果"
+          }
         }
       }
     },
@@ -6319,6 +7621,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 sonuç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个结果"
           }
         }
       }
@@ -6349,6 +7657,12 @@
             "state": "translated",
             "value": "Komutlar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "命令"
+          }
         }
       }
     },
@@ -6377,6 +7691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Daha eski"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更早"
           }
         }
       }
@@ -6407,6 +7727,12 @@
             "state": "translated",
             "value": "Bu hafta"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本周"
+          }
         }
       }
     },
@@ -6435,6 +7761,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bugün"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天"
           }
         }
       }
@@ -6465,6 +7797,12 @@
             "state": "translated",
             "value": "Dün"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨天"
+          }
         }
       }
     },
@@ -6493,6 +7831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Komutu kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝命令"
           }
         }
       }
@@ -6523,6 +7867,12 @@
             "state": "translated",
             "value": "Liste okunamadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法读取列表。"
+          }
         }
       }
     },
@@ -6551,6 +7901,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terminal’de"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在终端中："
           }
         }
       }
@@ -6581,6 +7937,12 @@
             "state": "translated",
             "value": "Yükleniyor…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在载入…"
+          }
         }
       }
     },
@@ -6609,6 +7971,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Her kopyanı görebilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以看到你拷贝的所有内容"
           }
         }
       }
@@ -6639,6 +8007,12 @@
             "state": "translated",
             "value": "Bilgisayarındaki şu programları çalıştırabilir: %@. Bu programlar dosyalarına erişebilir ve internete çıkabilir."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以在你的Mac上运行这些程序：%@。它们可以读写你的文件并访问互联网。"
+          }
         }
       }
     },
@@ -6667,6 +8041,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmişinin tamamını okuyabilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以读取你的全部历史记录"
           }
         }
       }
@@ -6697,6 +8077,12 @@
             "state": "translated",
             "value": "Her siteye internetten erişebilir"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以访问任意网站"
+          }
         }
       }
     },
@@ -6725,6 +8111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İnternete çıkabilir: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以访问：%@"
           }
         }
       }
@@ -6755,6 +8147,12 @@
             "state": "translated",
             "value": "Şifre gibi gizli kayıtları okuyup yapıştırabilir. Bunlar geçmişe ve diske yazılmaz."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以读取并粘贴密码等机密信息。这些信息绝不会写入历史记录或磁盘。"
+          }
         }
       }
     },
@@ -6783,6 +8181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yerel uzantılar imzasızdır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地扩展未经签名。"
           }
         }
       }
@@ -6813,6 +8217,12 @@
             "state": "translated",
             "value": "Yeni kategori: “%@”"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新分类：“%@”"
+          }
         }
       }
     },
@@ -6841,6 +8251,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategoriye ekle…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加到分类…"
           }
         }
       }
@@ -6871,6 +8287,12 @@
             "state": "translated",
             "value": "Uygulama"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
         }
       }
     },
@@ -6899,6 +8321,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategori"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类"
           }
         }
       }
@@ -6929,6 +8357,12 @@
             "state": "translated",
             "value": "Karakter"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字符数"
+          }
         }
       }
     },
@@ -6957,6 +8391,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kapat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
           }
         }
       }
@@ -6987,6 +8427,12 @@
             "state": "translated",
             "value": "Uzantı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展"
+          }
         }
       }
     },
@@ -7015,6 +8461,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Üretici · girdi almaz"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "生成器 · 无需输入"
           }
         }
       }
@@ -7045,6 +8497,12 @@
             "state": "translated",
             "value": "Girdi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输入"
+          }
         }
       }
     },
@@ -7073,6 +8531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anahtar kelimeler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关键词"
           }
         }
       }
@@ -7103,6 +8567,12 @@
             "state": "translated",
             "value": "Tür"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "种类"
+          }
         }
       }
     },
@@ -7131,6 +8601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ → %@ karakter"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@个字符"
           }
         }
       }
@@ -7161,6 +8637,12 @@
             "state": "translated",
             "value": "Uzunluk"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "长度"
+          }
         }
       }
     },
@@ -7189,6 +8671,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yapıştırılacak"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将粘贴"
           }
         }
       }
@@ -7219,6 +8707,12 @@
             "state": "translated",
             "value": "Yapıştırınca ya da kopyalayınca çalışır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴或拷贝时运行"
+          }
         }
       }
     },
@@ -7247,6 +8741,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dönüştürücü · seçili öğeye uygulanır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "转换器 · 应用于所选项目"
           }
         }
       }
@@ -7277,6 +8777,12 @@
             "state": "translated",
             "value": "İçerik"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容"
+          }
         }
       }
     },
@@ -7305,6 +8811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyalandı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝时间"
           }
         }
       }
@@ -7335,6 +8847,12 @@
             "state": "translated",
             "value": "Cihaz"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设备"
+          }
         }
       }
     },
@@ -7363,6 +8881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "iPhone · Universal Clipboard"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · 通用剪贴板"
           }
         }
       }
@@ -7393,6 +8917,12 @@
             "state": "translated",
             "value": "Alan adı"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "域名"
+          }
         }
       }
     },
@@ -7421,6 +8951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ karakter daha"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另有%@个字符"
           }
         }
       }
@@ -7451,6 +8987,12 @@
             "state": "translated",
             "value": "Bilgi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信息"
+          }
         }
       }
     },
@@ -7479,6 +9021,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konum"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置"
           }
         }
       }
@@ -7509,6 +9057,12 @@
             "state": "translated",
             "value": "Boyut"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大小"
+          }
         }
       }
     },
@@ -7537,6 +9091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ hiçbir zaman gösterilmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@绝不会显示。"
           }
         }
       }
@@ -7567,6 +9127,12 @@
             "state": "translated",
             "value": "Giriş yaptıktan sonra paneli yeniden aç."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录后，请再次打开面板。"
+          }
         }
       }
     },
@@ -7595,6 +9161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terminal’de çalıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在终端中运行"
           }
         }
       }
@@ -7625,6 +9197,12 @@
             "state": "translated",
             "value": "Kelime"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "词数"
+          }
         }
       }
     },
@@ -7653,6 +9231,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uzantılar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展"
           }
         }
       }
@@ -7683,6 +9267,12 @@
             "state": "translated",
             "value": "Genel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通用"
+          }
         }
       }
     },
@@ -7711,6 +9301,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kısayollar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷键"
           }
         }
       }
@@ -7741,6 +9337,12 @@
             "state": "translated",
             "value": "Panel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板"
+          }
         }
       }
     },
@@ -7769,6 +9371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmiş"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录"
           }
         }
       }
@@ -7799,6 +9407,12 @@
             "state": "translated",
             "value": "Kategoriler"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类"
+          }
         }
       }
     },
@@ -7827,6 +9441,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzinler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权限"
           }
         }
       }
@@ -7857,6 +9477,12 @@
             "state": "translated",
             "value": "İçe Aktar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导入"
+          }
         }
       }
     },
@@ -7885,6 +9511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürüm %@ (%@)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本%@（%@）"
           }
         }
       }
@@ -7915,6 +9547,12 @@
             "state": "translated",
             "value": "Kopyaladığın her şey, imlecinin hemen altında."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你拷贝的一切，就在插入点下方。"
+          }
         }
       }
     },
@@ -7943,6 +9581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncellemeleri denetle…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
           }
         }
       }
@@ -7973,6 +9617,12 @@
             "state": "translated",
             "value": "GitHub’da aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在GitHub上打开"
+          }
         }
       }
     },
@@ -8001,6 +9651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürüm notları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发行说明"
           }
         }
       }
@@ -8031,6 +9687,12 @@
             "state": "translated",
             "value": "Lisanslar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "许可证"
+          }
         }
       }
     },
@@ -8059,6 +9721,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Destek ol"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持yabbistir"
           }
         }
       }
@@ -8089,6 +9757,12 @@
             "state": "translated",
             "value": "Tamam"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
         }
       }
     },
@@ -8117,6 +9791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hakkında"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于"
           }
         }
       }
@@ -8147,6 +9827,12 @@
             "state": "translated",
             "value": "Ayarlar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
         }
       }
     },
@@ -8175,6 +9861,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ öğe sırada"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共%@个项目"
           }
         }
       }
@@ -8205,6 +9897,12 @@
             "state": "translated",
             "value": "Bitir"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
         }
       }
     },
@@ -8233,6 +9931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bundan sonra kopyaladıkların burada sıraya girer."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "现在拷贝的内容会在这里排队。"
           }
         }
       }
@@ -8263,6 +9967,12 @@
             "state": "translated",
             "value": "Sıradakini yapıştır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴下一个"
+          }
         }
       }
     },
@@ -8291,6 +10001,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başa"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最前"
           }
         }
       }
@@ -8321,6 +10037,12 @@
             "state": "translated",
             "value": "Yeni kopya"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刚拷贝"
+          }
         }
       }
     },
@@ -8349,6 +10071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "2. sıra"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第2位"
           }
         }
       }
@@ -8379,6 +10107,12 @@
             "state": "translated",
             "value": "Sıradan çıkar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从粘贴队列移除"
+          }
         }
       }
     },
@@ -8407,6 +10141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıra"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴队列"
           }
         }
       }
@@ -8437,6 +10177,12 @@
             "state": "translated",
             "value": "Başa al"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到最前"
+          }
         }
       }
     },
@@ -8465,6 +10211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld gün"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld天前"
           }
         }
       }
@@ -8495,6 +10247,12 @@
             "state": "translated",
             "value": "%lld sa"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld小时前"
+          }
         }
       }
     },
@@ -8523,6 +10281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld dk"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld分钟前"
           }
         }
       }
@@ -8553,6 +10317,12 @@
             "state": "translated",
             "value": "şimdi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刚刚"
+          }
         }
       }
     },
@@ -8581,6 +10351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "dün"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨天"
           }
         }
       }
@@ -8611,6 +10387,12 @@
             "state": "translated",
             "value": "Geri"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回"
+          }
         }
       }
     },
@@ -8640,6 +10422,12 @@
             "state": "translated",
             "value": "Kopyala"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝"
+          }
         }
       }
     },
@@ -8668,6 +10456,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ ve kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@并拷贝"
           }
         }
       }
@@ -8746,6 +10540,18 @@
               }
             }
           }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld个转换"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -8774,6 +10580,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” için dönüşüm yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有适用于“%@”的转换"
           }
         }
       }
@@ -8804,6 +10616,12 @@
             "state": "translated",
             "value": "Varsayılanı kaldır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除默认转换"
+          }
         }
       }
     },
@@ -8832,6 +10650,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "⇧↵ için varsayılan yap"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设为⇧↵的默认转换"
           }
         }
       }
@@ -8862,6 +10686,12 @@
             "state": "translated",
             "value": "Yapıştır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴"
+          }
         }
       }
     },
@@ -8890,6 +10720,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dosya olarak yapıştırılır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已作为文件粘贴"
           }
         }
       }
@@ -8920,6 +10756,12 @@
             "state": "translated",
             "value": "Açık Finder klasörüne"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到打开的访达文件夹"
+          }
         }
       }
     },
@@ -8948,6 +10790,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ için"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用于%@"
           }
         }
       }
@@ -8978,6 +10826,12 @@
             "state": "translated",
             "value": "Varsayılan"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认"
+          }
         }
       }
     },
@@ -9007,6 +10861,12 @@
             "state": "translated",
             "value": "Finder’a"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到访达"
+          }
         }
       }
     },
@@ -9032,6 +10892,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -9065,6 +10931,12 @@
             "state": "translated",
             "value": "Başlat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始"
+          }
         }
       }
     },
@@ -9093,6 +10965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu metin çevrilemedi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法翻译这段文本"
           }
         }
       }
@@ -9123,6 +11001,12 @@
             "state": "translated",
             "value": "%@ → %@ dil paketi indirilmemiş"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未下载“%@ → %@”语言包"
+          }
         }
       }
     },
@@ -9151,6 +11035,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu metnin dili anlaşılamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法判断这是哪种语言"
           }
         }
       }
@@ -9181,6 +11071,12 @@
             "state": "translated",
             "value": "%@ → %@ bu Mac’te çevrilemiyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这台Mac无法翻译“%@ → %@”"
+          }
         }
       }
     },
@@ -9209,6 +11105,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "语言"
           }
         }
       }
@@ -9239,6 +11141,12 @@
             "state": "translated",
             "value": "Görünüm"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外观"
+          }
         }
       }
     },
@@ -9267,6 +11175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟随系统"
           }
         }
       }
@@ -9297,6 +11211,12 @@
             "state": "translated",
             "value": "Açık"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浅色"
+          }
         }
       }
     },
@@ -9325,6 +11245,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Koyu"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色"
           }
         }
       }
@@ -9355,6 +11281,12 @@
             "state": "translated",
             "value": "Girişte başlat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开"
+          }
         }
       }
     },
@@ -9383,6 +11315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem Ayarları’nda onay gerekiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要你在系统设置中批准。"
           }
         }
       }
@@ -9413,6 +11351,12 @@
             "state": "translated",
             "value": "Açılamadı. Sistem Ayarları’ndan dene."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法打开。请在系统设置中尝试。"
+          }
         }
       }
     },
@@ -9441,6 +11385,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem Ayarları’nı aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开系统设置"
           }
         }
       }
@@ -9471,6 +11421,12 @@
             "state": "translated",
             "value": "Menü çubuğu simgesi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "菜单栏图标"
+          }
         }
       }
     },
@@ -9499,6 +11455,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gizliyken Ayarlar’a yabbistir’i yeniden açarak ulaşırsın."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图标隐藏期间，再次打开yabbistir即可进入设置。"
           }
         }
       }
@@ -9529,6 +11491,12 @@
             "state": "translated",
             "value": "Geçmişi sakla"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录保留时间"
+          }
         }
       }
     },
@@ -9557,6 +11525,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 hafta"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1周"
           }
         }
       }
@@ -9587,6 +11561,12 @@
             "state": "translated",
             "value": "1 ay"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个月"
+          }
         }
       }
     },
@@ -9615,6 +11595,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "3 ay"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3个月"
           }
         }
       }
@@ -9645,6 +11631,12 @@
             "state": "translated",
             "value": "1 yıl"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1年"
+          }
         }
       }
     },
@@ -9673,6 +11665,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sınırsız"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久"
           }
         }
       }
@@ -9703,6 +11701,12 @@
             "state": "translated",
             "value": "Bir öğeyi son kullandığından itibaren sayılır. Kategorideki öğeler hiç silinmez."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从你上次使用某个项目时起算。分类中的项目绝不会被移除。"
+          }
         }
       }
     },
@@ -9731,6 +11735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu ayar %@ öğeyi hemen siler."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这会立即移除%@个项目。"
           }
         }
       }
@@ -9761,6 +11771,12 @@
             "state": "translated",
             "value": "Bu ayar 1 öğeyi hemen siler."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这会立即移除1个项目。"
+          }
         }
       }
     },
@@ -9789,6 +11805,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sil ve uygula"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除并应用"
           }
         }
       }
@@ -9819,6 +11841,12 @@
             "state": "translated",
             "value": "Vazgeç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -9847,6 +11875,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategori ekle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加分类"
           }
         }
       }
@@ -9877,6 +11911,12 @@
             "state": "translated",
             "value": "Her zaman"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "始终"
+          }
         }
       }
     },
@@ -9905,6 +11945,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seçilince"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选取时"
           }
         }
       }
@@ -9935,6 +11981,12 @@
             "state": "translated",
             "value": "“%@” silinsin mi?"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要删除“%@”吗？"
+          }
         }
       }
     },
@@ -9963,6 +12015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmişteki öğeler kalır. Yalnızca bu kategoride saklananlar silinir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录中的项目会保留。仅存放在此分类中的项目会被删除。"
           }
         }
       }
@@ -9993,6 +12051,12 @@
             "state": "translated",
             "value": "Sil"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
         }
       }
     },
@@ -10021,6 +12085,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uzantısı dolduruyor; yalnızca nerede görüneceğini değiştirebilirsin."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由其扩展填充；你可以更改它的显示位置。"
           }
         }
       }
@@ -10051,6 +12121,12 @@
             "state": "translated",
             "value": "Yok sayılan uygulamalar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "忽略的App"
+          }
         }
       }
     },
@@ -10079,6 +12155,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu uygulamalarda kopyaladıkların kaydedilmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在这些App中拷贝的内容都不会被存储。"
           }
         }
       }
@@ -10109,6 +12191,12 @@
             "state": "translated",
             "value": "iPhone’dan gelen kopyaları sakla"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留从iPhone拷贝的内容"
+          }
         }
       }
     },
@@ -10137,6 +12225,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uzantı çıktıları geçmişte görünsün"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在历史记录中显示扩展结果"
           }
         }
       }
@@ -10167,6 +12261,12 @@
             "state": "translated",
             "value": "Depolama"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "储存空间"
+          }
         }
       }
     },
@@ -10195,6 +12295,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmiş %@ kullanıyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录占用%@"
           }
         }
       }
@@ -10225,6 +12331,12 @@
             "state": "translated",
             "value": "Geçmişi temizle…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除历史记录…"
+          }
         }
       }
     },
@@ -10253,6 +12365,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bütün geçmiş silinsin mi?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要清除全部历史记录吗？"
           }
         }
       }
@@ -10283,6 +12401,12 @@
             "state": "translated",
             "value": "Kategorilerindeki öğeler kalır. Bu geri alınamaz."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分类中的项目会保留。此操作无法撤销。"
+          }
         }
       }
     },
@@ -10311,6 +12435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmişi temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除历史记录"
           }
         }
       }
@@ -10341,6 +12471,12 @@
             "state": "translated",
             "value": "Çıktılar iş kartından ve kategorilerden yapıştırılabilir kalır."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "结果仍可从其任务卡片和分类中粘贴。"
+          }
         }
       }
     },
@@ -10369,6 +12505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ekran paylaşımında gizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在屏幕共享中隐藏"
           }
         }
       }
@@ -10399,6 +12541,12 @@
             "state": "translated",
             "value": "Panel, Sıra ve bildirimler kayıtlarda ve paylaşılan ekranda görünmez."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板、粘贴队列和通知不会出现在录制内容或共享的屏幕中。"
+          }
         }
       }
     },
@@ -10427,6 +12575,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Genel kısayollar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷键"
           }
         }
       }
@@ -10457,6 +12611,12 @@
             "state": "translated",
             "value": "Paneli aç"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开面板"
+          }
         }
       }
     },
@@ -10485,6 +12645,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıra’ya kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝到粘贴队列"
           }
         }
       }
@@ -10515,6 +12681,12 @@
             "state": "translated",
             "value": "Varsayılanlara dön"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复默认"
+          }
         }
       }
     },
@@ -10543,6 +12715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Panelde"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在面板中"
           }
         }
       }
@@ -10573,6 +12751,12 @@
             "state": "translated",
             "value": "Listede gez"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在列表中移动"
+          }
         }
       }
     },
@@ -10601,6 +12785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sütunlar arasında geç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换列"
           }
         }
       }
@@ -10631,6 +12821,12 @@
             "state": "translated",
             "value": "Yapıştır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴"
+          }
         }
       }
     },
@@ -10659,6 +12855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İkinci seçenekle yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴第二选项"
           }
         }
       }
@@ -10689,6 +12891,12 @@
             "state": "translated",
             "value": "Dönüşümler"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "转换"
+          }
         }
       }
     },
@@ -10717,6 +12925,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eylemler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作"
           }
         }
       }
@@ -10747,6 +12961,12 @@
             "state": "translated",
             "value": "Kopyala"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝"
+          }
         }
       }
     },
@@ -10775,6 +12995,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kategoriye ekle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加到分类"
           }
         }
       }
@@ -10805,6 +13031,12 @@
             "state": "translated",
             "value": "Kategorileri düzenle"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑分类"
+          }
         }
       }
     },
@@ -10833,6 +13065,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İlk dokuzdan birini yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴前九项之一"
           }
         }
       }
@@ -10863,6 +13101,12 @@
             "state": "translated",
             "value": "Kapat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
         }
       }
     },
@@ -10891,6 +13135,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Açıldığı yer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示在"
           }
         }
       }
@@ -10921,6 +13171,12 @@
             "state": "translated",
             "value": "Yazı imleci"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "插入点下方"
+          }
         }
       }
     },
@@ -10949,6 +13205,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare imleci"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标指针下方"
           }
         }
       }
@@ -10979,6 +13241,12 @@
             "state": "translated",
             "value": "Önizleme gecikmesi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预览延迟"
+          }
         }
       }
     },
@@ -11007,6 +13275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kısa"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "短"
           }
         }
       }
@@ -11037,6 +13311,12 @@
             "state": "translated",
             "value": "Orta"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中"
+          }
         }
       }
     },
@@ -11065,6 +13345,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uzun"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "长"
           }
         }
       }
@@ -11095,6 +13381,12 @@
             "state": "translated",
             "value": "↵ ile"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵的作用"
+          }
         }
       }
     },
@@ -11123,6 +13415,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uygulamaya yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴到App中"
           }
         }
       }
@@ -11153,6 +13451,12 @@
             "state": "translated",
             "value": "Yalnızca panoya kopyala"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅拷贝到剪贴板"
+          }
         }
       }
     },
@@ -11181,6 +13485,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Her zaman düz metin yapıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "始终粘贴纯文本"
           }
         }
       }
@@ -11211,6 +13521,12 @@
             "state": "translated",
             "value": "Panelden ve Sıra’dan yapıştırırken yazı tipi, renk ve bağlantı biçimi atılır."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从面板和粘贴队列粘贴时，会去掉字体、颜色和链接的格式。"
+          }
         }
       }
     },
@@ -11239,6 +13555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verildi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允许"
           }
         }
       }
@@ -11269,6 +13591,12 @@
             "state": "translated",
             "value": "Gerekli"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "必需"
+          }
         }
       }
     },
@@ -11297,6 +13625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İsteğe bağlı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选"
           }
         }
       }
@@ -11327,6 +13661,12 @@
             "state": "translated",
             "value": "Erişilebilirlik"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "辅助功能"
+          }
         }
       }
     },
@@ -11355,6 +13695,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bulunduğun uygulamaya yapıştırır ve yazı imlecini bulur."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴到你所在的App，并找到你的插入点。"
           }
         }
       }
@@ -11385,6 +13731,12 @@
             "state": "translated",
             "value": "Gizlilik ve Güvenlik › Erişilebilirlik’te yabbistir’i bul ve anahtarını aç."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“隐私与安全性 › 辅助功能”中找到yabbistir并打开它。"
+          }
         }
       }
     },
@@ -11413,6 +13765,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Girdi İzleme"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输入监控"
           }
         }
       }
@@ -11443,6 +13801,12 @@
             "state": "translated",
             "value": "Sıra’nın ⌘V’ni duymasını sağlar; her yapıştırmadan sonra sıradaki öğe gelir."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "让粘贴队列能感知你的⌘V，这样每次粘贴后都会轮到下一个项目。"
+          }
         }
       }
     },
@@ -11471,6 +13835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gizlilik ve Güvenlik › Girdi İzleme’de yabbistir’i bul ve anahtarını aç."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“隐私与安全性 › 输入监控”中找到yabbistir并打开它。"
           }
         }
       }
@@ -11501,6 +13871,12 @@
             "state": "translated",
             "value": "Pano erişimi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从其他App粘贴"
+          }
         }
       }
     },
@@ -11529,6 +13905,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir’in kopyaladıklarını görmesini, böylece geçmişini tutmasını sağlar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "让yabbistir能看到你拷贝的内容，以便保存历史记录。"
           }
         }
       }
@@ -11559,6 +13941,12 @@
             "state": "translated",
             "value": "macOS sorarsa “Her zaman izin ver”i seç. Sonra Gizlilik ve Güvenlik’ten değiştirebilirsin."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果macOS询问，请选择“始终允许”。之后可在“隐私与安全性”中更改。"
+          }
         }
       }
     },
@@ -11587,6 +13975,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS henüz sormadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS尚未询问。"
           }
         }
       }
@@ -11617,6 +14011,12 @@
             "state": "translated",
             "value": "macOS her seferinde soruyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS每次都会询问。"
+          }
         }
       }
     },
@@ -11645,6 +14045,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kapalı: yabbistir kopyaladıklarını göremiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已关闭：yabbistir看不到你的拷贝内容。"
           }
         }
       }
@@ -11675,6 +14081,12 @@
             "state": "translated",
             "value": "Girişte başlat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开"
+          }
         }
       }
     },
@@ -11703,6 +14115,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oturum açınca yabbistir’i başlatır; geçmişin hiç kesilmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时启动yabbistir，让历史记录保持最新。"
           }
         }
       }
@@ -11733,6 +14151,12 @@
             "state": "translated",
             "value": "Genel’den aç. macOS onay isterse Giriş Öğeleri’nden onayla."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“通用”中打开。如果macOS询问，请在“登录项”中批准。"
+          }
         }
       }
     },
@@ -11761,6 +14185,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste kütüphaneni taşıyalım"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "把你的Paste资料库导入进来"
           }
         }
       }
@@ -11791,6 +14221,12 @@
             "state": "translated",
             "value": "Pinboard’ların kategori olur. Paste’teki verine dokunulmaz, yalnızca okunur."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的Pinboard会变成分类。yabbistir只会读取你在Paste中的数据，不会更改。"
+          }
         }
       }
     },
@@ -11816,6 +14252,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -11849,6 +14291,12 @@
             "state": "translated",
             "value": "%@ · %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
         }
       }
     },
@@ -11877,6 +14325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçmişin tamamı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部历史记录"
           }
         }
       }
@@ -11907,6 +14361,12 @@
             "state": "translated",
             "value": "%@ → %@, kategori olarak gelecek"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@，以分类形式导入"
+          }
         }
       }
     },
@@ -11935,6 +14395,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İçe aktar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导入"
           }
         }
       }
@@ -11965,6 +14431,12 @@
             "state": "translated",
             "value": "Şimdilik atla"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以后"
+          }
         }
       }
     },
@@ -11993,6 +14465,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Taşınıyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在导入…"
           }
         }
       }
@@ -12023,6 +14501,12 @@
             "state": "translated",
             "value": "Görseller ve zengin metin biçimleriyle birlikte geliyor."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图像和富文本也会一并导入。"
+          }
         }
       }
     },
@@ -12048,6 +14532,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -12081,6 +14571,12 @@
             "state": "translated",
             "value": "Hepsi burada."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部完成。"
+          }
         }
       }
     },
@@ -12109,6 +14605,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Metin"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文本"
           }
         }
       }
@@ -12139,6 +14641,12 @@
             "state": "translated",
             "value": "Kod"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "代码"
+          }
         }
       }
     },
@@ -12167,6 +14675,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "链接"
           }
         }
       }
@@ -12197,6 +14711,12 @@
             "state": "translated",
             "value": "Görsel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图像"
+          }
         }
       }
     },
@@ -12225,6 +14745,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Renk"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "颜色"
           }
         }
       }
@@ -12255,6 +14781,12 @@
             "state": "translated",
             "value": "Dosya"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件"
+          }
         }
       }
     },
@@ -12283,6 +14815,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 yeni öğe eklendi."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已添加1个新项目。"
           }
         }
       }
@@ -12313,6 +14851,12 @@
             "state": "translated",
             "value": "%@ yeni öğe eklendi."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已添加%@个新项目。"
+          }
         }
       }
     },
@@ -12341,6 +14885,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İçe aktarılacak yeni bir şey yok."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有可导入的新内容。"
           }
         }
       }
@@ -12371,6 +14921,12 @@
             "state": "translated",
             "value": "1 öğe aktarılamadı."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有1个项目无法导入。"
+          }
         }
       }
     },
@@ -12399,6 +14955,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ öğe aktarılamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有%@个项目无法导入。"
           }
         }
       }
@@ -12429,6 +14991,12 @@
             "state": "translated",
             "value": "Kütüphane okunamadı. Paste’i kapatıp tekrar dene."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法读取资料库。请退出Paste后重试。"
+          }
         }
       }
     },
@@ -12457,6 +15025,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu Mac’te Paste kütüphanesi bulunamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在这台Mac上未找到Paste资料库。"
           }
         }
       }
@@ -12487,6 +15061,12 @@
             "state": "translated",
             "value": "Paste hâlâ çalışıyor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste仍在运行"
+          }
         }
       }
     },
@@ -12515,6 +15095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İkisi aynı kısayolları kullanır. Paste’i kapat ve Giriş Öğeleri’nden çıkar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "两者使用相同的快捷键。请退出Paste，并将它从登录项中移除。"
           }
         }
       }
@@ -12545,6 +15131,12 @@
             "state": "translated",
             "value": "Paste’i kapat"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出Paste"
+          }
         }
       }
     },
@@ -12573,6 +15165,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 öğe"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个项目"
           }
         }
       }
@@ -12603,6 +15201,12 @@
             "state": "translated",
             "value": "%@ öğe"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@个项目"
+          }
         }
       }
     },
@@ -12631,6 +15235,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 sabit öğe"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个固定项目"
           }
         }
       }
@@ -12661,6 +15271,12 @@
             "state": "translated",
             "value": "%@ sabit öğe"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@个固定项目"
+          }
         }
       }
     },
@@ -12689,6 +15305,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 pinboard"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1个Pinboard"
           }
         }
       }
@@ -12719,6 +15341,12 @@
             "state": "translated",
             "value": "%@ pinboard"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@个Pinboard"
+          }
         }
       }
     },
@@ -12747,6 +15375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyaladığın her şey, imlecinin hemen altında."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你拷贝的一切，就在插入点下方。"
           }
         }
       }
@@ -12777,6 +15411,12 @@
             "state": "translated",
             "value": "yabbistir geçmişini saklar. Kısayola bas, yazmaya başla, ↵ ile yapıştır. Fareye hiç dokunmadan."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir会保存你的历史记录。按下快捷键，开始输入，按↵粘贴。无需鼠标。"
+          }
         }
       }
     },
@@ -12805,6 +15445,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başlayalım"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始吧"
           }
         }
       }
@@ -12835,6 +15481,12 @@
             "state": "translated",
             "value": "Paste kütüphanen de taşınacak"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的Paste资料库也会一并导入"
+          }
         }
       }
     },
@@ -12863,6 +15515,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Devam"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "继续"
           }
         }
       }
@@ -12893,6 +15551,12 @@
             "state": "translated",
             "value": "Son birkaç ayar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最后几项设置"
+          }
         }
       }
     },
@@ -12921,6 +15585,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İstediğin zaman Ayarlar’dan değiştirebilirsin."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你随时可以在设置中更改。"
           }
         }
       }
@@ -12951,6 +15621,12 @@
             "state": "translated",
             "value": "Paneli açma kısayolu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开面板的快捷键"
+          }
         }
       }
     },
@@ -12979,6 +15655,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste’te alıştığın gibi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你在Paste中用惯的那个"
           }
         }
       }
@@ -13009,6 +15691,12 @@
             "state": "translated",
             "value": "Ayarlar’dan değiştirebilirsin."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你可以在设置中更改。"
+          }
         }
       }
     },
@@ -13037,6 +15725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Doğrudan yapıştırma"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接粘贴"
           }
         }
       }
@@ -13067,6 +15761,12 @@
             "state": "translated",
             "value": "Erişilebilirlik izni olmadan yalnızca panoya kopyalanır"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有辅助功能权限时，项目只会拷贝到剪贴板"
+          }
         }
       }
     },
@@ -13095,6 +15795,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzin ver"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许"
           }
         }
       }
@@ -13125,6 +15831,12 @@
             "state": "translated",
             "value": "İzin verildi"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允许"
+          }
         }
       }
     },
@@ -13153,6 +15865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Girişte başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开"
           }
         }
       }
@@ -13183,6 +15901,12 @@
             "state": "translated",
             "value": "Mac açıldığında arka planda hazır olsun"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac启动后，它已在后台待命"
+          }
         }
       }
     },
@@ -13211,6 +15935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bitti, paneli göster"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成，显示面板"
           }
         }
       }
@@ -13241,6 +15971,12 @@
             "state": "translated",
             "value": "İlk kurulumu tekrar çalıştır…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新运行首次设置…"
+          }
         }
       }
     },
@@ -13269,6 +16005,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kütüphanen okunuyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在读取你的资料库…"
           }
         }
       }
@@ -13299,6 +16041,12 @@
             "state": "translated",
             "value": "öğe · %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "个项目 · %@"
+          }
         }
       }
     },
@@ -13327,6 +16075,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "öğe · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "个项目 · %@"
           }
         }
       }
