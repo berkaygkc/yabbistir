@@ -703,6 +703,9 @@ public final class PanelViewModel {
     /// The input method's text in progress (empty when it ends without a result). As in a text field, composing over a
     /// ⌘A-selected search replaces it.
     public func setMarkedText(_ text: String) {
+        // Composing is typing, though the window hands its keys to the input method, not to `handle`: the ⇧ panel's
+        // search line comes and goes with it and moves the rows under a resting pointer, which keeps the keyboard's row.
+        hoverGate.keyboardActed(pointer: pointerLocation())
         if !text.isEmpty, isQuerySelected, typingTarget == .search { setQuery("") }
         markedText = text
     }

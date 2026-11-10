@@ -146,6 +146,24 @@ private func clip(_ s: String, minutesAgo: Double, rtf: Bool = false) -> Capture
         #expect(model.query == "")
     }
 
+    /// Composing is typing for the hover rule too: the ⇧ panel's search line comes with the first composed letter and
+    /// moves the rows under a resting pointer; the row that lands there doesn't take the highlight until the pointer moves.
+    @Test func composingKeepsTheHighlightUntilThePointerMoves() {
+        final class Pointer { var at = CGPoint(x: 300, y: 400) }
+        let pointer = Pointer()
+        model.pointerLocation = { pointer.at }
+        model.select(richID, in: .history)
+        _ = model.handle(.toggleTransforms)
+        pointer.at.x += 3
+        #expect(model.acceptsHover())
+        model.setMarkedText("c")
+        #expect(!model.acceptsHover())
+        pointer.at.y -= 2
+        #expect(model.acceptsHover())
+        model.setMarkedText("")
+        #expect(!model.acceptsHover())
+    }
+
     @Test func transformsMenuComposesInItsOwnLine() {
         model.select(richID, in: .history)
         _ = model.handle(.toggleTransforms)
