@@ -22,6 +22,12 @@
             "value": "Añadir a una categoría…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à une catégorie…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -61,6 +67,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir a la Pila"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à la Pile"
           }
         },
         "ko": {
@@ -104,6 +116,12 @@
             "value": "Todas las transformaciones (%@)…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les transformations (%@)…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -143,6 +161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiar en el portapapeles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier dans le presse-papiers"
           }
         },
         "ko": {
@@ -186,6 +210,12 @@
             "value": "Eliminar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -225,6 +255,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se han encontrado acciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune action trouvée"
           }
         },
         "ko": {
@@ -268,6 +304,12 @@
             "value": "Pegar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -307,6 +349,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar como texto sin formato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller en texte brut"
           }
         },
         "ko": {
@@ -350,6 +398,12 @@
             "value": "Vista previa"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperçu"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -389,6 +443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar de la categoría"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer de la catégorie"
           }
         },
         "ko": {
@@ -432,6 +492,12 @@
             "value": "Buscar acciones…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des actions…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -471,6 +537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence no ha podido responder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence n’a pas pu répondre"
           }
         },
         "ko": {
@@ -514,6 +586,12 @@
             "value": "Apple Intelligence tiene demasiada carga, inténtalo de nuevo en un momento"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence est occupé, réessayez dans un instant"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -553,6 +631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence no responderá a esto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence ne répondra pas à cette demande"
           }
         },
         "ko": {
@@ -596,6 +680,12 @@
             "value": "Apple Intelligence aún no admite este idioma"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence ne prend pas encore en charge cette langue"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -635,6 +725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este texto es demasiado largo para Apple Intelligence"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce texte est trop long pour Apple Intelligence"
           }
         },
         "ko": {
@@ -678,6 +774,12 @@
             "value": "Este Mac no puede ejecutar Apple Intelligence"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce Mac ne peut pas utiliser Apple Intelligence"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -717,6 +819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activa Apple Intelligence en Ajustes del Sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez Apple Intelligence dans Réglages Système"
           }
         },
         "ko": {
@@ -760,6 +868,12 @@
             "value": "Apple Intelligence aún se está preparando"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence n’est pas encore prêt"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -801,6 +915,12 @@
             "value": "Arcilla"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argile"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -837,6 +957,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocre"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Ocre"
@@ -883,6 +1009,12 @@
             "value": "Ciruela"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prune"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -922,6 +1054,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salvia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauge"
           }
         },
         "ko": {
@@ -965,6 +1103,12 @@
             "value": "Pizarra"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardoise"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1004,6 +1148,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verde azulado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sarcelle"
           }
         },
         "ko": {
@@ -1047,6 +1197,12 @@
             "value": "Siempre"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1086,6 +1242,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cerrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
           }
         },
         "ko": {
@@ -1129,6 +1291,12 @@
             "value": "Nueva"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1168,6 +1336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seleccionar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir"
           }
         },
         "ko": {
@@ -1211,6 +1385,12 @@
             "value": "Visibilidad"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visibilité"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1250,6 +1430,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva categoría"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle catégorie"
           }
         },
         "ko": {
@@ -1293,6 +1479,12 @@
             "value": "Las categorías “Siempre” se abren como columnas"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les catégories « Toujours » s’ouvrent en colonnes"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1332,6 +1524,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Al seleccionar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À la sélection"
           }
         },
         "ko": {
@@ -1375,6 +1573,12 @@
             "value": "Arrastra para reordenar las columnas. El panel se actualiza al instante."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites glisser pour réordonner les colonnes. Le panneau se met à jour en direct."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1414,6 +1618,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categorías"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégories"
           }
         },
         "ko": {
@@ -1457,6 +1667,12 @@
             "value": "Cancelar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1496,6 +1712,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comandos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes"
           }
         },
         "ko": {
@@ -1539,6 +1761,12 @@
             "value": "Permitir"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1578,6 +1806,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No instalar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas installer"
           }
         },
         "ko": {
@@ -1621,6 +1855,12 @@
             "value": "Permitir e instalar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser et installer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1660,6 +1900,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Revisar permisos…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner les autorisations…"
           }
         },
         "ko": {
@@ -1703,6 +1949,12 @@
             "value": "“%@” quiere:"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » souhaite :"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1742,6 +1994,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Elegir…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir…"
           }
         },
         "ko": {
@@ -1785,6 +2043,12 @@
             "value": "Borrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1824,6 +2088,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ninguna carpeta elegida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun dossier choisi"
           }
         },
         "ko": {
@@ -1867,6 +2137,12 @@
             "value": "Sugerida: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggestion : %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1906,6 +2182,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalar .yabext…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer un .yabext…"
           }
         },
         "ko": {
@@ -1949,6 +2231,12 @@
             "value": "Instalar desde una carpeta…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer depuis un dossier…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1988,6 +2276,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Problemas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Problèmes"
           }
         },
         "ko": {
@@ -2031,6 +2325,12 @@
             "value": "Vincular carpeta de desarrollo…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lier un dossier de développement…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2070,6 +2370,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Registro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal"
           }
         },
         "ko": {
@@ -2113,6 +2419,12 @@
             "value": "Aún no se ha registrado nada. Aquí aparecen console.log y los errores de las extensiones."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n’a encore été journalisé. Les console.log et les erreurs des extensions apparaissent ici."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2152,6 +2464,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir la carpeta de extensiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le dossier des extensions"
           }
         },
         "ko": {
@@ -2195,6 +2513,12 @@
             "value": "Permisos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisations"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2234,6 +2558,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer"
           }
         },
         "ko": {
@@ -2277,6 +2607,12 @@
             "value": "Preferencias"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préférences"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2316,6 +2652,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recargar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recharger"
           }
         },
         "ko": {
@@ -2359,6 +2701,12 @@
             "value": "Eliminar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2398,6 +2746,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Eliminar %@?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer %@ ?"
           }
         },
         "ko": {
@@ -2441,6 +2795,12 @@
             "value": "Imagen"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2480,6 +2840,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reglas de copia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Règles de copie"
           }
         },
         "ko": {
@@ -2523,6 +2889,12 @@
             "value": "Borrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2562,6 +2934,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido guardar el secreto en el Llavero."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’enregistrer le secret dans le Trousseau."
           }
         },
         "ko": {
@@ -2605,6 +2983,12 @@
             "value": "Guardar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2644,6 +3028,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Guardado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistré"
           }
         },
         "ko": {
@@ -2687,6 +3077,12 @@
             "value": "Integrada"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intégrée"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2726,6 +3122,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desarrollo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développement"
           }
         },
         "ko": {
@@ -2769,6 +3171,12 @@
             "value": "Local"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locale"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2808,6 +3216,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido verificar la lista de la tienda. Se muestra la lista guardada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de vérifier la liste de la boutique. La liste enregistrée est affichée."
           }
         },
         "ko": {
@@ -2851,6 +3265,12 @@
             "value": "La firma de la tienda no coincide. Inténtalo de nuevo más tarde."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La signature de la boutique ne correspond pas. Réessayez plus tard."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2890,6 +3310,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido verificar la tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de vérifier la boutique."
           }
         },
         "ko": {
@@ -2933,6 +3359,12 @@
             "value": "Categoría"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégorie"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2969,6 +3401,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "IA"
@@ -3015,6 +3453,12 @@
             "value": "Todas las categorías"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les catégories"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3054,6 +3498,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desarrollo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développement"
           }
         },
         "ko": {
@@ -3097,6 +3547,12 @@
             "value": "Archivos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3136,6 +3592,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Imágenes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Images"
           }
         },
         "ko": {
@@ -3179,6 +3641,12 @@
             "value": "Enlaces"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liens"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3218,6 +3686,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Multimedia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Médias"
           }
         },
         "ko": {
@@ -3261,6 +3735,12 @@
             "value": "Productividad"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Productivité"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3300,6 +3780,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte"
           }
         },
         "ko": {
@@ -3343,6 +3829,12 @@
             "value": "Permitir y actualizar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser et mettre à jour"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3382,6 +3874,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "También se actualizan (sin permisos nuevos): %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Également mises à jour (sans nouvelle autorisation) : %@"
           }
         },
         "ko": {
@@ -3425,6 +3923,12 @@
             "value": "¿Instalar %@ extensiones?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer %@ extensions ?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3464,6 +3968,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Instalar “%@”?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer « %@ » ?"
           }
         },
         "ko": {
@@ -3507,6 +4017,12 @@
             "value": "Permisos nuevos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelles autorisations"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3546,6 +4062,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No necesita permisos especiales."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne demande aucune autorisation particulière."
           }
         },
         "ko": {
@@ -3589,6 +4111,12 @@
             "value": "¿Actualizar %@ extensiones?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre à jour %@ extensions ?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3628,6 +4156,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Actualizar “%@”?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre à jour « %@ » ?"
           }
         },
         "ko": {
@@ -3671,6 +4205,12 @@
             "value": "La tienda aún no tiene extensiones."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La boutique ne propose encore aucune extension."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3710,6 +4250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No hay extensiones en esta categoría."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune extension dans cette catégorie."
           }
         },
         "ko": {
@@ -3753,6 +4299,12 @@
             "value": "Ninguna extensión coincide con “%@”"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune extension ne correspond à « %@ »"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3792,6 +4344,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La lista de la tienda ha cambiado; revísala e inténtalo de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liste de la boutique a changé ; examinez-la et réessayez."
           }
         },
         "ko": {
@@ -3835,6 +4393,12 @@
             "value": "No se puede instalar en esta versión de yabbistir."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle ne peut pas être installée avec cette version de yabbistir."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3874,6 +4438,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido descargar. Comprueba tu conexión e inténtalo de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de la télécharger. Vérifiez votre connexion et réessayez."
           }
         },
         "ko": {
@@ -3917,6 +4487,12 @@
             "value": "La descarga no coincidía con el catálogo, así que no se ha instalado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le téléchargement ne correspondait pas au catalogue ; elle n’a donc pas été installée."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3956,6 +4532,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido instalar. Los detalles están en la pestaña Desarrollo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de l’installer. Les détails figurent dans l’onglet Développement."
           }
         },
         "ko": {
@@ -3999,6 +4581,12 @@
             "value": "No se ha podido verificar; no se ha instalado nada."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification impossible ; rien n’a été installé."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4038,6 +4626,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer"
           }
         },
         "ko": {
@@ -4081,6 +4675,12 @@
             "value": "Instalar (%@)"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer (%@)"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4120,6 +4720,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalando…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installation…"
           }
         },
         "ko": {
@@ -4163,6 +4769,12 @@
             "value": "La extensión del enlace no está en la tienda."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension du lien n’est pas dans la boutique."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4202,6 +4814,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las extensiones del enlace no están en la tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les extensions du lien ne sont pas dans la boutique."
           }
         },
         "ko": {
@@ -4245,6 +4863,12 @@
             "value": "Algunas extensiones del enlace no están en la tienda."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Certaines extensions du lien ne sont pas dans la boutique."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4284,6 +4908,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión del enlace ya está instalada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension du lien est déjà installée."
           }
         },
         "ko": {
@@ -4327,6 +4957,12 @@
             "value": "Las extensiones del enlace ya están instaladas."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les extensions du lien sont déjà installées."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4366,6 +5002,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión del enlace necesita una versión más reciente de yabbistir."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension du lien nécessite une version plus récente de yabbistir."
           }
         },
         "ko": {
@@ -4409,6 +5051,12 @@
             "value": "Las extensiones del enlace necesitan una versión más reciente de yabbistir."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les extensions du lien nécessitent une version plus récente de yabbistir."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4448,6 +5096,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Algunas extensiones del enlace necesitan una versión más reciente de yabbistir."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Certaines extensions du lien nécessitent une version plus récente de yabbistir."
           }
         },
         "ko": {
@@ -4491,6 +5145,12 @@
             "value": "La extensión del enlace está esperando a la tienda."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension du lien attend la boutique."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4530,6 +5190,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las extensiones del enlace están esperando a la tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les extensions du lien attendent la boutique."
           }
         },
         "ko": {
@@ -4573,6 +5239,12 @@
             "value": "Cargando la tienda…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement de la boutique…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4612,6 +5284,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido leer la lista de la tienda. Se muestra la lista guardada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire la liste de la boutique. La liste enregistrée est affichée."
           }
         },
         "ko": {
@@ -4655,6 +5333,12 @@
             "value": "Inténtalo de nuevo más tarde o actualiza yabbistir."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayez plus tard, ou mettez yabbistir à jour."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4694,6 +5378,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido leer la lista de la tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire la liste de la boutique."
           }
         },
         "ko": {
@@ -4737,6 +5427,12 @@
             "value": "Ahora la tienda necesita una versión más reciente de yabbistir. Se muestra la lista guardada."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La boutique nécessite désormais une version plus récente de yabbistir. La liste enregistrée est affichée."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4776,6 +5472,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualiza yabbistir y vuelve a intentarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettez yabbistir à jour, puis réessayez."
           }
         },
         "ko": {
@@ -4819,6 +5521,12 @@
             "value": "La tienda necesita una versión más reciente de yabbistir."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La boutique nécessite une version plus récente de yabbistir."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4858,6 +5566,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido conectar con la tienda. Se muestra la lista guardada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre la boutique. La liste enregistrée est affichée."
           }
         },
         "ko": {
@@ -4901,6 +5615,12 @@
             "value": "Comprueba tu conexión a internet y vuelve a intentarlo."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifiez votre connexion à Internet, puis réessayez."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4940,6 +5660,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido conectar con la tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre la boutique."
           }
         },
         "ko": {
@@ -4983,6 +5709,12 @@
             "value": "La tienda ha enviado una lista más antigua. Se muestra la lista guardada."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La boutique a envoyé une liste plus ancienne. La liste enregistrée est affichée."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5022,6 +5754,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualizar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiser"
           }
         },
         "ko": {
@@ -5065,6 +5803,12 @@
             "value": "Comprobando la tienda…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification de la boutique…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5104,6 +5848,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buscar extensiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des extensions"
           }
         },
         "ko": {
@@ -5147,6 +5897,12 @@
             "value": "Requiere una versión más reciente de yabbistir"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nécessite une version plus récente de yabbistir"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5186,6 +5942,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installée"
           }
         },
         "ko": {
@@ -5229,6 +5991,12 @@
             "value": "Actualización disponible"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mise à jour disponible"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5268,6 +6036,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ve lo que copias"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voit ce que vous copiez"
           }
         },
         "ko": {
@@ -5311,6 +6085,12 @@
             "value": "Ejecuta: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécute : %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5350,6 +6130,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejecuta programas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécute des programmes"
           }
         },
         "ko": {
@@ -5393,6 +6179,12 @@
             "value": "Lee tu historial"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lit votre historique"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5432,6 +6224,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Red: cualquier sitio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réseau : tout site"
           }
         },
         "ko": {
@@ -5475,6 +6273,12 @@
             "value": "Red: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réseau : %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5514,6 +6318,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Red: %@ sitios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réseau : %@ sites"
           }
         },
         "ko": {
@@ -5557,6 +6367,12 @@
             "value": "Reintentar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5596,6 +6412,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualizar todo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout mettre à jour"
           }
         },
         "ko": {
@@ -5639,6 +6461,12 @@
             "value": "%@ actualizaciones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mises à jour"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5678,6 +6506,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 actualización"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 mise à jour"
           }
         },
         "ko": {
@@ -5721,6 +6555,12 @@
             "value": "Desarrollo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développement"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5760,6 +6600,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instaladas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installées"
           }
         },
         "ko": {
@@ -5803,6 +6649,12 @@
             "value": "Tienda"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boutique"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5842,6 +6694,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desactivar extensiones de terceros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver les extensions tierces"
           }
         },
         "ko": {
@@ -5885,6 +6743,12 @@
             "value": "Copiar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5924,6 +6788,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ no está instalado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ n’est pas installé"
           }
         },
         "ko": {
@@ -5967,6 +6837,12 @@
             "value": "Esperando tu permiso"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente de votre autorisation"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6006,6 +6882,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El historial no está disponible aquí"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’historique n’est pas disponible ici"
           }
         },
         "ko": {
@@ -6049,6 +6931,12 @@
             "value": "Esta extensión no tiene permiso para leer tu historial"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette extension n’est pas autorisée à lire votre historique"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6088,6 +6976,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esto ha tardado demasiado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela a pris trop de temps"
           }
         },
         "ko": {
@@ -6131,6 +7025,12 @@
             "value": "Cancelar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6170,6 +7070,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tareas de yabbistir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâches de yabbistir"
           }
         },
         "ko": {
@@ -6213,6 +7119,12 @@
             "value": "Cerrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6252,6 +7164,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Guardado en el Finder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistré dans le Finder"
           }
         },
         "ko": {
@@ -6295,6 +7213,12 @@
             "value": "Pegado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collé"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6334,6 +7258,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadido a la Pila"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouté à la Pile"
           }
         },
         "ko": {
@@ -6377,6 +7307,12 @@
             "value": "No se ha podido terminar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de terminer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6416,6 +7352,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión se ha detenido de forma inesperada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension s’est arrêtée de façon inattendue"
           }
         },
         "ko": {
@@ -6459,6 +7401,12 @@
             "value": "No se ha podido conectar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de se connecter"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6498,6 +7446,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No permitido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non autorisé"
           }
         },
         "ko": {
@@ -6541,6 +7495,12 @@
             "value": "%@ no está instalado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ n’est pas installé"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6580,6 +7540,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión no está disponible ahora mismo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’extension n’est pas disponible pour le moment"
           }
         },
         "ko": {
@@ -6623,6 +7589,12 @@
             "value": "Cancelar: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler : %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6662,6 +7634,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tareas en curso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâches en cours"
           }
         },
         "ko": {
@@ -6705,6 +7683,12 @@
             "value": "En cola"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6744,6 +7728,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Listo, %@ para pegar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt, %@ pour coller"
           }
         },
         "ko": {
@@ -6787,6 +7777,12 @@
             "value": "Iniciando"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrage"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6826,6 +7822,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadido al historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouté à l’historique"
           }
         },
         "ko": {
@@ -6869,6 +7871,12 @@
             "value": "Código"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6908,6 +7916,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Color"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur"
           }
         },
         "ko": {
@@ -6951,6 +7965,12 @@
             "value": "Archivo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6990,6 +8010,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Imagen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image"
           }
         },
         "ko": {
@@ -7033,6 +8059,12 @@
             "value": "Enlace"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lien"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7072,6 +8104,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte"
           }
         },
         "ko": {
@@ -7115,6 +8153,12 @@
             "value": "Editar categorías"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier les catégories"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7154,6 +8198,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se abre como columna si está marcada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S’ouvre en colonne si cochée"
           }
         },
         "ko": {
@@ -7197,6 +8247,12 @@
             "value": "Idioma"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7236,6 +8292,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau"
           }
         },
         "ko": {
@@ -7279,6 +8341,12 @@
             "value": "Salir de yabbistir"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter yabbistir"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7318,6 +8386,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buscar actualizaciones…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des mises à jour…"
           }
         },
         "ko": {
@@ -7361,6 +8435,12 @@
             "value": "Ajustes…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7400,6 +8480,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié."
           }
         },
         "ko": {
@@ -7443,6 +8529,12 @@
             "value": "Copiado, pega con ⌘V"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié, collez avec ⌘V"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7482,6 +8574,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir Ajustes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les Réglages"
           }
         },
         "ko": {
@@ -7525,6 +8623,12 @@
             "value": "Permite Accesibilidad para pegar directamente."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accordez l’autorisation Accessibilité pour coller directement."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7564,6 +8668,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiado en el portapapeles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié dans le presse-papiers"
           }
         },
         "ko": {
@@ -7607,6 +8717,12 @@
             "value": "%@ se ha desactivado tras varios errores seguidos."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a été désactivée après des erreurs répétées."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7646,6 +8762,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
           }
         },
         "ko": {
@@ -7689,6 +8811,12 @@
             "value": "Error en la extensión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de l’extension"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7728,6 +8856,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permítelo para que el siguiente ítem aparezca tras cada ⌘V."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisez-la pour que l’élément suivant apparaisse après chaque ⌘V."
           }
         },
         "ko": {
@@ -7771,6 +8905,12 @@
             "value": "La Pila necesita Monitorización de los dispositivos de entrada"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Pile a besoin de la Surveillance de l’entrée"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7810,6 +8950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se borrará del portapapeles en 30 segundos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retiré du presse-papiers dans 30 secondes."
           }
         },
         "ko": {
@@ -7853,6 +8999,12 @@
             "value": "Pulsa ⌘V para pegar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur ⌘V pour coller"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7892,6 +9044,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejecútalo en Terminal y vuelve a abrir el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécutez-la dans Terminal, puis rouvrez le panneau."
           }
         },
         "ko": {
@@ -7935,6 +9093,12 @@
             "value": "Comando copiado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commande copiée."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7974,6 +9138,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha pegado nada: el valor estaba vacío."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n’a été collé : la valeur était vide."
           }
         },
         "ko": {
@@ -8017,6 +9187,12 @@
             "value": "Otra app ha pasado a primer plano."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une autre app est passée au premier plan."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8056,6 +9232,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha pegado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non collé."
           }
         },
         "ko": {
@@ -8099,6 +9281,12 @@
             "value": "Pegado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collé."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8138,6 +9326,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Descargar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger"
           }
         },
         "ko": {
@@ -8181,6 +9375,12 @@
             "value": "La traducción necesita un paquete de idioma"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La traduction nécessite un pack de langue"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8220,6 +9420,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir %@ está disponible"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@ est disponible"
           }
         },
         "ko": {
@@ -8263,6 +9469,12 @@
             "value": "No se han podido buscar actualizaciones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de rechercher des mises à jour"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8302,6 +9514,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir está al día (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir est à jour (%@)"
           }
         },
         "ko": {
@@ -8345,6 +9563,12 @@
             "value": "Categorías"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégories"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8384,6 +9608,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique"
           }
         },
         "ko": {
@@ -8427,6 +9657,12 @@
             "value": "Pila"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pile"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8466,6 +9702,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta categoría está vacía.\nSelecciona un ítem y pulsa ⌘P para añadirlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette catégorie est vide.\nSélectionnez un élément et appuyez sur ⌘P pour l’ajouter."
           }
         },
         "ko": {
@@ -8509,6 +9751,12 @@
             "value": "“%@” no está en esta categoría."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » n’est pas dans cette catégorie."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8548,6 +9796,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia algo y aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiez quelque chose et cela apparaîtra ici."
           }
         },
         "ko": {
@@ -8591,6 +9845,12 @@
             "value": "Sin resultados para “%@”"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun résultat pour « %@ »"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8630,6 +9890,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions"
           }
         },
         "ko": {
@@ -8673,6 +9939,12 @@
             "value": "Añadir a categoría"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégoriser"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8712,6 +9984,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historial del portapapeles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique du presse-papiers"
           }
         },
         "ko": {
@@ -8755,6 +10033,12 @@
             "value": "Pegar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8794,6 +10078,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transformar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformer"
           }
         },
         "ko": {
@@ -8837,6 +10127,12 @@
             "value": "Buscar en el portapapeles…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher dans votre presse-papiers…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8876,6 +10172,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ resultados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ résultats"
           }
         },
         "ko": {
@@ -8919,6 +10221,12 @@
             "value": "1 resultado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 résultat"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8958,6 +10266,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comandos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes"
           }
         },
         "ko": {
@@ -9001,6 +10315,12 @@
             "value": "Anteriores"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus anciens"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9040,6 +10360,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette semaine"
           }
         },
         "ko": {
@@ -9083,6 +10409,12 @@
             "value": "Hoy"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd’hui"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9122,6 +10454,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier"
           }
         },
         "ko": {
@@ -9165,6 +10503,12 @@
             "value": "Copiar comando"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9204,6 +10548,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido leer la lista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire la liste."
           }
         },
         "ko": {
@@ -9247,6 +10597,12 @@
             "value": "En Terminal:"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans Terminal :"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9286,6 +10642,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargando…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement…"
           }
         },
         "ko": {
@@ -9329,6 +10691,12 @@
             "value": "Puede ver todo lo que copias"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut voir tout ce que vous copiez"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9368,6 +10736,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede ejecutar estos programas en tu Mac: %@. Pueden leer y escribir tus archivos y acceder a internet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut exécuter ces programmes sur votre Mac : %@. Ils peuvent lire et écrire vos fichiers et accéder à Internet."
           }
         },
         "ko": {
@@ -9411,6 +10785,12 @@
             "value": "Puede leer todo tu historial"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut lire tout votre historique"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9450,6 +10830,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede acceder a cualquier sitio web"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut accéder à n’importe quel site web"
           }
         },
         "ko": {
@@ -9493,6 +10879,12 @@
             "value": "Puede acceder a: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut accéder à : %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9532,6 +10924,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede leer y pegar secretos, como contraseñas. Nunca se escriben en el historial ni en el disco."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut lire et coller des secrets, comme des mots de passe. Ils ne sont jamais écrits dans l’historique ni sur le disque."
           }
         },
         "ko": {
@@ -9575,6 +10973,12 @@
             "value": "Las extensiones locales no están firmadas."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les extensions locales ne sont pas signées."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9614,6 +11018,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva categoría: “%@”"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle catégorie : « %@ »"
           }
         },
         "ko": {
@@ -9657,6 +11067,12 @@
             "value": "Añadir a una categoría…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à une catégorie…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9693,6 +11109,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "App"
@@ -9739,6 +11161,12 @@
             "value": "Categoría"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégorie"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9778,6 +11206,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Caracteres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caractères"
           }
         },
         "ko": {
@@ -9821,6 +11255,12 @@
             "value": "Cerrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9860,6 +11300,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Extensión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extension"
           }
         },
         "ko": {
@@ -9903,6 +11349,12 @@
             "value": "Generador · sin entrada"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Générateur · sans entrée"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9942,6 +11394,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrée"
           }
         },
         "ko": {
@@ -9985,6 +11443,12 @@
             "value": "Palabras clave"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mots-clés"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10024,6 +11488,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tipo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
           }
         },
         "ko": {
@@ -10067,6 +11537,12 @@
             "value": "%@ → %@ caracteres"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ caractères"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10106,6 +11582,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Longitud"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Longueur"
           }
         },
         "ko": {
@@ -10149,6 +11631,12 @@
             "value": "Se pegará"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sera collé"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10188,6 +11676,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se ejecuta al pegarlo o copiarlo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S’exécute quand vous le collez ou le copiez"
           }
         },
         "ko": {
@@ -10231,6 +11725,12 @@
             "value": "Transformador · se aplica al ítem seleccionado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformateur · s’applique à l’élément sélectionné"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10270,6 +11770,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contenido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contenu"
           }
         },
         "ko": {
@@ -10313,6 +11819,12 @@
             "value": "Copiado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10352,6 +11864,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dispositivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appareil"
           }
         },
         "ko": {
@@ -10395,6 +11913,12 @@
             "value": "iPhone · Portapapeles universal"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · Presse-papiers universel"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10434,6 +11958,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dominio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domaine"
           }
         },
         "ko": {
@@ -10477,6 +12007,12 @@
             "value": "%@ caracteres más"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ caractères de plus"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10516,6 +12052,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Información"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informations"
           }
         },
         "ko": {
@@ -10559,6 +12101,12 @@
             "value": "Ubicación"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emplacement"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10598,6 +12146,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tamaño"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille"
           }
         },
         "ko": {
@@ -10641,6 +12195,12 @@
             "value": "%@ nunca se muestra."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ n’est jamais affiché."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10680,6 +12240,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Después de iniciar sesión, vuelve a abrir el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après la connexion, rouvrez le panneau."
           }
         },
         "ko": {
@@ -10723,6 +12289,12 @@
             "value": "Ejecutar en Terminal"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécuter dans Terminal"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10762,6 +12334,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Palabras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mots"
           }
         },
         "ko": {
@@ -10805,6 +12383,12 @@
             "value": "Extensiones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10844,6 +12428,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "General"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
           }
         },
         "ko": {
@@ -10887,6 +12477,12 @@
             "value": "Atajos de teclado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis clavier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10926,6 +12522,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panneau"
           }
         },
         "ko": {
@@ -10969,6 +12571,12 @@
             "value": "Historial"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11008,6 +12616,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categorías"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catégories"
           }
         },
         "ko": {
@@ -11051,6 +12665,12 @@
             "value": "Permisos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisations"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11090,6 +12710,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer"
           }
         },
         "ko": {
@@ -11133,6 +12759,12 @@
             "value": "Versión %@ (%@)"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@ (%@)"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11172,6 +12804,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo lo que copias, justo bajo tu punto de inserción."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout ce que vous copiez, juste sous votre point d’insertion."
           }
         },
         "ko": {
@@ -11215,6 +12853,12 @@
             "value": "Buscar actualizaciones…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des mises à jour…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11254,6 +12898,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir en GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir sur GitHub"
           }
         },
         "ko": {
@@ -11297,6 +12947,12 @@
             "value": "Notas de la versión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes de version"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11336,6 +12992,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Licencias"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licences"
           }
         },
         "ko": {
@@ -11379,6 +13041,12 @@
             "value": "Apoyar yabbistir"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir yabbistir"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11418,6 +13086,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
           }
         },
         "ko": {
@@ -11461,6 +13135,12 @@
             "value": "Acerca de"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11500,6 +13180,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajustes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
           }
         },
         "ko": {
@@ -11543,6 +13229,12 @@
             "value": "%@ en la Pila"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dans la Pile"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11582,6 +13274,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
           }
         },
         "ko": {
@@ -11625,6 +13323,12 @@
             "value": "Lo que copies ahora se pone en fila aquí."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que vous copiez s’alignera ici."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11664,6 +13368,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar el siguiente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller le suivant"
           }
         },
         "ko": {
@@ -11707,6 +13417,12 @@
             "value": "Al principio"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En haut"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11746,6 +13462,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia nueva"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle copie"
           }
         },
         "ko": {
@@ -11789,6 +13511,12 @@
             "value": "2.º"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2e"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11828,6 +13556,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar de la Pila"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer de la Pile"
           }
         },
         "ko": {
@@ -11871,6 +13605,12 @@
             "value": "Pila"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pile"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11910,6 +13650,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mover al principio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Placer en haut"
           }
         },
         "ko": {
@@ -11953,6 +13699,12 @@
             "value": "%lld d"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld j"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11992,6 +13744,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld h"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h"
           }
         },
         "ko": {
@@ -12035,6 +13793,12 @@
             "value": "%lld min"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12074,6 +13838,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "à l’instant"
           }
         },
         "ko": {
@@ -12117,6 +13887,12 @@
             "value": "ayer"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12156,6 +13932,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atrás"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour"
           }
         },
         "ko": {
@@ -12199,6 +13981,12 @@
             "value": "Copiar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12238,6 +14026,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ y copiar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ et copier"
           }
         },
         "ko": {
@@ -12317,6 +14111,24 @@
             }
           }
         },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld transformation"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld transformations"
+                }
+              }
+            }
+          }
+        },
         "ko": {
           "variations": {
             "plural": {
@@ -12382,6 +14194,12 @@
             "value": "Ninguna transformación para “%@”"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune transformation pour « %@ »"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12421,6 +14239,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No usar por omisión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne plus utiliser par défaut"
           }
         },
         "ko": {
@@ -12464,6 +14288,12 @@
             "value": "Usar por omisión con ⇧↵"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Définir par défaut pour ⇧↵"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12503,6 +14333,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller"
           }
         },
         "ko": {
@@ -12546,6 +14382,12 @@
             "value": "Pegado como archivo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collé comme fichier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12585,6 +14427,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En la carpeta abierta del Finder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vers le dossier du Finder ouvert"
           }
         },
         "ko": {
@@ -12628,6 +14476,12 @@
             "value": "Para %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12667,6 +14521,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Por omisión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par défaut"
           }
         },
         "ko": {
@@ -12710,6 +14570,12 @@
             "value": "En el Finder"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vers le Finder"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12746,6 +14612,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -12792,6 +14664,12 @@
             "value": "Iniciar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12831,6 +14709,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido traducir este texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de traduire ce texte"
           }
         },
         "ko": {
@@ -12874,6 +14758,12 @@
             "value": "El paquete de idioma %@ → %@ no está descargado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le pack de langue %@ → %@ n’est pas téléchargé"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12913,6 +14803,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido saber de qué idioma es"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de déterminer la langue du texte"
           }
         },
         "ko": {
@@ -12956,6 +14852,12 @@
             "value": "%@ → %@ no se puede traducir en este Mac"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La traduction %@ → %@ n’est pas possible sur ce Mac"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12995,6 +14897,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Idioma"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
           }
         },
         "ko": {
@@ -13038,6 +14946,12 @@
             "value": "Apariencia"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparence"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13077,6 +14991,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Système"
           }
         },
         "ko": {
@@ -13120,6 +15040,12 @@
             "value": "Claro"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clair"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13159,6 +15085,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oscuro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sombre"
           }
         },
         "ko": {
@@ -13202,6 +15134,12 @@
             "value": "Abrir al iniciar sesión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir avec la session"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13241,6 +15179,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Necesita tu aprobación en Ajustes del Sistema."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nécessite votre approbation dans Réglages Système."
           }
         },
         "ko": {
@@ -13284,6 +15228,12 @@
             "value": "No se ha podido activar. Inténtalo en Ajustes del Sistema."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de l’activer. Essayez dans Réglages Système."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13323,6 +15273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir Ajustes del Sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages Système"
           }
         },
         "ko": {
@@ -13366,6 +15322,12 @@
             "value": "Icono de la barra de menús"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icône de la barre des menus"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13405,6 +15367,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mientras esté oculto, vuelve a abrir yabbistir para acceder a Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tant qu’elle est masquée, rouvrez yabbistir pour accéder aux Réglages."
           }
         },
         "ko": {
@@ -13448,6 +15416,12 @@
             "value": "Conservar el historial"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conserver l’historique pendant"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13487,6 +15461,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 semaine"
           }
         },
         "ko": {
@@ -13530,6 +15510,12 @@
             "value": "1 mes"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 mois"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13569,6 +15555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "3 meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 mois"
           }
         },
         "ko": {
@@ -13612,6 +15604,12 @@
             "value": "1 año"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 an"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13651,6 +15649,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Siempre"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours"
           }
         },
         "ko": {
@@ -13694,6 +15698,12 @@
             "value": "Se cuenta desde la última vez que usaste un ítem. Los ítems de una categoría nunca se eliminan."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compté à partir de la dernière utilisation d’un élément. Les éléments d’une catégorie ne sont jamais supprimés."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13733,6 +15743,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esto elimina %@ ítems ahora."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela supprime %@ éléments maintenant."
           }
         },
         "ko": {
@@ -13776,6 +15792,12 @@
             "value": "Esto elimina 1 ítem ahora."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela supprime 1 élément maintenant."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13815,6 +15837,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar y aplicar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer et appliquer"
           }
         },
         "ko": {
@@ -13858,6 +15886,12 @@
             "value": "Cancelar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13897,6 +15931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir categoría"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une catégorie"
           }
         },
         "ko": {
@@ -13940,6 +15980,12 @@
             "value": "Siempre"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13979,6 +16025,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Al elegirla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À la sélection"
           }
         },
         "ko": {
@@ -14022,6 +16074,12 @@
             "value": "¿Eliminar “%@”?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer « %@ » ?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14061,6 +16119,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Los ítems de tu historial se conservan. Los ítems guardados solo en esta categoría se eliminan."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les éléments de votre historique restent. Les éléments conservés uniquement dans cette catégorie sont supprimés."
           }
         },
         "ko": {
@@ -14104,6 +16168,12 @@
             "value": "Eliminar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14143,6 +16213,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La rellena su extensión; puedes cambiar dónde aparece."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentée par son extension ; vous pouvez changer l’endroit où elle s’affiche."
           }
         },
         "ko": {
@@ -14186,6 +16262,12 @@
             "value": "Apps ignoradas"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps ignorées"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14225,6 +16307,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada de lo que copies en estas apps se guarda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de ce que vous copiez dans ces apps n’est enregistré."
           }
         },
         "ko": {
@@ -14268,6 +16356,12 @@
             "value": "Conservar copias del iPhone"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conserver les copies de l’iPhone"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14307,6 +16401,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mostrar resultados de extensiones en el historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les résultats des extensions dans l’historique"
           }
         },
         "ko": {
@@ -14350,6 +16450,12 @@
             "value": "Almacenamiento"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stockage"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14389,6 +16495,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El historial ocupa %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’historique occupe %@"
           }
         },
         "ko": {
@@ -14432,6 +16544,12 @@
             "value": "Borrar historial…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer l’historique…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14471,6 +16589,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Borrar todo tu historial?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer tout votre historique ?"
           }
         },
         "ko": {
@@ -14514,6 +16638,12 @@
             "value": "Los ítems de tus categorías se conservan. Esta acción no se puede deshacer."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les éléments de vos catégories restent. Cette action est irréversible."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14553,6 +16683,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Borrar historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer l’historique"
           }
         },
         "ko": {
@@ -14596,6 +16732,12 @@
             "value": "Los resultados se pueden seguir pegando desde su tarjeta de tareas y desde las categorías."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les résultats peuvent toujours être collés depuis leur carte de tâche et vos catégories."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14635,6 +16777,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ocultar al compartir pantalla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer lors du partage d’écran"
           }
         },
         "ko": {
@@ -14678,6 +16826,12 @@
             "value": "El panel, la Pila y los avisos no aparecen en las grabaciones ni en las pantallas compartidas."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau, la Pile et les notifications n’apparaissent pas dans les enregistrements ni les écrans partagés."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14717,6 +16871,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atajos de teclado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis clavier"
           }
         },
         "ko": {
@@ -14760,6 +16920,12 @@
             "value": "Abrir el panel"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14799,6 +16965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiar en la Pila"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier dans la Pile"
           }
         },
         "ko": {
@@ -14842,6 +17014,12 @@
             "value": "Restaurar valores por omisión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir les valeurs par défaut"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14881,6 +17059,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans le panneau"
           }
         },
         "ko": {
@@ -14924,6 +17108,12 @@
             "value": "Moverse por la lista"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcourir la liste"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14963,6 +17153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cambiar de columna"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changer de colonne"
           }
         },
         "ko": {
@@ -15006,6 +17202,12 @@
             "value": "Pegar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15045,6 +17247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar la segunda opción"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller l’option secondaire"
           }
         },
         "ko": {
@@ -15088,6 +17296,12 @@
             "value": "Transformaciones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformations"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15127,6 +17341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions"
           }
         },
         "ko": {
@@ -15170,6 +17390,12 @@
             "value": "Copiar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15209,6 +17435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir a una categoría"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à une catégorie"
           }
         },
         "ko": {
@@ -15252,6 +17484,12 @@
             "value": "Editar categorías"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier les catégories"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15291,6 +17529,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar uno de los nueve primeros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller l’un des neuf premiers"
           }
         },
         "ko": {
@@ -15334,6 +17578,12 @@
             "value": "Cerrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15373,6 +17623,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se abre bajo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S’ouvre sous"
           }
         },
         "ko": {
@@ -15416,6 +17672,12 @@
             "value": "El punto de inserción"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le point d’insertion"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15455,6 +17717,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El puntero del ratón"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le pointeur de la souris"
           }
         },
         "ko": {
@@ -15498,6 +17766,12 @@
             "value": "Retardo de la vista previa"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Délai de l’aperçu"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15537,6 +17811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Corto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Court"
           }
         },
         "ko": {
@@ -15580,6 +17860,12 @@
             "value": "Medio"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyen"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15619,6 +17905,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Largo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Long"
           }
         },
         "ko": {
@@ -15662,6 +17954,12 @@
             "value": "↵ hace"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵ sert à"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15701,6 +17999,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar en la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller dans l’app"
           }
         },
         "ko": {
@@ -15744,6 +18048,12 @@
             "value": "Copiar solo en el portapapeles"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier uniquement dans le presse-papiers"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15783,6 +18093,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar siempre texto sin formato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours coller en texte brut"
           }
         },
         "ko": {
@@ -15826,6 +18142,12 @@
             "value": "Al pegar desde el panel y la Pila se pierden las fuentes, los colores y el formato de los enlaces."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les collages depuis le panneau et la Pile abandonnent les polices, les couleurs et la mise en forme des liens."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15865,6 +18187,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisé"
           }
         },
         "ko": {
@@ -15908,6 +18236,12 @@
             "value": "Necesario"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requis"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15947,6 +18281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opcional"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif"
           }
         },
         "ko": {
@@ -15990,6 +18330,12 @@
             "value": "Accesibilidad"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessibilité"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16029,6 +18375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pega en la app en la que estabas y localiza tu punto de inserción."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colle dans l’app où vous étiez et repère votre point d’insertion."
           }
         },
         "ko": {
@@ -16072,6 +18424,12 @@
             "value": "En Privacidad y seguridad › Accesibilidad, busca yabbistir y actívalo."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans Confidentialité et sécurité › Accessibilité, recherchez yabbistir et activez-le."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16111,6 +18469,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monitorización de los dispositivos de entrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surveillance de l’entrée"
           }
         },
         "ko": {
@@ -16154,6 +18518,12 @@
             "value": "Permite que la Pila detecte tu ⌘V para que el siguiente ítem aparezca tras cada pegado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permet à la Pile d’entendre votre ⌘V, afin que l’élément suivant apparaisse après chaque collage."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16193,6 +18563,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En Privacidad y seguridad › Monitorización de los dispositivos de entrada, busca yabbistir y actívalo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans Confidentialité et sécurité › Surveillance de l’entrée, recherchez yabbistir et activez-le."
           }
         },
         "ko": {
@@ -16236,6 +18612,12 @@
             "value": "Pegar desde otras apps"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller depuis d’autres apps"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16275,6 +18657,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permite que yabbistir vea lo que copias para poder guardar tu historial."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permet à yabbistir de voir ce que vous copiez, afin de tenir votre historique."
           }
         },
         "ko": {
@@ -16318,6 +18706,12 @@
             "value": "Si macOS te lo pregunta, elige Permitir siempre. Puedes cambiarlo después en Privacidad y seguridad."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si macOS vous le demande, choisissez Toujours autoriser. Vous pourrez le modifier plus tard dans Confidentialité et sécurité."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16357,6 +18751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS aún no lo ha preguntado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS ne l’a pas encore demandé."
           }
         },
         "ko": {
@@ -16400,6 +18800,12 @@
             "value": "macOS lo pregunta cada vez."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS le demande à chaque fois."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16439,6 +18845,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desactivado: yabbistir no puede ver lo que copias."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivé : yabbistir ne peut pas voir vos copies."
           }
         },
         "ko": {
@@ -16482,6 +18894,12 @@
             "value": "Abrir al iniciar sesión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir avec la session"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16521,6 +18939,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abre yabbistir al iniciar sesión, para que tu historial esté siempre al día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lance yabbistir à l’ouverture de votre session, pour que votre historique reste à jour."
           }
         },
         "ko": {
@@ -16564,6 +18988,12 @@
             "value": "Actívalo en General. Si macOS te lo pregunta, apruébalo en Ítems de inicio."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez-le dans Général. Si macOS vous le demande, approuvez-le dans Ouverture et extensions."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16603,6 +19033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vamos a traer tu biblioteca de Paste"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importons votre bibliothèque Paste"
           }
         },
         "ko": {
@@ -16646,6 +19082,12 @@
             "value": "Tus pinboards pasan a ser categorías. Tus datos de Paste solo se leen, nunca se modifican."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos pinboards deviennent des catégories. Vos données dans Paste sont seulement lues, jamais modifiées."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16682,6 +19124,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -16728,6 +19176,12 @@
             "value": "%@ · %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16767,6 +19221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo el historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout l’historique"
           }
         },
         "ko": {
@@ -16810,6 +19270,12 @@
             "value": "%@ → %@, como categorías"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@, sous forme de catégories"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16849,6 +19315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer"
           }
         },
         "ko": {
@@ -16892,6 +19364,12 @@
             "value": "Ahora no"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus tard"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16931,6 +19409,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trayéndolo todo…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transfert en cours…"
           }
         },
         "ko": {
@@ -16974,6 +19458,12 @@
             "value": "Las imágenes y el texto enriquecido también vienen."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les images et le texte enrichi sont aussi importés."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17010,6 +19500,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -17056,6 +19552,12 @@
             "value": "Todo aquí."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout est là."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17095,6 +19597,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte"
           }
         },
         "ko": {
@@ -17138,6 +19646,12 @@
             "value": "Código"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17177,6 +19691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enlace"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lien"
           }
         },
         "ko": {
@@ -17220,6 +19740,12 @@
             "value": "Imagen"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17259,6 +19785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Color"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur"
           }
         },
         "ko": {
@@ -17302,6 +19834,12 @@
             "value": "Archivo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17341,6 +19879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem nuevo añadido."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 nouvel élément ajouté."
           }
         },
         "ko": {
@@ -17384,6 +19928,12 @@
             "value": "%@ ítems nuevos añadidos."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nouveaux éléments ajoutés."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17423,6 +19973,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No hay nada nuevo que importar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de nouveau à importer."
           }
         },
         "ko": {
@@ -17466,6 +20022,12 @@
             "value": "No se ha podido importar 1 ítem."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 élément n’a pas pu être importé."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17505,6 +20067,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se han podido importar %@ ítems."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ éléments n’ont pas pu être importés."
           }
         },
         "ko": {
@@ -17548,6 +20116,12 @@
             "value": "No se ha podido leer la biblioteca. Cierra Paste e inténtalo de nuevo."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire la bibliothèque. Quittez Paste et réessayez."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17587,6 +20161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha encontrado ninguna biblioteca de Paste en este Mac."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune bibliothèque Paste n’a été trouvée sur ce Mac."
           }
         },
         "ko": {
@@ -17630,6 +20210,12 @@
             "value": "Paste sigue abierto"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste est toujours ouvert"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17669,6 +20255,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ambos usan los mismos atajos. Cierra Paste y quítalo de los Ítems de inicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux utilisent les mêmes raccourcis. Quittez Paste et retirez-le d’Ouverture et extensions."
           }
         },
         "ko": {
@@ -17712,6 +20304,12 @@
             "value": "Salir de Paste"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter Paste"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17751,6 +20349,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 élément"
           }
         },
         "ko": {
@@ -17794,6 +20398,12 @@
             "value": "%@ ítems"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ éléments"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17833,6 +20443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem fijado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 élément épinglé"
           }
         },
         "ko": {
@@ -17876,6 +20492,12 @@
             "value": "%@ ítems fijados"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ éléments épinglés"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17912,6 +20534,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 pinboard"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "1 pinboard"
@@ -17958,6 +20586,12 @@
             "value": "%@ pinboards"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pinboards"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17997,6 +20631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo lo que copias, justo bajo tu punto de inserción."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout ce que vous copiez, juste sous votre point d’insertion."
           }
         },
         "ko": {
@@ -18040,6 +20680,12 @@
             "value": "yabbistir guarda tu historial. Pulsa el atajo, empieza a escribir y pega con ↵. Sin tocar el ratón."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir garde votre historique. Appuyez sur le raccourci, commencez à taper, collez avec ↵. Sans souris."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18079,6 +20725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empezar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C’est parti"
           }
         },
         "ko": {
@@ -18122,6 +20774,12 @@
             "value": "Tu biblioteca de Paste también se importa"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre bibliothèque Paste peut aussi être importée"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18161,6 +20819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continuar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
           }
         },
         "ko": {
@@ -18204,6 +20868,12 @@
             "value": "Unos últimos ajustes"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques derniers réglages"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18243,6 +20913,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puedes cambiarlos cuando quieras en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez les modifier à tout moment dans les Réglages."
           }
         },
         "ko": {
@@ -18286,6 +20962,12 @@
             "value": "Atajo para abrir el panel"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourci pour ouvrir le panneau"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18325,6 +21007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El que ya conoces de Paste"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celui que vous connaissez dans Paste"
           }
         },
         "ko": {
@@ -18368,6 +21056,12 @@
             "value": "Puedes cambiarlo en Ajustes."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez le modifier dans les Réglages."
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18407,6 +21101,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar directamente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller directement"
           }
         },
         "ko": {
@@ -18450,6 +21150,12 @@
             "value": "Sin Accesibilidad, los ítems solo se copian en el portapapeles"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans Accessibilité, les éléments sont seulement copiés dans le presse-papiers"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18489,6 +21195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser"
           }
         },
         "ko": {
@@ -18532,6 +21244,12 @@
             "value": "Permitido"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisé"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18571,6 +21289,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir al iniciar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir avec la session"
           }
         },
         "ko": {
@@ -18614,6 +21338,12 @@
             "value": "Listo en segundo plano cuando se inicia el Mac"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt en arrière-plan au démarrage de votre Mac"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18653,6 +21383,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar y mostrar el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé, afficher le panneau"
           }
         },
         "ko": {
@@ -18696,6 +21432,12 @@
             "value": "Repetir la configuración inicial…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer la configuration initiale…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18735,6 +21477,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Leyendo tu biblioteca…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture de votre bibliothèque…"
           }
         },
         "ko": {
@@ -18778,6 +21526,12 @@
             "value": "ítems · %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "éléments · %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18817,6 +21571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ítem · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "élément · %@"
           }
         },
         "ko": {

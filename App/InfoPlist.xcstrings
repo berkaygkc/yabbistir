@@ -23,6 +23,12 @@
             "value" : "Algunas extensiones que instalas se comunican con otras apps, por ejemplo para leer las pestañas abiertas de Safari o para añadir una nota en Notas. macOS lo pregunta una vez por cada app."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certaines extensions que vous installez communiquent avec d’autres apps, par exemple pour lire les onglets ouverts de Safari ou ajouter une note dans Notes. macOS vous le demande une fois pour chaque app."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
