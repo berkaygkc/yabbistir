@@ -17,6 +17,12 @@
             "value" : "Some extensions you install talk to other apps, for example to read Safari's open tabs or to add a note to Notes. macOS asks once for each app."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algunas extensiones que instalas se comunican con otras apps, por ejemplo para leer las pestañas abiertas de Safari o para añadir una nota en Notas. macOS lo pregunta una vez por cada app."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",

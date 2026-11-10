@@ -16,6 +16,12 @@
             "value": "Add to category…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a una categoría…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -37,6 +43,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add to stack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a la Pila"
           }
         },
         "tr": {
@@ -62,6 +74,12 @@
             "value": "All transforms (%@)…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las transformaciones (%@)…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -83,6 +101,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copy to clipboard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar en el portapapeles"
           }
         },
         "tr": {
@@ -108,6 +132,12 @@
             "value": "Delete"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -129,6 +159,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No actions found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se han encontrado acciones"
           }
         },
         "tr": {
@@ -154,6 +190,12 @@
             "value": "Paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -175,6 +217,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste as plain text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar como texto sin formato"
           }
         },
         "tr": {
@@ -200,6 +248,12 @@
             "value": "Preview"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista previa"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -221,6 +275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove from category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar de la categoría"
           }
         },
         "tr": {
@@ -246,6 +306,12 @@
             "value": "Search actions…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar acciones…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -267,6 +333,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence couldn’t answer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence no ha podido responder"
           }
         },
         "tr": {
@@ -292,6 +364,12 @@
             "value": "Apple Intelligence is busy, try again in a moment"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence tiene demasiada carga, inténtalo de nuevo en un momento"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -313,6 +391,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence won’t answer this"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence no responderá a esto"
           }
         },
         "tr": {
@@ -338,6 +422,12 @@
             "value": "Apple Intelligence doesn’t support this language yet"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence aún no admite este idioma"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -359,6 +449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This text is too long for Apple Intelligence"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este texto es demasiado largo para Apple Intelligence"
           }
         },
         "tr": {
@@ -384,6 +480,12 @@
             "value": "This Mac can’t run Apple Intelligence"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Mac no puede ejecutar Apple Intelligence"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -405,6 +507,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turn on Apple Intelligence in System Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa Apple Intelligence en Ajustes del Sistema"
           }
         },
         "tr": {
@@ -430,6 +538,12 @@
             "value": "Apple Intelligence is still getting ready"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence aún se está preparando"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -451,6 +565,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clay"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arcilla"
           }
         },
         "tr": {
@@ -476,6 +596,12 @@
             "value": "Ochre"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocre"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -497,6 +623,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plum"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciruela"
           }
         },
         "tr": {
@@ -522,6 +654,12 @@
             "value": "Sage"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvia"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -543,6 +681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Slate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pizarra"
           }
         },
         "tr": {
@@ -568,6 +712,12 @@
             "value": "Teal"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde azulado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -589,6 +739,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Always"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siempre"
           }
         },
         "tr": {
@@ -614,6 +770,12 @@
             "value": "Close"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -635,6 +797,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva"
           }
         },
         "tr": {
@@ -660,6 +828,12 @@
             "value": "Select"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seleccionar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -681,6 +855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Visibility"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visibilidad"
           }
         },
         "tr": {
@@ -706,6 +886,12 @@
             "value": "New category"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva categoría"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -727,6 +913,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“Always” categories open as columns"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las categorías “Siempre” se abren como columnas"
           }
         },
         "tr": {
@@ -752,6 +944,12 @@
             "value": "On select"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al seleccionar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -773,6 +971,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Drag to reorder columns. The panel updates live."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra para reordenar las columnas. El panel se actualiza al instante."
           }
         },
         "tr": {
@@ -798,6 +1002,12 @@
             "value": "Categories"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categorías"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -819,6 +1029,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
           }
         },
         "tr": {
@@ -844,6 +1060,12 @@
             "value": "Commands"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -865,6 +1087,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir"
           }
         },
         "tr": {
@@ -890,6 +1118,12 @@
             "value": "Don’t Install"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No instalar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -911,6 +1145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow and Install"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir e instalar"
           }
         },
         "tr": {
@@ -936,6 +1176,12 @@
             "value": "Review Permissions…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar permisos…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -957,6 +1203,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” wants to:"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” quiere:"
           }
         },
         "tr": {
@@ -982,6 +1234,12 @@
             "value": "Choose…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1003,6 +1261,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clear"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar"
           }
         },
         "tr": {
@@ -1028,6 +1292,12 @@
             "value": "No folder chosen"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguna carpeta elegida"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1049,6 +1319,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suggested: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerida: %@"
           }
         },
         "tr": {
@@ -1074,6 +1350,12 @@
             "value": "Install .yabext…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar .yabext…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1095,6 +1377,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Install from Folder…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar desde una carpeta…"
           }
         },
         "tr": {
@@ -1120,6 +1408,12 @@
             "value": "Problems"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Problemas"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1141,6 +1435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link Development Folder…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vincular carpeta de desarrollo…"
           }
         },
         "tr": {
@@ -1166,6 +1466,12 @@
             "value": "Log"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registro"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1187,6 +1493,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nothing logged yet. console.log and errors from extensions show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no se ha registrado nada. Aquí aparecen console.log y los errores de las extensiones."
           }
         },
         "tr": {
@@ -1212,6 +1524,12 @@
             "value": "Open Extensions Folder"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir la carpeta de extensiones"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1233,6 +1551,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permissions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permisos"
           }
         },
         "tr": {
@@ -1258,6 +1582,12 @@
             "value": "Turn On"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1279,6 +1609,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preferences"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferencias"
           }
         },
         "tr": {
@@ -1304,6 +1640,12 @@
             "value": "Reload"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recargar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1325,6 +1667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
           }
         },
         "tr": {
@@ -1350,6 +1698,12 @@
             "value": "Remove %@?"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar %@?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1371,6 +1725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Image"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imagen"
           }
         },
         "tr": {
@@ -1396,6 +1756,12 @@
             "value": "Copy Rules"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reglas de copia"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1417,6 +1783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clear"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar"
           }
         },
         "tr": {
@@ -1442,6 +1814,12 @@
             "value": "The secret could not be saved to the Keychain."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido guardar el secreto en el Llavero."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1463,6 +1841,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Save"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar"
           }
         },
         "tr": {
@@ -1488,6 +1872,12 @@
             "value": "Saved"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1509,6 +1899,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Built-in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Integrada"
           }
         },
         "tr": {
@@ -1534,6 +1930,12 @@
             "value": "Development"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desarrollo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1552,6 +1954,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Local"
@@ -1580,6 +1988,12 @@
             "value": "Couldn’t verify the store’s list. Showing the saved list."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido verificar la lista de la tienda. Se muestra la lista guardada."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1601,6 +2015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The store’s signature didn’t match. Try again later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La firma de la tienda no coincide. Inténtalo de nuevo más tarde."
           }
         },
         "tr": {
@@ -1626,6 +2046,12 @@
             "value": "Couldn’t verify the store."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido verificar la tienda."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1647,6 +2073,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría"
           }
         },
         "tr": {
@@ -1672,6 +2104,12 @@
             "value": "AI"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1693,6 +2131,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "All Categories"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las categorías"
           }
         },
         "tr": {
@@ -1718,6 +2162,12 @@
             "value": "Developer"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desarrollo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1739,6 +2189,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Files"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos"
           }
         },
         "tr": {
@@ -1764,6 +2220,12 @@
             "value": "Images"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imágenes"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1785,6 +2247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Links"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlaces"
           }
         },
         "tr": {
@@ -1810,6 +2278,12 @@
             "value": "Media"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multimedia"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1831,6 +2305,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Productivity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Productividad"
           }
         },
         "tr": {
@@ -1856,6 +2336,12 @@
             "value": "Text"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texto"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1877,6 +2363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow and Update"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir y actualizar"
           }
         },
         "tr": {
@@ -1902,6 +2394,12 @@
             "value": "Also updating (no new permissions): %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También se actualizan (sin permisos nuevos): %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1923,6 +2421,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Install %@ extensions?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Instalar %@ extensiones?"
           }
         },
         "tr": {
@@ -1948,6 +2452,12 @@
             "value": "Install “%@”?"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Instalar “%@”?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1969,6 +2479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New permissions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permisos nuevos"
           }
         },
         "tr": {
@@ -1994,6 +2510,12 @@
             "value": "Needs no special permissions."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No necesita permisos especiales."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2015,6 +2537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Update %@ extensions?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Actualizar %@ extensiones?"
           }
         },
         "tr": {
@@ -2040,6 +2568,12 @@
             "value": "Update “%@”?"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Actualizar “%@”?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2061,6 +2595,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The store has no extensions yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tienda aún no tiene extensiones."
           }
         },
         "tr": {
@@ -2086,6 +2626,12 @@
             "value": "No extensions in this category."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay extensiones en esta categoría."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2107,6 +2653,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No extensions match “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguna extensión coincide con “%@”"
           }
         },
         "tr": {
@@ -2132,6 +2684,12 @@
             "value": "The store list changed; review it and try again."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lista de la tienda ha cambiado; revísala e inténtalo de nuevo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2153,6 +2711,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "It can’t be installed on this version of yabbistir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se puede instalar en esta versión de yabbistir."
           }
         },
         "tr": {
@@ -2178,6 +2742,12 @@
             "value": "Couldn’t download it. Check your connection and try again."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido descargar. Comprueba tu conexión e inténtalo de nuevo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2199,6 +2769,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The download didn’t match the catalog, so it wasn’t installed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La descarga no coincidía con el catálogo, así que no se ha instalado."
           }
         },
         "tr": {
@@ -2224,6 +2800,12 @@
             "value": "Couldn’t install it. The details are in the Development tab."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido instalar. Los detalles están en la pestaña Desarrollo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2245,6 +2827,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t verify; nothing was installed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido verificar; no se ha instalado nada."
           }
         },
         "tr": {
@@ -2270,6 +2858,12 @@
             "value": "Install"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2291,6 +2885,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Install (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar (%@)"
           }
         },
         "tr": {
@@ -2316,6 +2916,12 @@
             "value": "Installing…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalando…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2337,6 +2943,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The extension from the link isn’t in the store."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión del enlace no está en la tienda."
           }
         },
         "tr": {
@@ -2362,6 +2974,12 @@
             "value": "The extensions from the link aren’t in the store."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las extensiones del enlace no están en la tienda."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2383,6 +3001,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Some extensions from the link aren’t in the store."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algunas extensiones del enlace no están en la tienda."
           }
         },
         "tr": {
@@ -2408,6 +3032,12 @@
             "value": "The extension from the link is already installed."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión del enlace ya está instalada."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2429,6 +3059,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The extensions from the link are already installed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las extensiones del enlace ya están instaladas."
           }
         },
         "tr": {
@@ -2454,6 +3090,12 @@
             "value": "The extension from the link needs a newer yabbistir."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión del enlace necesita una versión más reciente de yabbistir."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2475,6 +3117,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The extensions from the link need a newer yabbistir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las extensiones del enlace necesitan una versión más reciente de yabbistir."
           }
         },
         "tr": {
@@ -2500,6 +3148,12 @@
             "value": "Some extensions from the link need a newer yabbistir."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algunas extensiones del enlace necesitan una versión más reciente de yabbistir."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2521,6 +3175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The extension from the link is waiting for the store."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión del enlace está esperando a la tienda."
           }
         },
         "tr": {
@@ -2546,6 +3206,12 @@
             "value": "The extensions from the link are waiting for the store."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las extensiones del enlace están esperando a la tienda."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2567,6 +3233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Loading the store…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando la tienda…"
           }
         },
         "tr": {
@@ -2592,6 +3264,12 @@
             "value": "Couldn’t read the store’s list. Showing the saved list."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido leer la lista de la tienda. Se muestra la lista guardada."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2613,6 +3291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Try again later, or update yabbistir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inténtalo de nuevo más tarde o actualiza yabbistir."
           }
         },
         "tr": {
@@ -2638,6 +3322,12 @@
             "value": "Couldn’t read the store’s list."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido leer la lista de la tienda."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2659,6 +3349,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The store now needs a newer yabbistir. Showing the saved list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora la tienda necesita una versión más reciente de yabbistir. Se muestra la lista guardada."
           }
         },
         "tr": {
@@ -2684,6 +3380,12 @@
             "value": "Update yabbistir, then try again."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiza yabbistir y vuelve a intentarlo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2705,6 +3407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The store needs a newer yabbistir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tienda necesita una versión más reciente de yabbistir."
           }
         },
         "tr": {
@@ -2730,6 +3438,12 @@
             "value": "Couldn’t reach the store. Showing the saved list."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido conectar con la tienda. Se muestra la lista guardada."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2751,6 +3465,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Check your internet connection, then try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprueba tu conexión a internet y vuelve a intentarlo."
           }
         },
         "tr": {
@@ -2776,6 +3496,12 @@
             "value": "Couldn’t reach the store."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido conectar con la tienda."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2797,6 +3523,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The store sent an older list. Showing the saved list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tienda ha enviado una lista más antigua. Se muestra la lista guardada."
           }
         },
         "tr": {
@@ -2822,6 +3554,12 @@
             "value": "Refresh"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2843,6 +3581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Checking the store…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobando la tienda…"
           }
         },
         "tr": {
@@ -2868,6 +3612,12 @@
             "value": "Search extensions"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar extensiones"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2889,6 +3639,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Requires a newer yabbistir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requiere una versión más reciente de yabbistir"
           }
         },
         "tr": {
@@ -2914,6 +3670,12 @@
             "value": "Installed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalada"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2935,6 +3697,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Update available"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualización disponible"
           }
         },
         "tr": {
@@ -2960,6 +3728,12 @@
             "value": "Sees what you copy"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ve lo que copias"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2981,6 +3755,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Runs: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecuta: %@"
           }
         },
         "tr": {
@@ -3006,6 +3786,12 @@
             "value": "Runs programs"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecuta programas"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3027,6 +3813,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reads your history"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lee tu historial"
           }
         },
         "tr": {
@@ -3052,6 +3844,12 @@
             "value": "Network: any site"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red: cualquier sitio"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3073,6 +3871,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Network: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red: %@"
           }
         },
         "tr": {
@@ -3098,6 +3902,12 @@
             "value": "Network: %@ sites"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red: %@ sitios"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3119,6 +3929,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Try Again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reintentar"
           }
         },
         "tr": {
@@ -3144,6 +3960,12 @@
             "value": "Update All"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar todo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3165,6 +3987,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ updates"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ actualizaciones"
           }
         },
         "tr": {
@@ -3190,6 +4018,12 @@
             "value": "1 update"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 actualización"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3211,6 +4045,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Development"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desarrollo"
           }
         },
         "tr": {
@@ -3236,6 +4076,12 @@
             "value": "Installed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instaladas"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3257,6 +4103,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Store"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tienda"
           }
         },
         "tr": {
@@ -3282,6 +4134,12 @@
             "value": "Turn Off Third-Party Extensions"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar extensiones de terceros"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3303,6 +4161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar"
           }
         },
         "tr": {
@@ -3328,6 +4192,12 @@
             "value": "%@ isn’t installed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ no está instalado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3349,6 +4219,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Waiting for your permission"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esperando tu permiso"
           }
         },
         "tr": {
@@ -3374,6 +4250,12 @@
             "value": "History isn’t available here"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El historial no está disponible aquí"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3395,6 +4277,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This extension isn’t allowed to read your history"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta extensión no tiene permiso para leer tu historial"
           }
         },
         "tr": {
@@ -3420,6 +4308,12 @@
             "value": "This took too long"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto ha tardado demasiado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3441,6 +4335,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
           }
         },
         "tr": {
@@ -3466,6 +4366,12 @@
             "value": "yabbistir jobs"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tareas de yabbistir"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3487,6 +4393,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Close"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
           }
         },
         "tr": {
@@ -3512,6 +4424,12 @@
             "value": "Saved to Finder"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardado en el Finder"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3533,6 +4451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pasted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegado"
           }
         },
         "tr": {
@@ -3558,6 +4482,12 @@
             "value": "Added to Stack"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadido a la Pila"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3579,6 +4509,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t finish"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido terminar"
           }
         },
         "tr": {
@@ -3604,6 +4540,12 @@
             "value": "The extension stopped unexpectedly"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión se ha detenido de forma inesperada"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3625,6 +4567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t connect"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido conectar"
           }
         },
         "tr": {
@@ -3650,6 +4598,12 @@
             "value": "Not allowed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No permitido"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3671,6 +4625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ isn’t installed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ no está instalado"
           }
         },
         "tr": {
@@ -3696,6 +4656,12 @@
             "value": "The extension isn’t available right now"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La extensión no está disponible ahora mismo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3717,6 +4683,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancel: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar: %@"
           }
         },
         "tr": {
@@ -3742,6 +4714,12 @@
             "value": "Running Jobs"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tareas en curso"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3763,6 +4741,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Queued"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cola"
           }
         },
         "tr": {
@@ -3788,6 +4772,12 @@
             "value": "Ready, %@ to paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo, %@ para pegar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3809,6 +4799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Starting"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciando"
           }
         },
         "tr": {
@@ -3834,6 +4830,12 @@
             "value": "Added to history"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadido al historial"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3857,6 +4859,12 @@
             "value": "Code"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3875,6 +4883,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Color"
@@ -3903,6 +4917,12 @@
             "value": "File"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3924,6 +4944,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Image"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imagen"
           }
         },
         "tr": {
@@ -3949,6 +4975,12 @@
             "value": "Link"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlace"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3970,6 +5002,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texto"
           }
         },
         "tr": {
@@ -3995,6 +5033,12 @@
             "value": "Edit categories"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar categorías"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4016,6 +5060,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opens as a column when checked"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se abre como columna si está marcada"
           }
         },
         "tr": {
@@ -4041,6 +5091,12 @@
             "value": "Language"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4062,6 +5118,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open Panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el panel"
           }
         },
         "tr": {
@@ -4087,6 +5149,12 @@
             "value": "Quit yabbistir"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de yabbistir"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4108,6 +5176,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Check for Updates…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar actualizaciones…"
           }
         },
         "tr": {
@@ -4133,6 +5207,12 @@
             "value": "Settings…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4154,6 +5234,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copied."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado."
           }
         },
         "tr": {
@@ -4179,6 +5265,12 @@
             "value": "Copied, paste with ⌘V"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado, pega con ⌘V"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4200,6 +5292,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes"
           }
         },
         "tr": {
@@ -4225,6 +5323,12 @@
             "value": "Allow Accessibility to paste directly."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permite Accesibilidad para pegar directamente."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4246,6 +5350,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copied to clipboard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado en el portapapeles"
           }
         },
         "tr": {
@@ -4271,6 +5381,12 @@
             "value": "%@ was turned off after repeated errors."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ se ha desactivado tras varios errores seguidos."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4289,6 +5405,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "%@: %@"
@@ -4317,6 +5439,12 @@
             "value": "Extension failed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error en la extensión"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4338,6 +5466,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow it so the next item follows each ⌘V."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permítelo para que el siguiente ítem aparezca tras cada ⌘V."
           }
         },
         "tr": {
@@ -4363,6 +5497,12 @@
             "value": "Stack needs Input Monitoring"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Pila necesita Monitorización de los dispositivos de entrada"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4384,6 +5524,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "It leaves the clipboard in 30 seconds."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se borrará del portapapeles en 30 segundos."
           }
         },
         "tr": {
@@ -4409,6 +5555,12 @@
             "value": "Press ⌘V to paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa ⌘V para pegar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4430,6 +5582,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Run it in Terminal, then open the panel again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecútalo en Terminal y vuelve a abrir el panel."
           }
         },
         "tr": {
@@ -4455,6 +5613,12 @@
             "value": "Command copied."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comando copiado."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4476,6 +5640,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nothing pasted: the value was empty."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha pegado nada: el valor estaba vacío."
           }
         },
         "tr": {
@@ -4501,6 +5671,12 @@
             "value": "Another app came to the front."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra app ha pasado a primer plano."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4522,6 +5698,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Not pasted."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha pegado."
           }
         },
         "tr": {
@@ -4547,6 +5729,12 @@
             "value": "Pasted."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegado."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4568,6 +5756,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Download"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargar"
           }
         },
         "tr": {
@@ -4593,6 +5787,12 @@
             "value": "Translation needs a language pack"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La traducción necesita un paquete de idioma"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4614,6 +5814,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir %@ is available"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@ está disponible"
           }
         },
         "tr": {
@@ -4639,6 +5845,12 @@
             "value": "Couldn’t check for updates"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se han podido buscar actualizaciones"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4660,6 +5872,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir is up to date (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir está al día (%@)"
           }
         },
         "tr": {
@@ -4685,6 +5903,12 @@
             "value": "Categories"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categorías"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4706,6 +5930,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "History"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial"
           }
         },
         "tr": {
@@ -4731,6 +5961,12 @@
             "value": "Stack"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pila"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4752,6 +5988,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This category is empty.\nSelect an item and press ⌘P to add it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta categoría está vacía.\nSelecciona un ítem y pulsa ⌘P para añadirlo."
           }
         },
         "tr": {
@@ -4777,6 +6019,12 @@
             "value": "“%@” isn’t in this category."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” no está en esta categoría."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4798,6 +6046,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copy something and it will appear here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia algo y aparecerá aquí."
           }
         },
         "tr": {
@@ -4823,6 +6077,12 @@
             "value": "No results for “%@”"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin resultados para “%@”"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4844,6 +6104,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acciones"
           }
         },
         "tr": {
@@ -4869,6 +6135,12 @@
             "value": "Add to category"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a categoría"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4890,6 +6162,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clipboard history"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial del portapapeles"
           }
         },
         "tr": {
@@ -4915,6 +6193,12 @@
             "value": "Paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4936,6 +6220,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transform"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformar"
           }
         },
         "tr": {
@@ -4961,6 +6251,12 @@
             "value": "Search your clipboard…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar en el portapapeles…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4982,6 +6278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ results"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ resultados"
           }
         },
         "tr": {
@@ -5007,6 +6309,12 @@
             "value": "1 result"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 resultado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5028,6 +6336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commands"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos"
           }
         },
         "tr": {
@@ -5053,6 +6367,12 @@
             "value": "Older"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anteriores"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5074,6 +6394,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana"
           }
         },
         "tr": {
@@ -5099,6 +6425,12 @@
             "value": "Today"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5120,6 +6452,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yesterday"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayer"
           }
         },
         "tr": {
@@ -5145,6 +6483,12 @@
             "value": "Copy command"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5166,6 +6510,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t read the list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido leer la lista."
           }
         },
         "tr": {
@@ -5191,6 +6541,12 @@
             "value": "In Terminal:"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Terminal:"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5212,6 +6568,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Loading…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando…"
           }
         },
         "tr": {
@@ -5237,6 +6599,12 @@
             "value": "Can see everything you copy"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede ver todo lo que copias"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5258,6 +6626,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Can run these programs on your Mac: %@. They can read and write your files and reach the internet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede ejecutar estos programas en tu Mac: %@. Pueden leer y escribir tus archivos y acceder a internet."
           }
         },
         "tr": {
@@ -5283,6 +6657,12 @@
             "value": "Can read your whole history"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede leer todo tu historial"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5304,6 +6684,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Can reach any website"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede acceder a cualquier sitio web"
           }
         },
         "tr": {
@@ -5329,6 +6715,12 @@
             "value": "Can reach: %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede acceder a: %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5350,6 +6742,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Can read and paste secrets such as passwords. They’re never written to history or disk."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede leer y pegar secretos, como contraseñas. Nunca se escriben en el historial ni en el disco."
           }
         },
         "tr": {
@@ -5375,6 +6773,12 @@
             "value": "Local extensions are not signed."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las extensiones locales no están firmadas."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5396,6 +6800,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New category: “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva categoría: “%@”"
           }
         },
         "tr": {
@@ -5421,6 +6831,12 @@
             "value": "Add to category…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a una categoría…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5439,6 +6855,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "App"
@@ -5467,6 +6889,12 @@
             "value": "Category"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5488,6 +6916,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Characters"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caracteres"
           }
         },
         "tr": {
@@ -5513,6 +6947,12 @@
             "value": "Close"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5534,6 +6974,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Extension"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensión"
           }
         },
         "tr": {
@@ -5559,6 +7005,12 @@
             "value": "Generator · takes no input"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generador · sin entrada"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5580,6 +7032,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Input"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrada"
           }
         },
         "tr": {
@@ -5605,6 +7063,12 @@
             "value": "Keywords"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras clave"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5626,6 +7090,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kind"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipo"
           }
         },
         "tr": {
@@ -5651,6 +7121,12 @@
             "value": "%@ → %@ characters"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ caracteres"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5672,6 +7148,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Length"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Longitud"
           }
         },
         "tr": {
@@ -5697,6 +7179,12 @@
             "value": "Will paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se pegará"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5718,6 +7206,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Runs when you paste or copy it"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se ejecuta al pegarlo o copiarlo"
           }
         },
         "tr": {
@@ -5743,6 +7237,12 @@
             "value": "Transformer · applies to the selected item"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformador · se aplica al ítem seleccionado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5764,6 +7264,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Content"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contenido"
           }
         },
         "tr": {
@@ -5789,6 +7295,12 @@
             "value": "Copied"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5810,6 +7322,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Device"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dispositivo"
           }
         },
         "tr": {
@@ -5835,6 +7353,12 @@
             "value": "iPhone · Universal Clipboard"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · Portapapeles universal"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5856,6 +7380,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Domain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dominio"
           }
         },
         "tr": {
@@ -5881,6 +7411,12 @@
             "value": "%@ more characters"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ caracteres más"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5902,6 +7438,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Información"
           }
         },
         "tr": {
@@ -5927,6 +7469,12 @@
             "value": "Location"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubicación"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5948,6 +7496,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Size"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamaño"
           }
         },
         "tr": {
@@ -5973,6 +7527,12 @@
             "value": "%@ is never shown."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nunca se muestra."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5994,6 +7554,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "After you sign in, open the panel again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Después de iniciar sesión, vuelve a abrir el panel."
           }
         },
         "tr": {
@@ -6019,6 +7585,12 @@
             "value": "Run in Terminal"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar en Terminal"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6040,6 +7612,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Words"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras"
           }
         },
         "tr": {
@@ -6065,6 +7643,12 @@
             "value": "Extensions"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensiones"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6083,6 +7667,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "General"
@@ -6111,6 +7701,12 @@
             "value": "Shortcuts"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos de teclado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6129,6 +7725,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Panel"
@@ -6157,6 +7759,12 @@
             "value": "History"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6178,6 +7786,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categories"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categorías"
           }
         },
         "tr": {
@@ -6203,6 +7817,12 @@
             "value": "Permissions"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permisos"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6224,6 +7844,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Import"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar"
           }
         },
         "tr": {
@@ -6249,6 +7875,12 @@
             "value": "Version %@ (%@)"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión %@ (%@)"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6270,6 +7902,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Everything you copy, right under your caret."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo lo que copias, justo bajo tu punto de inserción."
           }
         },
         "tr": {
@@ -6295,6 +7933,12 @@
             "value": "Check for Updates…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar actualizaciones…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6316,6 +7960,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open on GitHub"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir en GitHub"
           }
         },
         "tr": {
@@ -6341,6 +7991,12 @@
             "value": "Release Notes"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas de la versión"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6362,6 +8018,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Licenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licencias"
           }
         },
         "tr": {
@@ -6387,6 +8049,12 @@
             "value": "Support yabbistir"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar yabbistir"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6408,6 +8076,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Done"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar"
           }
         },
         "tr": {
@@ -6433,6 +8107,12 @@
             "value": "About"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6454,6 +8134,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
           }
         },
         "tr": {
@@ -6479,6 +8165,12 @@
             "value": "%@ in the stack"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en la Pila"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6500,6 +8192,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Done"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar"
           }
         },
         "tr": {
@@ -6525,6 +8223,12 @@
             "value": "What you copy now lines up here."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que copies ahora se pone en fila aquí."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6546,6 +8250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste next"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar el siguiente"
           }
         },
         "tr": {
@@ -6571,6 +8281,12 @@
             "value": "To top"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al principio"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6592,6 +8308,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New copy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia nueva"
           }
         },
         "tr": {
@@ -6617,6 +8339,12 @@
             "value": "2nd"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2.º"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6638,6 +8366,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove from stack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar de la Pila"
           }
         },
         "tr": {
@@ -6663,6 +8397,12 @@
             "value": "Stack"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pila"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6684,6 +8424,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Move to top"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover al principio"
           }
         },
         "tr": {
@@ -6709,6 +8455,12 @@
             "value": "%lldd"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld d"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6730,6 +8482,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lldh"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h"
           }
         },
         "tr": {
@@ -6755,6 +8513,12 @@
             "value": "%lldm"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6776,6 +8540,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ahora"
           }
         },
         "tr": {
@@ -6801,6 +8571,12 @@
             "value": "yesterday"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ayer"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6822,6 +8598,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Back"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atrás"
           }
         },
         "tr": {
@@ -6847,6 +8629,12 @@
             "value": "Copy"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6868,6 +8656,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ and copy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ y copiar"
           }
         },
         "tr": {
@@ -6917,6 +8711,24 @@
             }
           }
         },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld transformación"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld transformaciones"
+                }
+              }
+            }
+          }
+        },
         "tr": {
           "variations": {
             "plural": {
@@ -6952,6 +8764,12 @@
             "value": "No transform for “%@”"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguna transformación para “%@”"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6973,6 +8791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove default"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No usar por omisión"
           }
         },
         "tr": {
@@ -6998,6 +8822,12 @@
             "value": "Make default for ⇧↵"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar por omisión con ⇧↵"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7019,6 +8849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar"
           }
         },
         "tr": {
@@ -7044,6 +8880,12 @@
             "value": "Pasted as a file"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegado como archivo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7065,6 +8907,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "To the open Finder folder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la carpeta abierta del Finder"
           }
         },
         "tr": {
@@ -7090,6 +8938,12 @@
             "value": "For %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7111,6 +8965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Default"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por omisión"
           }
         },
         "tr": {
@@ -7136,6 +8996,12 @@
             "value": "To Finder"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En el Finder"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7154,6 +9020,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -7182,6 +9054,12 @@
             "value": "Start"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7203,6 +9081,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This text couldn’t be translated"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido traducir este texto"
           }
         },
         "tr": {
@@ -7228,6 +9112,12 @@
             "value": "The %@ → %@ language pack isn’t downloaded"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El paquete de idioma %@ → %@ no está descargado"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7249,6 +9139,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t tell which language this is"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido saber de qué idioma es"
           }
         },
         "tr": {
@@ -7274,6 +9170,12 @@
             "value": "%@ → %@ can’t be translated on this Mac"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ no se puede traducir en este Mac"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7295,6 +9197,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Language"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma"
           }
         },
         "tr": {
@@ -7320,6 +9228,12 @@
             "value": "Appearance"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apariencia"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7341,6 +9255,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "System"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
           }
         },
         "tr": {
@@ -7366,6 +9286,12 @@
             "value": "Light"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claro"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7387,6 +9313,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dark"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oscuro"
           }
         },
         "tr": {
@@ -7412,6 +9344,12 @@
             "value": "Open at login"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7433,6 +9371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Needs your approval in System Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesita tu aprobación en Ajustes del Sistema."
           }
         },
         "tr": {
@@ -7458,6 +9402,12 @@
             "value": "Couldn’t turn it on. Try in System Settings."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido activar. Inténtalo en Ajustes del Sistema."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7479,6 +9429,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open System Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes del Sistema"
           }
         },
         "tr": {
@@ -7504,6 +9460,12 @@
             "value": "Menu bar icon"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icono de la barra de menús"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7525,6 +9487,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "While it’s hidden, open yabbistir again to reach Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mientras esté oculto, vuelve a abrir yabbistir para acceder a Ajustes."
           }
         },
         "tr": {
@@ -7550,6 +9518,12 @@
             "value": "Keep history for"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conservar el historial"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7571,6 +9545,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 semana"
           }
         },
         "tr": {
@@ -7596,6 +9576,12 @@
             "value": "1 month"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 mes"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7617,6 +9603,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "3 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 meses"
           }
         },
         "tr": {
@@ -7642,6 +9634,12 @@
             "value": "1 year"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 año"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7663,6 +9661,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Forever"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siempre"
           }
         },
         "tr": {
@@ -7688,6 +9692,12 @@
             "value": "Counted from the last time you used an item. Items in a category are never removed."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se cuenta desde la última vez que usaste un ítem. Los ítems de una categoría nunca se eliminan."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7709,6 +9719,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This removes %@ items now."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto elimina %@ ítems ahora."
           }
         },
         "tr": {
@@ -7734,6 +9750,12 @@
             "value": "This removes 1 item now."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto elimina 1 ítem ahora."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7755,6 +9777,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove and Apply"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar y aplicar"
           }
         },
         "tr": {
@@ -7780,6 +9808,12 @@
             "value": "Cancel"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7801,6 +9835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add Category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir categoría"
           }
         },
         "tr": {
@@ -7826,6 +9866,12 @@
             "value": "Always"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siempre"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7847,6 +9893,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "When picked"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al elegirla"
           }
         },
         "tr": {
@@ -7872,6 +9924,12 @@
             "value": "Delete “%@”?"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar “%@”?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7893,6 +9951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Items in your history stay. Items kept only in this category are deleted."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ítems de tu historial se conservan. Los ítems guardados solo en esta categoría se eliminan."
           }
         },
         "tr": {
@@ -7918,6 +9982,12 @@
             "value": "Delete"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7939,6 +10009,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Filled by its extension; you can change where it shows."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La rellena su extensión; puedes cambiar dónde aparece."
           }
         },
         "tr": {
@@ -7964,6 +10040,12 @@
             "value": "Ignored apps"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps ignoradas"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7985,6 +10067,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nothing you copy in these apps is saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada de lo que copies en estas apps se guarda."
           }
         },
         "tr": {
@@ -8010,6 +10098,12 @@
             "value": "Keep copies from iPhone"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conservar copias del iPhone"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8031,6 +10125,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Show extension results in History"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar resultados de extensiones en el historial"
           }
         },
         "tr": {
@@ -8056,6 +10156,12 @@
             "value": "Storage"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almacenamiento"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8077,6 +10183,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "History uses %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El historial ocupa %@"
           }
         },
         "tr": {
@@ -8102,6 +10214,12 @@
             "value": "Clear History…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar historial…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8123,6 +10241,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clear your whole history?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Borrar todo tu historial?"
           }
         },
         "tr": {
@@ -8148,6 +10272,12 @@
             "value": "Items in your categories stay. This can’t be undone."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ítems de tus categorías se conservan. Esta acción no se puede deshacer."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8169,6 +10299,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clear History"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar historial"
           }
         },
         "tr": {
@@ -8194,6 +10330,12 @@
             "value": "Results stay pasteable from their job card and categories."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los resultados se pueden seguir pegando desde su tarjeta de tareas y desde las categorías."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8215,6 +10357,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hide from screen sharing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar al compartir pantalla"
           }
         },
         "tr": {
@@ -8240,6 +10388,12 @@
             "value": "The panel, the Stack and notices don’t show up in recordings or shared screens."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel, la Pila y los avisos no aparecen en las grabaciones ni en las pantallas compartidas."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8261,6 +10415,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Shortcuts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos de teclado"
           }
         },
         "tr": {
@@ -8286,6 +10446,12 @@
             "value": "Open the panel"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el panel"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8307,6 +10473,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copy to the Stack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar en la Pila"
           }
         },
         "tr": {
@@ -8332,6 +10504,12 @@
             "value": "Restore Defaults"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar valores por omisión"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8353,6 +10531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "In the panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En el panel"
           }
         },
         "tr": {
@@ -8378,6 +10562,12 @@
             "value": "Move through the list"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moverse por la lista"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8399,6 +10589,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Switch columns"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambiar de columna"
           }
         },
         "tr": {
@@ -8424,6 +10620,12 @@
             "value": "Paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8445,6 +10647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste the second choice"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar la segunda opción"
           }
         },
         "tr": {
@@ -8470,6 +10678,12 @@
             "value": "Transforms"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transformaciones"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8491,6 +10705,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acciones"
           }
         },
         "tr": {
@@ -8516,6 +10736,12 @@
             "value": "Copy"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8537,6 +10763,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add to a category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a una categoría"
           }
         },
         "tr": {
@@ -8562,6 +10794,12 @@
             "value": "Edit categories"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar categorías"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8583,6 +10821,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste one of the first nine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar uno de los nueve primeros"
           }
         },
         "tr": {
@@ -8608,6 +10852,12 @@
             "value": "Close"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8629,6 +10879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opens under"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se abre bajo"
           }
         },
         "tr": {
@@ -8654,6 +10910,12 @@
             "value": "The text caret"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El punto de inserción"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8675,6 +10937,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The mouse pointer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El puntero del ratón"
           }
         },
         "tr": {
@@ -8700,6 +10968,12 @@
             "value": "Preview delay"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retardo de la vista previa"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8721,6 +10995,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Short"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corto"
           }
         },
         "tr": {
@@ -8746,6 +11026,12 @@
             "value": "Medium"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medio"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8767,6 +11053,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Long"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Largo"
           }
         },
         "tr": {
@@ -8792,6 +11084,12 @@
             "value": "↵ does"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵ hace"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8813,6 +11111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste into the app"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar en la app"
           }
         },
         "tr": {
@@ -8838,6 +11142,12 @@
             "value": "Copy to the clipboard only"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar solo en el portapapeles"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8859,6 +11169,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Always paste plain text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar siempre texto sin formato"
           }
         },
         "tr": {
@@ -8884,6 +11200,12 @@
             "value": "Pastes from the panel and the Stack drop fonts, colors and links’ formatting."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al pegar desde el panel y la Pila se pierden las fuentes, los colores y el formato de los enlaces."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8905,6 +11227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allowed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitido"
           }
         },
         "tr": {
@@ -8930,6 +11258,12 @@
             "value": "Needed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesario"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8951,6 +11285,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Optional"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional"
           }
         },
         "tr": {
@@ -8976,6 +11316,12 @@
             "value": "Accessibility"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesibilidad"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8997,6 +11343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pastes into the app you were in and finds your text caret."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pega en la app en la que estabas y localiza tu punto de inserción."
           }
         },
         "tr": {
@@ -9022,6 +11374,12 @@
             "value": "In Privacy & Security › Accessibility, find yabbistir and turn it on."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Privacidad y seguridad › Accesibilidad, busca yabbistir y actívalo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9043,6 +11401,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Input Monitoring"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monitorización de los dispositivos de entrada"
           }
         },
         "tr": {
@@ -9068,6 +11432,12 @@
             "value": "Lets the Stack hear your ⌘V, so the next item comes up after each paste."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permite que la Pila detecte tu ⌘V para que el siguiente ítem aparezca tras cada pegado."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9089,6 +11459,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "In Privacy & Security › Input Monitoring, find yabbistir and turn it on."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Privacidad y seguridad › Monitorización de los dispositivos de entrada, busca yabbistir y actívalo."
           }
         },
         "tr": {
@@ -9114,6 +11490,12 @@
             "value": "Clipboard access"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar desde otras apps"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9135,6 +11517,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lets yabbistir see what you copy, so it can keep your history."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permite que yabbistir vea lo que copias para poder guardar tu historial."
           }
         },
         "tr": {
@@ -9160,6 +11548,12 @@
             "value": "If macOS asks, choose Always Allow. You can change it later in Privacy & Security."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si macOS te lo pregunta, elige Permitir siempre. Puedes cambiarlo después en Privacidad y seguridad."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9181,6 +11575,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS hasn’t asked yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS aún no lo ha preguntado."
           }
         },
         "tr": {
@@ -9206,6 +11606,12 @@
             "value": "macOS asks each time."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS lo pregunta cada vez."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9227,6 +11633,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turned off: yabbistir can’t see your copies."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivado: yabbistir no puede ver lo que copias."
           }
         },
         "tr": {
@@ -9252,6 +11664,12 @@
             "value": "Open at login"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9273,6 +11691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Starts yabbistir when you log in, so your history keeps up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre yabbistir al iniciar sesión, para que tu historial esté siempre al día."
           }
         },
         "tr": {
@@ -9298,6 +11722,12 @@
             "value": "Turn it on in General. If macOS asks, approve it in Login Items."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actívalo en General. Si macOS te lo pregunta, apruébalo en Ítems de inicio."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9319,6 +11749,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Let’s bring your Paste library over"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vamos a traer tu biblioteca de Paste"
           }
         },
         "tr": {
@@ -9344,6 +11780,12 @@
             "value": "Your pinboards become categories. Your data in Paste is only read, never changed."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus pinboards pasan a ser categorías. Tus datos de Paste solo se leen, nunca se modifican."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9362,6 +11804,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -9390,6 +11838,12 @@
             "value": "%@ · %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9411,6 +11865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Whole history"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo el historial"
           }
         },
         "tr": {
@@ -9436,6 +11896,12 @@
             "value": "%@ → %@, coming in as categories"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@, como categorías"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9457,6 +11923,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Import"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar"
           }
         },
         "tr": {
@@ -9482,6 +11954,12 @@
             "value": "Not Now"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9503,6 +11981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bringing it over…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trayéndolo todo…"
           }
         },
         "tr": {
@@ -9528,6 +12012,12 @@
             "value": "Images and rich text come along too."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las imágenes y el texto enriquecido también vienen."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9546,6 +12036,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -9574,6 +12070,12 @@
             "value": "All here."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo aquí."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9595,6 +12097,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texto"
           }
         },
         "tr": {
@@ -9620,6 +12128,12 @@
             "value": "Code"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9641,6 +12155,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlace"
           }
         },
         "tr": {
@@ -9666,6 +12186,12 @@
             "value": "Image"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imagen"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9684,6 +12210,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Color"
@@ -9712,6 +12244,12 @@
             "value": "File"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9733,6 +12271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 new item added."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ítem nuevo añadido."
           }
         },
         "tr": {
@@ -9758,6 +12302,12 @@
             "value": "%@ new items added."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ítems nuevos añadidos."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9779,6 +12329,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nothing new to import."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay nada nuevo que importar."
           }
         },
         "tr": {
@@ -9804,6 +12360,12 @@
             "value": "1 item couldn’t be imported."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido importar 1 ítem."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9825,6 +12387,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ items couldn’t be imported."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se han podido importar %@ ítems."
           }
         },
         "tr": {
@@ -9850,6 +12418,12 @@
             "value": "The library couldn’t be read. Quit Paste and try again."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido leer la biblioteca. Cierra Paste e inténtalo de nuevo."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9871,6 +12445,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No Paste library was found on this Mac."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha encontrado ninguna biblioteca de Paste en este Mac."
           }
         },
         "tr": {
@@ -9896,6 +12476,12 @@
             "value": "Paste is still running"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste sigue abierto"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9917,6 +12503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Both use the same shortcuts. Quit Paste and remove it from Login Items."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos usan los mismos atajos. Cierra Paste y quítalo de los Ítems de inicio."
           }
         },
         "tr": {
@@ -9942,6 +12534,12 @@
             "value": "Quit Paste"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de Paste"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9963,6 +12561,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 item"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ítem"
           }
         },
         "tr": {
@@ -9988,6 +12592,12 @@
             "value": "%@ items"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ítems"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10009,6 +12619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 item"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ítem fijado"
           }
         },
         "tr": {
@@ -10034,6 +12650,12 @@
             "value": "%@ items"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ítems fijados"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10052,6 +12674,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 pinboard"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "1 pinboard"
@@ -10080,6 +12708,12 @@
             "value": "%@ pinboards"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pinboards"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10101,6 +12735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Everything you copy, right under your caret."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo lo que copias, justo bajo tu punto de inserción."
           }
         },
         "tr": {
@@ -10126,6 +12766,12 @@
             "value": "yabbistir keeps your history. Press the shortcut, start typing, paste with ↵. No mouse needed."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir guarda tu historial. Pulsa el atajo, empieza a escribir y pega con ↵. Sin tocar el ratón."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10147,6 +12793,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Let’s Begin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empezar"
           }
         },
         "tr": {
@@ -10172,6 +12824,12 @@
             "value": "Your Paste library comes along too"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu biblioteca de Paste también se importa"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10193,6 +12851,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continue"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuar"
           }
         },
         "tr": {
@@ -10218,6 +12882,12 @@
             "value": "A few last settings"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unos últimos ajustes"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10239,6 +12909,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You can change these any time in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiarlos cuando quieras en Ajustes."
           }
         },
         "tr": {
@@ -10264,6 +12940,12 @@
             "value": "Shortcut to open the panel"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajo para abrir el panel"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10285,6 +12967,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The one you’re used to from Paste"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El que ya conoces de Paste"
           }
         },
         "tr": {
@@ -10310,6 +12998,12 @@
             "value": "You can change it in Settings."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiarlo en Ajustes."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10331,6 +13025,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paste directly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar directamente"
           }
         },
         "tr": {
@@ -10356,6 +13056,12 @@
             "value": "Without Accessibility, items are only copied to the clipboard"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin Accesibilidad, los ítems solo se copian en el portapapeles"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10377,6 +13083,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir"
           }
         },
         "tr": {
@@ -10402,6 +13114,12 @@
             "value": "Allowed"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitido"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10423,6 +13141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open at login"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
           }
         },
         "tr": {
@@ -10448,6 +13172,12 @@
             "value": "Ready in the background when your Mac starts"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo en segundo plano cuando se inicia el Mac"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10469,6 +13199,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Done, Show the Panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar y mostrar el panel"
           }
         },
         "tr": {
@@ -10494,6 +13230,12 @@
             "value": "Run First Setup Again…"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repetir la configuración inicial…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10515,6 +13257,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reading your library…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leyendo tu biblioteca…"
           }
         },
         "tr": {
@@ -10540,6 +13288,12 @@
             "value": "items · %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ítems · %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10561,6 +13315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "item · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ítem · %@"
           }
         },
         "tr": {

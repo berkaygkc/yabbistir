@@ -6,7 +6,7 @@ import Testing
 /// placeholder.
 @Suite struct CatalogTests {
     /// Every language the app ships. Each translation task appends its code.
-    static let shippedLanguages = ["en", "tr", "de"]
+    static let shippedLanguages = ["en", "tr", "de", "es"]
 
     /// Languages whose plural rules tell one from many.
     static let singularLanguages: Set<String> = ["en", "tr", "de", "fr", "es"]
