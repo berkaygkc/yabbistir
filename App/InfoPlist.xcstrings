@@ -29,6 +29,12 @@
             "value" : "Certaines extensions que vous installez communiquent avec d’autres apps, par exemple pour lire les onglets ouverts de Safari ou ajouter une note dans Notes. macOS vous le demande une fois pour chaque app."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インストールした一部の機能拡張は、Safariで開いているタブの読み取りや“メモ”へのメモの追加など、ほかのアプリとやり取りします。macOSは各アプリについて1回確認します。"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",

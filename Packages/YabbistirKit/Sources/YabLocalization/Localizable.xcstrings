@@ -28,6 +28,12 @@
             "value": "Ajouter à une catégorie…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリに追加…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -73,6 +79,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter à la Pile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックに追加"
           }
         },
         "ko": {
@@ -122,6 +134,12 @@
             "value": "Toutes les transformations (%@)…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべての変換（%@）…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -167,6 +185,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copier dans le presse-papiers"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリップボードにコピー"
           }
         },
         "ko": {
@@ -216,6 +240,12 @@
             "value": "Supprimer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -261,6 +291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune action trouvée"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクションが見つかりません"
           }
         },
         "ko": {
@@ -310,6 +346,12 @@
             "value": "Coller"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペースト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -355,6 +397,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller en texte brut"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレーンテキストとしてペースト"
           }
         },
         "ko": {
@@ -404,6 +452,12 @@
             "value": "Aperçu"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレビュー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -449,6 +503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Retirer de la catégorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリから削除"
           }
         },
         "ko": {
@@ -498,6 +558,12 @@
             "value": "Rechercher des actions…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクションを検索…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -543,6 +609,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence n’a pas pu répondre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligenceが応答できませんでした"
           }
         },
         "ko": {
@@ -592,6 +664,12 @@
             "value": "Apple Intelligence est occupé, réessayez dans un instant"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligenceが混み合っています。しばらくしてからもう一度お試しください"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -637,6 +715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence ne répondra pas à cette demande"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligenceはこの内容には応答できません"
           }
         },
         "ko": {
@@ -686,6 +770,12 @@
             "value": "Apple Intelligence ne prend pas encore en charge cette langue"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligenceはまだこの言語に対応していません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -731,6 +821,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce texte est trop long pour Apple Intelligence"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このテキストはApple Intelligenceには長すぎます"
           }
         },
         "ko": {
@@ -780,6 +876,12 @@
             "value": "Ce Mac ne peut pas utiliser Apple Intelligence"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このMacではApple Intelligenceを使用できません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -825,6 +927,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activez Apple Intelligence dans Réglages Système"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定でApple Intelligenceをオンにしてください"
           }
         },
         "ko": {
@@ -874,6 +982,12 @@
             "value": "Apple Intelligence n’est pas encore prêt"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligenceはまだ準備中です"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -919,6 +1033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Argile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クレイ"
           }
         },
         "ko": {
@@ -968,6 +1088,12 @@
             "value": "Ocre"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オーカー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1013,6 +1139,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prune"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プラム"
           }
         },
         "ko": {
@@ -1062,6 +1194,12 @@
             "value": "Sauge"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セージ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1107,6 +1245,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ardoise"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スレート"
           }
         },
         "ko": {
@@ -1156,6 +1300,12 @@
             "value": "Sarcelle"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ティール"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1201,6 +1351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toujours"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "常に"
           }
         },
         "ko": {
@@ -1250,6 +1406,12 @@
             "value": "Fermer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1295,6 +1457,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouvelle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規"
           }
         },
         "ko": {
@@ -1344,6 +1512,12 @@
             "value": "Choisir"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1389,6 +1563,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Visibilité"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示"
           }
         },
         "ko": {
@@ -1438,6 +1618,12 @@
             "value": "Nouvelle catégorie"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規カテゴリ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1483,6 +1669,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les catégories « Toujours » s’ouvrent en colonnes"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“常に”のカテゴリはカラムとして開きます"
           }
         },
         "ko": {
@@ -1532,6 +1724,12 @@
             "value": "À la sélection"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択時"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1577,6 +1775,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Faites glisser pour réordonner les colonnes. Le panneau se met à jour en direct."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドラッグしてカラムの順序を変更します。パネルにはすぐ反映されます。"
           }
         },
         "ko": {
@@ -1626,6 +1830,12 @@
             "value": "Catégories"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1671,6 +1881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annuler"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
           }
         },
         "ko": {
@@ -1720,6 +1936,12 @@
             "value": "Commandes"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンド"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1765,6 +1987,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autoriser"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可"
           }
         },
         "ko": {
@@ -1814,6 +2042,12 @@
             "value": "Ne pas installer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストールしない"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1859,6 +2093,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autoriser et installer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可してインストール"
           }
         },
         "ko": {
@@ -1908,6 +2148,12 @@
             "value": "Examiner les autorisations…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "権限を確認…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -1953,6 +2199,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "« %@ » souhaite :"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”が次の操作を求めています:"
           }
         },
         "ko": {
@@ -2002,6 +2254,12 @@
             "value": "Choisir…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2047,6 +2305,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Effacer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "消去"
           }
         },
         "ko": {
@@ -2096,6 +2360,12 @@
             "value": "Aucun dossier choisi"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダが選択されていません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2141,6 +2411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suggestion : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "候補: %@"
           }
         },
         "ko": {
@@ -2190,6 +2466,12 @@
             "value": "Installer un .yabext…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".yabextをインストール…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2235,6 +2517,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Installer depuis un dossier…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダからインストール…"
           }
         },
         "ko": {
@@ -2284,6 +2572,12 @@
             "value": "Problèmes"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "問題"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2329,6 +2623,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lier un dossier de développement…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開発用フォルダをリンク…"
           }
         },
         "ko": {
@@ -2378,6 +2678,12 @@
             "value": "Journal"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2423,6 +2729,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rien n’a encore été journalisé. Les console.log et les erreurs des extensions apparaissent ici."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだログはありません。機能拡張のconsole.logとエラーがここに表示されます。"
           }
         },
         "ko": {
@@ -2472,6 +2784,12 @@
             "value": "Ouvrir le dossier des extensions"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張フォルダを開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2517,6 +2835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autorisations"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "権限"
           }
         },
         "ko": {
@@ -2566,6 +2890,12 @@
             "value": "Activer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにする"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2611,6 +2941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Préférences"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
           }
         },
         "ko": {
@@ -2660,6 +2996,12 @@
             "value": "Recharger"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再読み込み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2705,6 +3047,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Supprimer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
           }
         },
         "ko": {
@@ -2754,6 +3102,12 @@
             "value": "Supprimer %@ ?"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を削除しますか?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2799,6 +3153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Image"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
           }
         },
         "ko": {
@@ -2848,6 +3208,12 @@
             "value": "Règles de copie"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピールール"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2893,6 +3259,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Effacer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "消去"
           }
         },
         "ko": {
@@ -2942,6 +3314,12 @@
             "value": "Impossible d’enregistrer le secret dans le Trousseau."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シークレットをキーチェーンに保存できませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -2987,6 +3365,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistrer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
           }
         },
         "ko": {
@@ -3036,6 +3420,12 @@
             "value": "Enregistré"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存済み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3081,6 +3471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Intégrée"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内蔵"
           }
         },
         "ko": {
@@ -3130,6 +3526,12 @@
             "value": "Développement"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開発"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3175,6 +3577,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Locale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカル"
           }
         },
         "ko": {
@@ -3224,6 +3632,12 @@
             "value": "Impossible de vérifier la liste de la boutique. La liste enregistrée est affichée."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアのリストを検証できませんでした。保存済みのリストを表示しています。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3269,6 +3683,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La signature de la boutique ne correspond pas. Réessayez plus tard."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアの署名が一致しませんでした。しばらくしてからもう一度お試しください。"
           }
         },
         "ko": {
@@ -3318,6 +3738,12 @@
             "value": "Impossible de vérifier la boutique."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアを検証できませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3363,6 +3789,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
           }
         },
         "ko": {
@@ -3412,6 +3844,12 @@
             "value": "IA"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3457,6 +3895,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toutes les catégories"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのカテゴリ"
           }
         },
         "ko": {
@@ -3506,6 +3950,12 @@
             "value": "Développement"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開発ツール"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3551,6 +4001,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fichiers"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
           }
         },
         "ko": {
@@ -3600,6 +4056,12 @@
             "value": "Images"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3645,6 +4107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Liens"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク"
           }
         },
         "ko": {
@@ -3694,6 +4162,12 @@
             "value": "Médias"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メディア"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3739,6 +4213,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Productivité"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仕事効率化"
           }
         },
         "ko": {
@@ -3788,6 +4268,12 @@
             "value": "Texte"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3833,6 +4319,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autoriser et mettre à jour"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可してアップデート"
           }
         },
         "ko": {
@@ -3882,6 +4374,12 @@
             "value": "Également mises à jour (sans nouvelle autorisation) : %@"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あわせてアップデート（新しい権限なし）: %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -3927,6 +4425,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Installer %@ extensions ?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個の機能拡張をインストールしますか?"
           }
         },
         "ko": {
@@ -3976,6 +4480,12 @@
             "value": "Installer « %@ » ?"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”をインストールしますか?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4021,6 +4531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouvelles autorisations"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい権限"
           }
         },
         "ko": {
@@ -4070,6 +4586,12 @@
             "value": "Ne demande aucune autorisation particulière."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "特別な権限は必要ありません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4115,6 +4637,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mettre à jour %@ extensions ?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個の機能拡張をアップデートしますか?"
           }
         },
         "ko": {
@@ -4164,6 +4692,12 @@
             "value": "Mettre à jour « %@ » ?"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”をアップデートしますか?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4209,6 +4743,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La boutique ne propose encore aucune extension."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアにはまだ機能拡張がありません。"
           }
         },
         "ko": {
@@ -4258,6 +4798,12 @@
             "value": "Aucune extension dans cette catégorie."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このカテゴリに機能拡張はありません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4303,6 +4849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune extension ne correspond à « %@ »"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”に一致する機能拡張はありません"
           }
         },
         "ko": {
@@ -4352,6 +4904,12 @@
             "value": "La liste de la boutique a changé ; examinez-la et réessayez."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアのリストが変更されました。内容を確認して、もう一度お試しください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4397,6 +4955,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Elle ne peut pas être installée avec cette version de yabbistir."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このバージョンのyabbistirにはインストールできません。"
           }
         },
         "ko": {
@@ -4446,6 +5010,12 @@
             "value": "Impossible de la télécharger. Vérifiez votre connexion et réessayez."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロードできませんでした。接続を確認して、もう一度お試しください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4491,6 +5061,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le téléchargement ne correspondait pas au catalogue ; elle n’a donc pas été installée."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロードした内容がカタログと一致しなかったため、インストールしませんでした。"
           }
         },
         "ko": {
@@ -4540,6 +5116,12 @@
             "value": "Impossible de l’installer. Les détails figurent dans l’onglet Développement."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストールできませんでした。詳細は“開発”タブにあります。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4585,6 +5167,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vérification impossible ; rien n’a été installé."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検証できなかったため、何もインストールしませんでした。"
           }
         },
         "ko": {
@@ -4634,6 +5222,12 @@
             "value": "Installer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4679,6 +5273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Installer (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール（%@）"
           }
         },
         "ko": {
@@ -4728,6 +5328,12 @@
             "value": "Installation…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール中…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4773,6 +5379,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’extension du lien n’est pas dans la boutique."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張はストアにありません。"
           }
         },
         "ko": {
@@ -4822,6 +5434,12 @@
             "value": "Les extensions du lien ne sont pas dans la boutique."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張はストアにありません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4867,6 +5485,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Certaines extensions du lien ne sont pas dans la boutique."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の一部の機能拡張はストアにありません。"
           }
         },
         "ko": {
@@ -4916,6 +5540,12 @@
             "value": "L’extension du lien est déjà installée."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張はすでにインストールされています。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -4961,6 +5591,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les extensions du lien sont déjà installées."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張はすでにインストールされています。"
           }
         },
         "ko": {
@@ -5010,6 +5646,12 @@
             "value": "L’extension du lien nécessite une version plus récente de yabbistir."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張には、より新しいyabbistirが必要です。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5055,6 +5697,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les extensions du lien nécessitent une version plus récente de yabbistir."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張には、より新しいyabbistirが必要です。"
           }
         },
         "ko": {
@@ -5104,6 +5752,12 @@
             "value": "Certaines extensions du lien nécessitent une version plus récente de yabbistir."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の一部の機能拡張には、より新しいyabbistirが必要です。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5149,6 +5803,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’extension du lien attend la boutique."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張は、ストアの読み込みを待っています。"
           }
         },
         "ko": {
@@ -5198,6 +5858,12 @@
             "value": "Les extensions du lien attendent la boutique."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク先の機能拡張は、ストアの読み込みを待っています。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5243,6 +5909,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chargement de la boutique…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアを読み込み中…"
           }
         },
         "ko": {
@@ -5292,6 +5964,12 @@
             "value": "Impossible de lire la liste de la boutique. La liste enregistrée est affichée."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアのリストを読み取れませんでした。保存済みのリストを表示しています。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5337,6 +6015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réessayez plus tard, ou mettez yabbistir à jour."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "しばらくしてからもう一度お試しいただくか、yabbistirをアップデートしてください。"
           }
         },
         "ko": {
@@ -5386,6 +6070,12 @@
             "value": "Impossible de lire la liste de la boutique."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアのリストを読み取れませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5431,6 +6121,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La boutique nécessite désormais une version plus récente de yabbistir. La liste enregistrée est affichée."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアには、より新しいyabbistirが必要です。保存済みのリストを表示しています。"
           }
         },
         "ko": {
@@ -5480,6 +6176,12 @@
             "value": "Mettez yabbistir à jour, puis réessayez."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirをアップデートして、もう一度お試しください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5525,6 +6227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La boutique nécessite une version plus récente de yabbistir."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアには、より新しいyabbistirが必要です。"
           }
         },
         "ko": {
@@ -5574,6 +6282,12 @@
             "value": "Impossible de joindre la boutique. La liste enregistrée est affichée."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアに接続できませんでした。保存済みのリストを表示しています。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5619,6 +6333,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vérifiez votre connexion à Internet, puis réessayez."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インターネット接続を確認して、もう一度お試しください。"
           }
         },
         "ko": {
@@ -5668,6 +6388,12 @@
             "value": "Impossible de joindre la boutique."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアに接続できませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5713,6 +6439,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La boutique a envoyé une liste plus ancienne. La liste enregistrée est affichée."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアから古いリストが送られました。保存済みのリストを表示しています。"
           }
         },
         "ko": {
@@ -5762,6 +6494,12 @@
             "value": "Actualiser"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5807,6 +6545,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vérification de la boutique…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアを確認中…"
           }
         },
         "ko": {
@@ -5856,6 +6600,12 @@
             "value": "Rechercher des extensions"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張を検索"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5901,6 +6651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nécessite une version plus récente de yabbistir"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "より新しいyabbistirが必要"
           }
         },
         "ko": {
@@ -5950,6 +6706,12 @@
             "value": "Installée"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール済み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -5995,6 +6757,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mise à jour disponible"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートあり"
           }
         },
         "ko": {
@@ -6044,6 +6812,12 @@
             "value": "Voit ce que vous copiez"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーした内容を参照"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6089,6 +6863,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exécute : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "実行: %@"
           }
         },
         "ko": {
@@ -6138,6 +6918,12 @@
             "value": "Exécute des programmes"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プログラムを実行"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6183,6 +6969,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lit votre historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴を読み取り"
           }
         },
         "ko": {
@@ -6232,6 +7024,12 @@
             "value": "Réseau : tout site"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ネットワーク: すべてのサイト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6277,6 +7075,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réseau : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ネットワーク: %@"
           }
         },
         "ko": {
@@ -6326,6 +7130,12 @@
             "value": "Réseau : %@ sites"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ネットワーク: %@サイト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6371,6 +7181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réessayer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度試す"
           }
         },
         "ko": {
@@ -6420,6 +7236,12 @@
             "value": "Tout mettre à jour"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてアップデート"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6465,6 +7287,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ mises à jour"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@件のアップデート"
           }
         },
         "ko": {
@@ -6514,6 +7342,12 @@
             "value": "1 mise à jour"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1件のアップデート"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6559,6 +7393,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Développement"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開発"
           }
         },
         "ko": {
@@ -6608,6 +7448,12 @@
             "value": "Installées"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール済み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6653,6 +7499,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Boutique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストア"
           }
         },
         "ko": {
@@ -6702,6 +7554,12 @@
             "value": "Désactiver les extensions tierces"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サードパーティの機能拡張をオフにする"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6747,6 +7605,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
           }
         },
         "ko": {
@@ -6796,6 +7660,12 @@
             "value": "%@ n’est pas installé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@がインストールされていません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6841,6 +7711,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En attente de votre autorisation"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可を待っています"
           }
         },
         "ko": {
@@ -6890,6 +7766,12 @@
             "value": "L’historique n’est pas disponible ici"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ここでは履歴を利用できません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -6935,6 +7817,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette extension n’est pas autorisée à lire votre historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この機能拡張には履歴を読み取る権限がありません"
           }
         },
         "ko": {
@@ -6984,6 +7872,12 @@
             "value": "Cela a pris trop de temps"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間がかかりすぎました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7029,6 +7923,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annuler"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
           }
         },
         "ko": {
@@ -7078,6 +7978,12 @@
             "value": "Tâches de yabbistir"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirのジョブ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7123,6 +8029,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fermer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
           }
         },
         "ko": {
@@ -7172,6 +8084,12 @@
             "value": "Enregistré dans le Finder"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finderに保存しました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7217,6 +8135,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Collé"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストしました"
           }
         },
         "ko": {
@@ -7266,6 +8190,12 @@
             "value": "Ajouté à la Pile"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックに追加しました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7311,6 +8241,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de terminer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了できませんでした"
           }
         },
         "ko": {
@@ -7360,6 +8296,12 @@
             "value": "L’extension s’est arrêtée de façon inattendue"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張が予期せず停止しました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7405,6 +8347,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de se connecter"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続できませんでした"
           }
         },
         "ko": {
@@ -7454,6 +8402,12 @@
             "value": "Non autorisé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可されていません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7499,6 +8453,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ n’est pas installé"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@がインストールされていません"
           }
         },
         "ko": {
@@ -7548,6 +8508,12 @@
             "value": "L’extension n’est pas disponible pour le moment"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在この機能拡張は利用できません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7593,6 +8559,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annuler : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル: %@"
           }
         },
         "ko": {
@@ -7642,6 +8614,12 @@
             "value": "Tâches en cours"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "実行中のジョブ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7687,6 +8665,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En attente"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "待機中"
           }
         },
         "ko": {
@@ -7736,6 +8720,12 @@
             "value": "Prêt, %@ pour coller"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "準備完了、%@でペースト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7781,6 +8771,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Démarrage"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始中"
           }
         },
         "ko": {
@@ -7830,6 +8826,12 @@
             "value": "Ajouté à l’historique"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴に追加しました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7875,6 +8877,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Code"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コード"
           }
         },
         "ko": {
@@ -7924,6 +8932,12 @@
             "value": "Couleur"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カラー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -7969,6 +8983,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fichier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
           }
         },
         "ko": {
@@ -8018,6 +9038,12 @@
             "value": "Image"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8063,6 +9089,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lien"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク"
           }
         },
         "ko": {
@@ -8112,6 +9144,12 @@
             "value": "Texte"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8157,6 +9195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier les catégories"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリを編集"
           }
         },
         "ko": {
@@ -8206,6 +9250,12 @@
             "value": "S’ouvre en colonne si cochée"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チェックするとカラムとして開きます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8251,6 +9301,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Langue"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "言語"
           }
         },
         "ko": {
@@ -8300,6 +9356,12 @@
             "value": "Ouvrir le panneau"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルを開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8345,6 +9407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitter yabbistir"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirを終了"
           }
         },
         "ko": {
@@ -8394,6 +9462,12 @@
             "value": "Rechercher des mises à jour…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8439,6 +9513,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réglages…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定…"
           }
         },
         "ko": {
@@ -8488,6 +9568,12 @@
             "value": "Copié."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8533,6 +9619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copié, collez avec ⌘V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました。⌘Vでペーストできます"
           }
         },
         "ko": {
@@ -8582,6 +9674,12 @@
             "value": "Ouvrir les Réglages"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定を開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8627,6 +9725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accordez l’autorisation Accessibilité pour coller directement."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセシビリティを許可すると、直接ペーストできます。"
           }
         },
         "ko": {
@@ -8676,6 +9780,12 @@
             "value": "Copié dans le presse-papiers"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリップボードにコピーしました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8721,6 +9831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ a été désactivée après des erreurs répétées."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@は、エラーが続いたためオフになりました。"
           }
         },
         "ko": {
@@ -8770,6 +9886,12 @@
             "value": "%@ : %@"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8815,6 +9937,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Échec de l’extension"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張が失敗しました"
           }
         },
         "ko": {
@@ -8864,6 +9992,12 @@
             "value": "Autorisez-la pour que l’élément suivant apparaisse après chaque ⌘V."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可すると、⌘Vのたびに次の項目がペーストされます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -8909,6 +10043,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La Pile a besoin de la Surveillance de l’entrée"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックには入力監視が必要です"
           }
         },
         "ko": {
@@ -8958,6 +10098,12 @@
             "value": "Retiré du presse-papiers dans 30 secondes."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30秒後にクリップボードから消えます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9003,6 +10149,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appuyez sur ⌘V pour coller"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘Vを押してペースト"
           }
         },
         "ko": {
@@ -9052,6 +10204,12 @@
             "value": "Exécutez-la dans Terminal, puis rouvrez le panneau."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルで実行してから、もう一度パネルを開いてください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9097,6 +10255,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commande copiée."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドをコピーしました。"
           }
         },
         "ko": {
@@ -9146,6 +10310,12 @@
             "value": "Rien n’a été collé : la valeur était vide."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストしませんでした: 値が空でした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9191,6 +10361,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Une autre app est passée au premier plan."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のアプリが前面に表示されました。"
           }
         },
         "ko": {
@@ -9240,6 +10416,12 @@
             "value": "Non collé."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストしませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9285,6 +10467,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Collé."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストしました。"
           }
         },
         "ko": {
@@ -9334,6 +10522,12 @@
             "value": "Télécharger"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロード"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9379,6 +10573,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La traduction nécessite un pack de langue"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "翻訳には言語パックが必要です"
           }
         },
         "ko": {
@@ -9428,6 +10628,12 @@
             "value": "yabbistir %@ est disponible"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@を利用できます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9473,6 +10679,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de rechercher des mises à jour"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認できませんでした"
           }
         },
         "ko": {
@@ -9522,6 +10734,12 @@
             "value": "yabbistir est à jour (%@)"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirは最新です（%@）"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9567,6 +10785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégories"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
           }
         },
         "ko": {
@@ -9616,6 +10840,12 @@
             "value": "Historique"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9661,6 +10891,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタック"
           }
         },
         "ko": {
@@ -9710,6 +10946,12 @@
             "value": "Cette catégorie est vide.\nSélectionnez un élément et appuyez sur ⌘P pour l’ajouter."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このカテゴリは空です。\n項目を選択して⌘Pを押すと追加できます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9755,6 +10997,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "« %@ » n’est pas dans cette catégorie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”はこのカテゴリにありません。"
           }
         },
         "ko": {
@@ -9804,6 +11052,12 @@
             "value": "Copiez quelque chose et cela apparaîtra ici."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "何かをコピーすると、ここに表示されます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9849,6 +11103,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun résultat pour « %@ »"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”の検索結果はありません"
           }
         },
         "ko": {
@@ -9898,6 +11158,12 @@
             "value": "Actions"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクション"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -9943,6 +11209,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégoriser"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリに追加"
           }
         },
         "ko": {
@@ -9992,6 +11264,12 @@
             "value": "Historique du presse-papiers"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリップボード履歴"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10037,6 +11315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペースト"
           }
         },
         "ko": {
@@ -10086,6 +11370,12 @@
             "value": "Transformer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変換"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10131,6 +11421,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher dans votre presse-papiers…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリップボードを検索…"
           }
         },
         "ko": {
@@ -10180,6 +11476,12 @@
             "value": "%@ résultats"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@件の結果"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10225,6 +11527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 résultat"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1件の結果"
           }
         },
         "ko": {
@@ -10274,6 +11582,12 @@
             "value": "Commandes"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンド"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10319,6 +11633,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plus anciens"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "それ以前"
           }
         },
         "ko": {
@@ -10368,6 +11688,12 @@
             "value": "Cette semaine"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10413,6 +11739,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aujourd’hui"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日"
           }
         },
         "ko": {
@@ -10462,6 +11794,12 @@
             "value": "Hier"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨日"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10507,6 +11845,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copier la commande"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドをコピー"
           }
         },
         "ko": {
@@ -10556,6 +11900,12 @@
             "value": "Impossible de lire la liste."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リストを読み取れませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10601,6 +11951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dans Terminal :"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルで:"
           }
         },
         "ko": {
@@ -10650,6 +12006,12 @@
             "value": "Chargement…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込み中…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10695,6 +12057,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peut voir tout ce que vous copiez"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーした内容をすべて参照できます"
           }
         },
         "ko": {
@@ -10744,6 +12112,12 @@
             "value": "Peut exécuter ces programmes sur votre Mac : %@. Ils peuvent lire et écrire vos fichiers et accéder à Internet."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac上で次のプログラムを実行できます: %@。ファイルの読み書きやインターネットへのアクセスも可能です。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10789,6 +12163,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peut lire tout votre historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴全体を読み取れます"
           }
         },
         "ko": {
@@ -10838,6 +12218,12 @@
             "value": "Peut accéder à n’importe quel site web"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのWebサイトにアクセスできます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10883,6 +12269,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peut accéder à : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセス先: %@"
           }
         },
         "ko": {
@@ -10932,6 +12324,12 @@
             "value": "Peut lire et coller des secrets, comme des mots de passe. Ils ne sont jamais écrits dans l’historique ni sur le disque."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスワードなどのシークレットを読み取ってペーストできます。履歴やディスクには書き込まれません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -10977,6 +12375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les extensions locales ne sont pas signées."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカルの機能拡張は署名されていません。"
           }
         },
         "ko": {
@@ -11026,6 +12430,12 @@
             "value": "Nouvelle catégorie : « %@ »"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規カテゴリ: “%@”"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11071,6 +12481,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter à une catégorie…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリに追加…"
           }
         },
         "ko": {
@@ -11120,6 +12536,12 @@
             "value": "App"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11165,6 +12587,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
           }
         },
         "ko": {
@@ -11214,6 +12642,12 @@
             "value": "Caractères"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字数"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11259,6 +12693,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fermer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
           }
         },
         "ko": {
@@ -11308,6 +12748,12 @@
             "value": "Extension"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11353,6 +12799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Générateur · sans entrée"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "生成ツール · 入力不要"
           }
         },
         "ko": {
@@ -11402,6 +12854,12 @@
             "value": "Entrée"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11447,6 +12905,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mots-clés"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーワード"
           }
         },
         "ko": {
@@ -11496,6 +12960,12 @@
             "value": "Type"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "種類"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11541,6 +13011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ → %@ caractères"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@文字"
           }
         },
         "ko": {
@@ -11590,6 +13066,12 @@
             "value": "Longueur"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "長さ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11635,6 +13117,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sera collé"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストする内容"
           }
         },
         "ko": {
@@ -11684,6 +13172,12 @@
             "value": "S’exécute quand vous le collez ou le copiez"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペーストまたはコピーしたときに実行されます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11729,6 +13223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transformateur · s’applique à l’élément sélectionné"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変換ツール · 選択した項目に適用"
           }
         },
         "ko": {
@@ -11778,6 +13278,12 @@
             "value": "Contenu"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11823,6 +13329,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copié"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー日時"
           }
         },
         "ko": {
@@ -11872,6 +13384,12 @@
             "value": "Appareil"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デバイス"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -11917,6 +13435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "iPhone · Presse-papiers universel"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · ユニバーサルクリップボード"
           }
         },
         "ko": {
@@ -11966,6 +13490,12 @@
             "value": "Domaine"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドメイン"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12011,6 +13541,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ caractères de plus"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほか%@文字"
           }
         },
         "ko": {
@@ -12060,6 +13596,12 @@
             "value": "Informations"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "情報"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12105,6 +13647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Emplacement"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "場所"
           }
         },
         "ko": {
@@ -12154,6 +13702,12 @@
             "value": "Taille"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サイズ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12199,6 +13753,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ n’est jamais affiché."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@は表示されません。"
           }
         },
         "ko": {
@@ -12248,6 +13808,12 @@
             "value": "Après la connexion, rouvrez le panneau."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインインしたあと、もう一度パネルを開いてください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12293,6 +13859,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exécuter dans Terminal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルで実行"
           }
         },
         "ko": {
@@ -12342,6 +13914,12 @@
             "value": "Mots"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "単語数"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12387,6 +13965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Extensions"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張"
           }
         },
         "ko": {
@@ -12436,6 +14020,12 @@
             "value": "Général"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12481,6 +14071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Raccourcis clavier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードショートカット"
           }
         },
         "ko": {
@@ -12530,6 +14126,12 @@
             "value": "Panneau"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12575,6 +14177,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴"
           }
         },
         "ko": {
@@ -12624,6 +14232,12 @@
             "value": "Catégories"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12669,6 +14283,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autorisations"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "権限"
           }
         },
         "ko": {
@@ -12718,6 +14338,12 @@
             "value": "Importer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12763,6 +14389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Version %@ (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン%@（%@）"
           }
         },
         "ko": {
@@ -12812,6 +14444,12 @@
             "value": "Tout ce que vous copiez, juste sous votre point d’insertion."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしたすべてが、挿入ポイントのすぐ下に。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12857,6 +14495,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher des mises à jour…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認…"
           }
         },
         "ko": {
@@ -12906,6 +14550,12 @@
             "value": "Ouvrir sur GitHub"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHubで開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -12951,6 +14601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notes de version"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースノート"
           }
         },
         "ko": {
@@ -13000,6 +14656,12 @@
             "value": "Licences"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライセンス"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13045,6 +14707,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Soutenir yabbistir"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirを応援"
           }
         },
         "ko": {
@@ -13094,6 +14762,12 @@
             "value": "Terminé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13139,6 +14813,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "À propos"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "情報"
           }
         },
         "ko": {
@@ -13188,6 +14868,12 @@
             "value": "Réglages"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13233,6 +14919,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ dans la Pile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックに%@件"
           }
         },
         "ko": {
@@ -13282,6 +14974,12 @@
             "value": "Terminé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13327,6 +15025,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce que vous copiez s’alignera ici."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今コピーしたものはここに並びます。"
           }
         },
         "ko": {
@@ -13376,6 +15080,12 @@
             "value": "Coller le suivant"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次をペースト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13421,6 +15131,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En haut"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先頭へ"
           }
         },
         "ko": {
@@ -13470,6 +15186,12 @@
             "value": "Nouvelle copie"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいコピー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13515,6 +15237,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "2e"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2番目"
           }
         },
         "ko": {
@@ -13564,6 +15292,12 @@
             "value": "Retirer de la Pile"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックから削除"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13609,6 +15343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタック"
           }
         },
         "ko": {
@@ -13658,6 +15398,12 @@
             "value": "Placer en haut"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先頭に移動"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13703,6 +15449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld j"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld日"
           }
         },
         "ko": {
@@ -13752,6 +15504,12 @@
             "value": "%lld h"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld時間"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13797,6 +15555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld min"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld分"
           }
         },
         "ko": {
@@ -13846,6 +15610,12 @@
             "value": "à l’instant"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13891,6 +15661,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "hier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨日"
           }
         },
         "ko": {
@@ -13940,6 +15716,12 @@
             "value": "Retour"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "戻る"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -13987,6 +15769,12 @@
             "value": "Copier"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14032,6 +15820,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ et copier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@してコピー"
           }
         },
         "ko": {
@@ -14129,6 +15923,18 @@
             }
           }
         },
+        "ja": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld件の変換"
+                }
+              }
+            }
+          }
+        },
         "ko": {
           "variations": {
             "plural": {
@@ -14200,6 +16006,12 @@
             "value": "Aucune transformation pour « %@ »"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”に使える変換はありません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14245,6 +16057,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ne plus utiliser par défaut"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルトを解除"
           }
         },
         "ko": {
@@ -14294,6 +16112,12 @@
             "value": "Définir par défaut pour ⇧↵"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⇧↵のデフォルトにする"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14339,6 +16163,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペースト"
           }
         },
         "ko": {
@@ -14388,6 +16218,12 @@
             "value": "Collé comme fichier"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルとしてペーストしました"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14433,6 +16269,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vers le dossier du Finder ouvert"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開いているFinderフォルダへ"
           }
         },
         "ko": {
@@ -14482,6 +16324,12 @@
             "value": "Pour %@"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@用"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14527,6 +16375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Par défaut"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルト"
           }
         },
         "ko": {
@@ -14576,6 +16430,12 @@
             "value": "Vers le Finder"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finderへ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14618,6 +16478,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -14670,6 +16536,12 @@
             "value": "Démarrer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14715,6 +16587,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de traduire ce texte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このテキストを翻訳できませんでした"
           }
         },
         "ko": {
@@ -14764,6 +16642,12 @@
             "value": "Le pack de langue %@ → %@ n’est pas téléchargé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@の言語パックがダウンロードされていません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14809,6 +16693,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de déterminer la langue du texte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "言語を判別できませんでした"
           }
         },
         "ko": {
@@ -14858,6 +16748,12 @@
             "value": "La traduction %@ → %@ n’est pas possible sur ce Mac"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このMacでは%@ → %@の翻訳はできません"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14903,6 +16799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Langue"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "言語"
           }
         },
         "ko": {
@@ -14952,6 +16854,12 @@
             "value": "Apparence"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外観"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -14997,6 +16905,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Système"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム"
           }
         },
         "ko": {
@@ -15046,6 +16960,12 @@
             "value": "Clair"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15091,6 +17011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sombre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダーク"
           }
         },
         "ko": {
@@ -15140,6 +17066,12 @@
             "value": "Ouvrir avec la session"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15185,6 +17117,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nécessite votre approbation dans Réglages Système."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定での承認が必要です。"
           }
         },
         "ko": {
@@ -15234,6 +17172,12 @@
             "value": "Impossible de l’activer. Essayez dans Réglages Système."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにできませんでした。システム設定で試してください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15279,6 +17223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir Réglages Système"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定を開く"
           }
         },
         "ko": {
@@ -15328,6 +17278,12 @@
             "value": "Icône de la barre des menus"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーのアイコン"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15373,6 +17329,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tant qu’elle est masquée, rouvrez yabbistir pour accéder aux Réglages."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "非表示の間は、もう一度yabbistirを開くと設定にアクセスできます。"
           }
         },
         "ko": {
@@ -15422,6 +17384,12 @@
             "value": "Conserver l’historique pendant"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴の保持期間"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15467,6 +17435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 semaine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1週間"
           }
         },
         "ko": {
@@ -15516,6 +17490,12 @@
             "value": "1 mois"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1か月"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15561,6 +17541,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "3 mois"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3か月"
           }
         },
         "ko": {
@@ -15610,6 +17596,12 @@
             "value": "1 an"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1年"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15655,6 +17647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toujours"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無期限"
           }
         },
         "ko": {
@@ -15704,6 +17702,12 @@
             "value": "Compté à partir de la dernière utilisation d’un élément. Les éléments d’une catégorie ne sont jamais supprimés."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目を最後に使った日から数えます。カテゴリ内の項目は削除されません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15749,6 +17753,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cela supprime %@ éléments maintenant."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今すぐ%@件の項目を削除します。"
           }
         },
         "ko": {
@@ -15798,6 +17808,12 @@
             "value": "Cela supprime 1 élément maintenant."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今すぐ1件の項目を削除します。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15843,6 +17859,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Supprimer et appliquer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除して適用"
           }
         },
         "ko": {
@@ -15892,6 +17914,12 @@
             "value": "Annuler"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -15937,6 +17965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter une catégorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリを追加"
           }
         },
         "ko": {
@@ -15986,6 +18020,12 @@
             "value": "Toujours"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "常に"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16031,6 +18071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "À la sélection"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択時"
           }
         },
         "ko": {
@@ -16080,6 +18126,12 @@
             "value": "Supprimer « %@ » ?"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”を削除しますか?"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16125,6 +18177,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les éléments de votre historique restent. Les éléments conservés uniquement dans cette catégorie sont supprimés."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴内の項目は残ります。このカテゴリにのみ保存されている項目は削除されます。"
           }
         },
         "ko": {
@@ -16174,6 +18232,12 @@
             "value": "Supprimer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16219,6 +18283,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alimentée par son extension ; vous pouvez changer l’endroit où elle s’affiche."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張によって内容が入ります。表示のしかたは変更できます。"
           }
         },
         "ko": {
@@ -16268,6 +18338,12 @@
             "value": "Apps ignorées"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無視するアプリ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16313,6 +18389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rien de ce que vous copiez dans ces apps n’est enregistré."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらのアプリでコピーした内容は保存されません。"
           }
         },
         "ko": {
@@ -16362,6 +18444,12 @@
             "value": "Conserver les copies de l’iPhone"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneからのコピーを保持"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16407,6 +18495,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Afficher les résultats des extensions dans l’historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能拡張の結果を履歴に表示"
           }
         },
         "ko": {
@@ -16456,6 +18550,12 @@
             "value": "Stockage"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストレージ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16501,6 +18601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’historique occupe %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴の使用量: %@"
           }
         },
         "ko": {
@@ -16550,6 +18656,12 @@
             "value": "Effacer l’historique…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴を消去…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16595,6 +18707,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Effacer tout votre historique ?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴をすべて消去しますか?"
           }
         },
         "ko": {
@@ -16644,6 +18762,12 @@
             "value": "Les éléments de vos catégories restent. Cette action est irréversible."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ内の項目は残ります。この操作は取り消せません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16689,6 +18813,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Effacer l’historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴を消去"
           }
         },
         "ko": {
@@ -16738,6 +18868,12 @@
             "value": "Les résultats peuvent toujours être collés depuis leur carte de tâche et vos catégories."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結果は、ジョブカードとカテゴリからペーストできます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16783,6 +18919,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Masquer lors du partage d’écran"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面共有から隠す"
           }
         },
         "ko": {
@@ -16832,6 +18974,12 @@
             "value": "Le panneau, la Pile et les notifications n’apparaissent pas dans les enregistrements ni les écrans partagés."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル、スタック、通知は、録画や共有された画面に表示されません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16877,6 +19025,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Raccourcis clavier"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードショートカット"
           }
         },
         "ko": {
@@ -16926,6 +19080,12 @@
             "value": "Ouvrir le panneau"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルを開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -16971,6 +19131,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copier dans la Pile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックにコピー"
           }
         },
         "ko": {
@@ -17020,6 +19186,12 @@
             "value": "Rétablir les valeurs par défaut"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルトに戻す"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17065,6 +19237,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dans le panneau"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル内"
           }
         },
         "ko": {
@@ -17114,6 +19292,12 @@
             "value": "Parcourir la liste"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リストを移動"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17159,6 +19343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Changer de colonne"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カラムを切り替える"
           }
         },
         "ko": {
@@ -17208,6 +19398,12 @@
             "value": "Coller"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペースト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17253,6 +19449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller l’option secondaire"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2番目の選択肢でペースト"
           }
         },
         "ko": {
@@ -17302,6 +19504,12 @@
             "value": "Transformations"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変換"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17347,6 +19555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actions"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクション"
           }
         },
         "ko": {
@@ -17396,6 +19610,12 @@
             "value": "Copier"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17441,6 +19661,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter à une catégorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリに追加"
           }
         },
         "ko": {
@@ -17490,6 +19716,12 @@
             "value": "Modifier les catégories"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリを編集"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17535,6 +19767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller l’un des neuf premiers"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初の9件のいずれかをペースト"
           }
         },
         "ko": {
@@ -17584,6 +19822,12 @@
             "value": "Fermer"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17629,6 +19873,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "S’ouvre sous"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開く位置"
           }
         },
         "ko": {
@@ -17678,6 +19928,12 @@
             "value": "Le point d’insertion"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "挿入ポイント"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17723,6 +19979,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le pointeur de la souris"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ポインタ"
           }
         },
         "ko": {
@@ -17772,6 +20034,12 @@
             "value": "Délai de l’aperçu"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレビューの遅延"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17817,6 +20085,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Court"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "短い"
           }
         },
         "ko": {
@@ -17866,6 +20140,12 @@
             "value": "Moyen"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "標準"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -17911,6 +20191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Long"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "長い"
           }
         },
         "ko": {
@@ -17960,6 +20246,12 @@
             "value": "↵ sert à"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵の動作"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18005,6 +20297,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller dans l’app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリにペースト"
           }
         },
         "ko": {
@@ -18054,6 +20352,12 @@
             "value": "Copier uniquement dans le presse-papiers"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリップボードにのみコピー"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18099,6 +20403,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toujours coller en texte brut"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "常にプレーンテキストでペースト"
           }
         },
         "ko": {
@@ -18148,6 +20458,12 @@
             "value": "Les collages depuis le panneau et la Pile abandonnent les polices, les couleurs et la mise en forme des liens."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルとスタックからのペーストでは、フォント、色、リンクの書式が除かれます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18193,6 +20509,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autorisé"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可済み"
           }
         },
         "ko": {
@@ -18242,6 +20564,12 @@
             "value": "Requis"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "必要"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18287,6 +20615,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Facultatif"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意"
           }
         },
         "ko": {
@@ -18336,6 +20670,12 @@
             "value": "Accessibilité"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセシビリティ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18381,6 +20721,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Colle dans l’app où vous étiez et repère votre point d’insertion."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "元のアプリにペーストし、挿入ポイントの位置を見つけます。"
           }
         },
         "ko": {
@@ -18430,6 +20776,12 @@
             "value": "Dans Confidentialité et sécurité › Accessibilité, recherchez yabbistir et activez-le."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プライバシーとセキュリティ › アクセシビリティでyabbistirを探してオンにしてください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18475,6 +20827,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Surveillance de l’entrée"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力監視"
           }
         },
         "ko": {
@@ -18524,6 +20882,12 @@
             "value": "Permet à la Pile d’entendre votre ⌘V, afin que l’élément suivant apparaisse après chaque collage."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタックが⌘Vを検知して、ペーストのたびに次の項目を用意できるようにします。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18569,6 +20933,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dans Confidentialité et sécurité › Surveillance de l’entrée, recherchez yabbistir et activez-le."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プライバシーとセキュリティ › 入力監視でyabbistirを探してオンにしてください。"
           }
         },
         "ko": {
@@ -18618,6 +20988,12 @@
             "value": "Coller depuis d’autres apps"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかのアプリからペースト"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18663,6 +21039,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permet à yabbistir de voir ce que vous copiez, afin de tenir votre historique."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーした内容をyabbistirが読み取り、履歴を保存できるようにします。"
           }
         },
         "ko": {
@@ -18712,6 +21094,12 @@
             "value": "Si macOS vous le demande, choisissez Toujours autoriser. Vous pourrez le modifier plus tard dans Confidentialité et sécurité."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOSから確認されたら、“常に許可”を選択してください。あとからプライバシーとセキュリティで変更できます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18757,6 +21145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS ne l’a pas encore demandé."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOSからまだ確認されていません。"
           }
         },
         "ko": {
@@ -18806,6 +21200,12 @@
             "value": "macOS le demande à chaque fois."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOSが毎回確認します。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18851,6 +21251,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Désactivé : yabbistir ne peut pas voir vos copies."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフ: yabbistirはコピーした内容を参照できません。"
           }
         },
         "ko": {
@@ -18900,6 +21306,12 @@
             "value": "Ouvrir avec la session"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に開く"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -18945,6 +21357,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lance yabbistir à l’ouverture de votre session, pour que votre historique reste à jour."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時にyabbistirを起動して、履歴が途切れないようにします。"
           }
         },
         "ko": {
@@ -18994,6 +21412,12 @@
             "value": "Activez-le dans Général. Si macOS vous le demande, approuvez-le dans Ouverture et extensions."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“一般”でオンにしてください。macOSから確認されたら、ログイン項目で承認してください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19039,6 +21463,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importons votre bibliothèque Paste"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasteのライブラリを読み込みましょう"
           }
         },
         "ko": {
@@ -19088,6 +21518,12 @@
             "value": "Vos pinboards deviennent des catégories. Vos données dans Paste sont seulement lues, jamais modifiées."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinboardはカテゴリになります。Pasteのデータは読み取るだけで、変更されません。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19130,6 +21566,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -19182,6 +21624,12 @@
             "value": "%@ · %@"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19227,6 +21675,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout l’historique"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴全体"
           }
         },
         "ko": {
@@ -19276,6 +21730,12 @@
             "value": "%@ → %@, sous forme de catégories"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個のPinboard → %@、カテゴリとして読み込まれます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19321,6 +21781,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込む"
           }
         },
         "ko": {
@@ -19370,6 +21836,12 @@
             "value": "Plus tard"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今はしない"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19415,6 +21887,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transfert en cours…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込み中…"
           }
         },
         "ko": {
@@ -19464,6 +21942,12 @@
             "value": "Les images et le texte enrichi sont aussi importés."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像やリッチテキストもあわせて読み込まれます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19506,6 +21990,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -19558,6 +22048,12 @@
             "value": "Tout est là."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込みが完了しました。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19603,6 +22099,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Texte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト"
           }
         },
         "ko": {
@@ -19652,6 +22154,12 @@
             "value": "Code"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コード"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19697,6 +22205,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lien"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンク"
           }
         },
         "ko": {
@@ -19746,6 +22260,12 @@
             "value": "Image"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19791,6 +22311,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couleur"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カラー"
           }
         },
         "ko": {
@@ -19840,6 +22366,12 @@
             "value": "Fichier"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19885,6 +22417,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 nouvel élément ajouté."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい項目を1件追加しました。"
           }
         },
         "ko": {
@@ -19934,6 +22472,12 @@
             "value": "%@ nouveaux éléments ajoutés."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい項目を%@件追加しました。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -19979,6 +22523,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rien de nouveau à importer."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込む新しい項目はありません。"
           }
         },
         "ko": {
@@ -20028,6 +22578,12 @@
             "value": "1 élément n’a pas pu être importé."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1件の項目を読み込めませんでした。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20073,6 +22629,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ éléments n’ont pas pu être importés."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@件の項目を読み込めませんでした。"
           }
         },
         "ko": {
@@ -20122,6 +22684,12 @@
             "value": "Impossible de lire la bibliothèque. Quittez Paste et réessayez."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライブラリを読み取れませんでした。Pasteを終了して、もう一度お試しください。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20167,6 +22735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune bibliothèque Paste n’a été trouvée sur ce Mac."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このMacにPasteのライブラリが見つかりませんでした。"
           }
         },
         "ko": {
@@ -20216,6 +22790,12 @@
             "value": "Paste est toujours ouvert"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasteがまだ実行中です"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20261,6 +22841,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les deux utilisent les mêmes raccourcis. Quittez Paste et retirez-le d’Ouverture et extensions."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どちらも同じキーボードショートカットを使います。Pasteを終了し、ログイン項目から削除してください。"
           }
         },
         "ko": {
@@ -20310,6 +22896,12 @@
             "value": "Quitter Paste"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasteを終了"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20355,6 +22947,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 élément"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目1件"
           }
         },
         "ko": {
@@ -20404,6 +23002,12 @@
             "value": "%@ éléments"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目%@件"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20449,6 +23053,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 élément épinglé"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピン留めした項目1件"
           }
         },
         "ko": {
@@ -20498,6 +23108,12 @@
             "value": "%@ éléments épinglés"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピン留めした項目%@件"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20543,6 +23159,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 pinboard"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個のPinboard"
           }
         },
         "ko": {
@@ -20592,6 +23214,12 @@
             "value": "%@ pinboards"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個のPinboard"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20637,6 +23265,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout ce que vous copiez, juste sous votre point d’insertion."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしたすべてが、挿入ポイントのすぐ下に。"
           }
         },
         "ko": {
@@ -20686,6 +23320,12 @@
             "value": "yabbistir garde votre historique. Appuyez sur le raccourci, commencez à taper, collez avec ↵. Sans souris."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistirがコピーの履歴を保存します。キーボードショートカットを押し、入力して検索し、↵でペースト。マウスは不要です。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20731,6 +23371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "C’est parti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "はじめる"
           }
         },
         "ko": {
@@ -20780,6 +23426,12 @@
             "value": "Votre bibliothèque Paste peut aussi être importée"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasteのライブラリも読み込めます"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20825,6 +23477,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continuer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "続ける"
           }
         },
         "ko": {
@@ -20874,6 +23532,12 @@
             "value": "Quelques derniers réglages"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最後にいくつかの設定"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -20919,6 +23583,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous pouvez les modifier à tout moment dans les Réglages."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらは設定でいつでも変更できます。"
           }
         },
         "ko": {
@@ -20968,6 +23638,12 @@
             "value": "Raccourci pour ouvrir le panneau"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルを開くショートカット"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21013,6 +23689,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Celui que vous connaissez dans Paste"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasteで使い慣れたもの"
           }
         },
         "ko": {
@@ -21062,6 +23744,12 @@
             "value": "Vous pouvez le modifier dans les Réglages."
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定で変更できます。"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21107,6 +23795,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coller directement"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接ペースト"
           }
         },
         "ko": {
@@ -21156,6 +23850,12 @@
             "value": "Sans Accessibilité, les éléments sont seulement copiés dans le presse-papiers"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセシビリティを許可しない場合、項目はクリップボードにコピーされるだけです"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21201,6 +23901,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autoriser"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可"
           }
         },
         "ko": {
@@ -21250,6 +23956,12 @@
             "value": "Autorisé"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可済み"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21295,6 +24007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir avec la session"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に開く"
           }
         },
         "ko": {
@@ -21344,6 +24062,12 @@
             "value": "Prêt en arrière-plan au démarrage de votre Mac"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Macの起動時にバックグラウンドで待機します"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21389,6 +24113,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terminé, afficher le panneau"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了してパネルを表示"
           }
         },
         "ko": {
@@ -21438,6 +24168,12 @@
             "value": "Relancer la configuration initiale…"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "初期設定をもう一度実行…"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21483,6 +24219,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lecture de votre bibliothèque…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライブラリを読み取り中…"
           }
         },
         "ko": {
@@ -21532,6 +24274,12 @@
             "value": "éléments · %@"
           }
         },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目 · %@"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -21577,6 +24325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "élément · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目 · %@"
           }
         },
         "ko": {
