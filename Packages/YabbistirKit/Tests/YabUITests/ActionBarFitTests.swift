@@ -108,6 +108,20 @@ import YabLocalization
         #expect(all <= room, "\(language.rawValue): \(all) pt in \(room) pt")
     }
 
+    /// German's Transform goes by its key alone in one column ("Einsetzen ↵ | ⇧ | Aktionen ⌘K"), and VoiceOver still
+    /// reads it as "Umwandeln", not "⇧"; the pointer's tooltip says the same.
+    @Test func aKeysOnlyButtonKeepsItsName() throws {
+        let bar = try bar(.german)
+        #expect(ActionBarView.Words.allCases.first { idealWidth(bar.itemActions($0)) <= room } == .firstAndActions)
+        let (window, host) = AccessibilityTree.host(bar.frame(width: column),
+                                                    size: NSSize(width: column, height: Tokens.Metrics.footerHeight))
+        let buttons = AccessibilityTree.elements(under: host).filter { $0.role == NSAccessibility.Role.button.rawValue }
+        #expect(buttons.map(\.label) == ["Einsetzen, ↵", "Umwandeln", "Aktionen, ⌘, K"])
+        let transform = try #require(buttons.first { $0.label == "Umwandeln" })
+        #expect(transform.help == "Umwandeln")
+        _ = window
+    }
+
     /// Under an input method Transform's keys read ⌘T, with or without its word.
     @Test func theInputMethodKeysStay() throws {
         let keys = idealWidth(try bar(.german, inputMethod: true).itemActions(.firstOnly))

@@ -528,27 +528,57 @@ private struct AppIcon: View {
     }
 }
 
-/// The app's languages, each in its own name, in a pop-up that reads the current one: the system's small borderless
-/// pop-up on a 26 pt `tile` with `controlRadius` corners and a hairline edge. Picking one turns the whole window (and the
-/// app) to it at once.
+/// The app's languages, each in its own name, in a menu that reads the current one. The tile is the menu's own label,
+/// so all of it opens the menu: 26 pt of `tile` with `controlRadius` corners and a hairline edge, `row-hover` under the
+/// pointer as the onboarding's secondary buttons are, the name at 11.5 pt beside the pop-up chevron. The menu is the
+/// system's: the nine names, a check on the current one. Picking one turns the whole window (and the app) to it at once.
 struct LanguagePicker: View {
     @Bindable var store: LanguageStore
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: Tokens.Metrics.controlRadius, style: .continuous)
-        Picker(L10n.string("settings.general.language", store.language), selection: $store.language) {
-            ForEach(AppLanguage.allCases, id: \.self) { Text($0.nativeName).tag($0) }
+        Menu {
+            // Toggles rather than an inline Picker, whose section puts a separator above and below the names.
+            ForEach(AppLanguage.allCases, id: \.self) { language in
+                Toggle(language.nativeName, isOn: Binding(get: { store.language == language },
+                                                          set: { if $0 { store.language = language } }))
+            }
+        } label: {
+            Tile(name: store.language.nativeName)
         }
-        .pickerStyle(.menu)
-        .buttonStyle(.borderless)
-        .controlSize(.small)
-        .labelsHidden()
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .menuIndicator(.hidden)
         .fixedSize()
-        .padding(.leading, 8)
-        .padding(.trailing, 5)
-        .frame(height: 26)
-        .background(Tokens.Colors.tile, in: shape)
-        .overlay(shape.strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
+        .accessibilityLabel(Text(L10n.string("settings.general.language", store.language)))
+        .accessibilityValue(Text(store.language.nativeName))
+    }
+
+    private struct Tile: View {
+        let name: String
+        @State private var hovering = false
+
+        var body: some View {
+            let shape = RoundedRectangle(cornerRadius: Tokens.Metrics.controlRadius, style: .continuous)
+            HStack(spacing: 6) {
+                Text(name)
+                    .font(.system(size: 11.5, weight: .medium))
+                    .foregroundStyle(Tokens.Colors.text)
+                    .lineLimit(1)
+                // Decoration: shown, it would be a second menu button for VoiceOver, the size of the chevron.
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.system(size: 8, weight: .semibold))
+                    .foregroundStyle(Tokens.Colors.textSecondary)
+                    .accessibilityHidden(true)
+            }
+            .padding(.leading, 10)
+            .padding(.trailing, 8)
+            .frame(height: 26)
+            .background(hovering ? Tokens.Colors.rowHover : Tokens.Colors.tile, in: shape)
+            .overlay(shape.strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
+            .contentShape(shape)
+            .onHover { hovering = $0 }
+            .animation(.plainEase(0.15), value: hovering)
+        }
     }
 }
 

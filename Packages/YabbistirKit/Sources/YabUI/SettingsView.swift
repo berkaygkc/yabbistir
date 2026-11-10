@@ -23,12 +23,26 @@ public enum SettingsSection: String, CaseIterable, Hashable {
     }
 
     /// The sidebar's first width: 200 pt, or wide enough for the language's longest title (German "Tastaturkurzbefehle",
-    /// Japanese "キーボードショートカット"), up to the column's 260 pt. A row gives its title all but 88 pt: the icon, the
-    /// insets and the selection's margins.
-    public static func sidebarWidth(_ language: AppLanguage) -> CGFloat {
-        let font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+    /// Japanese "キーボードショートカット"), up to the column's 260 pt.
+    ///
+    /// Titles are measured in the sidebar's own font, which follows System Settings › Appearance › Sidebar icon size:
+    /// 11, 13 or 15 pt for small, medium and large rows. Beside its title a row then keeps 84, 88 or 90 pt. Of those,
+    /// 59, 63 and 65 pt are the row's own, measured on macOS 26 in a sidebar `List` as wide as the column: the cell's
+    /// 16 pt insets and the icon with its gap. The other 25 pt are headroom, so the longest title never ends right at
+    /// the inset.
+    ///
+    /// The limit: these are macOS 26's figures, read from neither AppKit nor SwiftUI, which don't publish them. A later
+    /// macOS that pads its sidebar rows by more than the headroom would truncate the longest title until the user drags
+    /// the column wider (it goes to 260 pt).
+    public static func sidebarWidth(_ language: AppLanguage, rowSize: SidebarRowSize = .medium) -> CGFloat {
+        let (fontSize, chrome): (CGFloat, CGFloat) = switch rowSize {
+        case .small: (11, 84)
+        case .large: (15, 90)
+        default: (13, 88)
+        }
+        let font = NSFont.systemFont(ofSize: fontSize)
         let widest = allCases.map { NSAttributedString(string: L10n.string($0.titleKey, language), attributes: [.font: font]).size().width }
-        return min(260, max(200, ceil(widest.max() ?? 0) + 88))
+        return min(260, max(200, ceil(widest.max() ?? 0) + chrome))
     }
 }
 
@@ -69,6 +83,8 @@ public struct SettingsModels {
 /// The Settings window: a sidebar of sections beside the chosen one.
 public struct SettingsView: View {
     let models: SettingsModels
+    /// The system's sidebar icon size, which sets the rows' font.
+    @Environment(\.sidebarRowSize) private var sidebarRowSize
 
     public init(models: SettingsModels) {
         self.models = models
@@ -80,7 +96,8 @@ public struct SettingsView: View {
             List(SettingsSection.allCases, id: \.self, selection: $navigation.section) { section in
                 Label(L10n.string(section.titleKey, models.language.language), systemImage: section.symbol)
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: SettingsSection.sidebarWidth(models.language.language), max: 260)
+            .navigationSplitViewColumnWidth(min: 180, ideal: SettingsSection.sidebarWidth(models.language.language, rowSize: sidebarRowSize),
+                                           max: 260)
         } detail: {
             switch navigation.section ?? .general {
             case .general:
