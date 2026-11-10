@@ -1893,7 +1893,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Außerdem aktualisiert (keine neuen Berechtigungen): %@"
+            "value": "Weitere Updates ohne neue Berechtigungen: %@"
           }
         },
         "en": {
@@ -4009,7 +4009,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Markierte öffnen sich als Spalte"
+            "value": "Markierte öffnen sich als Spalten"
           }
         },
         "en": {
@@ -4377,7 +4377,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Es verschwindet in 30 Sekunden aus der Zwischenablage."
+            "value": "Der Wert verschwindet in 30 Sekunden aus der Zwischenablage."
           }
         },
         "en": {
@@ -4860,7 +4860,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zu Kategorie hinzufügen"
+            "value": "In Kategorie"
           }
         },
         "en": {
@@ -7219,7 +7219,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Sprachpaket %@ → %@ ist nicht geladen"
+            "value": "Das Sprachpaket %@ → %@ ist nicht heruntergeladen"
           }
         },
         "en": {
