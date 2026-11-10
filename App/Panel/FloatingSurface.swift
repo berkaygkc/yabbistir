@@ -10,6 +10,7 @@ final class FloatingSurface: NSPanel {
     /// The owner alone sizes the window; a hosting view that sized it too grew it from the bottom.
     private let sizedByOwner: Bool
     private var host: SurfaceHostingView?
+    private var measuringHost: NSHostingView<AnyView>?
     /// Esc inside the surface (also from a focused text field).
     var onCancel: (() -> Void)?
     /// Keys the surface handles before its views (true: consumed), e.g. ↑/↓ and ⇥ in the editor.
@@ -58,6 +59,17 @@ final class FloatingSurface: NSPanel {
     func fittingSize<Content: View>(of content: Content) -> CGSize {
         setContent(content)
         return host?.fittingSize ?? .zero
+    }
+
+    /// A stand-in's natural size, measured in a hosting view of its own that is never shown, so the shown content
+    /// keeps its state (how far a list is scrolled). The stand-in leaves once measured, so it watches nothing.
+    func measuredSize<Content: View>(of content: Content) -> CGSize {
+        let measuring = measuringHost ?? NSHostingView(rootView: AnyView(EmptyView()))
+        measuringHost = measuring
+        measuring.rootView = AnyView(content)
+        let size = measuring.fittingSize
+        measuring.rootView = AnyView(EmptyView())
+        return size
     }
 
     func show<Content: View>(_ content: Content, frame: CGRect, above parent: NSWindow) {

@@ -137,6 +137,9 @@ public final class PanelViewModel {
     public private(set) var edgeNudge = 0
     /// Highlighted row of the open menu.
     public private(set) var menuSelection = 0
+    /// Bumped when the keyboard moves the ⇧ panel's highlight (↑/↓, its search, a new ⇧↵ default): a list that
+    /// scrolls brings the row into view. Pointing at a row highlights it but never scrolls.
+    public private(set) var transformReveal = 0
     /// ⌘P search text.
     public private(set) var pinQuery = ""
     /// Categories the selected item belongs to, read when ⌘P opens and after each change.
@@ -902,18 +905,23 @@ public final class PanelViewModel {
         case .type(let text):
             transformQuery += text
             menuSelection = 0
+            transformReveal += 1
         case .togglePreview:
             transformQuery += " "
             menuSelection = 0
+            transformReveal += 1
         case .deleteBackward:
             if !transformQuery.isEmpty { transformQuery.removeLast() }
             menuSelection = 0
+            transformReveal += 1
         case .delete:
             // ⌘⌫ in a search field clears it.
             transformQuery = ""
             menuSelection = 0
+            transformReveal += 1
         case .move(let delta):
             menuSelection = max(0, min(transformRows.count - 1, menuSelection + delta))
+            transformReveal += 1
         case .confirm, .copy:
             return Consumed(action: runTransformRow(copy: command == .copy))
         case .toggleActions:
@@ -1001,6 +1009,7 @@ public final class PanelViewModel {
         defaultsRevision += 1
         if !transformQuery.isEmpty { transformQuery = "" }
         menuSelection = transformRows.firstIndex { $0.id == id } ?? 0
+        transformReveal += 1
     }
 
     /// Pointer over an item of the ⇧ panel's ⌘K.

@@ -9,13 +9,27 @@ import YabLocalization
 /// text" for rich text ("yabbistir"), the paste target's own actions ("Finder’a"), then its
 /// transforms grouped by extension with each one's output on the right, the highlighted one's
 /// result below, then the keys; ⌘K opens its own menu over the lower right. On a source's row it
-/// lists that row's actions instead (`sourceList`).
+/// lists that row's actions instead (`sourceList`). With more rows than the screen holds, the rows
+/// scroll between the header and the result (`ListMode.scrolls`).
 public struct TransformPanelView: View {
+    /// How the rows stand (`TransformListLayout` decides).
+    public enum ListMode: Equatable, Sendable {
+        /// All of them, as tall as they are.
+        case full
+        /// A list `height` tall that scrolls; the keyboard's highlight stays in view.
+        case scrolls(height: CGFloat)
+        /// For measuring the panel's other parts: no rows, and the result at its tallest (three lines), so a list
+        /// fitted to what is left keeps its height as the highlight moves.
+        case chrome
+    }
+
     @Bindable var model: PanelViewModel
+    let list: ListMode
     let onAction: (PanelAction) -> Void
 
-    public init(model: PanelViewModel, onAction: @escaping (PanelAction) -> Void) {
+    public init(model: PanelViewModel, list: ListMode = .full, onAction: @escaping (PanelAction) -> Void) {
         self.model = model
+        self.list = list
         self.onAction = onAction
     }
 
@@ -33,7 +47,37 @@ public struct TransformPanelView: View {
         VStack(alignment: .leading, spacing: 0) {
             header(count: rows.count)
             if !model.transformQuery.isEmpty { queryLine }
-            ForEach(Array(rows.enumerated()), id: \.element.id) { index, row in
+            switch list {
+            case .full: rowList(rows, sections)
+            case .scrolls(let height): scrollingRows(rows, sections, height: height)
+            case .chrome: EmptyView()
+            }
+            if rows.isEmpty {
+                Text(L10n.string("transforms.empty", model.language, model.transformQuery))
+                    .font(.system(size: 12.5))
+                    .foregroundStyle(Tokens.Colors.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 10)
+            } else if list == .chrome {
+                tallestResult
+            } else if rows.indices.contains(model.menuSelection) {
+                result(rows[model.menuSelection])
+            }
+            footer
+        }
+        .padding(6)
+        .frame(width: 344)
+        .background(PanelBackground(material: PanelMaterial.current, cornerRadius: 14))
+        .environment(\.locale, model.language.locale)
+    }
+
+    /// Each row under its section's header, if it opens one. A row and its header are one piece, so a list that scrolls
+    /// to a section's first row shows its header too.
+    private func rowList(_ rows: [TransformRow], _ sections: [TransformSection]) -> some View {
+        ForEach(Array(rows.enumerated()), id: \.element.id) { index, row in
+            VStack(alignment: .leading, spacing: 0) {
                 if let section = sections.first(where: { $0.rows.lowerBound == index }) { sectionHeader(section) }
                 MenuRow(title: title(of: row), isHighlighted: index == model.menuSelection, keepsTitle: true) {
                     EmptyView()
@@ -57,23 +101,33 @@ public struct TransformPanelView: View {
                     if let action = model.handle(.confirm(plain: false)) { onAction(action) }
                 }
             }
-            if rows.isEmpty {
-                Text(L10n.string("transforms.empty", model.language, model.transformQuery))
-                    .font(.system(size: 12.5))
-                    .foregroundStyle(Tokens.Colors.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 10)
-            } else if rows.indices.contains(model.menuSelection) {
-                result(rows[model.menuSelection])
-            }
-            footer
+            .id(row.id)
         }
-        .padding(6)
-        .frame(width: 344)
-        .background(PanelBackground(material: PanelMaterial.current, cornerRadius: 14))
-        .environment(\.locale, model.language.locale)
+    }
+
+    /// More rows than the screen holds: they scroll under a ghost scroller, cut clean at the header's hairline and the
+    /// result's, as the Sıra's list is. ↑ ↓ and a new search bring the highlighted row into view; the pointer never
+    /// scrolls the list (pointing at a row only highlights it).
+    private func scrollingRows(_ rows: [TransformRow], _ sections: [TransformSection], height: CGFloat) -> some View {
+        ScrollViewReader { proxy in
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: 0) { rowList(rows, sections) }
+                    .background(OverlayScrollerStyle())
+            }
+            .scrollIndicators(.automatic)
+            .frame(height: height)
+            .onAppear {
+                // Laid out first: a scroll asked for before that is lost.
+                guard rows.indices.contains(model.menuSelection), model.menuSelection > 0 else { return }
+                let id = rows[model.menuSelection].id
+                DispatchQueue.main.async { proxy.scrollTo(id) }
+            }
+            .onChange(of: model.transformReveal) {
+                let rows = model.transformRows
+                guard rows.indices.contains(model.menuSelection) else { return }
+                withAnimation(Tokens.Motion.resolved(Tokens.Motion.ease(0.2))) { proxy.scrollTo(rows[model.menuSelection].id) }
+            }
+        }
     }
 
     // MARK: A source's row
@@ -189,7 +243,7 @@ public struct TransformPanelView: View {
     /// image's format, a file's tile beside where it goes, otherwise up to three lines of text
     /// (for "Paste as plain text", the item's own).
     @ViewBuilder private func result(_ row: TransformRow) -> some View {
-        HStack(spacing: 11) {
+        resultStrip {
             switch row {
             case .plainText:
                 Text(model.transformPlainText ?? "")
@@ -203,6 +257,21 @@ public struct TransformPanelView: View {
             case .command(let command):
                 output(command)
             }
+        }
+    }
+
+    /// The result's tallest form, for measuring: three lines of the 12.5 pt text, taller than a mono output, an
+    /// image's thumbnail or a file's two lines.
+    private var tallestResult: some View {
+        resultStrip {
+            Text(verbatim: "A\nA\nA").font(.system(size: 12.5)).lineSpacing(3).lineLimit(3).hidden()
+        }
+    }
+
+    /// The result's place under the rows, over a hairline.
+    private func resultStrip<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        HStack(spacing: 11) {
+            content()
             Spacer(minLength: 0)
         }
         .padding(EdgeInsets(top: 11, leading: 10, bottom: 6, trailing: 10))

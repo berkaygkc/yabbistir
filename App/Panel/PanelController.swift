@@ -384,21 +384,38 @@ final class PanelController: NSObject, NSWindowDelegate {
     }
 
     /// Like a submenu: its left edge 12 pt inside the column's right edge, or flipped to the
-    /// column's left when the screen runs out; its top 8 pt above the row, kept on screen.
+    /// column's left when the screen runs out; its top 8 pt above the row, kept on screen. With more
+    /// rows than the screen holds, its list scrolls and the panel stands 12 pt below the screen's top,
+    /// so the list stays put while the result under it changes height.
     private func updateTransforms() {
         guard window.isVisible, model.layer == .transforms, let row = screenRect(of: model.selectedRowFrame) else {
             transformSurface.hide()
             return
         }
-        let content = TransformPanelView(model: model) { [weak self] action in self?.perform(action) }
+        let fit = transformListFit()
+        let list: TransformPanelView.ListMode = fit.map { $0.scrolls ? .scrolls(height: $0.height) : .full } ?? .full
+        let content = TransformPanelView(model: model, list: list) { [weak self] action in self?.perform(action) }
         let size = transformSurface.fittingSize(of: content)
+        let margin = ColumnStripLayout.screenMargin
         let column = columnRect()
         var x = column.maxX - 12
-        if x + size.width > visibleFrame.maxX - 12 { x = column.minX - size.width + 12 }
-        x = max(visibleFrame.minX + 12, min(x, visibleFrame.maxX - 12 - size.width))
-        var y = row.maxY + 8 - size.height
-        y = max(visibleFrame.minY + 12, min(y, visibleFrame.maxY - 12 - size.height))
+        if x + size.width > visibleFrame.maxX - margin { x = column.minX - size.width + 12 }
+        x = max(visibleFrame.minX + margin, min(x, visibleFrame.maxX - margin - size.width))
+        var y = fit?.scrolls == true ? visibleFrame.maxY - margin - size.height : row.maxY + 8 - size.height
+        y = max(visibleFrame.minY + margin, min(y, visibleFrame.maxY - margin - size.height))
         transformSurface.show(content, frame: CGRect(x: x, y: y, width: size.width, height: size.height), above: window)
+    }
+
+    /// The ⇧ panel's rows against the screen's height inside its margins, less the panel's other parts with the result
+    /// at its tallest (measured apart, so the shown list keeps its scroll). Nil without rows, and on a source's row,
+    /// whose few actions always fit.
+    private func transformListFit() -> TransformListLayout.Fit? {
+        guard model.transformSource == nil else { return nil }
+        let rows = model.transformRows.count
+        guard rows > 0 else { return nil }
+        let chrome = transformSurface.measuredSize(of: TransformPanelView(model: model, list: .chrome) { _ in }).height
+        let available = visibleFrame.height - 2 * ColumnStripLayout.screenMargin - chrome
+        return TransformListLayout.fit(rows: rows, sections: model.transformSections.count, available: available)
     }
 
     /// The focused column on screen.
