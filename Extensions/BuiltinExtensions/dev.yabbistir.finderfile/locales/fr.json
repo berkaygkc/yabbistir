@@ -1,0 +1,9 @@
+{
+  "name": "Coller comme fichier dans le Finder",
+  "description": "Dépose du texte, du code, des liens et des images dans le dossier du Finder ouvert, sous forme de fichiers.",
+  "file.title": "Coller comme fichier dans le Finder",
+  "file.keywords": ["finder", "fichier", "enregistrer", "webloc"],
+  "text": "Texte",
+  "link": "Lien",
+  "image": "Image"
+}

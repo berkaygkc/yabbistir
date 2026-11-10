@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "UUIDを生成します: ランダム（v4）または時間順（v7）。",
+  "v4.title": "UUIDを生成",
+  "v4.subtitle": "v4 · ランダム",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "UUIDを生成（v7）",
+  "v7.subtitle": "時間順",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "大文字"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Finder에 파일로 붙여넣기",
+  "description": "텍스트, 코드, 링크, 이미지를 열려 있는 Finder 폴더에 파일로 저장합니다.",
+  "file.title": "Finder에 파일로 붙여넣기",
+  "file.keywords": ["finder", "파일", "저장", "webloc"],
+  "text": "텍스트",
+  "link": "링크",
+  "image": "이미지"
+}

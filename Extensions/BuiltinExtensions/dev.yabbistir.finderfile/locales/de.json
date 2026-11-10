@@ -1,0 +1,9 @@
+{
+  "name": "Als Datei in den Finder einsetzen",
+  "description": "Legt Text, Code, Links und Bilder als Dateien im geöffneten Finder-Ordner ab.",
+  "file.title": "Als Datei in den Finder einsetzen",
+  "file.keywords": ["finder", "datei", "sichern", "speichern", "webloc"],
+  "text": "Text",
+  "link": "Link",
+  "image": "Bild"
+}

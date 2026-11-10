@@ -1,0 +1,11 @@
+{
+  "name": "Base64",
+  "description": "编码和解码Base64，并在你拷贝时识别它。",
+  "decode.title": "Base64解码",
+  "decode.keywords": ["base64", "b64", "解码"],
+  "encode.title": "Base64编码",
+  "encode.keywords": ["base64", "b64", "编码"],
+  "tag": "base64",
+  "preview": "解码结果",
+  "notBase64": "这不是Base64。"
+}

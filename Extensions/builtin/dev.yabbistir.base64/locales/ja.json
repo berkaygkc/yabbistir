@@ -1,0 +1,11 @@
+{
+  "name": "Base64",
+  "description": "Base64のエンコードとデコードを行い、コピーしたBase64を認識します。",
+  "decode.title": "Base64をデコード",
+  "decode.keywords": ["base64", "b64", "デコード"],
+  "encode.title": "Base64でエンコード",
+  "encode.keywords": ["base64", "b64", "エンコード"],
+  "tag": "base64",
+  "preview": "デコード結果",
+  "notBase64": "Base64ではありません。"
+}

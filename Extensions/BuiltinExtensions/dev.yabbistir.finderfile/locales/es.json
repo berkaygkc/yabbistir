@@ -1,0 +1,9 @@
+{
+  "name": "Pegar como archivo en el Finder",
+  "description": "Deja texto, código, enlaces e imágenes como archivos en la carpeta abierta del Finder.",
+  "file.title": "Pegar como archivo en el Finder",
+  "file.keywords": ["finder", "archivo", "guardar", "webloc"],
+  "text": "Texto",
+  "link": "Enlace",
+  "image": "Imagen"
+}

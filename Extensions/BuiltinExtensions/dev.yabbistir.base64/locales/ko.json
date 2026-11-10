@@ -1,0 +1,11 @@
+{
+  "name": "Base64",
+  "description": "Base64를 인코딩하고 디코딩하며, 복사한 Base64를 인식합니다.",
+  "decode.title": "Base64 디코딩",
+  "decode.keywords": ["base64", "b64", "디코딩"],
+  "encode.title": "Base64 인코딩",
+  "encode.keywords": ["base64", "b64", "인코딩"],
+  "tag": "base64",
+  "preview": "디코딩 결과",
+  "notBase64": "Base64가 아닙니다."
+}

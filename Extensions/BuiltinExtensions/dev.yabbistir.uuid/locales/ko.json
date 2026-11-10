@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "UUID를 생성합니다: 무작위(v4) 또는 시간순(v7).",
+  "v4.title": "UUID 생성",
+  "v4.subtitle": "v4 · 무작위",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "UUID 생성(v7)",
+  "v7.subtitle": "시간순",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "대문자"
+}

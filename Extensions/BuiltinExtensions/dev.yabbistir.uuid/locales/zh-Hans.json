@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "生成UUID：随机（v4）或按时间排序（v7）。",
+  "v4.title": "生成UUID",
+  "v4.subtitle": "v4 · 随机",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "生成UUID（v7）",
+  "v7.subtitle": "按时间排序",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "大写"
+}

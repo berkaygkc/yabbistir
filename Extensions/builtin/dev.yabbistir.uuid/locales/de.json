@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "Erzeugt UUIDs: zufällig (v4) oder zeitlich sortiert (v7).",
+  "v4.title": "UUID erzeugen",
+  "v4.subtitle": "v4 · zufällig",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "UUID erzeugen (v7)",
+  "v7.subtitle": "zeitlich sortiert",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "Großbuchstaben"
+}

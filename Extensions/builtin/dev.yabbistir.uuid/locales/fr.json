@@ -1,0 +1,11 @@
+{
+  "name": "UUID",
+  "description": "Génère des UUID : aléatoires (v4) ou ordonnés chronologiquement (v7).",
+  "v4.title": "Générer un UUID",
+  "v4.subtitle": "v4 · aléatoire",
+  "v4.keywords": ["uuid", "guid"],
+  "v7.title": "Générer un UUID (v7)",
+  "v7.subtitle": "ordonné chronologiquement",
+  "v7.keywords": ["uuid", "guid", "uuidv7"],
+  "uppercase": "Majuscules"
+}

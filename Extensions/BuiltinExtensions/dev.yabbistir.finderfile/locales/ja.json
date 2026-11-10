@@ -1,0 +1,9 @@
+{
+  "name": "ファイルとしてFinderにペースト",
+  "description": "テキスト、コード、リンク、画像を、開いているFinderフォルダにファイルとして保存します。",
+  "file.title": "ファイルとしてFinderにペースト",
+  "file.keywords": ["finder", "ファイル", "保存", "webloc"],
+  "text": "テキスト",
+  "link": "リンク",
+  "image": "画像"
+}
