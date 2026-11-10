@@ -1,5 +1,5 @@
 {
-  "name": "转换",
+  "name": "格式转换",
   "description": "转换颜色格式，将图像转为JPEG、PNG或缩小一半，并读取图像中的文本。",
   "color.title": "转换颜色",
   "color.keywords": ["转换", "颜色", "色值", "rgb", "hsl", "oklch", "swiftui", "nscolor"],

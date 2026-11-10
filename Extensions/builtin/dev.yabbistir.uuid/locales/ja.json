@@ -1,6 +1,6 @@
 {
   "name": "UUID",
-  "description": "UUIDを生成します: ランダム（v4）または時間順（v7）。",
+  "description": "ランダム（v4）または時間順（v7）のUUIDを生成します。",
   "v4.title": "UUIDを生成",
   "v4.subtitle": "v4 · ランダム",
   "v4.keywords": ["uuid", "guid"],

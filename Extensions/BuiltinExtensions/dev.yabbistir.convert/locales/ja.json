@@ -1,6 +1,6 @@
 {
-  "name": "変換",
-  "description": "カラーを別のフォーマットに、画像をJPEG、PNG、半分のサイズに変換し、画像のテキストを読み取ります。",
+  "name": "フォーマット変換",
+  "description": "カラーを別のフォーマットに、画像をJPEG、PNG、半分のサイズに変換し、画像内のテキストを読み取ります。",
   "color.title": "カラーを変換",
   "color.keywords": ["変換", "カラー", "色", "rgb", "hsl", "oklch", "swiftui", "nscolor"],
   "color.rgb": "RGBとして",

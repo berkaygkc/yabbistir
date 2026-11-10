@@ -2,7 +2,7 @@
   "name": "Base64",
   "description": "Codifica y decodifica Base64, y lo reconoce cuando lo copias.",
   "decode.title": "Decodificar Base64",
-  "decode.keywords": ["base64", "b64", "decodificar"],
+  "decode.keywords": ["base64", "b64", "decodificar", "descodificar"],
   "encode.title": "Codificar con Base64",
   "encode.keywords": ["base64", "b64", "codificar"],
   "tag": "base64",

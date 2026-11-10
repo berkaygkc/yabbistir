@@ -1,7 +1,7 @@
 {
-  "name": "在Finder中以檔案貼上",
+  "name": "作為檔案貼到Finder",
   "description": "將文字、程式碼、連結和影像作為檔案放入已打開的Finder檔案夾。",
-  "file.title": "在Finder中以檔案貼上",
+  "file.title": "作為檔案貼到Finder",
   "file.keywords": ["finder", "檔案", "儲存", "webloc"],
   "text": "文字",
   "link": "連結",

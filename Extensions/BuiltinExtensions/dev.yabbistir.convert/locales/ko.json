@@ -1,6 +1,6 @@
 {
-  "name": "변환",
-  "description": "색상을 다른 형식으로, 이미지를 JPEG, PNG 또는 절반 크기로 변환하고 이미지 속 텍스트를 읽습니다.",
+  "name": "포맷 변환",
+  "description": "색상을 다른 포맷으로, 이미지를 JPEG, PNG 또는 절반 크기로 변환하고 이미지 속 텍스트를 읽습니다.",
   "color.title": "색상 변환",
   "color.keywords": ["변환", "색상", "색", "rgb", "hsl", "oklch", "swiftui", "nscolor"],
   "color.rgb": "RGB로",
@@ -21,5 +21,5 @@
   "ocr.keywords": ["ocr", "텍스트", "문자 인식", "변환"],
   "bgremove.title": "배경 제거",
   "bgremove.subtitle": "투명 PNG 위의 대상체",
-  "bgremove.keywords": ["배경", "제거", "누끼", "오려내기", "투명", "대상체"]
+  "bgremove.keywords": ["배경", "제거", "누끼", "오려내기", "투명", "대상체", "피사체"]
 }

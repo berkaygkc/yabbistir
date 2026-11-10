@@ -1,6 +1,6 @@
 {
-  "name": "Umwandeln",
-  "description": "Wandelt Farben in andere Formate und Bilder in JPEG oder PNG um, verkleinert Bilder auf die Hälfte und liest Text aus Bildern.",
+  "name": "Konvertieren",
+  "description": "Konvertiert Farben zwischen Formaten und Bilder in JPEG oder PNG, verkleinert Bilder auf die Hälfte und liest Text aus Bildern.",
   "color.title": "Farbe umwandeln",
   "color.keywords": ["umwandeln", "konvertieren", "farbe", "rgb", "hsl", "oklch", "swiftui", "nscolor"],
   "color.rgb": "Als RGB",
@@ -18,7 +18,7 @@
   "image.half.subtitle": "50 %",
   "ocr.title": "Text extrahieren (OCR)",
   "ocr.subtitle": "Text im Bild",
-  "ocr.keywords": ["ocr", "text", "texterkennung", "umwandeln"],
+  "ocr.keywords": ["ocr", "text", "texterkennung", "umwandeln", "konvertieren"],
   "bgremove.title": "Hintergrund entfernen",
   "bgremove.subtitle": "Motiv auf transparentem PNG",
   "bgremove.keywords": ["hintergrund", "entfernen", "freistellen", "transparent", "motiv"]
