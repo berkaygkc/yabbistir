@@ -22,6 +22,12 @@
             "value": "Añadir a una categoría…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에 추가…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -55,6 +61,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir a la Pila"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택에 추가"
           }
         },
         "tr": {
@@ -92,6 +104,12 @@
             "value": "Todas las transformaciones (%@)…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 변환(%@)…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -125,6 +143,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiar en el portapapeles"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클립보드로 복사"
           }
         },
         "tr": {
@@ -162,6 +186,12 @@
             "value": "Eliminar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -195,6 +225,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se han encontrado acciones"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동작을 찾을 수 없음"
           }
         },
         "tr": {
@@ -232,6 +268,12 @@
             "value": "Pegar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -265,6 +307,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar como texto sin formato"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반 텍스트로 붙여넣기"
           }
         },
         "tr": {
@@ -302,6 +350,12 @@
             "value": "Vista previa"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "미리보기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -335,6 +389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar de la categoría"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에서 제거"
           }
         },
         "tr": {
@@ -372,6 +432,12 @@
             "value": "Buscar acciones…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동작 검색…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -405,6 +471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence no ha podido responder"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence가 답하지 못했습니다"
           }
         },
         "tr": {
@@ -442,6 +514,12 @@
             "value": "Apple Intelligence tiene demasiada carga, inténtalo de nuevo en un momento"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence가 사용 중입니다. 잠시 후 다시 시도하십시오"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -475,6 +553,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple Intelligence no responderá a esto"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence가 이 요청에는 답하지 않습니다"
           }
         },
         "tr": {
@@ -512,6 +596,12 @@
             "value": "Apple Intelligence aún no admite este idioma"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence가 아직 이 언어를 지원하지 않습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -545,6 +635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este texto es demasiado largo para Apple Intelligence"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트가 너무 길어 Apple Intelligence에서 처리할 수 없습니다"
           }
         },
         "tr": {
@@ -582,6 +678,12 @@
             "value": "Este Mac no puede ejecutar Apple Intelligence"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서는 Apple Intelligence를 실행할 수 없습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -615,6 +717,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activa Apple Intelligence en Ajustes del Sistema"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정에서 Apple Intelligence를 켜십시오"
           }
         },
         "tr": {
@@ -652,6 +760,12 @@
             "value": "Apple Intelligence aún se está preparando"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence가 아직 준비 중입니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -685,6 +799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Arcilla"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "점토"
           }
         },
         "tr": {
@@ -722,6 +842,12 @@
             "value": "Ocre"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황토"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -755,6 +881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ciruela"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자두"
           }
         },
         "tr": {
@@ -792,6 +924,12 @@
             "value": "Salvia"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세이지"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -825,6 +963,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pizarra"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "슬레이트"
           }
         },
         "tr": {
@@ -862,6 +1006,12 @@
             "value": "Verde azulado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "청록"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -895,6 +1045,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Siempre"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항상"
           }
         },
         "tr": {
@@ -932,6 +1088,12 @@
             "value": "Cerrar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -965,6 +1127,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로 만들기"
           }
         },
         "tr": {
@@ -1002,6 +1170,12 @@
             "value": "Seleccionar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1035,6 +1209,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Visibilidad"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시"
           }
         },
         "tr": {
@@ -1072,6 +1252,12 @@
             "value": "Nueva categoría"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 카테고리"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1105,6 +1291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las categorías “Siempre” se abren como columnas"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘항상’ 카테고리는 열로 표시됩니다"
           }
         },
         "tr": {
@@ -1142,6 +1334,12 @@
             "value": "Al seleccionar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 시"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1175,6 +1373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Arrastra para reordenar las columnas. El panel se actualiza al instante."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "끌어서 열 순서를 바꿉니다. 패널에 바로 반영됩니다."
           }
         },
         "tr": {
@@ -1212,6 +1416,12 @@
             "value": "Categorías"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1245,6 +1455,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancelar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
           }
         },
         "tr": {
@@ -1282,6 +1498,12 @@
             "value": "Comandos"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1315,6 +1537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용"
           }
         },
         "tr": {
@@ -1352,6 +1580,12 @@
             "value": "No instalar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치 안 함"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1385,6 +1619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir e instalar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용 및 설치"
           }
         },
         "tr": {
@@ -1422,6 +1662,12 @@
             "value": "Revisar permisos…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한 검토…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1455,6 +1701,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” quiere:"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’이(가) 다음을 요청합니다:"
           }
         },
         "tr": {
@@ -1492,6 +1744,12 @@
             "value": "Elegir…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1525,6 +1783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Borrar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지우기"
           }
         },
         "tr": {
@@ -1562,6 +1826,12 @@
             "value": "Ninguna carpeta elegida"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 폴더 없음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1595,6 +1865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sugerida: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추천: %@"
           }
         },
         "tr": {
@@ -1632,6 +1908,12 @@
             "value": "Instalar .yabext…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".yabext 설치…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1665,6 +1947,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalar desde una carpeta…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더에서 설치…"
           }
         },
         "tr": {
@@ -1702,6 +1990,12 @@
             "value": "Problemas"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "문제"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1735,6 +2029,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vincular carpeta de desarrollo…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개발 폴더 연결…"
           }
         },
         "tr": {
@@ -1772,6 +2072,12 @@
             "value": "Registro"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1805,6 +2111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no se ha registrado nada. Aquí aparecen console.log y los errores de las extensiones."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 기록된 내용이 없습니다. 확장 프로그램의 console.log와 오류가 여기에 표시됩니다."
           }
         },
         "tr": {
@@ -1842,6 +2154,12 @@
             "value": "Abrir la carpeta de extensiones"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 폴더 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1875,6 +2193,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permisos"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한"
           }
         },
         "tr": {
@@ -1912,6 +2236,12 @@
             "value": "Activar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -1945,6 +2275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preferencias"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
           }
         },
         "tr": {
@@ -1982,6 +2318,12 @@
             "value": "Recargar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 로드"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2015,6 +2357,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거"
           }
         },
         "tr": {
@@ -2052,6 +2400,12 @@
             "value": "¿Eliminar %@?"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@을(를) 제거하겠습니까?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2085,6 +2439,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Imagen"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지"
           }
         },
         "tr": {
@@ -2122,6 +2482,12 @@
             "value": "Reglas de copia"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사 규칙"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2155,6 +2521,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Borrar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지우기"
           }
         },
         "tr": {
@@ -2192,6 +2564,12 @@
             "value": "No se ha podido guardar el secreto en el Llavero."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비밀 값을 키체인에 저장하지 못했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2225,6 +2603,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Guardar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장"
           }
         },
         "tr": {
@@ -2262,6 +2646,12 @@
             "value": "Guardado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2295,6 +2685,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Integrada"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내장"
           }
         },
         "tr": {
@@ -2332,6 +2728,12 @@
             "value": "Desarrollo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개발"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2365,6 +2767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Local"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬"
           }
         },
         "tr": {
@@ -2402,6 +2810,12 @@
             "value": "No se ha podido verificar la lista de la tienda. Se muestra la lista guardada."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 목록을 확인하지 못했습니다. 저장된 목록을 표시합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2435,6 +2849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La firma de la tienda no coincide. Inténtalo de nuevo más tarde."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어의 서명이 일치하지 않습니다. 나중에 다시 시도하십시오."
           }
         },
         "tr": {
@@ -2472,6 +2892,12 @@
             "value": "No se ha podido verificar la tienda."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어를 확인하지 못했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2505,6 +2931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categoría"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
           }
         },
         "tr": {
@@ -2542,6 +2974,12 @@
             "value": "IA"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2575,6 +3013,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todas las categorías"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 카테고리"
           }
         },
         "tr": {
@@ -2612,6 +3056,12 @@
             "value": "Desarrollo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개발자"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2645,6 +3095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Archivos"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
           }
         },
         "tr": {
@@ -2682,6 +3138,12 @@
             "value": "Imágenes"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2715,6 +3177,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enlaces"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크"
           }
         },
         "tr": {
@@ -2752,6 +3220,12 @@
             "value": "Multimedia"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "미디어"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2785,6 +3259,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Productividad"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "생산성"
           }
         },
         "tr": {
@@ -2822,6 +3302,12 @@
             "value": "Texto"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2855,6 +3341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir y actualizar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용 및 업데이트"
           }
         },
         "tr": {
@@ -2892,6 +3384,12 @@
             "value": "También se actualizan (sin permisos nuevos): %@"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "함께 업데이트(새 권한 없음): %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2925,6 +3423,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Instalar %@ extensiones?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 %@개를 설치하겠습니까?"
           }
         },
         "tr": {
@@ -2962,6 +3466,12 @@
             "value": "¿Instalar “%@”?"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’을(를) 설치하겠습니까?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2995,6 +3505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permisos nuevos"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 권한"
           }
         },
         "tr": {
@@ -3032,6 +3548,12 @@
             "value": "No necesita permisos especiales."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "특별한 권한이 필요하지 않습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3065,6 +3587,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Actualizar %@ extensiones?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 %@개를 업데이트하겠습니까?"
           }
         },
         "tr": {
@@ -3102,6 +3630,12 @@
             "value": "¿Actualizar “%@”?"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’을(를) 업데이트하겠습니까?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3135,6 +3669,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La tienda aún no tiene extensiones."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에 아직 확장 프로그램이 없습니다."
           }
         },
         "tr": {
@@ -3172,6 +3712,12 @@
             "value": "No hay extensiones en esta categoría."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 카테고리에는 확장 프로그램이 없습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3205,6 +3751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ninguna extensión coincide con “%@”"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’와(과) 일치하는 확장 프로그램이 없습니다"
           }
         },
         "tr": {
@@ -3242,6 +3794,12 @@
             "value": "La lista de la tienda ha cambiado; revísala e inténtalo de nuevo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 목록이 변경되었습니다. 목록을 확인한 후 다시 시도하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3275,6 +3833,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se puede instalar en esta versión de yabbistir."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 버전의 yabbistir에는 설치할 수 없습니다."
           }
         },
         "tr": {
@@ -3312,6 +3876,12 @@
             "value": "No se ha podido descargar. Comprueba tu conexión e inténtalo de nuevo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드하지 못했습니다. 연결을 확인하고 다시 시도하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3345,6 +3915,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La descarga no coincidía con el catálogo, así que no se ha instalado."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드한 파일이 카탈로그와 일치하지 않아 설치하지 않았습니다."
           }
         },
         "tr": {
@@ -3382,6 +3958,12 @@
             "value": "No se ha podido instalar. Los detalles están en la pestaña Desarrollo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치하지 못했습니다. 자세한 내용은 개발 탭에 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3415,6 +3997,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido verificar; no se ha instalado nada."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인하지 못해 아무것도 설치하지 않았습니다."
           }
         },
         "tr": {
@@ -3452,6 +4040,12 @@
             "value": "Instalar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3485,6 +4079,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instalar (%@)"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치(%@)"
           }
         },
         "tr": {
@@ -3522,6 +4122,12 @@
             "value": "Instalando…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치 중…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3555,6 +4161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión del enlace no está en la tienda."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 스토어에 없습니다."
           }
         },
         "tr": {
@@ -3592,6 +4204,12 @@
             "value": "Las extensiones del enlace no están en la tienda."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 스토어에 없습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3625,6 +4243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Algunas extensiones del enlace no están en la tienda."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 일부 확장 프로그램이 스토어에 없습니다."
           }
         },
         "tr": {
@@ -3662,6 +4286,12 @@
             "value": "La extensión del enlace ya está instalada."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 이미 설치되어 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3695,6 +4325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las extensiones del enlace ya están instaladas."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 이미 설치되어 있습니다."
           }
         },
         "tr": {
@@ -3732,6 +4368,12 @@
             "value": "La extensión del enlace necesita una versión más reciente de yabbistir."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램에는 더 최신 버전의 yabbistir가 필요합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3765,6 +4407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las extensiones del enlace necesitan una versión más reciente de yabbistir."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램에는 더 최신 버전의 yabbistir가 필요합니다."
           }
         },
         "tr": {
@@ -3802,6 +4450,12 @@
             "value": "Algunas extensiones del enlace necesitan una versión más reciente de yabbistir."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 일부 확장 프로그램에는 더 최신 버전의 yabbistir가 필요합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3835,6 +4489,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La extensión del enlace está esperando a la tienda."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 스토어를 기다리고 있습니다."
           }
         },
         "tr": {
@@ -3872,6 +4532,12 @@
             "value": "Las extensiones del enlace están esperando a la tienda."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크의 확장 프로그램이 스토어를 기다리고 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3905,6 +4571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargando la tienda…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 로드 중…"
           }
         },
         "tr": {
@@ -3942,6 +4614,12 @@
             "value": "No se ha podido leer la lista de la tienda. Se muestra la lista guardada."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 목록을 읽지 못했습니다. 저장된 목록을 표시합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -3975,6 +4653,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inténtalo de nuevo más tarde o actualiza yabbistir."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에 다시 시도하거나 yabbistir를 업데이트하십시오."
           }
         },
         "tr": {
@@ -4012,6 +4696,12 @@
             "value": "No se ha podido leer la lista de la tienda."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 목록을 읽지 못했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4045,6 +4735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ahora la tienda necesita una versión más reciente de yabbistir. Se muestra la lista guardada."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에 더 최신 버전의 yabbistir가 필요합니다. 저장된 목록을 표시합니다."
           }
         },
         "tr": {
@@ -4082,6 +4778,12 @@
             "value": "Actualiza yabbistir y vuelve a intentarlo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir를 업데이트한 후 다시 시도하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4115,6 +4817,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La tienda necesita una versión más reciente de yabbistir."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에 더 최신 버전의 yabbistir가 필요합니다."
           }
         },
         "tr": {
@@ -4152,6 +4860,12 @@
             "value": "No se ha podido conectar con la tienda. Se muestra la lista guardada."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에 연결하지 못했습니다. 저장된 목록을 표시합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4185,6 +4899,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comprueba tu conexión a internet y vuelve a intentarlo."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "인터넷 연결을 확인한 후 다시 시도하십시오."
           }
         },
         "tr": {
@@ -4222,6 +4942,12 @@
             "value": "No se ha podido conectar con la tienda."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에 연결하지 못했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4255,6 +4981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La tienda ha enviado una lista más antigua. Se muestra la lista guardada."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어에서 이전 목록을 보냈습니다. 저장된 목록을 표시합니다."
           }
         },
         "tr": {
@@ -4292,6 +5024,12 @@
             "value": "Actualizar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로 고침"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4325,6 +5063,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comprobando la tienda…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어 확인 중…"
           }
         },
         "tr": {
@@ -4362,6 +5106,12 @@
             "value": "Buscar extensiones"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 검색"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4395,6 +5145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Requiere una versión más reciente de yabbistir"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "더 최신 yabbistir 필요"
           }
         },
         "tr": {
@@ -4432,6 +5188,12 @@
             "value": "Instalada"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4465,6 +5227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualización disponible"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 가능"
           }
         },
         "tr": {
@@ -4502,6 +5270,12 @@
             "value": "Ve lo que copias"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사한 내용을 봅니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4535,6 +5309,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejecuta: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실행: %@"
           }
         },
         "tr": {
@@ -4572,6 +5352,12 @@
             "value": "Ejecuta programas"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로그램을 실행합니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4605,6 +5391,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lee tu historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록을 읽습니다"
           }
         },
         "tr": {
@@ -4642,6 +5434,12 @@
             "value": "Red: cualquier sitio"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "네트워크: 모든 사이트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4675,6 +5473,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Red: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "네트워크: %@"
           }
         },
         "tr": {
@@ -4712,6 +5516,12 @@
             "value": "Red: %@ sitios"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "네트워크: 사이트 %@개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4745,6 +5555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reintentar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 시도"
           }
         },
         "tr": {
@@ -4782,6 +5598,12 @@
             "value": "Actualizar todo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 업데이트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4815,6 +5637,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ actualizaciones"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 %@개"
           }
         },
         "tr": {
@@ -4852,6 +5680,12 @@
             "value": "1 actualización"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 1개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4885,6 +5719,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desarrollo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개발"
           }
         },
         "tr": {
@@ -4922,6 +5762,12 @@
             "value": "Instaladas"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -4955,6 +5801,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tienda"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스토어"
           }
         },
         "tr": {
@@ -4992,6 +5844,12 @@
             "value": "Desactivar extensiones de terceros"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타사 확장 프로그램 끄기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5025,6 +5883,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사하기"
           }
         },
         "tr": {
@@ -5062,6 +5926,12 @@
             "value": "%@ no está instalado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 설치되어 있지 않습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5095,6 +5965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esperando tu permiso"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용 대기 중"
           }
         },
         "tr": {
@@ -5132,6 +6008,12 @@
             "value": "El historial no está disponible aquí"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여기서는 기록을 사용할 수 없습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5165,6 +6047,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta extensión no tiene permiso para leer tu historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 확장 프로그램은 기록을 읽을 수 없습니다"
           }
         },
         "tr": {
@@ -5202,6 +6090,12 @@
             "value": "Esto ha tardado demasiado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간이 너무 오래 걸렸습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5235,6 +6129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancelar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
           }
         },
         "tr": {
@@ -5272,6 +6172,12 @@
             "value": "Tareas de yabbistir"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir 작업"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5305,6 +6211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cerrar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
           }
         },
         "tr": {
@@ -5342,6 +6254,12 @@
             "value": "Guardado en el Finder"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder에 저장됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5375,6 +6293,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegado"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣음"
           }
         },
         "tr": {
@@ -5412,6 +6336,12 @@
             "value": "Añadido a la Pila"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택에 추가됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5445,6 +6375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido terminar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료하지 못했습니다"
           }
         },
         "tr": {
@@ -5482,6 +6418,12 @@
             "value": "La extensión se ha detenido de forma inesperada"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램이 예기치 않게 중지되었습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5515,6 +6457,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido conectar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연결하지 못했습니다"
           }
         },
         "tr": {
@@ -5552,6 +6500,12 @@
             "value": "No permitido"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용되지 않음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5585,6 +6539,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ no está instalado"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 설치되어 있지 않습니다"
           }
         },
         "tr": {
@@ -5622,6 +6582,12 @@
             "value": "La extensión no está disponible ahora mismo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램을 지금은 사용할 수 없습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5655,6 +6621,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancelar: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소: %@"
           }
         },
         "tr": {
@@ -5692,6 +6664,12 @@
             "value": "Tareas en curso"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실행 중인 작업"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5725,6 +6703,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En cola"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대기 중"
           }
         },
         "tr": {
@@ -5762,6 +6746,12 @@
             "value": "Listo, %@ para pegar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "준비됨, %@ 키로 붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5795,6 +6785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iniciando"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작 중"
           }
         },
         "tr": {
@@ -5832,6 +6828,12 @@
             "value": "Añadido al historial"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록에 추가됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5865,6 +6867,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Código"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "코드"
           }
         },
         "tr": {
@@ -5902,6 +6910,12 @@
             "value": "Color"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "색상"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -5935,6 +6949,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Archivo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
           }
         },
         "tr": {
@@ -5972,6 +6992,12 @@
             "value": "Imagen"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6005,6 +7031,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enlace"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크"
           }
         },
         "tr": {
@@ -6042,6 +7074,12 @@
             "value": "Texto"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6075,6 +7113,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Editar categorías"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리 편집"
           }
         },
         "tr": {
@@ -6112,6 +7156,12 @@
             "value": "Se abre como columna si está marcada"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "체크하면 열로 표시됩니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6145,6 +7195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Idioma"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언어"
           }
         },
         "tr": {
@@ -6182,6 +7238,12 @@
             "value": "Abrir el panel"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6215,6 +7277,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salir de yabbistir"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir 종료"
           }
         },
         "tr": {
@@ -6252,6 +7320,12 @@
             "value": "Buscar actualizaciones…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6285,6 +7359,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajustes…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정…"
           }
         },
         "tr": {
@@ -6322,6 +7402,12 @@
             "value": "Copiado."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6355,6 +7441,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiado, pega con ⌘V"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사됨, ⌘V로 붙여넣기"
           }
         },
         "tr": {
@@ -6392,6 +7484,12 @@
             "value": "Abrir Ajustes"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6425,6 +7523,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permite Accesibilidad para pegar directamente."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바로 붙여넣으려면 손쉬운 사용을 허용하십시오."
           }
         },
         "tr": {
@@ -6462,6 +7566,12 @@
             "value": "Copiado en el portapapeles"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클립보드에 복사됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6497,6 +7607,12 @@
             "value": "%@ se ha desactivado tras varios errores seguidos."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 반복된 오류로 꺼졌습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6527,6 +7643,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@"
+          }
+        },
+        "ko": {
           "stringUnit": {
             "state": "translated",
             "value": "%@: %@"
@@ -6567,6 +7689,12 @@
             "value": "Error en la extensión"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 오류"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6600,6 +7728,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permítelo para que el siguiente ítem aparezca tras cada ⌘V."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용하면 ⌘V를 누를 때마다 다음 항목이 이어집니다."
           }
         },
         "tr": {
@@ -6637,6 +7771,12 @@
             "value": "La Pila necesita Monitorización de los dispositivos de entrada"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택을 사용하려면 입력 모니터링이 필요합니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6670,6 +7810,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se borrará del portapapeles en 30 segundos."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30초 후 클립보드에서 사라집니다."
           }
         },
         "tr": {
@@ -6707,6 +7853,12 @@
             "value": "Pulsa ⌘V para pegar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘V를 눌러 붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6740,6 +7892,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejecútalo en Terminal y vuelve a abrir el panel."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널에서 실행한 다음 패널을 다시 여십시오."
           }
         },
         "tr": {
@@ -6777,6 +7935,12 @@
             "value": "Comando copiado."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령을 복사했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6810,6 +7974,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha pegado nada: el valor estaba vacío."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣은 내용 없음: 값이 비어 있었습니다."
           }
         },
         "tr": {
@@ -6847,6 +8017,12 @@
             "value": "Otra app ha pasado a primer plano."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱이 앞으로 나왔습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6880,6 +8056,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha pegado."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣지 않았습니다."
           }
         },
         "tr": {
@@ -6917,6 +8099,12 @@
             "value": "Pegado."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣었습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -6950,6 +8138,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Descargar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드"
           }
         },
         "tr": {
@@ -6987,6 +8181,12 @@
             "value": "La traducción necesita un paquete de idioma"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "번역에는 언어 팩이 필요합니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7020,6 +8220,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir %@ está disponible"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@을(를) 사용할 수 있습니다"
           }
         },
         "tr": {
@@ -7057,6 +8263,12 @@
             "value": "No se han podido buscar actualizaciones"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트를 확인하지 못했습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7090,6 +8302,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir está al día (%@)"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir가 최신 버전입니다(%@)"
           }
         },
         "tr": {
@@ -7127,6 +8345,12 @@
             "value": "Categorías"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7160,6 +8384,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록"
           }
         },
         "tr": {
@@ -7197,6 +8427,12 @@
             "value": "Pila"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7230,6 +8466,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta categoría está vacía.\nSelecciona un ítem y pulsa ⌘P para añadirlo."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 카테고리는 비어 있습니다.\n항목을 선택하고 ⌘P를 눌러 추가하십시오."
           }
         },
         "tr": {
@@ -7267,6 +8509,12 @@
             "value": "“%@” no está en esta categoría."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’은(는) 이 카테고리에 없습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7300,6 +8548,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia algo y aparecerá aquí."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "무언가를 복사하면 여기에 표시됩니다."
           }
         },
         "tr": {
@@ -7337,6 +8591,12 @@
             "value": "Sin resultados para “%@”"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’에 대한 결과 없음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7370,6 +8630,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acciones"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동작"
           }
         },
         "tr": {
@@ -7407,6 +8673,12 @@
             "value": "Añadir a categoría"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에 추가"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7440,6 +8712,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historial del portapapeles"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클립보드 기록"
           }
         },
         "tr": {
@@ -7477,6 +8755,12 @@
             "value": "Pegar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7510,6 +8794,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transformar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변환"
           }
         },
         "tr": {
@@ -7547,6 +8837,12 @@
             "value": "Buscar en el portapapeles…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클립보드 검색…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7580,6 +8876,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ resultados"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과 %@개"
           }
         },
         "tr": {
@@ -7617,6 +8919,12 @@
             "value": "1 resultado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과 1개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7650,6 +8958,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comandos"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령"
           }
         },
         "tr": {
@@ -7687,6 +9001,12 @@
             "value": "Anteriores"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이전"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7720,6 +9040,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta semana"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 주"
           }
         },
         "tr": {
@@ -7757,6 +9083,12 @@
             "value": "Hoy"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7790,6 +9122,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayer"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어제"
           }
         },
         "tr": {
@@ -7827,6 +9165,12 @@
             "value": "Copiar comando"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령 복사하기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7860,6 +9204,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido leer la lista."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "목록을 읽지 못했습니다."
           }
         },
         "tr": {
@@ -7897,6 +9247,12 @@
             "value": "En Terminal:"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널에서:"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -7930,6 +9286,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargando…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로드 중…"
           }
         },
         "tr": {
@@ -7967,6 +9329,12 @@
             "value": "Puede ver todo lo que copias"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사하는 모든 내용을 볼 수 있습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8000,6 +9368,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede ejecutar estos programas en tu Mac: %@. Pueden leer y escribir tus archivos y acceder a internet."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac에서 다음 프로그램을 실행할 수 있습니다: %@. 이 프로그램은 파일을 읽고 쓰며 인터넷에 접근할 수 있습니다."
           }
         },
         "tr": {
@@ -8037,6 +9411,12 @@
             "value": "Puede leer todo tu historial"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체 기록을 읽을 수 있습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8070,6 +9450,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede acceder a cualquier sitio web"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 웹 사이트에 접근할 수 있습니다"
           }
         },
         "tr": {
@@ -8107,6 +9493,12 @@
             "value": "Puede acceder a: %@"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "접근 가능: %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8140,6 +9532,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede leer y pegar secretos, como contraseñas. Nunca se escriben en el historial ni en el disco."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "암호 같은 비밀 값을 읽고 붙여넣을 수 있습니다. 기록이나 디스크에는 저장되지 않습니다."
           }
         },
         "tr": {
@@ -8177,6 +9575,12 @@
             "value": "Las extensiones locales no están firmadas."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬 확장 프로그램은 서명되지 않았습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8210,6 +9614,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva categoría: “%@”"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 카테고리: ‘%@’"
           }
         },
         "tr": {
@@ -8247,6 +9657,12 @@
             "value": "Añadir a una categoría…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에 추가…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8280,6 +9696,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "App"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱"
           }
         },
         "tr": {
@@ -8317,6 +9739,12 @@
             "value": "Categoría"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8350,6 +9778,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Caracteres"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "문자 수"
           }
         },
         "tr": {
@@ -8387,6 +9821,12 @@
             "value": "Cerrar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8420,6 +9860,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Extensión"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램"
           }
         },
         "tr": {
@@ -8457,6 +9903,12 @@
             "value": "Generador · sin entrada"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "생성기 · 입력 없음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8490,6 +9942,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entrada"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "입력"
           }
         },
         "tr": {
@@ -8527,6 +9985,12 @@
             "value": "Palabras clave"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키워드"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8560,6 +10024,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tipo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "종류"
           }
         },
         "tr": {
@@ -8597,6 +10067,12 @@
             "value": "%@ → %@ caracteres"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@자"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8630,6 +10106,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Longitud"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "길이"
           }
         },
         "tr": {
@@ -8667,6 +10149,12 @@
             "value": "Se pegará"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣을 내용"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8700,6 +10188,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se ejecuta al pegarlo o copiarlo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣거나 복사할 때 실행됩니다"
           }
         },
         "tr": {
@@ -8737,6 +10231,12 @@
             "value": "Transformador · se aplica al ítem seleccionado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변환기 · 선택한 항목에 적용"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8770,6 +10270,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contenido"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내용"
           }
         },
         "tr": {
@@ -8807,6 +10313,12 @@
             "value": "Copiado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8840,6 +10352,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dispositivo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기"
           }
         },
         "tr": {
@@ -8877,6 +10395,12 @@
             "value": "iPhone · Portapapeles universal"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · 공통 클립보드"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8910,6 +10434,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dominio"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도메인"
           }
         },
         "tr": {
@@ -8947,6 +10477,12 @@
             "value": "%@ caracteres más"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@자 더 있음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -8980,6 +10516,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Información"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정보"
           }
         },
         "tr": {
@@ -9017,6 +10559,12 @@
             "value": "Ubicación"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9050,6 +10598,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tamaño"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "크기"
           }
         },
         "tr": {
@@ -9087,6 +10641,12 @@
             "value": "%@ nunca se muestra."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@은(는) 표시되지 않습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9120,6 +10680,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Después de iniciar sesión, vuelve a abrir el panel."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인한 후 패널을 다시 여십시오."
           }
         },
         "tr": {
@@ -9157,6 +10723,12 @@
             "value": "Ejecutar en Terminal"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널에서 실행"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9190,6 +10762,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Palabras"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단어 수"
           }
         },
         "tr": {
@@ -9227,6 +10805,12 @@
             "value": "Extensiones"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9260,6 +10844,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "General"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반"
           }
         },
         "tr": {
@@ -9297,6 +10887,12 @@
             "value": "Atajos de teclado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9330,6 +10926,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Panel"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널"
           }
         },
         "tr": {
@@ -9367,6 +10969,12 @@
             "value": "Historial"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9400,6 +11008,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categorías"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
           }
         },
         "tr": {
@@ -9437,6 +11051,12 @@
             "value": "Permisos"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9470,6 +11090,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가져오기"
           }
         },
         "tr": {
@@ -9507,6 +11133,12 @@
             "value": "Versión %@ (%@)"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 %@(%@)"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9540,6 +11172,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo lo que copias, justo bajo tu punto de inserción."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사한 모든 것이 삽입점 바로 아래에."
           }
         },
         "tr": {
@@ -9577,6 +11215,12 @@
             "value": "Buscar actualizaciones…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9610,6 +11254,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir en GitHub"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub에서 열기"
           }
         },
         "tr": {
@@ -9647,6 +11297,12 @@
             "value": "Notas de la versión"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "릴리스 노트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9680,6 +11336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Licencias"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이선스"
           }
         },
         "tr": {
@@ -9717,6 +11379,12 @@
             "value": "Apoyar yabbistir"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir 후원"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9750,6 +11418,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료"
           }
         },
         "tr": {
@@ -9787,6 +11461,12 @@
             "value": "Acerca de"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정보"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9820,6 +11500,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajustes"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
           }
         },
         "tr": {
@@ -9857,6 +11543,12 @@
             "value": "%@ en la Pila"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택에 %@개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9890,6 +11582,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료"
           }
         },
         "tr": {
@@ -9927,6 +11625,12 @@
             "value": "Lo que copies ahora se pone en fila aquí."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 복사하는 내용이 여기에 줄지어 쌓입니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -9960,6 +11664,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar el siguiente"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음 붙여넣기"
           }
         },
         "tr": {
@@ -9997,6 +11707,12 @@
             "value": "Al principio"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "맨 위"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10030,6 +11746,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia nueva"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 항목"
           }
         },
         "tr": {
@@ -10067,6 +11789,12 @@
             "value": "2.º"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2번째"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10100,6 +11828,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar de la Pila"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택에서 제거"
           }
         },
         "tr": {
@@ -10137,6 +11871,12 @@
             "value": "Pila"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10170,6 +11910,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mover al principio"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "맨 위로 이동"
           }
         },
         "tr": {
@@ -10207,6 +11953,12 @@
             "value": "%lld d"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10240,6 +11992,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld h"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld시간"
           }
         },
         "tr": {
@@ -10277,6 +12035,12 @@
             "value": "%lld min"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld분"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10310,6 +12074,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ahora"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금"
           }
         },
         "tr": {
@@ -10347,6 +12117,12 @@
             "value": "ayer"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어제"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10380,6 +12156,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atrás"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "뒤로"
           }
         },
         "tr": {
@@ -10417,6 +12199,12 @@
             "value": "Copiar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사하기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10450,6 +12238,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ y copiar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 후 복사하기"
           }
         },
         "tr": {
@@ -10523,6 +12317,18 @@
             }
           }
         },
+        "ko": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "변환 %lld개"
+                }
+              }
+            }
+          }
+        },
         "tr": {
           "variations": {
             "plural": {
@@ -10576,6 +12382,12 @@
             "value": "Ninguna transformación para “%@”"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’에 대한 변환 없음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10609,6 +12421,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No usar por omisión"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본값 제거"
           }
         },
         "tr": {
@@ -10646,6 +12464,12 @@
             "value": "Usar por omisión con ⇧↵"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⇧↵의 기본값으로 지정"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10679,6 +12503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣기"
           }
         },
         "tr": {
@@ -10716,6 +12546,12 @@
             "value": "Pegado como archivo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일로 붙여넣음"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10749,6 +12585,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En la carpeta abierta del Finder"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열려 있는 Finder 폴더로"
           }
         },
         "tr": {
@@ -10786,6 +12628,12 @@
             "value": "Para %@"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@용"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10819,6 +12667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Por omisión"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본"
           }
         },
         "tr": {
@@ -10856,6 +12710,12 @@
             "value": "En el Finder"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder로"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10886,6 +12746,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "ko": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -10926,6 +12792,12 @@
             "value": "Iniciar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -10959,6 +12831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido traducir este texto"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 텍스트를 번역하지 못했습니다"
           }
         },
         "tr": {
@@ -10996,6 +12874,12 @@
             "value": "El paquete de idioma %@ → %@ no está descargado"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ 언어 팩이 다운로드되지 않았습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11029,6 +12913,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha podido saber de qué idioma es"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 언어인지 알 수 없습니다"
           }
         },
         "tr": {
@@ -11066,6 +12956,12 @@
             "value": "%@ → %@ no se puede traducir en este Mac"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서는 %@ → %@ 번역을 지원하지 않습니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11099,6 +12995,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Idioma"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언어"
           }
         },
         "tr": {
@@ -11136,6 +13038,12 @@
             "value": "Apariencia"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 모드"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11169,6 +13077,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistema"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
           }
         },
         "tr": {
@@ -11206,6 +13120,12 @@
             "value": "Claro"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이트"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11239,6 +13159,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oscuro"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다크"
           }
         },
         "tr": {
@@ -11276,6 +13202,12 @@
             "value": "Abrir al iniciar sesión"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11309,6 +13241,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Necesita tu aprobación en Ajustes del Sistema."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정에서 승인이 필요합니다."
           }
         },
         "tr": {
@@ -11346,6 +13284,12 @@
             "value": "No se ha podido activar. Inténtalo en Ajustes del Sistema."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜지 못했습니다. 시스템 설정에서 시도하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11379,6 +13323,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir Ajustes del Sistema"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정 열기"
           }
         },
         "tr": {
@@ -11416,6 +13366,12 @@
             "value": "Icono de la barra de menús"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대 아이콘"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11449,6 +13405,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mientras esté oculto, vuelve a abrir yabbistir para acceder a Ajustes."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이콘이 숨겨져 있을 때는 yabbistir를 다시 열어 설정으로 이동하십시오."
           }
         },
         "tr": {
@@ -11486,6 +13448,12 @@
             "value": "Conservar el historial"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록 보관 기간"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11519,6 +13487,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 semana"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1주"
           }
         },
         "tr": {
@@ -11556,6 +13530,12 @@
             "value": "1 mes"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1개월"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11589,6 +13569,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "3 meses"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3개월"
           }
         },
         "tr": {
@@ -11626,6 +13612,12 @@
             "value": "1 año"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1년"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11659,6 +13651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Siempre"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "영구"
           }
         },
         "tr": {
@@ -11696,6 +13694,12 @@
             "value": "Se cuenta desde la última vez que usaste un ítem. Los ítems de una categoría nunca se eliminan."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목을 마지막으로 사용한 때부터 계산합니다. 카테고리에 있는 항목은 제거되지 않습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11729,6 +13733,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esto elimina %@ ítems ahora."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 항목 %@개가 제거됩니다."
           }
         },
         "tr": {
@@ -11766,6 +13776,12 @@
             "value": "Esto elimina 1 ítem ahora."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 항목 1개가 제거됩니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11799,6 +13815,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar y aplicar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거 후 적용"
           }
         },
         "tr": {
@@ -11836,6 +13858,12 @@
             "value": "Cancelar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11869,6 +13897,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir categoría"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리 추가"
           }
         },
         "tr": {
@@ -11906,6 +13940,12 @@
             "value": "Siempre"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항상"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -11939,6 +13979,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Al elegirla"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 시"
           }
         },
         "tr": {
@@ -11976,6 +14022,12 @@
             "value": "¿Eliminar “%@”?"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’을(를) 삭제하겠습니까?"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12009,6 +14061,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Los ítems de tu historial se conservan. Los ítems guardados solo en esta categoría se eliminan."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록에 있는 항목은 유지됩니다. 이 카테고리에만 보관된 항목은 삭제됩니다."
           }
         },
         "tr": {
@@ -12046,6 +14104,12 @@
             "value": "Eliminar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12079,6 +14143,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La rellena su extensión; puedes cambiar dónde aparece."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램이 채우며, 표시되는 위치는 변경할 수 있습니다."
           }
         },
         "tr": {
@@ -12116,6 +14186,12 @@
             "value": "Apps ignoradas"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "무시할 앱"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12149,6 +14225,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada de lo que copies en estas apps se guarda."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 앱에서 복사한 내용은 저장되지 않습니다."
           }
         },
         "tr": {
@@ -12186,6 +14268,12 @@
             "value": "Conservar copias del iPhone"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone에서 복사한 항목 보관"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12219,6 +14307,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mostrar resultados de extensiones en el historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장 프로그램 결과를 기록에 표시"
           }
         },
         "tr": {
@@ -12256,6 +14350,12 @@
             "value": "Almacenamiento"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장 공간"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12289,6 +14389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El historial ocupa %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록 사용량: %@"
           }
         },
         "tr": {
@@ -12326,6 +14432,12 @@
             "value": "Borrar historial…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록 지우기…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12359,6 +14471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Borrar todo tu historial?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체 기록을 지우겠습니까?"
           }
         },
         "tr": {
@@ -12396,6 +14514,12 @@
             "value": "Los ítems de tus categorías se conservan. Esta acción no se puede deshacer."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에 있는 항목은 유지됩니다. 이 작업은 되돌릴 수 없습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12429,6 +14553,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Borrar historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록 지우기"
           }
         },
         "tr": {
@@ -12466,6 +14596,12 @@
             "value": "Los resultados se pueden seguir pegando desde su tarjeta de tareas y desde las categorías."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과는 작업 카드와 카테고리에서 계속 붙여넣을 수 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12499,6 +14635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ocultar al compartir pantalla"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 공유에서 가리기"
           }
         },
         "tr": {
@@ -12536,6 +14678,12 @@
             "value": "El panel, la Pila y los avisos no aparecen en las grabaciones ni en las pantallas compartidas."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널, 스택, 알림이 녹화나 공유 화면에 나타나지 않습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12569,6 +14717,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atajos de teclado"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키"
           }
         },
         "tr": {
@@ -12606,6 +14760,12 @@
             "value": "Abrir el panel"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12639,6 +14799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copiar en la Pila"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택으로 복사"
           }
         },
         "tr": {
@@ -12676,6 +14842,12 @@
             "value": "Restaurar valores por omisión"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본값 복원"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12709,6 +14881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En el panel"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널에서"
           }
         },
         "tr": {
@@ -12746,6 +14924,12 @@
             "value": "Moverse por la lista"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "목록 이동"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12779,6 +14963,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cambiar de columna"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열 전환"
           }
         },
         "tr": {
@@ -12816,6 +15006,12 @@
             "value": "Pegar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12849,6 +15045,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar la segunda opción"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 번째 선택으로 붙여넣기"
           }
         },
         "tr": {
@@ -12886,6 +15088,12 @@
             "value": "Transformaciones"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변환"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12919,6 +15127,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acciones"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동작"
           }
         },
         "tr": {
@@ -12956,6 +15170,12 @@
             "value": "Copiar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사하기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -12989,6 +15209,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir a una categoría"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리에 추가"
           }
         },
         "tr": {
@@ -13026,6 +15252,12 @@
             "value": "Editar categorías"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리 편집"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13059,6 +15291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar uno de los nueve primeros"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "처음 아홉 개 중 하나 붙여넣기"
           }
         },
         "tr": {
@@ -13096,6 +15334,12 @@
             "value": "Cerrar"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13129,6 +15373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se abre bajo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열리는 위치"
           }
         },
         "tr": {
@@ -13166,6 +15416,12 @@
             "value": "El punto de inserción"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삽입점"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13199,6 +15455,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El puntero del ratón"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마우스 포인터"
           }
         },
         "tr": {
@@ -13236,6 +15498,12 @@
             "value": "Retardo de la vista previa"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "미리보기 지연"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13269,6 +15537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Corto"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "짧게"
           }
         },
         "tr": {
@@ -13306,6 +15580,12 @@
             "value": "Medio"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보통"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13339,6 +15619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Largo"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "길게"
           }
         },
         "tr": {
@@ -13376,6 +15662,12 @@
             "value": "↵ hace"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵ 동작"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13409,6 +15701,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar en la app"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱에 붙여넣기"
           }
         },
         "tr": {
@@ -13446,6 +15744,12 @@
             "value": "Copiar solo en el portapapeles"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클립보드에만 복사"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13479,6 +15783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar siempre texto sin formato"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항상 일반 텍스트로 붙여넣기"
           }
         },
         "tr": {
@@ -13516,6 +15826,12 @@
             "value": "Al pegar desde el panel y la Pila se pierden las fuentes, los colores y el formato de los enlaces."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널과 스택에서 붙여넣으면 글꼴, 색상, 링크 서식이 제거됩니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13549,6 +15865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitido"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용됨"
           }
         },
         "tr": {
@@ -13586,6 +15908,12 @@
             "value": "Necesario"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "필요"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13619,6 +15947,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opcional"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 사항"
           }
         },
         "tr": {
@@ -13656,6 +15990,12 @@
             "value": "Accesibilidad"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손쉬운 사용"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13689,6 +16029,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pega en la app en la que estabas y localiza tu punto de inserción."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사용 중이던 앱에 붙여넣고 삽입점을 찾습니다."
           }
         },
         "tr": {
@@ -13726,6 +16072,12 @@
             "value": "En Privacidad y seguridad › Accesibilidad, busca yabbistir y actívalo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인정보 보호 및 보안 › 손쉬운 사용에서 yabbistir를 찾아 켜십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13759,6 +16111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monitorización de los dispositivos de entrada"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "입력 모니터링"
           }
         },
         "tr": {
@@ -13796,6 +16154,12 @@
             "value": "Permite que la Pila detecte tu ⌘V para que el siguiente ítem aparezca tras cada pegado."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스택이 ⌘V를 인식하여 붙여넣을 때마다 다음 항목이 나타나게 합니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13829,6 +16193,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En Privacidad y seguridad › Monitorización de los dispositivos de entrada, busca yabbistir y actívalo."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인정보 보호 및 보안 › 입력 모니터링에서 yabbistir를 찾아 켜십시오."
           }
         },
         "tr": {
@@ -13866,6 +16236,12 @@
             "value": "Pegar desde otras apps"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱에서 붙여넣기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13899,6 +16275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permite que yabbistir vea lo que copias para poder guardar tu historial."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir가 복사한 내용을 볼 수 있게 하여 기록을 보관합니다."
           }
         },
         "tr": {
@@ -13936,6 +16318,12 @@
             "value": "Si macOS te lo pregunta, elige Permitir siempre. Puedes cambiarlo después en Privacidad y seguridad."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS에서 묻는 경우 ‘항상 허용’을 선택하십시오. 나중에 개인정보 보호 및 보안에서 변경할 수 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -13969,6 +16357,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS aún no lo ha preguntado."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS가 아직 묻지 않았습니다."
           }
         },
         "tr": {
@@ -14006,6 +16400,12 @@
             "value": "macOS lo pregunta cada vez."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS가 매번 묻습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14039,6 +16439,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desactivado: yabbistir no puede ver lo que copias."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "꺼짐: yabbistir가 복사한 내용을 볼 수 없습니다."
           }
         },
         "tr": {
@@ -14076,6 +16482,12 @@
             "value": "Abrir al iniciar sesión"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 열기"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14109,6 +16521,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abre yabbistir al iniciar sesión, para que tu historial esté siempre al día."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인할 때 yabbistir를 시작하여 기록이 빠짐없이 쌓이게 합니다."
           }
         },
         "tr": {
@@ -14146,6 +16564,12 @@
             "value": "Actívalo en General. Si macOS te lo pregunta, apruébalo en Ítems de inicio."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반에서 켜십시오. macOS에서 묻는 경우 로그인 항목에서 승인하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14179,6 +16603,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vamos a traer tu biblioteca de Paste"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste 보관함을 가져옵니다"
           }
         },
         "tr": {
@@ -14216,6 +16646,12 @@
             "value": "Tus pinboards pasan a ser categorías. Tus datos de Paste solo se leen, nunca se modifican."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinboard는 카테고리가 됩니다. Paste의 데이터는 읽기만 하며 변경하지 않습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14246,6 +16682,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "ko": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -14286,6 +16728,12 @@
             "value": "%@ · %@"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14319,6 +16767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo el historial"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체 기록"
           }
         },
         "tr": {
@@ -14356,6 +16810,12 @@
             "value": "%@ → %@, como categorías"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@, 카테고리로 가져옵니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14389,6 +16849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가져오기"
           }
         },
         "tr": {
@@ -14426,6 +16892,12 @@
             "value": "Ahora no"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 안 함"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14459,6 +16931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trayéndolo todo…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가져오는 중…"
           }
         },
         "tr": {
@@ -14496,6 +16974,12 @@
             "value": "Las imágenes y el texto enriquecido también vienen."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지와 서식 있는 텍스트도 함께 가져옵니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14526,6 +17010,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "ko": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -14566,6 +17056,12 @@
             "value": "Todo aquí."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 가져왔습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14599,6 +17095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Texto"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트"
           }
         },
         "tr": {
@@ -14636,6 +17138,12 @@
             "value": "Código"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "코드"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14669,6 +17177,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enlace"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링크"
           }
         },
         "tr": {
@@ -14706,6 +17220,12 @@
             "value": "Imagen"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14739,6 +17259,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Color"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "색상"
           }
         },
         "tr": {
@@ -14776,6 +17302,12 @@
             "value": "Archivo"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14809,6 +17341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem nuevo añadido."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 항목 1개를 추가했습니다."
           }
         },
         "tr": {
@@ -14846,6 +17384,12 @@
             "value": "%@ ítems nuevos añadidos."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 항목 %@개를 추가했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14879,6 +17423,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No hay nada nuevo que importar."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가져올 새 항목이 없습니다."
           }
         },
         "tr": {
@@ -14916,6 +17466,12 @@
             "value": "No se ha podido importar 1 ítem."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 1개를 가져오지 못했습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -14949,6 +17505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se han podido importar %@ ítems."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 %@개를 가져오지 못했습니다."
           }
         },
         "tr": {
@@ -14986,6 +17548,12 @@
             "value": "No se ha podido leer la biblioteca. Cierra Paste e inténtalo de nuevo."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보관함을 읽지 못했습니다. Paste를 종료한 후 다시 시도하십시오."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15019,6 +17587,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se ha encontrado ninguna biblioteca de Paste en este Mac."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서 Paste 보관함을 찾지 못했습니다."
           }
         },
         "tr": {
@@ -15056,6 +17630,12 @@
             "value": "Paste sigue abierto"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste가 아직 실행 중입니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15089,6 +17669,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ambos usan los mismos atajos. Cierra Paste y quítalo de los Ítems de inicio."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 앱이 같은 단축키를 사용합니다. Paste를 종료하고 로그인 항목에서 제거하십시오."
           }
         },
         "tr": {
@@ -15126,6 +17712,12 @@
             "value": "Salir de Paste"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste 종료"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15159,6 +17751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 1개"
           }
         },
         "tr": {
@@ -15196,6 +17794,12 @@
             "value": "%@ ítems"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 %@개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15229,6 +17833,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 ítem fijado"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고정된 항목 1개"
           }
         },
         "tr": {
@@ -15266,6 +17876,12 @@
             "value": "%@ ítems fijados"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고정된 항목 %@개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15299,6 +17915,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 pinboard"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinboard 1개"
           }
         },
         "tr": {
@@ -15336,6 +17958,12 @@
             "value": "%@ pinboards"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinboard %@개"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15369,6 +17997,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo lo que copias, justo bajo tu punto de inserción."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사한 모든 것이 삽입점 바로 아래에."
           }
         },
         "tr": {
@@ -15406,6 +18040,12 @@
             "value": "yabbistir guarda tu historial. Pulsa el atajo, empieza a escribir y pega con ↵. Sin tocar el ratón."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir가 기록을 보관합니다. 단축키를 누르고, 입력해서 검색하고, ↵로 붙여넣으십시오. 마우스는 필요 없습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15439,6 +18079,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empezar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작하기"
           }
         },
         "tr": {
@@ -15476,6 +18122,12 @@
             "value": "Tu biblioteca de Paste también se importa"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste 보관함도 함께 가져옵니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15509,6 +18161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continuar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계속"
           }
         },
         "tr": {
@@ -15546,6 +18204,12 @@
             "value": "Unos últimos ajustes"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마지막 설정 몇 가지"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15579,6 +18243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puedes cambiarlos cuando quieras en Ajustes."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언제든 설정에서 변경할 수 있습니다."
           }
         },
         "tr": {
@@ -15616,6 +18286,12 @@
             "value": "Atajo para abrir el panel"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널을 여는 단축키"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15649,6 +18325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El que ya conoces de Paste"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste에서 쓰던 그 단축키"
           }
         },
         "tr": {
@@ -15686,6 +18368,12 @@
             "value": "Puedes cambiarlo en Ajustes."
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정에서 변경할 수 있습니다."
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15719,6 +18407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pegar directamente"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바로 붙여넣기"
           }
         },
         "tr": {
@@ -15756,6 +18450,12 @@
             "value": "Sin Accesibilidad, los ítems solo se copian en el portapapeles"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손쉬운 사용 권한이 없으면 항목은 클립보드에만 복사됩니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15789,6 +18489,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용"
           }
         },
         "tr": {
@@ -15826,6 +18532,12 @@
             "value": "Permitido"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용됨"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15859,6 +18571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abrir al iniciar sesión"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 열기"
           }
         },
         "tr": {
@@ -15896,6 +18614,12 @@
             "value": "Listo en segundo plano cuando se inicia el Mac"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac이 시작되면 백그라운드에서 준비됩니다"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15929,6 +18653,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aceptar y mostrar el panel"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료, 패널 보기"
           }
         },
         "tr": {
@@ -15966,6 +18696,12 @@
             "value": "Repetir la configuración inicial…"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "첫 설정 다시 실행…"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -15999,6 +18735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Leyendo tu biblioteca…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보관함 읽는 중…"
           }
         },
         "tr": {
@@ -16036,6 +18778,12 @@
             "value": "ítems · %@"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 · %@"
+          }
+        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -16069,6 +18817,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ítem · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 · %@"
           }
         },
         "tr": {

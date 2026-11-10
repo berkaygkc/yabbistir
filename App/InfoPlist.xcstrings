@@ -23,6 +23,12 @@
             "value" : "Algunas extensiones que instalas se comunican con otras apps, por ejemplo para leer las pestañas abiertas de Safari o para añadir una nota en Notas. macOS lo pregunta una vez por cada app."
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설치한 일부 확장 프로그램은 Safari의 열린 탭을 읽거나 메모 앱에 내용을 추가하는 등 다른 앱과 통신합니다. macOS는 앱마다 한 번씩 묻습니다."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
