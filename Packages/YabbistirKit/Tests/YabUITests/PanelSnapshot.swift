@@ -481,6 +481,45 @@ import YabLocalization
         }
     }
 
+    /// The footer at one column's width on an item with a transform, in English, German, French and Japanese, without and
+    /// with an input method (⌘T): where the words don't fit, Transform and then Actions go by their keys alone.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
+    func renderFooter() throws {
+        let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
+        let store = try ItemStore.temporary()
+        let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("SGVsbG8=".utf8))]],
+                                source: nil, device: .local, capturedAt: Date())
+        let id = try #require(try store.ingest(clip)).item.id!
+        let fake = FakeCommands()
+        fake.transformsByItem[id] = [FakeCommands.command("dev.yabbistir.base64/decode", title: "Base64", keywords: ["b64"])]
+        for language in [AppLanguage.english, .german, .french, .japanese] {
+            for inputMethod in [false, true] {
+                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-footer-\(UUID())")!, preferredLanguages: ["en"])
+                languageStore.language = language
+                let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { Date() })
+                model.reset()
+                model.select(id, in: .history)
+                model.inputMethodActive = inputMethod
+                let view = ActionBarView(model: model, onPaste: { _ in }, onAction: { _ in })
+                    .frame(width: Tokens.Metrics.columnWidth)
+                    .background(PanelBackground(material: .tunedEffect, cornerRadius: 0, forceSolid: true))
+                    .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: Tokens.Metrics.panelRadius,
+                                                      bottomTrailingRadius: Tokens.Metrics.panelRadius, style: .continuous))
+                    .padding(20)
+                    .background(Color(red: 0.12, green: 0.16, blue: 0.35))
+                    .environment(\.colorScheme, .dark)
+                let renderer = ImageRenderer(content: view)
+                renderer.scale = 2
+                NSAppearance(named: .darkAqua)!.performAsCurrentDrawingAppearance {
+                    let rendered = renderer.nsImage!
+                    let rep = NSBitmapImageRep(data: rendered.tiffRepresentation!)!
+                    let name = "footer-\(language.rawValue)\(inputMethod ? "-input-method" : "").png"
+                    try? rep.representation(using: .png, properties: [:])!.write(to: dir.appendingPathComponent(name))
+                }
+            }
+        }
+    }
+
     /// The job card (synthetic jobs) in both themes: running with a fraction, an indeterminate
     /// state word, queued, and finished (ready, done in Finder, a missing tool); then a
     /// mix of them in English, and the status item's ring.

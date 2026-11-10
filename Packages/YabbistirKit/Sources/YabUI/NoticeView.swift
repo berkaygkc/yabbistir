@@ -141,11 +141,11 @@ public struct NoticeView: View {
                 Text(kind.titleText(language))
                     .font(Tokens.Fonts.labelStrong).foregroundStyle(Tokens.Colors.text)
                 if !kind.bodyText(language).isEmpty {
-                    Text(kind.bodyText(language))
-                        .font(Tokens.Fonts.label).foregroundStyle(Tokens.Colors.textSecondary)
-                        .lineLimit(3)
-                        .frame(maxWidth: 360, alignment: .leading)
-                        .fixedSize(horizontal: false, vertical: true)
+                    WrappingWidth(maxWidth: 360) {
+                        Text(kind.bodyText(language))
+                            .font(Tokens.Fonts.label).foregroundStyle(Tokens.Colors.textSecondary)
+                            .lineLimit(3)
+                    }
                 }
             }
             if let title = kind.actionText(language) {
@@ -164,5 +164,21 @@ public struct NoticeView: View {
         .padding(.vertical, 12)
         .background(PanelBackground(material: PanelMaterial.current, cornerRadius: 12))
         .fixedSize()
+    }
+}
+
+/// One line as wide as it needs, up to `maxWidth`; past that it wraps, and is as tall as its lines. The notice is measured
+/// at its ideal size, where `frame(maxWidth:)` would report a long body's single line and the window would cut the rest.
+private struct WrappingWidth: Layout {
+    let maxWidth: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        guard let text = subviews.first else { return .zero }
+        let width = min(text.sizeThatFits(.unspecified).width, maxWidth, proposal.width ?? .infinity)
+        return CGSize(width: width, height: text.sizeThatFits(ProposedViewSize(width: width, height: nil)).height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        subviews.first?.place(at: bounds.origin, proposal: ProposedViewSize(bounds.size))
     }
 }

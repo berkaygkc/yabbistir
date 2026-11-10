@@ -80,10 +80,12 @@ public struct PanelView: View {
                 // Hidden, not removed, so selecting never shifts the line.
                 BlinkingCaret().opacity(model.isQuerySelected ? 0 : 1)
                 if model.query.isEmpty, model.markedText(in: .search).isEmpty {
+                    // One line, however long a language's words: the row is a search line.
                     Text(L10n.string("panel.search.placeholder", model.language))
                         .font(Tokens.Fonts.search)
                         .tracking(Tokens.Fonts.searchTracking)
                         .foregroundStyle(Tokens.Colors.textSecondary)
+                        .lineLimit(1)
                         .padding(.leading, 2)
                 }
             }

@@ -137,7 +137,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todas las transformaciones (%@)…"
+            "value": "Transformaciones (%@)…"
           }
         },
         "fr": {
@@ -184,7 +184,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "In die Zwischenablage kopieren"
+            "value": "Kopieren"
           }
         },
         "en": {
@@ -202,7 +202,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Copier dans le presse-papiers"
+            "value": "Copier"
           }
         },
         "ja": {
@@ -432,7 +432,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pegar como texto sin formato"
+            "value": "Pegar sin formato"
           }
         },
         "fr": {
@@ -444,7 +444,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "プレーンテキストとしてペースト"
+            "value": "プレーンテキストでペースト"
           }
         },
         "ko": {
@@ -12692,7 +12692,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zwischenablage durchsuchen …"
+            "value": "Verlauf durchsuchen …"
           }
         },
         "en": {
@@ -12710,7 +12710,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rechercher dans votre presse-papiers…"
+            "value": "Rechercher…"
           }
         },
         "ja": {

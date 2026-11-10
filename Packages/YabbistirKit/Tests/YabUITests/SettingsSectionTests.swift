@@ -18,4 +18,13 @@ import YabLocalization
             }
         }
     }
+
+    /// English and Turkish keep the 200 pt sidebar; a language whose longest title needs more gets it, within the column.
+    @Test func theSidebarFitsTheLongestTitle() {
+        #expect(SettingsSection.sidebarWidth(.english) == 200)
+        #expect(SettingsSection.sidebarWidth(.turkish) == 200)
+        #expect(SettingsSection.sidebarWidth(.japanese) > 200)
+        #expect(SettingsSection.sidebarWidth(.german) > 200)
+        for language in AppLanguage.allCases { #expect(SettingsSection.sidebarWidth(language) <= 260) }
+    }
 }

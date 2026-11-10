@@ -1,4 +1,6 @@
+import AppKit
 import Foundation
+import SwiftUI
 import Testing
 import YabLocalization
 @testable import YabUI
@@ -135,5 +137,28 @@ import YabLocalization
         #expect(NoticeKind.updateCheckFailed.titleText(.english) == "Couldn’t check for updates")
         #expect(NoticeKind.updateCheckFailed.titleText(.turkish) == "Güncellemeler denetlenemedi")
         #expect(!NoticeKind.updateCheckFailed.titleText(.english).contains("up to date"))
+    }
+}
+
+/// A notice sizes its window to itself: a body past 360 pt wraps, and the notice is as tall as its lines, so the window
+/// never cuts the second one off (German and French bodies often wrap).
+@MainActor @Suite struct NoticeLayoutTests {
+    func size(_ kind: NoticeKind, _ language: AppLanguage = .english) -> CGSize {
+        NSHostingView(rootView: NoticeView(language: language, kind: kind) {}).fittingSize
+    }
+
+    @Test func aBodyThatWrapsMakesTheNoticeTaller() {
+        let short = size(.extensionMessage(name: "Video", message: "No video at this link."))
+        let long = size(.extensionMessage(name: "Video", message: String(repeating: "This post needs a sign-in to download. ", count: 2)))
+        // The body is 360 pt at most, beside the 18 pt mark and its 12 pt gap, inside 14 pt of padding.
+        let widest: CGFloat = 360 + 18 + 12 + 28
+        #expect(long.width <= widest)
+        #expect(long.height >= short.height + 12)
+    }
+
+    @Test func aGermanBodyKeepsItsSecondLine() {
+        let oneLine = size(.sourceNotPasted, .german)
+        let twoLines = size(.secretCopiedOnly, .german)
+        #expect(twoLines.height >= oneLine.height + 12)
     }
 }

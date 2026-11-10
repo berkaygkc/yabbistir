@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 import YabLocalization
 
@@ -19,6 +20,15 @@ public enum SettingsSection: String, CaseIterable, Hashable {
         case .import: "square.and.arrow.down"
         case .about: "info.circle"
         }
+    }
+
+    /// The sidebar's first width: 200 pt, or wide enough for the language's longest title (German "Tastaturkurzbefehle",
+    /// Japanese "キーボードショートカット"), up to the column's 260 pt. A row gives its title all but 88 pt: the icon, the
+    /// insets and the selection's margins.
+    public static func sidebarWidth(_ language: AppLanguage) -> CGFloat {
+        let font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        let widest = allCases.map { NSAttributedString(string: L10n.string($0.titleKey, language), attributes: [.font: font]).size().width }
+        return min(260, max(200, ceil(widest.max() ?? 0) + 88))
     }
 }
 
@@ -70,7 +80,7 @@ public struct SettingsView: View {
             List(SettingsSection.allCases, id: \.self, selection: $navigation.section) { section in
                 Label(L10n.string(section.titleKey, models.language.language), systemImage: section.symbol)
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
+            .navigationSplitViewColumnWidth(min: 180, ideal: SettingsSection.sidebarWidth(models.language.language), max: 260)
         } detail: {
             switch navigation.section ?? .general {
             case .general:

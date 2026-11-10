@@ -85,6 +85,8 @@ import YabLocalization
         try write(model, "1-welcome")
         let (english, _) = try make(.ready(Self.summary, Self.location), language: .english)
         try write(english, "1-welcome-en")
+        let (german, _) = try make(.ready(Self.summary, Self.location), language: .german)
+        try write(german, "1-welcome-de", appearance: .darkAqua)
         let (bare, _) = try make(.unavailable)
         try write(bare, "1-welcome-no-library")
         let (dark, _) = try make(.ready(Self.summary, Self.location))

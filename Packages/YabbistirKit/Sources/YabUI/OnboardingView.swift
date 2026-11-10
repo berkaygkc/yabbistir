@@ -383,24 +383,6 @@ private struct StepColumn: Layout {
     }
 }
 
-/// Segments of one width, the widest one's.
-private struct EqualWidths: Layout {
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let sizes = subviews.map { $0.sizeThatFits(.unspecified) }
-        let width = sizes.map(\.width).max() ?? 0
-        return CGSize(width: width * CGFloat(subviews.count), height: sizes.map(\.height).max() ?? 0)
-    }
-
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        guard !subviews.isEmpty else { return }
-        let width = bounds.width / CGFloat(subviews.count)
-        for (index, subview) in subviews.enumerated() {
-            subview.place(at: CGPoint(x: bounds.minX + CGFloat(index) * width, y: bounds.minY),
-                          proposal: ProposedViewSize(width: width, height: bounds.height))
-        }
-    }
-}
-
 // MARK: - Type
 
 /// A text style: size, weight, line height and letter spacing (in em).
@@ -546,50 +528,27 @@ private struct AppIcon: View {
     }
 }
 
-/// English · Türkçe. Picking one turns the whole window (and the app) to it at once.
-private struct LanguagePicker: View {
-    let store: LanguageStore
+/// The app's languages, each in its own name, in a pop-up that reads the current one: the system's small borderless
+/// pop-up on a 26 pt `tile` with `controlRadius` corners and a hairline edge. Picking one turns the whole window (and the
+/// app) to it at once.
+struct LanguagePicker: View {
+    @Bindable var store: LanguageStore
 
     var body: some View {
-        EqualWidths {
-            ForEach(AppLanguage.allCases, id: \.self) { language in
-                segment(language)
-            }
+        let shape = RoundedRectangle(cornerRadius: Tokens.Metrics.controlRadius, style: .continuous)
+        Picker(L10n.string("settings.general.language", store.language), selection: $store.language) {
+            ForEach(AppLanguage.allCases, id: \.self) { Text($0.nativeName).tag($0) }
         }
-        .padding(2)
-        .background(Tokens.Colors.tile, in: RoundedRectangle(cornerRadius: Tokens.Metrics.controlRadius, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: Tokens.Metrics.controlRadius, style: .continuous)
-            .strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
+        .pickerStyle(.menu)
+        .buttonStyle(.borderless)
+        .controlSize(.small)
+        .labelsHidden()
         .fixedSize()
-    }
-
-    private func segment(_ language: AppLanguage) -> some View {
-        let on = store.language == language
-        let thumb = RoundedRectangle(cornerRadius: 6, style: .continuous)
-        return Button { store.language = language } label: {
-            // The semibold copy holds the width, so choosing never changes it.
-            ZStack {
-                Text(language.nativeName).font(.system(size: 11.5, weight: .semibold)).hidden()
-                Text(language.nativeName)
-                    .font(.system(size: 11.5, weight: on ? .semibold : .regular))
-                    .foregroundStyle(on ? Tokens.Colors.text : Tokens.Colors.textSecondary)
-            }
-            .lineLimit(1)
-            .fixedSize()
-            .padding(.horizontal, 9)
-            .frame(maxWidth: .infinity)
-            .frame(height: 22)
-            .background {
-                if on {
-                    thumb.fill(Tokens.Colors.surfaceSolid)
-                        .shadow(color: .black.opacity(0.18), radius: 1, y: 1)
-                        .overlay(thumb.strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
-                }
-            }
-            .contentShape(thumb)
-        }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(on ? .isSelected : [])
+        .padding(.leading, 8)
+        .padding(.trailing, 5)
+        .frame(height: 26)
+        .background(Tokens.Colors.tile, in: shape)
+        .overlay(shape.strokeBorder(Tokens.Colors.hairline, lineWidth: 0.5))
     }
 }
 
