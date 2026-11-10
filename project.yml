@@ -31,8 +31,8 @@ targets:
         CFBundleDisplayName: $(APP_DISPLAY_NAME)
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations: [en, de, es, fr, tr, ja, ko, zh-Hans, zh-Hant]
-        CFBundleShortVersionString: "0.5.1"
-        CFBundleVersion: "7"
+        CFBundleShortVersionString: "0.6.0"
+        CFBundleVersion: "8"
         LSUIElement: true
         LSApplicationCategoryType: public.app-category.productivity
         # Store extensions such as Browser Tabs and Send To run osascript to read another app's tabs or add a note to it.

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.0 — unreleased
+## 0.6.0 — 2026-11-10
 
 - **Nine languages:** yabbistir, its store extensions and the website now speak English, Deutsch, Español (Spain), Français (France), Türkçe, 日本語, 한국어, 简体中文 and 繁體中文 (Taiwan). A wording that sounds off? The new [translation issue form](https://github.com/berkaygkc/yabbistir/issues/new?template=translation.yml) takes the language, where it appears and your suggestion.
   - A new install starts in your Mac's language when yabbistir has it, and in English otherwise. If you're updating, yabbistir keeps the language you had.
