@@ -46,20 +46,22 @@ public enum AppLanguage: String, CaseIterable, Sendable, Codable {
     }
 
     /// The first language in `identifiers` (BCP 47, as `Locale.preferredLanguages` gives them) that the app speaks,
-    /// or English. A language matches by its code alone (`de-AT` → German, `es-419` → Spanish). Chinese goes by its
-    /// script when the identifier names one (`zh-Hans-HK` → Simplified); without one, Taiwan, Hong Kong and Macau
-    /// read Traditional and everywhere else Simplified.
+    /// or the default. A language matches by its code alone (`de-AT` → German, `es-419` → Spanish), in any letter case
+    /// and with `-` or `_`. Chinese goes by its script when the identifier names one (`zh-Hans-HK` → Simplified);
+    /// without one, Taiwan, Hong Kong and Macau read Traditional and everywhere else Simplified. Cantonese (`yue`)
+    /// reads Traditional unless it names Simplified.
     public static func preferred(from identifiers: [String]) -> AppLanguage {
-        identifiers.lazy.compactMap(match).first ?? .english
+        identifiers.lazy.compactMap(match).first ?? .default
     }
 
     private static func match(_ identifier: String) -> AppLanguage? {
         let subtags = identifier.lowercased().split(whereSeparator: { $0 == "-" || $0 == "_" })
         guard let code = subtags.first else { return nil }
-        guard code == "zh" else { return AppLanguage(rawValue: String(code)) }
+        guard code == "zh" || code == "yue" else { return AppLanguage(rawValue: String(code)) }
         let rest = subtags.dropFirst()
         if rest.contains("hant") { return .traditionalChinese }
         if rest.contains("hans") { return .simplifiedChinese }
+        if code == "yue" { return .traditionalChinese }
         return rest.contains(where: { ["tw", "hk", "mo"].contains($0) }) ? .traditionalChinese : .simplifiedChinese
     }
 }
@@ -67,8 +69,6 @@ public enum AppLanguage: String, CaseIterable, Sendable, Codable {
 @MainActor @Observable
 public final class LanguageStore {
     public static let defaultsKey = "appLanguage"
-    /// Preferences' flag (YabUI) for a finished first-run window.
-    static let onboardedKey = "pref.onboarded"
 
     public var language: AppLanguage {
         didSet { defaults.set(language.rawValue, forKey: Self.defaultsKey) }
@@ -76,15 +76,16 @@ public final class LanguageStore {
 
     @ObservationIgnored private let defaults: UserDefaults
 
-    /// A stored choice wins. Without one, a fresh install takes the system's language, while someone who finished the
-    /// first-run window before the language followed the system stays in English, as before the update. Either answer
+    /// A stored choice wins. Without one, a fresh install takes the system's language, while someone who used the app
+    /// before the language followed the system (`isExistingUser`) stays in English, as before the update. Either answer
     /// is stored at once, so a later change to the Mac's languages never moves the app's.
-    public init(defaults: UserDefaults = .standard, preferredLanguages: [String] = Locale.preferredLanguages) {
+    public init(defaults: UserDefaults = .standard, preferredLanguages: [String] = Locale.preferredLanguages,
+                isExistingUser: Bool = false) {
         self.defaults = defaults
         if let stored = defaults.string(forKey: Self.defaultsKey).flatMap(AppLanguage.init(rawValue:)) {
             self.language = stored
         } else {
-            let language = defaults.bool(forKey: Self.onboardedKey) ? AppLanguage.english : .preferred(from: preferredLanguages)
+            let language = isExistingUser ? AppLanguage.english : .preferred(from: preferredLanguages)
             self.language = language
             defaults.set(language.rawValue, forKey: Self.defaultsKey)
         }

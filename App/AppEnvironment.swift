@@ -11,7 +11,7 @@ import YabUI
 @MainActor
 final class AppEnvironment {
     let library: Library
-    let language = LanguageStore()
+    let language: LanguageStore
     let preferences = Preferences()
     /// Built-ins from the app bundle; the person's copies and development links in
     /// Application Support/yabbistir/Extensions, their data in …/ExtensionData.
@@ -77,6 +77,9 @@ final class AppEnvironment {
             .appendingPathComponent("yabbistir", isDirectory: true)
         storageDirectory = directory
         library = try Library(store: ItemStore(directory: directory))
+        // Built once the library is open: someone updating with a history, onboarded or not (the first-run window came in
+        // 0.4, and launch marks such a person onboarded only later), keeps English rather than the system's language.
+        language = LanguageStore(isExistingUser: preferences.onboarded || library.index.count > 0)
         let warningLogs = extensionLogs
         extensionRegistry = ExtensionRegistry(builtInRoot: Bundle.main.resourceURL!.appendingPathComponent("BuiltinExtensions"),
                                               userRoot: directory.appendingPathComponent("Extensions", isDirectory: true),

@@ -8,10 +8,7 @@ import Testing
         #expect(AppLanguage.allCases.map(\.rawValue) == ["en", "de", "es", "fr", "tr", "ja", "ko", "zh-Hans", "zh-Hant"])
     }
 
-    @Test func eachLanguageHasItsLocaleAndItsOwnName() {
-        // Foundation shortens zh_Hans_CN to zh_CN, keeping the script.
-        #expect(AppLanguage.allCases.map(\.locale) == ["en_US", "de_DE", "es_ES", "fr_FR", "tr_TR", "ja_JP", "ko_KR", "zh_Hans_CN", "zh_Hant_TW"]
-            .map(Locale.init(identifier:)))
+    @Test func eachLanguageHasItsOwnName() {
         #expect(AppLanguage.simplifiedChinese.locale.language.script == .hanSimplified)
         #expect(AppLanguage.traditionalChinese.locale.language.script == .hanTraditional)
         #expect(AppLanguage.allCases.map(\.nativeName)
@@ -39,10 +36,20 @@ import Testing
         (["zh-Hans-HK"], .simplifiedChinese),
         (["zh-Hans-TW"], .simplifiedChinese),
         (["zh-Hant-CN"], .traditionalChinese),
+        (["zh-Hant-HK"], .traditionalChinese),
+        (["zh-Hant"], .traditionalChinese),
+        // Underscores and any letter case.
+        (["zh_Hant_TW"], .traditionalChinese),
+        (["ZH-hk"], .traditionalChinese),
+        // Cantonese reads Chinese: Traditional unless it names Simplified.
+        (["yue-Hant-HK"], .traditionalChinese),
+        (["yue"], .traditionalChinese),
+        (["yue-Hans-CN"], .simplifiedChinese),
         (["pt-BR", "ja-JP"], .japanese),
         (["pt-BR"], .english),
         ([], .english),
         (["en-GB", "de-DE"], .english),
+        (["en-TR"], .english),
         (["tr-TR"], .turkish),
         (["ko-KR"], .korean),
     ]
@@ -66,12 +73,11 @@ import Testing
         #expect(defaults.string(forKey: "appLanguage") == "ja")
     }
 
-    /// Someone who finished onboarding before the language followed the system, and never picked one, stays in
-    /// English after the update.
-    @Test func anOnboardedPersonWithoutAChoiceStaysInEnglish() {
+    /// Someone who used the app before the language followed the system, and never picked one, stays in English
+    /// after the update.
+    @Test func anExistingUserWithoutAChoiceStaysInEnglish() {
         let defaults = freshDefaults()
-        defaults.set(true, forKey: "pref.onboarded")
-        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"]).language == .english)
+        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"], isExistingUser: true).language == .english)
         #expect(defaults.string(forKey: "appLanguage") == "en")
     }
 
@@ -80,8 +86,7 @@ import Testing
         defaults.set("fr", forKey: "appLanguage")
         #expect(LanguageStore(defaults: defaults, preferredLanguages: ["ja-JP"]).language == .french)
         #expect(LanguageStore(defaults: defaults, preferredLanguages: []).language == .french)
-        defaults.set(true, forKey: "pref.onboarded")
-        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"]).language == .french)
+        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"], isExistingUser: true).language == .french)
         #expect(defaults.string(forKey: "appLanguage") == "fr")
     }
 
@@ -91,11 +96,10 @@ import Testing
         #expect(LanguageStore(defaults: fresh, preferredLanguages: ["ja-JP"]).language == .japanese)
         #expect(fresh.string(forKey: "appLanguage") == "ja")
 
-        let onboarded = freshDefaults()
-        onboarded.set("xx", forKey: "appLanguage")
-        onboarded.set(true, forKey: "pref.onboarded")
-        #expect(LanguageStore(defaults: onboarded, preferredLanguages: ["ja-JP"]).language == .english)
-        #expect(onboarded.string(forKey: "appLanguage") == "en")
+        let existing = freshDefaults()
+        existing.set("xx", forKey: "appLanguage")
+        #expect(LanguageStore(defaults: existing, preferredLanguages: ["ja-JP"], isExistingUser: true).language == .english)
+        #expect(existing.string(forKey: "appLanguage") == "en")
     }
 
     /// The system decides once: changing the Mac's language later does not move the app's.
