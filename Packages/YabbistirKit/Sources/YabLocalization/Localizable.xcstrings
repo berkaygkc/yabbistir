@@ -51,6 +51,12 @@
             "state": "translated",
             "value": "添加到分类…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入類別⋯"
+          }
         }
       }
     },
@@ -103,6 +109,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加到粘贴队列"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入貼上佇列"
           }
         }
       }
@@ -157,6 +169,12 @@
             "state": "translated",
             "value": "所有转换（%@）…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有轉換（%@）⋯"
+          }
         }
       }
     },
@@ -209,6 +227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝至剪贴板"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝到剪貼板"
           }
         }
       }
@@ -263,6 +287,12 @@
             "state": "translated",
             "value": "删除"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除"
+          }
         }
       }
     },
@@ -315,6 +345,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "未找到操作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到動作"
           }
         }
       }
@@ -369,6 +405,12 @@
             "state": "translated",
             "value": "粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上"
+          }
         }
       }
     },
@@ -421,6 +463,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "粘贴为纯文本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以純文字貼上"
           }
         }
       }
@@ -475,6 +523,12 @@
             "state": "translated",
             "value": "预览"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "預覽"
+          }
         }
       }
     },
@@ -527,6 +581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "从分类移除"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從類別中移除"
           }
         }
       }
@@ -581,6 +641,12 @@
             "state": "translated",
             "value": "搜索操作…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋動作⋯"
+          }
         }
       }
     },
@@ -633,6 +699,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple智能无法回答"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence無法回答"
           }
         }
       }
@@ -687,6 +759,12 @@
             "state": "translated",
             "value": "Apple智能正忙，请稍后再试"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence正忙，請稍後再試"
+          }
         }
       }
     },
@@ -739,6 +817,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apple智能不会回答这个问题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence不會回答這個問題"
           }
         }
       }
@@ -793,6 +877,12 @@
             "state": "translated",
             "value": "Apple智能暂不支持这种语言"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence尚不支援這種語言"
+          }
         }
       }
     },
@@ -845,6 +935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "这段文本对Apple智能来说太长了"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這段文字對Apple Intelligence來說太長了"
           }
         }
       }
@@ -899,6 +995,12 @@
             "state": "translated",
             "value": "这台Mac无法运行Apple智能"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這台Mac無法執行Apple Intelligence"
+          }
         }
       }
     },
@@ -951,6 +1053,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "请在系统设置中打开Apple智能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請在系統設定中開啟Apple Intelligence"
           }
         }
       }
@@ -1005,6 +1113,12 @@
             "state": "translated",
             "value": "Apple智能仍在准备中"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence仍在準備中"
+          }
         }
       }
     },
@@ -1054,6 +1168,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "陶土色"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "陶土色"
@@ -1111,6 +1231,12 @@
             "state": "translated",
             "value": "赭石色"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "赭石色"
+          }
         }
       }
     },
@@ -1163,6 +1289,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "梅紫"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "梅紫色"
           }
         }
       }
@@ -1217,6 +1349,12 @@
             "state": "translated",
             "value": "鼠尾草绿"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠尾草綠"
+          }
         }
       }
     },
@@ -1266,6 +1404,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "石板灰"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "石板灰"
@@ -1323,6 +1467,12 @@
             "state": "translated",
             "value": "青绿"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "青綠色"
+          }
         }
       }
     },
@@ -1375,6 +1525,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "始终"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永遠"
           }
         }
       }
@@ -1429,6 +1585,12 @@
             "state": "translated",
             "value": "关闭"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
+          }
         }
       }
     },
@@ -1481,6 +1643,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "新建"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增"
           }
         }
       }
@@ -1535,6 +1703,12 @@
             "state": "translated",
             "value": "选择"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇"
+          }
         }
       }
     },
@@ -1587,6 +1761,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示方式"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示方式"
           }
         }
       }
@@ -1641,6 +1821,12 @@
             "state": "translated",
             "value": "新建分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增類別"
+          }
         }
       }
     },
@@ -1693,6 +1879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "设为“始终”的分类会以列的形式打开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設為「永遠」的類別會以直欄開啟"
           }
         }
       }
@@ -1747,6 +1939,12 @@
             "state": "translated",
             "value": "选取时"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選取時"
+          }
         }
       }
     },
@@ -1799,6 +1997,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "拖移以重新排列列。面板会实时更新。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拖移以重新排列直欄。面板會即時更新。"
           }
         }
       }
@@ -1853,6 +2057,12 @@
             "state": "translated",
             "value": "分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別"
+          }
         }
       }
     },
@@ -1902,6 +2112,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "取消"
@@ -1959,6 +2175,12 @@
             "state": "translated",
             "value": "命令"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "指令"
+          }
         }
       }
     },
@@ -2011,6 +2233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許"
           }
         }
       }
@@ -2065,6 +2293,12 @@
             "state": "translated",
             "value": "不安装"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不安裝"
+          }
         }
       }
     },
@@ -2117,6 +2351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许并安装"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許並安裝"
           }
         }
       }
@@ -2171,6 +2411,12 @@
             "state": "translated",
             "value": "查看权限…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢視權限⋯"
+          }
         }
       }
     },
@@ -2223,6 +2469,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@”想要："
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」想要："
           }
         }
       }
@@ -2277,6 +2529,12 @@
             "state": "translated",
             "value": "选取…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇⋯"
+          }
         }
       }
     },
@@ -2326,6 +2584,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "清除"
@@ -2383,6 +2647,12 @@
             "state": "translated",
             "value": "未选取文件夹"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未選擇檔案夾"
+          }
         }
       }
     },
@@ -2435,6 +2705,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "建议：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "建議：%@"
           }
         }
       }
@@ -2489,6 +2765,12 @@
             "state": "translated",
             "value": "安装.yabext…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安裝.yabext⋯"
+          }
         }
       }
     },
@@ -2541,6 +2823,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "从文件夹安装…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從檔案夾安裝⋯"
           }
         }
       }
@@ -2595,6 +2883,12 @@
             "state": "translated",
             "value": "问题"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "問題"
+          }
         }
       }
     },
@@ -2647,6 +2941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接开发文件夹…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結開發檔案夾⋯"
           }
         }
       }
@@ -2701,6 +3001,12 @@
             "state": "translated",
             "value": "日志"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄檔"
+          }
         }
       }
     },
@@ -2753,6 +3059,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "尚无日志。扩展的console.log和错误会显示在这里。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄檔中還沒有內容。延伸功能的console.log和錯誤會顯示在這裡。"
           }
         }
       }
@@ -2807,6 +3119,12 @@
             "state": "translated",
             "value": "打开扩展文件夹"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開延伸功能檔案夾"
+          }
         }
       }
     },
@@ -2859,6 +3177,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "权限"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "權限"
           }
         }
       }
@@ -2913,6 +3237,12 @@
             "state": "translated",
             "value": "打开"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟"
+          }
         }
       }
     },
@@ -2965,6 +3295,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "偏好设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏好設定"
           }
         }
       }
@@ -3019,6 +3355,12 @@
             "state": "translated",
             "value": "重新载入"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新載入"
+          }
         }
       }
     },
@@ -3068,6 +3410,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "移除"
@@ -3125,6 +3473,12 @@
             "state": "translated",
             "value": "要移除%@吗？"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確定要移除%@嗎？"
+          }
         }
       }
     },
@@ -3177,6 +3531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "图像"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "影像"
           }
         }
       }
@@ -3231,6 +3591,12 @@
             "state": "translated",
             "value": "拷贝时的规则"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝時的規則"
+          }
         }
       }
     },
@@ -3280,6 +3646,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "清除"
@@ -3337,6 +3709,12 @@
             "state": "translated",
             "value": "无法将机密信息存储到钥匙串。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法將機密儲存到鑰匙圈。"
+          }
         }
       }
     },
@@ -3389,6 +3767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "存储"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "儲存"
           }
         }
       }
@@ -3443,6 +3827,12 @@
             "state": "translated",
             "value": "已存储"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已儲存"
+          }
         }
       }
     },
@@ -3495,6 +3885,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "内置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "內建"
           }
         }
       }
@@ -3549,6 +3945,12 @@
             "state": "translated",
             "value": "开发"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開發"
+          }
         }
       }
     },
@@ -3601,6 +4003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "本地"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本機"
           }
         }
       }
@@ -3655,6 +4063,12 @@
             "state": "translated",
             "value": "无法验证商店的列表。正在显示已存储的列表。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法驗證商店的清單。正在顯示已儲存的清單。"
+          }
         }
       }
     },
@@ -3707,6 +4121,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "商店的签名不匹配。请稍后重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店的簽章不相符。請稍後再試。"
           }
         }
       }
@@ -3761,6 +4181,12 @@
             "state": "translated",
             "value": "无法验证商店。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法驗證商店。"
+          }
         }
       }
     },
@@ -3814,6 +4240,12 @@
             "state": "translated",
             "value": "分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別"
+          }
         }
       }
     },
@@ -3863,6 +4295,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "AI"
@@ -3920,6 +4358,12 @@
             "state": "translated",
             "value": "所有分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有類別"
+          }
         }
       }
     },
@@ -3972,6 +4416,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "开发者"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開發者"
           }
         }
       }
@@ -4026,6 +4476,12 @@
             "state": "translated",
             "value": "文件"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檔案"
+          }
         }
       }
     },
@@ -4078,6 +4534,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "图像"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "影像"
           }
         }
       }
@@ -4132,6 +4594,12 @@
             "state": "translated",
             "value": "链接"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結"
+          }
         }
       }
     },
@@ -4184,6 +4652,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "媒体"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "媒體"
           }
         }
       }
@@ -4238,6 +4712,12 @@
             "state": "translated",
             "value": "效率"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "生產力"
+          }
         }
       }
     },
@@ -4290,6 +4770,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "文本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字"
           }
         }
       }
@@ -4344,6 +4830,12 @@
             "state": "translated",
             "value": "允许并更新"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許並更新"
+          }
         }
       }
     },
@@ -4396,6 +4888,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "同时更新（无需新权限）：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同時更新（不需新權限）：%@"
           }
         }
       }
@@ -4450,6 +4948,12 @@
             "state": "translated",
             "value": "要安装%@个扩展吗？"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要安裝%@個延伸功能嗎？"
+          }
         }
       }
     },
@@ -4502,6 +5006,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "要安装“%@”吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要安裝「%@」嗎？"
           }
         }
       }
@@ -4556,6 +5066,12 @@
             "state": "translated",
             "value": "新权限"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新權限"
+          }
         }
       }
     },
@@ -4608,6 +5124,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无需特殊权限。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不需要特殊權限。"
           }
         }
       }
@@ -4662,6 +5184,12 @@
             "state": "translated",
             "value": "要更新%@个扩展吗？"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要更新%@個延伸功能嗎？"
+          }
         }
       }
     },
@@ -4714,6 +5242,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "要更新“%@”吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要更新「%@」嗎？"
           }
         }
       }
@@ -4768,6 +5302,12 @@
             "state": "translated",
             "value": "商店中还没有扩展。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店中還沒有延伸功能。"
+          }
         }
       }
     },
@@ -4820,6 +5360,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "此分类中没有扩展。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此類別中沒有延伸功能。"
           }
         }
       }
@@ -4874,6 +5420,12 @@
             "state": "translated",
             "value": "没有与“%@”匹配的扩展"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有與「%@」相符的延伸功能"
+          }
         }
       }
     },
@@ -4926,6 +5478,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "商店列表已更改；请查看后重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店清單已變更；請檢視後再試一次。"
           }
         }
       }
@@ -4980,6 +5538,12 @@
             "state": "translated",
             "value": "无法在此版本的yabbistir上安装。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法在此版本的yabbistir上安裝。"
+          }
         }
       }
     },
@@ -5032,6 +5596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法下载。请检查网络连接后重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法下載。請檢查網路連線後再試一次。"
           }
         }
       }
@@ -5086,6 +5656,12 @@
             "state": "translated",
             "value": "下载内容与目录不符，因此未安装。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載內容與目錄不符，因此未安裝。"
+          }
         }
       }
     },
@@ -5138,6 +5714,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法安装。详细信息见“开发”标签页。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法安裝。詳細資訊在「開發」標籤頁中。"
           }
         }
       }
@@ -5192,6 +5774,12 @@
             "state": "translated",
             "value": "无法验证；未安装任何内容。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法驗證；未安裝任何內容。"
+          }
         }
       }
     },
@@ -5244,6 +5832,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "安装"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安裝"
           }
         }
       }
@@ -5298,6 +5892,12 @@
             "state": "translated",
             "value": "安装（%@）"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安裝（%@）"
+          }
         }
       }
     },
@@ -5350,6 +5950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在安装…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安裝中⋯"
           }
         }
       }
@@ -5404,6 +6010,12 @@
             "state": "translated",
             "value": "链接中的扩展不在商店中。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的延伸功能不在商店中。"
+          }
         }
       }
     },
@@ -5456,6 +6068,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接中的这些扩展不在商店中。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的這些延伸功能不在商店中。"
           }
         }
       }
@@ -5510,6 +6128,12 @@
             "state": "translated",
             "value": "链接中的部分扩展不在商店中。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的部分延伸功能不在商店中。"
+          }
         }
       }
     },
@@ -5562,6 +6186,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接中的扩展已安装。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的延伸功能已安裝。"
           }
         }
       }
@@ -5616,6 +6246,12 @@
             "state": "translated",
             "value": "链接中的这些扩展已安装。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的這些延伸功能已安裝。"
+          }
         }
       }
     },
@@ -5668,6 +6304,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接中的扩展需要更新版本的yabbistir。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的延伸功能需要較新版本的yabbistir。"
           }
         }
       }
@@ -5722,6 +6364,12 @@
             "state": "translated",
             "value": "链接中的这些扩展需要更新版本的yabbistir。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的這些延伸功能需要較新版本的yabbistir。"
+          }
         }
       }
     },
@@ -5774,6 +6422,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接中的部分扩展需要更新版本的yabbistir。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的部分延伸功能需要較新版本的yabbistir。"
           }
         }
       }
@@ -5828,6 +6482,12 @@
             "state": "translated",
             "value": "链接中的扩展正在等待商店。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的延伸功能正在等待商店。"
+          }
         }
       }
     },
@@ -5880,6 +6540,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接中的这些扩展正在等待商店。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結中的這些延伸功能正在等待商店。"
           }
         }
       }
@@ -5934,6 +6600,12 @@
             "state": "translated",
             "value": "正在载入商店…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "載入商店中⋯"
+          }
         }
       }
     },
@@ -5986,6 +6658,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法读取商店的列表。正在显示已存储的列表。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法讀取商店的清單。正在顯示已儲存的清單。"
           }
         }
       }
@@ -6040,6 +6718,12 @@
             "state": "translated",
             "value": "请稍后重试，或更新yabbistir。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請稍後再試，或更新yabbistir。"
+          }
         }
       }
     },
@@ -6092,6 +6776,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法读取商店的列表。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法讀取商店的清單。"
           }
         }
       }
@@ -6146,6 +6836,12 @@
             "state": "translated",
             "value": "商店现在需要更新版本的yabbistir。正在显示已存储的列表。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店現在需要較新版本的yabbistir。正在顯示已儲存的清單。"
+          }
         }
       }
     },
@@ -6198,6 +6894,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "请更新yabbistir，然后重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請更新yabbistir，然後再試一次。"
           }
         }
       }
@@ -6252,6 +6954,12 @@
             "state": "translated",
             "value": "商店需要更新版本的yabbistir。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店需要較新版本的yabbistir。"
+          }
         }
       }
     },
@@ -6304,6 +7012,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法连接商店。正在显示已存储的列表。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法連線到商店。正在顯示已儲存的清單。"
           }
         }
       }
@@ -6358,6 +7072,12 @@
             "state": "translated",
             "value": "请检查互联网连接，然后重试。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請檢查網際網路連線，然後再試一次。"
+          }
         }
       }
     },
@@ -6410,6 +7130,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法连接商店。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法連線到商店。"
           }
         }
       }
@@ -6464,6 +7190,12 @@
             "state": "translated",
             "value": "商店发送了较旧的列表。正在显示已存储的列表。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店傳來的清單較舊。正在顯示已儲存的清單。"
+          }
         }
       }
     },
@@ -6516,6 +7248,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "刷新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新整理"
           }
         }
       }
@@ -6570,6 +7308,12 @@
             "state": "translated",
             "value": "正在检查商店…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查商店中⋯"
+          }
         }
       }
     },
@@ -6622,6 +7366,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "搜索扩展"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋延伸功能"
           }
         }
       }
@@ -6676,6 +7426,12 @@
             "state": "translated",
             "value": "需要更新版本的yabbistir"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要較新版本的yabbistir"
+          }
         }
       }
     },
@@ -6728,6 +7484,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "已安装"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安裝"
           }
         }
       }
@@ -6782,6 +7544,12 @@
             "state": "translated",
             "value": "有可用更新"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有可用的更新"
+          }
         }
       }
     },
@@ -6834,6 +7602,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "能看到你拷贝的内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "能看到你拷貝的內容"
           }
         }
       }
@@ -6888,6 +7662,12 @@
             "state": "translated",
             "value": "运行：%@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "執行：%@"
+          }
         }
       }
     },
@@ -6940,6 +7720,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "运行程序"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "執行程式"
           }
         }
       }
@@ -6994,6 +7780,12 @@
             "state": "translated",
             "value": "读取你的历史记录"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讀取你的記錄"
+          }
         }
       }
     },
@@ -7046,6 +7838,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "网络：任意网站"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網路：任何網站"
           }
         }
       }
@@ -7100,6 +7898,12 @@
             "state": "translated",
             "value": "网络：%@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網路：%@"
+          }
         }
       }
     },
@@ -7152,6 +7956,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "网络：%@个网站"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網路：%@個網站"
           }
         }
       }
@@ -7206,6 +8016,12 @@
             "state": "translated",
             "value": "重试"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再試一次"
+          }
         }
       }
     },
@@ -7255,6 +8071,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部更新"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "全部更新"
@@ -7312,6 +8134,12 @@
             "state": "translated",
             "value": "%@个更新"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個更新"
+          }
         }
       }
     },
@@ -7364,6 +8192,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1个更新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個更新"
           }
         }
       }
@@ -7418,6 +8252,12 @@
             "state": "translated",
             "value": "开发"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開發"
+          }
         }
       }
     },
@@ -7471,6 +8311,12 @@
             "state": "translated",
             "value": "已安装"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安裝"
+          }
         }
       }
     },
@@ -7520,6 +8366,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商店"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "商店"
@@ -7577,6 +8429,12 @@
             "state": "translated",
             "value": "关闭第三方扩展"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉第三方延伸功能"
+          }
         }
       }
     },
@@ -7629,6 +8487,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝"
           }
         }
       }
@@ -7683,6 +8547,12 @@
             "state": "translated",
             "value": "未安装%@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安裝%@"
+          }
         }
       }
     },
@@ -7735,6 +8605,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "等待你的许可"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "等待你的許可"
           }
         }
       }
@@ -7789,6 +8665,12 @@
             "state": "translated",
             "value": "此处无法使用历史记录"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此處無法使用記錄"
+          }
         }
       }
     },
@@ -7841,6 +8723,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "此扩展无权读取你的历史记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此延伸功能無權讀取你的記錄"
           }
         }
       }
@@ -7895,6 +8783,12 @@
             "state": "translated",
             "value": "耗时太长"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "耗時過長"
+          }
         }
       }
     },
@@ -7944,6 +8838,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "取消"
@@ -8001,6 +8901,12 @@
             "state": "translated",
             "value": "yabbistir任务"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir工作"
+          }
         }
       }
     },
@@ -8053,6 +8959,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
           }
         }
       }
@@ -8107,6 +9019,12 @@
             "state": "translated",
             "value": "已存储到访达"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已儲存到Finder"
+          }
         }
       }
     },
@@ -8159,6 +9077,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "已粘贴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已貼上"
           }
         }
       }
@@ -8213,6 +9137,12 @@
             "state": "translated",
             "value": "已添加到粘贴队列"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已加入貼上佇列"
+          }
         }
       }
     },
@@ -8265,6 +9195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法完成"
           }
         }
       }
@@ -8319,6 +9255,12 @@
             "state": "translated",
             "value": "扩展意外停止"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "延伸功能意外停止"
+          }
         }
       }
     },
@@ -8371,6 +9313,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法连接"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法連線"
           }
         }
       }
@@ -8425,6 +9373,12 @@
             "state": "translated",
             "value": "未获允许"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未獲允許"
+          }
         }
       }
     },
@@ -8477,6 +9431,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "未安装%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安裝%@"
           }
         }
       }
@@ -8531,6 +9491,12 @@
             "state": "translated",
             "value": "扩展目前不可用"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "延伸功能目前無法使用"
+          }
         }
       }
     },
@@ -8580,6 +9546,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消：%@"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "取消：%@"
@@ -8637,6 +9609,12 @@
             "state": "translated",
             "value": "正在运行的任务"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "執行中的工作"
+          }
         }
       }
     },
@@ -8689,6 +9667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "排队中"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "排隊中"
           }
         }
       }
@@ -8743,6 +9727,12 @@
             "state": "translated",
             "value": "已就绪，按%@粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已就緒，按%@貼上"
+          }
         }
       }
     },
@@ -8795,6 +9785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在启动"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "啟動中"
           }
         }
       }
@@ -8849,6 +9845,12 @@
             "state": "translated",
             "value": "已添加到历史记录"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已加入記錄"
+          }
         }
       }
     },
@@ -8901,6 +9903,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "代码"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "程式碼"
           }
         }
       }
@@ -8955,6 +9963,12 @@
             "state": "translated",
             "value": "颜色"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顏色"
+          }
         }
       }
     },
@@ -9007,6 +10021,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檔案"
           }
         }
       }
@@ -9061,6 +10081,12 @@
             "state": "translated",
             "value": "图像"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "影像"
+          }
         }
       }
     },
@@ -9113,6 +10139,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結"
           }
         }
       }
@@ -9167,6 +10199,12 @@
             "state": "translated",
             "value": "文本"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字"
+          }
         }
       }
     },
@@ -9219,6 +10257,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "编辑分类"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編輯類別"
           }
         }
       }
@@ -9273,6 +10317,12 @@
             "state": "translated",
             "value": "勾选后以列的形式打开"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勾選後以直欄開啟"
+          }
         }
       }
     },
@@ -9325,6 +10375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "语言"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語言"
           }
         }
       }
@@ -9379,6 +10435,12 @@
             "state": "translated",
             "value": "打开面板"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開面板"
+          }
         }
       }
     },
@@ -9431,6 +10493,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "退出yabbistir"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束yabbistir"
           }
         }
       }
@@ -9485,6 +10553,12 @@
             "state": "translated",
             "value": "检查更新…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查更新⋯"
+          }
         }
       }
     },
@@ -9537,6 +10611,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "设置…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定⋯"
           }
         }
       }
@@ -9591,6 +10671,12 @@
             "state": "translated",
             "value": "已拷贝。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷貝。"
+          }
         }
       }
     },
@@ -9643,6 +10729,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "已拷贝，按⌘V粘贴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷貝，按⌘V貼上"
           }
         }
       }
@@ -9697,6 +10789,12 @@
             "state": "translated",
             "value": "打开设置"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開設定"
+          }
         }
       }
     },
@@ -9749,6 +10847,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许使用辅助功能，即可直接粘贴。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許輔助使用，即可直接貼上。"
           }
         }
       }
@@ -9803,6 +10907,12 @@
             "state": "translated",
             "value": "已拷贝至剪贴板"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷貝到剪貼板"
+          }
         }
       }
     },
@@ -9856,6 +10966,12 @@
             "state": "translated",
             "value": "%@因反复出错而被关闭。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@因重複出錯而被關閉。"
+          }
         }
       }
     },
@@ -9905,6 +11021,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@：%@"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "%@：%@"
@@ -9962,6 +11084,12 @@
             "state": "translated",
             "value": "扩展出错"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "延伸功能發生錯誤"
+          }
         }
       }
     },
@@ -10014,6 +11142,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许后，每次按⌘V都会接着粘贴下一个项目。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許後，每次按⌘V都會接著貼上下一個項目。"
           }
         }
       }
@@ -10068,6 +11202,12 @@
             "state": "translated",
             "value": "粘贴队列需要输入监控权限"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上佇列需要輸入監控權限"
+          }
         }
       }
     },
@@ -10120,6 +11260,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "30秒后会从剪贴板中移除。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30秒後會從剪貼板中移除。"
           }
         }
       }
@@ -10174,6 +11320,12 @@
             "state": "translated",
             "value": "按⌘V粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按⌘V貼上"
+          }
         }
       }
     },
@@ -10226,6 +11378,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "请在终端中运行它，然后再次打开面板。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請在終端機中執行它，然後再次打開面板。"
           }
         }
       }
@@ -10280,6 +11438,12 @@
             "state": "translated",
             "value": "已拷贝命令。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷貝指令。"
+          }
         }
       }
     },
@@ -10332,6 +11496,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "未粘贴：值为空。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未貼上：值為空。"
           }
         }
       }
@@ -10386,6 +11556,12 @@
             "state": "translated",
             "value": "另一个App已移到前台。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一個App已移到最前方。"
+          }
         }
       }
     },
@@ -10438,6 +11614,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "未粘贴。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未貼上。"
           }
         }
       }
@@ -10492,6 +11674,12 @@
             "state": "translated",
             "value": "已粘贴。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已貼上。"
+          }
         }
       }
     },
@@ -10544,6 +11732,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載"
           }
         }
       }
@@ -10598,6 +11792,12 @@
             "state": "translated",
             "value": "翻译需要语言包"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "翻譯需要先下載語言"
+          }
         }
       }
     },
@@ -10650,6 +11850,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir %@现已可用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir %@現已推出"
           }
         }
       }
@@ -10704,6 +11910,12 @@
             "state": "translated",
             "value": "无法检查更新"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法檢查更新"
+          }
         }
       }
     },
@@ -10753,6 +11965,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir已是最新版本（%@）"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir已是最新版本（%@）"
@@ -10810,6 +12028,12 @@
             "state": "translated",
             "value": "分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別"
+          }
         }
       }
     },
@@ -10862,6 +12086,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "历史记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄"
           }
         }
       }
@@ -10916,6 +12146,12 @@
             "state": "translated",
             "value": "粘贴队列"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上佇列"
+          }
         }
       }
     },
@@ -10968,6 +12204,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "此分类为空。\n选择一个项目并按⌘P即可添加。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此類別是空的。\n選擇一個項目並按⌘P即可加入。"
           }
         }
       }
@@ -11022,6 +12264,12 @@
             "state": "translated",
             "value": "此分类中没有“%@”。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此類別中沒有「%@」。"
+          }
         }
       }
     },
@@ -11074,6 +12322,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝内容后，它会显示在这里。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝內容後，它會顯示在這裡。"
           }
         }
       }
@@ -11128,6 +12382,12 @@
             "state": "translated",
             "value": "没有“%@”的结果"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到「%@」的結果"
+          }
         }
       }
     },
@@ -11180,6 +12440,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "操作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動作"
           }
         }
       }
@@ -11234,6 +12500,12 @@
             "state": "translated",
             "value": "添加到分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入類別"
+          }
         }
       }
     },
@@ -11286,6 +12558,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "剪贴板历史记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剪貼板記錄"
           }
         }
       }
@@ -11340,6 +12618,12 @@
             "state": "translated",
             "value": "粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上"
+          }
         }
       }
     },
@@ -11392,6 +12676,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "转换"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轉換"
           }
         }
       }
@@ -11446,6 +12736,12 @@
             "state": "translated",
             "value": "搜索剪贴板…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋剪貼板⋯"
+          }
         }
       }
     },
@@ -11498,6 +12794,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@个结果"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個結果"
           }
         }
       }
@@ -11552,6 +12854,12 @@
             "state": "translated",
             "value": "1个结果"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個結果"
+          }
         }
       }
     },
@@ -11605,6 +12913,12 @@
             "state": "translated",
             "value": "命令"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "指令"
+          }
         }
       }
     },
@@ -11654,6 +12968,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更早"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "更早"
@@ -11711,6 +13031,12 @@
             "state": "translated",
             "value": "本周"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本週"
+          }
         }
       }
     },
@@ -11760,6 +13086,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "今天"
@@ -11817,6 +13149,12 @@
             "state": "translated",
             "value": "昨天"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨天"
+          }
         }
       }
     },
@@ -11869,6 +13207,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝命令"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝指令"
           }
         }
       }
@@ -11923,6 +13267,12 @@
             "state": "translated",
             "value": "无法读取列表。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法讀取清單。"
+          }
         }
       }
     },
@@ -11975,6 +13325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "在终端中："
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在終端機中："
           }
         }
       }
@@ -12029,6 +13385,12 @@
             "state": "translated",
             "value": "正在载入…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "載入中⋯"
+          }
         }
       }
     },
@@ -12081,6 +13443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "可以看到你拷贝的所有内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以看到你拷貝的所有內容"
           }
         }
       }
@@ -12135,6 +13503,12 @@
             "state": "translated",
             "value": "可以在你的Mac上运行这些程序：%@。它们可以读写你的文件并访问互联网。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以在你的Mac上執行這些程式：%@。它們可以讀寫你的檔案並連上網際網路。"
+          }
         }
       }
     },
@@ -12187,6 +13561,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "可以读取你的全部历史记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以讀取你的全部記錄"
           }
         }
       }
@@ -12241,6 +13621,12 @@
             "state": "translated",
             "value": "可以访问任意网站"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以連上任何網站"
+          }
         }
       }
     },
@@ -12293,6 +13679,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "可以访问：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以連上：%@"
           }
         }
       }
@@ -12347,6 +13739,12 @@
             "state": "translated",
             "value": "可以读取并粘贴密码等机密信息。这些信息绝不会写入历史记录或磁盘。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以讀取並貼上密碼等機密資訊。這些資訊絕不會寫入記錄或磁碟。"
+          }
         }
       }
     },
@@ -12399,6 +13797,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "本地扩展未经签名。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本機延伸功能未經簽署。"
           }
         }
       }
@@ -12453,6 +13857,12 @@
             "state": "translated",
             "value": "新分类：“%@”"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新類別：「%@」"
+          }
         }
       }
     },
@@ -12506,6 +13916,12 @@
             "state": "translated",
             "value": "添加到分类…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入類別⋯"
+          }
         }
       }
     },
@@ -12555,6 +13971,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "App"
@@ -12612,6 +14034,12 @@
             "state": "translated",
             "value": "分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別"
+          }
         }
       }
     },
@@ -12664,6 +14092,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "字符数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字元數"
           }
         }
       }
@@ -12718,6 +14152,12 @@
             "state": "translated",
             "value": "关闭"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
+          }
         }
       }
     },
@@ -12770,6 +14210,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "扩展"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "延伸功能"
           }
         }
       }
@@ -12824,6 +14270,12 @@
             "state": "translated",
             "value": "生成器 · 无需输入"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "產生器 · 不需輸入"
+          }
         }
       }
     },
@@ -12876,6 +14328,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "输入"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輸入"
           }
         }
       }
@@ -12930,6 +14388,12 @@
             "state": "translated",
             "value": "关键词"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關鍵字"
+          }
         }
       }
     },
@@ -12982,6 +14446,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "种类"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "種類"
           }
         }
       }
@@ -13036,6 +14506,12 @@
             "state": "translated",
             "value": "%@ → %@个字符"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@個字元"
+          }
         }
       }
     },
@@ -13088,6 +14564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "长度"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "長度"
           }
         }
       }
@@ -13142,6 +14624,12 @@
             "state": "translated",
             "value": "将粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "將貼上"
+          }
         }
       }
     },
@@ -13194,6 +14682,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "粘贴或拷贝时运行"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上或拷貝時執行"
           }
         }
       }
@@ -13248,6 +14742,12 @@
             "state": "translated",
             "value": "转换器 · 应用于所选项目"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轉換器 · 套用於所選項目"
+          }
         }
       }
     },
@@ -13300,6 +14800,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "內容"
           }
         }
       }
@@ -13354,6 +14860,12 @@
             "state": "translated",
             "value": "拷贝时间"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝時間"
+          }
         }
       }
     },
@@ -13406,6 +14918,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "设备"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置"
           }
         }
       }
@@ -13460,6 +14978,12 @@
             "state": "translated",
             "value": "iPhone · 通用剪贴板"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone · 通用剪貼板"
+          }
         }
       }
     },
@@ -13512,6 +15036,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "域名"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網域"
           }
         }
       }
@@ -13566,6 +15096,12 @@
             "state": "translated",
             "value": "另有%@个字符"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另有%@個字元"
+          }
         }
       }
     },
@@ -13619,6 +15155,12 @@
             "state": "translated",
             "value": "信息"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "資訊"
+          }
         }
       }
     },
@@ -13668,6 +15210,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "位置"
@@ -13725,6 +15273,12 @@
             "state": "translated",
             "value": "大小"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大小"
+          }
         }
       }
     },
@@ -13777,6 +15331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@绝不会显示。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@絕不會顯示。"
           }
         }
       }
@@ -13831,6 +15391,12 @@
             "state": "translated",
             "value": "登录后，请再次打开面板。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入後，請再次打開面板。"
+          }
         }
       }
     },
@@ -13883,6 +15449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "在终端中运行"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在終端機中執行"
           }
         }
       }
@@ -13937,6 +15509,12 @@
             "state": "translated",
             "value": "词数"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字數"
+          }
         }
       }
     },
@@ -13989,6 +15567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "扩展"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "延伸功能"
           }
         }
       }
@@ -14043,6 +15627,12 @@
             "state": "translated",
             "value": "通用"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
         }
       }
     },
@@ -14096,6 +15686,12 @@
             "state": "translated",
             "value": "快捷键"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速鍵"
+          }
         }
       }
     },
@@ -14145,6 +15741,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "面板"
@@ -14202,6 +15804,12 @@
             "state": "translated",
             "value": "历史记录"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄"
+          }
         }
       }
     },
@@ -14254,6 +15862,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "分类"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別"
           }
         }
       }
@@ -14308,6 +15922,12 @@
             "state": "translated",
             "value": "权限"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "權限"
+          }
         }
       }
     },
@@ -14361,6 +15981,12 @@
             "state": "translated",
             "value": "导入"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入"
+          }
         }
       }
     },
@@ -14410,6 +16036,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本%@（%@）"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "版本%@（%@）"
@@ -14467,6 +16099,12 @@
             "state": "translated",
             "value": "你拷贝的一切，就在插入点下方。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你拷貝的一切，就在插入點下方。"
+          }
         }
       }
     },
@@ -14519,6 +16157,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "检查更新…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查更新⋯"
           }
         }
       }
@@ -14573,6 +16217,12 @@
             "state": "translated",
             "value": "在GitHub上打开"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在GitHub上打開"
+          }
         }
       }
     },
@@ -14625,6 +16275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "发行说明"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本說明"
           }
         }
       }
@@ -14679,6 +16335,12 @@
             "state": "translated",
             "value": "许可证"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授權條款"
+          }
         }
       }
     },
@@ -14728,6 +16390,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持yabbistir"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "支持yabbistir"
@@ -14785,6 +16453,12 @@
             "state": "translated",
             "value": "完成"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
         }
       }
     },
@@ -14837,6 +16511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "关于"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關於"
           }
         }
       }
@@ -14891,6 +16571,12 @@
             "state": "translated",
             "value": "设置"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
         }
       }
     },
@@ -14944,6 +16630,12 @@
             "state": "translated",
             "value": "共%@个项目"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上佇列中共%@個項目"
+          }
         }
       }
     },
@@ -14993,6 +16685,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "完成"
@@ -15050,6 +16748,12 @@
             "state": "translated",
             "value": "现在拷贝的内容会在这里排队。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在拷貝的內容會在這裡排隊。"
+          }
         }
       }
     },
@@ -15103,6 +16807,12 @@
             "state": "translated",
             "value": "粘贴下一个"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上下一個"
+          }
         }
       }
     },
@@ -15152,6 +16862,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最前"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "最前"
@@ -15209,6 +16925,12 @@
             "state": "translated",
             "value": "刚拷贝"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剛拷貝"
+          }
         }
       }
     },
@@ -15258,6 +16980,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第2位"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "第2位"
@@ -15315,6 +17043,12 @@
             "state": "translated",
             "value": "从粘贴队列移除"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從貼上佇列中移除"
+          }
         }
       }
     },
@@ -15368,6 +17102,12 @@
             "state": "translated",
             "value": "粘贴队列"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上佇列"
+          }
         }
       }
     },
@@ -15417,6 +17157,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到最前"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "移到最前"
@@ -15474,6 +17220,12 @@
             "state": "translated",
             "value": "%lld天前"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld天前"
+          }
         }
       }
     },
@@ -15526,6 +17278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld小时前"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld小時前"
           }
         }
       }
@@ -15580,6 +17338,12 @@
             "state": "translated",
             "value": "%lld分钟前"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld分鐘前"
+          }
         }
       }
     },
@@ -15633,6 +17397,12 @@
             "state": "translated",
             "value": "刚刚"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剛剛"
+          }
         }
       }
     },
@@ -15682,6 +17452,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨天"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "昨天"
@@ -15739,6 +17515,12 @@
             "state": "translated",
             "value": "返回"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回"
+          }
         }
       }
     },
@@ -15792,6 +17574,12 @@
             "state": "translated",
             "value": "拷贝"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝"
+          }
         }
       }
     },
@@ -15844,6 +17632,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@并拷贝"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@並拷貝"
           }
         }
       }
@@ -15976,6 +17770,18 @@
               }
             }
           }
+        },
+        "zh-Hant": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld個轉換"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -16028,6 +17834,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "没有适用于“%@”的转换"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有適用於「%@」的轉換"
           }
         }
       }
@@ -16082,6 +17894,12 @@
             "state": "translated",
             "value": "移除默认转换"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除預設轉換"
+          }
         }
       }
     },
@@ -16134,6 +17952,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "设为⇧↵的默认转换"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設為⇧↵的預設轉換"
           }
         }
       }
@@ -16188,6 +18012,12 @@
             "state": "translated",
             "value": "粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上"
+          }
         }
       }
     },
@@ -16240,6 +18070,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "已作为文件粘贴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已作為檔案貼上"
           }
         }
       }
@@ -16294,6 +18130,12 @@
             "state": "translated",
             "value": "到打开的访达文件夹"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到已打開的Finder檔案夾"
+          }
         }
       }
     },
@@ -16346,6 +18188,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "用于%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用於%@"
           }
         }
       }
@@ -16400,6 +18248,12 @@
             "state": "translated",
             "value": "默认"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "預設"
+          }
         }
       }
     },
@@ -16453,6 +18307,12 @@
             "state": "translated",
             "value": "到访达"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到Finder"
+          }
         }
       }
     },
@@ -16502,6 +18362,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "yabbistir"
@@ -16559,6 +18425,12 @@
             "state": "translated",
             "value": "开始"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始"
+          }
         }
       }
     },
@@ -16611,6 +18483,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法翻译这段文本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法翻譯這段文字"
           }
         }
       }
@@ -16665,6 +18543,12 @@
             "state": "translated",
             "value": "尚未下载“%@ → %@”语言包"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未下載「%@ → %@」的翻譯語言"
+          }
         }
       }
     },
@@ -16717,6 +18601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法判断这是哪种语言"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法判斷這是哪種語言"
           }
         }
       }
@@ -16771,6 +18661,12 @@
             "state": "translated",
             "value": "这台Mac无法翻译“%@ → %@”"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這台Mac無法翻譯「%@ → %@」"
+          }
         }
       }
     },
@@ -16823,6 +18719,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "语言"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語言"
           }
         }
       }
@@ -16877,6 +18779,12 @@
             "state": "translated",
             "value": "外观"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外觀"
+          }
         }
       }
     },
@@ -16929,6 +18837,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "跟随系统"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟隨系統"
           }
         }
       }
@@ -16983,6 +18897,12 @@
             "state": "translated",
             "value": "浅色"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "淺色"
+          }
         }
       }
     },
@@ -17032,6 +18952,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "深色"
@@ -17089,6 +19015,12 @@
             "state": "translated",
             "value": "登录时打开"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在登入時打開"
+          }
         }
       }
     },
@@ -17141,6 +19073,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "需要你在系统设置中批准。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要你在系統設定中核准。"
           }
         }
       }
@@ -17195,6 +19133,12 @@
             "state": "translated",
             "value": "无法打开。请在系统设置中尝试。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法開啟。請在系統設定中嘗試。"
+          }
         }
       }
     },
@@ -17247,6 +19191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "打开系统设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開系統設定"
           }
         }
       }
@@ -17301,6 +19251,12 @@
             "state": "translated",
             "value": "菜单栏图标"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選單列圖示"
+          }
         }
       }
     },
@@ -17353,6 +19309,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "图标隐藏期间，再次打开yabbistir即可进入设置。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "圖示隱藏期間，再次打開yabbistir即可進入設定。"
           }
         }
       }
@@ -17407,6 +19369,12 @@
             "state": "translated",
             "value": "历史记录保留时间"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄保留時間"
+          }
         }
       }
     },
@@ -17459,6 +19427,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1周"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1週"
           }
         }
       }
@@ -17513,6 +19487,12 @@
             "state": "translated",
             "value": "1个月"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個月"
+          }
         }
       }
     },
@@ -17566,6 +19546,12 @@
             "state": "translated",
             "value": "3个月"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3個月"
+          }
         }
       }
     },
@@ -17615,6 +19601,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1年"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "1年"
@@ -17672,6 +19664,12 @@
             "state": "translated",
             "value": "永久"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久"
+          }
         }
       }
     },
@@ -17724,6 +19722,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "从你上次使用某个项目时起算。分类中的项目绝不会被移除。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從你上次使用某個項目起算。類別中的項目絕不會被移除。"
           }
         }
       }
@@ -17778,6 +19782,12 @@
             "state": "translated",
             "value": "这会立即移除%@个项目。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這會立即移除%@個項目。"
+          }
         }
       }
     },
@@ -17830,6 +19840,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "这会立即移除1个项目。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這會立即移除1個項目。"
           }
         }
       }
@@ -17884,6 +19900,12 @@
             "state": "translated",
             "value": "移除并应用"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除並套用"
+          }
         }
       }
     },
@@ -17933,6 +19955,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "取消"
@@ -17990,6 +20018,12 @@
             "state": "translated",
             "value": "添加分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增類別"
+          }
         }
       }
     },
@@ -18042,6 +20076,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "始终"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永遠"
           }
         }
       }
@@ -18096,6 +20136,12 @@
             "state": "translated",
             "value": "选取时"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選取時"
+          }
         }
       }
     },
@@ -18148,6 +20194,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "要删除“%@”吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確定要刪除「%@」嗎？"
           }
         }
       }
@@ -18202,6 +20254,12 @@
             "state": "translated",
             "value": "历史记录中的项目会保留。仅存放在此分类中的项目会被删除。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄中的項目會保留。僅存放在此類別中的項目會被刪除。"
+          }
         }
       }
     },
@@ -18254,6 +20312,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "删除"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除"
           }
         }
       }
@@ -18308,6 +20372,12 @@
             "state": "translated",
             "value": "由其扩展填充；你可以更改它的显示位置。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由其延伸功能填入；你可以變更它的顯示位置。"
+          }
         }
       }
     },
@@ -18357,6 +20427,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "忽略的App"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "忽略的App"
@@ -18414,6 +20490,12 @@
             "state": "translated",
             "value": "在这些App中拷贝的内容都不会被存储。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在這些App中拷貝的內容都不會被儲存。"
+          }
         }
       }
     },
@@ -18466,6 +20548,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留从iPhone拷贝的内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留從iPhone拷貝的內容"
           }
         }
       }
@@ -18520,6 +20608,12 @@
             "state": "translated",
             "value": "在历史记录中显示扩展结果"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在記錄中顯示延伸功能的結果"
+          }
         }
       }
     },
@@ -18572,6 +20666,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "储存空间"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "儲存空間"
           }
         }
       }
@@ -18626,6 +20726,12 @@
             "state": "translated",
             "value": "历史记录占用%@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記錄佔用%@"
+          }
         }
       }
     },
@@ -18678,6 +20784,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "清除历史记录…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除記錄⋯"
           }
         }
       }
@@ -18732,6 +20844,12 @@
             "state": "translated",
             "value": "要清除全部历史记录吗？"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確定要清除全部記錄嗎？"
+          }
         }
       }
     },
@@ -18784,6 +20902,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "分类中的项目会保留。此操作无法撤销。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "類別中的項目會保留。此操作無法還原。"
           }
         }
       }
@@ -18838,6 +20962,12 @@
             "state": "translated",
             "value": "清除历史记录"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除記錄"
+          }
         }
       }
     },
@@ -18890,6 +21020,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "结果仍可从其任务卡片和分类中粘贴。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結果仍可從其工作卡片和類別中貼上。"
           }
         }
       }
@@ -18944,6 +21080,12 @@
             "state": "translated",
             "value": "在屏幕共享中隐藏"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在螢幕共享中隱藏"
+          }
         }
       }
     },
@@ -18996,6 +21138,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "面板、粘贴队列和通知不会出现在录制内容或共享的屏幕中。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板、貼上佇列和通知不會出現在錄製內容或共享的螢幕中。"
           }
         }
       }
@@ -19050,6 +21198,12 @@
             "state": "translated",
             "value": "快捷键"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速鍵"
+          }
         }
       }
     },
@@ -19102,6 +21256,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "打开面板"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開面板"
           }
         }
       }
@@ -19156,6 +21316,12 @@
             "state": "translated",
             "value": "拷贝到粘贴队列"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝到貼上佇列"
+          }
         }
       }
     },
@@ -19209,6 +21375,12 @@
             "state": "translated",
             "value": "恢复默认"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢復預設值"
+          }
         }
       }
     },
@@ -19258,6 +21430,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在面板中"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "在面板中"
@@ -19315,6 +21493,12 @@
             "state": "translated",
             "value": "在列表中移动"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在清單中移動"
+          }
         }
       }
     },
@@ -19367,6 +21551,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "切换列"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切換直欄"
           }
         }
       }
@@ -19421,6 +21611,12 @@
             "state": "translated",
             "value": "粘贴"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上"
+          }
         }
       }
     },
@@ -19473,6 +21669,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "粘贴第二选项"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以第二選項貼上"
           }
         }
       }
@@ -19527,6 +21729,12 @@
             "state": "translated",
             "value": "转换"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轉換"
+          }
         }
       }
     },
@@ -19579,6 +21787,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "操作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動作"
           }
         }
       }
@@ -19633,6 +21847,12 @@
             "state": "translated",
             "value": "拷贝"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝"
+          }
         }
       }
     },
@@ -19685,6 +21905,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加到分类"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入類別"
           }
         }
       }
@@ -19739,6 +21965,12 @@
             "state": "translated",
             "value": "编辑分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編輯類別"
+          }
         }
       }
     },
@@ -19791,6 +22023,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "粘贴前九项之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上前九項之一"
           }
         }
       }
@@ -19845,6 +22083,12 @@
             "state": "translated",
             "value": "关闭"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
+          }
         }
       }
     },
@@ -19897,6 +22141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示在"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示在"
           }
         }
       }
@@ -19951,6 +22201,12 @@
             "state": "translated",
             "value": "插入点下方"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "插入點下方"
+          }
         }
       }
     },
@@ -20003,6 +22259,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "鼠标指针下方"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "滑鼠指標下方"
           }
         }
       }
@@ -20057,6 +22319,12 @@
             "state": "translated",
             "value": "预览延迟"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "預覽延遲"
+          }
         }
       }
     },
@@ -20106,6 +22374,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "短"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "短"
@@ -20163,6 +22437,12 @@
             "state": "translated",
             "value": "中"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中"
+          }
         }
       }
     },
@@ -20216,6 +22496,12 @@
             "state": "translated",
             "value": "长"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "長"
+          }
         }
       }
     },
@@ -20265,6 +22551,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↵的作用"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "↵的作用"
@@ -20322,6 +22614,12 @@
             "state": "translated",
             "value": "粘贴到App中"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上到App中"
+          }
         }
       }
     },
@@ -20374,6 +22672,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "仅拷贝到剪贴板"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "僅拷貝到剪貼板"
           }
         }
       }
@@ -20428,6 +22732,12 @@
             "state": "translated",
             "value": "始终粘贴纯文本"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一律貼上純文字"
+          }
         }
       }
     },
@@ -20480,6 +22790,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "从面板和粘贴队列粘贴时，会去掉字体、颜色和链接的格式。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從面板和貼上佇列貼上時，會去掉字體、顏色和連結的格式。"
           }
         }
       }
@@ -20534,6 +22850,12 @@
             "state": "translated",
             "value": "已允许"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允許"
+          }
         }
       }
     },
@@ -20586,6 +22908,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "必需"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "必要"
           }
         }
       }
@@ -20640,6 +22968,12 @@
             "state": "translated",
             "value": "可选"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選用"
+          }
         }
       }
     },
@@ -20692,6 +23026,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "辅助功能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輔助使用"
           }
         }
       }
@@ -20746,6 +23086,12 @@
             "state": "translated",
             "value": "粘贴到你所在的App，并找到你的插入点。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上到你所在的App，並找到你的插入點。"
+          }
         }
       }
     },
@@ -20798,6 +23144,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "在“隐私与安全性 › 辅助功能”中找到yabbistir并打开它。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「隱私權與安全性 › 輔助使用」中找到yabbistir並開啟它。"
           }
         }
       }
@@ -20852,6 +23204,12 @@
             "state": "translated",
             "value": "输入监控"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輸入監控"
+          }
         }
       }
     },
@@ -20904,6 +23262,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "让粘贴队列能感知你的⌘V，这样每次粘贴后都会轮到下一个项目。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓貼上佇列能感測你的⌘V，這樣每次貼上後都會輪到下一個項目。"
           }
         }
       }
@@ -20958,6 +23322,12 @@
             "state": "translated",
             "value": "在“隐私与安全性 › 输入监控”中找到yabbistir并打开它。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「隱私權與安全性 › 輸入監控」中找到yabbistir並開啟它。"
+          }
         }
       }
     },
@@ -21010,6 +23380,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "从其他App粘贴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從其他App貼上"
           }
         }
       }
@@ -21064,6 +23440,12 @@
             "state": "translated",
             "value": "让yabbistir能看到你拷贝的内容，以便保存历史记录。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓yabbistir能看到你拷貝的內容，以便保存記錄。"
+          }
         }
       }
     },
@@ -21116,6 +23498,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "如果macOS询问，请选择“始终允许”。之后可在“隐私与安全性”中更改。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果macOS詢問，請選擇「永遠允許」。之後可在「隱私權與安全性」中變更。"
           }
         }
       }
@@ -21170,6 +23558,12 @@
             "state": "translated",
             "value": "macOS尚未询问。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS尚未詢問。"
+          }
         }
       }
     },
@@ -21222,6 +23616,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS每次都会询问。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS每次都會詢問。"
           }
         }
       }
@@ -21276,6 +23676,12 @@
             "state": "translated",
             "value": "已关闭：yabbistir看不到你的拷贝内容。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已關閉：yabbistir看不到你拷貝的內容。"
+          }
         }
       }
     },
@@ -21328,6 +23734,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "登录时打开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在登入時打開"
           }
         }
       }
@@ -21382,6 +23794,12 @@
             "state": "translated",
             "value": "登录时启动yabbistir，让历史记录保持最新。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入時啟動yabbistir，讓記錄保持最新。"
+          }
         }
       }
     },
@@ -21434,6 +23852,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "在“通用”中打开。如果macOS询问，请在“登录项”中批准。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「一般」中開啟。如果macOS詢問，請在「登入項目」中核准。"
           }
         }
       }
@@ -21488,6 +23912,12 @@
             "state": "translated",
             "value": "把你的Paste资料库导入进来"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入你的Paste資料庫"
+          }
         }
       }
     },
@@ -21541,6 +23971,12 @@
             "state": "translated",
             "value": "你的Pinboard会变成分类。yabbistir只会读取你在Paste中的数据，不会更改。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的Pinboard會變成類別。yabbistir只會讀取你在Paste中的資料，不會變更。"
+          }
         }
       }
     },
@@ -21590,6 +24026,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste"
@@ -21647,6 +24089,12 @@
             "state": "translated",
             "value": "%@ · %@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
         }
       }
     },
@@ -21699,6 +24147,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "全部历史记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部記錄"
           }
         }
       }
@@ -21753,6 +24207,12 @@
             "state": "translated",
             "value": "%@ → %@，以分类形式导入"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@，以類別形式匯入"
+          }
         }
       }
     },
@@ -21805,6 +24265,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "导入"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入"
           }
         }
       }
@@ -21859,6 +24325,12 @@
             "state": "translated",
             "value": "以后"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後再說"
+          }
         }
       }
     },
@@ -21911,6 +24383,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在导入…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入中⋯"
           }
         }
       }
@@ -21965,6 +24443,12 @@
             "state": "translated",
             "value": "图像和富文本也会一并导入。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "影像和格式化文字也會一併匯入。"
+          }
         }
       }
     },
@@ -22014,6 +24498,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %@"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "/ %@"
@@ -22071,6 +24561,12 @@
             "state": "translated",
             "value": "全部完成。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部完成。"
+          }
         }
       }
     },
@@ -22123,6 +24619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "文本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字"
           }
         }
       }
@@ -22177,6 +24679,12 @@
             "state": "translated",
             "value": "代码"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "程式碼"
+          }
         }
       }
     },
@@ -22229,6 +24737,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "链接"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連結"
           }
         }
       }
@@ -22283,6 +24797,12 @@
             "state": "translated",
             "value": "图像"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "影像"
+          }
         }
       }
     },
@@ -22335,6 +24855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "颜色"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顏色"
           }
         }
       }
@@ -22389,6 +24915,12 @@
             "state": "translated",
             "value": "文件"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檔案"
+          }
         }
       }
     },
@@ -22441,6 +24973,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "已添加1个新项目。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已加入1個新項目。"
           }
         }
       }
@@ -22495,6 +25033,12 @@
             "state": "translated",
             "value": "已添加%@个新项目。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已加入%@個新項目。"
+          }
         }
       }
     },
@@ -22547,6 +25091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "没有可导入的新内容。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有可匯入的新內容。"
           }
         }
       }
@@ -22601,6 +25151,12 @@
             "state": "translated",
             "value": "有1个项目无法导入。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有1個項目無法匯入。"
+          }
         }
       }
     },
@@ -22653,6 +25209,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "有%@个项目无法导入。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有%@個項目無法匯入。"
           }
         }
       }
@@ -22707,6 +25269,12 @@
             "state": "translated",
             "value": "无法读取资料库。请退出Paste后重试。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法讀取資料庫。請結束Paste後再試一次。"
+          }
         }
       }
     },
@@ -22759,6 +25327,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "在这台Mac上未找到Paste资料库。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在這台Mac上找不到Paste資料庫。"
           }
         }
       }
@@ -22813,6 +25387,12 @@
             "state": "translated",
             "value": "Paste仍在运行"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste仍在執行中"
+          }
         }
       }
     },
@@ -22865,6 +25445,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "两者使用相同的快捷键。请退出Paste，并将它从登录项中移除。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "兩者使用相同的快速鍵。請結束Paste，並將它從登入項目中移除。"
           }
         }
       }
@@ -22919,6 +25505,12 @@
             "state": "translated",
             "value": "退出Paste"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束Paste"
+          }
         }
       }
     },
@@ -22971,6 +25563,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1个项目"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個項目"
           }
         }
       }
@@ -23025,6 +25623,12 @@
             "state": "translated",
             "value": "%@个项目"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個項目"
+          }
         }
       }
     },
@@ -23077,6 +25681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1个固定项目"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個已釘選項目"
           }
         }
       }
@@ -23131,6 +25741,12 @@
             "state": "translated",
             "value": "%@个固定项目"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個已釘選項目"
+          }
         }
       }
     },
@@ -23183,6 +25799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1个Pinboard"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1個Pinboard"
           }
         }
       }
@@ -23237,6 +25859,12 @@
             "state": "translated",
             "value": "%@个Pinboard"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個Pinboard"
+          }
         }
       }
     },
@@ -23289,6 +25917,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "你拷贝的一切，就在插入点下方。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你拷貝的一切，就在插入點下方。"
           }
         }
       }
@@ -23343,6 +25977,12 @@
             "state": "translated",
             "value": "yabbistir会保存你的历史记录。按下快捷键，开始输入，按↵粘贴。无需鼠标。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yabbistir會保存你的記錄。按下快速鍵，開始輸入，按↵貼上。不需要滑鼠。"
+          }
         }
       }
     },
@@ -23395,6 +26035,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "开始吧"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始吧"
           }
         }
       }
@@ -23449,6 +26095,12 @@
             "state": "translated",
             "value": "你的Paste资料库也会一并导入"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的Paste資料庫也會一併匯入"
+          }
         }
       }
     },
@@ -23501,6 +26153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "继续"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續"
           }
         }
       }
@@ -23555,6 +26213,12 @@
             "state": "translated",
             "value": "最后几项设置"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最後幾項設定"
+          }
         }
       }
     },
@@ -23607,6 +26271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "你随时可以在设置中更改。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你隨時可以在設定中變更。"
           }
         }
       }
@@ -23661,6 +26331,12 @@
             "state": "translated",
             "value": "打开面板的快捷键"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開面板的快速鍵"
+          }
         }
       }
     },
@@ -23713,6 +26389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "你在Paste中用惯的那个"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你在Paste中用慣的那個"
           }
         }
       }
@@ -23767,6 +26449,12 @@
             "state": "translated",
             "value": "你可以在设置中更改。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你可以在設定中變更。"
+          }
         }
       }
     },
@@ -23819,6 +26507,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "直接粘贴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接貼上"
           }
         }
       }
@@ -23873,6 +26567,12 @@
             "state": "translated",
             "value": "没有辅助功能权限时，项目只会拷贝到剪贴板"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有輔助使用權限時，項目只會拷貝到剪貼板"
+          }
         }
       }
     },
@@ -23925,6 +26625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允許"
           }
         }
       }
@@ -23979,6 +26685,12 @@
             "state": "translated",
             "value": "已允许"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允許"
+          }
         }
       }
     },
@@ -24031,6 +26743,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "登录时打开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在登入時打開"
           }
         }
       }
@@ -24085,6 +26803,12 @@
             "state": "translated",
             "value": "Mac启动后，它已在后台待命"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac啟動後，它已在背景待命"
+          }
         }
       }
     },
@@ -24137,6 +26861,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "完成，显示面板"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成，顯示面板"
           }
         }
       }
@@ -24191,6 +26921,12 @@
             "state": "translated",
             "value": "重新运行首次设置…"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新執行首次設定⋯"
+          }
         }
       }
     },
@@ -24243,6 +26979,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在读取你的资料库…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讀取你的資料庫中⋯"
           }
         }
       }
@@ -24297,6 +27039,12 @@
             "state": "translated",
             "value": "个项目 · %@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "個項目 · %@"
+          }
         }
       }
     },
@@ -24349,6 +27097,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "个项目 · %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "個項目 · %@"
           }
         }
       }

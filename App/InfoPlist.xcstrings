@@ -52,6 +52,12 @@
             "state" : "translated",
             "value" : "你安装的某些扩展会与其他App通信，例如读取“Safari浏览器”中已打开的标签页，或在“备忘录”中新建一条备忘录。macOS会对每个App询问一次。"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你安裝的某些延伸功能會與其他App溝通，例如讀取Safari中已開啟的標籤頁，或在「備忘錄」中新增一則備忘錄。macOS會對每個App詢問一次。"
+          }
         }
       }
     }
