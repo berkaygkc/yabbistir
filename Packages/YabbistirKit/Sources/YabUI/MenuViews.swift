@@ -224,7 +224,9 @@ struct ActionMenuView: View {
                             .foregroundStyle(item == .delete ? Tokens.Colors.danger : Tokens.Colors.textSecondary)
                     }
                 } trailing: {
-                    HStack(spacing: 3) { ForEach(Self.keys(item, shiftReturn: shiftReturn), id: \.self) { Keycap($0) } }
+                    HStack(spacing: 3) {
+                        ForEach(Self.keys(item, shiftReturn: shiftReturn, inputMethod: model.inputMethodActive), id: \.self) { Keycap($0) }
+                    }
                 }
                 .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                 .onTapGesture { if let action = model.activateMenuRow(index) { onAction(action) } }
@@ -286,15 +288,16 @@ struct ActionMenuView: View {
         }
     }
 
-    /// ⇧↵ sits on the row it runs (`shiftReturn`), wherever that row is.
-    static func keys(_ item: PanelActionItem, shiftReturn: PanelActionItem?) -> [String] {
+    /// ⇧↵ sits on the row it runs (`shiftReturn`), wherever that row is. "All transforms" names the ⇧ panel's key, ⌘T
+    /// while an input method has the ⇧ tap (`inputMethod`), as the footer does.
+    static func keys(_ item: PanelActionItem, shiftReturn: PanelActionItem?, inputMethod: Bool) -> [String] {
         if item == shiftReturn { return ["⇧", "↵"] }
         return switch item {
         case .paste, .sourcePrimary: ["↵"]
         case .sourceAlternate: ["⇧", "↵"]
         case .copy, .sourceCopy, .copySourceCommand: ["⌘", "C"]
         case .pastePlain, .addToStack, .transform: []
-        case .allTransforms: ["⇧"]
+        case .allTransforms: PanelKeyRouter.transformKeys(inputMethod: inputMethod)
         case .addToCategory: ["⌘", "P"]
         case .preview: ["␣"]
         case .editCategories: ["⌘", "E"]

@@ -48,6 +48,33 @@ import Testing
     @Test func unknownKeyReturnsKey() {
         #expect(L10n.string("does.not.exist", .turkish) == "does.not.exist")
     }
+
+    /// The source catalog's text for `key` in `code`.
+    static func catalogValue(_ key: String, _ code: String) throws -> String {
+        let kit = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let url = kit.appendingPathComponent("Sources/YabLocalization/Localizable.xcstrings")
+        let catalog = try JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
+        let strings = catalog?["strings"] as? [String: Any]
+        let localizations = (strings?[key] as? [String: Any])?["localizations"] as? [String: Any]
+        let unit = (localizations?[code] as? [String: Any])?["stringUnit"] as? [String: Any]
+        return try #require(unit?["value"] as? String, "\(key) has no \(code)")
+    }
+
+    /// The built bundle answers each language from its own lproj: a key reads as the catalog's text in that language,
+    /// never English's, and the two Chineses never answer for each other (a missing `ko.lproj` or a `zh-Hant` that
+    /// resolved to `zh-Hans` would pass every test that reads the catalog's JSON).
+    @Test(arguments: AppLanguage.allCases.filter { $0 != .english })
+    func eachLanguageResolvesToItsOwnStrings(_ language: AppLanguage) throws {
+        let chinese: [AppLanguage: AppLanguage] = [.simplifiedChinese: .traditionalChinese, .traditionalChinese: .simplifiedChinese]
+        for key in ["panel.footer.paste", "panel.footer.transform", "panel.search.placeholder", "time.minutes"] {
+            let text = L10n.string(key, language), expected = try Self.catalogValue(key, language.rawValue)
+            #expect(text == expected, "\(language.rawValue) \(key)")
+            #expect(text != L10n.string(key, .english), "\(language.rawValue) \(key) reads English")
+            if let other = chinese[language] {
+                #expect(text != L10n.string(key, other), "\(language.rawValue) \(key) reads \(other.rawValue)")
+            }
+        }
+    }
 }
 
 @Suite struct FormattingTests {
@@ -67,17 +94,61 @@ import Testing
     }
 
     /// The labels are read from the catalog once and joined to their count: they read as formatting the catalog's own
-    /// string would, in every language.
+    /// string would, in every language, with the count as `\(days)` always wrote it (no grouping separator).
     @Test func countLabelsReadAsTheCatalogsFormat() {
         let cases: [(key: String, seconds: Double, count: Int)] = [
             ("time.minutes", 7 * 60, 7), ("time.hours", 5 * 3600, 5), ("time.days", 12 * 86_400, 12), ("time.days", 1234 * 86_400, 1234),
         ]
         for language in AppLanguage.allCases {
             for c in cases {
-                let catalog = String(format: L10n.string(c.key, language), locale: language.locale, c.count)
+                let catalog = L10n.string(c.key, language).replacingOccurrences(of: "%lld", with: String(c.count))
                 let label = ShortRelativeTime.string(from: now.addingTimeInterval(-c.seconds), now: now, language: language)
                 #expect(label == catalog, "\(language) \(c.key)")
             }
+        }
+    }
+
+    /// A long-kept item's days read as they did before the catalog: "1234d", never "1,234d" or "1.234 gün".
+    @Test(arguments: [
+        (999, "999d", "999 gün"),
+        (1000, "1000d", "1000 gün"),
+        (1234, "1234d", "1234 gün"),
+    ])
+    func dayCountsAreNeverGrouped(days: Int, english: String, turkish: String) {
+        let date = now.addingTimeInterval(-Double(days) * 86_400)
+        #expect(ShortRelativeTime.string(from: date, now: now, language: .english) == english)
+        #expect(ShortRelativeTime.string(from: date, now: now, language: .turkish) == turkish)
+    }
+
+    /// Each language's words, written out here rather than read from the catalog; `#` is the count.
+    static let relativeWords: [AppLanguage: (now: String, minutes: String, hours: String, yesterday: String, days: String)] = [
+        .english: ("now", "#m", "#h", "yesterday", "#d"),
+        .german: ("jetzt", "# Min.", "# Std.", "gestern", "# Tg."),
+        .spanish: ("ahora", "# min", "# h", "ayer", "# d"),
+        .french: ("à l\u{2019}instant", "#\u{A0}min", "#\u{A0}h", "hier", "#\u{A0}j"),
+        .turkish: ("şimdi", "# dk", "# sa", "dün", "# gün"),
+        .japanese: ("今", "#分", "#時間", "昨日", "#日"),
+        .korean: ("지금", "#분", "#시간", "어제", "#일"),
+        .simplifiedChinese: ("刚刚", "#分钟前", "#小时前", "昨天", "#天前"),
+        .traditionalChinese: ("剛剛", "#分鐘前", "#小時前", "昨天", "#天前"),
+    ]
+
+    /// Every language's labels on both sides of each step: under a minute is now; then minutes; hours (rounded) up to a
+    /// day; yesterday up to two days; then days.
+    @Test(arguments: AppLanguage.allCases)
+    func relativeTimeBoundaries(_ language: AppLanguage) throws {
+        let words = try #require(Self.relativeWords[language])
+        func count(_ template: String, _ n: Int) -> String { template.replacingOccurrences(of: "#", with: String(n)) }
+        let rows: [(seconds: Double, label: String)] = [
+            (0, words.now), (59, words.now),
+            (60, count(words.minutes, 1)), (3599, count(words.minutes, 59)),
+            (3600, count(words.hours, 1)), (86_399, count(words.hours, 24)),
+            (86_400, words.yesterday), (172_799, words.yesterday),
+            (172_800, count(words.days, 2)),
+        ]
+        for row in rows {
+            let label = ShortRelativeTime.string(from: now.addingTimeInterval(-row.seconds), now: now, language: language)
+            #expect(label == row.label, "\(language.rawValue) at \(Int(row.seconds)) s")
         }
     }
 

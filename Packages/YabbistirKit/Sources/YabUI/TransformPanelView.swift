@@ -145,7 +145,7 @@ public struct TransformPanelView: View {
                 MenuRow(title: model.actionLabel(item), isHighlighted: index == model.menuSelection, keepsTitle: true) {
                     EmptyView()
                 } trailing: {
-                    HStack(spacing: 3) { ForEach(ActionMenuView.keys(item, shiftReturn: nil), id: \.self) { Keycap($0) } }
+                    HStack(spacing: 3) { ForEach(ActionMenuView.keys(item, shiftReturn: nil, inputMethod: model.inputMethodActive), id: \.self) { Keycap($0) } }
                 }
                 .onHover { if $0, model.acceptsHover() { model.highlightMenuRow(index) } }
                 .onTapGesture {

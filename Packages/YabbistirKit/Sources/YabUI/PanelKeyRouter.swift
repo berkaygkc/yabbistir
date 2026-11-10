@@ -44,6 +44,12 @@ public enum PanelKeyRouter {
         inputMethod ? nil : .toggleTransforms
     }
 
+    /// The keys a legend gives for the ⇧ panel (the footer's Transform, ⌘K's "All transforms"): ⇧, or ⌘T while an input
+    /// method has the ⇧ tap.
+    public static func transformKeys(inputMethod: Bool) -> [String] {
+        inputMethod ? ["⌘", "T"] : ["⇧"]
+    }
+
     public static func command(keyCode: UInt16, characters: String?, modifiers: NSEvent.ModifierFlags) -> PanelCommand? {
         let modifiers = modifiers.intersection(.deviceIndependentFlagsMask)
         switch keyCode {

@@ -69,9 +69,14 @@ public enum AppLanguage: String, CaseIterable, Sendable, Codable {
 @MainActor @Observable
 public final class LanguageStore {
     public static let defaultsKey = "appLanguage"
+    /// The languages AppKit picks the app's bundles' localizations by, read from the app's own defaults before the
+    /// Mac's (where macOS's per-app language setting writes them). The chosen language is written here too, so the
+    /// strings AppKit draws (open and save panels, alert buttons, a text field's menu, the shortcut recorder) speak it,
+    /// not the Mac's language. AppKit reads it once, at launch: a change applies from the next one.
+    public static let bundleLanguagesKey = "AppleLanguages"
 
     public var language: AppLanguage {
-        didSet { defaults.set(language.rawValue, forKey: Self.defaultsKey) }
+        didSet { save() }
     }
 
     @ObservationIgnored private let defaults: UserDefaults
@@ -79,15 +84,23 @@ public final class LanguageStore {
     /// A stored choice wins. Without one, a fresh install takes the system's language, while someone who used the app
     /// before the language followed the system (`isExistingUser`) stays in English, as before the update. Either answer
     /// is stored at once, so a later change to the Mac's languages never moves the app's.
+    ///
+    /// The system's languages are `preferredLanguages` alone, never the override this store writes: on a fresh install
+    /// nothing is written until the language is decided, and once one is stored the system is not asked again.
     public init(defaults: UserDefaults = .standard, preferredLanguages: [String] = Locale.preferredLanguages,
                 isExistingUser: Bool = false) {
         self.defaults = defaults
         if let stored = defaults.string(forKey: Self.defaultsKey).flatMap(AppLanguage.init(rawValue:)) {
             self.language = stored
         } else {
-            let language = isExistingUser ? AppLanguage.english : .preferred(from: preferredLanguages)
-            self.language = language
-            defaults.set(language.rawValue, forKey: Self.defaultsKey)
+            self.language = isExistingUser ? AppLanguage.english : .preferred(from: preferredLanguages)
         }
+        save()
+    }
+
+    /// The choice, and the same language for AppKit's own strings (`bundleLanguagesKey`).
+    private func save() {
+        defaults.set(language.rawValue, forKey: Self.defaultsKey)
+        defaults.set([language.rawValue], forKey: Self.bundleLanguagesKey)
     }
 }

@@ -129,4 +129,18 @@ import YabLocalization
         // ⌘T is two keycaps where ⇧ is one.
         #expect(keys - plain >= 20)
     }
+
+    /// What Transform's keycaps say, drawn with its word in every language: ⇧ on a plain layout, ⌘ and T under an input
+    /// method.
+    @Test(arguments: AppLanguage.allCases)
+    func theTransformKeycapsReadTheKeyThatWorks(_ language: AppLanguage) throws {
+        let transform = L10n.string("panel.footer.transform", language)
+        for (inputMethod, keys) in [(false, "⇧"), (true, "⌘, T")] {
+            let (window, host) = AccessibilityTree.host(try bar(language, inputMethod: inputMethod).itemActions(.all).fixedSize(),
+                                                        size: NSSize(width: 600, height: Tokens.Metrics.footerHeight))
+            let buttons = AccessibilityTree.elements(under: host).filter { $0.role == NSAccessibility.Role.button.rawValue }
+            #expect(buttons.map(\.label).contains("\(transform), \(keys)"), "\(language.rawValue): \(buttons.map(\.label))")
+            _ = window
+        }
+    }
 }

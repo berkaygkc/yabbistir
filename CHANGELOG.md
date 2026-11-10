@@ -3,12 +3,13 @@
 ## 0.6.0 — unreleased
 
 - **Nine languages:** yabbistir, its store extensions and the website now speak English, Deutsch, Español (Spain), Français (France), Türkçe, 日本語, 한국어, 简体中文 and 繁體中文 (Taiwan). A wording that sounds off? The new [translation issue form](https://github.com/berkaygkc/yabbistir/issues/new?template=translation.yml) takes the language, where it appears and your suggestion.
-  - A new install starts in your Mac's language when yabbistir has it, and in English otherwise. If you're updating, yabbistir stays in English until you change it.
+  - A new install starts in your Mac's language when yabbistir has it, and in English otherwise. If you're updating, yabbistir keeps the language you had.
   - Pick the language in the first-run window, in Settings → General or from the menu bar icon's Language menu.
+  - System dialogs and menus, such as Open panels, alert buttons and a text field's menu, follow the language you pick in yabbistir, from its next launch.
   - Extension READMEs stay in English.
 - **Input methods:** Pinyin, Zhuyin, Japanese Kana, Korean 2-Set and other input methods work in the panel's search. What you're composing is underlined, the candidate window opens under the search text, and ↵ and Esc go to the input method while you compose, so nothing is pasted and the panel stays open.
-- **⌘T:** opens the transforms of an item, for everyone, the same as tapping ⇧. While an input method is active a bare ⇧ belongs to the input method, so the footer shows ⌘T instead of ⇧.
-- **Long labels:** footers, the first-run window, Settings and the job card wrap or shorten instead of clipping. Where the full footer doesn't fit a language, it switches to a compact one that keeps the keys.
+- **⌘T:** opens the transforms of an item, for everyone, the same as tapping ⇧. While an input method is active a bare ⇧ belongs to the input method, so the footer and ⌘K show ⌘T instead of ⇧.
+- **Long labels:** footers, the first-run window and Settings wrap or shorten instead of clipping. Where the full footer doesn't fit a language, it switches to a compact one that keeps the keys.
 
 ## 0.5.1 — 2026-11-10
 

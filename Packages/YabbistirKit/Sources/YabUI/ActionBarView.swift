@@ -112,7 +112,7 @@ struct ActionBarView: View {
             divider
             if model.selectedTransformCount > 0 {
                 // Under an input method a ⇧ tap is the method's: ⌘T opens the panel instead.
-                let keys = model.inputMethodActive ? ["⌘", "T"] : ["⇧"]
+                let keys = PanelKeyRouter.transformKeys(inputMethod: model.inputMethodActive)
                 barButton(BarLabel(title: L10n.string("panel.footer.transform", model.language), keys: keys), primary: false,
                           words: words == .all, highlighted: model.layer == .transforms) {
                     _ = model.handle(.toggleTransforms)

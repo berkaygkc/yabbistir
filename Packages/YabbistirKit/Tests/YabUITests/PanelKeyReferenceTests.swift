@@ -10,6 +10,16 @@ import YabLocalization
         #expect(Set(PanelKeyReference.all.map(\.id)).count == PanelKeyReference.all.count)
     }
 
+    /// ⌘K's "All transforms" row names the key that opens the ⇧ panel, as the footer does: ⇧ on a plain layout, ⌘T while
+    /// an input method has the ⇧ tap. The other rows keep their keys.
+    @MainActor @Test func allTransformsFollowsTheInputMethod() {
+        #expect(ActionMenuView.keys(.allTransforms, shiftReturn: nil, inputMethod: false) == ["⇧"])
+        #expect(ActionMenuView.keys(.allTransforms, shiftReturn: nil, inputMethod: true) == ["⌘", "T"])
+        #expect(ActionMenuView.keys(.copy, shiftReturn: nil, inputMethod: true) == ["⌘", "C"])
+        #expect(ActionMenuView.keys(.paste, shiftReturn: nil, inputMethod: true) == ["↵"])
+        #expect(ActionMenuView.keys(.pastePlain, shiftReturn: .pastePlain, inputMethod: true) == ["⇧", "↵"])
+    }
+
     @Test func everyRowIsTranslated() {
         #expect(!PanelKeyReference.all.isEmpty)
         for row in PanelKeyReference.all {

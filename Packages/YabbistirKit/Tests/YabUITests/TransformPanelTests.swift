@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import os
+import SwiftUI
 import Testing
 @testable import YabCore
 import YabExtensionKit
@@ -141,6 +142,25 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(model.handle(.confirm(plain: false)) == .runCommand(commandID: "dev.yabbistir.convert/color#oklch", subjectID: colorID, copy: false))
     }
 
+    /// ⌘K's "All transforms" row, as drawn, names the key that opens the ⇧ panel: ⇧ on a plain layout, ⌘T while an input
+    /// method has the ⇧ tap.
+    @Test func allTransformsShowsTheKeyThatWorks() throws {
+        select(colorID)
+        _ = model.handle(.toggleActions)
+        let title = model.actionLabel(.allTransforms)
+        for (inputMethod, keys) in [(false, ["⇧"]), (true, ["⌘", "T"])] {
+            model.inputMethodActive = inputMethod
+            let (window, host) = AccessibilityTree.host(ActionMenuView(model: model, onAction: { _ in }),
+                                                        size: CGSize(width: 300, height: 700))
+            let texts = AccessibilityTree.elements(under: host).compactMap { element in
+                [element.label, element.value].compactMap { $0 }.first { !$0.isEmpty }
+            }
+            let row = try #require(texts.firstIndex(of: title), "\(texts)")
+            #expect(Array(texts.dropFirst(row + 1).prefix(keys.count)) == keys, "\(texts)")
+            _ = window
+        }
+    }
+
     @Test func allTransformsOpensThePanel() {
         select(colorID)
         _ = model.handle(.toggleActions)
@@ -245,7 +265,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
     static let b64 = FakeCommands.command("fake.ext/b64", title: "Base64 kodla", keywords: ["b64"])
 
     func isShiftReturn(_ item: PanelActionItem) -> Bool {
-        ActionMenuView.keys(item, shiftReturn: model.shiftReturnItem) == ["⇧", "↵"]
+        ActionMenuView.keys(item, shiftReturn: model.shiftReturnItem, inputMethod: false) == ["⇧", "↵"]
     }
 
     @Test func shiftReturnOnRichTextPastesPlain() {
@@ -351,7 +371,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         #expect(model.shiftReturnItem == .transform("fake.ext/b64"))
         #expect(isShiftReturn(.transform("fake.ext/b64")))
         #expect(!isShiftReturn(.pastePlain))
-        #expect(ActionMenuView.keys(.paste, shiftReturn: model.shiftReturnItem) == ["↵"])
+        #expect(ActionMenuView.keys(.paste, shiftReturn: model.shiftReturnItem, inputMethod: false) == ["↵"])
         // ⇧↵ pastes like ↵ on the link: no row carries it.
         _ = model.handle(.escape)
         fake.transformsByItem[linkID] = [Self.b64]

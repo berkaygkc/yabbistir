@@ -10,11 +10,20 @@ import SwiftUI
 /// or the open menu's own search line (`PanelViewModel.typingTarget`). It is the panel window's first responder and
 /// draws nothing; it sits behind the search line. The window decides which keys reach it (`PanelKeyRouter.route`).
 public final class PanelTextInputView: NSView, @preconcurrency NSTextInputClient {
-    var model: PanelViewModel
+    var model: PanelViewModel {
+        didSet { if model !== oldValue { listen() } }
+    }
 
     init(model: PanelViewModel) {
         self.model = model
         super.init(frame: .zero)
+        listen()
+    }
+
+    /// A composition the model ends itself (Esc the input method passed on, ⌘K, ⌘P, ⌘T, the panel closing) ends in the
+    /// input method too.
+    private func listen() {
+        model.discardInputMethodComposition = { [weak self] in self?.inputContext?.discardMarkedText() }
     }
 
     @available(*, unavailable)
@@ -45,9 +54,7 @@ public final class PanelTextInputView: NSView, @preconcurrency NSTextInputClient
 
     /// The panel is closing: a composition left open ends with it, without a result.
     public func discardComposition() {
-        guard hasMarkedText() else { return }
-        inputContext?.discardMarkedText()
-        model.setMarkedText("")
+        model.endComposition(committing: false)
     }
 
     /// The line typing goes to; the search's while typing goes nowhere (the Kategoriler menu).

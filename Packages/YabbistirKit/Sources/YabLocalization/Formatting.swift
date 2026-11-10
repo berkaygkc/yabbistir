@@ -11,22 +11,21 @@ public enum ShortRelativeTime {
         init(_ language: AppLanguage) {
             now = L10n.string("time.now", language)
             yesterday = L10n.string("time.yesterday", language)
-            minutes = CountLabel(L10n.string("time.minutes", language), locale: language.locale)
-            hours = CountLabel(L10n.string("time.hours", language), locale: language.locale)
-            days = CountLabel(L10n.string("time.days", language), locale: language.locale)
+            minutes = CountLabel(L10n.string("time.minutes", language))
+            hours = CountLabel(L10n.string("time.hours", language))
+            days = CountLabel(L10n.string("time.days", language))
         }
     }
 
-    /// A label with one count ("%lldm", "%lld Min."): the text around its `%lld`, joined to the number as `%lld`
-    /// prints it below 1,000 (no grouping separator yet); any other template or count is formatted.
+    /// A label with one count ("%lldm", "%lld Min."): the text around its `%lld`, joined to the number as `\(count)`
+    /// writes it, at any size with no grouping separator ("1234d", as the labels always read). Any other template is
+    /// formatted without a locale, which groups nothing either.
     private struct CountLabel: Sendable {
         let template: String
-        let locale: Locale
         let around: (before: String, after: String)?
 
-        init(_ template: String, locale: Locale) {
+        init(_ template: String) {
             self.template = template
-            self.locale = locale
             around = ["%lld", "%1$lld"].lazy.compactMap { token -> (String, String)? in
                 guard let range = template.range(of: token) else { return nil }
                 let before = String(template[..<range.lowerBound]), after = String(template[range.upperBound...])
@@ -35,7 +34,7 @@ public enum ShortRelativeTime {
         }
 
         func callAsFunction(_ count: Int) -> String {
-            guard let around, (0..<1000).contains(count) else { return String(format: template, locale: locale, count) }
+            guard let around else { return String(format: template, count) }
             return around.before + String(count) + around.after
         }
     }

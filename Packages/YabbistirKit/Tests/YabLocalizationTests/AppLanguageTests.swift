@@ -108,4 +108,36 @@ import Testing
         _ = LanguageStore(defaults: defaults, preferredLanguages: ["ko-KR"])
         #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"]).language == .korean)
     }
+
+    /// The strings AppKit draws (open panels, alert buttons, text menus, the shortcut recorder) speak the app's
+    /// language, not the Mac's: each decision and change is written as the app's own "AppleLanguages", which AppKit
+    /// reads at launch.
+    @Test func systemStringsFollowTheChoice() {
+        let defaults = freshDefaults()
+        let store = LanguageStore(defaults: defaults, preferredLanguages: ["ja-JP"])
+        #expect(defaults.stringArray(forKey: "AppleLanguages") == ["ja"])
+        store.language = .german
+        #expect(defaults.stringArray(forKey: "AppleLanguages") == ["de"])
+    }
+
+    /// An updating user's language, kept English or picked before, is written too.
+    @Test func aKeptLanguageIsTheSystemStringsToo() {
+        let existing = freshDefaults()
+        _ = LanguageStore(defaults: existing, preferredLanguages: ["de-DE"], isExistingUser: true)
+        #expect(existing.stringArray(forKey: "AppleLanguages") == ["en"])
+
+        let stored = freshDefaults()
+        stored.set("tr", forKey: "appLanguage")
+        _ = LanguageStore(defaults: stored, preferredLanguages: ["ja-JP"])
+        #expect(stored.stringArray(forKey: "AppleLanguages") == ["tr"])
+    }
+
+    /// The first launch decides by the system's languages it is handed, never by an "AppleLanguages" in the app's own
+    /// defaults: that is the app's override, not the Mac's.
+    @Test func theFirstLaunchNeverReadsTheOverride() {
+        let defaults = freshDefaults()
+        defaults.set(["ko"], forKey: "AppleLanguages")
+        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"]).language == .german)
+        #expect(defaults.stringArray(forKey: "AppleLanguages") == ["de"])
+    }
 }

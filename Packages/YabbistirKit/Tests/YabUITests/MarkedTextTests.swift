@@ -202,6 +202,133 @@ private func clip(_ s: String, minutesAgo: Double, rtf: Bool = false) -> Capture
         model.reset()
         #expect(model.markedText == "")
     }
+
+    // MARK: A composition the panel ends
+
+    /// Counts the times the model tells the input method to let go of its composition (`discardMarkedText`).
+    final class Discards {
+        var count = 0
+    }
+
+    func countDiscards() -> Discards {
+        let discards = Discards()
+        model.discardInputMethodComposition = { discards.count += 1 }
+        return discards
+    }
+
+    /// ⌘K or ⌘P while composing commits the text in the line it was composed in, as a text field does when focus
+    /// leaves it; the menu opens with an empty line, and the input method lets go of its composition.
+    @Test(arguments: [PanelCommand.toggleActions, .togglePin])
+    func aMenuShortcutCommitsTheComposition(_ shortcut: PanelCommand) {
+        let discards = countDiscards()
+        model.setMarkedText("rap")
+        _ = model.handle(shortcut)
+        #expect(model.layer == (shortcut == .toggleActions ? .actions : .pin))
+        #expect(model.query == "rap")
+        #expect(model.markedText == "")
+        #expect(model.actionQuery == "")
+        #expect(model.pinQuery == "")
+        #expect(discards.count == 1)
+    }
+
+    /// ⌘T closing the ⇧ panel mid-composition leaves nothing composing in the search under it.
+    @Test func commandTCommitsTheComposition() {
+        let discards = countDiscards()
+        model.select(richID, in: .history)
+        _ = model.handle(.toggleTransforms)
+        model.setMarkedText("chun")
+        _ = model.handle(.toggleTransforms)
+        #expect(model.layer == .none)
+        #expect(model.markedText == "")
+        #expect(model.markedText(in: .search) == "")
+        #expect(model.query == "")
+        #expect(discards.count == 1)
+    }
+
+    /// ⌘K inside ⌘K's own composition: the text stays in ⌘K's line as the menu closes; the search never gets it.
+    @Test func closingAMenuCommitsInItsLine() {
+        _ = model.handle(.toggleActions)
+        model.setMarkedText("fu")
+        _ = model.handle(.toggleActions)
+        #expect(model.layer == .none)
+        #expect(model.markedText(in: .search) == "")
+        #expect(model.query == "")
+    }
+
+    /// Shortcuts that open no line leave the composition where it is.
+    @Test func otherShortcutsLeaveTheComposition() {
+        let discards = countDiscards()
+        model.setMarkedText("ni")
+        _ = model.handle(.selectAll)
+        _ = model.handle(.commandHeld(true))
+        #expect(model.markedText == "ni")
+        #expect(discards.count == 0)
+    }
+
+    /// An Esc the input method passes on drops the composition here and in the input method, which would otherwise
+    /// bring the text back with its next key.
+    @Test func aPassedOnEscapeTellsTheInputMethod() {
+        let discards = countDiscards()
+        model.setMarkedText("ni")
+        #expect(model.handle(.escape) == nil)
+        #expect(model.markedText == "")
+        #expect(model.query == "")
+        #expect(discards.count == 1)
+    }
+
+    /// An input method may hand its composition back as it lets go (`insertText` after `discardMarkedText`, at once or
+    /// a moment later): it is not typed again, whether Esc dropped it or a shortcut already committed it.
+    @Test func theTextHandedBackIsNotTypedTwice() {
+        // At once, from inside the discard.
+        final class Echo { var text = "" }
+        let echo = Echo()
+        model.discardInputMethodComposition = { [model] in model.commitText(echo.text) }
+        echo.text = "ni"
+        model.setMarkedText("ni")
+        _ = model.handle(.escape)
+        #expect(model.query == "")
+
+        echo.text = "rap"
+        model.setMarkedText("rap")
+        _ = model.handle(.toggleActions)
+        #expect(model.query == "rap")
+        #expect(model.actionQuery == "")
+        _ = model.handle(.escape)
+
+        // A moment later.
+        model.discardInputMethodComposition = {}
+        model.setMarkedText("or")
+        _ = model.handle(.toggleActions)
+        model.commitText("or")
+        #expect(model.query == "rapor")
+        #expect(model.actionQuery == "")
+        // What comes after is typed as usual.
+        model.commitText("复制")
+        #expect(model.actionQuery == "复制")
+    }
+
+    /// A new composition means the input method answered: the same text committed then is typed.
+    @Test func aNewCompositionIsTypedEvenIfItMatches() {
+        model.discardInputMethodComposition = {}
+        model.setMarkedText("ni")
+        _ = model.handle(.escape)
+        model.setMarkedText("ni")
+        model.commitText("ni")
+        #expect(model.query == "ni")
+    }
+
+    /// The panel closing ends a composition without a result, in the model and in the input method.
+    @Test func closingThePanelDropsTheComposition() {
+        let input = PanelTextInputView(model: model)
+        let discards = countDiscards()
+        model.setMarkedText("ni")
+        input.discardComposition()
+        #expect(model.markedText == "")
+        #expect(model.query == "")
+        #expect(discards.count == 1)
+        input.discardComposition()
+        #expect(discards.count == 1)
+    }
 }
 
 /// Where an input method's candidate window goes: measured from the line's leading edge, so it never depends on the line

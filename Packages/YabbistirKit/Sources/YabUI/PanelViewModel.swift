@@ -121,6 +121,13 @@ public final class PanelViewModel {
     /// The keyboard's input source is an input method; the window keeps it current. The ⇧ tap is the method's then,
     /// so the footer offers ⌘T for the ⇧ panel.
     public var inputMethodActive = false
+    /// Tells the input method that a composition ended here, not in the method (Esc it passed on, a shortcut that
+    /// opens or closes a line, the panel closing), so it lets go of its own and never brings the text back with its next
+    /// key. The live panel's text input view sets it (`discardMarkedText` on its input context).
+    @ObservationIgnored var discardInputMethodComposition: @MainActor () -> Void = {}
+    /// A composition the panel ended, until the input method answers: one that hands the text back as it lets go
+    /// (`insertText` after `discardMarkedText`) does not type it a second time.
+    @ObservationIgnored private var endedComposition: String?
     /// Where views behind the search lines tell an input method where each line is; the live panel's only.
     @ObservationIgnored let textInputAnchors = TextInputAnchors()
     public private(set) var columns: [PanelColumn] = [] { didSet { updateStrip() } }
@@ -552,6 +559,7 @@ public final class PanelViewModel {
     public func reset() {
         query = ""
         markedText = ""
+        endedComposition = nil
         subjectID = nil
         isQuerySelected = false
         selections = [:]
@@ -587,9 +595,12 @@ public final class PanelViewModel {
         // The window hands these keys to the input method while it composes. One that still gets here (the method
         // did not take it) never pastes, moves or closes; Esc drops the composition.
         if !markedText.isEmpty, command.belongsToComposition {
-            if command == .escape { markedText = "" }
+            if command == .escape { endComposition(committing: false) }
             return nil
         }
+        // A shortcut that opens or closes a line (⌘K, ⌘P, ⌘T, ⌘E) commits the composition first, as a text field does
+        // when focus leaves it: the text stays in the line it was composed in, and the next line starts empty.
+        if command.changesTypingLine { endComposition(committing: true) }
         if layer == .categoryMenu, let consumed = handleCategoryMenu(command) { return consumed.action }
         if layer == .actions, let consumed = handleActions(command) { return consumed.action }
         if layer == .pin, let consumed = handlePin(command) { return consumed.action }
@@ -707,14 +718,32 @@ public final class PanelViewModel {
         // search line comes and goes with it and moves the rows under a resting pointer, which keeps the keyboard's row.
         hoverGate.keyboardActed(pointer: pointerLocation())
         if !text.isEmpty, isQuerySelected, typingTarget == .search { setQuery("") }
+        // A new composition: the input method has moved on from the one the panel ended.
+        if !text.isEmpty { endedComposition = nil }
         markedText = text
     }
 
-    /// The input method's result (你好 for "nihao"): typed like any key, into `typingTarget`'s line.
+    /// The input method's result (你好 for "nihao"): typed like any key, into `typingTarget`'s line. The text of a
+    /// composition the panel already ended, handed back as the method lets go of it, is not typed again.
     public func commitText(_ text: String) {
         markedText = ""
         guard !text.isEmpty else { return }
+        if let ended = endedComposition {
+            endedComposition = nil
+            if text == ended { return }
+        }
         _ = handle(.type(text))
+    }
+
+    /// Ends what an input method is composing, here and in the method: `committing`, the text is typed in its line
+    /// first, as a text field commits it when focus leaves; otherwise it is dropped.
+    func endComposition(committing: Bool) {
+        guard !markedText.isEmpty else { return }
+        let text = markedText
+        markedText = ""
+        if committing { _ = handle(.type(text)) }
+        endedComposition = text
+        discardInputMethodComposition()
     }
 
     /// ↵, ⌘1–9, a double click or the footer's Paste on a row of the focused column (`plain`: ⌘K's
@@ -1428,6 +1457,15 @@ private extension PanelCommand {
     var belongsToComposition: Bool {
         switch self {
         case .confirm, .escape, .move, .moveColumn, .moveItem, .togglePreview, .deleteBackward, .toggleCategoryMenu: true
+        default: false
+        }
+    }
+
+    /// ⌘K, ⌘P, ⌘T (or the footer's buttons) and ⌘E: a menu, the ⇧ panel or the editor opens or closes, and typing
+    /// moves to another line.
+    var changesTypingLine: Bool {
+        switch self {
+        case .toggleActions, .togglePin, .toggleTransforms, .openEditor: true
         default: false
         }
     }
