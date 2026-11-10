@@ -97,7 +97,7 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
     let key = Curve25519.Signing.PrivateKey()
     let root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-store-tab-\(UUID().uuidString)")
     let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-store-tab-\(UUID().uuidString)")!)
-    let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-store-tab-lang-\(UUID().uuidString)")!)
+    let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-store-tab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
     let registry: ExtensionRegistry
 
     init(language: AppLanguage = .english) {

@@ -39,7 +39,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         try store.add(itemID: ids["SELECT id FROM users"]!, toCategory: code.id!)
         try store.add(itemID: ids["İade akışı demosu"]!, toCategory: links.id!)
         library = try Library(store: store)
-        language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!)
+        language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         model = PanelViewModel(library: library, language: language, now: { now })
         library.onChange = { [model] in model.refresh() }
@@ -432,7 +432,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
             _ = try store.ingest(clip("\(minute) \(paragraph)", minutesAgo: Double(minute)))
         }
         let library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let model = PanelViewModel(library: library, language: language, now: { now })
         model.reset()
         _ = model.handle(.type("x"))
@@ -450,7 +450,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         try store.insertSyntheticItems(count: 20_000, now: now)
         let library = try Library(store: store)
         let ids = library.index.search("", limit: 20_000).ids
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-cat-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-cat-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let model = PanelViewModel(library: library, language: language, now: { now })
         for (offset, name) in ["A", "B", "C", "D", "E", "F"].enumerated() {
             let category = try library.createCategory(name: name)
@@ -485,7 +485,7 @@ private final class StackWriter: PasteboardWriting {
         let code = try store.createCategory(name: "Kod", color: .slate, visibility: .always)
         try store.add(itemID: ids["SELECT id FROM users"]!, toCategory: code.id!)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         stack = StackSession(library: library, writer: StackWriter(), didWrite: { _ in })
         stack.append(ids["UPDATE users SET status"]!)

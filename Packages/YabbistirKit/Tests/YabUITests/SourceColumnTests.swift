@@ -43,7 +43,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         vault = try #require(categories.first { $0.source == Self.vaultKey })
         notes = try #require(categories.first { $0.source == Self.notesKey })
         gone = try #require(categories.first { $0.source == Self.goneKey })
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         sources = FakeSources()
         sources.descriptors = [FakeSources.vault(), FakeSources.vault(extensionID: "dev.example.notlar", sourceID: "notes", title: "Notlar")]
@@ -192,7 +192,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
     /// A panel without sources (none wired) shows no source column.
     @Test func noSourcesNoSourceColumns() throws {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let bare = PanelViewModel(library: library, language: language, now: { now })
         bare.reset()
         bare.toggleShown(vault.id!)

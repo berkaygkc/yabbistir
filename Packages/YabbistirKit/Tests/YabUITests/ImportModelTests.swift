@@ -16,7 +16,7 @@ private final class Counter {
 @MainActor
 private func makeModel(location: PasteLibraryLocation?, counter: Counter = Counter(), language: AppLanguage = .english,
                        store: ItemStore? = nil) throws -> ImportModel {
-    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-import-\(UUID().uuidString)")!)
+    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-import-\(UUID().uuidString)")!, preferredLanguages: ["en"])
     languages.language = language
     return ImportModel(
         store: try store ?? ItemStore.temporary(), reload: { counter.reloads += 1 }, ignoredApps: { [] },

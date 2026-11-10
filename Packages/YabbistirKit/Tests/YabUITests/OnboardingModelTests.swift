@@ -35,7 +35,7 @@ private func library() throws -> PasteLibraryLocation {
 @MainActor
 private func rig(withLibrary: Bool, loginStatus: LoginItemStatus = .disabled) async throws -> Rig {
     let location = withLibrary ? try library() : nil
-    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-onb-\(UUID().uuidString)")!)
+    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-onb-\(UUID().uuidString)")!, preferredLanguages: ["en"])
     let importer = ImportModel(
         store: try ItemStore.temporary(), reload: {}, ignoredApps: { [] }, locate: { location },
         otherAppRunning: { false }, quitOtherApp: {}, language: languages)

@@ -107,7 +107,7 @@ import YabLocalization
         fake.transformsByItem[id] = (1...4).map { FakeCommands.command("dev.example.case/upper#\($0)", title: "Büyük harf \($0)", keywords: ["büyük"],
                                                                        extensionName: "Harf") }
             + (1...3).map { FakeCommands.command("dev.example.hash/sha#\($0)", title: "SHA \($0)", keywords: ["sha"], extensionName: "Özet") }
-        let language = LanguageStore(defaults: suite)
+        let language = LanguageStore(defaults: suite, preferredLanguages: ["en"])
         language.language = .turkish
         model = PanelViewModel(library: try Library(store: store), language: language, extensions: fake, now: { Date() },
                                shiftDefaults: ShiftReturnDefaults(defaults: suite), shiftHintDelay: .zero)

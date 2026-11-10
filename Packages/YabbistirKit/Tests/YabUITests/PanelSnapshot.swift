@@ -51,7 +51,7 @@ import YabLocalization
                                                     ("dark-search", .darkAqua, .turkish, "iade"),
                                                     ("dark-commands", .darkAqua, .turkish, "uu"),
                                                     ("light-transforms", .aqua, .turkish, "kod")] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -128,7 +128,7 @@ import YabLocalization
                     + (fake.transformsByItem[link] ?? []).prefix(2)
                 fake.outputs["dev.yabbistir.base64/encode"] = .text("aHR0cHM6Ly93d3cudmlkZW8uZXhhbXBsZS93YXRjaD92PXlhYi0xNDI=")
             }
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-f-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-f-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -197,7 +197,7 @@ import YabLocalization
         ]
         fake.outputs["dev.yabbistir.convert/image#jpeg"] = .image(data: png, uti: "public.jpeg", width: 1200, height: 760)
         for (name, id, query) in [("text", textID, ""), ("color", colorID, ""), ("image", imageID, ""), ("empty", textID, "zz")] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-x-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-x-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = .turkish
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -249,7 +249,7 @@ import YabLocalization
             ("dark-locked-plain", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: nil), ""),
             ("dark-loading", .darkAqua, .turkish, .loading, ""),
         ] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-s-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-s-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let sources = FakeSources()
             sources.descriptors = [FakeSources.vault()]
@@ -318,7 +318,7 @@ import YabLocalization
         }
         for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
             func model(_ state: SourceCenter.State) -> PanelViewModel {
-                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-sa-\(UUID())")!)
+                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-sa-\(UUID())")!, preferredLanguages: ["en"])
                 languageStore.language = language
                 let sources = FakeSources()
                 sources.descriptors = [vaultDescriptor(language)]
@@ -438,7 +438,7 @@ import YabLocalization
             try? bitmap.representation(using: .png, properties: [:])?.write(to: dir.appendingPathComponent("source-around-\(name).png"))
         }
         for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-around-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-around-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let sources = FakeSources()
             sources.descriptors = [descriptor(language)]

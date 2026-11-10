@@ -18,7 +18,7 @@ import YabPasteboard
         let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-\(UUID().uuidString)")!)
         registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)
@@ -44,7 +44,7 @@ import YabPasteboard
             self.library = library
             service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in }, library: library,
                                        settings: ExtensionSettings(defaults: defaults),
-                                       language: LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!),
+                                       language: LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"]),
                                        resultFiles: files)
         }
 
@@ -213,7 +213,7 @@ import YabPasteboard
             request.load != nil ? HostMessage(id: request.id, done: true) : HostClientTests.failing(request.id)
         }
         let client = ExtensionHostClient(transport: transport) { _, _ in }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-off-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-off-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: client, library: library, settings: settings, language: language)
         var turnedOff: [String] = []
         service.onExtensionTurnedOff = { turnedOff.append($0) }
@@ -281,7 +281,7 @@ import YabPasteboard
         let transport = FakeTransport { request in
             request.load != nil ? HostMessage(id: request.id, done: true) : HostMessage(id: request.id, ok: .result(.text("ok")))
         }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fx-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fx-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language, toolSearchPath: ["/opt/tools/bin"])
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -387,7 +387,7 @@ import YabPasteboard
             request.load != nil ? HostMessage(id: request.id, done: true) : HostMessage(id: request.id, ok: .result(.file(path: path)))
         }
         let outputs = RegistryFixture.temporary("Outputs")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-file-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-file-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language, resultFiles: ResultFiles(root: outputs, workRoot: work))
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -413,7 +413,7 @@ import YabPasteboard
         manifest["contributes"] = ["actions": [["id": "a", "title": "name", "keywords": "keywords", "input": "none", "output": "file"]]]
         try registry.install(folder: try RegistryFixture.write(in: RegistryFixture.temporary("src"), id: id, manifest: manifest))
         let work = RegistryFixture.temporary("work")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fail-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fail-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
 
         func service(returning path: String, files: ResultFiles?) -> ExtensionService {
             let transport = FakeTransport { request in
@@ -461,7 +461,7 @@ import YabPasteboard
             }
             return HostMessage(id: request.id, ok: .result(.text(invoke.context.target?.name ?? "ok")))
         }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-one-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-one-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language)
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -596,7 +596,7 @@ import YabPasteboard
         try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: ytdlp.path)
         let main = FakeTransport { request in HostMessage(id: request.id, done: true) }
         let jobs = FakeTransport { request in HostMessage(id: request.id, done: true) }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-tools-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-tools-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: main) { _, _ in },
                                        jobClient: ExtensionHostClient(transport: jobs) { _, _ in }, library: library, settings: settings,
                                        language: language, toolSearchPath: [tools.path])
@@ -642,7 +642,7 @@ import YabPasteboard
             return HostMessage(id: request.id, ok: .result(.file(path: path)))
         }
         let outputs = RegistryFixture.temporary("Outputs")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-job-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-job-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: main) { _, _ in },
                                        jobClient: ExtensionHostClient(transport: jobs) { _, _ in }, library: library, settings: settings,
                                        language: language, toolSearchPath: ["/opt/tools/bin"], resultFiles: ResultFiles(root: outputs, workRoot: work))

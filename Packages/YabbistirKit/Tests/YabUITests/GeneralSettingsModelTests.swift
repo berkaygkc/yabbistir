@@ -7,7 +7,7 @@ import YabPlatform
 @MainActor @Suite struct GeneralSettingsModelTests {
     func model(_ item: FakeLoginItem) -> GeneralSettingsModel {
         let preferences = Preferences(defaults: UserDefaults(suiteName: "yab-prefs-\(UUID().uuidString)")!)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         return GeneralSettingsModel(preferences: preferences, language: language, loginItem: item)
     }
 

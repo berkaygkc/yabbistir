@@ -110,7 +110,7 @@ private func png(width: Int, height: Int) -> Data {
         let key = FakeSources.vault().id
         try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
         let vault = try #require(try library.store.categories().first { $0.source == key })
-        let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-preview-source-\(UUID().uuidString)")!)
+        let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-preview-source-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         languageStore.language = .turkish
         let sources = FakeSources()
         sources.descriptors = [FakeSources.vault()]

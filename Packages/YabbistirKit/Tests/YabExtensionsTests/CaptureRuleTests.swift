@@ -52,7 +52,7 @@ import YabLocalization
                                      dataRoot: RegistryFixture.temporary("ExtensionData"), settings: settings)
         let logs = logs
         let client = ExtensionHostClient(transport: host ?? transport) { _, line in logs.lines.append(line) }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-rules-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-rules-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         service = ExtensionService(registry: registry, client: client, library: try Library(store: ItemStore.temporary()),
                                    settings: settings, language: language)
         runner = if let timeout {

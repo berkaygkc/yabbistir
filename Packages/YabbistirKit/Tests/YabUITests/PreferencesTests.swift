@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabCore
+import YabLocalization
 import YabPasteboard
 import YabPlatform
 @testable import YabUI
@@ -71,6 +72,12 @@ import YabPlatform
         defaults.set("neon", forKey: "pref.appearance")
         #expect(Preferences(defaults: defaults).previewDelay == .short)
         #expect(Preferences(defaults: defaults).appearance == .system)
+    }
+
+    /// LanguageStore reads the onboarding flag by its key: someone onboarded before 0.6 keeps English, not the system's.
+    @Test func anOnboardedPersonKeepsEnglishAfterTheUpdate() {
+        Preferences(defaults: defaults).onboarded = true
+        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["de-DE"]).language == .english)
     }
 
     @Test func previewDelaysHaveTheirDurations() {

@@ -15,7 +15,7 @@ final class FakeProbe: PermissionProbing {
 @MainActor @Suite struct PermissionsModelTests {
     func make(_ probe: FakeProbe, item: FakeLoginItem = FakeLoginItem(),
               open: @escaping (URL) -> Bool = { _ in true }) -> PermissionsModel {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         return PermissionsModel(probe: probe, loginItem: item, language: language, openURL: open)
     }
 

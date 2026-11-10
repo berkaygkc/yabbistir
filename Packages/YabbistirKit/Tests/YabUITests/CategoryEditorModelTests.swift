@@ -33,7 +33,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         try store.add(itemID: ids[1], toCategory: code.id!)
         try store.add(itemID: ids[2], toCategory: links.id!)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         model = PanelViewModel(library: library, language: language, now: { now })
         library.onChange = { [model] in model.refresh() }
@@ -102,7 +102,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
     /// The vault's category, made by its extension, after the person's two; the editor reads its rows from `sources`.
     private func addVault(sources: FakeSources? = nil) throws -> (CategoryEditorModel, CategoryEditorModel.Row) {
         try library.syncSourceCategories([SourceCategorySeed(key: Self.vaultKey, name: "Kasa")])
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-src-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         let editor = CategoryEditorModel(library: library, language: language, sources: sources)
         return (editor, try #require(editor.rows.first { $0.isSource }))

@@ -178,7 +178,7 @@ struct ReadmeFixture {
     }
 
     func panelModel() throws -> PanelViewModel {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "readme-\(UUID())")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "readme-\(UUID())")!, preferredLanguages: ["en"])
         language.language = .english
         let now = self.now
         let model = PanelViewModel(library: try Library(store: store), language: language, extensions: fake, now: { now })

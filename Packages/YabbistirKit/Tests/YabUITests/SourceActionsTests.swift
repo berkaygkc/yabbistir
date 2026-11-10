@@ -41,7 +41,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         let categories = try store.categories()
         vault = try #require(categories.first { $0.source == Self.vaultKey })
         pins = try #require(categories.first { $0.source == Self.pinKey })
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-act-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-act-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         sources = FakeSources()
         sources.descriptors = [FakeSources.vault(), Self.pinOnly]

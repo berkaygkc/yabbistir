@@ -44,7 +44,7 @@ import YabPasteboard
         library = try Library(store: ItemStore.temporary())
         registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-variant-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-variant-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .english
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)

@@ -87,7 +87,7 @@ import YabStack
         let library = try Library(store: ItemStore.temporary())
         for name in ["Kod parçaları", "Bağlantılar", "Toplantı notları"] { _ = try library.createCategory(name: name) }
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-editor-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-editor-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let editor = CategoryEditorModel(library: library, language: languageStore)
             let host = NSHostingView(rootView: CategoryEditorView(model: editor) {}
@@ -162,7 +162,7 @@ import YabStack
         logs.append("dev.yabbistir.convert", "TypeError: undefined is not an object (evaluating 'item.color.r')")
         for language in [AppLanguage.english, .turkish] {
             for tab in [ExtensionsSettingsView.Tab.installed, .development] {
-                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-lang-\(UUID())")!)
+                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-lang-\(UUID())")!, preferredLanguages: ["en"])
                 languageStore.language = language
                 let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: logs)
                 model.selectedID = "dev.yabbistir.uuid"
@@ -204,7 +204,7 @@ import YabStack
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-secret-lang-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-secret-lang-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer())
             if registry.installed.first(where: { $0.id == "dev.example.keys" }) == nil { model.installFolder(source) }
@@ -270,7 +270,7 @@ import YabStack
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-rules-lang-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-rules-lang-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer())
             if registry.installed.first(where: { $0.id == "dev.example.link-clean" }) == nil {
@@ -344,7 +344,7 @@ import YabStack
             }
         }
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-consent-lang-\(UUID())")!)
+            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-consent-lang-\(UUID())")!, preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer(),
                                                 toolLocator: ToolLocator(searchPath: [empty.path]))
@@ -407,7 +407,7 @@ extension StoreModel {
     /// A store for snapshots of the other tabs: never shown, so it never reaches the network.
     static func offline(_ settings: ExtensionsSettingsModel) -> StoreModel {
         let cache = FileManager.default.temporaryDirectory.appendingPathComponent("snap-store-\(UUID())")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "snap-store-lang-\(UUID())")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "snap-store-lang-\(UUID())")!, preferredLanguages: ["en"])
         language.language = settings.language
         return StoreModel(client: StoreClient(cacheFolder: cache, registry: settings.registry, appVersion: SemanticVersion("1.0.0")!),
                           registry: settings.registry, language: language)

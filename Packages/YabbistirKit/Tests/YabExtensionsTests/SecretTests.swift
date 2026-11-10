@@ -31,7 +31,7 @@ import YabLocalization
     }
 
     func service(transport: any HostTransport = PipeTransport()) -> ExtensionService {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-secret-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-secret-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         return ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                 settings: settings, language: language)
     }

@@ -102,12 +102,12 @@ import Testing
     }
 
     @Test func defaultLanguageIsEnglish() {
-        #expect(LanguageStore(defaults: freshDefaults()).language == .english)
+        #expect(LanguageStore(defaults: freshDefaults(), preferredLanguages: []).language == .english)
     }
 
     @Test func languagePersists() {
         let defaults = freshDefaults()
-        LanguageStore(defaults: defaults).language = .turkish
-        #expect(LanguageStore(defaults: defaults).language == .turkish)
+        LanguageStore(defaults: defaults, preferredLanguages: ["en"]).language = .turkish
+        #expect(LanguageStore(defaults: defaults, preferredLanguages: ["en"]).language == .turkish)
     }
 }

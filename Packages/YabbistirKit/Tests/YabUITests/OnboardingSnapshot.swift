@@ -29,7 +29,7 @@ import YabLocalization
 
     private func make(_ state: ImportModel.State, language: AppLanguage = .turkish, trusted: Bool = false,
                       running: Bool = false) throws -> (OnboardingModel, ImportModel) {
-        let languages = LanguageStore(defaults: UserDefaults(suiteName: "snap-onb-\(UUID())")!)
+        let languages = LanguageStore(defaults: UserDefaults(suiteName: "snap-onb-\(UUID())")!, preferredLanguages: ["en"])
         languages.language = language
         let flags = Flags()
         flags.trusted = trusted

@@ -23,7 +23,7 @@ private final class BuildThreads: @unchecked Sendable {
         let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-hist-\(UUID().uuidString)")!)
         let registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-hist-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-hist-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)
     }

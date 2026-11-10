@@ -10,7 +10,7 @@ import YabLocalization
 @MainActor @Suite struct SettingsSnapshot {
     static let dir = ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]
     static let turkish: LanguageStore = {
-        let store = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-\(UUID())")!)
+        let store = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-\(UUID())")!, preferredLanguages: ["en"])
         store.language = .turkish
         return store
     }()

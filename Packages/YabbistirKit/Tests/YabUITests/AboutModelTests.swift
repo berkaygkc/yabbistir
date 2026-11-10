@@ -6,7 +6,7 @@ import YabLocalization
 @MainActor @Suite struct AboutModelTests {
     func make(language: AppLanguage = .english, read: @escaping (String) -> String? = { _ in nil },
               open: @escaping (URL) -> Void = { _ in }) -> AboutModel {
-        let store = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!)
+        let store = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         store.language = language
         return AboutModel(version: "0.3.0", build: "3", language: store, checkForUpdates: {},
                           readNotice: read, openURL: open)
@@ -40,7 +40,7 @@ import YabLocalization
     }
 
     @Test func runningSetupAgainOnlyOpensIt() {
-        let store = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!)
+        let store = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         var opened: [URL] = []
         var reruns = 0
         let model = AboutModel(version: "0.3.0", build: "3", language: store, checkForUpdates: {}, readNotice: { _ in nil },

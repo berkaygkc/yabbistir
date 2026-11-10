@@ -90,7 +90,7 @@ final class HeldTransport: HostTransport, @unchecked Sendable {
     let builtIn = RegistryFixture.temporary("BuiltinExtensions")
     let user = RegistryFixture.temporary("Extensions")
     let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!)
-    let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-lang-\(UUID().uuidString)")!)
+    let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
     static let key = "dev.example.vault/vault"
 
     init() throws {

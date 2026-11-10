@@ -27,7 +27,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         base64ID = try ingest("SGVsbG8sIGTDvG55YQ==", minutesAgo: 0.5)
         plainID = try ingest("merhaba dünya", minutesAgo: 1)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-cmd-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-cmd-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         fake.generators = [FakeCommands.command("dev.yabbistir.uuid/v4", title: "UUID oluştur", keywords: ["uuid", "guid"], input: .none,
                                                 extensionName: "UUID"),

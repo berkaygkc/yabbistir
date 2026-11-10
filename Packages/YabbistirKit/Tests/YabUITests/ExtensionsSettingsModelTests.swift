@@ -25,7 +25,7 @@ import YabLocalization
     static func model(root: URL, settings: ExtensionSettings, toolLocator: ToolLocator = .standard) -> ExtensionsSettingsModel {
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-settings-lang-\(UUID().uuidString)")!)
+        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-settings-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
         language.language = .turkish
         return ExtensionsSettingsModel(registry: registry, settings: settings, language: language, logs: ExtensionLogBuffer(),
                                       toolLocator: toolLocator)

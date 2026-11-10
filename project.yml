@@ -30,7 +30,7 @@ targets:
       properties:
         CFBundleDisplayName: $(APP_DISPLAY_NAME)
         CFBundleDevelopmentRegion: en
-        CFBundleLocalizations: [en, tr]
+        CFBundleLocalizations: [en, de, es, fr, tr, ja, ko, zh-Hans, zh-Hant]
         CFBundleShortVersionString: "0.5.1"
         CFBundleVersion: "7"
         LSUIElement: true
