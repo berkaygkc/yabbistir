@@ -4,6 +4,7 @@ import YabCore
 import YabExtensionKit
 import YabLocalization
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 /// Records where the history items were built.
@@ -19,11 +20,11 @@ private final class BuildThreads: @unchecked Sendable {
     let service: ExtensionService
 
     init() throws {
-        library = try Library(store: ItemStore.temporary())
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-hist-\(UUID().uuidString)")!)
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-hist"))
         let registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-hist-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-hist-lang"), preferredLanguages: ["en"])
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)
     }

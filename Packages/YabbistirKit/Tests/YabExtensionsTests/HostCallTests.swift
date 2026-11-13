@@ -2,6 +2,7 @@ import Foundation
 import Testing
 import YabExtensionKit
 import YabLocalization
+import YabTestSupport
 @testable import YabExtensions
 
 /// The app's side of host calls, recorded.
@@ -100,7 +101,7 @@ final class RecordingTransport: HostTransport, @unchecked Sendable {
     /// `serviceLimit`: the longest the router works on one request; `pauseLimit`: the longest a call's clock waits for the app.
     init(js: String, permissions: [String] = [], serviceLimit: Duration = HostCallRouter.serviceLimit,
          pauseLimit: Duration = HostCallRouter.serviceLimit) async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-calls-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-calls"))
         registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("ExtensionData"), settings: settings)
         let folder = try ExtensionFixture.folder(id: Self.id, name: "Test", permissions: permissions, js: js)

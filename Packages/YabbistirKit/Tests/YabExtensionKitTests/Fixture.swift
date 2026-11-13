@@ -1,4 +1,5 @@
 import Foundation
+import YabTestSupport
 
 /// Writes an extension folder for a test: manifest, locales and (optionally) index.js.
 struct Fixture {
@@ -6,7 +7,7 @@ struct Fixture {
 
     init(id: String = "dev.example.sample", folderName: String? = nil, manifest: [String: Any]? = nil,
          locales: [String: [String: Any]] = Fixture.locales, indexJS: String? = "exports.actions = {};") throws {
-        root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-ext-\(UUID().uuidString)")
+        root = TestScratch.url("yab-ext")
             .appendingPathComponent(folderName ?? id)
         try FileManager.default.createDirectory(at: root.appendingPathComponent("locales"), withIntermediateDirectories: true)
         let body = manifest ?? Fixture.manifest(id: id)

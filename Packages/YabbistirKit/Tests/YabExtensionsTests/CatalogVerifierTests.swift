@@ -2,6 +2,7 @@ import CryptoKit
 import Foundation
 import Testing
 import YabPlatform
+import YabTestSupport
 @testable import YabExtensions
 
 struct CatalogVerifierTests {
@@ -91,7 +92,7 @@ extension CatalogVerifierTests {
         #expect(release.contains("scripts/check-store-keys.sh"))
         /// The gate's exit status for a StoreConfiguration.swift that declares `keys`.
         func gate(_ keys: String) throws -> Int32 {
-            let file = FileManager.default.temporaryDirectory.appendingPathComponent("StoreConfiguration-\(UUID().uuidString).swift")
+            let file = TestScratch.url("StoreConfiguration", pathExtension: "swift")
             defer { try? FileManager.default.removeItem(at: file) }
             try "import CryptoKit\n\npublic enum StoreConfiguration {\n    /// The keys.\n    \(keys)\n}\n".write(to: file, atomically: true, encoding: .utf8)
             let process = Process()

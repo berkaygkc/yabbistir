@@ -2,13 +2,14 @@ import Foundation
 import Testing
 import YabExtensionKit
 import YabLocalization
+import YabTestSupport
 @testable import YabExtensions
 
 @MainActor @Suite struct PermissionTests {
     let builtIn = RegistryFixture.temporary("BuiltinExtensions")
     let user = RegistryFixture.temporary("Extensions")
     let data = RegistryFixture.temporary("ExtensionData")
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-perm-\(UUID().uuidString)")!)
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-perm"))
 
     func registry() -> ExtensionRegistry {
         ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings)

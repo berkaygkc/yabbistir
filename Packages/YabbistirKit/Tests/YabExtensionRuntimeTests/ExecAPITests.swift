@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 /// `yab.exec` against fake tools: `#!/bin/sh` scripts in a temporary folder that serves as the search path.
@@ -12,7 +13,7 @@ import YabExtensionKit
 
     /// A fresh folder of fake tools, each a `#!/bin/sh` script with mode 0755.
     static func tools(_ scripts: [String: String] = [:]) throws -> URL {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("yab-tools-\(UUID().uuidString)")
+        let folder = TestScratch.url("yab-tools")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         for (name, body) in scripts {
             let file = folder.appendingPathComponent(name)
@@ -32,7 +33,7 @@ import YabExtensionKit
             fatalError("fixture manifest is invalid: \(ManifestValidator.validate(folder: folder).issues)")
         }
         return try ExtensionRuntime(folder: folder, manifest: parsed, localization: localization,
-                                    dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)"),
+                                    dataFolder: TestScratch.url("yab-data"),
                                     grant: PermissionGrant(permissions: permissions, domains: [], tools: granted),
                                     toolSearchPath: [tools.path], log: log)
     }

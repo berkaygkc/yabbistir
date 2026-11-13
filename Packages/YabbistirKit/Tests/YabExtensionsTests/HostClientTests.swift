@@ -1,12 +1,13 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensions
 
 /// A throwaway extension folder around some index.js.
 enum ExtensionFixture {
     static func folder(id: String = "dev.example.fixture", name: String = "Fixture", permissions: [String] = [], js: String) throws -> URL {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("yab-ext-\(UUID().uuidString)/\(id)")
+        let folder = TestScratch.url("yab-ext").appendingPathComponent(id)
         try FileManager.default.createDirectory(at: folder.appendingPathComponent("locales"), withIntermediateDirectories: true)
         let manifest: [String: Any] = [
             "id": id, "version": "1.0.0", "apiVersion": 1, "defaultLocale": "en", "name": "name", "description": "name",
@@ -19,7 +20,7 @@ enum ExtensionFixture {
         return folder
     }
 
-    static var dataFolder: URL { FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)") }
+    static var dataFolder: URL { TestScratch.url("yab-data") }
 }
 
 /// A transport that answers invokes with a scripted reply, or stays silent.

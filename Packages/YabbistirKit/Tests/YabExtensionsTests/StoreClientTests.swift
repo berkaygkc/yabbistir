@@ -3,6 +3,7 @@ import Foundation
 import Testing
 import YabExtensionKit
 import YabPlatform
+import YabTestSupport
 @testable import YabExtensions
 
 /// A URLProtocol that answers from a table keyed by host, so tests running in parallel never see each other's requests.
@@ -61,7 +62,7 @@ final class MockStoreProtocol: URLProtocol, @unchecked Sendable {
     let user = RegistryFixture.temporary("Extensions")
     let data = RegistryFixture.temporary("ExtensionData")
     let cache = RegistryFixture.temporary("Store")
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-store-\(UUID().uuidString)")!)
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-store"))
 
     var catalogURL: URL { URL(string: "https://\(host)/v1/catalog.json")! }
     var requestCount: Int { MockStoreProtocol.requests(host: host).count }

@@ -2,12 +2,13 @@ import AppKit
 import SwiftUI
 import Testing
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// The first-run language picker: one menu button, the whole tile, reading the current language in its own name. Its
 /// menu lists the nine names with a check on the current one; choosing one there sets (and keeps) the app's language.
 @MainActor @Suite struct LanguagePickerTests {
-    func store(_ defaults: UserDefaults = UserDefaults(suiteName: "yab-picker-\(UUID().uuidString)")!) -> LanguageStore {
+    func store(_ defaults: UserDefaults = TestScratch.defaults("yab-picker")) -> LanguageStore {
         LanguageStore(defaults: defaults, preferredLanguages: ["en"])
     }
 
@@ -53,7 +54,7 @@ import YabLocalization
     /// Opened as VoiceOver opens it, the picker's menu lists the nine names, English checked. Choosing "Deutsch" there
     /// turns the app to German, keeps it, and the tile reads it.
     @Test func choosingDeutschInTheMenuSetsIt() throws {
-        let defaults = UserDefaults(suiteName: "yab-picker-\(UUID().uuidString)")!
+        let defaults = TestScratch.defaults("yab-picker")
         let store = store(defaults)
         let (window, host) = host(store)
 

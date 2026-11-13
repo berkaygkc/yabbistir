@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabPasteboard
+import YabTestSupport
 @testable import YabCore
 @testable import YabUI
 
@@ -8,14 +9,14 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 private let day: TimeInterval = 86_400
 
 @MainActor @Suite struct HistorySettingsModelTests {
-    let preferences = Preferences(defaults: UserDefaults(suiteName: "yab-prefs-\(UUID().uuidString)")!)
+    let preferences = Preferences(defaults: TestScratch.defaults("yab-prefs"))
     let library: Library
     let model: HistorySettingsModel
     let itemID: Int64
 
     /// One item last used 40 days ago, under a one-year policy.
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("eski not".utf8))]],
                                 source: nil, device: .local, capturedAt: now.addingTimeInterval(-40 * day))
         itemID = try #require(try store.ingest(clip)).item.id!

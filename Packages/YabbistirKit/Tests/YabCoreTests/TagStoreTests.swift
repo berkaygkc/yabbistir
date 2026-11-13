@@ -1,13 +1,14 @@
 import Foundation
 import GRDB
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @Suite struct TagStoreTests {
     let store: ItemStore
 
     init() throws {
-        store = try ItemStore.temporary()
+        store = try ItemStore(directory: TestScratch.url("items"))
     }
 
     func ingest(_ text: String) throws -> Int64 {

@@ -4,6 +4,7 @@ import YabCore
 import YabImport
 import YabImportTestSupport
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 @MainActor
@@ -16,16 +17,16 @@ private final class Counter {
 @MainActor
 private func makeModel(location: PasteLibraryLocation?, counter: Counter = Counter(), language: AppLanguage = .english,
                        store: ItemStore? = nil) throws -> ImportModel {
-    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-import-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+    let languages = LanguageStore(defaults: TestScratch.defaults("yab-import"), preferredLanguages: ["en"])
     languages.language = language
     return ImportModel(
-        store: try store ?? ItemStore.temporary(), reload: { counter.reloads += 1 }, ignoredApps: { [] },
+        store: try store ?? ItemStore(directory: TestScratch.url("items")), reload: { counter.reloads += 1 }, ignoredApps: { [] },
         locate: { location }, otherAppRunning: { counter.running },
         quitOtherApp: { counter.quits += 1; counter.running = false }, language: languages)
 }
 
 private func syntheticLocation() throws -> PasteLibraryLocation {
-    let folder = FileManager.default.temporaryDirectory.appendingPathComponent("imp-ui-\(UUID())", isDirectory: true)
+    let folder = TestScratch.url("imp-ui")
     try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
     func text(_ s: String) -> SyntheticPasteLibrary.Payload { .plain([[("public.utf8-plain-text", s)]]) }
     try SyntheticPasteLibrary.make(in: folder, items: [
@@ -60,7 +61,7 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
 
     @Test func importRunsOffTheMainActorAndReloadsOnce() async throws {
         let counter = Counter()
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let model = try makeModel(location: try syntheticLocation(), counter: counter, store: store)
         await model.scan()
         model.start()
@@ -195,7 +196,7 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
 
     /// The other app held its library: once it has quit, the library is read again.
     @Test func quittingTheOtherAppAfterAFailureScansAgain() async throws {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("imp-ui-\(UUID())", isDirectory: true)
+        let folder = TestScratch.url("imp-ui")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let counter = Counter()
         let model = try makeModel(location: PasteLibraryLocation(folder: folder, vendor: nil), counter: counter)
@@ -264,7 +265,7 @@ private func board(_ id: Int64, _ count: Int) -> PasteBoard { PasteBoard(id: id,
     }
 
     @Test func aFailedOpenShowsFailed() async throws {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("imp-ui-\(UUID())", isDirectory: true)
+        let folder = TestScratch.url("imp-ui")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let model = try makeModel(location: PasteLibraryLocation(folder: folder, vendor: nil))
         await model.scan()

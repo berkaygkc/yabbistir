@@ -7,6 +7,7 @@ import YabCore
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 private func png(width: Int, height: Int) -> Data {
@@ -26,7 +27,7 @@ private func png(width: Int, height: Int) -> Data {
     let language = AppLanguage.turkish
 
     init() throws {
-        library = try Library(store: ItemStore.temporary())
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
     }
 
     private func ingest(_ text: String, device: DeviceKind = .local) throws -> Int64 {
@@ -74,7 +75,7 @@ private func png(width: Int, height: Int) -> Data {
     }
 
     @Test func imageFileShowsItsPicture() async throws {
-        let file = FileManager.default.temporaryDirectory.appendingPathComponent("yab-shot-\(UUID().uuidString).png")
+        let file = TestScratch.url("yab-shot", pathExtension: "png")
         try png(width: 1600, height: 1000).write(to: file)
         defer { try? FileManager.default.removeItem(at: file) }
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.fileURL, data: Data(file.absoluteString.utf8))]],
@@ -110,7 +111,7 @@ private func png(width: Int, height: Int) -> Data {
         let key = FakeSources.vault().id
         try library.syncSourceCategories([SourceCategorySeed(key: key, name: "Kasa")])
         let vault = try #require(try library.store.categories().first { $0.source == key })
-        let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-preview-source-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let languageStore = LanguageStore(defaults: TestScratch.defaults("yab-preview-source"), preferredLanguages: ["en"])
         languageStore.language = .turkish
         let sources = FakeSources()
         sources.descriptors = [FakeSources.vault()]

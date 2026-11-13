@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 
 @Suite struct ToolLocatorTests {
     static let ytdlp = ToolSpec(name: "yt-dlp", install: "brew install yt-dlp")
@@ -18,7 +19,7 @@ import YabExtensionKit
     }
 
     @Test func missingListsOnlyToolsNotFound() throws {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("yab-locate-\(UUID().uuidString)")
+        let folder = TestScratch.url("yab-locate")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: folder) }
         let ffmpeg = folder.appendingPathComponent("ffmpeg")
@@ -39,7 +40,7 @@ import YabExtensionKit
     }
 
     @Test func theFirstFolderThatHasTheToolWins() throws {
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-locate-\(UUID().uuidString)")
+        let root = TestScratch.url("yab-locate")
         defer { try? FileManager.default.removeItem(at: root) }
         let first = root.appendingPathComponent("first"), second = root.appendingPathComponent("second")
         for folder in [first, second] {

@@ -7,6 +7,7 @@ import YabExtensionKit
 import YabExtensions
 import YabLocalization
 import YabPlatform
+import YabTestSupport
 @testable import YabUI
 
 /// Answers store requests from a table keyed by host, so suites running side by side never see each other's requests.
@@ -95,9 +96,9 @@ final class StoreTabMockProtocol: URLProtocol, @unchecked Sendable {
 
     let host = "store-tab-\(UUID().uuidString.lowercased()).test"
     let key = Curve25519.Signing.PrivateKey()
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-store-tab-\(UUID().uuidString)")
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-store-tab-\(UUID().uuidString)")!)
-    let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "yab-store-tab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+    let root = TestScratch.url("yab-store-tab")
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-store-tab"))
+    let languageStore = LanguageStore(defaults: TestScratch.defaults("yab-store-tab-lang"), preferredLanguages: ["en"])
     let registry: ExtensionRegistry
 
     init(language: AppLanguage = .english) {

@@ -4,6 +4,7 @@ import Testing
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 @MainActor @Suite struct ExtensionsSettingsModelTests {
@@ -12,8 +13,8 @@ import YabLocalization
         .deletingLastPathComponent().deletingLastPathComponent()
         .appendingPathComponent("Extensions/BuiltinExtensions")
 
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-settings-\(UUID().uuidString)")
-    let defaults = UserDefaults(suiteName: "yab-settings-\(UUID().uuidString)")!
+    let root = TestScratch.url("yab-settings")
+    let defaults = TestScratch.defaults("yab-settings")
     let settings: ExtensionSettings
     let model: ExtensionsSettingsModel
 
@@ -25,7 +26,7 @@ import YabLocalization
     static func model(root: URL, settings: ExtensionSettings, toolLocator: ToolLocator = .standard) -> ExtensionsSettingsModel {
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-settings-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-settings-lang"), preferredLanguages: ["en"])
         language.language = .turkish
         return ExtensionsSettingsModel(registry: registry, settings: settings, language: language, logs: ExtensionLogBuffer(),
                                       toolLocator: toolLocator)
@@ -307,7 +308,7 @@ import YabLocalization
 
     /// An extension with a secret and a folder preference, on an in-memory Keychain.
     func secretModel(store: InMemorySecretStore = InMemorySecretStore()) throws -> ExtensionsSettingsModel {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-secret-ui-\(UUID().uuidString)")!, secrets: store)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-secret-ui"), secrets: store)
         let model = Self.model(root: root, settings: settings)
         let folder = try sampleFolder(id: "dev.example.keys")
         let manifestURL = folder.appendingPathComponent("manifest.json")

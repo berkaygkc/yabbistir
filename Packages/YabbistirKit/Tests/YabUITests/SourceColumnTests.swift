@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -30,7 +31,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
     /// History of two notes; three source categories (vault, notes, a gone one), all on select, so hidden at first.
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         for (text, minutes) in [("toplantı notu", 1.0), ("ornek.dev şifre sıfırlama", 5.0)] {
             _ = try store.ingest(CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(text.utf8))]],
                                               source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutes * 60)))
@@ -43,7 +44,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         vault = try #require(categories.first { $0.source == Self.vaultKey })
         notes = try #require(categories.first { $0.source == Self.notesKey })
         gone = try #require(categories.first { $0.source == Self.goneKey })
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-src"), preferredLanguages: ["en"])
         language.language = .turkish
         sources = FakeSources()
         sources.descriptors = [FakeSources.vault(), FakeSources.vault(extensionID: "dev.example.notlar", sourceID: "notes", title: "Notlar")]
@@ -192,7 +193,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
     /// A panel without sources (none wired) shows no source column.
     @Test func noSourcesNoSourceColumns() throws {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-src"), preferredLanguages: ["en"])
         let bare = PanelViewModel(library: library, language: language, now: { now })
         bare.reset()
         bare.toggleShown(vault.id!)

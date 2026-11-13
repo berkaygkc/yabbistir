@@ -2,6 +2,7 @@ import Foundation
 import Testing
 import YabLocalization
 import YabPlatform
+import YabTestSupport
 @testable import YabUI
 
 @MainActor
@@ -15,7 +16,7 @@ final class FakeProbe: PermissionProbing {
 @MainActor @Suite struct PermissionsModelTests {
     func make(_ probe: FakeProbe, item: FakeLoginItem = FakeLoginItem(),
               open: @escaping (URL) -> Bool = { _ in true }) -> PermissionsModel {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-lang"), preferredLanguages: ["en"])
         return PermissionsModel(probe: probe, loginItem: item, language: language, openURL: open)
     }
 

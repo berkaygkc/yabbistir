@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabCore
+import YabTestSupport
 @testable import YabUI
 
 @MainActor @Suite struct ShiftReturnTests {
@@ -28,7 +29,7 @@ import YabCore
     }
 
     @Test func pinsPersistPerKindAndCanBeRemoved() throws {
-        let suite = "yab-ui-\(UUID().uuidString)"
+        let suite = TestScratch.suiteName("yab-ui")
         let defaults = try #require(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
         let store = ShiftReturnDefaults(defaults: defaults)

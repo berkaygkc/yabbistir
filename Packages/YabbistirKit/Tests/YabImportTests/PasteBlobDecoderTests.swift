@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabCore
+import YabTestSupport
 @testable import YabImport
 import YabImportTestSupport
 
@@ -19,7 +20,7 @@ let expected = [[PasteboardRepresentation(type: "public.utf8-plain-text", data: 
     }
 
     @Test func externalReferenceReadsFile() throws {
-        let dir = FileManager.default.temporaryDirectory.appendingPathComponent("paste-ext-\(UUID())", isDirectory: true)
+        let dir = TestScratch.url("paste-ext")
         try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         let name = UUID().uuidString
         try lzfse(try pastePlist(sampleItems)).write(to: dir.appendingPathComponent(name))

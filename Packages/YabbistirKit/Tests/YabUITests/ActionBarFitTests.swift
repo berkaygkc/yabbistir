@@ -6,6 +6,7 @@ import YabCore
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// The footer laid out at one column's width, in every language: it never runs past the column. English and Turkish keep
@@ -16,7 +17,7 @@ import YabLocalization
     let fake = FakeCommands()
 
     init() throws {
-        store = try ItemStore.temporary()
+        store = try ItemStore(directory: TestScratch.url("items"))
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("SGVsbG8=".utf8))]],
                                 source: nil, device: .local, capturedAt: Date())
         item = try #require(try store.ingest(clip)).item.id!
@@ -25,7 +26,7 @@ import YabLocalization
 
     /// The item selected, with a transform, so the bar shows all three buttons.
     func bar(_ language: AppLanguage, inputMethod: Bool = false) throws -> ActionBarView {
-        let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-fit-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let languages = LanguageStore(defaults: TestScratch.defaults("yab-fit"), preferredLanguages: ["en"])
         languages.language = language
         let model = PanelViewModel(library: try Library(store: store), language: languages, extensions: fake, now: { Date() })
         model.reset()

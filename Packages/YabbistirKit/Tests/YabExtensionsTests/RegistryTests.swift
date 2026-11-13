@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensions
 
 /// Extension folders written straight into a root.
@@ -26,7 +27,7 @@ enum RegistryFixture {
     }
 
     static func temporary(_ name: String) -> URL {
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("yab-reg-\(UUID().uuidString)/\(name)")
+        let url = TestScratch.url("yab-reg").appendingPathComponent(name)
         try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         return url
     }
@@ -44,10 +45,16 @@ extension ExtensionRegistry {
     let builtIn = RegistryFixture.temporary("BuiltinExtensions")
     let user = RegistryFixture.temporary("Extensions")
     let data = RegistryFixture.temporary("ExtensionData")
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-ext-\(UUID().uuidString)")!)
+    let staging = TestScratch.url("yab-staging")
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-ext"))
 
     func registry() -> ExtensionRegistry {
-        ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings)
+        ExtensionRegistry(builtInRoot: builtIn, userRoot: user, dataRoot: data, settings: settings, stagingRoot: staging)
+    }
+
+    /// What installs left in the staging folder: an install cleans up after itself, whether it succeeds or not.
+    func leftInStaging() -> [String] {
+        (try? FileManager.default.contentsOfDirectory(atPath: staging.path)) ?? []
     }
 
     @Test func aCaptureRuleTagsWarningReachesTheDevelopmentLog() throws {
@@ -134,6 +141,21 @@ extension ExtensionRegistry {
         let registry = registry()
         #expect(try registry.install(archive: archive) == "dev.example.zip")
         #expect(registry.installed.contains { $0.id == "dev.example.zip" })
+        #expect(leftInStaging().isEmpty)
+    }
+
+    @Test func installingAFolderLeavesNothingInStaging() throws {
+        let source = try RegistryFixture.write(in: RegistryFixture.temporary("src"), id: "dev.example.tidy")
+        try registry().install(folder: source)
+        #expect(leftInStaging().isEmpty)
+    }
+
+    @Test func aRejectedFolderLeavesNothingInStaging() throws {
+        var manifest = RegistryFixture.manifest(id: "dev.example.rejected")
+        manifest["version"] = "one"
+        let source = try RegistryFixture.write(in: RegistryFixture.temporary("src"), id: "dev.example.rejected", manifest: manifest)
+        #expect(throws: RegistryError.self) { try registry().install(folder: source) }
+        #expect(leftInStaging().isEmpty)
     }
 
     @Test func aLinkedFolderReloadsWhenItChanges() async throws {

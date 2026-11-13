@@ -5,6 +5,7 @@ import YabImport
 import YabImportTestSupport
 import YabLocalization
 import YabPlatform
+import YabTestSupport
 @testable import YabUI
 
 @MainActor
@@ -24,7 +25,7 @@ private struct Rig {
 }
 
 private func library() throws -> PasteLibraryLocation {
-    let folder = FileManager.default.temporaryDirectory.appendingPathComponent("onb-\(UUID())", isDirectory: true)
+    let folder = TestScratch.url("onb")
     try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
     try SyntheticPasteLibrary.make(in: folder, items: [
         .init(externalID: "h1", createdAt: 100, timestamp: 110, payload: .plain([[("public.utf8-plain-text", "one")]])),
@@ -35,11 +36,11 @@ private func library() throws -> PasteLibraryLocation {
 @MainActor
 private func rig(withLibrary: Bool, loginStatus: LoginItemStatus = .disabled) async throws -> Rig {
     let location = withLibrary ? try library() : nil
-    let languages = LanguageStore(defaults: UserDefaults(suiteName: "yab-onb-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+    let languages = LanguageStore(defaults: TestScratch.defaults("yab-onb"), preferredLanguages: ["en"])
     let importer = ImportModel(
-        store: try ItemStore.temporary(), reload: {}, ignoredApps: { [] }, locate: { location },
+        store: try ItemStore(directory: TestScratch.url("items")), reload: {}, ignoredApps: { [] }, locate: { location },
         otherAppRunning: { false }, quitOtherApp: {}, language: languages)
-    let preferences = Preferences(defaults: UserDefaults(suiteName: "yab-onb-p-\(UUID().uuidString)")!)
+    let preferences = Preferences(defaults: TestScratch.defaults("yab-onb-p"))
     let login = FakeLoginItem(status: loginStatus)
     let probe = Probe()
     let model = OnboardingModel(

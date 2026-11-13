@@ -2,6 +2,7 @@ import AppKit
 import Foundation
 import SwiftUI
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -95,10 +96,10 @@ import YabLocalization
 @MainActor @Suite struct TransformListDrawingTests {
     let model: PanelViewModel
     let fake = FakeCommands()
-    let suite = UserDefaults(suiteName: "yab-xlist-\(UUID().uuidString)")!
+    let suite = TestScratch.defaults("yab-xlist")
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         // Rich text, so "Paste as plain text" leads, with a result of three full lines: the tallest a result gets.
         let text = String(repeating: "Perşembe toplantısında iade akışının demosu, ödeme ekranı ve bildirim metinleri. ", count: 12)
         let reps = [PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(text.utf8)),

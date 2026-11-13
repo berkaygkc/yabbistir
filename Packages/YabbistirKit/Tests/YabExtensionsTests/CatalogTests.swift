@@ -3,6 +3,7 @@ import Testing
 import YabCore
 import YabExtensionKit
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 /// The built-ins as built by `make extensions`.
@@ -14,7 +15,7 @@ enum BuiltinFolder {
 }
 
 @MainActor @Suite struct CatalogTests {
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-cat-\(UUID().uuidString)")!)
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-cat"))
     let registry: ExtensionRegistry
 
     init() {

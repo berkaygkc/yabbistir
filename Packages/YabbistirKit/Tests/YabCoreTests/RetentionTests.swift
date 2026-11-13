@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 private let day: TimeInterval = 86_400
@@ -8,28 +9,28 @@ private let day: TimeInterval = 86_400
     let now = t0
 
     @Test func usedWithinYearIsKept() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(textClip("eski ama kullanılmış", at: now.addingTimeInterval(-364 * day)))
         #expect(try store.purgeExpired(policy: .oneYear, now: now).isEmpty)
         #expect(try store.history(limit: 10).count == 1)
     }
 
     @Test func unusedForMoreThanYearIsPurged() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let result = try #require(try store.ingest(textClip("unutulmuş", at: now.addingTimeInterval(-366 * day))))
         #expect(try store.purgeExpired(policy: .oneYear, now: now) == [result.item.id!])
         #expect(try store.history(limit: 10).isEmpty)
     }
 
     @Test func recopyRenews() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(textClip("tekrar", at: now.addingTimeInterval(-400 * day)))
         _ = try store.ingest(textClip("tekrar", at: now.addingTimeInterval(-1 * day)))
         #expect(try store.purgeExpired(policy: .oneYear, now: now).isEmpty)
     }
 
     @Test func markUsedRenews() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let result = try #require(try store.ingest(textClip("yapıştırıldı", at: now.addingTimeInterval(-400 * day))))
         let usedAt = now.addingTimeInterval(-1 * day)
         try store.markUsed(result.item.id!, at: usedAt)
@@ -40,7 +41,7 @@ private let day: TimeInterval = 86_400
     }
 
     @Test func categorizedNeverPurged() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let result = try #require(try store.ingest(textClip("SELECT 1;", at: now.addingTimeInterval(-3 * 365 * day))))
         let category = try store.createCategory(name: "SQL", color: .slate)
         #expect(category.visibility == .onSelect)
@@ -49,13 +50,13 @@ private let day: TimeInterval = 86_400
     }
 
     @Test func unlimitedPurgesNothing() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(textClip("çok eski", at: now.addingTimeInterval(-10 * 365 * day)))
         #expect(try store.purgeExpired(policy: .unlimited, now: now).isEmpty)
     }
 
     @Test func purgeCollectsBlobs() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.png, data: randomData(100 * 1024))]],
                                 source: nil, device: .local, capturedAt: now.addingTimeInterval(-500 * day))
         _ = try store.ingest(clip)
@@ -64,7 +65,7 @@ private let day: TimeInterval = 86_400
     }
 
     @Test func countMatchesWhatPurgeDeletes() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(textClip("yeni", at: now.addingTimeInterval(-10 * day)))
         let old = try #require(try store.ingest(textClip("eski", at: now.addingTimeInterval(-40 * day))))
         let kept = try #require(try store.ingest(textClip("kategoride", at: now.addingTimeInterval(-40 * day))))

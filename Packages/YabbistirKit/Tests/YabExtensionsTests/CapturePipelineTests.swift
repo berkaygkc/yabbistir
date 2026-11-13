@@ -3,6 +3,7 @@ import Testing
 import YabCore
 import YabExtensionKit
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 /// Rules the test decides: `decide` answers each copy.
@@ -324,7 +325,7 @@ import YabPasteboard
 
     /// Category names match whatever their case and Turkish letters; extensions never make categories.
     @Test func aCategoryIsFoundWhateverItsCase() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         let work = try library.createCategory(name: "İş")
         let item = try #require(try library.store.ingest(Self.text("a"))?.item.id)
         let categories = LibraryCategories(library: library)
@@ -338,7 +339,7 @@ import YabPasteboard
 
     /// A source's category is the extension's: a rule naming it files into the person's namesake, or nowhere.
     @Test func aSourceCategoryIsNeverTheOneARuleFilesInto() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         _ = try library.store.syncSourceCategories([SourceCategorySeed(key: "dev.ornek/vault", name: "Kasa")])
         let categories = LibraryCategories(library: library)
         #expect(categories.categoryID(named: "kasa") == nil)

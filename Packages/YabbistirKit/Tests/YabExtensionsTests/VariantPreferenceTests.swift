@@ -4,6 +4,7 @@ import YabCore
 import YabExtensionKit
 import YabLocalization
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 /// A variant that names one of its extension's toggle preferences is offered only while that toggle is on, read from
@@ -11,7 +12,7 @@ import YabPasteboard
 @MainActor @Suite struct VariantPreferenceTests {
     static let id = "dev.example.send"
     let library: Library
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-variant-\(UUID().uuidString)")!)
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-variant"))
     let registry: ExtensionRegistry
     let service: ExtensionService
 
@@ -41,10 +42,10 @@ import YabPasteboard
     }
 
     init() throws {
-        library = try Library(store: ItemStore.temporary())
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-variant-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-variant-lang"), preferredLanguages: ["en"])
         language.language = .english
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)

@@ -5,6 +5,7 @@ import YabCore
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// Renders the panel to PNG for visual review. Off by default; run with
@@ -13,7 +14,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderPanel() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         let samples: [(String, String, Double, DeviceKind)] = [
             ("public.utf8-plain-text", "UPDATE users SET status = 'refunded' WHERE id = 4821;", 1, .local),
@@ -51,7 +52,7 @@ import YabLocalization
                                                     ("dark-search", .darkAqua, .turkish, "iade"),
                                                     ("dark-commands", .darkAqua, .turkish, "uu"),
                                                     ("light-transforms", .aqua, .turkish, "kod")] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap"), preferredLanguages: ["en"])
             languageStore.language = language
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -80,7 +81,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderFinderTarget() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         let link = try #require(try store.ingest(CapturedClip(
             items: [[PasteboardRepresentation(type: TypeIdentifiers.url, data: Data("https://www.video.example/watch?v=yab-142".utf8)),
@@ -128,7 +129,7 @@ import YabLocalization
                     + (fake.transformsByItem[link] ?? []).prefix(2)
                 fake.outputs["dev.yabbistir.base64/encode"] = .text("aHR0cHM6Ly93d3cudmlkZW8uZXhhbXBsZS93YXRjaD92PXlhYi0xNDI=")
             }
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-f-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-f"), preferredLanguages: ["en"])
             languageStore.language = language
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -155,7 +156,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderTransformPanel() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         let context = CGContext(data: nil, width: 1200, height: 760, bitsPerComponent: 8, bytesPerRow: 0,
                                 space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
@@ -197,7 +198,7 @@ import YabLocalization
         ]
         fake.outputs["dev.yabbistir.convert/image#jpeg"] = .image(data: png, uti: "public.jpeg", width: 1200, height: 760)
         for (name, id, query) in [("text", textID, ""), ("color", colorID, ""), ("image", imageID, ""), ("empty", textID, "zz")] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-x-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-x"), preferredLanguages: ["en"])
             languageStore.language = .turkish
             let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { now })
             model.reset()
@@ -223,7 +224,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSources() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
                                 ("Perşembe 14:00 — iade akışı demosu", 9), ("git rebase -i HEAD~3", 22), ("ops@ornek.dev", 1600)] {
@@ -249,7 +250,7 @@ import YabLocalization
             ("dark-locked-plain", .darkAqua, .turkish, .locked(message: "Kasa kilitli", command: nil), ""),
             ("dark-loading", .darkAqua, .turkish, .loading, ""),
         ] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-s-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-s"), preferredLanguages: ["en"])
             languageStore.language = language
             let sources = FakeSources()
             sources.descriptors = [FakeSources.vault()]
@@ -281,7 +282,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSourceActions() async throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
                                 ("Perşembe 14:00 — iade akışı demosu", 9), ("git rebase -i HEAD~3", 22)] {
@@ -318,7 +319,7 @@ import YabLocalization
         }
         for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
             func model(_ state: SourceCenter.State) -> PanelViewModel {
-                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-sa-\(UUID())")!, preferredLanguages: ["en"])
+                let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-sa"), preferredLanguages: ["en"])
                 languageStore.language = language
                 let sources = FakeSources()
                 sources.descriptors = [vaultDescriptor(language)]
@@ -376,7 +377,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSourceSurroundings() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let now = Date()
         var ids: [Int64] = []
         for (text, minutes) in [("UPDATE users SET status = 'refunded' WHERE id = 4821;", 1.0), ("https://ornek.dev/giris", 4),
@@ -438,7 +439,7 @@ import YabLocalization
             try? bitmap.representation(using: .png, properties: [:])?.write(to: dir.appendingPathComponent("source-around-\(name).png"))
         }
         for (suffix, language, dark) in [("dark", AppLanguage.turkish, true), ("light-en", .english, false)] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-around-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-around"), preferredLanguages: ["en"])
             languageStore.language = language
             let sources = FakeSources()
             sources.descriptors = [descriptor(language)]
@@ -486,7 +487,7 @@ import YabLocalization
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderFooter() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("SGVsbG8=".utf8))]],
                                 source: nil, device: .local, capturedAt: Date())
         let id = try #require(try store.ingest(clip)).item.id!
@@ -494,7 +495,7 @@ import YabLocalization
         fake.transformsByItem[id] = [FakeCommands.command("dev.yabbistir.base64/decode", title: "Base64", keywords: ["b64"])]
         for language in [AppLanguage.english, .german, .french, .japanese] {
             for inputMethod in [false, true] {
-                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-footer-\(UUID())")!, preferredLanguages: ["en"])
+                let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-footer"), preferredLanguages: ["en"])
                 languageStore.language = language
                 let model = PanelViewModel(library: try Library(store: store), language: languageStore, extensions: fake, now: { Date() })
                 model.reset()

@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabExtensionKit
 
 /// The store's validator (a separate repository) and this one must agree on every manifest. The corpus under
@@ -16,7 +17,7 @@ struct ManifestParityTests {
 
     /// Writes the fixture's folder under a fresh temporary directory, as the store's tools do.
     static func materialize(_ fixture: [String: Any]) throws -> URL {
-        let parent = FileManager.default.temporaryDirectory.appendingPathComponent("yab-parity-\(UUID().uuidString)")
+        let parent = TestScratch.url("yab-parity")
         let folder = parent.appendingPathComponent(fixture["folder"] as? String ?? "dev.example.sample")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         if let text = fixture["manifestText"] as? String {

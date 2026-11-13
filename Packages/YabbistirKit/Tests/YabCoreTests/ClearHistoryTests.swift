@@ -1,10 +1,11 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @MainActor @Suite struct ClearHistoryTests {
     @Test func clearHistoryReturnsTheDeletedIDs() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         let cat = try library.createCategory(name: "Kod")
         var ids: [Int64] = []
         for text in ["bir", "iki", "üç"] {
@@ -28,7 +29,7 @@ import Testing
     }
 
     @Test func clearingWhenEveryItemIsCategorizedHidesThemAll() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         let cat = try library.createCategory(name: "Kod")
         var ids: [Int64] = []
         for text in ["bir", "iki"] {

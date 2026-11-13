@@ -4,6 +4,7 @@ import YabCore
 import YabExtensionKit
 import YabLocalization
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 /// A synthetic extension with one source, "vault", in English and Turkish: a sensitive one has a secret action
@@ -89,12 +90,12 @@ final class HeldTransport: HostTransport, @unchecked Sendable {
     let library: Library
     let builtIn = RegistryFixture.temporary("BuiltinExtensions")
     let user = RegistryFixture.temporary("Extensions")
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-src-\(UUID().uuidString)")!)
-    let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-src"))
+    let language = LanguageStore(defaults: TestScratch.defaults("yab-src-lang"), preferredLanguages: ["en"])
     static let key = "dev.example.vault/vault"
 
     init() throws {
-        library = try Library(store: ItemStore.temporary())
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         language.language = .turkish
     }
 

@@ -3,6 +3,7 @@ import SwiftUI
 import Testing
 import YabCore
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// Renders Settings panes to PNG for visual review. Off by default; run with
@@ -10,7 +11,7 @@ import YabLocalization
 @MainActor @Suite struct SettingsSnapshot {
     static let dir = ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]
     static let turkish: LanguageStore = {
-        let store = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-\(UUID())")!, preferredLanguages: ["en"])
+        let store = LanguageStore(defaults: TestScratch.defaults("snap-settings"), preferredLanguages: ["en"])
         store.language = .turkish
         return store
     }()
@@ -37,7 +38,7 @@ import YabLocalization
 
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderCategories() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = CapturedClip(items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data("SELECT 1".utf8))]],
                                 source: nil, device: .local, capturedAt: Date())
         let itemID = try #require(try store.ingest(clip)).item.id!
@@ -46,7 +47,7 @@ import YabLocalization
         let library = try Library(store: store)
         try library.syncSourceCategories([SourceCategorySeed(key: "dev.example.kasa/vault", name: "Kasa")])
         for (name, count) in [("categories-2", 2), ("categories-1", 1), ("categories-0", 0), ("categories-10", 10)] {
-            let rowStore = try ItemStore.temporary()
+            let rowStore = try ItemStore(directory: TestScratch.url("items"))
             let rowLibrary = try Library(store: rowStore)
             if count >= 1 {
                 try rowLibrary.syncSourceCategories([SourceCategorySeed(key: "dev.example.kasa/vault", name: "Kasa")])

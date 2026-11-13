@@ -34,17 +34,19 @@ let package = Package(
         .target(name: "YabImport", dependencies: ["YabCore", "YabPasteboard", .product(name: "GRDB", package: "GRDB.swift")]),
         // Test-only helpers (synthetic libraries, payload builders); deliberately not part of any product.
         .target(name: "YabImportTestSupport", dependencies: ["YabImport", "YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
-        .testTarget(name: "YabCoreTests", dependencies: ["YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
+        // Test-only: paths and defaults suites that are removed when the test process exits.
+        .target(name: "YabTestSupport"),
+        .testTarget(name: "YabCoreTests", dependencies: ["YabTestSupport", "YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
         .testTarget(name: "YabPasteboardTests", dependencies: ["YabPasteboard"]),
         .testTarget(name: "YabPlatformTests", dependencies: ["YabPlatform", .product(name: "KeyboardShortcuts", package: "KeyboardShortcuts")]),
-        .testTarget(name: "YabLocalizationTests", dependencies: ["YabLocalization"]),
-        .testTarget(name: "YabUITests", dependencies: ["YabUI", "YabStack", "YabPasteboard", "YabExtensions", "YabExtensionKit", "YabPlatform", "YabImport", "YabImportTestSupport",
+        .testTarget(name: "YabLocalizationTests", dependencies: ["YabTestSupport", "YabLocalization"]),
+        .testTarget(name: "YabUITests", dependencies: ["YabTestSupport", "YabUI", "YabStack", "YabPasteboard", "YabExtensions", "YabExtensionKit", "YabPlatform", "YabImport", "YabImportTestSupport",
                                                 .product(name: "GRDB", package: "GRDB.swift")]),
-        .testTarget(name: "YabImportTests", dependencies: ["YabImport", "YabImportTestSupport", "YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
-        .testTarget(name: "YabStackTests", dependencies: ["YabStack"]),
-        .testTarget(name: "YabExtensionKitTests", dependencies: ["YabExtensionKit"]),
-        .testTarget(name: "YabExtensionRuntimeTests", dependencies: ["YabExtensionRuntime"]),
-        .testTarget(name: "YabExtensionsTests", dependencies: ["YabExtensions", "YabPlatform", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization",
+        .testTarget(name: "YabImportTests", dependencies: ["YabTestSupport", "YabImport", "YabImportTestSupport", "YabCore", .product(name: "GRDB", package: "GRDB.swift")]),
+        .testTarget(name: "YabStackTests", dependencies: ["YabTestSupport", "YabStack"]),
+        .testTarget(name: "YabExtensionKitTests", dependencies: ["YabTestSupport", "YabExtensionKit"]),
+        .testTarget(name: "YabExtensionRuntimeTests", dependencies: ["YabTestSupport", "YabExtensionRuntime"]),
+        .testTarget(name: "YabExtensionsTests", dependencies: ["YabTestSupport", "YabExtensions", "YabPlatform", "YabExtensionRuntime", "YabCore", "YabPasteboard", "YabLocalization",
                                                         .product(name: "GRDB", package: "GRDB.swift")]),
     ]
 )

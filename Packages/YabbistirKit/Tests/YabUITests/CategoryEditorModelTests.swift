@@ -4,6 +4,7 @@ import YabCore
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
@@ -22,7 +23,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
     let links: ClipCategory
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         var ids: [Int64] = []
         for (offset, text) in ["SELECT 1", "UPDATE t", "https://example.com"].enumerated() {
             ids.append(try #require(try store.ingest(clip(text, minutesAgo: Double(offset)))).item.id!)
@@ -33,7 +34,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         try store.add(itemID: ids[1], toCategory: code.id!)
         try store.add(itemID: ids[2], toCategory: links.id!)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-editor"), preferredLanguages: ["en"])
         language.language = .turkish
         model = PanelViewModel(library: library, language: language, now: { now })
         library.onChange = { [model] in model.refresh() }
@@ -102,7 +103,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
     /// The vault's category, made by its extension, after the person's two; the editor reads its rows from `sources`.
     private func addVault(sources: FakeSources? = nil) throws -> (CategoryEditorModel, CategoryEditorModel.Row) {
         try library.syncSourceCategories([SourceCategorySeed(key: Self.vaultKey, name: "Kasa")])
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-editor-src-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-editor-src"), preferredLanguages: ["en"])
         language.language = .turkish
         let editor = CategoryEditorModel(library: library, language: language, sources: sources)
         return (editor, try #require(editor.rows.first { $0.isSource }))
