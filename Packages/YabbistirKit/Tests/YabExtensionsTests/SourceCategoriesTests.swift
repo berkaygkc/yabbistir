@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabCore
+import YabTestSupport
 @testable import YabExtensions
 
 @MainActor @Suite struct SourceCategoriesTests {
@@ -10,7 +11,7 @@ import YabCore
     }
 
     @Test func syncFollowsTheUsableSources() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         var changes = 0
         library.onChange = { changes += 1 }
         let mine = try library.createCategory(name: "İş")

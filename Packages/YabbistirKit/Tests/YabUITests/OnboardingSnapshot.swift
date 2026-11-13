@@ -4,6 +4,7 @@ import Testing
 import YabCore
 import YabImport
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// Renders the first-run steps to PNG for visual review, from synthetic data (no library is read). Off by default;
@@ -29,12 +30,12 @@ import YabLocalization
 
     private func make(_ state: ImportModel.State, language: AppLanguage = .turkish, trusted: Bool = false,
                       running: Bool = false) throws -> (OnboardingModel, ImportModel) {
-        let languages = LanguageStore(defaults: UserDefaults(suiteName: "snap-onb-\(UUID())")!, preferredLanguages: ["en"])
+        let languages = LanguageStore(defaults: TestScratch.defaults("snap-onb"), preferredLanguages: ["en"])
         languages.language = language
         let flags = Flags()
         flags.trusted = trusted
         flags.running = running
-        let importer = ImportModel(store: try ItemStore.temporary(), reload: {}, ignoredApps: { [] }, locate: { nil },
+        let importer = ImportModel(store: try ItemStore(directory: TestScratch.url("items")), reload: {}, ignoredApps: { [] }, locate: { nil },
                                    otherAppRunning: { flags.running }, quitOtherApp: {}, language: languages)
         importer.state = state
         // As a scan leaves it: everything chosen.
@@ -42,7 +43,7 @@ import YabLocalization
             importer.selection = PasteSelection(history: true, boards: Set(summary.boards.map(\.id)))
         }
         let model = OnboardingModel(
-            importer: importer, preferences: Preferences(defaults: UserDefaults(suiteName: "snap-onb-p-\(UUID())")!),
+            importer: importer, preferences: Preferences(defaults: TestScratch.defaults("snap-onb-p")),
             language: languages, loginItem: FakeLoginItem(), isTrusted: { flags.trusted }, promptAccessibility: {},
             onFinish: {})
         return (model, importer)

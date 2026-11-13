@@ -83,6 +83,8 @@ public final class ExtensionRegistry {
     @ObservationIgnored public let userRoot: URL
     @ObservationIgnored public let dataRoot: URL
     @ObservationIgnored public let settings: ExtensionSettings
+    /// Where an install is unpacked and checked before it moves into `userRoot`.
+    @ObservationIgnored private let stagingRoot: URL
     @ObservationIgnored private var watcher: FolderWatcher?
     /// Hears each warning of a loadable manifest as (extension id, line), once for each version of the extension;
     /// the app writes it to the Development log. Warnings never enter `InstalledExtension.issues`: those keep an
@@ -93,12 +95,14 @@ public final class ExtensionRegistry {
     @ObservationIgnored private var loggedWarnings: Set<[String]> = []
 
     public init(builtInRoot: URL, userRoot: URL, dataRoot: URL, settings: ExtensionSettings,
+                stagingRoot: URL = FileManager.default.temporaryDirectory,
                 onWarning: (@MainActor (String, String) -> Void)? = nil) {
         self.onWarning = onWarning
         self.builtInRoot = builtInRoot
         self.userRoot = userRoot
         self.dataRoot = dataRoot
         self.settings = settings
+        self.stagingRoot = stagingRoot
         try? FileManager.default.createDirectory(at: userRoot, withIntermediateDirectories: true)
         reload()
     }
@@ -121,7 +125,9 @@ public final class ExtensionRegistry {
     /// Validates a folder and copies it in, replacing an installed copy with the same id.
     @discardableResult
     public func install(folder: URL) throws(RegistryError) -> String {
-        let staged = try stage(folder)
+        let scratch = temporaryFolder()
+        defer { try? FileManager.default.removeItem(at: scratch) }
+        let staged = try stage(folder, in: scratch)
         let destination = userRoot.appendingPathComponent(staged.lastPathComponent)
         guard isDirectChild(destination, of: userRoot) else { throw .failed("\(staged.lastPathComponent) is not a usable extension id") }
         do {
@@ -140,6 +146,7 @@ public final class ExtensionRegistry {
     @discardableResult
     public func install(archive: URL) throws(RegistryError) -> String {
         let unpacked = temporaryFolder()
+        defer { try? FileManager.default.removeItem(at: unpacked) }
         let ditto = Process()
         ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
         ditto.arguments = ["-x", "-k", archive.path, unpacked.path]
@@ -246,9 +253,9 @@ public final class ExtensionRegistry {
 
     /// A copy of the folder named after its id, checked before anything is installed: the source
     /// folder may carry any name.
-    private func stage(_ folder: URL) throws(RegistryError) -> URL {
+    private func stage(_ folder: URL, in scratch: URL) throws(RegistryError) -> URL {
         let id = try manifestID(in: folder)
-        let staged = temporaryFolder().appendingPathComponent(id)
+        let staged = scratch.appendingPathComponent(id)
         do {
             try FileManager.default.copyItem(at: folder.resolvingSymlinksInPath(), to: staged)
         } catch {
@@ -272,7 +279,7 @@ public final class ExtensionRegistry {
     }
 
     private func temporaryFolder() -> URL {
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("yabbistir-install-\(UUID().uuidString)")
+        let url = stagingRoot.appendingPathComponent("yabbistir-install-\(UUID().uuidString)")
         try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         return url
     }

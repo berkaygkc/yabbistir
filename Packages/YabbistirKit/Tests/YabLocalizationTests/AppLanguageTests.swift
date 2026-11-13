@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabLocalization
 
 @Suite struct AppLanguageTests {
@@ -63,7 +64,7 @@ import Testing
 
 @MainActor @Suite struct LanguageStoreFirstLaunchTests {
     func freshDefaults() -> UserDefaults {
-        UserDefaults(suiteName: "yab-lang-first-\(UUID().uuidString)")!
+        TestScratch.defaults("yab-lang-first")
     }
 
     /// A fresh install speaks the system's language from its first window, and stores it.

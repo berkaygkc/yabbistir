@@ -1,6 +1,7 @@
 import Foundation
 import os
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @MainActor private final class IngestedLog {
@@ -11,7 +12,7 @@ import Testing
 
 @MainActor @Suite struct IngestQueueTests {
     @Test func ingestsOffMainAndReportsInCaptureOrderOnMain() async throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let ranOnMain = OSAllocatedUnfairLock(initialState: [Bool]())
         let log = IngestedLog()
         let queue = IngestQueue(ingest: { clip in
@@ -32,7 +33,7 @@ import Testing
 
     /// A clip's own completion hears its stored item's id after `onIngested` (nil when nothing was kept).
     @Test func eachClipHearsItsStoredID() async throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let log = IngestedLog()
         let queue = IngestQueue(store: store) { item in log.previews.append(item.previewText) }
         queue.submit(textClip("bir")) { id in log.heard.append((id, log.previews.count)) }

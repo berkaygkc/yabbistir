@@ -2,13 +2,14 @@ import Foundation
 import Testing
 import YabCore
 import YabImportTestSupport
+import YabTestSupport
 @testable import YabImport
 
 private typealias L = SyntheticPasteLibrary
 private let now = Date(timeIntervalSinceReferenceDate: 800_000_000)
 
 private func tempFolder() throws -> URL {
-    let url = FileManager.default.temporaryDirectory.appendingPathComponent("imp-\(UUID())", isDirectory: true)
+    let url = TestScratch.url("imp")
     try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
     return url
 }
@@ -40,7 +41,7 @@ private func sample() throws -> PasteLibrary {
 
 @Suite struct PasteImporterTests {
     @Test func importsHistoryAndBoards() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try sample()
         defer { library.close() }
         let report = try importer(store).run(library, selection: everything) { _ in }
@@ -58,7 +59,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func importingAgainAddsNothing() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try sample()
         defer { library.close() }
         _ = try importer(store).run(library, selection: everything) { _ in }
@@ -67,7 +68,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func aBoardJoinsTheSameNamedCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let existing = try store.createCategory(name: "LINKS", color: .sage, visibility: .always)
         let library = try sample()
         defer { library.close() }
@@ -78,7 +79,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func ignoredAppsAndConcealedItemsStayOut() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "ok", createdAt: 1, timestamp: 2, app: 1, payload: .plain(text("fine"))),
             L.Item(externalID: "ignored", createdAt: 1, timestamp: 3, app: 2, payload: .plain(text("from a vault"))),
@@ -92,7 +93,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func anUndecodableItemFallsBackToItsTitle() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "titled", title: "Meeting notes", createdAt: 1, timestamp: 2, payload: .garbage),
             L.Item(externalID: "untitled", createdAt: 1, timestamp: 3, payload: .garbage),
@@ -105,7 +106,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func onlySelectedPartsComeIn() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try sample()
         defer { library.close() }
         let report = try importer(store).run(library, selection: PasteSelection(history: false, boards: [7])) { _ in }
@@ -114,7 +115,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func aLargeImportReportsProgressSparsely() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open((0..<600).map {
             L.Item(externalID: "n\($0)", createdAt: Double($0), timestamp: Double($0), payload: .plain(text("item \($0)")))
         })
@@ -131,7 +132,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func theTimeTriggerFiresWhenTheIntervalIsTiny() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open((0..<20).map {
             L.Item(externalID: "n\($0)", createdAt: Double($0), timestamp: Double($0), payload: .plain(text("item \($0)")))
         })
@@ -143,7 +144,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func anEmptyBoardNameBecomesPinboardN() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "b", createdAt: 1, timestamp: 1, board: 7, order: 1, payload: .plain(text("pinned"))),
         ], boards: [.init(pk: 7, name: "   ")])
@@ -156,7 +157,7 @@ private func sample() throws -> PasteLibrary {
     /// A pinboard item that cannot be filed (its category went away mid-run) is not imported at all: it counts as
     /// failed, leaves nothing in History, the other boards complete, and the next run brings it.
     @Test func aBoardItemThatCannotBeFiledComesInNextTime() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "h", createdAt: 1, timestamp: 1, payload: .plain(text("history"))),
             L.Item(externalID: "a", createdAt: 1, timestamp: 2, board: 7, order: 1, payload: .plain(text("board seven"))),
@@ -182,7 +183,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func aMergedBoardItemStaysInHistoryAndJoinsTheCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let existing = try #require(try store.ingest(CapturedClip(
             items: [[PasteboardRepresentation(type: "public.utf8-plain-text", data: Data("already here".utf8))]],
             source: nil, device: .local, capturedAt: now)))
@@ -198,7 +199,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func aSameNamedSourceCategoryIsNotJoined() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "ext/src", name: "Links")])
         let library = try sample()
         defer { library.close() }
@@ -211,7 +212,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func categoriesCreatedCountsOnlyNewOnes() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.createCategory(name: "Links", color: .sage)
         let library = try open([
             L.Item(externalID: "a", createdAt: 1, timestamp: 1, board: 7, order: 1, payload: .plain(text("one"))),
@@ -224,7 +225,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func aConcealedTypeOnALaterItemSkipsTheWholeItem() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "s", createdAt: 1, timestamp: 1, payload: .plain([
                 [("public.utf8-plain-text", "first")], [("org.nspasteboard.TransientType", "")]])),
@@ -238,7 +239,7 @@ private func sample() throws -> PasteLibrary {
     /// A run that stops partway through the pinboards (a quit, a crash, an unreadable page) loses none of them: the
     /// next run files every item, in order, and keeps the pinned-only ones out of History.
     @Test func anInterruptedRunStillFilesEveryPinboardItemNextTime() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "h", createdAt: 1, timestamp: 1, payload: .plain(text("history"))),
             L.Item(externalID: "a1", createdAt: 1, timestamp: 2, board: 7, order: 1, payload: .plain(text("first"))),
@@ -269,7 +270,7 @@ private func sample() throws -> PasteLibrary {
     /// A pinboard whose items all stay out (an ignored app, or imported before and deleted since) leaves no empty
     /// category behind.
     @Test func aPinboardWithNothingNewLeavesNoEmptyCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "a", createdAt: 1, timestamp: 1, board: 7, order: 1, app: 1, payload: .plain(text("from a vault"))),
             L.Item(externalID: "b", createdAt: 1, timestamp: 2, board: 8, order: 1, payload: .plain(text("kept"))),
@@ -291,7 +292,7 @@ private func sample() throws -> PasteLibrary {
 
     /// Rows with a raw-byte identifier, no identifier at all, or no creation date all come in, each as its own item.
     @Test func oddRowsImportAsDistinctItems() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let bytes = Data([0xFF, 0xFE, 0x00, 0x80, 0xC3, 0x28, 0xA0, 0xA1, 0xE2, 0x28, 0xA1, 0xF0, 0x28, 0x8C, 0xBC, 0x9F])
         let library = try open([
             L.Item(externalID: nil, identifierBytes: bytes, createdAt: 1, timestamp: 2, payload: .plain(text("raw bytes"))),
@@ -311,7 +312,7 @@ private func sample() throws -> PasteLibrary {
     }
 
     @Test func kindsAreCounted() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try open([
             L.Item(externalID: "a", createdAt: 1, timestamp: 1, payload: .plain(text("just words"))),
             L.Item(externalID: "b", createdAt: 1, timestamp: 2, payload: .plain(text("more words"))),

@@ -1,5 +1,6 @@
 import AppKit
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabLocalization
 import YabPasteboard
@@ -20,11 +21,11 @@ private func clip(_ s: String, minutesAgo: Double, rtf: Bool = false) -> Capture
     let richID: Int64
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(clip("你好世界", minutesAgo: 1))
         richID = try #require(try store.ingest(clip("haftalık rapor", minutesAgo: 2, rtf: true))).item.id!
         _ = try store.ingest(clip("eski not", minutesAgo: 3))
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-ui"), preferredLanguages: ["en"])
         model = PanelViewModel(library: try Library(store: store), language: language, now: { now })
         model.reset()
     }

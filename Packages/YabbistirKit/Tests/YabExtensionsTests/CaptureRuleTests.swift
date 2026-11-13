@@ -3,6 +3,7 @@ import Testing
 import YabCore
 import YabExtensionKit
 import YabLocalization
+import YabTestSupport
 @testable import YabExtensions
 
 /// Extensions with capture rules, in a real host over a pipe, behind the service and the rule runner.
@@ -25,7 +26,7 @@ import YabLocalization
         var lines: [String] = []
     }
 
-    let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-rules-\(UUID().uuidString)")!)
+    let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-rules"))
     let transport = RecordingTransport()
     let logs = LogBox()
     let registry: ExtensionRegistry
@@ -52,8 +53,8 @@ import YabLocalization
                                      dataRoot: RegistryFixture.temporary("ExtensionData"), settings: settings)
         let logs = logs
         let client = ExtensionHostClient(transport: host ?? transport) { _, line in logs.lines.append(line) }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-rules-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
-        service = ExtensionService(registry: registry, client: client, library: try Library(store: ItemStore.temporary()),
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-rules-lang"), preferredLanguages: ["en"])
+        service = ExtensionService(registry: registry, client: client, library: try Library(store: ItemStore(directory: TestScratch.url("items"))),
                                    settings: settings, language: language)
         runner = if let timeout {
             CaptureRuleRunner(service: service, registry: registry, settings: settings, timeout: timeout)

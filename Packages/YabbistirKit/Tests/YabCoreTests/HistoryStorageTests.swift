@@ -1,10 +1,11 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @Suite struct HistoryStorageTests {
     @Test func countsOnlyHistoryFiles() throws {
-        let dir = FileManager.default.temporaryDirectory.appendingPathComponent("yab-storage-\(UUID().uuidString)")
+        let dir = TestScratch.url("yab-storage")
         defer { try? FileManager.default.removeItem(at: dir) }
         let fm = FileManager.default
         try fm.createDirectory(at: dir.appendingPathComponent("Blobs"), withIntermediateDirectories: true)
@@ -18,7 +19,7 @@ import Testing
     }
 
     @Test func compactingAfterClearingGivesTheSpaceBack() throws {
-        let dir = FileManager.default.temporaryDirectory.appendingPathComponent("yab-compact-\(UUID().uuidString)")
+        let dir = TestScratch.url("yab-compact")
         defer { try? FileManager.default.removeItem(at: dir) }
         let store = try ItemStore(directory: dir)
         for index in 0..<150 {

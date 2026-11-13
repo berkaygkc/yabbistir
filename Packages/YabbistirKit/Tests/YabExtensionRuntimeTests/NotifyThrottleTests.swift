@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 /// A clock the test moves by hand.
@@ -28,7 +29,7 @@ final class ManualClock: @unchecked Sendable {
                 if message.event == "call" { sent.append("\(message.method ?? "")|\(message.params?["message"]?.stringValue ?? "")") }
             }
             runtime = try ExtensionRuntime(folder: folder, manifest: manifest, localization: localization,
-                                           dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)"),
+                                           dataFolder: TestScratch.url("yab-data"),
                                            hostCalls: channel, clock: { clock.now }) { logs.append($0) }
         }
 

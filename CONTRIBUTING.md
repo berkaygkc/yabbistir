@@ -18,6 +18,8 @@ A dev build is named "yabbistir Dev" and has its own bundle ID (`dev.yabbistir.a
 
 Tests that open a window on screen only run with `TEST_RUNNER_YAB_ONSCREEN=1`.
 
+Tests take their temporary folders, files and defaults suites from `TestScratch` (in `YabTestSupport`), never from `FileManager.default.temporaryDirectory` or `UserDefaults(suiteName:)` directly. Everything `TestScratch` hands out is removed when the test run ends; a run that crashed is cleaned up by the next one.
+
 ## Extensions
 
 Third-party extensions live in their own repository, `yabbistir-extensions` (coming soon). Extension authors don't need to build the app; they build against the extension API and drop the result into a folder.

@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 private let day: TimeInterval = 86_400
@@ -14,7 +15,7 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
     let now = t0
 
     @Test func importedOldItemsSurviveTheNextPurge() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let old = now.addingTimeInterval(-730 * day)
         let outcome = try store.importClip(importedClip("eski kayıt", first: old, last: old), from: "other", usedAt: now)
         guard case .added(let id) = outcome else { Issue.record("expected added"); return }
@@ -26,7 +27,7 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
     }
 
     @Test func anExistingItemKeepsItsNewerDates() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let yesterday = now.addingTimeInterval(-day)
         let year = now.addingTimeInterval(-365 * day)
         let existing = try #require(try store.ingest(textClip("aynı içerik", at: yesterday)))
@@ -40,7 +41,7 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
 
     /// The merge keeps the existing representations, so a large one that came with the import is not kept on disk.
     @Test func aMergedImportLeavesNoStrayBlob() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try #require(try store.ingest(textClip("aynı içerik", at: now)))
         let large = Data(repeating: 0x3C, count: ItemStore.inlineLimit + 1)
         let clip = ImportedClip(
@@ -52,7 +53,7 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
     }
 
     @Test func theSameExternalIDIsImportedOnce() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = importedClip("bir kez", first: now, last: now)
         _ = try store.importClip(clip, from: "other", usedAt: now)
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .alreadyImported)
@@ -60,7 +61,7 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
     }
 
     @Test func aDeletedImportedItemStaysDeleted() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = importedClip("silinecek", first: now, last: now)
         guard case .added(let id) = try store.importClip(clip, from: "other", usedAt: now) else { Issue.record("expected added"); return }
         try store.delete(id)
@@ -69,14 +70,14 @@ private func importedClip(_ text: String, id: String = "ext-1", first: Date, las
     }
 
     @Test func unclassifiableContentIsRecordedAndNotRetried() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let clip = ImportedClip(items: [], source: nil, device: .local, firstCopiedAt: now, lastCopiedAt: now, externalID: "empty")
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .nothingToKeep)
         #expect(try store.importClip(clip, from: "other", usedAt: now) == .alreadyImported)
     }
 
     @MainActor @Test func reloadIndexNotifiesOnceAndKeepsTheExtensionOutputSetting() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         library.setHidesExtensionOutputs(true)
         var calls = 0
         library.onChange = { calls += 1 }

@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabLocalization
 
 @Suite struct L10nTests {
@@ -169,7 +170,7 @@ import Testing
 
 @MainActor @Suite struct LanguageStoreTests {
     func freshDefaults() -> UserDefaults {
-        UserDefaults(suiteName: "yabbistir-tests-\(UUID().uuidString)")!
+        TestScratch.defaults("yabbistir-tests")
     }
 
     @Test func defaultLanguageIsEnglish() {

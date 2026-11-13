@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 @Suite struct FilesAPITests {
@@ -49,7 +50,7 @@ import YabExtensionKit
     }
 
     @Test func aSymlinkOutOfTheWorkFolderIsRefused() async throws {
-        let outside = FileManager.default.temporaryDirectory.appendingPathComponent("yab-outside-\(UUID().uuidString).txt")
+        let outside = TestScratch.url("yab-outside", pathExtension: "txt")
         try "secret".write(to: outside, atomically: true, encoding: .utf8)
         defer { try? FileManager.default.removeItem(at: outside) }
         let js = """
@@ -88,7 +89,7 @@ import YabExtensionKit
     }
 
     @Test func readingIsLimitedToTheWorkFolderAndTheItemsFiles() async throws {
-        let own = FileManager.default.temporaryDirectory.appendingPathComponent("yab-own-\(UUID().uuidString).txt")
+        let own = TestScratch.url("yab-own", pathExtension: "txt")
         try "own".write(to: own, atomically: true, encoding: .utf8)
         defer { try? FileManager.default.removeItem(at: own) }
         let item = ExtensionItem(id: 1, kind: "file", files: [.init(path: own.path, name: own.lastPathComponent, size: 3, uti: "public.text")],

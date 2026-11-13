@@ -2,12 +2,13 @@ import Foundation
 import Testing
 import YabLocalization
 import YabPlatform
+import YabTestSupport
 @testable import YabUI
 
 @MainActor @Suite struct GeneralSettingsModelTests {
     func model(_ item: FakeLoginItem) -> GeneralSettingsModel {
-        let preferences = Preferences(defaults: UserDefaults(suiteName: "yab-prefs-\(UUID().uuidString)")!)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let preferences = Preferences(defaults: TestScratch.defaults("yab-prefs"))
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-lang"), preferredLanguages: ["en"])
         return GeneralSettingsModel(preferences: preferences, language: language, loginItem: item)
     }
 

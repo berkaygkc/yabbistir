@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -33,7 +34,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
 
     /// History of one note; the vault's column and a one-action source's, both shown, the vault's focused.
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.ingest(CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("toplantı notu".utf8))]],
                                           source: nil, device: .local, capturedAt: now.addingTimeInterval(-60)))
         library = try Library(store: store)
@@ -41,7 +42,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         let categories = try store.categories()
         vault = try #require(categories.first { $0.source == Self.vaultKey })
         pins = try #require(categories.first { $0.source == Self.pinKey })
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-src-act-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-src-act"), preferredLanguages: ["en"])
         language.language = .turkish
         sources = FakeSources()
         sources.descriptors = [FakeSources.vault(), Self.pinOnly]

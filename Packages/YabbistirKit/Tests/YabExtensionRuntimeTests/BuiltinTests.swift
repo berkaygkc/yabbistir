@@ -2,6 +2,7 @@ import Foundation
 import ImageIO
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 /// The built-in extensions as the app ships them: Extensions/BuiltinExtensions, built by `make extensions`.
@@ -17,7 +18,7 @@ enum Builtins {
             throw ExtensionError(.notFound, "\(id): \(ManifestValidator.validate(folder: folder).issues)")
         }
         return try ExtensionRuntime(folder: folder, manifest: manifest, localization: localization,
-                                    dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)")) { _ in }
+                                    dataFolder: TestScratch.url("yab-data")) { _ in }
     }
 }
 

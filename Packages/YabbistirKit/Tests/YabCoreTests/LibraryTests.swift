@@ -1,10 +1,11 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @MainActor @Suite struct LibraryTests {
     @Test func deletingFromHistoryUpdatesIndexAndNotifies() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         var changes = 0
         library.onChange = { changes += 1 }
         let item = try #require(try library.store.ingest(textClip("sil", at: t0))).item
@@ -15,7 +16,7 @@ import Testing
     }
 
     @Test func toggleAddsThenRemovesMembership() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         let cat = try library.createCategory(name: "Kod")
         let item = try #require(try library.store.ingest(textClip("x", at: t0))).item
         library.didIngest(item)
@@ -26,7 +27,7 @@ import Testing
     }
 
     @Test func richTextIsTextWithRTFOrHTML() throws {
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         func add(_ reps: [PasteboardRepresentation]) throws -> Int64 {
             let clip = CapturedClip(items: [reps], source: nil, device: .local, capturedAt: t0)
             let item = try #require(try library.store.ingest(clip)).item

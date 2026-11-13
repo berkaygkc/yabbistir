@@ -3,10 +3,11 @@ import Testing
 import YabCore
 import YabPasteboard
 import YabPlatform
+import YabTestSupport
 @testable import YabUI
 
 @MainActor @Suite struct PreferencesTests {
-    let defaults = UserDefaults(suiteName: "yab-prefs-\(UUID().uuidString)")!
+    let defaults = TestScratch.defaults("yab-prefs")
 
     @Test func defaultsMatchTheSpec() {
         let prefs = Preferences(defaults: defaults)

@@ -70,11 +70,6 @@ public final class ItemStore: Sendable {
         }
     }
 
-    public static func temporary() throws -> ItemStore {
-        try ItemStore(directory: FileManager.default.temporaryDirectory
-            .appendingPathComponent("yabbistir-tests-\(UUID().uuidString)", isDirectory: true))
-    }
-
     /// Inserts a new clip, or bumps the item that already holds the same content. The latest
     /// copy wins: its representations, preview and source replace the stored ones.
     /// Returns nil when the clip has nothing worth keeping.

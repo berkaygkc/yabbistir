@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 @Suite struct HostAPITests {
@@ -60,7 +61,7 @@ import YabExtensionKit
     }
 
     @Test func storageSurvivesAReload() async throws {
-        let data = FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)")
+        let data = TestScratch.url("yab-data")
         let writer = try RuntimeFixture.load(js: #"exports.actions = { a: { run() { yab.storage.set("k", { a: 1 }); return { text: "" }; } } };"#, dataFolder: data)
         _ = try await writer.invoke(.run, name: "a", item: nil, context: context())
         let reader = try RuntimeFixture.load(js: #"exports.actions = { a: { run: () => ({ text: String(yab.storage.get("k").a) + String(yab.storage.get("missing")) }) } };"#, dataFolder: data)

@@ -8,6 +8,7 @@ import YabLocalization
 import YabPasteboard
 import YabPlatform
 import YabStack
+import YabTestSupport
 @testable import YabUI
 
 /// Renders preview variants (synthetic content) to PNG for visual review. Off by default; run with
@@ -84,10 +85,10 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderEditor() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         for name in ["Kod parçaları", "Bağlantılar", "Toplantı notları"] { _ = try library.createCategory(name: name) }
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-editor-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-editor"), preferredLanguages: ["en"])
             languageStore.language = language
             let editor = CategoryEditorModel(library: library, language: languageStore)
             let host = NSHostingView(rootView: CategoryEditorView(model: editor) {}
@@ -109,7 +110,7 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderStack() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let library = try Library(store: ItemStore.temporary())
+        let library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         let samples: [(String, SourceApp?)] = [
             ("Perşembe 14:00 — iade akışı demosu", SourceApp(bundleID: "com.apple.TextEdit", name: "TextEdit")),
             ("let total = items.reduce(0, +)", SourceApp(bundleID: "com.apple.dt.Xcode", name: "Xcode")),
@@ -151,10 +152,10 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSettings() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("snap-settings-\(UUID())")
+        let root = TestScratch.url("snap-settings")
         let builtIns = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Extensions/BuiltinExtensions")
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "snap-settings-\(UUID())")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("snap-settings"))
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         let logs = ExtensionLogBuffer()
@@ -162,7 +163,7 @@ import YabStack
         logs.append("dev.yabbistir.convert", "TypeError: undefined is not an object (evaluating 'item.color.r')")
         for language in [AppLanguage.english, .turkish] {
             for tab in [ExtensionsSettingsView.Tab.installed, .development] {
-                let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-settings-lang-\(UUID())")!, preferredLanguages: ["en"])
+                let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-settings-lang"), preferredLanguages: ["en"])
                 languageStore.language = language
                 let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: logs)
                 model.selectedID = "dev.yabbistir.uuid"
@@ -187,7 +188,7 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderSecretPreferences() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("snap-secret-\(UUID())")
+        let root = TestScratch.url("snap-secret")
         let builtIns = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Extensions/BuiltinExtensions")
         let source = root.appendingPathComponent("keys-source")
@@ -200,11 +201,11 @@ import YabStack
                                    ["id": "dir", "type": "folder", "title": "uppercase", "default": "~/Documents/Projects/Archive/2026/Receipts"]]
         try JSONSerialization.data(withJSONObject: manifest).write(to: manifestURL)
         let secrets = InMemorySecretStore()
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "snap-secret-\(UUID())")!, secrets: secrets)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("snap-secret"), secrets: secrets)
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-secret-lang-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-secret-lang"), preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer())
             if registry.installed.first(where: { $0.id == "dev.example.keys" }) == nil { model.installFolder(source) }
@@ -236,7 +237,7 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderCaptureRules() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("snap-rules-\(UUID())")
+        let root = TestScratch.url("snap-rules")
         let builtIns = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Extensions/BuiltinExtensions")
         let source = root.appendingPathComponent("link-clean-source")
@@ -266,11 +267,11 @@ import YabStack
         for (language, table) in tables {
             try JSONSerialization.data(withJSONObject: table).write(to: source.appendingPathComponent("locales/\(language).json"))
         }
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "snap-rules-\(UUID())")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("snap-rules"))
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-rules-lang-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-rules-lang"), preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer())
             if registry.installed.first(where: { $0.id == "dev.example.link-clean" }) == nil {
@@ -302,7 +303,7 @@ import YabStack
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"] != nil))
     func renderConsent() throws {
         let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["YAB_SNAPSHOT_DIR"]!)
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("snap-consent-\(UUID())")
+        let root = TestScratch.url("snap-consent")
         let builtIns = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Extensions/BuiltinExtensions")
         let source = root.appendingPathComponent("video-source")
@@ -324,7 +325,7 @@ import YabStack
             table["description"] = description
             try JSONSerialization.data(withJSONObject: table).write(to: url)
         }
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "snap-consent-\(UUID())")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("snap-consent"))
         let registry = ExtensionRegistry(builtInRoot: builtIns, userRoot: root.appendingPathComponent("Extensions"),
                                          dataRoot: root.appendingPathComponent("Data"), settings: settings)
         let empty = root.appendingPathComponent("no-tools")
@@ -344,7 +345,7 @@ import YabStack
             }
         }
         for language in [AppLanguage.english, .turkish] {
-            let languageStore = LanguageStore(defaults: UserDefaults(suiteName: "snap-consent-lang-\(UUID())")!, preferredLanguages: ["en"])
+            let languageStore = LanguageStore(defaults: TestScratch.defaults("snap-consent-lang"), preferredLanguages: ["en"])
             languageStore.language = language
             let model = ExtensionsSettingsModel(registry: registry, settings: settings, language: languageStore, logs: ExtensionLogBuffer(),
                                                 toolLocator: ToolLocator(searchPath: [empty.path]))
@@ -406,8 +407,8 @@ private final class SnapshotWriter: PasteboardWriting {
 extension StoreModel {
     /// A store for snapshots of the other tabs: never shown, so it never reaches the network.
     static func offline(_ settings: ExtensionsSettingsModel) -> StoreModel {
-        let cache = FileManager.default.temporaryDirectory.appendingPathComponent("snap-store-\(UUID())")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "snap-store-lang-\(UUID())")!, preferredLanguages: ["en"])
+        let cache = TestScratch.url("snap-store")
+        let language = LanguageStore(defaults: TestScratch.defaults("snap-store-lang"), preferredLanguages: ["en"])
         language.language = settings.language
         return StoreModel(client: StoreClient(cacheFolder: cache, registry: settings.registry, appVersion: SemanticVersion("1.0.0")!),
                           registry: settings.registry, language: language)

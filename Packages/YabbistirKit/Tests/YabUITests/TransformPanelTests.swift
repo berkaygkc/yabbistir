@@ -3,6 +3,7 @@ import Observation
 import os
 import SwiftUI
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -27,7 +28,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
     let suite: UserDefaults
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         func ingest(_ text: String, minutesAgo: Double, rtf: Bool = false) throws -> Int64 {
             let plain = PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(text.utf8))
             let reps = rtf ? [plain, PasteboardRepresentation(type: TypeIdentifiers.rtf, data: Data("{\\rtf1 \(text)}".utf8))] : [plain]
@@ -40,7 +41,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         richID = try ingest("Perşembe toplantısı\niade akışı demosu", minutesAgo: 3, rtf: true)
         linkID = try ingest("https://ornek.dev/rapor", minutesAgo: 4)
         library = try Library(store: store)
-        suite = try #require(UserDefaults(suiteName: "yab-xform-\(UUID().uuidString)"))
+        suite = TestScratch.defaults("yab-xform")
         language = LanguageStore(defaults: suite, preferredLanguages: ["en"])
         language.language = .turkish
         defaults = ShiftReturnDefaults(defaults: suite)

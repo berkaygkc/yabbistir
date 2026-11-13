@@ -2,6 +2,7 @@ import Foundation
 import Testing
 import YabCore
 import YabPasteboard
+import YabTestSupport
 @testable import YabStack
 
 /// Records what the session puts on the clipboard.
@@ -50,7 +51,7 @@ final class FakeWriter: PasteboardWriting {
 
     /// Three text items, "bir", "iki" and "üç"; short timings.
     init() throws {
-        library = try Library(store: ItemStore.temporary())
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
         var ids: [Int64] = []
         for (offset, text) in ["bir", "iki", "üç"].enumerated() {
             let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(text.utf8))]],

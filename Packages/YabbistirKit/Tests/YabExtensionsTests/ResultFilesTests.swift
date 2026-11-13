@@ -4,10 +4,11 @@ import ImageIO
 import Testing
 import YabCore
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensions
 
 @Suite struct ResultFilesTests {
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent("yab-outputs-\(UUID().uuidString)")
+    let root = TestScratch.url("yab-outputs")
 
     @Test func aFormatChangeKeepsTheNameAndChangesTheExtension() {
         #expect(ResultFiles.fileName(base: "Ekran Resmi", sourceSize: CGSize(width: 1324, height: 789), width: 1324, height: 789,
@@ -109,8 +110,8 @@ import YabExtensionKit
 }
 
 @Suite struct ResultFileAdoptionTests {
-    let outputs = FileManager.default.temporaryDirectory.appendingPathComponent("yab-outputs-\(UUID().uuidString)")
-    let work = FileManager.default.temporaryDirectory.appendingPathComponent("yab-work-\(UUID().uuidString)")
+    let outputs = TestScratch.url("yab-outputs")
+    let work = TestScratch.url("yab-work")
 
     /// A call's work folder with files in it, as the helper leaves it.
     func workFolder(_ files: [String: String]) throws -> URL {
@@ -156,7 +157,7 @@ import YabExtensionKit
 
     @Test func aPathOutsideTheWorkFolderIsNotAdopted() throws {
         let folder = try workFolder(["a.txt": "a"])
-        let outside = FileManager.default.temporaryDirectory.appendingPathComponent("yab-out-\(UUID().uuidString).txt")
+        let outside = TestScratch.url("yab-out", pathExtension: "txt")
         try "x".write(to: outside, atomically: true, encoding: .utf8)
         defer { try? FileManager.default.removeItem(at: outside) }
         let link = folder.appendingPathComponent("link.txt")

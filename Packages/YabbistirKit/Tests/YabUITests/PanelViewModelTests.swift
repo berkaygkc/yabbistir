@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -24,7 +25,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
 
     /// History of six items; "Kod" (always shown) holds the SQL lines, "Bağlantılar" (on select) one item.
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let samples: [(String, Double)] = [
             ("SELECT id FROM users", 0.5), ("UPDATE users SET status", 1), ("İade akışı demosu", 60),
             ("selam dünya", 1560), ("haftalık rapor", 4320), ("eski not", 57600),
@@ -39,7 +40,7 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
         try store.add(itemID: ids["SELECT id FROM users"]!, toCategory: code.id!)
         try store.add(itemID: ids["İade akışı demosu"]!, toCategory: links.id!)
         library = try Library(store: store)
-        language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        language = LanguageStore(defaults: TestScratch.defaults("yab-ui"), preferredLanguages: ["en"])
         language.language = .turkish
         model = PanelViewModel(library: library, language: language, now: { now })
         library.onChange = { [model] in model.refresh() }
@@ -426,13 +427,13 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
 
 @MainActor @Suite struct PanelTypingPerformanceTests {
     @Test func keystrokeOverLongRowsFitsInAFrame() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let paragraph = String(repeating: "ölçüm değeri e ", count: 1_400)
         for minute in 0..<200 {
             _ = try store.ingest(clip("\(minute) \(paragraph)", minutesAgo: Double(minute)))
         }
         let library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-perf"), preferredLanguages: ["en"])
         let model = PanelViewModel(library: library, language: language, now: { now })
         model.reset()
         _ = model.handle(.type("x"))
@@ -446,11 +447,11 @@ private func clip(_ s: String, minutesAgo: Double) -> CapturedClip {
 /// A keystroke stays within 16 ms at 20,000 items, here with six category columns.
 @MainActor @Suite struct PanelCategoryPerformanceTests {
     @Test func keystrokeWithSixCategoryColumnsFitsInAFrame() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         try store.insertSyntheticItems(count: 20_000, now: now)
         let library = try Library(store: store)
         let ids = library.index.search("", limit: 20_000).ids
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-perf-cat-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-perf-cat"), preferredLanguages: ["en"])
         let model = PanelViewModel(library: library, language: language, now: { now })
         for (offset, name) in ["A", "B", "C", "D", "E", "F"].enumerated() {
             let category = try library.createCategory(name: name)
@@ -477,7 +478,7 @@ private final class StackWriter: PasteboardWriting {
     let stack: StackSession
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         var ids: [String: Int64] = [:]
         for (text, minutes) in [("SELECT id FROM users", 0.5), ("UPDATE users SET status", 1.0), ("İade akışı demosu", 60.0)] {
             ids[text] = try #require(try store.ingest(clip(text, minutesAgo: minutes))).item.id
@@ -485,7 +486,7 @@ private final class StackWriter: PasteboardWriting {
         let code = try store.createCategory(name: "Kod", color: .slate, visibility: .always)
         try store.add(itemID: ids["SELECT id FROM users"]!, toCategory: code.id!)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-ui-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-ui"), preferredLanguages: ["en"])
         language.language = .turkish
         stack = StackSession(library: library, writer: StackWriter(), didWrite: { _ in })
         stack.append(ids["UPDATE users SET status"]!)

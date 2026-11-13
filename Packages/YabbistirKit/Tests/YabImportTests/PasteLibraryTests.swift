@@ -3,10 +3,11 @@ import GRDB
 import Testing
 import YabCore
 import YabImportTestSupport
+import YabTestSupport
 @testable import YabImport
 
 private func tempFolder() throws -> URL {
-    let url = FileManager.default.temporaryDirectory.appendingPathComponent("lib-\(UUID())", isDirectory: true)
+    let url = TestScratch.url("lib")
     try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
     return url
 }

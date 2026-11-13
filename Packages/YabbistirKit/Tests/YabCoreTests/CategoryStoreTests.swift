@@ -1,11 +1,12 @@
 import Foundation
 import GRDB
 import Testing
+import YabTestSupport
 @testable import YabCore
 
 @Suite struct CategoryStoreTests {
     @Test func createTrimsAndRejectsBlankOrDuplicateNames() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let work = try store.createCategory(name: "  İş  ", color: .slate)
         #expect(work.name == "İş")
         #expect(work.visibility == .onSelect)
@@ -14,14 +15,14 @@ import Testing
     }
 
     @Test func nextColorSkipsUsedColors() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.createCategory(name: "A", color: .slate)
         _ = try store.createCategory(name: "B", color: .sage)
         #expect(try store.nextCategoryColor() == .clay)
     }
 
     @Test func moveRenumbersPositions() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let a = try store.createCategory(name: "A", color: .slate)
         _ = try store.createCategory(name: "B", color: .sage)
         _ = try store.createCategory(name: "C", color: .clay)
@@ -31,7 +32,7 @@ import Testing
     }
 
     @Test func categoryListsNewestMembershipFirst() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let cat = try store.createCategory(name: "A", color: .slate)
         let x = try #require(try store.ingest(textClip("x", at: t0))).item.id!
         let y = try #require(try store.ingest(textClip("y", at: t0.addingTimeInterval(1)))).item.id!
@@ -41,7 +42,7 @@ import Testing
     }
 
     @Test func deletingACategorizedItemFromHistoryKeepsItInTheCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let cat = try store.createCategory(name: "A", color: .slate)
         let id = try #require(try store.ingest(textClip("sabit", at: t0))).item.id!
         try store.add(itemID: id, toCategory: cat.id!)
@@ -51,7 +52,7 @@ import Testing
     }
 
     @Test func removingTheLastCategoryOfAHiddenItemDeletesIt() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let cat = try store.createCategory(name: "A", color: .slate)
         let id = try #require(try store.ingest(textClip("sabit", at: t0))).item.id!
         try store.add(itemID: id, toCategory: cat.id!)
@@ -61,7 +62,7 @@ import Testing
     }
 
     @Test func recopyOrPasteBringsAHiddenItemBackToHistory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let cat = try store.createCategory(name: "A", color: .slate)
         let id = try #require(try store.ingest(textClip("sabit", at: t0))).item.id!
         try store.add(itemID: id, toCategory: cat.id!)
@@ -71,7 +72,7 @@ import Testing
     }
 
     @Test func deletingACategoryKeepsItemsThatAreStillInHistory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let cat = try store.createCategory(name: "A", color: .slate)
         let kept = try #require(try store.ingest(textClip("geçmişte", at: t0))).item.id!
         let hidden = try #require(try store.ingest(textClip("yalnız kategoride", at: t0))).item.id!
@@ -86,7 +87,7 @@ import Testing
     // MARK: Source categories
 
     @Test func aSourceCategoryIsCreatedAtTheEndAndOpensOnSelect() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.createCategory(name: "İş", color: .slate)
         #expect(try store.syncSourceCategories([SourceCategorySeed(key: "dev.ornek/vault", name: "Kasa")]))
         let all = try store.categories()
@@ -100,7 +101,7 @@ import Testing
     }
 
     @Test func syncRemovesCategoriesOfGoneSourcesAndKeepsThePersons() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let mine = try store.createCategory(name: "İş", color: .slate)
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "Bir"), SourceCategorySeed(key: "a/two", name: "İki")])
         #expect(try store.syncSourceCategories([SourceCategorySeed(key: "a/two", name: "İki")]))
@@ -113,7 +114,7 @@ import Testing
     }
 
     @Test func syncIsIdempotent() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let wanted = [SourceCategorySeed(key: "a/one", name: "Bir")]
         #expect(try store.syncSourceCategories(wanted))
         #expect(try !store.syncSourceCategories(wanted))
@@ -121,7 +122,7 @@ import Testing
     }
 
     @Test func aRenamedSourceRenamesItsCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "Kasa")])
         let id = try #require(try store.categories().first?.id)
         #expect(try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "Vault")]))
@@ -131,7 +132,7 @@ import Testing
     }
 
     @Test func aSourceCategoryCannotBeRenamedDeletedOrFilled() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "Kasa")])
         var category = try #require(try store.categories().first)
         let id = try #require(category.id)
@@ -147,7 +148,7 @@ import Testing
     }
 
     @Test func visibilityAndOrderWorkLikeAnyCategory() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let mine = try store.createCategory(name: "İş", color: .slate)
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "Kasa")])
         var source = try #require(try store.categories().last)
@@ -162,7 +163,7 @@ import Testing
     }
 
     @Test func aPersonsCategoryMayShareASourcesName() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         _ = try store.createCategory(name: "Kasa", color: .slate)
         _ = try store.syncSourceCategories([SourceCategorySeed(key: "a/one", name: "kasa")])
         #expect(try store.categories().count == 2)
@@ -175,7 +176,7 @@ import Testing
     }
 
     @Test func oldCategoriesHaveNoSourceAfterTheMigration() throws {
-        let directory = FileManager.default.temporaryDirectory.appendingPathComponent("yab-source-\(UUID().uuidString)", isDirectory: true)
+        let directory = TestScratch.url("yab-source")
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         do {
             let queue = try DatabaseQueue(path: directory.appendingPathComponent("db.sqlite").path)

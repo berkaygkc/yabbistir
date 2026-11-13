@@ -7,6 +7,7 @@ import YabCore
 import YabExtensionKit
 import YabExtensions
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 /// Draws the README images from synthetic data, in English, at their final pixel sizes. Off by default;
@@ -117,7 +118,7 @@ struct ReadmeFixture {
     static let videoTitle = "Liquid Glass in SwiftUI — a complete guide"
 
     init(snippets: Bool = false) throws {
-        store = try ItemStore.temporary()
+        store = try ItemStore(directory: TestScratch.url("items"))
         let safari = SourceApp(bundleID: "com.apple.Safari", name: "Safari")
         func ingest(_ key: String, _ representations: [PasteboardRepresentation], minutes: Double, source: SourceApp? = nil,
                     device: DeviceKind = .local) throws {
@@ -178,7 +179,7 @@ struct ReadmeFixture {
     }
 
     func panelModel() throws -> PanelViewModel {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "readme-\(UUID())")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("readme"), preferredLanguages: ["en"])
         language.language = .english
         let now = self.now
         let model = PanelViewModel(library: try Library(store: store), language: language, extensions: fake, now: { now })

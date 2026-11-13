@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import YabExtensionKit
+import YabTestSupport
 @testable import YabExtensionRuntime
 
 /// What the stub network did, shared by the tests of this suite (which therefore run one at a time).
@@ -75,7 +76,7 @@ final class StubProtocol: URLProtocol {
         let folder = try RuntimeFixture.folder(js: js)
         guard case .valid(let manifest, let localization) = ManifestValidator.validate(folder: folder) else { fatalError("fixture manifest") }
         return try ExtensionRuntime(folder: folder, manifest: manifest, localization: localization,
-                                    dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)"),
+                                    dataFolder: TestScratch.url("yab-data"),
                                     grant: grant(domains, permissions: permissions), urlSessionConfiguration: stub.configuration) { _ in }
     }
 
@@ -374,7 +375,7 @@ final class StubProtocol: URLProtocol {
         let folder = try RuntimeFixture.folder(js: js)
         guard case .valid(let manifest, let localization) = ManifestValidator.validate(folder: folder) else { fatalError("fixture manifest") }
         let runtime = try ExtensionRuntime(folder: folder, manifest: manifest, localization: localization,
-                                           dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)"),
+                                           dataFolder: TestScratch.url("yab-data"),
                                            grant: grant(), urlSessionConfiguration: stub.configuration, log: sink.append)
         let context = context
         let call = Task { try await runtime.invoke(.run, name: "a", item: nil, context: context, effects: true, callID: 5) }
@@ -439,7 +440,7 @@ final class StubProtocol: URLProtocol {
             let server = HostServer(output: pipe.fileHandleForWriting)
             let encoder = JSONEncoder()
             let load = LoadRequest(extensionID: "dev.example.fixture", folder: folder.path,
-                                   dataFolder: FileManager.default.temporaryDirectory.appendingPathComponent("yab-data-\(UUID().uuidString)").path,
+                                   dataFolder: TestScratch.url("yab-data").path,
                                    language: "en", grant: grant)
             server.handle(try encoder.encode(HostRequest(id: 1, load: load)))
             try collector.wait(for: { $0.contains { $0.id == 1 && $0.done == true } })

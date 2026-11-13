@@ -3,6 +3,7 @@ import SwiftUI
 import Testing
 import YabCore
 import YabLocalization
+import YabTestSupport
 @testable import YabUI
 
 private final class KeyablePanel: NSPanel {
@@ -14,14 +15,14 @@ private final class KeyablePanel: NSPanel {
 @MainActor @Suite struct PanelPresentationTests {
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_ONSCREEN"] != nil))
     func entranceReachesFullOpacityOnEveryShow() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let base = Date()
         for i in 0..<10 {
             _ = try store.ingest(CapturedClip(
                 items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data("satır \(i)".utf8))]],
                 source: nil, device: .local, capturedAt: base.addingTimeInterval(Double(-i * 60))))
         }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-onscreen-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-onscreen"), preferredLanguages: ["en"])
         let library = try Library(store: store)
         let links = try library.createCategory(name: "Bağlantılar")
         try library.toggle(try #require(library.index.search("", limit: 1).ids.first), inCategory: links.id!)
@@ -58,7 +59,7 @@ private final class KeyablePanel: NSPanel {
     /// never runs off screen when they do not all fit.
     @Test(.enabled(if: ProcessInfo.processInfo.environment["YAB_ONSCREEN"] != nil))
     func windowWidthFollowsTheColumns() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         let library = try Library(store: store)
         for minute in 0..<5 {
             let item = try #require(try store.ingest(CapturedClip(
@@ -68,7 +69,7 @@ private final class KeyablePanel: NSPanel {
         }
         var categories: [ClipCategory] = []
         for name in ["A", "B", "C", "D", "E", "F"] { categories.append(try library.createCategory(name: name)) }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-width-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-width"), preferredLanguages: ["en"])
         let model = PanelViewModel(library: library, language: language)
         let panel = KeyablePanel(contentRect: .zero, styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
                                  backing: .buffered, defer: true)

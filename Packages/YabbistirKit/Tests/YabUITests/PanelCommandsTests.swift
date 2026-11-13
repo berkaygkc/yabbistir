@@ -2,6 +2,7 @@ import CoreGraphics
 import Foundation
 import ImageIO
 import Testing
+import YabTestSupport
 @testable import YabCore
 import YabExtensionKit
 import YabExtensions
@@ -18,7 +19,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
     let plainID: Int64
 
     init() throws {
-        let store = try ItemStore.temporary()
+        let store = try ItemStore(directory: TestScratch.url("items"))
         func ingest(_ text: String, minutesAgo: Double) throws -> Int64 {
             let clip = CapturedClip(items: [[PasteboardRepresentation(type: TypeIdentifiers.plainText, data: Data(text.utf8))]],
                                     source: nil, device: .local, capturedAt: now.addingTimeInterval(-minutesAgo * 60))
@@ -27,7 +28,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
         base64ID = try ingest("SGVsbG8sIGTDvG55YQ==", minutesAgo: 0.5)
         plainID = try ingest("merhaba dünya", minutesAgo: 1)
         library = try Library(store: store)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-cmd-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-cmd"), preferredLanguages: ["en"])
         language.language = .turkish
         fake.generators = [FakeCommands.command("dev.yabbistir.uuid/v4", title: "UUID oluştur", keywords: ["uuid", "guid"], input: .none,
                                                 extensionName: "UUID"),
@@ -135,7 +136,7 @@ private let now = Date(timeIntervalSinceReferenceDate: 815_000_000)
     }
 
     @Test func anImageFilesPreviewShowsThePicture() async throws {
-        let png = FileManager.default.temporaryDirectory.appendingPathComponent("yab-cmd-\(UUID().uuidString).png")
+        let png = TestScratch.url("yab-cmd", pathExtension: "png")
         let context = CGContext(data: nil, width: 64, height: 40, bitsPerComponent: 8, bytesPerRow: 0,
                                 space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
         context.setFillColor(CGColor(red: 0.2, green: 0.4, blue: 0.8, alpha: 1))

@@ -3,11 +3,12 @@ import Testing
 import YabCore
 import YabExtensionKit
 import YabLocalization
+import YabTestSupport
 @testable import YabExtensions
 
 /// Secret and folder preferences. Only synthetic values are used here.
 @MainActor @Suite struct SecretTests {
-    let suiteName = "yab-secret-\(UUID().uuidString)"
+    let suiteName = TestScratch.suiteName("yab-secret")
     let defaults: UserDefaults
     let secrets = InMemorySecretStore()
     let settings: ExtensionSettings
@@ -19,7 +20,7 @@ import YabLocalization
         settings = ExtensionSettings(defaults: defaults, secrets: secrets)
         registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        library = try Library(store: ItemStore.temporary())
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
     }
 
     func install(_ id: String, preferences: [[String: Any]], js: String) throws {
@@ -31,7 +32,7 @@ import YabLocalization
     }
 
     func service(transport: any HostTransport = PipeTransport()) -> ExtensionService {
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-secret-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-secret-lang"), preferredLanguages: ["en"])
         return ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                 settings: settings, language: language)
     }

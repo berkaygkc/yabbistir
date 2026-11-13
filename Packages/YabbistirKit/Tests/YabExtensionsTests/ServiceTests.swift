@@ -6,6 +6,7 @@ import YabCore
 import YabExtensionKit
 import YabLocalization
 import YabPasteboard
+import YabTestSupport
 @testable import YabExtensions
 
 @MainActor @Suite struct ServiceTests {
@@ -14,11 +15,11 @@ import YabPasteboard
     let service: ExtensionService
 
     init() throws {
-        library = try Library(store: ItemStore.temporary())
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-\(UUID().uuidString)")!)
+        library = try Library(store: ItemStore(directory: TestScratch.url("items")))
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc"))
         registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
                                      dataRoot: RegistryFixture.temporary("Data"), settings: settings)
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-lang"), preferredLanguages: ["en"])
         language.language = .turkish
         service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in },
                                    library: library, settings: settings, language: language)
@@ -39,12 +40,12 @@ import YabPasteboard
         let service: ExtensionService
 
         init(limit: Int, library: Library, registry: ExtensionRegistry) {
-            let defaults = UserDefaults(suiteName: "yab-svc-outputs-\(UUID().uuidString)")!
+            let defaults = TestScratch.defaults("yab-svc-outputs")
             defaults.set(limit, forKey: "outputsLimitBytes")
             self.library = library
             service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: PipeTransport()) { _, _ in }, library: library,
                                        settings: ExtensionSettings(defaults: defaults),
-                                       language: LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"]),
+                                       language: LanguageStore(defaults: TestScratch.defaults("yab-svc-lang"), preferredLanguages: ["en"]),
                                        resultFiles: files)
         }
 
@@ -206,14 +207,14 @@ import YabPasteboard
 
     /// "Turned off after repeated errors" is off everywhere, and turning it back on works.
     @Test func anExtensionTurnedOffByErrorsIsOffEverywhere() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-off-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-off"))
         let registry = ExtensionRegistry(builtInRoot: BuiltinFolder.root, userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
         let transport = FakeTransport { request in
             request.load != nil ? HostMessage(id: request.id, done: true) : HostClientTests.failing(request.id)
         }
         let client = ExtensionHostClient(transport: transport) { _, _ in }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-off-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-off-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: client, library: library, settings: settings, language: language)
         var turnedOff: [String] = []
         service.onExtensionTurnedOff = { turnedOff.append($0) }
@@ -269,7 +270,7 @@ import YabPasteboard
     /// A hint runs without network and programs, the run the person starts
     /// gets them, and the host learns what the manifest asks for and where tools are.
     @Test func onlyARunThePersonStartedGetsEffects() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-fx-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-fx"))
         let registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
         let id = "dev.example.net"
@@ -281,7 +282,7 @@ import YabPasteboard
         let transport = FakeTransport { request in
             request.load != nil ? HostMessage(id: request.id, done: true) : HostMessage(id: request.id, ok: .result(.text("ok")))
         }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fx-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-fx-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language, toolSearchPath: ["/opt/tools/bin"])
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -371,7 +372,7 @@ import YabPasteboard
     /// A command that makes files never runs ahead (it would litter work folders and Outputs); when it is used, the
     /// service adopts its files into Outputs and answers with those paths.
     @Test func aFileCommandNeverRunsAheadAndItsFilesAreAdopted() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-file-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-file"))
         let registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
         let id = "dev.example.files"
@@ -387,7 +388,7 @@ import YabPasteboard
             request.load != nil ? HostMessage(id: request.id, done: true) : HostMessage(id: request.id, ok: .result(.file(path: path)))
         }
         let outputs = RegistryFixture.temporary("Outputs")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-file-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-file-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language, resultFiles: ResultFiles(root: outputs, workRoot: work))
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -405,7 +406,7 @@ import YabPasteboard
     }
     /// A file result that cannot be adopted (no ResultFiles, or a refused path) does not leave its work folder for the 24 h purge.
     @Test func aFailedAdoptionRemovesTheWorkFolder() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-fail-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-fail"))
         let registry = ExtensionRegistry(builtInRoot: RegistryFixture.temporary("BuiltinExtensions"), userRoot: RegistryFixture.temporary("Extensions"),
                                          dataRoot: RegistryFixture.temporary("Data"), settings: settings)
         let id = "dev.example.failfiles"
@@ -413,7 +414,7 @@ import YabPasteboard
         manifest["contributes"] = ["actions": [["id": "a", "title": "name", "keywords": "keywords", "input": "none", "output": "file"]]]
         try registry.install(folder: try RegistryFixture.write(in: RegistryFixture.temporary("src"), id: id, manifest: manifest))
         let work = RegistryFixture.temporary("work")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-fail-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-fail-lang"), preferredLanguages: ["en"])
 
         func service(returning path: String, files: ResultFiles?) -> ExtensionService {
             let transport = FakeTransport { request in
@@ -446,7 +447,7 @@ import YabPasteboard
     /// of the target it was given ("ok" without one), and `slowLoad` keeps each load 200 ms on its way.
     /// The extension is in place before the registry starts watching, so no reload drops a session's outputs.
     func service(action: [String: Any], slowLoad: Bool = false) throws -> (ExtensionService, FakeTransport, ExtensionCommand) {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-one-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-one"))
         let id = "dev.example.one"
         var manifest = RegistryFixture.manifest(id: id)
         manifest["contributes"] = ["actions": [action]]
@@ -461,7 +462,7 @@ import YabPasteboard
             }
             return HostMessage(id: request.id, ok: .result(.text(invoke.context.target?.name ?? "ok")))
         }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-one-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-one-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: transport) { _, _ in }, library: library,
                                        settings: settings, language: language)
         let command = try #require(service.commands(matching: "kx", subjectID: nil).first { $0.extensionID == id })
@@ -576,7 +577,7 @@ import YabPasteboard
     /// second required tool is missing fails before the host with `toolMissing` naming that tool, in
     /// exec's words (so the card says "ffmpeg bulunamadı").
     @Test func aMissingRequiredToolFailsTheRunBeforeTheHost() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-tools-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-tools"))
         let id = "dev.example.tools"
         var manifest = RegistryFixture.manifest(id: id, permissions: ["exec"])
         manifest["requires"] = ["tools": [["name": "yt-dlp", "install": "brew install yt-dlp"], ["name": "ffmpeg", "install": "brew install ffmpeg"]]]
@@ -596,7 +597,7 @@ import YabPasteboard
         try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: ytdlp.path)
         let main = FakeTransport { request in HostMessage(id: request.id, done: true) }
         let jobs = FakeTransport { request in HostMessage(id: request.id, done: true) }
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-tools-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-tools-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: main) { _, _ in },
                                        jobClient: ExtensionHostClient(transport: jobs) { _, _ in }, library: library, settings: settings,
                                        language: language, toolSearchPath: [tools.path])
@@ -615,7 +616,7 @@ import YabPasteboard
     /// host) never cuts a download short. The job gets effects, no clock, the target it started
     /// with and its files adopted into Outputs.
     @Test func aSlowHintDoesNotInterruptAJob() async throws {
-        let settings = ExtensionSettings(defaults: UserDefaults(suiteName: "yab-svc-job-\(UUID().uuidString)")!)
+        let settings = ExtensionSettings(defaults: TestScratch.defaults("yab-svc-job"))
         let id = "dev.example.job"
         var manifest = RegistryFixture.manifest(id: id)
         manifest["contributes"] = ["actions": [
@@ -642,7 +643,7 @@ import YabPasteboard
             return HostMessage(id: request.id, ok: .result(.file(path: path)))
         }
         let outputs = RegistryFixture.temporary("Outputs")
-        let language = LanguageStore(defaults: UserDefaults(suiteName: "yab-svc-job-lang-\(UUID().uuidString)")!, preferredLanguages: ["en"])
+        let language = LanguageStore(defaults: TestScratch.defaults("yab-svc-job-lang"), preferredLanguages: ["en"])
         let service = ExtensionService(registry: registry, client: ExtensionHostClient(transport: main) { _, _ in },
                                        jobClient: ExtensionHostClient(transport: jobs) { _, _ in }, library: library, settings: settings,
                                        language: language, toolSearchPath: ["/opt/tools/bin"], resultFiles: ResultFiles(root: outputs, workRoot: work))
